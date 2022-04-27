@@ -13,6 +13,7 @@ from mipac.models.user import User
 if TYPE_CHECKING:
     from mipac.actions.note import NoteActions
     from mipac.manager.client import ClientActions
+    from mipac.manager.reaction import ReactionManager
     from mipac.models.drive import File
     from mipac.models.emoji import Emoji
 
@@ -99,9 +100,9 @@ class Poll:
 
 
 class Renote:
-    def __init__(self, raw_data: RawRenote):
+    def __init__(self, raw_data: RawRenote, *, client: ClientActions):
         self.__raw_data: RawRenote = raw_data
-        self.__client = manager.ClientActions()
+        self.__client: ClientActions = client
 
     @property
     def id(self) -> str:
