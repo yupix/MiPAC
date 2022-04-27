@@ -19,10 +19,10 @@ extras_require = {
         'axblack',
         'isort',
         'mypy',
-        'flake8'
+        'pyproject-flake8'
     ],
     'ci': [
-        'flake8',
+        'pyproject-flake8',
         'mypy'
     ]
 }

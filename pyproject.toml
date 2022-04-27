@@ -1,2 +1,11 @@
 [tool.black]
 line-length = 79
+
+[tool.isort]
+profile = "black"
+line_length = 79
+
+[tool.flake8]
+skip_glob = "mipac/abc/*.py"
+ignore = "A003, W503,"
+# W503は現在のPEP 8に従う為無効, A003はidなど直感的な操作として必要不可欠
