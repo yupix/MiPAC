@@ -10,10 +10,6 @@ with readme_file.open(encoding="utf-8") as fh:
 with open("requirements.txt", "r") as f:
     requirements = f.read().splitlines()
 
-
-
-
-
 extras_require = {
     'dev': [
         'axblack',
