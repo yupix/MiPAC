@@ -36,6 +36,14 @@ class UserActions:
         self.__client: ClientActions = client
         self.note: NoteManager = NoteManager(session=session, client=client)
 
+    async def get_me(self) -> User:
+        """
+        ログインしているユーザーの情報を取得します
+        """
+
+        res = await self.__session.request(Route('POST', '/api/i'))
+        return User(RawUser(res), client=self.__client)
+
     @cached(ttl=10, namespace='get_user', key_builder=key_builder)
     async def get(
         self,

@@ -39,3 +39,6 @@ class ClientActions:
 
     def _create_note_instance(self, note_id: str) -> NoteManager:
         return NoteManager(note_id, session=self.__session, client=self)
+
+    async def get_me(self) -> User:
+        return await self.user.action.get_me()
