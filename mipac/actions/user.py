@@ -37,7 +37,7 @@ class UserActions:
         ログインしているユーザーの情報を取得します
         """
 
-        res = await self.__session.request(Route('POST', '/api/i'))
+        res = await self.__session.request(Route('POST', '/api/i'), auth=True)
         return User(RawUser(res), client=self.__client)
 
     @cached(ttl=10, namespace='get_user', key_builder=key_builder)
