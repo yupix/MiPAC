@@ -44,7 +44,7 @@ setup(
     name="mipac",
     version="0.0.1",
     install_requires=requirements,
-    url="https://github.com/yupix/mi.py",
+    url="https://github.com/yupix/mipac",
     author="yupix",
     author_email="yupi0982@outlook.jp",
     license="MIT",

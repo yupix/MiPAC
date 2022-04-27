@@ -43,7 +43,7 @@ class Route:
 
 class HTTPClient:
     def __init__(self, url: str, token: str) -> None:
-        user_agent = 'Misskey Bot (https://github.com/yupix/Mi.py {0}) Python/{1[0]}.{1[1]} aiohttp/{2}'
+        user_agent = 'Misskey Bot (https://github.com/yupix/MiPA {0}) Python/{1[0]}.{1[1]} aiohttp/{2}'
         self.user_agent = user_agent.format(
             __version__, sys.version_info, aiohttp.__version__
         )

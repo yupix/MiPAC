@@ -1,5 +1,5 @@
 """
-Mi.pyを使用する上でちょっとした際に便利なツール一覧
+MiPAを使用する上でちょっとした際に便利なツール一覧
 """
 from __future__ import annotations
 
