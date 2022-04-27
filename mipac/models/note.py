@@ -237,9 +237,9 @@ class Reaction:
     def reaction(self) -> str:
         return self.__raw_data.reaction
 
-    # @property  # TODO: 修正
-    # def action(self) -> ReactionManager:
-    #     return manager.ClientActions().reaction
+    @property  # TODO: 修正
+    def action(self) -> ReactionManager:
+        return self.__client.reaction
 
 
 class Note:

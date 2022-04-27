@@ -331,5 +331,7 @@ class NoteActions:
         self, reaction: str, note_id: Optional[str] = None
     ) -> List[NoteReaction]:
         note_id = note_id or self.__note_id
-        # return await ReactionManager(note_id=note_id, client=self.__client).get_reaction(reaction)
-        # TODO:  self.__client形式に置き換え
+        return await ReactionManager(
+            note_id=note_id, client=self.__client, session=self.__session
+        ).get_reaction(reaction)
+        # TODO: self.__clientを使ったインスタンス生成に変えないと循環インポートの原因になりかねない

@@ -38,7 +38,6 @@ class Route:
     def __init__(self, method: str, path: str):
         self.path: str = path
         self.method: str = method
-        # self.url = config.i.origin_uri + path
 
 
 class HTTPClient:
