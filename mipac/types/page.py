@@ -3,7 +3,17 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, List, Optional, TypedDict
 
 if TYPE_CHECKING:
-    from mipac.types import PropertiesPayload, UserPayload
+    from mipac.types.drive import PropertiesPayload
+    from mipac.types.user import UserPayload
+
+__all__ = (
+    'PageContentPayload',
+    'VariablePayload',
+    'PageFilePayload',
+    'EyeCatchingImagePayload',
+    'AttachedFilePayload',
+    'PagePayload',
+)
 
 
 class PageContentPayload(TypedDict):
