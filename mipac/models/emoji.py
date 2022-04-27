@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-__all__ = ('Emoji',)
-
 from mipac.core.models.emoji import RawEmoji
+
+__all__ = ('Emoji',)
 
 
 class Emoji:

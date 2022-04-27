@@ -12,6 +12,9 @@ if TYPE_CHECKING:
     from mipac.models.user import User
 
 
+__all__ = ('InstanceMeta', 'Instance')
+
+
 class InstanceMeta:
     def __init__(self, data: MetaPayload):
         self.maintainer_name: str = data['maintainer_name']
