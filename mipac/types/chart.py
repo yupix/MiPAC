@@ -1,11 +1,11 @@
+from typing import List, TypedDict
+
 __all__ = (
     'ActiveUsersChartPayload',
     'DriveLocalChartPayload',
     'DriveRemoteChartPayload',
     'DriveChartPayload',
 )
-
-from typing import List, TypedDict, Union
 
 
 class ActiveUsersChartPayload(TypedDict):

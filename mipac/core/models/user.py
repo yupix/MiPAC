@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import List, Optional
 
 from mipac.core.models.instance import RawInstance
-from mipac.types import UserPayload
+from mipac.types.user import UserPayload
 
 __all__ = ('RawUserDetails', 'RawUser')
 

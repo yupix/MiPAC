@@ -2,8 +2,12 @@ from __future__ import annotations
 
 from typing import List
 
-from mipac.types import (ActiveUsersChartPayload, DriveChartPayload,
-                         DriveLocalChartPayload, DriveRemoteChartPayload)
+from mipac.types.chart import (
+    ActiveUsersChartPayload,
+    DriveChartPayload,
+    DriveLocalChartPayload,
+    DriveRemoteChartPayload,
+)
 
 __all__ = (
     'RawActiveUsersChart',

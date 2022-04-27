@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from mipac.types import InstancePayload
+from mipac.types.instance import InstancePayload
 
 __all__ = ['RawInstance']
 

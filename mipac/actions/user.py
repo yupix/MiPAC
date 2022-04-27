@@ -11,8 +11,12 @@ from mipac.http import HTTPClient, Route
 from mipac.manager.note import NoteManager
 from mipac.models.note import Note
 from mipac.models.user import User
-from mipac.util import (check_multi_arg, get_cache_key, key_builder,
-                        remove_dict_empty)
+from mipac.util import (
+    check_multi_arg,
+    get_cache_key,
+    key_builder,
+    remove_dict_empty,
+)
 
 __all__ = ['UserActions']
 
@@ -171,9 +175,3 @@ class UserActions:
         return (
             f'@{user.name}@{user.host}' if user.instance else f'@{user.name}'
         )
-
-    # def get_follow(self, user_id: str) -> FollowManager:
-    #     return FollowManager(user_id=user_id)
-    #
-    # def get_follow_request(self, user_id: str) -> FollowRequestManager:
-    #     return FollowRequestManager(user_id=user_id)

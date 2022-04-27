@@ -7,7 +7,7 @@ from mipac.core.models.drive import RawFile
 from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.poll import RawPoll
 from mipac.core.models.user import RawUser
-from mipac.types import NotePayload, ReactionPayload, RenotePayload
+from mipac.types.note import NotePayload, ReactionPayload, RenotePayload
 from mipac.util import upper_to_lower
 
 __all__ = ('RawRenote', 'RawReaction', 'RawNote')

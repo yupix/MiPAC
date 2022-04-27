@@ -5,7 +5,6 @@ from typing import TYPE_CHECKING, Any, Dict, Optional, TypedDict
 if TYPE_CHECKING:
     from mipac.types.user import UserPayload
 
-
 __all__ = ('PropertiesPayload', 'FolderPayload', 'FilePayload')
 
 

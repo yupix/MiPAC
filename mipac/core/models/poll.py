@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from mipac.types import PollPayload
+from mipac.types.note import PollPayload
 
 __all__ = ['RawPollChoices', 'RawPoll']
 

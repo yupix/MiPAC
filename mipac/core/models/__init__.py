@@ -1,5 +1,9 @@
-from mipac.core.models.chart import (RawActiveUsersChart, RawDriveChart,
-                                     RawDriveLocalChart, RawDriveRemoteChart)
+from mipac.core.models.chart import (
+    RawActiveUsersChart,
+    RawDriveChart,
+    RawDriveLocalChart,
+    RawDriveRemoteChart,
+)
 from mipac.core.models.chat import RawChat
 from mipac.core.models.drive import RawFile, RawFolder, RawProperties
 from mipac.core.models.emoji import RawEmoji

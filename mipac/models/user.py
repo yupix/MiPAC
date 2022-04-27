@@ -6,8 +6,12 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 from mipac.core.models.user import RawUser
 from mipac.models.emoji import Emoji
 from mipac.models.instance import Instance
-from mipac.types import (ChannelPayload, FieldContentPayload,
-                         PinnedNotePayload, PinnedPagePayload)
+from mipac.types.user import (
+    ChannelPayload,
+    FieldContentPayload,
+    PinnedNotePayload,
+    PinnedPagePayload,
+)
 
 if TYPE_CHECKING:
     from mipac.actions.user import UserActions
@@ -42,14 +46,6 @@ class FollowRequest:
         self.is_admin: bool = bool(data.get('is_admin'))
         self.is_bot: bool = bool(data.get('is_bot'))
         self.is_cat: bool = bool(data.get('is_cat'))
-        # self.__client = manager.ClientActions()
-
-    # @property
-    # def action(self) -> FollowRequestManager:
-    #     return self.__client.user.get_follow_request(self.id)
-
-    # async def get_profile(self) -> User:
-    #     return await self.__client.user.get(user_id=self.id)
 
 
 class Channel:

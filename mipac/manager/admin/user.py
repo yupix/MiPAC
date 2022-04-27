@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Optional
 
 from mipac.core.models.user import RawUser
-from mipac.exception import NotSupportedError
 from mipac.http import HTTPClient, Route
 from mipac.models.user import User
 
@@ -22,34 +21,6 @@ class AdminUserManager:
         self.__user_id = user_id
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
-
-    async def create_account(self, username: str, password: str) -> User:
-        """
-        Create a new account.
-
-        Parameters
-        ----------
-        username : str
-            User's name
-        password : str
-            User's password
-
-        Returns
-        -------
-        User
-            Created user
-        """
-
-        if config.is_ayuskey:
-            raise NotSupportedError('Ayuskeyではサポートされていません')
-        data = {'username': username, 'password': password}
-        res = await self.__session.request(
-            Route('POST', '/api/admin/accounts/create'),
-            json=data,
-            auth=True,
-            lower=True,
-        )
-        return User(RawUser(res), client=self.__client)
 
     async def delete_account(self, user_id: Optional[str] = None) -> bool:
         """

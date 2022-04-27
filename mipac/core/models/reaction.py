@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from mipac.types import NoteReactionPayload, UserPayload
+from mipac.types.reaction import NoteReactionPayload
+from mipac.types.user import UserPayload
 
 __all__ = ['RawNoteReaction']
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List
 
-from mipac.types import ChatPayload
+from mipac.types.chat import ChatPayload
 
 from .user import RawUser
 

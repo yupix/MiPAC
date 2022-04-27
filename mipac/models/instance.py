@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncIterator, Dict, List, Optional
+from typing import TYPE_CHECKING, Dict, List, Optional
 
 from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.instance import RawInstance
 from mipac.models.emoji import Emoji
-from mipac.types import MetaPayload
+from mipac.types.instance import MetaPayload
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
-    from mipac.models.user import User
-
 
 __all__ = ('InstanceMeta', 'Instance')
 
@@ -117,35 +115,3 @@ class Instance:
     @property
     def theme_color(self):
         return self.__raw_data.theme_color
-
-    def get_users(
-        self,
-        limit: int = 10,
-        *,
-        offset: int = 0,
-        sort: Optional[str] = None,
-        state: str = 'all',
-        origin: str = 'local',
-        username: Optional[str] = None,
-        hostname: Optional[str] = None,
-        get_all: bool = False
-    ) -> AsyncIterator[User]:
-        """
-
-        Parameters
-        ----------
-        limit: int
-        offset:int
-        sort:str
-        state:str
-        origin:str
-        username:str
-        hostname:str
-        get_all:bool
-
-        Returns
-        -------
-        AsyncIterator[User]
-        """
-        # return self.__client.get_users(limit=limit, offset=offset, sort=sort, state=state, origin=origin, username=username,
-        #                                hostname=hostname, get_all=get_all)  # TODO: 修正

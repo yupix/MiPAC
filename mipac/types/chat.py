@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, List, TypedDict
 
 if TYPE_CHECKING:
-    from mipac.types import UserPayload
+    from mipac.types.user import UserPayload
 
 __all__ = ('ChatPayload',)
 

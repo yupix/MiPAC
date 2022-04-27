@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional, Union
+from typing import TYPE_CHECKING, Optional
 
 from mipac.core.models.drive import RawFile, RawFolder, RawProperties
 from mipac.core.models.user import RawUser

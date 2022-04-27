@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, List, Optional, TypedDict
 
 if TYPE_CHECKING:
-    from mipac.types import EmojiPayload
+    from mipac.types.emoji import EmojiPayload
 
 __all__ = (
     'FeaturesPayload',

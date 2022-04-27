@@ -1,9 +1,4 @@
-from typing import List, Optional
-
-from mipac.core.models.drive import RawFile
-from mipac.http import Route
-
-# __all__ = ('MiFile', 'check_upload', 'get_file_ids')
+from typing import Optional
 
 
 class MiFile:
@@ -52,25 +47,3 @@ class MiFile:
         self.comment = comment
         self.is_sensitive = is_sensitive
         self.force = force
-
-
-# async def check_upload(files: List[MiFile]):
-#     _files = []
-#     for file in files:
-#         if file.path:
-#             endpoint = Route('POST', '/api/drive/files/create')
-#             data = {'file': open(file.path, 'rb'),
-#                     'name': file.name,
-#                     'folderId': file.folder_id,
-#                     'isSensitive': file.is_sensitive,
-#                     'comment': file.comment,
-#                     'force': file.force}
-#             _files.append(RawFile(await HTTPSession.request(endpoint, auth=True, data=data, lower=True)).id)  # TODO: 治す
-#         else:
-#             _files.append(file.file_id)
-#
-#     return _files
-
-
-# async def get_file_ids(files: List[MiFile]):
-#     return await check_upload(files)
