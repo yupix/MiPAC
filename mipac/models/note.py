@@ -22,7 +22,6 @@ __all__ = (
     'Reaction',
     'Follow',
     'Header',
-    'File',
     'Renote',
     'NoteReaction',
 )
