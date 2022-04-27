@@ -1,10 +1,12 @@
+from __future__ import annotations
+
 from datetime import datetime
 from typing import List, Optional
 
-__all__ = ('RawUserDetails', 'RawUser')
-
 from mipac.core.models.instance import RawInstance
 from mipac.types import UserPayload
+
+__all__ = ('RawUserDetails', 'RawUser')
 
 
 class RawUserDetails:

@@ -1,9 +1,4 @@
-__all__ = (
-    'RawActiveUsersChart',
-    'RawDriveRemoteChart',
-    'RawDriveLocalChart',
-    'RawDriveChart',
-)
+from __future__ import annotations
 
 from typing import List
 
@@ -12,6 +7,13 @@ from mipac.types import (
     DriveChartPayload,
     DriveLocalChartPayload,
     DriveRemoteChartPayload,
+)
+
+__all__ = (
+    'RawActiveUsersChart',
+    'RawDriveRemoteChart',
+    'RawDriveLocalChart',
+    'RawDriveChart',
 )
 
 

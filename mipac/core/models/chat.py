@@ -1,9 +1,13 @@
+from __future__ import annotations
+
 from datetime import datetime
 from typing import List
 
 from mipac.types import ChatPayload
 
 from .user import RawUser
+
+__all__ = ('RawChat',)
 
 
 class RawChat:

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
@@ -7,6 +9,8 @@ from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.poll import RawPoll
 from mipac.types import NotePayload, ReactionPayload, RenotePayload
 from mipac.util import upper_to_lower
+
+__all__ = ('RawRenote', 'RawReaction', 'RawNote')
 
 
 class RawRenote:

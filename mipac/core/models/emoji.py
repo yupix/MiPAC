@@ -1,6 +1,10 @@
+from __future__ import annotations
+
 from typing import List, Optional
 
 from mipac.types import EmojiPayload
+
+__all__ = ('RawEmoji',)
 
 
 class RawEmoji:

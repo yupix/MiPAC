@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 from typing import Optional
 
-__all__ = ['RawInstance']
-
 from mipac.types import InstancePayload
+
+__all__ = ['RawInstance']
 
 
 class RawInstance:

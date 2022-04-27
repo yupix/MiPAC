@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 from datetime import datetime
 
-__all__ = ['RawNoteReaction']
-
 from mipac.types import NoteReactionPayload, UserPayload
+
+__all__ = ['RawNoteReaction']
 
 
 class RawNoteReaction:
