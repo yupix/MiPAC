@@ -173,12 +173,13 @@ class Renote:
         return Poll(self.__raw_data.poll) if self.__raw_data.poll else None
 
     async def delete(self) -> bool:
-        return await self.__client.note.delete(self.__raw_data.id)
+        return await self.__client.note.action.delete(self.__raw_data.id)
 
 
 class NoteReaction:
-    def __init__(self, raw_data: RawNoteReaction):
+    def __init__(self, raw_data: RawNoteReaction, *, client: ClientActions):
         self.__raw_data = raw_data
+        self.__client: ClientActions = client
 
     @property
     def id(self) -> str:
@@ -283,7 +284,7 @@ class Note:
     @property
     def renote(self) -> Union[None, Renote]:
         return (
-            Renote(self.__raw_data.renote) if self.__raw_data.renote else None
+            Renote(self.__raw_data.renote, client=self.__client) if self.__raw_data.renote else None
         )
 
     @property
@@ -382,16 +383,16 @@ class Note:
         return self.__client._create_note_instance(self.id).action
 
     async def reply(
-        self,
-        content: Optional[str],
-        cw: Optional[str] = None,
-        extract_mentions: bool = True,
-        extract_hashtags: bool = True,
-        extract_emojis: bool = True,
-        renote_id: Optional[str] = None,
-        channel_id: Optional[str] = None,
-        file_ids=None,
-        poll: Optional[Poll] = None,
+            self,
+            content: Optional[str],
+            cw: Optional[str] = None,
+            extract_mentions: bool = True,
+            extract_hashtags: bool = True,
+            extract_emojis: bool = True,
+            renote_id: Optional[str] = None,
+            channel_id: Optional[str] = None,
+            file_ids=None,
+            poll: Optional[Poll] = None,
     ) -> Note:
         """
         ノートに対して返信を送信します

@@ -49,7 +49,7 @@ class ChatManager:
         data = await self.__session.request(
             Route('POST', '/api/messaging/history'), json=args, auth=True
         )
-        return [Chat(RawChat(d)) for d in data]
+        return [Chat(RawChat(d), client=self.__client) for d in data]
 
     async def send(
         self,
@@ -86,7 +86,7 @@ class ChatManager:
             auth=True,
             lower=True,
         )
-        return Chat(RawChat(res))
+        return Chat(RawChat(res), client=self.__client)
 
     async def delete(self, message_id: Optional[str] = None) -> bool:
         """

@@ -74,7 +74,7 @@ class ReactionManager(AbstractManager):
             auth=True,
             lower=True,
         )
-        return [NoteReaction(RawNoteReaction(i)) for i in res]
+        return [NoteReaction(RawNoteReaction(i), client=self.__client) for i in res]
 
     async def get_emoji_list(self) -> List[Emoji]:
         data = await self.__session.request(
