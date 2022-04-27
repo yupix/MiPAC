@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac.core import RawUser
+from mipac.core.models.user import RawUser
 from mipac.exception import NotSupportedError
 from mipac.http import HTTPClient, Route
 from mipac.models.user import User

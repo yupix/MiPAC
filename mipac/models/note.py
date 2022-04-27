@@ -3,10 +3,10 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 
-from mipac.core import RawUser
 from mipac.core.models.note import RawNote, RawReaction, RawRenote
 from mipac.core.models.poll import RawPoll
 from mipac.core.models.reaction import RawNoteReaction
+from mipac.core.models.user import RawUser
 from mipac.exception import NotExistRequiredData
 from mipac.models.user import User
 

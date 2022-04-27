@@ -3,15 +3,11 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 
-from mipac.core import RawUser
+from mipac.core.models.user import RawUser
 from mipac.models.emoji import Emoji
 from mipac.models.instance import Instance
-from mipac.types import (
-    ChannelPayload,
-    FieldContentPayload,
-    PinnedNotePayload,
-    PinnedPagePayload,
-)
+from mipac.types import (ChannelPayload, FieldContentPayload,
+                         PinnedNotePayload, PinnedPagePayload)
 
 if TYPE_CHECKING:
     from mipac.actions.user import UserActions
