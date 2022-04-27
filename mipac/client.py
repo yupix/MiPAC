@@ -6,11 +6,11 @@ class Client:
     def __init__(self, url: str, token: str):
         self.__url: str = url
         self.__token: str = token
-        self.session: HTTPClient = HTTPClient(url, token)
+        self.http: HTTPClient = HTTPClient(url, token)
 
     @property
     def action(self):
-        return ClientActions(self.session)
+        return ClientActions(self.http)
 
     async def close_session(self):
-        await self.session.close_session()
+        await self.http.close_session()
