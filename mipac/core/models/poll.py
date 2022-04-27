@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 from typing import List, Optional
 
-__all__ = ['RawPollChoices', 'RawPoll']
-
 from mipac.types import PollPayload
+
+__all__ = ['RawPollChoices', 'RawPoll']
 
 
 class RawPollChoices:
