@@ -9,7 +9,7 @@ from mipac.models.user import User
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
 
-__all__ = ['Properties', 'File', 'File', 'Folder']
+__all__ = ['Properties', 'File', 'Folder']
 
 
 class Properties:
