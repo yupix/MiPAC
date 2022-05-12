@@ -65,7 +65,7 @@ class RawRenote:
         self.user_id: str = data['user_id']
         self.user: RawUser = RawUser(data['user'])
         self.content: Optional[str] = data.get('text', None)
-        self.cw: Optional[str] = data['cw']
+        self.cw: Optional[str] = data.get('cw')
         self.visibility: str = data['visibility']
         self.renote_count: int = data['renote_count']
         self.replies_count: int = data['replies_count']
