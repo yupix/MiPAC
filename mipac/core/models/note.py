@@ -108,7 +108,7 @@ class RawReaction:
 
     def __init__(self, data: ReactionPayload):
         self.id: Optional[str] = data.get('id')
-        self.created_at: Optional[str] = datetime.strptime(
+        self.created_at: Optional[datetime] = datetime.strptime(
             data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
         ) if data.get('created_at') else None
         self.type: Optional[str] = data.get('type')
