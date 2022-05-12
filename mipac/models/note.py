@@ -133,11 +133,11 @@ class Renote:
         return self.__raw_data.visibility
 
     @property
-    def renote_count(self) -> int:
+    def renote_count(self) -> int | None:
         return self.__raw_data.renote_count
 
     @property
-    def replies_count(self) -> int:
+    def replies_count(self) -> int | None:
         return self.__raw_data.replies_count
 
     @property

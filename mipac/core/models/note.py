@@ -24,8 +24,8 @@ class RawRenote:
     content: Optional[str], default=None
     cw : Optional[str], default=None
     visibility : str
-    renote_count : int
-    replies_count : int
+    renote_count : int | None
+    replies_count : int | None
     reactions
     emojis
     file_ids : List[str]
@@ -67,8 +67,8 @@ class RawRenote:
         self.content: Optional[str] = data.get('text', None)
         self.cw: Optional[str] = data.get('cw')
         self.visibility: str = data['visibility']
-        self.renote_count: int = data['renote_count']
-        self.replies_count: int = data['replies_count']
+        self.renote_count: int | None = data.get('renote_count')
+        self.replies_count: int | None = data.get('replies_count')
         self.reactions = data['reactions']  # TODO:型探す
         self.emojis = data['emojis']  # TODO:型探す
         self.file_ids: List[str] = data['file_ids']
