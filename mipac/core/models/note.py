@@ -74,8 +74,6 @@ class RawRenote:
         self.file_ids: List[str] = data['file_ids']
         self.files = data['files']
         self.reply_id = data['reply_id']
-        self.files = data['files']
-        self.reply_id = data['reply_id']
         self.renote_id = data['renote_id']
         self.uri = data.get('uri')
         self.poll: Optional[RawPoll] = RawPoll(data['poll']) if data.get(
