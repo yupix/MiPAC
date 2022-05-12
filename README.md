@@ -7,12 +7,27 @@
 
 MiPAのCoreとなるライブラリです
 
-
-# サポートしているMisskey
+## サポートしているMisskey
 
 - [Misskey Official v12](https://github.com/misskey-dev/misskey)
 - [Ayuskey latest](https://gtihub.com/teamblackcrystal/misskey)
 
+## 使い方
+
+```python
+import asyncio
+
+from mipac.client import Client
+
+async def main():
+    client = Client(url, token)
+    await client.http.login()
+    note = await client.action.note.action.send('Hello World')
+    print(note.author.name, note.content)
+
+if __name__ == '__main__':
+    asyncio.run(main())
+```
 
 ### Collaborators
 
