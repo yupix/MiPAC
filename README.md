@@ -5,7 +5,7 @@
 
 ## 概要
 
-MiPAのCoreとなるライブラリです
+MiPAのCoreとなるライブラリです。issueは[こちら](https://code.teamblackcrystal.com/projects/120/issues)で管理しています
 
 ## サポートしているMisskey
 
