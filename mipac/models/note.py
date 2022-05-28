@@ -283,9 +283,9 @@ class Note:
 
     @property
     def renote(self) -> Union[None, Renote]:
-        return (
-            Renote(self.__raw_data.renote, client=self.__client) if self.__raw_data.renote else None
-        )
+        if self.__raw_data.renote:
+            return Renote(self.__raw_data.renote, client=self.__client)
+        return None
 
     @property
     def visibility(self) -> Optional[str]:
@@ -383,16 +383,16 @@ class Note:
         return self.__client._create_note_instance(self.id).action
 
     async def reply(
-            self,
-            content: Optional[str],
-            cw: Optional[str] = None,
-            extract_mentions: bool = True,
-            extract_hashtags: bool = True,
-            extract_emojis: bool = True,
-            renote_id: Optional[str] = None,
-            channel_id: Optional[str] = None,
-            file_ids=None,
-            poll: Optional[Poll] = None,
+        self,
+        content: Optional[str],
+        cw: Optional[str] = None,
+        extract_mentions: bool = True,
+        extract_hashtags: bool = True,
+        extract_emojis: bool = True,
+        renote_id: Optional[str] = None,
+        channel_id: Optional[str] = None,
+        file_ids=None,
+        poll: Optional[Poll] = None,
     ) -> Note:
         """
         ノートに対して返信を送信します
