@@ -32,7 +32,7 @@ class AdminEmojiManager(AbstractManager):
         category: Optional[str] = None,
         aliases: Optional[List[str]] = None
     ) -> bool:
-        if config.is_ayuskey:  # TODO: どうにかする
+        if self.__client._config.is_ayuskey:
             data = {
                 'name': name,
                 'url': url,
