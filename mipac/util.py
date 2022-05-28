@@ -7,8 +7,7 @@ import asyncio
 import re
 import uuid
 from datetime import datetime, timedelta
-from inspect import isawaitable
-from typing import Any, Callable, Dict, Iterable, List, Optional, TypeVar
+from typing import Any, Dict, List, Optional
 from urllib.parse import urlencode
 
 import aiohttp
@@ -19,16 +18,12 @@ __all__ = (
     'get_cache_key',
     'key_builder',
     'check_multi_arg',
-    'async_all',
-    'find',
     'remove_list_empty',
     'remove_dict_empty',
     'upper_to_lower',
     'str_lower',
     'bool_to_string',
 )
-
-T = TypeVar('T')
 
 
 def deprecated_func(func):
@@ -122,6 +117,29 @@ class AuthClient:
                 self.__session_token = data['token']
                 return data['url']
 
+    async def wait_miauth(self) -> str:
+        url = f'{self.__instance_uri}/api/miauth/{self.__session_token}/check'
+        while True:
+            async with self.__client_session.post(url) as res:
+                data = await res.json()
+                if data.get('ok') is True:
+                    return data
+            await asyncio.sleep(1)
+
+    async def wait_oldauth(self) -> str:
+        while True:
+            async with self.__client_session.post(
+                f'{self.__instance_uri}/api/auth/session/userkey',
+                json={
+                    'appSecret': self.__secret,
+                    'token': self.__session_token,
+                },
+            ) as res:
+                data = await res.json()
+                if data.get('error', {}).get('code') != 'PENDING_SESSION':
+                    break
+            await asyncio.sleep(1)
+
     async def check_auth(self) -> str:
         """
         認証が完了するまで待機し、完了した場合はTokenを返します
@@ -132,27 +150,9 @@ class AuthClient:
             Token
         """
         if self.__use_miauth:
-            while True:
-                async with self.__client_session.post(
-                    f'{self.__instance_uri}/api/miauth/{self.__session_token}/check'
-                ) as res:
-                    data = await res.json()
-                    if data.get('ok') is True:
-                        break
-                await asyncio.sleep(1)
+            data = await self.wait_miauth()
         else:
-            while True:
-                async with self.__client_session.post(
-                    f'{self.__instance_uri}/api/auth/session/userkey',
-                    json={
-                        'appSecret': self.__secret,
-                        'token': self.__session_token,
-                    },
-                ) as res:
-                    data = await res.json()
-                    if data.get('error', {}).get('code') != 'PENDING_SESSION':
-                        break
-                await asyncio.sleep(1)
+            data = await self.wait_oldauth()
         await self.__client_session.close()
         return data['token'] if self.__use_miauth else data['accessToken']
 
@@ -199,40 +199,6 @@ def check_multi_arg(*args: Any) -> bool:
         存在する場合はTrue, 存在しない場合はFalse
     """
     return bool([i for i in args if i])
-
-
-async def async_all(gen, *, check=isawaitable):
-    for elem in gen:
-        if check(elem):
-            elem = await elem
-        if not elem:
-            return False
-    return True
-
-
-def find(predicate: Callable[[T], Any], seq: Iterable[T]) -> Optional[T]:
-    """A helper to return the first element found in the sequence
-    that meets the predicate. For example: ::
-
-        member = discord.utils.find(lambda m: m.name == 'Mighty', channel.guild.members)
-
-    would find the first :class:`~discord.Member` whose name is 'Mighty' and return it.
-    If an entry is not found, then ``None`` is returned.
-
-    This is different from :func:`py:filter` due to the fact it stops the moment it finds
-    a valid entry.
-
-    Parameters
-    -----------
-    predicate
-        A function that returns a boolean-like result.
-    seq: :class:`collections.abc.Iterable`
-        The iterable to search through.
-    """
-    for element in seq:
-        if predicate(element):
-            return element
-    return None
 
 
 def remove_list_empty(data: List[Any]) -> List[Any]:
