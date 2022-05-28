@@ -12,8 +12,8 @@ from mipac.manager.reaction import ReactionManager
 from mipac.manager.user import UserManager
 
 if TYPE_CHECKING:
-    from mipac.models.user import User
     from mipac.config import Config
+    from mipac.models.user import User
 
 __all__ = ('ClientActions',)
 
