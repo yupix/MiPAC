@@ -8,6 +8,8 @@ from mipac.models.user import User
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
+    from mipac.manager.drive import FolderManager
+
 
 __all__ = ['Properties', 'File', 'Folder']
 
@@ -30,8 +32,9 @@ class Properties:
 
 
 class Folder:
-    def __init__(self, raw_data: RawFolder):
+    def __init__(self, raw_data: RawFolder, client: ClientActions):
         self.__raw_data = raw_data
+        self.__client: ClientActions = client
 
     @property
     def id(self):
@@ -57,9 +60,9 @@ class Folder:
     def parent(self):
         return self.__raw_data.parent
 
-    # @property TODO: 治す
-    # def action(self) -> FolderManager:
-    #     return mi.framework.manager.ClientActions().drive.get_folder_instance(self.id).action
+    @property
+    def action(self) -> FolderManager:
+        return self.__client.drive._get_folder_instance(self.id)
 
 
 class File:
