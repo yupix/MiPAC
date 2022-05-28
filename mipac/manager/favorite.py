@@ -2,11 +2,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac import AbstractManager, HTTPClient
-from mipac.http import Route
+from mipac import AbstractManager
+from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
+
+__all__ = 'FavoriteManager'
 
 
 class FavoriteManager(AbstractManager):

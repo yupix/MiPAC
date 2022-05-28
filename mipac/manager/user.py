@@ -10,6 +10,8 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
     from mipac.models.user import User
 
+__all__ = ('UserManager',)
+
 
 class UserManager(AbstractManager):
     def __init__(

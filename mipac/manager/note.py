@@ -9,6 +9,8 @@ from mipac.http import HTTPClient, Route
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
 
+__all__ = 'NoteManager'
+
 
 class NoteManager(AbstractManager):
     """User behavior for notes"""

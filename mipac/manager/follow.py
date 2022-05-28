@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
 
-__all__ = ['FollowManager', 'FollowRequestManager']
-
-from mipac import AbstractManager, HTTPClient
-from mipac.http import Route
+from mipac import AbstractManager
+from mipac.http import HTTPClient, Route
 from mipac.models.user import FollowRequest, User
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
+
+__all__ = ('FollowManager', 'FollowRequestManager')
 
 
 class FollowManager(AbstractManager):

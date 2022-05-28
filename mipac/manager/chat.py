@@ -11,6 +11,8 @@ from mipac.util import check_multi_arg
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
 
+__all__ = ('ChatManager',)
+
 
 class ChatManager:
     def __init__(

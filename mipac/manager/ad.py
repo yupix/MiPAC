@@ -8,6 +8,8 @@ from mipac.http import HTTPClient, Route
 if TYPE_CHECKING:
     from mipac.client import ClientActions
 
+__all__ = ('AdminAdvertisingManager',)
+
 
 class AdminAdvertisingManager(AbstractManager):
     def __init__(self, *, session: HTTPClient, client: ClientActions):
