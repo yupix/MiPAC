@@ -15,7 +15,6 @@ jobs:
     interpreter: !DefaultInterpreter
       commands:
       - pip install . .[ci]
-      - mypy mipac
       - pflake8 mipac
     useTTY: true
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
