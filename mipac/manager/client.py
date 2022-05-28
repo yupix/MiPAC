@@ -14,6 +14,8 @@ from mipac.manager.user import UserManager
 if TYPE_CHECKING:
     from mipac.models.user import User
 
+__all__ = ('ClientActions',)
+
 
 class ClientActions:
     def __init__(self, session: HTTPClient):
@@ -21,18 +23,12 @@ class ClientActions:
         self.note: NoteManager = NoteManager(session=session, client=self)
         self.chat: ChatManager = ChatManager(session=session, client=self)
         self.user: UserManager = UserManager(session=session, client=self)
-        self.admin: AdminActions = AdminActions(
-            session=session, client=self
-        )
-        self.drive: DriveManager = DriveManager(
-            session=session, client=self
-        )
+        self.admin: AdminActions = AdminActions(session=session, client=self)
+        self.drive: DriveManager = DriveManager(session=session, client=self)
         self.reaction: ReactionManager = ReactionManager(
             session=session, client=self
         )
-        self.chart: ChartManager = ChartManager(
-            session=session, client=self
-        )
+        self.chart: ChartManager = ChartManager(session=session, client=self)
 
     def _create_user_instance(self, user: User) -> UserManager:
         return UserManager(session=self.__session, client=self, user=user)
