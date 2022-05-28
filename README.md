@@ -54,11 +54,6 @@ if __name__ == '__main__':
     </tr>
 </table>
 
-### Libraries
-
-- [Discord.py](https://github.com/Rapptz/discord.py)
-    - 一部や仕組みを参考にさせてもらっています。実際にコードも利用しています
-
 ### 開発者向け情報
 
 このプロジェクトでは [black](https://github.com/psf/black)のforkである、[axblack](https://github.com/axiros/axblack)を利用しています。主な違いはダブルクォートがデフォルトではなく、シングルクォートになっている点です
