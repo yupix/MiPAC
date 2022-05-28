@@ -2,11 +2,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac import AbstractManager, HTTPClient
-from mipac.http import Route
+from mipac import AbstractManager
+from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
+
+__all__ = 'PagesManager'
 
 
 class PagesManager(AbstractManager):
@@ -24,3 +26,4 @@ class PagesManager(AbstractManager):
         res = await self.__session.request(
             Route('POST', '/api/i/pages'), json=data, auth=True
         )
+        return res
