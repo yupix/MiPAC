@@ -1,0 +1,11 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+- repo: https://github.com/pycqa/isort
+  rev: 5.10.1
+  hooks:
+    - id: isort
+- repo: https://github.com/axiros/axblack
+  rev: 5f011e46362b8680d686cb7918e849e4cb17e826
+  hooks:
+    - id: black
