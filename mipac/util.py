@@ -2,14 +2,14 @@
 MiPAを使用する上でちょっとした際に便利なツール一覧
 """
 from __future__ import annotations
-import asyncio
 
+import asyncio
 import re
+import uuid
 from datetime import datetime, timedelta
 from inspect import isawaitable
 from typing import Any, Callable, Dict, Iterable, List, Optional, TypeVar
 from urllib.parse import urlencode
-import uuid
 
 import aiohttp
 
@@ -45,7 +45,7 @@ class AuthClient:
     """
     Tokenの取得を手助けするクラス
     """
-    
+
     def __init__(
         self,
         instance_uri: str,
@@ -72,7 +72,6 @@ class AuthClient:
         use_miauth: bool, default=False
             MiAuthを使用するか
         """
-        
         if permissions is None:
             permissions = ['read:account']
         self.__client_session = aiohttp.ClientSession()
@@ -88,13 +87,12 @@ class AuthClient:
     async def get_auth_url(self) -> str:
         """
         認証に使用するURLを取得します
-        
+
         Returns
         -------
         str
             認証に使用するURL
         """
-        
         field = remove_dict_empty(
             {
                 'name': self.__name,
@@ -126,14 +124,13 @@ class AuthClient:
 
     async def check_auth(self) -> str:
         """
-        認証が完了したかを確認し完了している場合はTokenを返します
-        
+        認証が完了するまで待機し、完了した場合はTokenを返します
+
         Returns
         -------
         str
             Token
         """
-        
         if self.__use_miauth:
             while True:
                 async with self.__client_session.post(
@@ -265,7 +262,6 @@ def remove_dict_empty(data: Dict[str, Any]) -> Dict[str, Any]:
     _data: dict
         空のkeyがなくなったdict
     """
-
     _data = {}
     _data = {k: v for k, v in data.items() if v is not None}
     _data = {k: v for k, v in data.items() if v}
@@ -295,7 +291,6 @@ def upper_to_lower(
     field : dict
         小文字になった, key名が変更されたdict
     """
-
     if data is None:
         return {}
     if replace_list is None:

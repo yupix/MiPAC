@@ -78,13 +78,12 @@ class Instance:
     def __init__(self, raw_data: RawInstance, *, client: ClientActions):
         """
         インスタンス情報
-        
+
         Parameters
         ----------
         raw_data : RawInstance
             インスタンス情報の入った dict
         """
-
         self.__raw_data: RawInstance = raw_data
         self.__client: ClientActions = client
 
