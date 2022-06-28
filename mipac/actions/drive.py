@@ -262,4 +262,4 @@ class DriveActions(AbstractAction):
             lower=True,
             auth=True,
         )
-        return [Folder(RawFolder(i)) for i in data]
+        return [Folder(RawFolder(i), client=self.__client) for i in data]
