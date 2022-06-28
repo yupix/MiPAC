@@ -7,7 +7,7 @@ from mipac.core.models.drive import RawFile
 from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.poll import RawPoll
 from mipac.core.models.user import RawUser
-from mipac.types.note import NotePayload, ReactionPayload, RenotePayload
+from mipac.types.note import INote, ReactionPayload, RenotePayload
 from mipac.util import upper_to_lower
 
 __all__ = ('RawRenote', 'RawReaction', 'RawNote')
@@ -76,9 +76,7 @@ class RawRenote:
         self.reply_id = data['reply_id']
         self.renote_id = data['renote_id']
         self.uri = data.get('uri')
-        self.poll: Optional[RawPoll] = RawPoll(data['poll']) if data.get(
-            'poll'
-        ) else None
+        self.poll: Optional[RawPoll] = RawPoll(data['poll']) if 'poll' in data else None
 
 
 class RawReaction:
@@ -186,7 +184,7 @@ class RawNote:
         'channel_id',
     )
 
-    def __init__(self, data: NotePayload):
+    def __init__(self, data: INote):
         self.id: str = data['id']
         self.created_at: datetime = datetime.strptime(
             data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
@@ -197,27 +195,25 @@ class RawNote:
         self.cw: Optional[str] = data.get('cw')
         self.renote: Optional[RawRenote] = RawRenote(
             data['renote']
-        ) if data.get('renote') else None
+        ) if 'renote' in data else None
         self.visibility: Optional[str] = data.get(
             'visibility'
-        )  # This may be an optional
+        )
         self.renote_count: Optional[int] = data.get(
             'renote_count'
-        )  # TODO: Optionalかどうか
+        )
         self.replies_count: Optional[int] = data.get(
             'replies_count'
-        )  # TODO: Optionalかどうか
+        )
         self.reactions: Dict[str, Any] = data['reactions']
         self.emojis: List[RawEmoji] = [RawEmoji(i) for i in data['emojis']]
-        self.file_ids: Optional[List[str]] = data['file_ids']
+        self.file_ids: Optional[List[str]] = data.get('file_ids')
         self.files: List[RawFile] = [
             RawFile(upper_to_lower(i)) for i in data['files']
-        ]
-        self.reply_id: Optional[str] = data['reply_id']
-        self.renote_id: Optional[str] = data['renote_id']
-        self.poll: Optional[RawPoll] = RawPoll(data['poll']) if data.get(
-            'poll'
-        ) else None
+        ] if 'files' in data else []
+        self.reply_id: Optional[str] = data.get('reply_id')
+        self.renote_id: Optional[str] = data.get('renote_id')
+        self.poll: Optional[RawPoll] = RawPoll(data['poll']) if 'poll' in data else None
         self.visible_user_ids: Optional[List[str]] = data.get(
             'visible_user_ids', []
         )

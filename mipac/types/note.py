@@ -5,7 +5,8 @@ from .emoji import EmojiPayload
 from .user import UserPayload
 
 __all__ = (
-    'NotePayload',
+    'INoteRequired',
+    'INote',
     'GeoPayload',
     'ReactionPayload',
     'PollPayload',
@@ -60,47 +61,43 @@ class RenotePayload(TypedDict):
     channel_id: Optional[str]
 
 
-class _NoteOptional(TypedDict, total=False):
-    """
-    ノートに必ず存在すると限らない物
-    """
-
-    text: str
-    cw: str
-    geo: GeoPayload
-
-
-class NotePayload(_NoteOptional):
-    """
-    note object
-    """
-
+class INoteRequired(TypedDict):
     id: str
     created_at: str
     user_id: str
     user: UserPayload
-    visibility: Optional[str]
-    renote_count: Optional[int]
-    replies_count: Optional[int]
-    reactions: Dict[str, Any]
     emojis: List[EmojiPayload]
-    file_ids: Optional[List[str]]
-    files: Optional[List[FilePayload]]
-    reply_id: Optional[str]
-    renote_id: Optional[str]
-    poll: Optional[PollPayload]
-    visible_user_ids: Optional[List[str]]
-    via_mobile: Optional[bool]
-    local_only: Optional[bool]
-    extract_mentions: Optional[bool]
-    extract_hashtags: Optional[bool]
-    extract_emojis: Optional[bool]
-    preview: Optional[bool]
-    media_ids: Optional[List[str]]
-    renote: Optional[RenotePayload]
-    field: Optional[dict]
-    tags: Optional[List[str]]
-    channel_id: Optional[str]
+    reactions: Dict[str, Any]
+
+
+class INote(INoteRequired, total=False):
+    """
+    note object
+    """
+    visibility: str
+    renote_count: int
+    replies_count: int
+    file_ids: List[str]
+    files: List[FilePayload]
+    reply_id: str
+    renote_id: str
+    poll: PollPayload
+    visible_user_ids: List[str]
+    via_mobile: bool
+    local_only: bool
+    extract_mentions: bool
+    extract_hashtags: bool
+    extract_emojis: bool
+    preview: bool
+    media_ids: List[str]
+    renote: RenotePayload
+    field: dict
+    tags: List[str]
+    channel_id: str
+    text: str
+    cw: str
+    geo: GeoPayload
+
 
 
 class OptionalReaction(TypedDict, total=False):
@@ -108,7 +105,7 @@ class OptionalReaction(TypedDict, total=False):
     type: str
     is_read: bool
     user: UserPayload
-    note: NotePayload
+    note: INote
     id: str
 
 

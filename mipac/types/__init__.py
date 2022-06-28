@@ -16,7 +16,8 @@ from mipac.types.instance import (
 )
 from mipac.types.note import (
     GeoPayload,
-    NotePayload,
+    INoteRequired,
+    INote,
     OptionalReaction,
     PollPayload,
     ReactionPayload,
@@ -50,7 +51,8 @@ __all__ = (
     'FolderPayload',
     'FilePayload',
     'EmojiPayload',
-    'NotePayload',
+    'INoteRequired',
+    'INote',
     'GeoPayload',
     'ReactionPayload',
     'PollPayload',
