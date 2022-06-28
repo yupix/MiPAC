@@ -10,7 +10,7 @@ MiPAのCoreとなるライブラリです。issueは[こちら](https://code.tea
 ## サポートしているMisskey
 
 - [Misskey Official v12](https://github.com/misskey-dev/misskey)
-- [Ayuskey latest](https://gtihub.com/teamblackcrystal/misskey)
+- [Ayuskey latest](https://github.com/teamblackcrystal/misskey)
 
 ## 使い方
 
