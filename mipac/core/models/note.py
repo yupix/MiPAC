@@ -7,7 +7,7 @@ from mipac.core.models.drive import RawFile
 from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.poll import RawPoll
 from mipac.core.models.user import RawUser
-from mipac.types.note import INote, ReactionPayload, RenotePayload
+from mipac.types.note import INote, IReaction, IRenote
 from mipac.util import upper_to_lower
 
 __all__ = ('RawRenote', 'RawReaction', 'RawNote')
@@ -57,7 +57,7 @@ class RawRenote:
         'poll',
     )
 
-    def __init__(self, data: RenotePayload):
+    def __init__(self, data: IRenote):
         self.id: str = data['id']
         self.created_at: datetime = datetime.strptime(
             data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
@@ -70,13 +70,15 @@ class RawRenote:
         self.renote_count: int | None = data.get('renote_count')
         self.replies_count: int | None = data.get('replies_count')
         self.reactions = data['reactions']  # TODO:型探す
-        self.emojis = data['emojis']  # TODO:型探す
-        self.file_ids: List[str] = data['file_ids']
-        self.files = data['files']
-        self.reply_id = data['reply_id']
-        self.renote_id = data['renote_id']
+        self.emojis = data.get('emojis')  # TODO:型探す
+        self.file_ids: Optional[List[str]] = data.get('file_ids')
+        self.files = data.get('files')
+        self.reply_id = data.get('reply_id')
+        self.renote_id = data.get('renote_id')
         self.uri = data.get('uri')
-        self.poll: Optional[RawPoll] = RawPoll(data['poll']) if 'poll' in data else None
+        self.poll: Optional[RawPoll] = RawPoll(
+            data['poll']
+        ) if 'poll' in data else None
 
 
 class RawReaction:
@@ -102,19 +104,19 @@ class RawReaction:
         'reaction',
     )
 
-    def __init__(self, data: ReactionPayload):
+    def __init__(self, data: IReaction):
         self.id: Optional[str] = data.get('id')
         self.created_at: Optional[datetime] = datetime.strptime(
             data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
-        ) if data.get('created_at') else None
+        ) if 'created_at' in data else None
         self.type: Optional[str] = data.get('type')
         self.is_read: bool = bool(data.get('is_read'))
-        self.user: Optional[RawUser] = RawUser(data['user']) if data.get(
-            'user'
-        ) else None
-        self.note: Optional[RawNote] = RawNote(data['note']) if data.get(
-            'note'
-        ) else None
+        self.user: Optional[RawUser] = RawUser(
+            data['user']
+        ) if 'user' in data else None
+        self.note: Optional[RawNote] = RawNote(
+            data['note']
+        ) if 'note' in data else None
         self.reaction: str = data['reaction']
 
 
@@ -196,15 +198,9 @@ class RawNote:
         self.renote: Optional[RawRenote] = RawRenote(
             data['renote']
         ) if 'renote' in data else None
-        self.visibility: Optional[str] = data.get(
-            'visibility'
-        )
-        self.renote_count: Optional[int] = data.get(
-            'renote_count'
-        )
-        self.replies_count: Optional[int] = data.get(
-            'replies_count'
-        )
+        self.visibility: Optional[str] = data.get('visibility')
+        self.renote_count: Optional[int] = data.get('renote_count')
+        self.replies_count: Optional[int] = data.get('replies_count')
         self.reactions: Dict[str, Any] = data['reactions']
         self.emojis: List[RawEmoji] = [RawEmoji(i) for i in data['emojis']]
         self.file_ids: Optional[List[str]] = data.get('file_ids')
@@ -213,7 +209,9 @@ class RawNote:
         ] if 'files' in data else []
         self.reply_id: Optional[str] = data.get('reply_id')
         self.renote_id: Optional[str] = data.get('renote_id')
-        self.poll: Optional[RawPoll] = RawPoll(data['poll']) if 'poll' in data else None
+        self.poll: Optional[RawPoll] = RawPoll(
+            data['poll']
+        ) if 'poll' in data else None
         self.visible_user_ids: Optional[List[str]] = data.get(
             'visible_user_ids', []
         )

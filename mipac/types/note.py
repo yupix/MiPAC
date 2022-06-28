@@ -8,10 +8,10 @@ __all__ = (
     'INoteRequired',
     'INote',
     'GeoPayload',
-    'ReactionPayload',
+    'IReaction',
     'PollPayload',
-    'RenotePayload',
-    'OptionalReaction',
+    'IRenote',
+    'IReactionRequired',
 )
 
 
@@ -39,7 +39,7 @@ class PollPayload(TypedDict, total=False):
     expired_after: int
 
 
-class RenotePayload(TypedDict):
+class IRenoteRequired(TypedDict):
     id: str
     created_at: str
     user_id: str
@@ -48,17 +48,20 @@ class RenotePayload(TypedDict):
     cw: str
     visibility: str
     renote_count: int
-    replies_count: Optional[int]
     reactions: Dict[str, Any]
-    emojis: Optional[List]
-    file_ids: Optional[List]
-    files: Optional[List]
-    reply_id: Optional[str]
-    renote_id: Optional[str]
-    uri: Optional[str]
-    poll: Optional[PollPayload]
-    tags: Optional[List[str]]
-    channel_id: Optional[str]
+
+
+class IRenote(IRenoteRequired, total=False):
+    replies_count: int
+    emojis: List
+    file_ids: List
+    files: List
+    reply_id: str
+    renote_id: str
+    uri: str
+    poll: PollPayload
+    tags: List[str]
+    channel_id: str
 
 
 class INoteRequired(TypedDict):
@@ -74,6 +77,7 @@ class INote(INoteRequired, total=False):
     """
     note object
     """
+
     visibility: str
     renote_count: int
     replies_count: int
@@ -90,7 +94,7 @@ class INote(INoteRequired, total=False):
     extract_emojis: bool
     preview: bool
     media_ids: List[str]
-    renote: RenotePayload
+    renote: IRenote
     field: dict
     tags: List[str]
     channel_id: str
@@ -99,15 +103,14 @@ class INote(INoteRequired, total=False):
     geo: GeoPayload
 
 
+class IReactionRequired(TypedDict):
+    reaction: str
 
-class OptionalReaction(TypedDict, total=False):
+
+class IReaction(IReactionRequired, total=False):
     created_at: str
     type: str
     is_read: bool
     user: UserPayload
     note: INote
     id: str
-
-
-class ReactionPayload(OptionalReaction):
-    reaction: str

@@ -16,12 +16,12 @@ from mipac.types.instance import (
 )
 from mipac.types.note import (
     GeoPayload,
-    INoteRequired,
     INote,
-    OptionalReaction,
+    INoteRequired,
+    IReaction,
+    IReactionRequired,
+    IRenote,
     PollPayload,
-    ReactionPayload,
-    RenotePayload,
 )
 from mipac.types.page import (
     AttachedFilePayload,
@@ -54,10 +54,10 @@ __all__ = (
     'INoteRequired',
     'INote',
     'GeoPayload',
-    'ReactionPayload',
+    'IReaction',
     'PollPayload',
-    'RenotePayload',
-    'OptionalReaction',
+    'IRenote',
+    'IReactionRequired',
     'FeaturesPayload',
     'MetaPayload',
     'InstancePayload',
