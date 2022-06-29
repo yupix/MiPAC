@@ -1,10 +1,32 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import List, Optional
+from typing import Any, Optional
 
+from mipac.core.models.drive import RawFile
+from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.instance import RawInstance
-from mipac.types.user import UserPayload
+from mipac.types.user import IChannel, IPinnedNote, UserPayload
+
+__all__ = ('RawUserDetails', 'RawUser', 'RawChannel', 'RawPinnedNote')
+
+
+class RawChannel:
+    def __init__(self, data: IChannel):
+        self.id: Optional[str] = data.get('id')
+        self.created_at: Optional[datetime] = datetime.strptime(
+            data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
+        ) if 'created_at' in data else None
+        self.last_noted_at: Optional[str] = data.get(
+            'last_noted_at'
+        )  # TODO: datetimeか確認
+        self.name: Optional[str] = data.get('name')
+        self.description: Optional[str] = data.get('description')
+        self.banner_url: Optional[str] = data.get('banner_url')
+        self.notes_count: Optional[int] = data.get('notes_count')
+        self.users_count: Optional[int] = data.get('users_count')
+        self.is_following: Optional[bool] = data.get('is_following')
+        self.user_id: Optional[str] = data.get('user_id')
 
 __all__ = ('RawUserDetails', 'RawUser')
 
@@ -79,7 +101,7 @@ class RawUser:
         ねこか否か
     is_lady : bool
         お嬢様か否か (Ayuskeyのみ)
-    emojis : Optional[List[str]]
+    emojis : Optional[list[str]]
         # TODO 謎
     url : Optional[str]
         # TODO 謎
@@ -157,7 +179,7 @@ class RawUser:
         self.is_bot: bool = bool(data.get('is_bot'))
         self.is_cat: bool = bool(data.get('is_cat', False))
         self.is_lady: bool = bool(data.get('is_lady', False))
-        self.emojis: Optional[List[str]] = data.get('emojis')
+        self.emojis: Optional[list[str]] = data.get('emojis')
         self.online_status = data.get('online_status', None)
         self.url: Optional[str] = data.get('url')
         self.uri: Optional[str] = data.get('uri')
