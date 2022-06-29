@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Optional
 
 from aiocache import Cache, cached
 
@@ -127,9 +127,9 @@ class UserActions:
         until_date: int = 0,
         include_my_renotes: bool = True,
         with_files: bool = False,
-        file_type: Optional[List[str]] = None,
+        file_type: Optional[list[str]] = None,
         exclude_nsfw: bool = True,
-    ) -> List[Note]:
+    ) -> list[Note]:
 
         if check_multi_arg(user_id, self.__user):
             raise ParameterError('user_idがありません')

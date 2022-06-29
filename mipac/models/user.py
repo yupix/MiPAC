@@ -1,22 +1,17 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any, List, Optional, Union
 
-from mipac.core.models.user import RawUser
+from mipac import File
+from mipac.core.models.user import RawChannel, RawPinnedNote, RawUser
 from mipac.models.emoji import Emoji
 from mipac.models.instance import Instance
-from mipac.types.user import (
-    ChannelPayload,
-    FieldContentPayload,
-    PinnedNotePayload,
-    PinnedPagePayload,
-)
+from mipac.types.user import FieldContentPayload, PinnedPagePayload
 
 if TYPE_CHECKING:
     from mipac.actions.user import UserActions
     from mipac.manager.client import ClientActions
-
 
 __all__ = ['User', 'FollowRequest', 'Followee']
 
@@ -49,62 +44,163 @@ class FollowRequest:
 
 
 class Channel:
-    def __init__(self, data: ChannelPayload):
-        self.id: Optional[str] = data.get('id')
-        self.created_at: Optional[datetime] = datetime.strptime(
-            data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
-        ) if data.get('created_at') else None
-        self.last_noted_at: Optional[str] = data.get('last_noted_at')
-        self.name: Optional[str] = data.get('name')
-        self.description: Optional[str] = data.get('description')
-        self.banner_url: Optional[str] = data.get('banner_url')
-        self.notes_count: Optional[int] = data.get('notes_count')
-        self.users_count: Optional[int] = data.get('users_count')
-        self.is_following: Optional[bool] = data.get('is_following')
-        self.user_id: Optional[str] = data.get('user_id')
+    def __init__(self, raw_data: RawChannel, *, client: ClientActions):
+        self.__client: ClientActions = client
+        self.__raw_data: RawChannel = raw_data
+
+    @property
+    def id(self) -> str:
+        return self.__raw_data.id
+
+    @property
+    def created_at(self) -> Optional[datetime]:
+        return self.__raw_data.created_at
+
+    @property
+    def last_noted_at(self) -> Optional[str]:
+        return self.__raw_data.last_noted_at
+
+    @property
+    def name(self) -> Optional[str]:
+        return self.__raw_data.name
+
+    @property
+    def description(self) -> Optional[str]:
+        return self.__raw_data.description
+
+    @property
+    def banner_url(self) -> Optional[str]:
+        return self.__raw_data.banner_url
+
+    @property
+    def notes_count(self) -> Optional[int]:
+        return self.__raw_data.notes_count
+
+    @property
+    def users_count(self) -> Optional[int]:
+        return self.__raw_data.users_count
+
+    @property
+    def is_following(self) -> Optional[bool]:
+        return self.__raw_data.is_following
+
+    @property
+    def user_id(self) -> Optional[str]:
+        return self.__raw_data.user_id
 
 
 class PinnedNote:
-    def __init__(self, data: PinnedNotePayload, *, client: ClientActions):
-        self.id: Optional[str] = data.get('id')
-        self.created_at: Optional[datetime] = datetime.strptime(
-            data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
-        ) if data.get('created_at') else None
-        self.text: Optional[str] = data.get('text')
-        self.cw: Optional[str] = data.get('cw')
-        self.user_id: Optional[str] = data.get('user_id')
-        self.user: Optional[User] = User(
-            RawUser(data['user']), client=client
-        ) if data.get('user') else None
-        self.reply_id: Optional[str] = data.get('reply_id')
-        self.reply: Optional[Dict[str, Any]] = data.get('reply')
-        self.renote: Optional[Dict[str, Any]] = data.get('renote')
-        self.via_mobile: Optional[bool] = data.get('via_mobile')
-        self.is_hidden: Optional[bool] = data.get('is_hidden')
-        self.visibility: Optional[bool] = bool(data['visibility']) if data.get(
-            'visibility'
-        ) else None
-        self.mentions: Optional[List[str]] = data.get('mentions')
-        self.visible_user_ids: Optional[List[str]] = data.get(
-            'visible_user_ids'
-        )
-        self.file_ids: Optional[List[str]] = data.get('file_ids')
-        self.files: Optional[List[str]] = data.get('files')
-        self.tags: Optional[List[str]] = data.get('tags')
-        self.poll: Optional[List[str]] = data.get('poll')
-        self.channel: Optional[Channel] = Channel(data['channel']) if data.get(
-            'channel'
-        ) else None
-        self.local_only: Optional[bool] = data.get('local_only')
-        self.emojis: Optional[List[Emoji]] = [
-            Emoji(i) for i in data['emojis']
-        ] if data.get('emojis') else None
-        self.reactions: Optional[Dict[str, Any]] = data.get('reactions')
-        self.renote_count: Optional[int] = data.get('renote_count')
-        self.replies_count: Optional[int] = data.get('replies_count')
-        self.uri: Optional[str] = data.get('uri')
-        self.url: Optional[str] = data.get('url')
-        self.my_reaction: Optional[Dict[str, Any]] = data.get('my_reaction')
+    def __init__(self, raw_data: RawPinnedNote, *, client: ClientActions):
+        self._client: ClientActions = client
+        self._raw_data: RawPinnedNote = raw_data
+
+    @property
+    def id(self) -> Optional[str]:
+        return self._raw_data.id
+
+    @property
+    def created_at(self) -> Optional[datetime]:
+        return self._raw_data.created_at
+
+    @property
+    def text(self) -> Optional[str]:
+        return self._raw_data.text
+
+    @property
+    def cw(self) -> Optional[str]:
+        return self._raw_data.cw
+
+    @property
+    def user_id(self) -> Optional[str]:
+        return self._raw_data.user_id
+
+    @property
+    def user(self) -> Optional[User]:
+        return User(self._raw_data.user, client=self._client)
+
+    @property
+    def reply_id(self) -> Optional[str]:
+        return self._raw_data.reply_id
+
+    @property
+    def reply(self) -> Optional[dict[str, Any]]:
+        return self._raw_data.reply
+
+    @property
+    def renote(self) -> Optional[dict[str, Any]]:
+        return self._raw_data.renote
+
+    @property
+    def via_mobile(self) -> bool:
+        return self._raw_data.via_mobile
+
+    @property
+    def is_hidden(self) -> bool:
+        return self._raw_data.is_hidden
+
+    @property
+    def visibility(self) -> bool:
+        return self._raw_data.visibility
+
+    @property
+    def mentions(self) -> Optional[list[str]]:
+        return self._raw_data.mentions
+
+    @property
+    def visible_user_ids(self) -> Optional[list[str]]:
+        return self._raw_data.visible_user_ids
+
+    @property
+    def file_ids(self) -> Optional[list[str]]:
+        return self._raw_data.file_ids
+
+    @property
+    def files(self) -> list[File]:
+        return [File(i, client=self._client) for i in self._raw_data.files]
+
+    @property
+    def tags(self) -> Optional[list[str]]:
+        return self._raw_data.tags
+
+    @property
+    def poll(self) -> Optional[dict[str, Any]]:
+        return self._raw_data.poll
+
+    @property
+    def channel(self) -> Optional[Channel]:
+        return Channel(self._raw_data.channel, client=self._client)
+
+    @property
+    def local_only(self) -> bool:
+        return self._raw_data.local_only
+
+    @property
+    def emojis(self) -> Optional[list[Emoji]]:
+        return [Emoji(i, client=self._client) for i in self._raw_data.emojis]
+
+    @property
+    def reactions(self) -> Optional[dict[str, Any]]:
+        return self._raw_data.reactions
+
+    @property
+    def renote_count(self) -> Optional[int]:
+        return self._raw_data.renote_count
+
+    @property
+    def replies_count(self) -> Optional[int]:
+        return self._raw_data.replies_count
+
+    @property
+    def uri(self) -> Optional[str]:
+        return self._raw_data.uri
+
+    @property
+    def url(self) -> Optional[str]:
+        return self._raw_data.url
+
+    @property
+    def my_reaction(self) -> Optional[dict[str, Any]]:
+        return self._raw_data.my_reaction
 
 
 class PinnedPage:
@@ -120,7 +216,7 @@ class PinnedPage:
         self.content: Optional[List] = data.get('content')
         self.variables: Optional[List] = data.get('variables')
         self.user_id: Optional[str] = data.get('user_id')
-        self.author: Optional[Dict[str, Any]] = data.get('author')
+        self.author: Optional[dict[str, Any]] = data.get('author')
 
 
 class FieldContent:

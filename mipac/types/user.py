@@ -1,64 +1,64 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional, TypedDict
+from typing import Any, List, Optional, TypedDict
 
 from .drive import FilePayload
 from .emoji import EmojiPayload
 from .instance import InstancePayload
 
 __all__ = (
-    'ChannelPayload',
+    'IChannel',
     'FieldContentPayload',
     'UserPayload',
     'PinnedPagePayload',
-    'PinnedNotePayload',
+    'IPinnedNote',
     'OptionalUser',
 )
 
 
-class ChannelPayload(TypedDict):
-    id: Optional[str]
-    created_at: Optional[str]
-    last_noted_at: Optional[str]
-    name: Optional[str]
-    description: Optional[str]
-    banner_url: Optional[str]
-    notes_count: Optional[int]
-    users_count: Optional[int]
-    is_following: Optional[bool]
-    user_id: Optional[str]
+class IChannel(TypedDict, total=False):
+    id: str
+    created_at: str
+    last_noted_at: str
+    name: str
+    description: str
+    banner_url: str
+    notes_count: int
+    users_count: int
+    is_following: bool
+    user_id: str
 
 
-class PinnedNotePayload(TypedDict):
-    id: Optional[str]
-    created_at: Optional[str]
-    text: Optional[str]
-    cw: Optional[str]
-    user_id: Optional[str]
-    user: Optional['UserPayload']
-    reply_id: Optional[str]
-    renote_id: Optional[str]
-    reply: Optional[Dict[str, Any]]
-    renote: Optional[Dict[str, Any]]
-    via_mobile: Optional[bool]
-    is_hidden: Optional[bool]
-    visibility: Optional[str]
-    mentions: Optional[List[str]]
-    visible_user_ids: Optional[List[str]]
-    file_ids: Optional[List[str]]
-    files: Optional[List[FilePayload]]
-    tags: Optional[List[str]]
-    poll: Optional[Dict[str, Any]]
-    channel_id: Optional[str]
-    channel: Optional[ChannelPayload]
-    local_only: Optional[bool]
-    emojis: Optional[List[EmojiPayload]]
-    reactions: Optional[Dict[str, Any]]
-    renote_count: Optional[int]
-    replies_count: Optional[int]
-    uri: Optional[str]
-    url: Optional[str]
-    my_reaction: Optional[Dict[str, Any]]
+class IPinnedNote(TypedDict, total=False):
+    id: str
+    created_at: str
+    text: str
+    cw: str
+    user_id: str
+    user: 'UserPayload'
+    reply_id: str
+    renote_id: str
+    reply: dict[str, Any]
+    renote: dict[str, Any]
+    via_mobile: bool
+    is_hidden: bool
+    visibility: str
+    mentions: list[str]
+    visible_user_ids: list[str]
+    file_ids: list[str]
+    files: list[FilePayload]
+    tags: list[str]
+    poll: dict[str, Any]
+    channel_id: str
+    channel: IChannel
+    local_only: bool
+    emojis: list[EmojiPayload]
+    reactions: dict[str, Any]
+    renote_count: int
+    replies_count: int
+    uri: str
+    url: str
+    my_reaction: dict[str, Any]
 
 
 class PinnedPagePayload(TypedDict):
@@ -71,7 +71,7 @@ class PinnedPagePayload(TypedDict):
     content: Optional[List]
     variables: Optional[List]
     user_id: Optional[str]
-    author: Optional[Dict[str, Any]]
+    author: Optional[dict[str, Any]]
 
 
 class FieldContentPayload(TypedDict):
@@ -97,7 +97,7 @@ class UserPayload(OptionalUser):
     avatar_url: Optional[str]
     avatar_blurhash: Optional[str]
     avatar_color: Optional[str]
-    emojis: Optional[List[str]]
+    emojis: Optional[list[str]]
     url: str
     uri: str
     created_at: str
@@ -112,8 +112,8 @@ class UserPayload(OptionalUser):
     followers_count: int
     following_count: int
     notes_count: int
-    pinned_note_ids: List[str]
-    pinned_notes: List[str]
+    pinned_note_ids: list[str]
+    pinned_notes: list[str]
     pinned_page_id: str
     pinned_page: str
     ff_visibility: str
