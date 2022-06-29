@@ -92,7 +92,7 @@ class HTTPClient:
             if 300 > res.status >= 200:
                 return data
             if 511 > res.status >= 300:
-                raise APIError(data)
+                raise APIError(data, res.status)
 
     async def close_session(self):
         await self.__session.close()
