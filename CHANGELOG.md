@@ -8,7 +8,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- None
+- added `RawChannel` class
+- added `RawPinnedNote` class 
+- added `IReactionRequired` class
+
+### Changed
+
+- `Dict[Any, Any]` のような構文を typingモジュールを使わない `dict[any, any]` に変更
+- `List[Any, Any]` のような構文を typingモジュールを使わない `list[any, any]` に変更
+- `Channel` クラスを `RawChannel` を用いて作るように
+- `PinnedNote` クラスを `RawPinnedNote` を用いて作るように
+- change class name `PinnedNotePayload` -> `IPinnedNote`
+- change class name `ChannelPayload` -> `IChannel`
+- change class name `NotePayload` -> `INote`
+- change class name `RenotePayload` -> `IRenote`
+- change class name `ReactionPayload` -> `IReaction`
 
 ## [0.1.0] - 2022-05-28
 
