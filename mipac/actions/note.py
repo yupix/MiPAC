@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Optional
 
 from mipac.core.models.note import RawNote
 from mipac.exception import ParameterError
@@ -70,7 +70,7 @@ class NoteActions:
         self,
         content: Optional[str] = None,
         visibility: str = 'public',
-        visible_user_ids: Optional[List[str]] = None,
+        visible_user_ids: Optional[list[str]] = None,
         cw: Optional[str] = None,
         local_only: bool = False,
         extract_mentions: bool = True,
@@ -79,7 +79,7 @@ class NoteActions:
         reply_id: Optional[str] = None,
         renote_id: Optional[str] = None,
         channel_id: Optional[str] = None,
-        files: Optional[List[MiFile]] = None,
+        files: Optional[list[MiFile]] = None,
         poll: Optional[Poll] = None,
     ) -> Note:
         """
@@ -92,7 +92,7 @@ class NoteActions:
         visibility : str, optional
             公開範囲, by default "public"
             Enum: "public" "home" "followers" "specified"
-        visible_user_ids : Optional[List[str]], optional
+        visible_user_ids : Optional[list[str]], optional
             公開するユーザー, by default None
         cw : Optional[str], optional
             閲覧注意の文字, by default None
@@ -110,7 +110,7 @@ class NoteActions:
             リノート先のid, by default None
         channel_id : Optional[str], optional
             チャンネルid, by default None
-        files : List[MiFile], optional
+        files : list[MiFile], optional
             添付するファイルのリスト, by default None
         poll : Optional[Poll], optional
             アンケート, by default None
@@ -210,13 +210,13 @@ class NoteActions:
         self,
         content: Optional[str] = None,
         visibility: str = 'public',
-        visible_user_ids: Optional[List[str]] = None,
+        visible_user_ids: Optional[list[str]] = None,
         cw: Optional[str] = None,
         local_only: bool = False,
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
-        file_ids: Optional[List[str]] = None,
+        file_ids: Optional[list[str]] = None,
         poll: Optional[Poll] = None,
         note_id: Optional[str] = None,
     ) -> Note:
@@ -229,7 +229,7 @@ class NoteActions:
             text
         visibility: str, default='public'
             Disclosure range
-        visible_user_ids: Optional[List[str]], default=None
+        visible_user_ids: Optional[list[str]], default=None
             List of users to be published
         cw: Optional[str], default=None
             Text to be displayed when warning is given
@@ -241,7 +241,7 @@ class NoteActions:
             Whether to expand the hashtag
         extract_emojis: bool, default=True
             Whether to expand the emojis
-        file_ids: Optional[List[str]], default=None
+        file_ids: Optional[list[str]], default=None
             The ID list of files to be attached
         poll: Optional[Poll], default=None
             Questionnaire to be created
@@ -293,7 +293,7 @@ class NoteActions:
         until_id: Optional[str] = None,
         limit: int = 10,
         note_id: Optional[str] = None,
-    ) -> List[Note]:
+    ) -> list[Note]:
         """
         ノートに対する返信を取得します
 
@@ -310,7 +310,7 @@ class NoteActions:
 
         Returns
         -------
-        List[Note]
+        list[Note]
             返信のリスト
         """
         note_id = note_id or self.__note_id
@@ -329,7 +329,7 @@ class NoteActions:
 
     async def get_reaction(
         self, reaction: str, note_id: Optional[str] = None
-    ) -> List[NoteReaction]:
+    ) -> list[NoteReaction]:
         note_id = note_id or self.__note_id
         return await ReactionManager(
             note_id=note_id, client=self.__client, session=self.__session

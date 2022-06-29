@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 
 from mipac.types.emoji import EmojiPayload
 
@@ -11,7 +11,7 @@ class RawEmoji:
     ----------
     id : Optional[str]
         絵文字のID
-    aliases : Optional[List[str]]
+    aliases : Optional[list[str]]
         絵文字のエイリアス
     name : Optional[str]
         絵文字の名前
@@ -27,7 +27,7 @@ class RawEmoji:
 
     def __init__(self, data: EmojiPayload):
         self.id: Optional[str] = data.get('id')
-        self.aliases: Optional[List[str]] = data.get('aliases')
+        self.aliases: Optional[list[str]] = data.get('aliases')
         self.name: Optional[str] = data.get('name')
         self.category: Optional[str] = data.get('category')
         self.host: Optional[str] = data.get('host')

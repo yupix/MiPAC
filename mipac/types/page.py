@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, List, Optional, TypedDict
+from typing import TYPE_CHECKING, Any, Optional, TypedDict
 
 if TYPE_CHECKING:
     from mipac.types.drive import PropertiesPayload
@@ -36,7 +36,7 @@ class PageContentPayload(TypedDict):
     canvas_id: Optional[str]
     attach_canvas_image: Optional[bool]
     default: Optional[str]
-    value: Optional[List[Any]]
+    value: Optional[list[Any]]
 
     children: Optional['PageContentPayload']
 
@@ -81,8 +81,8 @@ class PagePayload(TypedDict):
     updated_at: str
     user_id: str
     user: UserPayload
-    content: List[PageContentPayload]
-    variable: List[VariablePayload]
+    content: list[PageContentPayload]
+    variable: list[VariablePayload]
     title: str
     name: str
     summary: Optional[str]
@@ -92,5 +92,5 @@ class PagePayload(TypedDict):
     script: str
     eye_catching_image_id: Optional[str]
     eye_catching_image: EyeCatchingImagePayload
-    attached_files: List[AttachedFilePayload]
+    attached_files: list[AttachedFilePayload]
     liked_count: int

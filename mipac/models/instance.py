@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict, List, Optional
+from typing import TYPE_CHECKING, Optional
 
 from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.instance import RawInstance
@@ -21,7 +21,7 @@ class InstanceMeta:
         self.name: str = data['name']
         self.uri: str = data['uri']
         self.description: str = data['description']
-        self.langs: List[str] = data['langs']
+        self.langs: list[str] = data['langs']
         self.tos_url: Optional[str] = data['tos_url']
         self.repository_url: str = data['repository_url']
         self.feedback_url: str = data['feedback_url']
@@ -49,7 +49,7 @@ class InstanceMeta:
         self.mascot_image_url: str = data['mascot_image_url']
         self.error_image: str = data['error_image_url']
         self.max_note_text_length: int = data['max_note_text_length']
-        self.emojis: List[Emoji] = [Emoji(RawEmoji(i)) for i in data['emojis']]
+        self.emojis: list[Emoji] = [Emoji(RawEmoji(i)) for i in data['emojis']]
         self.ads: list = data['ads']
         self.enable_email: bool = bool(data['enable_email'])
         self.enable_twitter_integration = bool(
@@ -63,7 +63,7 @@ class InstanceMeta:
         )
         self.enable_service_worker: bool = bool(data['enable_service_worker'])
         self.translator_available: bool = bool(data['translator_available'])
-        self.pinned_page: Optional[List[str]] = data.get('pinned_page')
+        self.pinned_page: Optional[list[str]] = data.get('pinned_page')
         self.cache_remote_files: Optional[bool] = data.get(
             'cache_remote_files'
         )
@@ -71,7 +71,7 @@ class InstanceMeta:
             'proxy_remote_files'
         )
         self.require_setup: Optional[bool] = data.get('require_setup')
-        self.features: Optional[Dict[str, bool]] = data.get('features')
+        self.features: Optional[dict[str, bool]] = data.get('features')
 
 
 class Instance:

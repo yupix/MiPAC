@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Optional
 
 from mipac.abc.action import AbstractAction
 from mipac.core.models.drive import RawFile, RawFolder
@@ -86,7 +86,7 @@ class FileActions(AbstractAction):
         until_id: Optional[str] = None,
         folder_id: Optional[str] = None,
         file_type: Optional[str] = None,
-    ) -> List[File]:
+    ) -> list[File]:
         """
         ファイルを取得します
 
@@ -189,7 +189,7 @@ class FolderActions(AbstractAction):
         until_id: Optional[str] = None,
         folder_id: Optional[str] = None,
         file_type: Optional[str] = None,
-    ) -> List[File]:
+    ) -> list[File]:
         """
         ファイルを取得します
 
@@ -234,7 +234,7 @@ class DriveActions(AbstractAction):
         since_id: Optional[str] = None,
         until_id: Optional[str] = None,
         folder_id: Optional[str] = None,
-    ) -> List[Folder]:
+    ) -> list[Folder]:
         """
         フォルダーの一覧を取得します
 

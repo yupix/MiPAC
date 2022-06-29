@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 from mipac.types.chart import (
     ActiveUsersChartPayload,
     DriveChartPayload,
@@ -31,21 +29,21 @@ class RawActiveUsersChart:
     )
 
     def __init__(self, data: ActiveUsersChartPayload):
-        self.read_write: List[int] = data['read_write']
-        self.read: List[int] = data['read']
-        self.write: List[int] = data['write']
-        self.registered_within_week: List[int] = data['registered_within_week']
-        self.registered_within_month: List[int] = data[
+        self.read_write: list[int] = data['read_write']
+        self.read: list[int] = data['read']
+        self.write: list[int] = data['write']
+        self.registered_within_week: list[int] = data['registered_within_week']
+        self.registered_within_month: list[int] = data[
             'registered_within_month'
         ]
-        self.registered_within_year: List[int] = data['registered_within_year']
-        self.registered_outside_week: List[int] = data[
+        self.registered_within_year: list[int] = data['registered_within_year']
+        self.registered_outside_week: list[int] = data[
             'registered_outside_week'
         ]
-        self.registered_outside_month: List[int] = data[
+        self.registered_outside_month: list[int] = data[
             'registered_outside_month'
         ]
-        self.registered_outside_year: List[int] = data[
+        self.registered_outside_year: list[int] = data[
             'registered_outside_year'
         ]
 
@@ -61,12 +59,12 @@ class RawDriveLocalChart:
     )
 
     def __init__(self, data: DriveLocalChartPayload):
-        self.total_count: List[int] = data['total_count']
-        self.total_size: List[int] = data['total_size']
-        self.inc_count: List[int] = data['inc_count']
-        self.inc_size: List[int] = data['inc_size']
-        self.dec_count: List[int] = data['dec_count']
-        self.dec_size: List[int] = data['dec_size']
+        self.total_count: list[int] = data['total_count']
+        self.total_size: list[int] = data['total_size']
+        self.inc_count: list[int] = data['inc_count']
+        self.inc_size: list[int] = data['inc_size']
+        self.dec_count: list[int] = data['dec_count']
+        self.dec_size: list[int] = data['dec_size']
 
 
 class RawDriveRemoteChart:
@@ -80,12 +78,12 @@ class RawDriveRemoteChart:
     )
 
     def __init__(self, data: DriveRemoteChartPayload):
-        self.total_count: List[int] = data['total_count']
-        self.total_size: List[int] = data['total_size']
-        self.inc_count: List[int] = data['inc_count']
-        self.inc_size: List[int] = data['inc_size']
-        self.dec_count: List[int] = data['dec_count']
-        self.dec_size: List[int] = data['dec_size']
+        self.total_count: list[int] = data['total_count']
+        self.total_size: list[int] = data['total_size']
+        self.inc_count: list[int] = data['inc_count']
+        self.inc_size: list[int] = data['inc_size']
+        self.dec_count: list[int] = data['dec_count']
+        self.dec_size: list[int] = data['dec_size']
 
 
 class RawDriveChart:

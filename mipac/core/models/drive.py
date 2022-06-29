@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 
 from mipac.types.drive import FilePayload, FolderPayload, PropertiesPayload
 from mipac.types.user import UserPayload
@@ -43,7 +43,7 @@ class RawFolder:
         # TODO: 調査
     parent_id : str
         親フォルダーのID
-    parent : Optional[Dict[str, Any]]
+    parent : Optional[dict[str, Any]]
         親フォルダー
     """
 
@@ -64,7 +64,7 @@ class RawFolder:
         self.name: str = data['name']
         self.folders_count: Optional[int] = data.get('folders_count', 0)
         self.parent_id: str = data['parent_id']
-        self.parent: Optional[Dict[str, Any]] = data.get('parent')
+        self.parent: Optional[dict[str, Any]] = data.get('parent')
 
 
 class RawFile:
@@ -102,7 +102,7 @@ class RawFile:
         # TODO: 調査
     user_id : str
         ファイル作成者のID
-    user : Dict[str, Any]
+    user : dict[str, Any]
         ファイル作成者の情報
     """
 

@@ -7,7 +7,7 @@ import asyncio
 import re
 import uuid
 from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 from urllib.parse import urlencode
 
 import aiohttp
@@ -46,7 +46,7 @@ class AuthClient:
         instance_uri: str,
         name: str,
         description: str,
-        permissions: Optional[List[str]] = None,
+        permissions: Optional[list[str]] = None,
         *,
         icon: Optional[str] = None,
         use_miauth: bool = False,
@@ -60,7 +60,7 @@ class AuthClient:
             アプリケーションの名前
         description : str
             アプリケーションの説明
-        permissions : Optional[List[str]], default=None
+        permissions : Optional[list[str]], default=None
             アプリケーションが要求する権限
         icon: Optional[str], default=None
             アプリケーションのアイコン画像URL
@@ -73,7 +73,7 @@ class AuthClient:
         self.__instance_uri: str = instance_uri
         self.__name: str = name
         self.__description: str = description
-        self.__permissions: List[str] = permissions
+        self.__permissions: list[str] = permissions
         self.__icon: Optional[str] = icon
         self.__use_miauth: bool = use_miauth
         self.__session_token: uuid.UUID
@@ -201,7 +201,7 @@ def check_multi_arg(*args: Any) -> bool:
     return bool([i for i in args if i])
 
 
-def remove_list_empty(data: List[Any]) -> List[Any]:
+def remove_list_empty(data: list[Any]) -> list[Any]:
     """
     Parameters
     ----------
@@ -210,13 +210,13 @@ def remove_list_empty(data: List[Any]) -> List[Any]:
 
     Returns
     -------
-    Dict[str, Any]
+    dict[str, Any]
         空のkeyがなくなったdict
     """
     return [k for k in data if k]
 
 
-def remove_dict_empty(data: Dict[str, Any]) -> Dict[str, Any]:
+def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
     """
     Parameters
     ----------
@@ -235,11 +235,11 @@ def remove_dict_empty(data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def upper_to_lower(
-    data: Dict[str, Any],
-    field: Optional[Dict[str, Any]] = None,
+    data: dict[str, Any],
+    field: Optional[dict[str, Any]] = None,
     nest: bool = True,
-    replace_list: Optional[Dict[str, Any]] = None,
-) -> Dict[str, Any]:
+    replace_list: Optional[dict[str, Any]] = None,
+) -> dict[str, Any]:
     """
     Parameters
     ----------

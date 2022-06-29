@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, TypedDict
+from typing import Any, List, Optional, TypedDict
 
 from .drive import FilePayload
 from .emoji import EmojiPayload
@@ -20,7 +20,7 @@ class GeoPayload(TypedDict):
     衛星情報
     """
 
-    coordinates: Optional[List[Any]]
+    coordinates: Optional[list[Any]]
     altitude: Optional[int]
     accuracy: Optional[int]
     altitude_accuracy: Optional[int]
@@ -35,7 +35,7 @@ class PollPayload(TypedDict, total=False):
 
     multiple: bool
     expires_at: int
-    choices: List[str]
+    choices: list[str]
     expired_after: int
 
 
@@ -48,7 +48,7 @@ class IRenoteRequired(TypedDict):
     cw: str
     visibility: str
     renote_count: int
-    reactions: Dict[str, Any]
+    reactions: dict[str, Any]
 
 
 class IRenote(IRenoteRequired, total=False):
@@ -60,7 +60,7 @@ class IRenote(IRenoteRequired, total=False):
     renote_id: str
     uri: str
     poll: PollPayload
-    tags: List[str]
+    tags: list[str]
     channel_id: str
 
 
@@ -69,8 +69,8 @@ class INoteRequired(TypedDict):
     created_at: str
     user_id: str
     user: UserPayload
-    emojis: List[EmojiPayload]
-    reactions: Dict[str, Any]
+    emojis: list[EmojiPayload]
+    reactions: dict[str, Any]
 
 
 class INote(INoteRequired, total=False):
@@ -81,22 +81,22 @@ class INote(INoteRequired, total=False):
     visibility: str
     renote_count: int
     replies_count: int
-    file_ids: List[str]
-    files: List[FilePayload]
+    file_ids: list[str]
+    files: list[FilePayload]
     reply_id: str
     renote_id: str
     poll: PollPayload
-    visible_user_ids: List[str]
+    visible_user_ids: list[str]
     via_mobile: bool
     local_only: bool
     extract_mentions: bool
     extract_hashtags: bool
     extract_emojis: bool
     preview: bool
-    media_ids: List[str]
+    media_ids: list[str]
     renote: IRenote
     field: dict
-    tags: List[str]
+    tags: list[str]
     channel_id: str
     text: str
     cw: str

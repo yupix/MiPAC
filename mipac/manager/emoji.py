@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Optional
 
 from mipac import AbstractManager
 from mipac.exception import NotExistRequiredData
@@ -30,7 +30,7 @@ class AdminEmojiManager(AbstractManager):
         name: Optional[str] = None,
         url: Optional[str] = None,
         category: Optional[str] = None,
-        aliases: Optional[List[str]] = None
+        aliases: Optional[list[str]] = None
     ) -> bool:
         if self.__client._config.is_ayuskey:
             data = {

@@ -1,11 +1,11 @@
-from typing import List, Optional, TypedDict
+from typing import Optional, TypedDict
 
 __all__ = ('EmojiPayload',)
 
 
 class EmojiPayload(TypedDict):
     id: Optional[str]
-    aliases: Optional[List[str]]
+    aliases: Optional[list[str]]
     name: Optional[str]
     category: Optional[str]
     host: Optional[str]

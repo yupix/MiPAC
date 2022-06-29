@@ -33,10 +33,10 @@ from mipac.types.page import (
 )
 from mipac.types.reaction import NoteReactionPayload
 from mipac.types.user import (
-    ChannelPayload,
     FieldContentPayload,
+    IChannel,
+    IPinnedNote,
     OptionalUser,
-    PinnedNotePayload,
     PinnedPagePayload,
     UserPayload,
 )
@@ -70,10 +70,10 @@ __all__ = (
     'AttachedFilePayload',
     'PagePayload',
     'NoteReactionPayload',
-    'ChannelPayload',
+    'IChannel',
     'FieldContentPayload',
     'UserPayload',
     'PinnedPagePayload',
-    'PinnedNotePayload',
+    'IPinnedNote',
     'OptionalUser',
 )

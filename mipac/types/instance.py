@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional, TypedDict
+from typing import TYPE_CHECKING, Optional, TypedDict
 
 if TYPE_CHECKING:
     from mipac.types.emoji import EmojiPayload
@@ -31,7 +31,7 @@ class FeaturesPayload:
 
 
 class OptionalMeta(TypedDict, total=False):
-    pinned_page: List[str]
+    pinned_page: list[str]
     cache_remote_files: bool
     proxy_remote_files: bool
     require_setup: bool
@@ -45,7 +45,7 @@ class MetaPayload(OptionalMeta):
     name: str
     uri: str
     description: str
-    langs: List[str]
+    langs: list[str]
     tos_url: Optional[str]
     repository_url: str
     feedback_url: str
@@ -63,7 +63,7 @@ class MetaPayload(OptionalMeta):
     mascot_image_url: str
     error_image_url: str
     max_note_text_length: int
-    emojis: List[EmojiPayload]
+    emojis: list[EmojiPayload]
     ads: list
     enable_email: bool
     enable_twitter_integration: bool

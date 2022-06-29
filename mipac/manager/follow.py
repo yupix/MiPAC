@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Optional
 
 from mipac import AbstractManager
 from mipac.http import HTTPClient, Route
@@ -86,7 +86,7 @@ class FollowRequestManager(AbstractManager):
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
 
-    async def get_all(self) -> List[FollowRequest]:
+    async def get_all(self) -> list[FollowRequest]:
         """
         未承認のフォローリクエストを取得します
         """

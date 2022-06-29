@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Optional
 
 from mipac import AbstractManager
 from mipac.core.models.emoji import RawEmoji
@@ -65,7 +65,7 @@ class ReactionManager(AbstractManager):
 
     async def get_reaction(
         self, reaction: str, note_id: Optional[str] = None, *, limit: int = 11
-    ) -> List[NoteReaction]:
+    ) -> list[NoteReaction]:
         note_id = note_id or self.__note_id
         data = remove_dict_empty(
             {'noteId': note_id, 'limit': limit, 'type': reaction}
@@ -80,7 +80,7 @@ class ReactionManager(AbstractManager):
             NoteReaction(RawNoteReaction(i), client=self.__client) for i in res
         ]
 
-    async def get_emoji_list(self) -> List[Emoji]:
+    async def get_emoji_list(self) -> list[Emoji]:
         data = await self.__session.request(
             Route('GET', '/api/meta'), json={'detail': False}, auth=True
         )

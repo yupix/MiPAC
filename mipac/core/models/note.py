@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 from mipac.core.models.drive import RawFile
 from mipac.core.models.emoji import RawEmoji
@@ -28,7 +28,7 @@ class RawRenote:
     replies_count : int | None
     reactions
     emojis
-    file_ids : List[str]
+    file_ids : list[str]
     files
     reply_id
     renote_id
@@ -71,7 +71,7 @@ class RawRenote:
         self.replies_count: int | None = data.get('replies_count')
         self.reactions = data['reactions']  # TODO:型探す
         self.emojis = data.get('emojis')  # TODO:型探す
-        self.file_ids: Optional[List[str]] = data.get('file_ids')
+        self.file_ids: Optional[list[str]] = data.get('file_ids')
         self.files = data.get('files')
         self.reply_id = data.get('reply_id')
         self.renote_id = data.get('renote_id')
@@ -134,23 +134,23 @@ class RawNote:
     visibility : Optional[str]
     renote_count : Optional[int]
     replies_count : Optional[int]
-    reactions : Optional[Dict[str, Any]]
-    emojis : List[RawEmoji]
-    file_ids : Optional[List[str]]
-    files : List[RawFile]
+    reactions : Optional[dict[str, Any]]
+    emojis : list[RawEmoji]
+    file_ids : Optional[list[str]]
+    files : list[RawFile]
     reply_id : Optional[str]
     renote_id : Optional[str]
     poll : Optional[RawPoll]
-    visible_user_ids : Optional[List[str]]
+    visible_user_ids : Optional[list[str]]
     via_mobile :  bool
     local_only :  bool
     extract_mentions :  bool
     extract_hashtags :  bool
     extract_emojis :  bool
     preview :  bool
-    media_ids : Optional[List[str]]
+    media_ids : Optional[list[str]]
     field : Optional[dict]
-    tags : Optional[List[str]]
+    tags : Optional[list[str]]
     channel_id : Optional[str]
     """
 
@@ -201,10 +201,10 @@ class RawNote:
         self.visibility: Optional[str] = data.get('visibility')
         self.renote_count: Optional[int] = data.get('renote_count')
         self.replies_count: Optional[int] = data.get('replies_count')
-        self.reactions: Dict[str, Any] = data['reactions']
-        self.emojis: List[RawEmoji] = [RawEmoji(i) for i in data['emojis']]
-        self.file_ids: Optional[List[str]] = data.get('file_ids')
-        self.files: List[RawFile] = [
+        self.reactions: dict[str, Any] = data['reactions']
+        self.emojis: list[RawEmoji] = [RawEmoji(i) for i in data['emojis']]
+        self.file_ids: Optional[list[str]] = data.get('file_ids')
+        self.files: list[RawFile] = [
             RawFile(upper_to_lower(i)) for i in data['files']
         ] if 'files' in data else []
         self.reply_id: Optional[str] = data.get('reply_id')
@@ -212,7 +212,7 @@ class RawNote:
         self.poll: Optional[RawPoll] = RawPoll(
             data['poll']
         ) if 'poll' in data else None
-        self.visible_user_ids: Optional[List[str]] = data.get(
+        self.visible_user_ids: Optional[list[str]] = data.get(
             'visible_user_ids', []
         )
         self.via_mobile: bool = bool(data.get('via_mobile', False))
@@ -221,7 +221,7 @@ class RawNote:
         self.extract_hashtags: bool = bool(data.get('extract_hashtags'))
         self.extract_emojis: bool = bool(data.get('extract_emojis'))
         self.preview: bool = bool(data.get('preview'))
-        self.media_ids: Optional[List[str]] = data.get('media_ids')
-        self.field: Optional[Dict[Any, Any]] = {}
-        self.tags: Optional[List[str]] = data.get('tags', [])
+        self.media_ids: Optional[list[str]] = data.get('media_ids')
+        self.field: Optional[dict[Any, Any]] = {}
+        self.tags: Optional[list[str]] = data.get('tags', [])
         self.channel_id: Optional[str] = data.get('channel_id')

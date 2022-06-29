@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, TypedDict
+from typing import TYPE_CHECKING, Any, Optional, TypedDict
 
 if TYPE_CHECKING:
     from mipac.types.user import UserPayload
@@ -29,7 +29,7 @@ class FolderPayload(TypedDict):
     folders_count: int
     files_count: int
     parent_id: str
-    parent: Dict[str, Any]
+    parent: dict[str, Any]
 
 
 class FilePayload(TypedDict):

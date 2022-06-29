@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Optional
 
 from mipac.types.note import PollPayload
 
@@ -35,7 +35,7 @@ class RawPoll:
         複数回投票可能か否か
     expires_at : Optional[int]
         投票期限
-    choices : Optional[List[RawPollChoices]]
+    choices : Optional[list[RawPollChoices]]
         項目
     expired_after : Optional[int]
         残り期限
@@ -46,7 +46,7 @@ class RawPoll:
     def __init__(self, data: PollPayload):
         self.multiple: Optional[bool] = data.get('multiple')
         self.expires_at: Optional[int] = data.get('expires_at')
-        self.choices: Optional[List[RawPollChoices]] = [
+        self.choices: Optional[list[RawPollChoices]] = [
             RawPollChoices(i) for i in data['choices']
         ] if data.get('choices') else None
         self.expired_after: Optional[int] = data.get('expired_after')

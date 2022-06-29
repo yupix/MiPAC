@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any, Optional, Union
 
 from mipac.core.models.note import RawNote, RawReaction, RawRenote
 from mipac.core.models.poll import RawPoll
@@ -83,7 +83,7 @@ class Poll:
         self.__raw_data = raw_data
 
     @property
-    def multiple(self) -> bool:
+    def multiple(self) -> bool | None:
         return self.__raw_data.multiple
 
     @property
@@ -245,9 +245,19 @@ class Reaction:
 
 
 class Note:
+    """
+    Noteモデル
+
+    Parameters
+    ----------
+    raw_data: RawNote
+        アクションを持たないNoteクラス
+    client: ClientActions
+    """
+
     def __init__(self, raw_data: RawNote, client: ClientActions):
-        self.__raw_data: RawNote = raw_data
-        self.__client: ClientActions = client
+        self._raw_data: RawNote = raw_data
+        self._client: ClientActions = client
 
     @property
     def id(self) -> str:
@@ -259,117 +269,117 @@ class Note:
         str
             ユーザーのID
         """
-        return self.__raw_data.id
+        return self._raw_data.id
 
     @property
     def created_at(self) -> datetime:
-        return self.__raw_data.created_at
+        return self._raw_data.created_at
 
     @property
     def user_id(self) -> str:
-        return self.__raw_data.user_id
+        return self._raw_data.user_id
 
     @property
     def author(self) -> User:
-        return User(self.__raw_data.author, client=self.__client)
+        return User(self._raw_data.author, client=self._client)
 
     @property
     def content(self) -> Optional[str]:
-        return self.__raw_data.content
+        return self._raw_data.content
 
     @property
     def cw(self) -> Optional[str]:
-        return self.__raw_data.cw
+        return self._raw_data.cw
 
     @property
     def renote(self) -> Union[None, Renote]:
-        if self.__raw_data.renote:
-            return Renote(self.__raw_data.renote, client=self.__client)
+        if self._raw_data.renote:
+            return Renote(self._raw_data.renote, client=self._client)
         return None
 
     @property
     def visibility(self) -> Optional[str]:
-        return self.__raw_data.visibility
+        return self._raw_data.visibility
 
     @property
     def renote_count(self) -> Optional[int]:
-        return self.__raw_data.renote_count
+        return self._raw_data.renote_count
 
     @property
     def replies_count(self) -> Optional[int]:
-        return self.__raw_data.replies_count
+        return self._raw_data.replies_count
 
     @property
-    def reactions(self) -> Optional[Dict[str, Any]]:  # TODO: 型の確認
-        return self.__raw_data.reactions
+    def reactions(self) -> Optional[dict[str, Any]]:  # TODO: 型の確認
+        return self._raw_data.reactions
 
     @property
-    def emojis(self) -> List[Emoji]:
-        return [Emoji(i) for i in self.__raw_data.emojis]
+    def emojis(self) -> list[Emoji]:
+        return [Emoji(i, client=self._client) for i in self._raw_data.emojis]
 
     @property
-    def file_ids(self) -> Optional[List[str]]:
-        return self.__raw_data.file_ids
+    def file_ids(self) -> Optional[list[str]]:
+        return self._raw_data.file_ids
 
     @property
-    def files(self) -> List[File]:
-        return [File(i, client=self.__client) for i in self.__raw_data.files]
+    def files(self) -> list[File]:
+        return [File(i, client=self._client) for i in self._raw_data.files]
 
     @property
     def reply_id(self) -> Optional[str]:
-        return self.__raw_data.reply_id
+        return self._raw_data.reply_id
 
     @property
     def renote_id(self) -> Optional[str]:
-        return self.__raw_data.renote_id
+        return self._raw_data.renote_id
 
     @property
     def poll(self) -> Union[Poll, None]:
-        return Poll(self.__raw_data.poll) if self.__raw_data.poll else None
+        return Poll(self._raw_data.poll) if self._raw_data.poll else None
 
     @property
-    def visible_user_ids(self) -> Optional[List[str]]:
-        return self.__raw_data.visible_user_ids
+    def visible_user_ids(self) -> Optional[list[str]]:
+        return self._raw_data.visible_user_ids
 
     @property
     def via_mobile(self) -> bool:
-        return self.__raw_data.via_mobile
+        return self._raw_data.via_mobile
 
     @property
     def local_only(self) -> bool:
-        return self.__raw_data.local_only
+        return self._raw_data.local_only
 
     @property
     def extract_mentions(self) -> bool:
-        return self.__raw_data.extract_mentions
+        return self._raw_data.extract_mentions
 
     @property
     def extract_hashtags(self) -> bool:
-        return self.__raw_data.extract_hashtags
+        return self._raw_data.extract_hashtags
 
     @property
     def extract_emojis(self) -> bool:
-        return self.__raw_data.extract_emojis
+        return self._raw_data.extract_emojis
 
     @property
     def preview(self) -> bool:
-        return self.__raw_data.preview
+        return self._raw_data.preview
 
     @property
-    def media_ids(self) -> Optional[List[str]]:
-        return self.__raw_data.media_ids
+    def media_ids(self) -> Optional[list[str]]:
+        return self._raw_data.media_ids
 
     @property
-    def field(self) -> Optional[Dict[Any, Any]]:  # TODO: any
-        return self.__raw_data.field
+    def field(self) -> Optional[dict[Any, Any]]:  # TODO: any
+        return self._raw_data.field
 
     @property
-    def tags(self) -> Optional[List[str]]:
-        return self.__raw_data.tags
+    def tags(self) -> Optional[list[str]]:
+        return self._raw_data.tags
 
     @property
     def channel_id(self) -> Optional[str]:
-        return self.__raw_data.channel_id
+        return self._raw_data.channel_id
 
     @property
     def action(self) -> NoteActions:
@@ -380,7 +390,7 @@ class Note:
         -------
         NoteActions
         """
-        return self.__client._create_note_instance(self.id).action
+        return self._client._create_note_instance(self.id).action
 
     async def reply(
         self,
@@ -422,7 +432,7 @@ class Note:
             file_ids = []
         visibility = self.visibility or 'public'
 
-        return await self.__client.note.action.send(
+        return await self._client.note.action.send(
             content,
             visibility=visibility,
             visible_user_ids=self.visible_user_ids,

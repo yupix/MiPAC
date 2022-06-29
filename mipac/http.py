@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
-from typing import Any, Dict
+from typing import Any
 
 import aiohttp
 
@@ -58,7 +58,7 @@ class HTTPClient:
         return self.__session
 
     async def request(self, route: Route, **kwargs) -> Any:
-        headers: Dict[str, str] = {
+        headers: dict[str, str] = {
             'User-Agent': self.user_agent,
         }
 
