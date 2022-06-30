@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- added `Modeler` class
 - added `RawChannel` class
 - added `RawPinnedNote` class 
 - added `IReactionRequired` class
