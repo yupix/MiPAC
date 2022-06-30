@@ -138,6 +138,7 @@ class NoteActions:
             'replyId': reply_id,
             'renoteId': renote_id,
             'channelId': channel_id,
+            'fileIds': [file.file_id for file in files]
         }
         if not check_multi_arg(content, files, renote_id, poll):
             raise ParameterError(
