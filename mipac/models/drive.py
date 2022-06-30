@@ -4,7 +4,6 @@ from typing import TYPE_CHECKING, Optional
 
 from mipac.core.models.drive import RawFile, RawFolder, RawProperties
 from mipac.core.models.user import RawUser
-from mipac.models.user import User
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
@@ -132,4 +131,6 @@ class File:
 
     @property
     def user(self):
-        return User(RawUser(self.__raw_data.user), client=self.__client)
+        return self.__client._modeler.create_user_instance(
+            RawUser(self.__raw_data.user)
+        )

@@ -3,8 +3,8 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Any, List, Optional, Union
 
-from mipac import File
 from mipac.core.models.user import RawChannel, RawPinnedNote, RawUser
+from mipac.models.drive import File
 from mipac.models.emoji import Emoji
 from mipac.models.instance import Instance
 from mipac.types.user import FieldContentPayload, PinnedPagePayload
@@ -156,7 +156,10 @@ class PinnedNote:
 
     @property
     def files(self) -> list[File]:
-        return [File(i, client=self._client) for i in self._raw_data.files]
+        return [
+            self._client._modeler.create_file_instance(i)
+            for i in self._raw_data.files
+        ]
 
     @property
     def tags(self) -> Optional[list[str]]:
