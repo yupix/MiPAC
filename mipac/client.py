@@ -11,7 +11,7 @@ class Client:
     ):
         self.__url: str = url
         self.__token: str = token
-        self.__config: Config = config if config else Config()
+        self.__config: Config = config or Config()
         self.http: HTTPClient = HTTPClient(url, token)
 
     @property
