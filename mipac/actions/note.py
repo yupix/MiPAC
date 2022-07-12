@@ -126,6 +126,10 @@ class NoteActions:
             [description]
         """
 
+        if files:
+            file_ids = [file.file_id for file in files]
+
+
         field = {
             'visibility': visibility,
             'visibleUserIds': visible_user_ids,
@@ -138,7 +142,7 @@ class NoteActions:
             'replyId': reply_id,
             'renoteId': renote_id,
             'channelId': channel_id,
-            'fileIds': [file.file_id for file in files]
+            'fileIds': files
         }
         if not check_multi_arg(content, files, renote_id, poll):
             raise ParameterError(
