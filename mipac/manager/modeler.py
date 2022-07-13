@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
-from mipac.core.models.chat import RawChat
 
+from mipac.core.models.chat import RawChat
 from mipac.core.models.drive import RawFolder
 from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.instance import RawInstance
@@ -27,7 +27,7 @@ class Modeler:
 
     def __init__(self, client: ClientActions) -> None:
         self._client = client
-    
+
     def new_note(self, raw_note: RawNote) -> Note:
         return Note(raw_note, client=self._client)
 

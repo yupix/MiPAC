@@ -179,7 +179,9 @@ class PinnedNote:
 
     @property
     def emojis(self) -> Optional[list[Emoji]]:
-        return [self._client._modeler.new_emoji(i) for i in self._raw_data.emojis]
+        return [
+            self._client._modeler.new_emoji(i) for i in self._raw_data.emojis
+        ]
 
     @property
     def reactions(self) -> Optional[dict[str, Any]]:

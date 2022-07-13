@@ -16,7 +16,6 @@ from mipac.util import (
     remove_dict_empty,
 )
 
-
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
     from mipac.models.note import Note
