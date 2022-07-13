@@ -125,7 +125,7 @@ class NoteActions:
         ContentRequired
             [description]
         """
-
+        file_ids = None
         if files:
             file_ids = [file.file_id for file in files]
 
@@ -141,7 +141,7 @@ class NoteActions:
             'replyId': reply_id,
             'renoteId': renote_id,
             'channelId': channel_id,
-            'fileIds': files,
+            'fileIds': file_ids,
         }
         if not check_multi_arg(content, files, renote_id, poll):
             raise ParameterError(

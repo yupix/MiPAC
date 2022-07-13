@@ -401,7 +401,7 @@ class Note:
 
     async def reply(
         self,
-        content: Optional[str],
+        content: Optional[str] = None,
         cw: Optional[str] = None,
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
@@ -435,8 +435,7 @@ class Note:
         poll : Optional[Poll], optional
             アンケート, by default None
         """
-        if files is None:
-            files = []
+
         visibility = self.visibility or 'public'
 
         return await self._client.note.action.send(
