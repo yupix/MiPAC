@@ -9,8 +9,6 @@ from mipac.core.models.user import RawUser
 from mipac.exception import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.manager.note import NoteManager
-from mipac.models.note import Note
-from mipac.models.user import User
 from mipac.util import (
     check_multi_arg,
     get_cache_key,
@@ -18,10 +16,13 @@ from mipac.util import (
     remove_dict_empty,
 )
 
-__all__ = ['UserActions']
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
+    from mipac.models.note import Note
+    from mipac.models.user import User
+
+__all__ = ['UserActions']
 
 
 class UserActions:
@@ -42,7 +43,7 @@ class UserActions:
         """
 
         res = await self.__session.request(Route('POST', '/api/i'), auth=True)
-        return User(RawUser(res), client=self.__client)
+        return self.__client._modeler.create_user_instance(RawUser(res))
 
     @cached(ttl=10, namespace='get_user', key_builder=key_builder)
     async def get(
@@ -76,7 +77,7 @@ class UserActions:
         data = await self.__session.request(
             Route('POST', '/api/users/show'), json=field, auth=True, lower=True
         )
-        return User(RawUser(data), client=self.__client)
+        return self.__client._modeler.create_user_instance(RawUser(data))
 
     @get_cache_key
     async def fetch(
@@ -114,7 +115,7 @@ class UserActions:
         )
         old_cache = Cache(namespace='get_user')
         await old_cache.delete(kwargs['cache_key'].format('get_user'))
-        return User(RawUser(data), client=self.__client)
+        return self.__client._modeler.create_user_instance(RawUser(data))
 
     async def get_notes(
         self,
@@ -151,7 +152,7 @@ class UserActions:
         res = await self.__session.request(
             Route('POST', '/api/users/notes'), json=data, auth=True, lower=True
         )
-        return [Note(RawNote(i), client=self.__client) for i in res]
+        return [self.__client._modeler.new_note(RawNote(i)) for i in res]
 
     def get_mention(self, user: Optional[User] = None) -> str:
         """

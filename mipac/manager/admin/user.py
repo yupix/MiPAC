@@ -4,10 +4,10 @@ from typing import TYPE_CHECKING, Optional
 
 from mipac.core.models.user import RawUser
 from mipac.http import HTTPClient, Route
-from mipac.models.user import User
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
+    from mipac.models.user import User
 
 
 class AdminUserManager:
@@ -69,7 +69,7 @@ class AdminUserManager:
             auth=True,
             lower=True,
         )
-        return User(RawUser(res), client=self.__client)
+        return self.__client._modeler.create_user_instance(RawUser(res))
 
     async def suspend(self, user_id: Optional[str] = None) -> bool:
         """

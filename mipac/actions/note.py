@@ -11,11 +11,11 @@ from mipac.manager.reaction import ReactionManager
 
 __all__ = ['NoteActions']
 
-from mipac.models.note import Note, NoteReaction, Poll
 from mipac.util import check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
+    from mipac.models.note import Note, NoteReaction, Poll
 
 
 class NoteActions:
@@ -129,7 +129,6 @@ class NoteActions:
         if files:
             file_ids = [file.file_id for file in files]
 
-
         field = {
             'visibility': visibility,
             'visibleUserIds': visible_user_ids,
@@ -142,7 +141,7 @@ class NoteActions:
             'replyId': reply_id,
             'renoteId': renote_id,
             'channelId': channel_id,
-            'fileIds': files
+            'fileIds': files,
         }
         if not check_multi_arg(content, files, renote_id, poll):
             raise ParameterError(
@@ -169,7 +168,7 @@ class NoteActions:
             auth=True,
             lower=True,
         )
-        return Note(RawNote(res['created_note']), client=self.__client)
+        return self.__client._modeler.new_note(RawNote(res['created_note']))
 
     async def delete(self, note_id: Optional[str] = None) -> bool:
         """
@@ -290,7 +289,7 @@ class NoteActions:
             auth=True,
             lower=True,
         )
-        return Note(RawNote(res), client=self.__client)
+        return self.__client._modeler.new_note(RawNote(res))
 
     async def get_replies(
         self,
@@ -330,7 +329,7 @@ class NoteActions:
             auth=True,
             lower=True,
         )
-        return [Note(RawNote(i), client=self.__client) for i in res]
+        return [self.__client._modeler.new_note(RawNote(i)) for i in res]
 
     async def get_reaction(
         self, reaction: str, note_id: Optional[str] = None

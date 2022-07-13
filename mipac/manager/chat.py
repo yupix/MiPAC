@@ -5,11 +5,11 @@ from typing import TYPE_CHECKING, Optional
 from mipac.core.models.chat import RawChat
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.chat import Chat
 from mipac.util import check_multi_arg
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
+    from mipac.models.chat import Chat
 
 __all__ = ('ChatManager',)
 
@@ -51,7 +51,7 @@ class ChatManager:
         data = await self.__session.request(
             Route('POST', '/api/messaging/history'), json=args, auth=True
         )
-        return [Chat(RawChat(d), client=self.__client) for d in data]
+        return [self.__client._modeler.new_chat(RawChat(d)) for d in data]
 
     async def send(
         self,
@@ -88,7 +88,7 @@ class ChatManager:
             auth=True,
             lower=True,
         )
-        return Chat(RawChat(res), client=self.__client)
+        return self.__client._modeler.new_chat(RawChat(res))
 
     async def delete(self, message_id: Optional[str] = None) -> bool:
         """

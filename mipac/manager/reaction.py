@@ -2,16 +2,16 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac import AbstractManager
+from mipac.abc.manager import AbstractManager
 from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.reaction import RawNoteReaction
 from mipac.http import HTTPClient, Route
-from mipac.models.emoji import Emoji
-from mipac.models.note import NoteReaction
 from mipac.util import remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
+    from mipac.models.emoji import Emoji
+    from mipac.models.note import NoteReaction
 
 __all__ = 'ReactionManager'
 
@@ -77,11 +77,15 @@ class ReactionManager(AbstractManager):
             lower=True,
         )
         return [
-            NoteReaction(RawNoteReaction(i), client=self.__client) for i in res
+            self.__client._modeler.new_note_reaction(RawNoteReaction(i))
+            for i in res
         ]
 
     async def get_emoji_list(self) -> list[Emoji]:
         data = await self.__session.request(
             Route('GET', '/api/meta'), json={'detail': False}, auth=True
         )
-        return [Emoji(RawEmoji(i)) for i in data['emojis']]
+        return [
+            self.__client._modeler.new_emoji(RawEmoji(i))
+            for i in data['emojis']
+        ]

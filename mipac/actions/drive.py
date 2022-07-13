@@ -6,11 +6,11 @@ from mipac.abc.action import AbstractAction
 from mipac.core.models.drive import RawFile, RawFolder
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.drive import File, Folder
 from mipac.util import remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
+    from mipac.models.drive import File, Folder
 
 __all__ = ('DriveActions', 'FileActions', 'FolderActions')
 
@@ -53,7 +53,7 @@ class FileActions(AbstractAction):
             auth=True,
             lower=True,
         )
-        return File(RawFile(res), client=self.__client)
+        return self.__client._modeler.create_file_instance(RawFile(res))
 
     async def remove_file(self, file_id: Optional[str] = None) -> bool:
         """
@@ -116,7 +116,10 @@ class FileActions(AbstractAction):
         res = await self.__session.request(
             Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
         )
-        return [File(RawFile(i), client=self.__client) for i in res]
+        return [
+            self.__client._modeler.create_file_instance(RawFile(i))
+            for i in res
+        ]
 
 
 class FolderActions(AbstractAction):
@@ -220,7 +223,10 @@ class FolderActions(AbstractAction):
         res = await self.__session.request(
             Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
         )
-        return [File(RawFile(i), client=self.__client) for i in res]
+        return [
+            self.__client._modeler.create_file_instance(RawFile(i))
+            for i in res
+        ]
 
 
 class DriveActions(AbstractAction):
@@ -262,4 +268,4 @@ class DriveActions(AbstractAction):
             lower=True,
             auth=True,
         )
-        return [Folder(RawFolder(i), client=self.__client) for i in data]
+        return [self.__client._modeler.new_folder(RawFolder(i)) for i in data]

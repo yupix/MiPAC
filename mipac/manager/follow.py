@@ -4,10 +4,10 @@ from typing import TYPE_CHECKING, Optional
 
 from mipac import AbstractManager
 from mipac.http import HTTPClient, Route
-from mipac.models.user import FollowRequest, User
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
+    from mipac.models.user import FollowRequest, User
 
 __all__ = ('FollowManager', 'FollowRequestManager')
 
@@ -92,7 +92,7 @@ class FollowRequestManager(AbstractManager):
         """
 
         return [
-            FollowRequest(i['follower'])
+            self.__client._modeler.new_follow_request(i['follower'])
             for i in await self.__session.request(
                 Route('POST', '/api/following/requests/list'),
                 auth=True,

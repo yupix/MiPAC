@@ -8,14 +8,15 @@ from mipac.core.models.poll import RawPoll
 from mipac.core.models.reaction import RawNoteReaction
 from mipac.core.models.user import RawUser
 from mipac.exception import NotExistRequiredData
-from mipac.models.user import User
 
 if TYPE_CHECKING:
     from mipac.actions.note import NoteActions
     from mipac.manager.client import ClientActions
+    from mipac.manager.file import MiFile
     from mipac.manager.reaction import ReactionManager
     from mipac.models.drive import File
     from mipac.models.emoji import Emoji
+    from mipac.models.user import User
 
 __all__ = (
     'Note',
@@ -118,7 +119,9 @@ class Renote:
 
     @property
     def user(self) -> User:
-        return User(self.__raw_data.user, client=self.__client)
+        return self.__client._modeler.create_user_instance(
+            self.__raw_data.user
+        )
 
     @property
     def content(self) -> Optional[str]:
@@ -191,7 +194,9 @@ class NoteReaction:
 
     @property
     def user(self) -> User:
-        return User(RawUser(self.__raw_data.user), client=self.__client)
+        return self.__client._modeler.create_user_instance(
+            RawUser(self.__raw_data.user)
+        )
 
     @property
     def reaction(self) -> str:
@@ -222,7 +227,7 @@ class Reaction:
     @property
     def user(self) -> Optional[User]:
         return (
-            User(self.__raw_data.user, client=self.__client)
+            self.__client._modeler.create_user_instance(self.__raw_data.user)
             if self.__raw_data.user
             else None
         )
@@ -281,7 +286,9 @@ class Note:
 
     @property
     def author(self) -> User:
-        return User(self._raw_data.author, client=self._client)
+        return self._client._modeler.create_user_instance(
+            self._raw_data.author
+        )
 
     @property
     def content(self) -> Optional[str]:
@@ -401,7 +408,7 @@ class Note:
         extract_emojis: bool = True,
         renote_id: Optional[str] = None,
         channel_id: Optional[str] = None,
-        file_ids=None,
+        files: Optional[list[MiFile]] = None,
         poll: Optional[Poll] = None,
     ) -> Note:
         """
@@ -423,13 +430,13 @@ class Note:
             リノート先のid, by default None
         channel_id : Optional[str], optional
             チャンネルid, by default None
-        file_ids : [type], optional
+        files :Optional[MiFile], optional
             添付するファイルのid, by default None
         poll : Optional[Poll], optional
             アンケート, by default None
         """
-        if file_ids is None:
-            file_ids = []
+        if files is None:
+            files = []
         visibility = self.visibility or 'public'
 
         return await self._client.note.action.send(
@@ -444,6 +451,6 @@ class Note:
             reply_id=self.id,
             renote_id=renote_id,
             channel_id=channel_id,
-            # file_ids=file_ids, TODO:  修正
+            files=files,
             poll=poll,
         )
