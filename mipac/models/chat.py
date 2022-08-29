@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.models.drive import File
-from mipac.models.lite.user import UserLite
+from mipac.models.lite.user import LiteUser
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
@@ -72,8 +72,8 @@ class ChatMessage:
         return self.__chat['user_id']
 
     @property
-    def user(self) -> UserLite:
-        return UserLite(self.__chat['user'])
+    def user(self) -> LiteUser:
+        return LiteUser(self.__chat['user'])
 
     @property
     def recipient_id(self) -> str:

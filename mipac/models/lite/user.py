@@ -5,7 +5,7 @@ from mipac.types.emoji import ICustomEmojiLite
 from mipac.types.user import IUserLite
 
 
-class UserLite:
+class LiteUser:
     __slots__ = ('__user',)
 
     def __init__(self, user: IUserLite) -> None:

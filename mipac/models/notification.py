@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 from mipac.manager.client import ClientActions
 from mipac.manager.reaction import ReactionManager
-from mipac.models.lite.user import UserLite
+from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 
 if TYPE_CHECKING:
@@ -38,8 +38,8 @@ class Reaction:
         return self.__reaction['is_read']
 
     @property
-    def user(self) -> UserLite:
-        return UserLite(self.__reaction['user'])
+    def user(self) -> LiteUser:
+        return LiteUser(self.__reaction['user'])
 
     @property
     def note(self) -> Note:

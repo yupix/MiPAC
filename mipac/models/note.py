@@ -7,7 +7,7 @@ from typing_extensions import Self
 
 from mipac.core.models.poll import RawPoll
 from mipac.exception import NotExistRequiredData
-from mipac.models.lite.user import UserLite
+from mipac.models.lite.user import LiteUser
 
 if TYPE_CHECKING:
     from mipac.actions.note import NoteActions
@@ -131,8 +131,8 @@ class NoteReaction:
         return self.__reaction['type']
 
     @property
-    def user(self) -> UserLite:
-        return UserLite(self.__reaction['user'])
+    def user(self) -> LiteUser:
+        return LiteUser(self.__reaction['user'])
 
 
 class Note:
@@ -181,8 +181,8 @@ class Note:
         return self.__note['user_id']
 
     @property
-    def author(self) -> UserLite:
-        return UserLite(self.__note['user'])
+    def author(self) -> LiteUser:
+        return LiteUser(self.__note['user'])
 
     @property
     def reply_id(self) -> str:

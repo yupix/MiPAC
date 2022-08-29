@@ -10,8 +10,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - added `Modeler` class
-- added `RawChannel` class
-- added `RawPinnedNote` class
 - added `IReactionRequired` class
 - added `IAds` class
 - added `LiteInstance` class
@@ -50,7 +48,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `RawEmoji`, `Emoji` クラスを削除しました。 今後は `CustomEmoji` クラスをご利用ください
 - `EmojiPayload` クラスを削除しました。今後は  `ICustomEmoji` クラスをご利用ください
 - `IReactionRequired`, `ReactionPayload`を削除しました。 今後は `IReactionNf` クラスをご利用ください
-- `RawUser`, `User` クラスを削除しました。今後は `UserDetailed`, `UserLite` クラスをご利用ください
+- `RawUser`, `User` クラスを削除しました。今後は `UserDetailed`, `LiteUser` クラスをご利用ください
 - `RawInstance` クラスを削除しました。今後は `LiteInstance` クラスをご利用ください
 - `RawProperties` クラスを削除しました。今後は `FileProperties` クラスをご利用ください
 - `RawFolder` クラスを削除しました。今後は `Folder` クラスをご利用ください

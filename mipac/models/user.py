@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Literal, TYPE_CHECKING
 
-from mipac.models.lite.user import UserLite
+from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 from mipac.types.page import IPage
 from mipac.types.user import (
@@ -47,7 +47,7 @@ class FollowRequest:
         self.is_cat: bool = bool(data.get('is_cat'))
 
 
-class UserDetailed(UserLite):
+class UserDetailed(LiteUser):
     __slots__ = (
         '__detail',
         '__client',
