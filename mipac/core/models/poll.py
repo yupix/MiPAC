@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from mipac.types.note import PollPayload
+from mipac.types.note import IPoll
 
 __all__ = ['RawPollChoices', 'RawPoll']
 
@@ -43,7 +43,7 @@ class RawPoll:
 
     __slots__ = ('multiple', 'expires_at', 'choices', 'expired_after')
 
-    def __init__(self, data: PollPayload):
+    def __init__(self, data: IPoll):
         self.multiple: Optional[bool] = data.get('multiple')
         self.expires_at: Optional[int] = data.get('expires_at')
         self.choices: Optional[list[RawPollChoices]] = [

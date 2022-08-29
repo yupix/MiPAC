@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any, Optional
 
-from mipac.types.drive import FilePayload, FolderPayload, PropertiesPayload
+from mipac.types.drive import IDriveFile, FolderPayload, PropertiesPayload
 from mipac.types.user import UserPayload
 
 __all__ = ('RawProperties', 'RawFolder', 'RawFile')
@@ -125,7 +125,7 @@ class RawFile:
         'user',
     )
 
-    def __init__(self, data: FilePayload):
+    def __init__(self, data: IDriveFile):
         self.id: str = data['id']
         self.created_at: datetime = datetime.strptime(
             data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'

@@ -5,7 +5,7 @@ from mipac.types.chart import (
     DriveRemoteChartPayload,
 )
 from mipac.types.chat import ChatPayload
-from mipac.types.drive import FilePayload, FolderPayload, PropertiesPayload
+from mipac.types.drive import IDriveFile, FolderPayload, PropertiesPayload
 from mipac.types.emoji import EmojiPayload
 from mipac.types.instance import (
     FeaturesPayload,
@@ -21,7 +21,7 @@ from mipac.types.note import (
     IReaction,
     IReactionRequired,
     IRenote,
-    PollPayload,
+    IPoll,
 )
 from mipac.types.page import (
     AttachedFilePayload,
@@ -49,13 +49,13 @@ __all__ = (
     'ChatPayload',
     'PropertiesPayload',
     'FolderPayload',
-    'FilePayload',
+    'IDriveFile',
     'EmojiPayload',
     'INoteRequired',
     'INote',
     'GeoPayload',
     'IReaction',
-    'PollPayload',
+    'IPoll',
     'IRenote',
     'IReactionRequired',
     'FeaturesPayload',
