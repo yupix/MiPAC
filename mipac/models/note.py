@@ -4,7 +4,6 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Literal, Optional, Union
 from typing_extensions import Self
 
-from mipac.core.models.note import RawRenote
 from mipac.core.models.poll import RawPoll
 from mipac.models.lite.user import UserLite
 from mipac.exception import NotExistRequiredData
@@ -96,85 +95,6 @@ class Poll:
     @property
     def expired_after(self) -> Optional[int]:
         return self.__raw_data.expired_after
-
-
-class Renote:
-    def __init__(self, raw_data: RawRenote, *, client: ClientActions):
-        self.__raw_data: RawRenote = raw_data
-        self.__client: ClientActions = client
-
-    @property
-    def id(self) -> str:
-        return self.__raw_data.id
-
-    @property
-    def created_at(self) -> datetime:
-        return self.__raw_data.created_at
-
-    @property
-    def user_id(self) -> str:
-        return self.__raw_data.user_id
-
-    @property
-    def user(self) -> User:
-        return self.__client._modeler.create_user_instance(
-            self.__raw_data.user
-        )
-
-    @property
-    def content(self) -> Optional[str]:
-        return self.__raw_data.content
-
-    @property
-    def cw(self) -> Optional[str]:
-        return self.__raw_data.cw
-
-    @property
-    def visibility(self) -> str:
-        return self.__raw_data.visibility
-
-    @property
-    def renote_count(self) -> int | None:
-        return self.__raw_data.renote_count
-
-    @property
-    def replies_count(self) -> int | None:
-        return self.__raw_data.replies_count
-
-    @property
-    def reactions(self):
-        return self.__raw_data.reactions
-
-    @property
-    def emojis(self):
-        return self.__raw_data.emojis
-
-    @property
-    def file_ids(self):
-        return self.__raw_data.file_ids
-
-    @property
-    def files(self):
-        return self.__raw_data.files
-
-    @property
-    def reply_id(self) -> Optional[str]:
-        return self.__raw_data.reply_id
-
-    @property
-    def renote_id(self) -> Optional[str]:
-        return self.__raw_data.renote_id
-
-    @property
-    def uri(self) -> Optional[str]:
-        return self.__raw_data.uri
-
-    @property
-    def poll(self) -> Union[Poll, None]:
-        return Poll(self.__raw_data.poll) if self.__raw_data.poll else None
-
-    async def delete(self) -> bool:
-        return await self.__client.note.action.delete(self.__raw_data.id)
 
 
 class NoteReaction:
