@@ -6,7 +6,7 @@ from typing import Any, Optional
 from mipac.core.models.drive import RawFile
 from mipac.types.user import IChannel, IPinnedNote
 
-__all__ = ('RawUserDetails', 'RawChannel', 'RawPinnedNote')
+__all__ = ('RawChannel', 'RawPinnedNote')
 
 
 class RawChannel:
