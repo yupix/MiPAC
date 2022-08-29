@@ -26,6 +26,7 @@ class _MissingSentinel:
 MISSING: Any = _MissingSentinel()
 R = TypeVar('R')
 
+
 async def json_or_text(response: aiohttp.ClientResponse):
     text = await response.text(encoding='utf-8')
     try:

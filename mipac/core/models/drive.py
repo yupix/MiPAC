@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any, Optional
 
-from mipac.types.drive import IDriveFile, FolderPayload, PropertiesPayload
+from mipac.types.drive import FolderPayload, IDriveFile, PropertiesPayload
 from mipac.types.user import UserPayload
 
 __all__ = ('RawProperties', 'RawFolder', 'RawFile')

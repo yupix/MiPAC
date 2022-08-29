@@ -11,8 +11,9 @@ __all__ = (
     'InstancePayload',
     'OptionalInstance',
     'OptionalMeta',
-    'IInstanceLite'
+    'IInstanceLite',
 )
+
 
 class IInstanceLite(TypedDict):
     name: str
@@ -21,6 +22,7 @@ class IInstanceLite(TypedDict):
     icon_url: str
     favicon_url: str
     theme_color: str
+
 
 class FeaturesPayload:
     registration: bool

@@ -1,5 +1,4 @@
 from __future__ import annotations
-import string
 
 from typing import Any, List, Literal, Optional, TypedDict
 

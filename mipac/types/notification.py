@@ -5,8 +5,8 @@ NfはNotificationの略です
 """
 
 from __future__ import annotations
-from typing import TYPE_CHECKING, TypedDict
 
+from typing import TYPE_CHECKING, TypedDict
 
 if TYPE_CHECKING:
     from mipac.types.note import INote
@@ -25,4 +25,3 @@ class IReactionNf(Notification):
     user: IUserLite
     user_id: str
     note: INote
-

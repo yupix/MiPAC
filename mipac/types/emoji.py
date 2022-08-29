@@ -7,6 +7,7 @@ class ICustomEmojiLite(TypedDict):
     name: str
     url: str
 
+
 class EmojiPayload(TypedDict):
     id: Optional[str]
     aliases: Optional[list[str]]

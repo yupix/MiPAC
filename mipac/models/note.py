@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Literal, Optional, Union
+from typing import TYPE_CHECKING, Literal, Optional
+
 from typing_extensions import Self
 
 from mipac.core.models.poll import RawPoll
-from mipac.models.lite.user import UserLite
 from mipac.exception import NotExistRequiredData
+from mipac.models.lite.user import UserLite
 
 if TYPE_CHECKING:
     from mipac.actions.note import NoteActions
@@ -21,7 +22,6 @@ __all__ = (
     'Poll',
     'Follow',
     'Header',
-    'Renote',
     'NoteReaction',
 )
 

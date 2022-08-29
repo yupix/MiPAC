@@ -1,6 +1,8 @@
 from __future__ import annotations
+
 from datetime import datetime
 from typing import TYPE_CHECKING
+
 from mipac.manager.client import ClientActions
 from mipac.manager.reaction import ReactionManager
 from mipac.models.lite.user import UserLite

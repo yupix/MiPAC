@@ -102,10 +102,9 @@ class INote(INoteRequired, total=False):
     is_hidden: bool
     poll: IPoll
 
+
 class INoteReaction(TypedDict):
     id: str
     created_at: str
     user: IUserLite
     type: str
-
-

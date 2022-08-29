@@ -1,4 +1,5 @@
 from typing import Literal
+
 from mipac.models.lite.instance import InstanceLite
 from mipac.types.emoji import ICustomEmojiLite
 from mipac.types.user import IUserLite
@@ -7,27 +8,29 @@ from mipac.types.user import IUserLite
 class UserLite:
     def __init__(self, user: IUserLite) -> None:
         self.__user: IUserLite = user
-    
+
     @property
     def id(self) -> str:
         return self.__user['id']
-    
+
     @property
     def username(self) -> str:
         return self.__user['username']
-    
+
     @property
     def host(self) -> str | None:
         return self.__user['host']
-    
+
     @property
     def name(self) -> str:
         return self.__user['name']
-    
+
     @property
-    def online_status(self) -> Literal['online', 'active', 'offline', 'unknown']:
+    def online_status(
+        self,
+    ) -> Literal['online', 'active', 'offline', 'unknown']:
         return self.__user['online_status']
-    
+
     @property
     def avatar_url(self) -> str:
         return self.__user['avatar_url']
@@ -37,9 +40,9 @@ class UserLite:
         return self.__user['avatar_blurhash']
 
     @property
-    def emojis(self) -> list[ICustomEmojiLite]: # TODO: ちゃんとモデルにする
+    def emojis(self) -> list[ICustomEmojiLite]:  # TODO: ちゃんとモデルにする
         return self.__user['emojis']
-    
+
     @property
     def instance(self) -> InstanceLite:
         return InstanceLite(self.__user['instance'])

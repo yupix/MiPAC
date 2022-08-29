@@ -2,9 +2,9 @@ from .chat import Chat
 from .drive import File, Folder, Properties
 from .emoji import Emoji
 from .instance import Instance, InstanceMeta
-from .note import Follow, Header, Note, NoteReaction, Poll, Renote
-from .user import Followee, FollowRequest, User
+from .note import Follow, Header, Note, NoteReaction, Poll
 from .notification import Reaction
+from .user import Followee, FollowRequest, User
 
 __all__ = (
     'Chat',
@@ -22,6 +22,5 @@ __all__ = (
     'Reaction',
     'Follow',
     'Header',
-    'Renote',
     'NoteReaction',
 )
