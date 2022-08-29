@@ -6,7 +6,6 @@ from mipac.core.models.chat import RawChat
 from mipac.core.models.drive import RawFolder
 from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.instance import RawInstance
-from mipac.core.models.note import RawNote
 from mipac.models.chat import Chat
 from mipac.models.drive import File, Folder
 from mipac.models.emoji import Emoji
@@ -27,9 +26,6 @@ class Modeler:
 
     def __init__(self, client: ClientActions) -> None:
         self._client = client
-
-    def new_note(self, raw_note: RawNote) -> Note:
-        return Note(raw_note, client=self._client)
 
     def new_instance(self, raw_instance: RawInstance) -> Instance:
         return Instance(raw_instance, client=self._client)
