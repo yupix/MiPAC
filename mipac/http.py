@@ -86,7 +86,7 @@ class HTTPClient:
         ) as res:
             data = await json_or_text(res)
             if is_lower:
-                if isinstance(data, list | dict):
+                if isinstance(data, list):
                     data = [upper_to_lower(i) for i in data]
             if 300 > res.status >= 200:
                 return data  # type: ignore
