@@ -7,7 +7,8 @@ from mipac.http import HTTPClient, Route
 from mipac.manager.favorite import FavoriteManager
 from mipac.manager.file import MiFile
 from mipac.manager.reaction import ReactionManager
-from mipac.models.note import Note, NoteReaction, Poll
+from mipac.models.note import Note, NoteReaction
+from mipac.models.poll import Poll
 from mipac.types.note import INote
 
 __all__ = ['NoteActions']

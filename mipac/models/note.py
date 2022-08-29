@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Literal, Optional
+from typing import Literal, Optional, TYPE_CHECKING
 
 from typing_extensions import Self
 
-from mipac.core.models.poll import RawPoll
 from mipac.exception import NotExistRequiredData
 from mipac.models.lite.user import LiteUser
+from mipac.models.poll import Poll
 
 if TYPE_CHECKING:
     from mipac.actions.note import NoteActions
@@ -15,11 +15,10 @@ if TYPE_CHECKING:
     from mipac.models.user import UserDetailed
     from mipac.types.drive import IDriveFile
     from mipac.types.emoji import ICustomEmojiLite
-    from mipac.types.note import INote, INoteReaction, IPoll
+    from mipac.types.note import INote, INoteReaction
 
 __all__ = (
     'Note',
-    'Poll',
     'Follow',
     'Header',
     'NoteReaction',
@@ -76,37 +75,7 @@ class Header:
         self.type = data.get('type')
 
 
-class Poll:
-    def __init__(self, raw_data: RawPoll):
-        self.__raw_data = raw_data
-
-    @property
-    def multiple(self) -> bool | None:
-        return self.__raw_data.multiple
-
-    @property
-    def expires_at(self) -> Optional[int]:
-        return self.__raw_data.expires_at
-
-    @property
-    def choices(self):
-        return self.__raw_data.choices
-
-    @property
-    def expired_after(self) -> Optional[int]:
-        return self.__raw_data.expired_after
-
-
 class NoteReaction:
-    """
-    Attributes
-    ----------
-    id : Optional[str], default=None
-    created_at : Optional[datetime], default=None
-    type : Optional[str], default=None
-    user : Optional[RawUser], default=None
-    """
-
     __slots__ = ('__reaction',)
 
     def __init__(self, reaction: INoteReaction):
@@ -202,7 +171,7 @@ class Note:
 
     @property
     def visibility(
-        self,
+            self,
     ) -> Literal['public', 'home', 'followers', 'specified']:
         return self.__note['visibility']
 
@@ -275,8 +244,8 @@ class Note:
         )
 
     @property
-    def poll(self) -> IPoll | None:
-        return self.__note['poll'] if 'poll' in self.__note else None
+    def poll(self) -> Poll | None:
+        return Poll(self.__note['poll'], client=self._client) if 'poll' in self.__note else None
 
     @property
     def action(self) -> NoteActions:

@@ -15,36 +15,7 @@ if TYPE_CHECKING:
     from mipac.actions.user import UserActions
     from mipac.manager.client import ClientActions
 
-__all__ = ['UserDetailed', 'FollowRequest', 'Followee']
-
-
-class Followee:
-    def __init__(self, data, *, client: ClientActions):
-        self.id: str = data['id']
-        self.created_at: datetime = datetime.strptime(
-            data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
-        )
-        self.followee_id: str = data['followee_id']
-        self.follower_id: str = data['follower_id']
-        self.user: UserDetailed = UserDetailed(
-            RawUser(data['follower']), client=client
-        )
-
-
-class FollowRequest:
-    def __init__(self, data):
-        self.id = data['id']
-        self.name = data['username']
-        self.nickname = data['name']
-        self.host = data['host']
-        self.avatar_url = data['avatar_url']
-        self.avatar_blurhash = data['avatar_blurhash']
-        self.avatar_color = data['avatar_color']
-        self.emojis = data['emojis']
-        self.online_status = data['online_status']
-        self.is_admin: bool = bool(data.get('is_admin'))
-        self.is_bot: bool = bool(data.get('is_bot'))
-        self.is_cat: bool = bool(data.get('is_cat'))
+__all__ = ['UserDetailed']
 
 
 class UserDetailed(LiteUser):

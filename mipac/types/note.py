@@ -2,14 +2,13 @@ from typing import Any, Literal, Optional, TypedDict
 
 from .drive import IDriveFile
 from .emoji import ICustomEmojiLite
+from .poll import IPoll
 from .user import IUserLite
 
 __all__ = (
     'INoteRequired',
     'INote',
     'GeoPayload',
-    'IPoll',
-    'IPollChoice',
     'INoteReaction',
 )
 
@@ -25,23 +24,6 @@ class GeoPayload(TypedDict):
     altitude_accuracy: Optional[int]
     heading: Optional[int]
     speed: Optional[int]
-
-
-class IPollChoice(TypedDict):
-    is_voted: bool
-    text: str
-    votes: int
-
-
-class IPoll(TypedDict, total=False):
-    """
-    アンケート情報
-    """
-
-    multiple: bool
-    expires_at: int
-    choices: list[IPollChoice]
-
 
 class INoteRequired(TypedDict):
     id: str

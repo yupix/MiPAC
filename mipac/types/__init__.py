@@ -18,7 +18,6 @@ from mipac.types.note import (
     INote,
     INoteReaction,
     INoteRequired,
-    IPoll,
 )
 from mipac.types.page import (
     AttachedFilePayload,
@@ -28,6 +27,7 @@ from mipac.types.page import (
     PagePayload,
     VariablePayload,
 )
+from mipac.types.poll import IPoll
 from mipac.types.reaction import NoteReactionPayload
 
 __all__ = (
