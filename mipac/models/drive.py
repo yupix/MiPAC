@@ -2,32 +2,31 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac.core.models.drive import RawFile, RawFolder, RawProperties
-from mipac.core.models.user import RawUser
+from mipac.core.models.drive import RawFolder
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
     from mipac.manager.drive import FolderManager
+    from mipac.types import IDriveFile, IFileProperties
+
+__all__ = ['FileProperties', 'File', 'Folder']
 
 
-__all__ = ['Properties', 'File', 'Folder']
-
-
-class Properties:
-    def __init__(self, raw_data: RawProperties) -> None:
-        self.__raw_data: RawProperties = raw_data
+class FileProperties:
+    def __init__(self, properties: IFileProperties) -> None:
+        self.__properties: IFileProperties = properties
 
     @property
     def width(self) -> Optional[int]:
-        return self.__raw_data.width
+        return self.__properties['width']
 
     @property
     def height(self) -> int:
-        return self.__raw_data.height
+        return self.__properties['height']
 
     @property
     def avg_color(self) -> Optional[str]:
-        return self.__raw_data.avg_color
+        return self.__properties['avg_color']
 
 
 class Folder:
@@ -65,72 +64,50 @@ class Folder:
 
 
 class File:
-    def __init__(self, raw_data: RawFile, *, client: ClientActions):
-        self.__raw_data = raw_data
+    def __init__(self, file: IDriveFile, *, client: ClientActions):
+        self.__file: IDriveFile = file
         self.__client: ClientActions = client
 
     @property
-    def id(self):
-        return self.__raw_data.id
+    def id(self) -> str:
+        return self.__file['id']
 
     @property
     def created_at(self):
-        return self.__raw_data.created_at
+        return self.__file['created_at']
 
     @property
-    def name(self):
-        return self.__raw_data.name
+    def is_sensitive(self) -> bool:
+        return self.__file['is_sensitive']
 
     @property
-    def type(self):
-        return self.__raw_data.type
+    def name(self) -> str:
+        return self.__file['name']
 
     @property
-    def md5(self):
-        return self.__raw_data.md5
+    def thumbnail_url(self) -> str:
+        return self.__file['thumbnail_url']
 
     @property
-    def size(self):
-        return self.__raw_data.size
+    def url(self) -> str:
+        return self.__file['url']
 
     @property
-    def is_sensitive(self):
-        return self.__raw_data.is_sensitive
+    def type(self) -> str:
+        return self.__file['type']
 
     @property
-    def blurhash(self):
-        return self.__raw_data.blurhash
+    def size(self) -> int:
+        return self.__file['size']
 
     @property
-    def properties(self):
-        return self.__raw_data.properties
+    def md5(self) -> str:
+        return self.__file['md5']
 
     @property
-    def url(self):
-        return self.__raw_data.url
+    def blurhash(self) -> str:
+        return self.__file['blurhash']
 
     @property
-    def thumbnail_url(self):
-        return self.__raw_data.thumbnail_url
-
-    @property
-    def comment(self):
-        return self.__raw_data.comment
-
-    @property
-    def folder_id(self):
-        return self.__raw_data.folder_id
-
-    @property
-    def folder(self):
-        return self.__raw_data.folder
-
-    @property
-    def user_id(self):
-        return self.__raw_data.user_id
-
-    @property
-    def user(self):
-        return self.__client._modeler.create_user_instance(
-            RawUser(self.__raw_data.user)
-        )
+    def properties(self) -> FileProperties:
+        return FileProperties(self.__file['properties'])

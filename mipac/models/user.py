@@ -1,11 +1,20 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, List, Optional, Union
+from typing import TYPE_CHECKING, Any, List, Literal, Optional, Union
 
+from mipac import Note
 from mipac.core.models.user import RawChannel, RawPinnedNote, RawUser
 from mipac.models.emoji import CustomEmoji
-from mipac.types.user import FieldContentPayload, PinnedPagePayload
+from mipac.models.lite.instance import LiteInstance
+from mipac.models.lite.user import UserLite
+from mipac.types.page import IPage
+from mipac.types.user import (
+    FieldContentPayload,
+    IUserDetailed,
+    IUserDetailedField,
+    PinnedPagePayload,
+)
 
 if TYPE_CHECKING:
     from mipac.actions.user import UserActions
@@ -13,7 +22,7 @@ if TYPE_CHECKING:
     from mipac.models.drive import File
     from mipac.models.instance import Instance
 
-__all__ = ['User', 'FollowRequest', 'Followee']
+__all__ = ['UserDetailed', 'FollowRequest', 'Followee']
 
 
 class Followee:
@@ -24,7 +33,9 @@ class Followee:
         )
         self.followee_id: str = data['followee_id']
         self.follower_id: str = data['follower_id']
-        self.user: User = User(RawUser(data['follower']), client=client)
+        self.user: UserDetailed = UserDetailed(
+            RawUser(data['follower']), client=client
+        )
 
 
 class FollowRequest:
@@ -115,8 +126,8 @@ class PinnedNote:
         return self._raw_data.user_id
 
     @property
-    def user(self) -> Optional[User]:
-        return User(self._raw_data.user, client=self._client)
+    def user(self) -> Optional[UserDetailed]:
+        return UserDetailed(self._raw_data.user, client=self._client)
 
     @property
     def reply_id(self) -> Optional[str]:
@@ -156,10 +167,7 @@ class PinnedNote:
 
     @property
     def files(self) -> list[File]:
-        return [
-            self._client._modeler.create_file_instance(i)
-            for i in self._raw_data.files
-        ]
+        return [File(i, client=self._client) for i in self._raw_data.files]
 
     @property
     def tags(self) -> Optional[list[str]]:
@@ -230,166 +238,218 @@ class FieldContent:
         self.value: str = data['value']
 
 
-class User:
-    def __init__(self, raw_user: RawUser, *, client: ClientActions):
-        self.__raw_user = raw_user
+class UserDetailed(UserLite):
+    __slots__ = (
+        '__detail',
+        '__client',
+        'id',
+        'username',
+        'host',
+        'name',
+        'online_status',
+        'avatar_url',
+        'avatar_blurhash',
+        'emojis',
+        'instance',
+        'fields',
+        'followers_count',
+        'following_count',
+        'has_pending_follow_request_from_you',
+        'has_pending_follow_request_to_you',
+        'is_admin',
+        'is_blocked',
+        'is_blocking',
+        'is_bot',
+        'is_cat',
+        'is_followed',
+        'is_following',
+        'is_locked',
+        'is_moderator',
+        'is_muted',
+        'is_silenced',
+        'is_suspended',
+        'public_reactions',
+        'security_keys',
+        'two_factor_enabled',
+        'notes_count',
+        'pinned_note_ids',
+        'pinned_notes',
+        'banner_blurhash',
+        'banner_color',
+        'banner_url',
+        'birthday',
+        'created_at',
+        'description',
+        'ff_visibility',
+        'lang',
+        'last_fetched_at',
+        'location',
+        'pinned_page',
+        'pinned_page_id',
+        'updated_at',
+        'uri',
+        'url',
+    )
+
+    def __init__(self, user: IUserDetailed, *, client: ClientActions):
+        super().__init__(user=user)
+        self.__detail = user
         self.__client: ClientActions = client
 
     @property
-    def id(self):
-        return self.__raw_user.id
+    def fields(self) -> list[IUserDetailedField]:
+        return self.__detail['fields']
 
     @property
-    def name(self):
-        return self.__raw_user.name
+    def followers_count(self) -> int:
+        return self.__detail['followers_count']
 
     @property
-    def nickname(self):
-        return self.__raw_user.nickname
+    def following_count(self) -> int:
+        return self.__detail['following_count']
 
     @property
-    def host(self):
-        return self.__raw_user.host
+    def has_pending_follow_request_from_you(self) -> bool:
+        return self.__detail['has_pending_follow_request_from_you']
 
     @property
-    def avatar_url(self):
-        return self.__raw_user.avatar_url
+    def has_pending_follow_request_to_you(self) -> bool:
+        return self.__detail['has_pending_follow_request_to_you']
 
     @property
-    def is_admin(self):
-        return self.__raw_user.is_admin
+    def is_admin(self) -> bool:
+        return self.__detail['is_admin']
 
     @property
-    def is_moderator(self):
-        return self.__raw_user.is_moderator
+    def is_blocked(self) -> bool:
+        return self.__detail['is_blocked']
 
     @property
-    def is_bot(self):
-        return self.__raw_user.is_bot
+    def is_blocking(self) -> bool:
+        return self.__detail['is_blocking']
 
     @property
-    def is_cat(self):
-        return self.__raw_user.is_cat
+    def is_bot(self) -> bool:
+        return self.__detail['is_bot']
 
     @property
-    def is_lady(self):
-        return self.__raw_user.is_lady
+    def is_cat(self) -> bool:
+        return self.__detail['is_cat']
 
     @property
-    def emojis(self):
-        return self.__raw_user.emojis
+    def is_followed(self) -> bool:
+        return self.__detail['is_followed']
 
     @property
-    def online_status(self):
-        return self.__raw_user.online_status
+    def is_following(self) -> bool:
+        return self.__detail['is_following']
 
     @property
-    def url(self):
-        return self.__raw_user.url
+    def is_locked(self) -> bool:
+        return self.__detail['is_locked']
 
     @property
-    def uri(self):
-        return self.__raw_user.uri
+    def is_moderator(self) -> bool:
+        return self.__detail['is_moderator']
 
     @property
-    def created_at(self) -> datetime:
-        return self.__raw_user.created_at
+    def is_muted(self) -> bool:
+        return self.__detail['is_muted']
 
     @property
-    def updated_at(self):
-        return self.__raw_user.updated_at
+    def is_silenced(self) -> bool:
+        return self.__detail['is_silenced']
 
     @property
-    def is_locked(self):
-        return self.__raw_user.is_locked
+    def is_suspended(self) -> bool:
+        return self.__detail['is_suspended']
 
     @property
-    def is_silenced(self):
-        return self.__raw_user.is_silenced
+    def public_reactions(self) -> bool:
+        return self.__detail['public_reactions']
 
     @property
-    def is_suspended(self):
-        return self.__raw_user.is_suspended
+    def security_keys(self) -> bool:
+        return self.__detail['security_keys']
 
     @property
-    def description(self):
-        return self.__raw_user.description
+    def two_factor_enabled(self) -> bool:
+        return self.__detail['two_factor_enabled']
 
     @property
-    def location(self):
-        return self.__raw_user.location
+    def notes_count(self) -> int:
+        return self.__detail['notes_count']
 
     @property
-    def birthday(self):
-        return self.__raw_user.birthday
+    def pinned_note_ids(self) -> list[str]:
+        return self.__detail['pinned_note_ids']
 
     @property
-    def fields(self):
-        return self.__raw_user.fields
+    def pinned_notes(self) -> list[Note]:
+        return [
+            Note(i, client=self.__client)
+            for i in self.__detail['pinned_notes']
+        ]
 
     @property
-    def followers_count(self):
-        return self.__raw_user.followers_count
+    def banner_blurhash(self) -> str | None:
+        return self.__detail.get('banner_blurhash')
 
     @property
-    def following_count(self):
-        return self.__raw_user.following_count
+    def banner_color(self) -> str | None:
+        return self.__detail.get('banner_color')
 
     @property
-    def notes_count(self):
-        return self.__raw_user.notes_count
+    def banner_url(self) -> str | None:
+        return self.__detail.get('banner_url')
 
     @property
-    def pinned_note_ids(self):
-        return self.__raw_user.pinned_note_ids
+    def birthday(self) -> str | None:
+        return self.__detail.get('birthday')
 
     @property
-    def pinned_notes(self):
-        return self.__raw_user.pinned_notes
+    def created_at(self) -> str | None:
+        return self.__detail.get('created_at')
 
     @property
-    def pinned_page_id(self):
-        return self.__raw_user.pinned_page_id
+    def description(self) -> str | None:
+        return self.__detail.get('description')
 
     @property
-    def pinned_page(self):
-        return self.__raw_user.pinned_page
+    def ff_visibility(self) -> Literal['public', 'followers', 'private']:
+        return self.__detail.get('ff_visibility')
 
     @property
-    def ff_visibility(self):
-        return self.__raw_user.ff_visibility
+    def lang(self) -> str | None:
+        return self.__detail.get('lang')
 
     @property
-    def is_following(self):
-        return self.__raw_user.is_following
+    def last_fetched_at(self) -> str | None:
+        return self.__detail.get('last_fetched_at')
 
     @property
-    def is_follow(self):
-        return self.__raw_user.is_follow
+    def location(self) -> str | None:
+        return self.__detail.get('location')
 
     @property
-    def is_blocking(self):
-        return self.__raw_user.is_blocking
+    def pinned_page(self) -> IPage | None:
+        return self.__detail.get('pinned_page')
 
     @property
-    def is_blocked(self):
-        return self.__raw_user.is_blocked
+    def pinned_page_id(self) -> str | None:
+        return self.__detail.get('pinned_page_id')
 
     @property
-    def is_muted(self):
-        return self.__raw_user.is_muted
+    def updated_at(self) -> str | None:
+        return self.__detail.get('updated_at')
 
     @property
-    def details(self):
-        return self.__raw_user.details
+    def uri(self) -> str | None:
+        return self.__detail.get('uri')
 
     @property
-    def instance(self) -> Union[Instance, None]:
-        return (
-            self.__client._modeler.new_instance(self.__raw_user.instance)
-            if self.__raw_user.instance
-            else None
-        )
+    def url(self) -> str | None:
+        return self.__detail.get('url')
 
     @property
     def action(self) -> UserActions:

@@ -1,17 +1,17 @@
 from .chat import Chat
-from .drive import File, Folder, Properties
+from .drive import File, FileProperties, Folder
 from .instance import Instance
 from .note import Follow, Header, Note, NoteReaction, Poll
 from .notification import Reaction
-from .user import Followee, FollowRequest, User
+from .user import Followee, FollowRequest, UserDetailed
 
 __all__ = (
     'Chat',
-    'Properties',
+    'FileProperties',
     'File',
     'Folder',
     'Instance',
-    'User',
+    'UserDetailed',
     'FollowRequest',
     'Followee',
     'Note',

@@ -7,7 +7,7 @@ from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
-    from mipac.models.user import FollowRequest, User
+    from mipac.models.user import FollowRequest, UserDetailed
 
 __all__ = ('FollowManager', 'FollowRequestManager')
 
@@ -100,7 +100,7 @@ class FollowRequestManager(AbstractManager):
             )
         ]
 
-    async def get_user(self, user_id: Optional[str] = None) -> User:
+    async def get_user(self, user_id: Optional[str] = None) -> UserDetailed:
         """
         フォローリクエスト元のユーザーを取得します
         Parameters
@@ -110,7 +110,7 @@ class FollowRequestManager(AbstractManager):
 
         Returns
         -------
-        User
+        UserDetailed
             フォローリクエスト元のユーザー
         """
 

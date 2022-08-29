@@ -18,7 +18,7 @@ from mipac.util import (
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
     from mipac.models.note import Note
-    from mipac.models.user import User
+    from mipac.models.user import UserDetailed
 
 __all__ = ['UserActions']
 
@@ -28,14 +28,14 @@ class UserActions:
         self,
         session: HTTPClient,
         client: ClientActions,
-        user: Optional[User] = None,
+        user: Optional[UserDetailed] = None,
     ):
         self.__session: HTTPClient = session
-        self.__user: Optional[User] = user
+        self.__user: Optional[UserDetailed] = user
         self.__client: ClientActions = client
         self.note: NoteManager = NoteManager(session=session, client=client)
 
-    async def get_me(self) -> User:
+    async def get_me(self) -> UserDetailed:
         """
         ログインしているユーザーの情報を取得します
         """
@@ -49,7 +49,7 @@ class UserActions:
         user_id: Optional[str] = None,
         username: Optional[str] = None,
         host: Optional[str] = None,
-    ) -> User:
+    ) -> UserDetailed:
         """
         ユーザーのプロフィールを取得します。一度のみサーバーにアクセスしキャッシュをその後は使います。
         fetch_userを使った場合はキャッシュが廃棄され再度サーバーにアクセスします。
@@ -65,7 +65,7 @@ class UserActions:
 
         Returns
         -------
-        User
+        UserDetailed
             ユーザー情報
         """
 
@@ -84,7 +84,7 @@ class UserActions:
         username: Optional[str] = None,
         host: Optional[str] = None,
         **kwargs,
-    ) -> User:
+    ) -> UserDetailed:
         """
         サーバーにアクセスし、ユーザーのプロフィールを取得します。基本的には get_userをお使いください。
 
@@ -99,7 +99,7 @@ class UserActions:
 
         Returns
         -------
-        User
+        UserDetailed
             ユーザー情報
         """
         if not check_multi_arg(user_id, username):
@@ -152,7 +152,7 @@ class UserActions:
         )
         return [Note(i, client=self.__client) for i in res]
 
-    def get_mention(self, user: Optional[User] = None) -> str:
+    def get_mention(self, user: Optional[UserDetailed] = None) -> str:
         """
         Get mention name of user.
 

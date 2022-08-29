@@ -37,7 +37,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-- `RenotePayload`, `Renote` クラスを削除しました。今後は `INote`, `Note` クラスをご利用ください
+- `RenotePayload`, `Renote`, `IRenote` クラスを削除しました。今後は `INote`, `Note` クラスをご利用ください
 - `RawEmoji`, `Emoji` クラスを削除しました。 今後は `ICustomEmoji`, `CustomEmoji` クラスをご利用ください
 - `IReactionRequired`, `ReactionPayload`を削除しました。 今後は `IReactionNf` をご利用ください
 

@@ -12,7 +12,7 @@ from mipac.models.lite.user import UserLite
 if TYPE_CHECKING:
     from mipac.actions.note import NoteActions
     from mipac.manager.client import ClientActions
-    from mipac.models.user import User
+    from mipac.models.user import UserDetailed
     from mipac.types.drive import IDriveFile
     from mipac.types.emoji import ICustomEmojiLite
     from mipac.types.note import INote, INoteReaction, IPoll
@@ -33,7 +33,7 @@ class Follow:
             data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
         ) if data.get('created_at') else None
         self.type: Optional[str] = data.get('type')
-        self.user: Optional[User] = data.get('user')
+        self.user: Optional[UserDetailed] = data.get('user')
 
     async def follow(self) -> tuple[bool, Optional[str]]:
         """

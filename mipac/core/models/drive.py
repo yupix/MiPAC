@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any, Optional
 
-from mipac.types.drive import FolderPayload, IDriveFile, PropertiesPayload
+from mipac.types.drive import FolderPayload, IDriveFile, IFileProperties
 from mipac.types.user import UserPayload
 
 __all__ = ('RawProperties', 'RawFolder', 'RawFile')
@@ -23,7 +23,7 @@ class RawProperties:
 
     __slots__ = ('width', 'height', 'avg_color')
 
-    def __init__(self, data: PropertiesPayload):
+    def __init__(self, data: IFileProperties):
         self.width: Optional[int] = data.get('width')
         self.height: int = data['height']
         self.avg_color: Optional[str] = data.get('avg_color')

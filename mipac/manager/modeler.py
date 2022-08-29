@@ -6,12 +6,12 @@ from mipac.core.models.chat import RawChat
 from mipac.core.models.drive import RawFolder
 from mipac.core.models.instance import RawInstance
 from mipac.models.chat import Chat
-from mipac.models.drive import File, Folder
+from mipac.models.drive import Folder
 from mipac.models.instance import Instance
-from mipac.models.user import FollowRequest, User
+from mipac.models.user import FollowRequest, UserDetailed
 
 if TYPE_CHECKING:
-    from mipac.core import RawFile, RawUser
+    from mipac.core import RawUser
     from mipac.manager.client import ClientActions
 
 
@@ -29,11 +29,8 @@ class Modeler:
     def new_chat(self, raw_chat: RawChat) -> Chat:
         return Chat(raw_chat, client=self._client)
 
-    def create_user_instance(self, raw_user: RawUser) -> User:
-        return User(raw_user, client=self._client)
-
-    def create_file_instance(self, raw_file: RawFile) -> File:
-        return File(raw_file, client=self._client)
+    def create_user_instance(self, raw_user: RawUser) -> UserDetailed:
+        return UserDetailed(raw_user, client=self._client)
 
     def new_follow_request(self, raw_follow_request: Any) -> FollowRequest:
         return FollowRequest(raw_follow_request)

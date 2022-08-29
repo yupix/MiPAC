@@ -54,7 +54,7 @@ class FileActions(AbstractAction):
             auth=True,
             lower=True,
         )
-        return self.__client._modeler.create_file_instance(RawFile(res))
+        return File(res, client=self.__client)
 
     async def remove_file(self, file_id: Optional[str] = None) -> bool:
         """
@@ -117,10 +117,7 @@ class FileActions(AbstractAction):
         res: list[IDriveFile] = await self.__session.request(
             Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
         )
-        return [
-            self.__client._modeler.create_file_instance(RawFile(i))
-            for i in res
-        ]
+        return [File(i, client=self.__client) for i in res]
 
 
 class FolderActions(AbstractAction):
@@ -222,10 +219,7 @@ class FolderActions(AbstractAction):
         res: list[IDriveFile] = await self.__session.request(
             Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
         )
-        return [
-            self.__client._modeler.create_file_instance(RawFile(i))
-            for i in res
-        ]
+        return [File(i, client=self.__client) for i in res]
 
 
 class DriveActions(AbstractAction):

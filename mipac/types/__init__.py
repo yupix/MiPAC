@@ -5,7 +5,7 @@ from mipac.types.chart import (
     DriveRemoteChartPayload,
 )
 from mipac.types.chat import ChatPayload
-from mipac.types.drive import FolderPayload, IDriveFile, PropertiesPayload
+from mipac.types.drive import FolderPayload, IDriveFile, IFileProperties
 from mipac.types.emoji import EmojiPayload
 from mipac.types.instance import (
     FeaturesPayload,
@@ -45,7 +45,7 @@ __all__ = (
     'DriveRemoteChartPayload',
     'DriveChartPayload',
     'ChatPayload',
-    'PropertiesPayload',
+    'IFileProperties',
     'FolderPayload',
     'IDriveFile',
     'EmojiPayload',

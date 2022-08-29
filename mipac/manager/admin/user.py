@@ -7,7 +7,7 @@ from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
-    from mipac.models.user import User
+    from mipac.models.user import UserDetailed
 
 
 class AdminUserManager:
@@ -47,7 +47,7 @@ class AdminUserManager:
         )
         return bool(res)
 
-    async def show_user(self, user_id: Optional[str] = None) -> User:
+    async def show_user(self, user_id: Optional[str] = None) -> UserDetailed:
         """
         Shows the user with the specified user ID.
 
@@ -58,7 +58,7 @@ class AdminUserManager:
 
         Returns
         -------
-        User
+        UserDetailed
         """
 
         user_id = user_id or self.__user_id

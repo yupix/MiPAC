@@ -2,6 +2,9 @@ from __future__ import annotations
 
 from typing import Any, List, Literal, Optional, TypedDict
 
+from mipac.types.note import INote
+from mipac.types.page import IPage
+
 from .drive import IDriveFile
 from .emoji import EmojiPayload, ICustomEmojiLite
 from .instance import IInstanceLite, InstancePayload
@@ -26,6 +29,55 @@ class IUserLite(TypedDict):
     avatar_blurhash: str
     emojis: list[ICustomEmojiLite]
     instance: IInstanceLite
+
+
+class IUserDetailedField(TypedDict):
+    name: str
+    value: str
+
+
+class IUserDetailedRequired(IUserLite):
+    fields: list[IUserDetailedField]
+    followers_count: int
+    following_count: int
+    has_pending_follow_request_from_you: bool
+    has_pending_follow_request_to_you: bool
+    is_admin: bool
+    is_blocked: bool
+    is_blocking: bool
+    is_bot: bool
+    is_cat: bool
+    is_followed: bool
+    is_following: bool
+    is_locked: bool
+    is_moderator: bool
+    is_muted: bool
+    is_silenced: bool
+    is_suspended: bool
+    public_reactions: bool
+    security_keys: bool
+    two_factor_enabled: bool
+    notes_count: int
+    pinned_note_ids: list[str]
+    pinned_notes: List[INote]
+
+
+class IUserDetailed(IUserDetailedRequired, total=False):
+    banner_blurhash: str
+    banner_color: str
+    banner_url: str
+    birthday: str
+    created_at: str
+    description: str
+    ff_visibility: Literal['public', 'followers', 'private']
+    lang: str
+    last_fetched_at: str
+    location: str
+    pinned_page: IPage
+    pinned_page_id: str
+    updated_at: str
+    uri: str
+    url: str
 
 
 class IChannel(TypedDict, total=False):

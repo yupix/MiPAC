@@ -14,7 +14,7 @@ from mipac.manager.user import UserManager
 
 if TYPE_CHECKING:
     from mipac.config import Config
-    from mipac.models.user import User
+    from mipac.models.user import UserDetailed
 
 __all__ = ('ClientActions',)
 
@@ -34,11 +34,11 @@ class ClientActions:
         self._config: Config = config
         self._modeler: Modeler = Modeler(self)
 
-    def _create_user_instance(self, user: User) -> UserManager:
+    def _create_user_instance(self, user: UserDetailed) -> UserManager:
         return UserManager(session=self.__session, client=self, user=user)
 
     def _create_note_instance(self, note_id: str) -> NoteManager:
         return NoteManager(note_id, session=self.__session, client=self)
 
-    async def get_me(self) -> User:
+    async def get_me(self) -> UserDetailed:
         return await self.user.action.get_me()
