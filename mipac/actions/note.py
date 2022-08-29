@@ -2,12 +2,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac.core.models.note import RawNote
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.manager.favorite import FavoriteManager
 from mipac.manager.file import MiFile
 from mipac.manager.reaction import ReactionManager
+from mipac.models.note import Note, NoteReaction, Poll
+from mipac.types.note import INote
 
 __all__ = ['NoteActions']
 
@@ -15,7 +16,6 @@ from mipac.util import check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
-    from mipac.models.note import Note, NoteReaction, Poll
 
 
 class NoteActions:
@@ -162,13 +162,13 @@ class NoteActions:
         # if files:  # TODO: get_file_idsを直さないと使えない
         # field['fileIds'] = await get_file_ids(files=files)
         field = remove_dict_empty(field)
-        res = await self.__session.request(
+        res: INote = await self.__session.request(
             Route('POST', '/api/notes/create'),
             json=field,
             auth=True,
             lower=True,
         )
-        return self.__client._modeler.new_note(RawNote(res['created_note']))
+        return Note(res, client=self.__client)
 
     async def delete(self, note_id: Optional[str] = None) -> bool:
         """
@@ -289,7 +289,7 @@ class NoteActions:
             auth=True,
             lower=True,
         )
-        return self.__client._modeler.new_note(RawNote(res))
+        return Note(res, client=self.__client)
 
     async def get_replies(
         self,
@@ -329,7 +329,7 @@ class NoteActions:
             auth=True,
             lower=True,
         )
-        return [self.__client._modeler.new_note(RawNote(i)) for i in res]
+        return [Note(i, client=self.__client) for i in res]
 
     async def get_reaction(
         self, reaction: str, note_id: Optional[str] = None

@@ -151,7 +151,7 @@ class UserActions:
         res = await self.__session.request(
             Route('POST', '/api/users/notes'), json=data, auth=True, lower=True
         )
-        return [self.__client._modeler.new_note(RawNote(i)) for i in res]
+        return [Note(i, client=self.__client) for i in res]
 
     def get_mention(self, user: Optional[User] = None) -> str:
         """
