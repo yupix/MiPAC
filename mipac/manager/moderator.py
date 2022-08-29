@@ -41,7 +41,7 @@ class AdminModeratorManager(AbstractManager):
         user_id = user_id or self.__user_id
         data = {'userId': user_id}
         res = await self.__session.request(
-            Route('POST', '/api/moderators/add'),
+            Route('POST', '/api/admin/moderators/add'),
             json=data,
             auth=True,
             lower=True,
@@ -65,7 +65,7 @@ class AdminModeratorManager(AbstractManager):
         user_id = user_id or self.__user_id
         data = {'userId': user_id}
         res = await self.__session.request(
-            Route('POST', '/api/moderators/remove'),
+            Route('POST', '/api/admin/moderators/remove'),
             json=data,
             auth=True,
             lower=True,

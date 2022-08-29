@@ -36,5 +36,5 @@ class AdminAdvertisingManager(AbstractManager):
             'image_url': image_url,
         }
         return await self.__session.request(
-            Route('POST', '/api/ad/create'), json=data, auth=True, lower=True
+            Route('POST', '/api/admin/ad/create'), json=data, auth=True, lower=True
         )
