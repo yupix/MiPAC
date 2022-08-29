@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac import AbstractManager
+from mipac.abc.manager import AbstractManager
 from mipac.actions.drive import DriveActions, FileActions, FolderActions
 from mipac.http import HTTPClient
 

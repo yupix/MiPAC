@@ -1,21 +1,36 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Literal, TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal
 
 from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 from mipac.types.page import IPage
-from mipac.types.user import (
-    IUserDetailed,
-    IUserDetailedField,
-)
+from mipac.types.user import IFollowRequest, IUserDetailed, IUserDetailedField
 
 if TYPE_CHECKING:
     from mipac.actions.user import UserActions
     from mipac.manager.client import ClientActions
 
-__all__ = ['UserDetailed']
+__all__ = ('UserDetailed', 'FollowRequest')
+
+
+class FollowRequest:
+    def __init__(self, request: IFollowRequest, *, client: ClientActions):
+        self.__request: IFollowRequest = request
+        self.__client: ClientActions = client
+
+    @property
+    def id(self) -> str:
+        return self.__request['id']
+
+    @property
+    def follower(self) -> LiteUser:
+        return LiteUser(self.__request['follower'])
+
+    @property
+    def followee(self) -> LiteUser:
+        return LiteUser(self.__request['followee'])
 
 
 class UserDetailed(LiteUser):

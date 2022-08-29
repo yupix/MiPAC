@@ -7,7 +7,6 @@ from mipac.http import HTTPClient
 from mipac.manager.chart import ChartManager
 from mipac.manager.chat import ChatManager
 from mipac.manager.drive import DriveManager
-from mipac.manager.modeler import Modeler
 from mipac.manager.note import NoteManager
 from mipac.manager.reaction import ReactionManager
 from mipac.manager.user import UserManager
@@ -32,7 +31,6 @@ class ClientActions:
         )
         self.chart: ChartManager = ChartManager(session=session, client=self)
         self._config: Config = config
-        self._modeler: Modeler = Modeler(self)
 
     def _create_user_instance(self, user: UserDetailed) -> UserManager:
         return UserManager(session=self.__session, client=self, user=user)

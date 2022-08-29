@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Literal, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal, Optional
 
 from typing_extensions import Self
 
@@ -171,7 +171,7 @@ class Note:
 
     @property
     def visibility(
-            self,
+        self,
     ) -> Literal['public', 'home', 'followers', 'specified']:
         return self.__note['visibility']
 
@@ -245,7 +245,11 @@ class Note:
 
     @property
     def poll(self) -> Poll | None:
-        return Poll(self.__note['poll'], client=self._client) if 'poll' in self.__note else None
+        return (
+            Poll(self.__note['poll'], client=self._client)
+            if 'poll' in self.__note
+            else None
+        )
 
     @property
     def action(self) -> NoteActions:

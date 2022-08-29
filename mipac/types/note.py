@@ -5,13 +5,6 @@ from .emoji import ICustomEmojiLite
 from .poll import IPoll
 from .user import IUserLite
 
-__all__ = (
-    'INoteRequired',
-    'INote',
-    'GeoPayload',
-    'INoteReaction',
-)
-
 
 class GeoPayload(TypedDict):
     """
@@ -24,6 +17,7 @@ class GeoPayload(TypedDict):
     altitude_accuracy: Optional[int]
     heading: Optional[int]
     speed: Optional[int]
+
 
 class INoteRequired(TypedDict):
     id: str

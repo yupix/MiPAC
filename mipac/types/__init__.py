@@ -13,12 +13,7 @@ from mipac.types.instance import (
     OptionalInstance,
     OptionalMeta,
 )
-from mipac.types.note import (
-    GeoPayload,
-    INote,
-    INoteReaction,
-    INoteRequired,
-)
+from mipac.types.note import GeoPayload, INote, INoteReaction, INoteRequired
 from mipac.types.page import (
     AttachedFilePayload,
     EyeCatchingImagePayload,

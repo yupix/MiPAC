@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, TYPE_CHECKING, TypedDict
+from typing import TYPE_CHECKING, List, Literal, TypedDict
 
 if TYPE_CHECKING:
     from mipac.types.channel import IChannel
@@ -75,3 +75,9 @@ class IUserDetailed(IUserDetailedRequired, total=False):
     updated_at: str
     uri: str
     url: str
+
+
+class IFollowRequest(TypedDict):
+    id: str
+    follower: IUserLite
+    followee: IUserLite

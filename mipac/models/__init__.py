@@ -1,7 +1,7 @@
 from .drive import File, FileProperties, Folder
 from .note import Follow, Header, Note, NoteReaction, Poll
 from .notification import Reaction
-from .user import Followee, FollowRequest, UserDetailed
+from .user import FollowRequest, UserDetailed
 
 __all__ = (
     'FileProperties',
@@ -9,7 +9,6 @@ __all__ = (
     'Folder',
     'UserDetailed',
     'FollowRequest',
-    'Followee',
     'Note',
     'Poll',
     'Reaction',

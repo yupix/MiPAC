@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac import AbstractManager
+from mipac.abc.manager import AbstractManager
 from mipac.core.models.chart import RawActiveUsersChart, RawDriveChart
 from mipac.http import HTTPClient, Route
 

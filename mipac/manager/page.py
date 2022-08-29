@@ -2,13 +2,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac import AbstractManager
+from mipac.abc.manager import AbstractManager
 from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
-
-__all__ = 'PagesManager'
 
 
 class PagesManager(AbstractManager):

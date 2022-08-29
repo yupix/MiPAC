@@ -9,6 +9,7 @@ from mipac.util import check_multi_arg
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
+    from mipac.types.chat import IChatMessage
 
 __all__ = ('ChatManager',)
 
@@ -47,7 +48,7 @@ class ChatManager:
             raise ParameterError('limit must be greater than 100')
 
         args = {'limit': limit, 'group': group}
-        data = await self.__session.request(
+        data: list[IChatMessage] = await self.__session.request(
             Route('POST', '/api/messaging/history'), json=args, auth=True
         )
         return [ChatMessage(d, client=self.__client) for d in data]

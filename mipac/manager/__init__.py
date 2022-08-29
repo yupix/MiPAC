@@ -1,34 +1,16 @@
-from .ad import AdminAdvertisingManager
-from .chart import ChartManager
-from .chat import ChatManager
-from .client import ClientActions
-from .drive import DriveManager, FileManager, FolderManager
-from .emoji import AdminEmojiManager
-from .favorite import FavoriteManager
-from .file import MiFile
-from .follow import FollowManager, FollowRequestManager
-from .moderator import AdminModeratorManager
-from .note import NoteManager
-from .page import PagesManager
-from .reaction import ReactionManager
-from .user import UserManager
+# noqa: F403, F401
 
-__all__ = (
-    'AdminAdvertisingManager',
-    'ChartManager',
-    'ChatManager',
-    'ClientActions',
-    'FolderManager',
-    'FileManager',
-    'DriveManager',
-    'AdminEmojiManager',
-    'FavoriteManager',
-    'MiFile',
-    'FollowManager',
-    'FollowRequestManager',
-    'AdminModeratorManager',
-    'NoteManager',
-    'PagesManager',
-    'ReactionManager',
-    'UserManager',
-)
+from .ad import *
+from .chart import *
+from .chat import *
+from .client import *
+from .drive import *
+from .emoji import *
+from .favorite import *
+from .file import *
+from .follow import *
+from .moderator import *
+from .note import *
+from .page import *
+from .reaction import *
+from .user import *

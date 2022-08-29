@@ -13,8 +13,6 @@ if TYPE_CHECKING:
     from mipac.client import ClientActions
     from mipac.models.note import NoteReaction
 
-__all__ = 'ReactionManager'
-
 
 class ReactionManager(AbstractManager):
     def __init__(
