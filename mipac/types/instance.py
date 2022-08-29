@@ -24,7 +24,7 @@ class IInstanceLite(TypedDict):
     theme_color: str
 
 
-class FeaturesPayload:
+class FeaturesPayload(TypedDict):
     registration: bool
     local_time_line: bool
     global_time_line: bool
