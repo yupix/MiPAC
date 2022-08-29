@@ -1,6 +1,9 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional, TypedDict
+from typing import TYPE_CHECKING, Any, Optional, TypedDict
+from mipac.types.ads import IAds
+
+from mipac.types.emoji import ICustomEmoji
 
 if TYPE_CHECKING:
     from mipac.types.emoji import EmojiPayload
@@ -81,6 +84,47 @@ class MetaPayload(OptionalMeta):
     enable_discord_integration: bool
     enable_service_worker: bool
     translator_available: bool
+
+
+class IInstanceMetaLiteRequired(TypedDict):
+    version: str
+    uri: str
+    disable_registration: bool
+    disable_local_timeline: bool
+    disable_global_timeline: bool
+    drive_capacity_per_local_user_mb: int
+    drive_capacity_per_remote_user_mb: int
+    enable_hcaptcha: bool
+    max_note_text_length: int
+    enable_email: bool
+    enable_twitter_integration: bool
+    enable_github_integration: bool
+    enable_discord_integration: bool
+    enable_service_worker: bool
+    emojis: list[ICustomEmoji]
+    mascot_image_url: str
+    banner_url: str
+    icon_url: str
+
+
+class IInstanceMetaLite(IInstanceMetaLiteRequired, total=False):
+    maintainer_name: str
+    maintainer_email: str
+    name: str
+    description: str
+    langs: list[str]
+    tos_url: str
+    tos_text_url: str
+    announcements: dict[str, Any]
+    hcaptcha_site_key: str
+    enable_recaptcha: bool
+    recaptcha_siteKey: str
+    sw_publickey: str
+    ads: list[IAds]  # v12 only
+
+
+class IInstanceMeta(IInstanceMetaLite):
+    features: FeaturesPayload
 
 
 class OptionalInstance(TypedDict, total=False):
