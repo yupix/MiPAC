@@ -1,6 +1,6 @@
 from typing import Literal
 
-from mipac.models.lite.instance import InstanceLite
+from mipac.models.lite.instance import LiteInstance
 from mipac.types.emoji import ICustomEmojiLite
 from mipac.types.user import IUserLite
 
@@ -44,5 +44,5 @@ class UserLite:
         return self.__user['emojis']
 
     @property
-    def instance(self) -> InstanceLite:
-        return InstanceLite(self.__user['instance'])
+    def instance(self) -> LiteInstance:
+        return LiteInstance(self.__user['instance'])
