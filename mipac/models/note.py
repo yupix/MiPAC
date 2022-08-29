@@ -4,24 +4,22 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Literal, Optional, Union
 from typing_extensions import Self
 
-from mipac.core.models.note import RawReaction, RawRenote
+from mipac.core.models.note import RawRenote
 from mipac.core.models.poll import RawPoll
-from mipac.exception import NotExistRequiredData
 from mipac.models.lite.user import UserLite
-from mipac.types.drive import IDriveFile
-from mipac.types.emoji import ICustomEmojiLite
-from mipac.types.note import INote, INoteReaction, IPoll
+from mipac.exception import NotExistRequiredData
 
 if TYPE_CHECKING:
     from mipac.actions.note import NoteActions
     from mipac.manager.client import ClientActions
-    from mipac.manager.reaction import ReactionManager
     from mipac.models.user import User
+    from mipac.types.drive import IDriveFile
+    from mipac.types.emoji import ICustomEmojiLite
+    from mipac.types.note import INote, INoteReaction, IPoll
 
 __all__ = (
     'Note',
     'Poll',
-    'Reaction',
     'Follow',
     'Header',
     'Renote',
@@ -177,52 +175,6 @@ class Renote:
 
     async def delete(self) -> bool:
         return await self.__client.note.action.delete(self.__raw_data.id)
-
-
-class Reaction:
-    def __init__(self, raw_data: RawReaction, *, client: ClientActions):
-        self.__raw_data: RawReaction = raw_data
-        self.__client: ClientActions = client
-
-    @property
-    def id(self) -> Optional[str]:
-        return self.__raw_data.id
-
-    @property
-    def created_at(self) -> Optional[datetime]:
-        return self.__raw_data.created_at
-
-    @property
-    def type(self) -> Optional[str]:
-        return self.__raw_data.type
-
-    @property
-    def is_read(self) -> bool:
-        return self.__raw_data.is_read
-
-    @property
-    def user(self) -> Optional[User]:
-        return (
-            self.__client._modeler.create_user_instance(self.__raw_data.user)
-            if self.__raw_data.user
-            else None
-        )
-
-    @property
-    def note(self) -> Optional[Note]:
-        return (
-            Note(self.__raw_data.note, client=self.__client)
-            if self.__raw_data.note
-            else None
-        )
-
-    @property
-    def reaction(self) -> str:
-        return self.__raw_data.reaction
-
-    @property  # TODO: 修正
-    def action(self) -> ReactionManager:
-        return self.__client.reaction
 
 
 class NoteReaction:
