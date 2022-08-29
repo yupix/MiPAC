@@ -20,7 +20,6 @@ from mipac.types.note import (
     INoteReaction,
     INoteRequired,
     IPoll,
-    IRenote,
 )
 from mipac.types.page import (
     AttachedFilePayload,
@@ -54,7 +53,6 @@ __all__ = (
     'INote',
     'GeoPayload',
     'IPoll',
-    'IRenote',
     'FeaturesPayload',
     'INoteReaction',
     'MetaPayload',

@@ -1,8 +1,8 @@
-from typing import Any, List, Literal, Optional, TypedDict
+from typing import Any, Literal, Optional, TypedDict
 
 from .drive import IDriveFile
 from .emoji import ICustomEmojiLite
-from .user import IUserLite, UserPayload
+from .user import IUserLite
 
 __all__ = (
     'INoteRequired',
@@ -11,7 +11,6 @@ __all__ = (
     'IPoll',
     'IPollCoice',
     'INoteReaction',
-    'IRenote',
 )
 
 
@@ -42,31 +41,6 @@ class IPoll(TypedDict, total=False):
     multiple: bool
     expires_at: int
     choices: list[IPollCoice]
-
-
-class IRenoteRequired(TypedDict):
-    id: str
-    created_at: str
-    user_id: str
-    user: UserPayload
-    text: str
-    cw: str
-    visibility: str
-    renote_count: int
-    reactions: dict[str, Any]
-
-
-class IRenote(IRenoteRequired, total=False):
-    replies_count: int
-    emojis: List
-    file_ids: List
-    files: List
-    reply_id: str
-    renote_id: str
-    uri: str
-    poll: IPoll
-    tags: list[str]
-    channel_id: str
 
 
 class INoteRequired(TypedDict):
