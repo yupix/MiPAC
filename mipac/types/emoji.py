@@ -1,7 +1,11 @@
 from typing import Optional, TypedDict
 
-__all__ = ('EmojiPayload',)
+__all__ = ('EmojiPayload', 'ICustomEmojiLite')
 
+
+class ICustomEmojiLite(TypedDict):
+    name: str
+    url: str
 
 class EmojiPayload(TypedDict):
     id: Optional[str]
