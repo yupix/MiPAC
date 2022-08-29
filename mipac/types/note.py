@@ -15,6 +15,7 @@ __all__ = (
     'IReactionRequired',
 )
 
+
 class GeoPayload(TypedDict):
     """
     衛星情報
@@ -32,6 +33,8 @@ class IPollCoice(TypedDict):
     is_voted: bool
     text: str
     votes: int
+
+
 class IPoll(TypedDict, total=False):
     """
     アンケート情報
@@ -40,6 +43,7 @@ class IPoll(TypedDict, total=False):
     multiple: bool
     expires_at: int
     choices: list[IPollCoice]
+
 
 class IRenoteRequired(TypedDict):
     id: str
@@ -66,7 +70,6 @@ class IRenote(IRenoteRequired, total=False):
     channel_id: str
 
 
-
 class INoteRequired(TypedDict):
     id: str
     created_at: str
@@ -84,12 +87,14 @@ class INoteRequired(TypedDict):
     replies_count: int
     emojis: list[ICustomEmojiLite]
 
+
 class INote(INoteRequired, total=False):
     """
     note object
     """
-    renote: "INote"
-    reply: "INote"
+
+    renote: 'INote'
+    reply: 'INote'
     visible_user_ids: list[str]
     local_only: bool
     my_reaction: str
@@ -98,8 +103,16 @@ class INote(INoteRequired, total=False):
     is_hidden: bool
     poll: IPoll
 
+
 class IReactionRequired(TypedDict):
     reaction: str
+
+
+class INoteReaction(TypedDict):
+    id: str
+    created_at: str
+    user: IUserLite
+    type: str
 
 
 class IReaction(IReactionRequired, total=False):
