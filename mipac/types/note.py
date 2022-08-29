@@ -8,11 +8,10 @@ __all__ = (
     'INoteRequired',
     'INote',
     'GeoPayload',
-    'IReaction',
     'IPoll',
     'IPollCoice',
+    'INoteReaction',
     'IRenote',
-    'IReactionRequired',
 )
 
 
@@ -103,11 +102,6 @@ class INote(INoteRequired, total=False):
     is_hidden: bool
     poll: IPoll
 
-
-class IReactionRequired(TypedDict):
-    reaction: str
-
-
 class INoteReaction(TypedDict):
     id: str
     created_at: str
@@ -115,10 +109,3 @@ class INoteReaction(TypedDict):
     type: str
 
 
-class IReaction(IReactionRequired, total=False):
-    created_at: str
-    type: str
-    is_read: bool
-    user: UserPayload
-    note: INote
-    id: str

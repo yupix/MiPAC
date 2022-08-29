@@ -18,10 +18,9 @@ from mipac.types.note import (
     GeoPayload,
     INote,
     INoteRequired,
-    IReaction,
-    IReactionRequired,
     IRenote,
     IPoll,
+    INoteReaction
 )
 from mipac.types.page import (
     AttachedFilePayload,
@@ -54,11 +53,10 @@ __all__ = (
     'INoteRequired',
     'INote',
     'GeoPayload',
-    'IReaction',
     'IPoll',
     'IRenote',
-    'IReactionRequired',
     'FeaturesPayload',
+    'INoteReaction',
     'MetaPayload',
     'InstancePayload',
     'OptionalInstance',
