@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import json
 import sys
-from typing import Any
+from typing import Any, Literal, TypeVar
 
 import aiohttp
 
 from mipac import __version__
 from mipac.exception import APIError
+from mipac.types.endpoints import ENDPOINTS
 from mipac.util import remove_dict_empty, upper_to_lower
 
 
@@ -23,7 +24,7 @@ class _MissingSentinel:
 
 
 MISSING: Any = _MissingSentinel()
-
+R = TypeVar('R')
 
 async def json_or_text(response: aiohttp.ClientResponse):
     text = await response.text(encoding='utf-8')
@@ -35,7 +36,7 @@ async def json_or_text(response: aiohttp.ClientResponse):
 
 
 class Route:
-    def __init__(self, method: str, path: str):
+    def __init__(self, method: Literal['GET', 'POST'], path: ENDPOINTS):
         self.path: str = path
         self.method: str = method
 
@@ -57,7 +58,7 @@ class HTTPClient:
     def session(self) -> aiohttp.ClientSession:
         return self.__session
 
-    async def request(self, route: Route, **kwargs) -> Any:
+    async def request(self, route: Route, **kwargs) -> R:
         headers: dict[str, str] = {
             'User-Agent': self.user_agent,
         }
@@ -85,14 +86,13 @@ class HTTPClient:
         ) as res:
             data = await json_or_text(res)
             if is_lower:
-                if isinstance(data, list):
+                if isinstance(data, list | dict):
                     data = [upper_to_lower(i) for i in data]
-                else:
-                    data = upper_to_lower(data)
             if 300 > res.status >= 200:
-                return data
+                return data  # type: ignore
             if 511 > res.status >= 300:
                 raise APIError(data, res.status)
+            raise APIError('HTTP ERROR')
 
     async def close_session(self):
         await self.__session.close()
