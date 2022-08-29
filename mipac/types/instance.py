@@ -11,8 +11,16 @@ __all__ = (
     'InstancePayload',
     'OptionalInstance',
     'OptionalMeta',
+    'IInstanceLite'
 )
 
+class IInstanceLite(TypedDict):
+    name: str
+    software_name: str
+    software_version: str
+    icon_url: str
+    favicon_url: str
+    theme_color: str
 
 class FeaturesPayload:
     registration: bool
