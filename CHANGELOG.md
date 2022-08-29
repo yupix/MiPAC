@@ -23,12 +23,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - change class name `PinnedNotePayload` -> `IPinnedNote`
 - change class name `ChannelPayload` -> `IChannel`
 - change class name `NotePayload` -> `INote`
-- change class name `RenotePayload` -> `IRenote`
-- change class name `ReactionPayload` -> `IReaction`
 
 ### Removed
 
-- `RawRenote`, `Renote` クラスを削除しました。今後は `Note` クラスをご利用ください
+- `RenotePayload`, `Renote` クラスを削除しました。今後は `Note` クラスをご利用ください
+- `IReactionRequired`, `ReactionPayload`を削除しました。 今後は `IReactionNf` をご利用ください
 
 ## [0.1.0] - 2022-05-28
 
