@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any, Optional, TypedDict
 if TYPE_CHECKING:
     from mipac.types.user import UserPayload
 
-__all__ = ('PropertiesPayload', 'FolderPayload', 'FilePayload')
+__all__ = ('PropertiesPayload', 'FolderPayload', 'IDriveFile')
 
 
 class PropertiesPayload(TypedDict):
@@ -32,7 +32,7 @@ class FolderPayload(TypedDict):
     parent: dict[str, Any]
 
 
-class FilePayload(TypedDict):
+class IDriveFile(TypedDict):
     """
     ファイル情報
     """
