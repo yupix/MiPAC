@@ -40,7 +40,7 @@ class UserActions:
         """
 
         res = await self.__session.request(Route('POST', '/api/i'), auth=True)
-        return self.__client._modeler.create_user_instance(RawUser(res))
+        return UserDetailed(res, client=self.__client)  # TODO: 自分用のクラスに変更する
 
     @cached(ttl=10, namespace='get_user', key_builder=key_builder)
     async def get(
@@ -74,7 +74,7 @@ class UserActions:
         data = await self.__session.request(
             Route('POST', '/api/users/show'), json=field, auth=True, lower=True
         )
-        return self.__client._modeler.create_user_instance(RawUser(data))
+        return UserDetailed(data, client=self.__client)
 
     @get_cache_key
     async def fetch(
@@ -112,7 +112,7 @@ class UserActions:
         )
         old_cache = Cache(namespace='get_user')
         await old_cache.delete(kwargs['cache_key'].format('get_user'))
-        return self.__client._modeler.create_user_instance(RawUser(data))
+        return UserDetailed(data, client=self.__client)
 
     async def get_notes(
         self,

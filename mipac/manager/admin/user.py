@@ -68,7 +68,7 @@ class AdminUserManager:
             auth=True,
             lower=True,
         )
-        return self.__client._modeler.create_user_instance(RawUser(res))
+        return UserDetailed(res, client=self.__client)
 
     async def suspend(self, user_id: Optional[str] = None) -> bool:
         """
