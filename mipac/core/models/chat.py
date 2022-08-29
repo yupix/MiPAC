@@ -5,7 +5,6 @@ from typing import List
 
 from mipac.types.chat import ChatPayload
 
-from .user import RawUser
 
 __all__ = ('RawChat',)
 

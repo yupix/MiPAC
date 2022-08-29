@@ -29,11 +29,6 @@ class CustomEmoji:
     """
 
     __slots__ = (
-        'id',
-        'aliases',
-        'name',
-        'category',
-        'url',
         '__emoji',
         '__client',
     )

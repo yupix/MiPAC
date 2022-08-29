@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import Optional, TYPE_CHECKING
 
 from mipac.abc.action import AbstractAction
-from mipac.core.models.drive import RawFile, RawFolder
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.types.drive import IDriveFile
@@ -261,4 +260,4 @@ class DriveActions(AbstractAction):
             lower=True,
             auth=True,
         )
-        return [self.__client._modeler.new_folder(RawFolder(i)) for i in data]
+        return [Folder(i, client=self.__client) for i in data]

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac.core.models.user import RawUser
 from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:

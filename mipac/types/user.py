@@ -1,13 +1,16 @@
 from __future__ import annotations
 
-from typing import Any, List, Literal, Optional, TypedDict
+from typing import Any, List, Literal, Optional, TYPE_CHECKING, TypedDict
 
-from mipac.types.note import INote
-from mipac.types.page import IPage
+
 
 from .drive import IDriveFile
 from .emoji import EmojiPayload, ICustomEmojiLite
 from .instance import IInstanceLite, InstancePayload
+
+if TYPE_CHECKING:
+    from mipac.types.note import INote
+    from mipac.types.page import IPage
 
 __all__ = (
     'IChannel',

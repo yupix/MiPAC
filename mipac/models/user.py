@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, List, Literal, Optional, Union
+from typing import Any, List, Literal, Optional, TYPE_CHECKING
 
-from mipac import Note
-from mipac.core.models.user import RawChannel, RawPinnedNote, RawUser
+from mipac.models.note import Note
+from mipac.core.models.user import RawChannel, RawPinnedNote
 from mipac.models.emoji import CustomEmoji
-from mipac.models.lite.instance import LiteInstance
 from mipac.models.lite.user import UserLite
 from mipac.types.page import IPage
 from mipac.types.user import (
@@ -20,7 +19,6 @@ if TYPE_CHECKING:
     from mipac.actions.user import UserActions
     from mipac.manager.client import ClientActions
     from mipac.models.drive import File
-    from mipac.models.instance import Instance
 
 __all__ = ['UserDetailed', 'FollowRequest', 'Followee']
 
@@ -242,53 +240,6 @@ class UserDetailed(UserLite):
     __slots__ = (
         '__detail',
         '__client',
-        'id',
-        'username',
-        'host',
-        'name',
-        'online_status',
-        'avatar_url',
-        'avatar_blurhash',
-        'emojis',
-        'instance',
-        'fields',
-        'followers_count',
-        'following_count',
-        'has_pending_follow_request_from_you',
-        'has_pending_follow_request_to_you',
-        'is_admin',
-        'is_blocked',
-        'is_blocking',
-        'is_bot',
-        'is_cat',
-        'is_followed',
-        'is_following',
-        'is_locked',
-        'is_moderator',
-        'is_muted',
-        'is_silenced',
-        'is_suspended',
-        'public_reactions',
-        'security_keys',
-        'two_factor_enabled',
-        'notes_count',
-        'pinned_note_ids',
-        'pinned_notes',
-        'banner_blurhash',
-        'banner_color',
-        'banner_url',
-        'birthday',
-        'created_at',
-        'description',
-        'ff_visibility',
-        'lang',
-        'last_fetched_at',
-        'location',
-        'pinned_page',
-        'pinned_page_id',
-        'updated_at',
-        'uri',
-        'url',
     )
 
     def __init__(self, user: IUserDetailed, *, client: ClientActions):

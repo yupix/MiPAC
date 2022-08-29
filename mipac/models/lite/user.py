@@ -8,15 +8,6 @@ from mipac.types.user import IUserLite
 class UserLite:
     __slots__ = (
         '__user',
-        'id',
-        'username',
-        'host',
-        'name',
-        'online_status',
-        'avatar_url',
-        'avatar_blurhash',
-        'emojis',
-        'instance',
     )
 
     def __init__(self, user: IUserLite) -> None:

@@ -1,13 +1,10 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
-
-from mipac.core.models.drive import RawFolder
+from typing import Any, Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
-    from mipac.manager.drive import FolderManager
-    from mipac.types import IDriveFile, IFileProperties
+    from mipac.types import FolderPayload, IDriveFile, IFileProperties
 
 __all__ = ['FileProperties', 'File', 'Folder']
 
@@ -30,37 +27,42 @@ class FileProperties:
 
 
 class Folder:
-    def __init__(self, raw_data: RawFolder, client: ClientActions):
-        self.__raw_data = raw_data
+    def __init__(self, folder: FolderPayload, client: ClientActions):
+        self.__folder: FolderPayload = folder
         self.__client: ClientActions = client
 
     @property
-    def id(self):
-        return self.__raw_data.id
+    def id(self) -> str:
+        """フォルダのID"""
+        return self.__folder['id']
 
     @property
-    def created_at(self):
-        return self.__raw_data.created_at
+    def created_at(self) -> str:  # TODO: 型
+        """フォルダの作成日時"""
+        return self.__folder['created_at']
 
     @property
-    def name(self):
-        return self.__raw_data.name
+    def name(self) -> str:
+        """フォルダ名"""
+        return self.__folder['name']
 
     @property
-    def folders_count(self):
-        return self.__raw_data.folders_count
+    def folders_count(self) -> int:
+        """フォルダ内のフォルダ数"""
+        return self.__folder['folders_count']
 
     @property
-    def parent_id(self):
-        return self.__raw_data.parent_id
+    def files_count(self) -> int:
+        """フォルダ内のファイル数"""
+        return self.__folder['files_count']
 
     @property
-    def parent(self):
-        return self.__raw_data.parent
+    def parent_id(self) -> str:
+        return self.__folder['parent_id']
 
     @property
-    def action(self) -> FolderManager:
-        return self.__client.drive._get_folder_instance(self.id)
+    def parent(self) -> dict[str, Any]:
+        return self.__folder['parent']
 
 
 class File:

@@ -108,10 +108,6 @@ class NoteReaction:
     """
 
     __slots__ = (
-        'id',
-        'created_at',
-        'user',
-        'type',
         '__reaction',
     )
 
