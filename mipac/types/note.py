@@ -9,7 +9,7 @@ __all__ = (
     'INote',
     'GeoPayload',
     'IPoll',
-    'IPollCoice',
+    'IPollChoice',
     'INoteReaction',
 )
 
@@ -27,7 +27,7 @@ class GeoPayload(TypedDict):
     speed: Optional[int]
 
 
-class IPollCoice(TypedDict):
+class IPollChoice(TypedDict):
     is_voted: bool
     text: str
     votes: int
@@ -40,7 +40,7 @@ class IPoll(TypedDict, total=False):
 
     multiple: bool
     expires_at: int
-    choices: list[IPollCoice]
+    choices: list[IPollChoice]
 
 
 class INoteRequired(TypedDict):
