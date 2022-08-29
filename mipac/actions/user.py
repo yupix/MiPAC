@@ -4,7 +4,6 @@ from typing import TYPE_CHECKING, Optional
 
 from aiocache import Cache, cached
 
-from mipac.core.models.note import RawNote
 from mipac.core.models.user import RawUser
 from mipac.exception import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
