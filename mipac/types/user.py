@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Any, List, Literal, Optional, TYPE_CHECKING, TypedDict
 
 
-
 from .drive import IDriveFile
 from .emoji import EmojiPayload, ICustomEmojiLite
 from .instance import IInstanceLite, InstancePayload

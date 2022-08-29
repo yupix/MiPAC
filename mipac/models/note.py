@@ -107,9 +107,7 @@ class NoteReaction:
     user : Optional[RawUser], default=None
     """
 
-    __slots__ = (
-        '__reaction',
-    )
+    __slots__ = ('__reaction',)
 
     def __init__(self, reaction: INoteReaction):
         self.__reaction: INoteReaction = reaction

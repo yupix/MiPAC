@@ -69,4 +69,3 @@ class InstanceMeta(LiteInstanceMeta):
     @property
     def miauth(self) -> bool:
         return self.__features['miauth']
-

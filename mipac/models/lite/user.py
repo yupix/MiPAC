@@ -6,9 +6,7 @@ from mipac.types.user import IUserLite
 
 
 class UserLite:
-    __slots__ = (
-        '__user',
-    )
+    __slots__ = ('__user',)
 
     def __init__(self, user: IUserLite) -> None:
         self.__user: IUserLite = user
