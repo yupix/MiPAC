@@ -1,30 +1,26 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Optional, Union
+from typing import TYPE_CHECKING, Literal, Optional
 
-from mipac.core.models.note import RawNote, RawReaction, RawRenote
-from mipac.core.models.poll import RawPoll
-from mipac.core.models.reaction import RawNoteReaction
-from mipac.core.models.user import RawUser
+from typing_extensions import Self
+
 from mipac.exception import NotExistRequiredData
+from mipac.models.lite.user import LiteUser
+from mipac.models.poll import Poll
 
 if TYPE_CHECKING:
     from mipac.actions.note import NoteActions
     from mipac.manager.client import ClientActions
-    from mipac.manager.file import MiFile
-    from mipac.manager.reaction import ReactionManager
-    from mipac.models.drive import File
-    from mipac.models.emoji import Emoji
-    from mipac.models.user import User
+    from mipac.models.user import UserDetailed
+    from mipac.types.drive import IDriveFile
+    from mipac.types.emoji import ICustomEmojiLite
+    from mipac.types.note import INote, INoteReaction
 
 __all__ = (
     'Note',
-    'Poll',
-    'Reaction',
     'Follow',
     'Header',
-    'Renote',
     'NoteReaction',
 )
 
@@ -36,7 +32,7 @@ class Follow:
             data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
         ) if data.get('created_at') else None
         self.type: Optional[str] = data.get('type')
-        self.user: Optional[User] = data.get('user')
+        self.user: Optional[UserDetailed] = data.get('user')
 
     async def follow(self) -> tuple[bool, Optional[str]]:
         """
@@ -79,174 +75,33 @@ class Header:
         self.type = data.get('type')
 
 
-class Poll:
-    def __init__(self, raw_data: RawPoll):
-        self.__raw_data = raw_data
-
-    @property
-    def multiple(self) -> bool | None:
-        return self.__raw_data.multiple
-
-    @property
-    def expires_at(self) -> Optional[int]:
-        return self.__raw_data.expires_at
-
-    @property
-    def choices(self):
-        return self.__raw_data.choices
-
-    @property
-    def expired_after(self) -> Optional[int]:
-        return self.__raw_data.expired_after
-
-
-class Renote:
-    def __init__(self, raw_data: RawRenote, *, client: ClientActions):
-        self.__raw_data: RawRenote = raw_data
-        self.__client: ClientActions = client
-
-    @property
-    def id(self) -> str:
-        return self.__raw_data.id
-
-    @property
-    def created_at(self) -> datetime:
-        return self.__raw_data.created_at
-
-    @property
-    def user_id(self) -> str:
-        return self.__raw_data.user_id
-
-    @property
-    def user(self) -> User:
-        return self.__client._modeler.create_user_instance(
-            self.__raw_data.user
-        )
-
-    @property
-    def content(self) -> Optional[str]:
-        return self.__raw_data.content
-
-    @property
-    def cw(self) -> Optional[str]:
-        return self.__raw_data.cw
-
-    @property
-    def visibility(self) -> str:
-        return self.__raw_data.visibility
-
-    @property
-    def renote_count(self) -> int | None:
-        return self.__raw_data.renote_count
-
-    @property
-    def replies_count(self) -> int | None:
-        return self.__raw_data.replies_count
-
-    @property
-    def reactions(self):
-        return self.__raw_data.reactions
-
-    @property
-    def emojis(self):
-        return self.__raw_data.emojis
-
-    @property
-    def file_ids(self):
-        return self.__raw_data.file_ids
-
-    @property
-    def files(self):
-        return self.__raw_data.files
-
-    @property
-    def reply_id(self) -> Optional[str]:
-        return self.__raw_data.reply_id
-
-    @property
-    def renote_id(self) -> Optional[str]:
-        return self.__raw_data.renote_id
-
-    @property
-    def uri(self) -> Optional[str]:
-        return self.__raw_data.uri
-
-    @property
-    def poll(self) -> Union[Poll, None]:
-        return Poll(self.__raw_data.poll) if self.__raw_data.poll else None
-
-    async def delete(self) -> bool:
-        return await self.__client.note.action.delete(self.__raw_data.id)
-
-
 class NoteReaction:
-    def __init__(self, raw_data: RawNoteReaction, *, client: ClientActions):
-        self.__raw_data = raw_data
-        self.__client: ClientActions = client
+    __slots__ = ('__reaction',)
+
+    def __init__(self, reaction: INoteReaction):
+        self.__reaction: INoteReaction = reaction
 
     @property
-    def id(self) -> str:
-        return self.__raw_data.id
+    def id(self) -> str | None:
+        return self.__reaction['id']
 
     @property
-    def created_at(self) -> datetime:
-        return self.__raw_data.created_at
-
-    @property
-    def user(self) -> User:
-        return self.__client._modeler.create_user_instance(
-            RawUser(self.__raw_data.user)
-        )
-
-    @property
-    def reaction(self) -> str:
-        return self.__raw_data.reaction
-
-
-class Reaction:
-    def __init__(self, raw_data: RawReaction, *, client: ClientActions):
-        self.__raw_data: RawReaction = raw_data
-        self.__client: ClientActions = client
-
-    @property
-    def id(self) -> Optional[str]:
-        return self.__raw_data.id
-
-    @property
-    def created_at(self) -> Optional[datetime]:
-        return self.__raw_data.created_at
-
-    @property
-    def type(self) -> Optional[str]:
-        return self.__raw_data.type
-
-    @property
-    def is_read(self) -> bool:
-        return self.__raw_data.is_read
-
-    @property
-    def user(self) -> Optional[User]:
+    def created_at(self) -> datetime | None:
         return (
-            self.__client._modeler.create_user_instance(self.__raw_data.user)
-            if self.__raw_data.user
+            datetime.strptime(
+                self.__reaction['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
+            )
+            if 'created_at' in self.__reaction
             else None
         )
 
     @property
-    def note(self) -> Optional[Note]:
-        return (
-            Note(self.__raw_data.note, client=self.__client)
-            if self.__raw_data.note
-            else None
-        )
+    def type(self) -> str | None:
+        return self.__reaction['type']
 
     @property
-    def reaction(self) -> str:
-        return self.__raw_data.reaction
-
-    @property  # TODO: 修正
-    def action(self) -> ReactionManager:
-        return self.__client.reaction
+    def user(self) -> LiteUser:
+        return LiteUser(self.__reaction['user'])
 
 
 class Note:
@@ -255,13 +110,13 @@ class Note:
 
     Parameters
     ----------
-    raw_data: RawNote
+    note: INote
         アクションを持たないNoteクラス
     client: ClientActions
     """
 
-    def __init__(self, raw_data: RawNote, client: ClientActions):
-        self._raw_data: RawNote = raw_data
+    def __init__(self, note: INote, client: ClientActions):
+        self.__note = note
         self._client: ClientActions = client
 
     @property
@@ -274,119 +129,127 @@ class Note:
         str
             ユーザーのID
         """
-        return self._raw_data.id
+        return self.__note['id']
 
     @property
     def created_at(self) -> datetime:
-        return self._raw_data.created_at
-
-    @property
-    def user_id(self) -> str:
-        return self._raw_data.user_id
-
-    @property
-    def author(self) -> User:
-        return self._client._modeler.create_user_instance(
-            self._raw_data.author
+        return datetime.strptime(
+            self.__note['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
         )
 
     @property
-    def content(self) -> Optional[str]:
-        return self._raw_data.content
+    def content(self) -> str | None:
+        return self.__note['text']
 
     @property
-    def cw(self) -> Optional[str]:
-        return self._raw_data.cw
+    def cw(self) -> str | None:
+        return self.__note['cw']
 
     @property
-    def renote(self) -> Union[None, Renote]:
-        if self._raw_data.renote:
-            return Renote(self._raw_data.renote, client=self._client)
-        return None
+    def user_id(self) -> str:
+        return self.__note['user_id']
 
     @property
-    def visibility(self) -> Optional[str]:
-        return self._raw_data.visibility
+    def author(self) -> LiteUser:
+        return LiteUser(self.__note['user'])
 
     @property
-    def renote_count(self) -> Optional[int]:
-        return self._raw_data.renote_count
+    def reply_id(self) -> str:
+        return self.__note['reply_id']
 
     @property
-    def replies_count(self) -> Optional[int]:
-        return self._raw_data.replies_count
+    def renote_id(self) -> str:
+        return self.__note['renote_id']
 
     @property
-    def reactions(self) -> Optional[dict[str, Any]]:  # TODO: 型の確認
-        return self._raw_data.reactions
+    def files(self) -> list[IDriveFile]:  # TODO: モデルに
+        return self.__note['files']
 
     @property
-    def emojis(self) -> list[Emoji]:
-        return [Emoji(i, client=self._client) for i in self._raw_data.emojis]
+    def file_ids(self) -> list[str]:
+        return self.__note['file_ids']
 
     @property
-    def file_ids(self) -> Optional[list[str]]:
-        return self._raw_data.file_ids
+    def visibility(
+        self,
+    ) -> Literal['public', 'home', 'followers', 'specified']:
+        return self.__note['visibility']
 
     @property
-    def files(self) -> list[File]:
-        return [File(i, client=self._client) for i in self._raw_data.files]
+    def reactions(self) -> dict[str, int]:
+        return self.__note['reactions']
 
     @property
-    def reply_id(self) -> Optional[str]:
-        return self._raw_data.reply_id
+    def renote_count(self) -> int:
+        return self.__note['renote_count']
 
     @property
-    def renote_id(self) -> Optional[str]:
-        return self._raw_data.renote_id
+    def replies_count(self) -> int:
+        return self.__note['replies_count']
 
     @property
-    def poll(self) -> Union[Poll, None]:
-        return Poll(self._raw_data.poll) if self._raw_data.poll else None
+    def emojis(self) -> list[ICustomEmojiLite]:  # TODO: モデルに
+        return self.__note['emojis']
 
     @property
-    def visible_user_ids(self) -> Optional[list[str]]:
-        return self._raw_data.visible_user_ids
+    def renote(self) -> Self | None:
+        return (
+            Note(note=self.__note['renote'], client=self._client)
+            if 'renote' in self.__note
+            else None
+        )
 
     @property
-    def via_mobile(self) -> bool:
-        return self._raw_data.via_mobile
+    def reply(self) -> Self | None:
+        return (
+            Note(note=self.__note['renote'], client=self._client)
+            if 'renote' in self.__note
+            else None
+        )
+
+    @property
+    def visible_user_ids(self) -> list[str]:
+        return (
+            self.__note['visible_user_ids']
+            if 'visible_user_ids' in self.__note
+            else []
+        )
 
     @property
     def local_only(self) -> bool:
-        return self._raw_data.local_only
+        return (
+            self.__note['local_only'] if 'local_only' in self.__note else False
+        )
 
     @property
-    def extract_mentions(self) -> bool:
-        return self._raw_data.extract_mentions
+    def my_reaction(self) -> str | None:
+        return (
+            self.__note['my_reaction']
+            if 'my_reaction' in self.__note
+            else None
+        )
 
     @property
-    def extract_hashtags(self) -> bool:
-        return self._raw_data.extract_hashtags
+    def uri(self) -> str | None:
+        return self.__note['uri'] if 'uri' in self.__note else None
 
     @property
-    def extract_emojis(self) -> bool:
-        return self._raw_data.extract_emojis
+    def url(self) -> str | None:
+        return self.__note['url'] if 'url' in self.__note else None
 
     @property
-    def preview(self) -> bool:
-        return self._raw_data.preview
+    def is_hidden(self) -> bool:
+        return (
+            self.__note['is_hidden'] if 'is_hidden' in self.__note else False
+        )
 
     @property
-    def media_ids(self) -> Optional[list[str]]:
-        return self._raw_data.media_ids
-
-    @property
-    def field(self) -> Optional[dict[Any, Any]]:  # TODO: any
-        return self._raw_data.field
-
-    @property
-    def tags(self) -> Optional[list[str]]:
-        return self._raw_data.tags
-
-    @property
-    def channel_id(self) -> Optional[str]:
-        return self._raw_data.channel_id
+    def poll(self) -> Poll | None:
+        return (
+            Poll(self.__note['poll'], client=self._client)
+            if 'poll' in self.__note
+            else None
+        )
 
     @property
     def action(self) -> NoteActions:
@@ -398,58 +261,3 @@ class Note:
         NoteActions
         """
         return self._client._create_note_instance(self.id).action
-
-    async def reply(
-        self,
-        content: Optional[str] = None,
-        cw: Optional[str] = None,
-        extract_mentions: bool = True,
-        extract_hashtags: bool = True,
-        extract_emojis: bool = True,
-        renote_id: Optional[str] = None,
-        channel_id: Optional[str] = None,
-        files: Optional[list[MiFile]] = None,
-        poll: Optional[Poll] = None,
-    ) -> Note:
-        """
-        ノートに対して返信を送信します
-
-        Parameters
-        ----------
-        content: Optional[str]
-            返信内容
-        cw: Optional[str]
-            閲覧注意
-        extract_mentions : bool, optional
-            メンションを展開するか, by default False
-        extract_hashtags : bool, optional
-            ハッシュタグを展開するか, by default False
-        extract_emojis : bool, optional
-            絵文字を展開するか, by default False
-        renote_id : Optional[str], optional
-            リノート先のid, by default None
-        channel_id : Optional[str], optional
-            チャンネルid, by default None
-        files :Optional[MiFile], optional
-            添付するファイルのid, by default None
-        poll : Optional[Poll], optional
-            アンケート, by default None
-        """
-
-        visibility = self.visibility or 'public'
-
-        return await self._client.note.action.send(
-            content,
-            visibility=visibility,
-            visible_user_ids=self.visible_user_ids,
-            cw=cw,
-            local_only=self.local_only,
-            extract_mentions=extract_mentions,
-            extract_hashtags=extract_hashtags,
-            extract_emojis=extract_emojis,
-            reply_id=self.id,
-            renote_id=renote_id,
-            channel_id=channel_id,
-            files=files,
-            poll=poll,
-        )

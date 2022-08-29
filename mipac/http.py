@@ -26,6 +26,7 @@ class _MissingSentinel:
 MISSING: Any = _MissingSentinel()
 R = TypeVar('R')
 
+
 async def json_or_text(response: aiohttp.ClientResponse):
     text = await response.text(encoding='utf-8')
     try:
@@ -77,6 +78,8 @@ class HTTPClient:
                 kwargs[key] = {}
             kwargs[key]['i'] = self.__token
 
+        replace_list = kwargs.pop('replace_list', {})
+
         for i in ('json', 'data'):
             if kwargs.get(i):
                 kwargs[i] = remove_dict_empty(kwargs[i])
@@ -86,8 +89,11 @@ class HTTPClient:
         ) as res:
             data = await json_or_text(res)
             if is_lower:
-                if isinstance(data, list | dict):
-                    data = [upper_to_lower(i) for i in data]
+                if isinstance(data, list):
+                    data = [
+                        upper_to_lower(i, replace_list=replace_list)
+                        for i in data
+                    ]
             if 300 > res.status >= 200:
                 return data  # type: ignore
             if 511 > res.status >= 300:

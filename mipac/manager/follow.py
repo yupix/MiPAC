@@ -2,12 +2,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac import AbstractManager
+from mipac.abc.manager import AbstractManager
 from mipac.http import HTTPClient, Route
+from mipac.models.user import FollowRequest, UserDetailed
+from mipac.types.user import IFollowRequest
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
-    from mipac.models.user import FollowRequest, User
 
 __all__ = ('FollowManager', 'FollowRequestManager')
 
@@ -91,16 +92,14 @@ class FollowRequestManager(AbstractManager):
         未承認のフォローリクエストを取得します
         """
 
-        return [
-            self.__client._modeler.new_follow_request(i['follower'])
-            for i in await self.__session.request(
-                Route('POST', '/api/following/requests/list'),
-                auth=True,
-                lower=True,
-            )
-        ]
+        res: list[IFollowRequest] = await self.__session.request(
+            Route('POST', '/api/following/requests/list'),
+            auth=True,
+            lower=True,
+        )
+        return [FollowRequest(request=i, client=self.__client) for i in res]
 
-    async def get_user(self, user_id: Optional[str] = None) -> User:
+    async def get_user(self, user_id: Optional[str] = None) -> UserDetailed:
         """
         フォローリクエスト元のユーザーを取得します
         Parameters
@@ -110,7 +109,7 @@ class FollowRequestManager(AbstractManager):
 
         Returns
         -------
-        User
+        UserDetailed
             フォローリクエスト元のユーザー
         """
 

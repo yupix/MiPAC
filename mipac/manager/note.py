@@ -2,14 +2,12 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac import AbstractManager
+from mipac.abc.manager import AbstractManager
 from mipac.actions.note import NoteActions
 from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
-
-__all__ = 'NoteManager'
 
 
 class NoteManager(AbstractManager):

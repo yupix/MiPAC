@@ -3,17 +3,15 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Optional
 
 from mipac.abc.manager import AbstractManager
-from mipac.core.models.emoji import RawEmoji
-from mipac.core.models.reaction import RawNoteReaction
 from mipac.http import HTTPClient, Route
+from mipac.models.emoji import CustomEmoji
+from mipac.types.instance import IInstanceMetaLite
+from mipac.types.note import INoteReaction
 from mipac.util import remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
-    from mipac.models.emoji import Emoji
     from mipac.models.note import NoteReaction
-
-__all__ = 'ReactionManager'
 
 
 class ReactionManager(AbstractManager):
@@ -48,20 +46,20 @@ class ReactionManager(AbstractManager):
 
         data = remove_dict_empty({'noteId': note_id, 'reaction': reaction})
         route = Route('POST', '/api/notes/reactions/create')
-        return await self.__session.request(
+        res: bool = await self.__session.request(
             route, json=data, auth=True, lower=True
         )
+        return bool(res)
 
     async def remove(self, note_id: Optional[str] = None) -> bool:
         note_id = note_id or self.__note_id
 
         data = remove_dict_empty({'noteId': note_id})
         route = Route('POST', '/api/notes/reactions/delete')
-        return bool(
-            await self.__session.request(
-                route, json=data, auth=True, lower=True
-            )
+        res: bool = await self.__session.request(
+            route, json=data, auth=True, lower=True
         )
+        return bool(res)
 
     async def get_reaction(
         self, reaction: str, note_id: Optional[str] = None, *, limit: int = 11
@@ -70,22 +68,19 @@ class ReactionManager(AbstractManager):
         data = remove_dict_empty(
             {'noteId': note_id, 'limit': limit, 'type': reaction}
         )
-        res = await self.__session.request(
+        res: list[INoteReaction] = await self.__session.request(
             Route('POST', '/api/notes/reactions'),
             json=data,
             auth=True,
             lower=True,
         )
-        return [
-            self.__client._modeler.new_note_reaction(RawNoteReaction(i))
-            for i in res
-        ]
+        return [NoteReaction(i) for i in res]
 
-    async def get_emoji_list(self) -> list[Emoji]:
-        data = await self.__session.request(
-            Route('GET', '/api/meta'), json={'detail': False}, auth=True
+    async def get_emoji_list(self) -> list[CustomEmoji]:
+        data: IInstanceMetaLite = await self.__session.request(
+            Route('GET', '/api/meta'),
+            json={'detail': False},
+            auth=True,
+            replace_list={'ToSUrl': 'tos_url', 'ToSTextUrl': 'tos_text_url'},
         )
-        return [
-            self.__client._modeler.new_emoji(RawEmoji(i))
-            for i in data['emojis']
-        ]
+        return [CustomEmoji(i, client=self.__client) for i in data['emojis']]

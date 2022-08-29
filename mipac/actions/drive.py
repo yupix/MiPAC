@@ -3,9 +3,9 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Optional
 
 from mipac.abc.action import AbstractAction
-from mipac.core.models.drive import RawFile, RawFolder
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route
+from mipac.types.drive import IDriveFile
 from mipac.util import remove_dict_empty
 
 if TYPE_CHECKING:
@@ -47,13 +47,13 @@ class FileActions(AbstractAction):
         """
 
         data = remove_dict_empty({'fileId': file_id, 'url': url})
-        res = await self.__session.request(
+        res: IDriveFile = await self.__session.request(
             Route('POST', '/api/admin/drive/show-file'),
             json=data,
             auth=True,
             lower=True,
         )
-        return self.__client._modeler.create_file_instance(RawFile(res))
+        return File(res, client=self.__client)
 
     async def remove_file(self, file_id: Optional[str] = None) -> bool:
         """
@@ -113,13 +113,10 @@ class FileActions(AbstractAction):
             'folderId': folder_id,
             'Type': file_type,
         }
-        res = await self.__session.request(
+        res: list[IDriveFile] = await self.__session.request(
             Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
         )
-        return [
-            self.__client._modeler.create_file_instance(RawFile(i))
-            for i in res
-        ]
+        return [File(i, client=self.__client) for i in res]
 
 
 class FolderActions(AbstractAction):
@@ -153,14 +150,13 @@ class FolderActions(AbstractAction):
         parent_id = parent_id or self.__folder_id
 
         data = {'name': name, 'parent_id': parent_id}
-        return bool(
-            await self.__session.request(
-                Route('POST', '/api/drive/folders/create'),
-                json=data,
-                lower=True,
-                auth=True,
-            )
+        res: bool = await self.__session.request(
+            Route('POST', '/api/drive/folders/create'),
+            json=data,
+            lower=True,
+            auth=True,
         )
+        return bool(res)
 
     async def delete(self, folder_id: Optional[str] = None) -> bool:
         """
@@ -176,14 +172,13 @@ class FolderActions(AbstractAction):
         """
         folder_id = folder_id or self.__folder_id
         data = {'folderId': folder_id}
-        return bool(
-            await self.__session.request(
-                Route('POST', '/api/drive/folders/delete'),
-                json=data,
-                lower=True,
-                auth=True,
-            )
+        res: bool = await self.__session.request(
+            Route('POST', '/api/drive/folders/delete'),
+            json=data,
+            lower=True,
+            auth=True,
         )
+        return bool(res)
 
     async def get_files(
         self,
@@ -220,13 +215,10 @@ class FolderActions(AbstractAction):
             'folderId': folder_id,
             'Type': file_type,
         }
-        res = await self.__session.request(
+        res: list[IDriveFile] = await self.__session.request(
             Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
         )
-        return [
-            self.__client._modeler.create_file_instance(RawFile(i))
-            for i in res
-        ]
+        return [File(i, client=self.__client) for i in res]
 
 
 class DriveActions(AbstractAction):
@@ -268,4 +260,4 @@ class DriveActions(AbstractAction):
             lower=True,
             auth=True,
         )
-        return [self.__client._modeler.new_folder(RawFolder(i)) for i in data]
+        return [Folder(i, client=self.__client) for i in data]

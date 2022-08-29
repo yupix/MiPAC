@@ -1,6 +1,5 @@
 from typing import Literal
 
-
 ENDPOINTS = Literal[
     '/api/admin/abuse-user-reports',
     '/api/admin/accounts/create',
@@ -311,4 +310,3 @@ ENDPOINTS = Literal[
     '/api/users/stats',
     '/api/version',
 ]
-

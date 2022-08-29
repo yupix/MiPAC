@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac import AbstractManager
+from mipac.abc.manager import AbstractManager
 from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
@@ -36,5 +36,8 @@ class AdminAdvertisingManager(AbstractManager):
             'image_url': image_url,
         }
         return await self.__session.request(
-            Route('POST', '/api/admin/ad/create'), json=data, auth=True, lower=True
+            Route('POST', '/api/admin/ad/create'),
+            json=data,
+            auth=True,
+            lower=True,
         )

@@ -2,12 +2,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac.core.models.user import RawUser
 from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
-    from mipac.models.user import User
+    from mipac.models.user import UserDetailed
 
 
 class AdminUserManager:
@@ -47,7 +46,7 @@ class AdminUserManager:
         )
         return bool(res)
 
-    async def show_user(self, user_id: Optional[str] = None) -> User:
+    async def show_user(self, user_id: Optional[str] = None) -> UserDetailed:
         """
         Shows the user with the specified user ID.
 
@@ -58,7 +57,7 @@ class AdminUserManager:
 
         Returns
         -------
-        User
+        UserDetailed
         """
 
         user_id = user_id or self.__user_id
@@ -69,7 +68,7 @@ class AdminUserManager:
             auth=True,
             lower=True,
         )
-        return self.__client._modeler.create_user_instance(RawUser(res))
+        return UserDetailed(res, client=self.__client)
 
     async def suspend(self, user_id: Optional[str] = None) -> bool:
         """
@@ -113,7 +112,7 @@ class AdminUserManager:
 
         user_id = user_id or self.__user_id
         data = {'userId': user_id}
-        res = await self.__session.request(
+        res: bool = await self.__session.request(
             Route('POST', '/api/admin/unsuspend-user'),
             json=data,
             auth=True,

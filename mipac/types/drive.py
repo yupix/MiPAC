@@ -1,14 +1,11 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Optional, TypedDict
+from typing import Any, Optional, TypedDict
 
-if TYPE_CHECKING:
-    from mipac.types.user import UserPayload
-
-__all__ = ('PropertiesPayload', 'FolderPayload', 'FilePayload')
+__all__ = ('IFileProperties', 'FolderPayload', 'IDriveFile')
 
 
-class PropertiesPayload(TypedDict):
+class IFileProperties(TypedDict):
     """
     プロパティー情報
     """
@@ -32,24 +29,19 @@ class FolderPayload(TypedDict):
     parent: dict[str, Any]
 
 
-class FilePayload(TypedDict):
+class IDriveFile(TypedDict):
     """
     ファイル情報
     """
 
     id: str
     created_at: str
-    name: str
-    type: str
-    md5: str
-    size: int
     is_sensitive: bool
-    blurhash: str
-    properties: PropertiesPayload
-    url: str
+    name: str
     thumbnail_url: str
-    comment: str
-    folder_id: str
-    folder: FolderPayload
-    user_id: str
-    user: UserPayload  # TODO: ここ確認
+    url: str
+    type: str
+    size: int
+    md5: str
+    blurhash: str
+    properties: IFileProperties

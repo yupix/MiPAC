@@ -1,26 +1,18 @@
-from .chat import Chat
-from .drive import File, Folder, Properties
-from .emoji import Emoji
-from .instance import Instance, InstanceMeta
-from .note import Follow, Header, Note, NoteReaction, Poll, Reaction, Renote
-from .user import Followee, FollowRequest, User
+from .drive import File, FileProperties, Folder
+from .note import Follow, Header, Note, NoteReaction, Poll
+from .notification import Reaction
+from .user import FollowRequest, UserDetailed
 
 __all__ = (
-    'Chat',
-    'Properties',
+    'FileProperties',
     'File',
     'Folder',
-    'InstanceMeta',
-    'Instance',
-    'Emoji',
-    'User',
+    'UserDetailed',
     'FollowRequest',
-    'Followee',
     'Note',
     'Poll',
     'Reaction',
     'Follow',
     'Header',
-    'Renote',
     'NoteReaction',
 )

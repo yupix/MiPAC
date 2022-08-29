@@ -4,8 +4,7 @@ from mipac.types.chart import (
     DriveLocalChartPayload,
     DriveRemoteChartPayload,
 )
-from mipac.types.chat import ChatPayload
-from mipac.types.drive import FilePayload, FolderPayload, PropertiesPayload
+from mipac.types.drive import FolderPayload, IDriveFile, IFileProperties
 from mipac.types.emoji import EmojiPayload
 from mipac.types.instance import (
     FeaturesPayload,
@@ -14,15 +13,7 @@ from mipac.types.instance import (
     OptionalInstance,
     OptionalMeta,
 )
-from mipac.types.note import (
-    GeoPayload,
-    INote,
-    INoteRequired,
-    IReaction,
-    IReactionRequired,
-    IRenote,
-    PollPayload,
-)
+from mipac.types.note import GeoPayload, INote, INoteReaction, INoteRequired
 from mipac.types.page import (
     AttachedFilePayload,
     EyeCatchingImagePayload,
@@ -31,34 +22,24 @@ from mipac.types.page import (
     PagePayload,
     VariablePayload,
 )
+from mipac.types.poll import IPoll
 from mipac.types.reaction import NoteReactionPayload
-from mipac.types.user import (
-    FieldContentPayload,
-    IChannel,
-    IPinnedNote,
-    OptionalUser,
-    PinnedPagePayload,
-    UserPayload,
-)
 
 __all__ = (
     'ActiveUsersChartPayload',
     'DriveLocalChartPayload',
     'DriveRemoteChartPayload',
     'DriveChartPayload',
-    'ChatPayload',
-    'PropertiesPayload',
+    'IFileProperties',
     'FolderPayload',
-    'FilePayload',
+    'IDriveFile',
     'EmojiPayload',
     'INoteRequired',
     'INote',
     'GeoPayload',
-    'IReaction',
-    'PollPayload',
-    'IRenote',
-    'IReactionRequired',
+    'IPoll',
     'FeaturesPayload',
+    'INoteReaction',
     'MetaPayload',
     'InstancePayload',
     'OptionalInstance',
@@ -70,10 +51,4 @@ __all__ = (
     'AttachedFilePayload',
     'PagePayload',
     'NoteReactionPayload',
-    'IChannel',
-    'FieldContentPayload',
-    'UserPayload',
-    'PinnedPagePayload',
-    'IPinnedNote',
-    'OptionalUser',
 )

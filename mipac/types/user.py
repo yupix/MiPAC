@@ -1,125 +1,83 @@
 from __future__ import annotations
 
-from typing import Any, List, Optional, TypedDict
+from typing import TYPE_CHECKING, List, Literal, TypedDict
 
-from .drive import FilePayload
-from .emoji import EmojiPayload
-from .instance import InstancePayload
-
+if TYPE_CHECKING:
+    from mipac.types.channel import IChannel
+    from mipac.types.emoji import ICustomEmojiLite
+    from mipac.types.instance import IInstanceLite
+    from mipac.types.note import INote
+    from mipac.types.page import IPage
 __all__ = (
     'IChannel',
-    'FieldContentPayload',
-    'UserPayload',
-    'PinnedPagePayload',
-    'IPinnedNote',
-    'OptionalUser',
+    'IUserLite',
+    'IUserDetailed',
+    'IUserDetailedField',
 )
 
 
-class IChannel(TypedDict, total=False):
+class IUserLite(TypedDict):
     id: str
-    created_at: str
-    last_noted_at: str
+    username: str
+    host: str | None
     name: str
-    description: str
-    banner_url: str
-    notes_count: int
-    users_count: int
-    is_following: bool
-    user_id: str
+    online_status: Literal['online', 'active', 'offline', 'unknown']
+    avatar_url: str
+    avatar_blurhash: str
+    emojis: list[ICustomEmojiLite]
+    instance: IInstanceLite
 
 
-class IPinnedNote(TypedDict, total=False):
-    id: str
-    created_at: str
-    text: str
-    cw: str
-    user_id: str
-    user: 'UserPayload'
-    reply_id: str
-    renote_id: str
-    reply: dict[str, Any]
-    renote: dict[str, Any]
-    via_mobile: bool
-    is_hidden: bool
-    visibility: str
-    mentions: list[str]
-    visible_user_ids: list[str]
-    file_ids: list[str]
-    files: list[FilePayload]
-    tags: list[str]
-    poll: dict[str, Any]
-    channel_id: str
-    channel: IChannel
-    local_only: bool
-    emojis: list[EmojiPayload]
-    reactions: dict[str, Any]
-    renote_count: int
-    replies_count: int
-    uri: str
-    url: str
-    my_reaction: dict[str, Any]
-
-
-class PinnedPagePayload(TypedDict):
-    id: Optional[str]
-    created_at: Optional[str]
-    updated_at: Optional[str]
-    title: Optional[str]
-    name: Optional[str]
-    summary: Optional[str]
-    content: Optional[List]
-    variables: Optional[List]
-    user_id: Optional[str]
-    author: Optional[dict[str, Any]]
-
-
-class FieldContentPayload(TypedDict):
+class IUserDetailedField(TypedDict):
     name: str
     value: str
 
 
-class OptionalUser(TypedDict, total=False):
-    user_id: str
-    name: str
-    host: str
-    is_admin: bool
-    is_moderator: bool
-    is_bot: bool
-    is_cat: bool
-    is_lady: bool
-    online_status: str
-
-
-class UserPayload(OptionalUser):
-    id: str
-    username: str
-    avatar_url: Optional[str]
-    avatar_blurhash: Optional[str]
-    avatar_color: Optional[str]
-    emojis: Optional[list[str]]
-    url: str
-    uri: str
-    created_at: str
-    updated_at: str
-    is_locked: bool
-    is_silenced: bool
-    is_suspended: bool
-    description: str
-    location: str
-    birthday: str
-    fields: Any
+class IUserDetailedRequired(IUserLite):
+    fields: list[IUserDetailedField]
     followers_count: int
     following_count: int
+    has_pending_follow_request_from_you: bool
+    has_pending_follow_request_to_you: bool
+    is_admin: bool
+    is_blocked: bool
+    is_blocking: bool
+    is_bot: bool
+    is_cat: bool
+    is_followed: bool
+    is_following: bool
+    is_locked: bool
+    is_moderator: bool
+    is_muted: bool
+    is_silenced: bool
+    is_suspended: bool
+    public_reactions: bool
+    security_keys: bool
+    two_factor_enabled: bool
     notes_count: int
     pinned_note_ids: list[str]
-    pinned_notes: list[str]
+    pinned_notes: List[INote]
+
+
+class IUserDetailed(IUserDetailedRequired, total=False):
+    banner_blurhash: str
+    banner_color: str
+    banner_url: str
+    birthday: str
+    created_at: str
+    description: str
+    ff_visibility: Literal['public', 'followers', 'private']
+    lang: str
+    last_fetched_at: str
+    location: str
+    pinned_page: IPage
     pinned_page_id: str
-    pinned_page: str
-    ff_visibility: str
-    is_following: bool
-    is_follow: bool
-    is_blocking: bool
-    is_blocked: bool
-    is_muted: bool
-    instance: Optional[InstancePayload]
+    updated_at: str
+    uri: str
+    url: str
+
+
+class IFollowRequest(TypedDict):
+    id: str
+    follower: IUserLite
+    followee: IUserLite

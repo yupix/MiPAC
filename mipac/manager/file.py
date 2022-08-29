@@ -1,7 +1,5 @@
 from typing import Optional
 
-__all__ = 'MiFile'
-
 
 class MiFile:
     __slots__ = (

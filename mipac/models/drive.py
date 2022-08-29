@@ -1,136 +1,115 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
-
-from mipac.core.models.drive import RawFile, RawFolder, RawProperties
-from mipac.core.models.user import RawUser
+from typing import TYPE_CHECKING, Any, Optional
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
-    from mipac.manager.drive import FolderManager
+    from mipac.types import FolderPayload, IDriveFile, IFileProperties
+
+__all__ = ['FileProperties', 'File', 'Folder']
 
 
-__all__ = ['Properties', 'File', 'Folder']
-
-
-class Properties:
-    def __init__(self, raw_data: RawProperties) -> None:
-        self.__raw_data: RawProperties = raw_data
+class FileProperties:
+    def __init__(self, properties: IFileProperties) -> None:
+        self.__properties: IFileProperties = properties
 
     @property
     def width(self) -> Optional[int]:
-        return self.__raw_data.width
+        return self.__properties['width']
 
     @property
     def height(self) -> int:
-        return self.__raw_data.height
+        return self.__properties['height']
 
     @property
     def avg_color(self) -> Optional[str]:
-        return self.__raw_data.avg_color
+        return self.__properties['avg_color']
 
 
 class Folder:
-    def __init__(self, raw_data: RawFolder, client: ClientActions):
-        self.__raw_data = raw_data
+    def __init__(self, folder: FolderPayload, client: ClientActions):
+        self.__folder: FolderPayload = folder
         self.__client: ClientActions = client
 
     @property
-    def id(self):
-        return self.__raw_data.id
+    def id(self) -> str:
+        """フォルダのID"""
+        return self.__folder['id']
 
     @property
-    def created_at(self):
-        return self.__raw_data.created_at
+    def created_at(self) -> str:  # TODO: 型
+        """フォルダの作成日時"""
+        return self.__folder['created_at']
 
     @property
-    def name(self):
-        return self.__raw_data.name
+    def name(self) -> str:
+        """フォルダ名"""
+        return self.__folder['name']
 
     @property
-    def folders_count(self):
-        return self.__raw_data.folders_count
+    def folders_count(self) -> int:
+        """フォルダ内のフォルダ数"""
+        return self.__folder['folders_count']
 
     @property
-    def parent_id(self):
-        return self.__raw_data.parent_id
+    def files_count(self) -> int:
+        """フォルダ内のファイル数"""
+        return self.__folder['files_count']
 
     @property
-    def parent(self):
-        return self.__raw_data.parent
+    def parent_id(self) -> str:
+        return self.__folder['parent_id']
 
     @property
-    def action(self) -> FolderManager:
-        return self.__client.drive._get_folder_instance(self.id)
+    def parent(self) -> dict[str, Any]:
+        return self.__folder['parent']
 
 
 class File:
-    def __init__(self, raw_data: RawFile, *, client: ClientActions):
-        self.__raw_data = raw_data
+    def __init__(self, file: IDriveFile, *, client: ClientActions):
+        self.__file: IDriveFile = file
         self.__client: ClientActions = client
 
     @property
-    def id(self):
-        return self.__raw_data.id
+    def id(self) -> str:
+        return self.__file['id']
 
     @property
     def created_at(self):
-        return self.__raw_data.created_at
+        return self.__file['created_at']
 
     @property
-    def name(self):
-        return self.__raw_data.name
+    def is_sensitive(self) -> bool:
+        return self.__file['is_sensitive']
 
     @property
-    def type(self):
-        return self.__raw_data.type
+    def name(self) -> str:
+        return self.__file['name']
 
     @property
-    def md5(self):
-        return self.__raw_data.md5
+    def thumbnail_url(self) -> str:
+        return self.__file['thumbnail_url']
 
     @property
-    def size(self):
-        return self.__raw_data.size
+    def url(self) -> str:
+        return self.__file['url']
 
     @property
-    def is_sensitive(self):
-        return self.__raw_data.is_sensitive
+    def type(self) -> str:
+        return self.__file['type']
 
     @property
-    def blurhash(self):
-        return self.__raw_data.blurhash
+    def size(self) -> int:
+        return self.__file['size']
 
     @property
-    def properties(self):
-        return self.__raw_data.properties
+    def md5(self) -> str:
+        return self.__file['md5']
 
     @property
-    def url(self):
-        return self.__raw_data.url
+    def blurhash(self) -> str:
+        return self.__file['blurhash']
 
     @property
-    def thumbnail_url(self):
-        return self.__raw_data.thumbnail_url
-
-    @property
-    def comment(self):
-        return self.__raw_data.comment
-
-    @property
-    def folder_id(self):
-        return self.__raw_data.folder_id
-
-    @property
-    def folder(self):
-        return self.__raw_data.folder
-
-    @property
-    def user_id(self):
-        return self.__raw_data.user_id
-
-    @property
-    def user(self):
-        return self.__client._modeler.create_user_instance(
-            RawUser(self.__raw_data.user)
-        )
+    def properties(self) -> FileProperties:
+        return FileProperties(self.__file['properties'])

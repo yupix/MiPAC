@@ -2,75 +2,103 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.core.models.chat import RawChat
+from mipac.models.drive import File
+from mipac.models.lite.user import LiteUser
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
+    from mipac.types.chat import IChatGroup, IChatMessage
 
-__all__ = ['Chat']
+__all__ = ['ChatGroup', 'ChatMessage']
 
 
-class Chat:
+class ChatGroup:
+    def __init__(self, group: IChatGroup, *, client: ClientActions):
+        self.__group: IChatGroup = group
+        self.__client: ClientActions = client
+
+    @property
+    def id(self) -> str:
+        """グループのID"""
+        return self.__group['id']
+
+    @property
+    def created_at(self) -> str:
+        """グループの作成日時"""
+        return self.__group['created_at']
+
+    @property
+    def name(self) -> str:
+        """グループ名"""
+        return self.__group['name']
+
+    @property
+    def owner_id(self) -> str:
+        """グループのオーナーのID"""
+        return self.__group['owner_id']
+
+    @property
+    def user_ids(self) -> list[str]:
+        return self.__group['user_ids']
+
+
+class ChatMessage:
     """
     チャットオブジェクト
     """
 
-    def __init__(self, raw_data: RawChat, *, client: ClientActions):
-        self.__raw_data: RawChat = raw_data
+    def __init__(self, chat: IChatMessage, *, client: ClientActions):
+        self.__chat: IChatMessage = chat
         self.__client: ClientActions = client
 
     @property
-    def id(self):
-        return self.__raw_data.id
+    def id(self) -> str:
+        return self.__chat['id']
 
     @property
-    def created_at(self):
-        return self.__raw_data.created_at
+    def created_at(self) -> str:
+        return self.__chat['created_at']
 
     @property
-    def content(self):
-        return self.__raw_data.content
+    def file(self) -> File:
+        return File(self.__chat['file'], client=self.__client)
 
     @property
-    def user_id(self):
-        return self.__raw_data.user_id
+    def text(self) -> str | None:
+        return self.__chat['text']
 
     @property
-    def author(self):
-        return self.__raw_data.author
+    def user_id(self) -> str:
+        return self.__chat['user_id']
 
     @property
-    def recipient_id(self):
-        return self.__raw_data.recipient_id
+    def user(self) -> LiteUser:
+        return LiteUser(self.__chat['user'])
 
     @property
-    def recipient(self):
-        return self.__raw_data.recipient
+    def recipient_id(self) -> str:
+        return self.__chat['recipient_id']
 
     @property
-    def group_id(self):
-        return self.__raw_data.group_id
+    def recipient(self) -> str:
+        return self.__chat['recipient']
 
     @property
-    def file_id(self):
-        return self.__raw_data.file_id
+    def group_id(self) -> str:
+        return self.__chat['group_id']
 
     @property
-    def is_read(self):
-        return self.__raw_data.is_read
+    def file_id(self) -> str:
+        return self.__chat['file_id']
 
     @property
-    def reads(self):
-        return self.__raw_data.reads
+    def is_read(self) -> bool:
+        return bool(self.__chat['is_read'])
 
-    async def delete(self) -> bool:
-        """
-        チャットを削除します（チャットの作者である必要があります）
+    @property
+    def reads(self) -> list[str]:
+        return self.__chat['reads']
 
-        Returns
-        -------
-        bool:
-            成功したか否か
-        """
-        res = await self.__client.chat.delete(message_id=self.id)
-        return bool(res)
+    @property
+    def group(self) -> ChatGroup:
+        return ChatGroup(self.__chat['group'], client=self.__client)

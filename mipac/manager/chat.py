@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac.core.models.chat import RawChat
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route
+from mipac.models.chat import ChatMessage
 from mipac.util import check_multi_arg
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
-    from mipac.models.chat import Chat
+    from mipac.types.chat import IChatMessage
 
 __all__ = ('ChatManager',)
 
@@ -40,7 +40,7 @@ class ChatManager:
 
         Returns
         -------
-        list[Chat]
+        list[ChatMessage]
             List of chat history
         """
 
@@ -48,10 +48,10 @@ class ChatManager:
             raise ParameterError('limit must be greater than 100')
 
         args = {'limit': limit, 'group': group}
-        data = await self.__session.request(
+        data: list[IChatMessage] = await self.__session.request(
             Route('POST', '/api/messaging/history'), json=args, auth=True
         )
-        return [self.__client._modeler.new_chat(RawChat(d)) for d in data]
+        return [ChatMessage(d, client=self.__client) for d in data]
 
     async def send(
         self,
@@ -60,7 +60,7 @@ class ChatManager:
         file_id: Optional[str] = None,
         user_id: Optional[str] = None,
         group_id: Optional[str] = None,
-    ) -> Chat:
+    ) -> ChatMessage:
         """
         Send chat.
 
@@ -88,7 +88,7 @@ class ChatManager:
             auth=True,
             lower=True,
         )
-        return self.__client._modeler.new_chat(RawChat(res))
+        return ChatMessage(res, client=self.__client)
 
     async def delete(self, message_id: Optional[str] = None) -> bool:
         """

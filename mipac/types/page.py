@@ -2,8 +2,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Optional, TypedDict
 
+from mipac.types.drive import IDriveFile
+from mipac.types.user import IUserLite
+
 if TYPE_CHECKING:
-    from mipac.types.drive import PropertiesPayload
+    from mipac.types.drive import IFileProperties
     from mipac.types.user import UserPayload
 
 __all__ = (
@@ -13,7 +16,33 @@ __all__ = (
     'EyeCatchingImagePayload',
     'AttachedFilePayload',
     'PagePayload',
+    'IPage',
 )
+
+
+class IPageRequired(TypedDict):
+    id: str
+    createdAt: str
+    updatedAt: str
+    userId: str
+    user: IUserLite
+    content: list[dict[str, Any]]
+    variables: list[dict[str, Any]]
+    title: str
+    name: str
+    hideTitleWhenPinned: bool
+    alignCenter: bool
+    font: str
+    script: str
+    attachedFiles: Any
+    likedCount: int
+
+
+class IPage(IPageRequired, total=False):
+    is_liked: bool
+    eyeCatchingImageId: str
+    eyeCatchingImage: IDriveFile
+    summary: str
 
 
 class PageContentPayload(TypedDict):
@@ -57,7 +86,7 @@ class PageFilePayload(TypedDict):
     size: int
     is_sensitive: bool
     blurhash: str
-    properties: PropertiesPayload
+    properties: IFileProperties
     url: str
     thumbnail_url: str
     comment: Optional[str]

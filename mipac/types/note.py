@@ -1,18 +1,9 @@
-from typing import Any, List, Optional, TypedDict
+from typing import Any, Literal, Optional, TypedDict
 
-from .drive import FilePayload
-from .emoji import EmojiPayload
-from .user import UserPayload
-
-__all__ = (
-    'INoteRequired',
-    'INote',
-    'GeoPayload',
-    'IReaction',
-    'PollPayload',
-    'IRenote',
-    'IReactionRequired',
-)
+from .drive import IDriveFile
+from .emoji import ICustomEmojiLite
+from .poll import IPoll
+from .user import IUserLite
 
 
 class GeoPayload(TypedDict):
@@ -28,49 +19,22 @@ class GeoPayload(TypedDict):
     speed: Optional[int]
 
 
-class PollPayload(TypedDict, total=False):
-    """
-    アンケート情報
-    """
-
-    multiple: bool
-    expires_at: int
-    choices: list[str]
-    expired_after: int
-
-
-class IRenoteRequired(TypedDict):
-    id: str
-    created_at: str
-    user_id: str
-    user: UserPayload
-    text: str
-    cw: str
-    visibility: str
-    renote_count: int
-    reactions: dict[str, Any]
-
-
-class IRenote(IRenoteRequired, total=False):
-    replies_count: int
-    emojis: List
-    file_ids: List
-    files: List
-    reply_id: str
-    renote_id: str
-    uri: str
-    poll: PollPayload
-    tags: list[str]
-    channel_id: str
-
-
 class INoteRequired(TypedDict):
     id: str
     created_at: str
+    text: str | None
+    cw: str | None
+    user: IUserLite
     user_id: str
-    user: UserPayload
-    emojis: list[EmojiPayload]
-    reactions: dict[str, Any]
+    reply_id: str
+    renote_id: str
+    files: list[IDriveFile]
+    file_ids: list[str]
+    visibility: Literal['public', 'home', 'followers', 'specified']
+    reactions: dict[str, int]
+    renote_count: int
+    replies_count: int
+    emojis: list[ICustomEmojiLite]
 
 
 class INote(INoteRequired, total=False):
@@ -78,39 +42,19 @@ class INote(INoteRequired, total=False):
     note object
     """
 
-    visibility: str
-    renote_count: int
-    replies_count: int
-    file_ids: list[str]
-    files: list[FilePayload]
-    reply_id: str
-    renote_id: str
-    poll: PollPayload
+    renote: 'INote'
+    reply: 'INote'
     visible_user_ids: list[str]
-    via_mobile: bool
     local_only: bool
-    extract_mentions: bool
-    extract_hashtags: bool
-    extract_emojis: bool
-    preview: bool
-    media_ids: list[str]
-    renote: IRenote
-    field: dict
-    tags: list[str]
-    channel_id: str
-    text: str
-    cw: str
-    geo: GeoPayload
+    my_reaction: str
+    uri: str
+    url: str
+    is_hidden: bool
+    poll: IPoll
 
 
-class IReactionRequired(TypedDict):
-    reaction: str
-
-
-class IReaction(IReactionRequired, total=False):
-    created_at: str
-    type: str
-    is_read: bool
-    user: UserPayload
-    note: INote
+class INoteReaction(TypedDict):
     id: str
+    created_at: str
+    user: IUserLite
+    type: str

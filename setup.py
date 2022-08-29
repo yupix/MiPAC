@@ -25,6 +25,7 @@ packages = [
     'mipac.manager.admin',
     'mipac.models',
     'mipac.types',
+    'mipac.models.lite'
 ]
 
 setup(

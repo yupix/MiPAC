@@ -4,8 +4,6 @@ from typing import TYPE_CHECKING, Optional
 
 from aiocache import Cache, cached
 
-from mipac.core.models.note import RawNote
-from mipac.core.models.user import RawUser
 from mipac.exception import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.manager.note import NoteManager
@@ -19,7 +17,7 @@ from mipac.util import (
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
     from mipac.models.note import Note
-    from mipac.models.user import User
+    from mipac.models.user import UserDetailed
 
 __all__ = ['UserActions']
 
@@ -29,20 +27,20 @@ class UserActions:
         self,
         session: HTTPClient,
         client: ClientActions,
-        user: Optional[User] = None,
+        user: Optional[UserDetailed] = None,
     ):
         self.__session: HTTPClient = session
-        self.__user: Optional[User] = user
+        self.__user: Optional[UserDetailed] = user
         self.__client: ClientActions = client
         self.note: NoteManager = NoteManager(session=session, client=client)
 
-    async def get_me(self) -> User:
+    async def get_me(self) -> UserDetailed:
         """
         ログインしているユーザーの情報を取得します
         """
 
         res = await self.__session.request(Route('POST', '/api/i'), auth=True)
-        return self.__client._modeler.create_user_instance(RawUser(res))
+        return UserDetailed(res, client=self.__client)  # TODO: 自分用のクラスに変更する
 
     @cached(ttl=10, namespace='get_user', key_builder=key_builder)
     async def get(
@@ -50,7 +48,7 @@ class UserActions:
         user_id: Optional[str] = None,
         username: Optional[str] = None,
         host: Optional[str] = None,
-    ) -> User:
+    ) -> UserDetailed:
         """
         ユーザーのプロフィールを取得します。一度のみサーバーにアクセスしキャッシュをその後は使います。
         fetch_userを使った場合はキャッシュが廃棄され再度サーバーにアクセスします。
@@ -66,7 +64,7 @@ class UserActions:
 
         Returns
         -------
-        User
+        UserDetailed
             ユーザー情報
         """
 
@@ -76,7 +74,7 @@ class UserActions:
         data = await self.__session.request(
             Route('POST', '/api/users/show'), json=field, auth=True, lower=True
         )
-        return self.__client._modeler.create_user_instance(RawUser(data))
+        return UserDetailed(data, client=self.__client)
 
     @get_cache_key
     async def fetch(
@@ -85,7 +83,7 @@ class UserActions:
         username: Optional[str] = None,
         host: Optional[str] = None,
         **kwargs,
-    ) -> User:
+    ) -> UserDetailed:
         """
         サーバーにアクセスし、ユーザーのプロフィールを取得します。基本的には get_userをお使いください。
 
@@ -100,7 +98,7 @@ class UserActions:
 
         Returns
         -------
-        User
+        UserDetailed
             ユーザー情報
         """
         if not check_multi_arg(user_id, username):
@@ -114,7 +112,7 @@ class UserActions:
         )
         old_cache = Cache(namespace='get_user')
         await old_cache.delete(kwargs['cache_key'].format('get_user'))
-        return self.__client._modeler.create_user_instance(RawUser(data))
+        return UserDetailed(data, client=self.__client)
 
     async def get_notes(
         self,
@@ -151,9 +149,9 @@ class UserActions:
         res = await self.__session.request(
             Route('POST', '/api/users/notes'), json=data, auth=True, lower=True
         )
-        return [self.__client._modeler.new_note(RawNote(i)) for i in res]
+        return [Note(i, client=self.__client) for i in res]
 
-    def get_mention(self, user: Optional[User] = None) -> str:
+    def get_mention(self, user: Optional[UserDetailed] = None) -> str:
         """
         Get mention name of user.
 
