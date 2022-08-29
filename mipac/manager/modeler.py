@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import Any, TYPE_CHECKING
 
-from mipac.core.models.chat import RawChat
-from mipac.models.chat import Chat
 from mipac.models.user import FollowRequest, UserDetailed
 
 if TYPE_CHECKING:
@@ -18,11 +16,6 @@ class Modeler:
 
     def __init__(self, client: ClientActions) -> None:
         self._client = client
-
-
-
-    def new_chat(self, raw_chat: RawChat) -> Chat:
-        return Chat(raw_chat, client=self._client)
 
     def create_user_instance(self, raw_user: RawUser) -> UserDetailed:
         return UserDetailed(raw_user, client=self._client)

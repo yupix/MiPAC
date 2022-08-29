@@ -4,7 +4,6 @@ from mipac.core.models.chart import (
     RawDriveLocalChart,
     RawDriveRemoteChart,
 )
-from mipac.core.models.chat import RawChat
 from mipac.core.models.poll import RawPoll, RawPollChoices
 from mipac.core.models.user import (
     RawChannel,
@@ -20,5 +19,4 @@ __all__ = (
     'RawDriveChart',
     'RawPoll',
     'RawPollChoices',
-    'RawChat',
 )

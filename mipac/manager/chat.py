@@ -1,26 +1,25 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import Optional, TYPE_CHECKING
 
-from mipac.core.models.chat import RawChat
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.util import check_multi_arg
+from mipac.models.chat import ChatMessage
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
-    from mipac.models.chat import Chat
 
 __all__ = ('ChatManager',)
 
 
 class ChatManager:
     def __init__(
-        self,
-        session: HTTPClient,
-        client: ClientActions,
-        user_id: Optional[str] = None,
-        message_id: Optional[str] = None,
+            self,
+            session: HTTPClient,
+            client: ClientActions,
+            user_id: Optional[str] = None,
+            message_id: Optional[str] = None,
     ):
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
@@ -40,7 +39,7 @@ class ChatManager:
 
         Returns
         -------
-        list[Chat]
+        list[ChatMessage]
             List of chat history
         """
 
@@ -51,16 +50,16 @@ class ChatManager:
         data = await self.__session.request(
             Route('POST', '/api/messaging/history'), json=args, auth=True
         )
-        return [self.__client._modeler.new_chat(RawChat(d)) for d in data]
+        return [ChatMessage(d, client=self.__client) for d in data]
 
     async def send(
-        self,
-        text: Optional[str] = None,
-        *,
-        file_id: Optional[str] = None,
-        user_id: Optional[str] = None,
-        group_id: Optional[str] = None,
-    ) -> Chat:
+            self,
+            text: Optional[str] = None,
+            *,
+            file_id: Optional[str] = None,
+            user_id: Optional[str] = None,
+            group_id: Optional[str] = None,
+    ) -> ChatMessage:
         """
         Send chat.
 
@@ -88,7 +87,7 @@ class ChatManager:
             auth=True,
             lower=True,
         )
-        return self.__client._modeler.new_chat(RawChat(res))
+        return ChatMessage(res, client=self.__client)
 
     async def delete(self, message_id: Optional[str] = None) -> bool:
         """

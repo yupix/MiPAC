@@ -1,22 +1,33 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, TypedDict
+from typing import List, TYPE_CHECKING, TypedDict
 
 if TYPE_CHECKING:
-    from mipac.types.user import UserPayload
+    from mipac.types.user import IUserLite
+    from mipac.types import IDriveFile
 
-__all__ = ('ChatPayload',)
+__all__ = ('IChatGroup', 'IChatMessage')
 
 
-class ChatPayload(TypedDict):
+class IChatGroup(TypedDict):
     id: str
     created_at: str
-    text: str
+    name: str
+    owner_id: str
+    user_ids: list[str]
+
+
+class IChatMessage(TypedDict):
+    id: str
+    created_at: str
+    file: IDriveFile
+    text: str | None
     user_id: str
-    user: UserPayload
+    user: IUserLite
     recipient_id: str
     recipient: str
     group_id: str
     file_id: str
-    is_read: bool
+    is_read: list[str]
     reads: List
+    group: IChatGroup | None
