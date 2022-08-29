@@ -13,6 +13,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - added `RawChannel` class
 - added `RawPinnedNote` class
 - added `IReactionRequired` class
+- added `IAds` class
+- added `LiteInstance` class
+- added `IReactionNf` class
+- added `INote` class
+- added `ICustomEmoji` class
+- added `CustomEmoji` class
+- added `InstanceMeta` class
+- added `LiteInstanceMeta`
+- added `IInstanceMetaLiteRequired` class
+- added `IInstanceMetaLite` class
+- added `IInstanceMeta` class
 
 ### Changed
 
