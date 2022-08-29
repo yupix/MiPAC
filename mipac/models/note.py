@@ -1,26 +1,21 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Literal, Optional, Union
+from typing import TYPE_CHECKING, Literal, Optional, Union
 from typing_extensions import Self
 
-from mipac.core.models.note import RawNote, RawReaction, RawRenote
+from mipac.core.models.note import RawReaction, RawRenote
 from mipac.core.models.poll import RawPoll
-from mipac.core.models.reaction import RawNoteReaction
-from mipac.core.models.user import RawUser
 from mipac.exception import NotExistRequiredData
 from mipac.models.lite.user import UserLite
 from mipac.types.drive import IDriveFile
 from mipac.types.emoji import ICustomEmojiLite
-from mipac.types.note import INote, IPoll
+from mipac.types.note import INote, INoteReaction, IPoll
 
 if TYPE_CHECKING:
     from mipac.actions.note import NoteActions
     from mipac.manager.client import ClientActions
-    from mipac.manager.file import MiFile
     from mipac.manager.reaction import ReactionManager
-    from mipac.models.drive import File
-    from mipac.models.emoji import Emoji
     from mipac.models.user import User
 
 __all__ = (
@@ -184,30 +179,6 @@ class Renote:
         return await self.__client.note.action.delete(self.__raw_data.id)
 
 
-class NoteReaction:
-    def __init__(self, raw_data: RawNoteReaction, *, client: ClientActions):
-        self.__raw_data = raw_data
-        self.__client: ClientActions = client
-
-    @property
-    def id(self) -> str:
-        return self.__raw_data.id
-
-    @property
-    def created_at(self) -> datetime:
-        return self.__raw_data.created_at
-
-    @property
-    def user(self) -> User:
-        return self.__client._modeler.create_user_instance(
-            RawUser(self.__raw_data.user)
-        )
-
-    @property
-    def reaction(self) -> str:
-        return self.__raw_data.reaction
-
-
 class Reaction:
     def __init__(self, raw_data: RawReaction, *, client: ClientActions):
         self.__raw_data: RawReaction = raw_data
@@ -254,13 +225,57 @@ class Reaction:
         return self.__client.reaction
 
 
+class NoteReaction:
+    """
+    Attributes
+    ----------
+    id : Optional[str], default=None
+    created_at : Optional[datetime], default=None
+    type : Optional[str], default=None
+    user : Optional[RawUser], default=None
+    """
+
+    __slots__ = (
+        'id',
+        'created_at',
+        'user',
+        'type',
+        '__reaction',
+    )
+
+    def __init__(self, reaction: INoteReaction):
+        self.__reaction: INoteReaction = reaction
+
+    @property
+    def id(self) -> str | None:
+        return self.__reaction['id']
+
+    @property
+    def created_at(self) -> datetime | None:
+        return (
+            datetime.strptime(
+                self.__reaction['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
+            )
+            if 'created_at' in self.__reaction
+            else None
+        )
+
+    @property
+    def type(self) -> str | None:
+        return self.__reaction['type']
+
+    @property
+    def user(self) -> UserLite:
+        return UserLite(self.__reaction['user'])
+
+
 class Note:
     """
     Noteモデル
 
     Parameters
     ----------
-    raw_data: RawNote
+    note: INote
         アクションを持たないNoteクラス
     client: ClientActions
     """
