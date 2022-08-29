@@ -78,7 +78,7 @@ class HTTPClient:
                 kwargs[key] = {}
             kwargs[key]['i'] = self.__token
 
-        replace_list  = kwargs.pop('replace_list', {}) 
+        replace_list = kwargs.pop('replace_list', {})
 
         for i in ('json', 'data'):
             if kwargs.get(i):
@@ -90,7 +90,10 @@ class HTTPClient:
             data = await json_or_text(res)
             if is_lower:
                 if isinstance(data, list):
-                    data = [upper_to_lower(i, replace_list=replace_list) for i in data]
+                    data = [
+                        upper_to_lower(i, replace_list=replace_list)
+                        for i in data
+                    ]
             if 300 > res.status >= 200:
                 return data  # type: ignore
             if 511 > res.status >= 300:

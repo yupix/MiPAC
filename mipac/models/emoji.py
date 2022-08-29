@@ -7,7 +7,7 @@ from mipac.types.emoji import ICustomEmoji
 if TYPE_CHECKING:
     from mipac.client import ClientActions
 
-__all__ = ('CustomEmoji', )
+__all__ = ('CustomEmoji',)
 
 
 class CustomEmoji:
@@ -28,12 +28,19 @@ class CustomEmoji:
         絵文字のURL
     """
 
-    __slots__ = ('id', 'aliases', 'name', 'category', 'url', '__emoji', '__client')
+    __slots__ = (
+        'id',
+        'aliases',
+        'name',
+        'category',
+        'url',
+        '__emoji',
+        '__client',
+    )
 
     def __init__(self, emoji: ICustomEmoji, *, client: ClientActions):
         self.__emoji: ICustomEmoji = emoji
         self.__client: ClientActions = client
-    
 
     @property
     def id(self) -> str:

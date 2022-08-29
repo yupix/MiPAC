@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
+
 from mipac.models.emoji import CustomEmoji
 from mipac.types.ads import IAds
 from mipac.types.instance import IInstanceLite, IInstanceMetaLite
@@ -90,7 +91,7 @@ class LiteInstanceMeta:
     @property
     def icon_url(self) -> str:
         return self.__instance['icon_url']
-    
+
     @property
     def maintainer_name(self) -> str | None:
         return self.__instance.get('maintainer_name')
@@ -120,7 +121,7 @@ class LiteInstanceMeta:
         return self.__instance.get('tos_text_url')
 
     @property
-    def announcements(self) -> dict[str, Any] | None: # TODO: 型確認
+    def announcements(self) -> dict[str, Any] | None:  # TODO: 型確認
         return self.__instance.get('announcements')
 
     @property
@@ -130,14 +131,17 @@ class LiteInstanceMeta:
     @property
     def enable_recaptcha(self) -> bool:
         return self.__instance.get('enable_recaptcha', False)
+
     @property
     def recaptcha_siteKey(self) -> str | None:
         return self.__instance.get('recaptcha_siteKey')
+
     @property
     def sw_publickey(self) -> str | None:
         return self.__instance.get('sw_publickey')
+
     @property
-    def ads(self) -> list[IAds] | None: # TODO: モデルに
+    def ads(self) -> list[IAds] | None:  # TODO: モデルに
         return self.__instance.get('ads')
 
 
