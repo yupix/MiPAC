@@ -24,6 +24,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - added `IInstanceMetaLiteRequired` class
 - added `IInstanceMetaLite` class
 - added `IInstanceMeta` class
+- added `IPage` class
+- added `IPageRequired` class
+- added `IUserDetailedField` class
+- added `IUserDetailedRequired` class
+- added `IUserDetailed` class
+- added `ChatGroup` class
+- added `ChatMessage` class
+- added `IChatGroup` class
 
 ### Changed
 
@@ -37,9 +45,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-- `RenotePayload`, `Renote`, `IRenote` クラスを削除しました。今後は `INote`, `Note` クラスをご利用ください
-- `RawEmoji`, `Emoji` クラスを削除しました。 今後は `ICustomEmoji`, `CustomEmoji` クラスをご利用ください
-- `IReactionRequired`, `ReactionPayload`を削除しました。 今後は `IReactionNf` をご利用ください
+- `Renote` クラスを削除しました。今後は `Note` クラスをご利用ください
+- `IRenote`, `RenotePayload` クラスを削除しました。今後は `INote` クラスをご利用ください
+- `RawEmoji`, `Emoji` クラスを削除しました。 今後は `CustomEmoji` クラスをご利用ください
+- `EmojiPayload` クラスを削除しました。今後は  `ICustomEmoji` クラスをご利用ください
+- `IReactionRequired`, `ReactionPayload`を削除しました。 今後は `IReactionNf` クラスをご利用ください
+- `RawUser`, `User` クラスを削除しました。今後は `UserDetailed`, `UserLite` クラスをご利用ください
+- `RawInstance` クラスを削除しました。今後は `LiteInstance` クラスをご利用ください
+- `RawProperties` クラスを削除しました。今後は `FileProperties` クラスをご利用ください
+- `RawFolder` クラスを削除しました。今後は `Folder` クラスをご利用ください
+- `RawFile` クラスを削除しました。 今後は `File` クラスをご利用ください
+- `RawChat`, `Chat` クラスを削除しました。 今後は `ChatMessage` クラスをご利用ください
+- `ChatPayload` クラスを削除しました。 今後は `IChatMessage` クラスをご利用ください
 
 ## [0.1.0] - 2022-05-28
 
@@ -58,7 +75,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `Note` クラスの`created_at` 属性の type hint を `Optional[str]` => `Optional[datetime]` に変更
 - `Note` クラスの `cw` 属性の取得方法が get ではなかったので修正
 - **BREAKING CHANGE** `FileManager`, `FolderManager`, `DriveManager`の役割が変わりました
-  - 例だと `FolderManager.get_files()` だったコードが `FolderManager.action.get_files()` と行ったふうに Actions クラスを経由するようになりました
+    - 例だと `FolderManager.get_files()` だったコードが `FolderManager.action.get_files()` と行ったふうに Actions クラスを経由するようになりました
 - 開発者向け情報 `Folder` クラスの引数に `client` を追加しました
 
 ### Fixed
