@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from typing import Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.util import check_multi_arg
 from mipac.models.chat import ChatMessage
+from mipac.util import check_multi_arg
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
@@ -15,11 +15,11 @@ __all__ = ('ChatManager',)
 
 class ChatManager:
     def __init__(
-            self,
-            session: HTTPClient,
-            client: ClientActions,
-            user_id: Optional[str] = None,
-            message_id: Optional[str] = None,
+        self,
+        session: HTTPClient,
+        client: ClientActions,
+        user_id: Optional[str] = None,
+        message_id: Optional[str] = None,
     ):
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
@@ -53,12 +53,12 @@ class ChatManager:
         return [ChatMessage(d, client=self.__client) for d in data]
 
     async def send(
-            self,
-            text: Optional[str] = None,
-            *,
-            file_id: Optional[str] = None,
-            user_id: Optional[str] = None,
-            group_id: Optional[str] = None,
+        self,
+        text: Optional[str] = None,
+        *,
+        file_id: Optional[str] = None,
+        user_id: Optional[str] = None,
+        group_id: Optional[str] = None,
     ) -> ChatMessage:
         """
         Send chat.

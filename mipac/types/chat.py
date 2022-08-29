@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from typing import List, TYPE_CHECKING, TypedDict
+from typing import TYPE_CHECKING, List, TypedDict
 
 if TYPE_CHECKING:
-    from mipac.types.user import IUserLite
     from mipac.types import IDriveFile
+    from mipac.types.user import IUserLite
 
 __all__ = ('IChatGroup', 'IChatMessage')
 

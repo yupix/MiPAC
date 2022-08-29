@@ -29,14 +29,6 @@ from mipac.types.page import (
     VariablePayload,
 )
 from mipac.types.reaction import NoteReactionPayload
-from mipac.types.user import (
-    FieldContentPayload,
-    IChannel,
-    IPinnedNote,
-    OptionalUser,
-    PinnedPagePayload,
-    UserPayload,
-)
 
 __all__ = (
     'ActiveUsersChartPayload',
@@ -64,10 +56,4 @@ __all__ = (
     'AttachedFilePayload',
     'PagePayload',
     'NoteReactionPayload',
-    'IChannel',
-    'FieldContentPayload',
-    'UserPayload',
-    'PinnedPagePayload',
-    'IPinnedNote',
-    'OptionalUser',
 )

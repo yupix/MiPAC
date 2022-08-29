@@ -1,24 +1,19 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, List, Literal, Optional, TYPE_CHECKING
+from typing import Literal, TYPE_CHECKING
 
-from mipac.models.note import Note
-from mipac.core.models.user import RawChannel, RawPinnedNote
-from mipac.models.emoji import CustomEmoji
 from mipac.models.lite.user import UserLite
+from mipac.models.note import Note
 from mipac.types.page import IPage
 from mipac.types.user import (
-    FieldContentPayload,
     IUserDetailed,
     IUserDetailedField,
-    PinnedPagePayload,
 )
 
 if TYPE_CHECKING:
     from mipac.actions.user import UserActions
     from mipac.manager.client import ClientActions
-    from mipac.models.drive import File
 
 __all__ = ['UserDetailed', 'FollowRequest', 'Followee']
 
@@ -50,190 +45,6 @@ class FollowRequest:
         self.is_admin: bool = bool(data.get('is_admin'))
         self.is_bot: bool = bool(data.get('is_bot'))
         self.is_cat: bool = bool(data.get('is_cat'))
-
-
-class Channel:
-    def __init__(self, raw_data: RawChannel, *, client: ClientActions):
-        self.__client: ClientActions = client
-        self.__raw_data: RawChannel = raw_data
-
-    @property
-    def id(self) -> str:
-        return self.__raw_data.id
-
-    @property
-    def created_at(self) -> Optional[datetime]:
-        return self.__raw_data.created_at
-
-    @property
-    def last_noted_at(self) -> Optional[str]:
-        return self.__raw_data.last_noted_at
-
-    @property
-    def name(self) -> Optional[str]:
-        return self.__raw_data.name
-
-    @property
-    def description(self) -> Optional[str]:
-        return self.__raw_data.description
-
-    @property
-    def banner_url(self) -> Optional[str]:
-        return self.__raw_data.banner_url
-
-    @property
-    def notes_count(self) -> Optional[int]:
-        return self.__raw_data.notes_count
-
-    @property
-    def users_count(self) -> Optional[int]:
-        return self.__raw_data.users_count
-
-    @property
-    def is_following(self) -> Optional[bool]:
-        return self.__raw_data.is_following
-
-    @property
-    def user_id(self) -> Optional[str]:
-        return self.__raw_data.user_id
-
-
-class PinnedNote:
-    def __init__(self, raw_data: RawPinnedNote, *, client: ClientActions):
-        self._client: ClientActions = client
-        self._raw_data: RawPinnedNote = raw_data
-
-    @property
-    def id(self) -> Optional[str]:
-        return self._raw_data.id
-
-    @property
-    def created_at(self) -> Optional[datetime]:
-        return self._raw_data.created_at
-
-    @property
-    def text(self) -> Optional[str]:
-        return self._raw_data.text
-
-    @property
-    def cw(self) -> Optional[str]:
-        return self._raw_data.cw
-
-    @property
-    def user_id(self) -> Optional[str]:
-        return self._raw_data.user_id
-
-    @property
-    def user(self) -> Optional[UserDetailed]:
-        return UserDetailed(self._raw_data.user, client=self._client)
-
-    @property
-    def reply_id(self) -> Optional[str]:
-        return self._raw_data.reply_id
-
-    @property
-    def reply(self) -> Optional[dict[str, Any]]:
-        return self._raw_data.reply
-
-    @property
-    def renote(self) -> Optional[dict[str, Any]]:
-        return self._raw_data.renote
-
-    @property
-    def via_mobile(self) -> bool:
-        return self._raw_data.via_mobile
-
-    @property
-    def is_hidden(self) -> bool:
-        return self._raw_data.is_hidden
-
-    @property
-    def visibility(self) -> bool:
-        return self._raw_data.visibility
-
-    @property
-    def mentions(self) -> Optional[list[str]]:
-        return self._raw_data.mentions
-
-    @property
-    def visible_user_ids(self) -> Optional[list[str]]:
-        return self._raw_data.visible_user_ids
-
-    @property
-    def file_ids(self) -> Optional[list[str]]:
-        return self._raw_data.file_ids
-
-    @property
-    def files(self) -> list[File]:
-        return [File(i, client=self._client) for i in self._raw_data.files]
-
-    @property
-    def tags(self) -> Optional[list[str]]:
-        return self._raw_data.tags
-
-    @property
-    def poll(self) -> Optional[dict[str, Any]]:
-        return self._raw_data.poll
-
-    @property
-    def channel(self) -> Optional[Channel]:
-        return Channel(self._raw_data.channel, client=self._client)
-
-    @property
-    def local_only(self) -> bool:
-        return self._raw_data.local_only
-
-    @property
-    def emojis(self) -> list[CustomEmoji] | None:
-        return [
-            CustomEmoji(i, client=self._client) for i in self._raw_data.emojis
-        ]
-
-    @property
-    def reactions(self) -> Optional[dict[str, Any]]:
-        return self._raw_data.reactions
-
-    @property
-    def renote_count(self) -> Optional[int]:
-        return self._raw_data.renote_count
-
-    @property
-    def replies_count(self) -> Optional[int]:
-        return self._raw_data.replies_count
-
-    @property
-    def uri(self) -> Optional[str]:
-        return self._raw_data.uri
-
-    @property
-    def url(self) -> Optional[str]:
-        return self._raw_data.url
-
-    @property
-    def my_reaction(self) -> Optional[dict[str, Any]]:
-        return self._raw_data.my_reaction
-
-
-class PinnedPage:
-    def __init__(self, data: PinnedPagePayload):
-        self.id: Optional[str] = data.get('id')
-        self.created_at: Optional[datetime] = datetime.strptime(
-            data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
-        ) if data.get('created_at') else None
-        self.updated_at: Optional[str] = data.get('updated_at', None)
-        self.title: Optional[str] = data.get('title')
-        self.name: Optional[str] = data.get('name')
-        self.summary: Optional[str] = data.get('summary')
-        self.content: Optional[List] = data.get('content')
-        self.variables: Optional[List] = data.get('variables')
-        self.user_id: Optional[str] = data.get('user_id')
-        self.author: Optional[dict[str, Any]] = data.get('author')
-
-
-class FieldContent:
-    def __init__(self, data: FieldContentPayload):
-        self.name: str = data['name']
-        self.value: str = data['value']
 
 
 class UserDetailed(UserLite):

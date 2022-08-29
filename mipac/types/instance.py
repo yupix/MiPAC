@@ -15,7 +15,7 @@ __all__ = (
     'OptionalInstance',
     'OptionalMeta',
     'IInstanceLite',
-    'IInstanceMeta'
+    'IInstanceMeta',
 )
 
 

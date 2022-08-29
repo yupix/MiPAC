@@ -16,6 +16,7 @@ __all__ = (
     'EyeCatchingImagePayload',
     'AttachedFilePayload',
     'PagePayload',
+    'IPage',
 )
 
 
