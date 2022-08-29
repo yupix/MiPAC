@@ -1,10 +1,11 @@
 from __future__ import annotations
+import string
 
-from typing import Any, List, Optional, TypedDict
+from typing import Any, List, Literal, Optional, TypedDict
 
-from .drive import FilePayload
-from .emoji import EmojiPayload
-from .instance import InstancePayload
+from .drive import IDriveFile
+from .emoji import EmojiPayload, ICustomEmojiLite
+from .instance import IInstanceLite, InstancePayload
 
 __all__ = (
     'IChannel',
@@ -14,6 +15,18 @@ __all__ = (
     'IPinnedNote',
     'OptionalUser',
 )
+
+
+class IUserLite(TypedDict):
+    id: str
+    username: str
+    host: str | None
+    name: str
+    online_status: Literal['online', 'active', 'offline', 'unknown']
+    avatar_url: str
+    avatar_blurhash: str
+    emojis: list[ICustomEmojiLite]
+    instance: IInstanceLite
 
 
 class IChannel(TypedDict, total=False):
@@ -46,7 +59,7 @@ class IPinnedNote(TypedDict, total=False):
     mentions: list[str]
     visible_user_ids: list[str]
     file_ids: list[str]
-    files: list[FilePayload]
+    files: list[IDriveFile]
     tags: list[str]
     poll: dict[str, Any]
     channel_id: str
