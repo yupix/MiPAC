@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac.core.models.emoji import RawEmoji
 from mipac.core.models.instance import RawInstance
-from mipac.models.emoji import Emoji
+from mipac.models.emoji import CustomEmoji
 from mipac.types.instance import MetaPayload
 
 if TYPE_CHECKING:
@@ -49,7 +48,7 @@ class InstanceMeta:
         self.mascot_image_url: str = data['mascot_image_url']
         self.error_image: str = data['error_image_url']
         self.max_note_text_length: int = data['max_note_text_length']
-        self.emojis: list[Emoji] = [Emoji(RawEmoji(i)) for i in data['emojis']]
+        self.emojis: list[CustomEmoji] = [CustomEmoji(i) for i in data['emojis']]
         self.ads: list = data['ads']
         self.enable_email: bool = bool(data['enable_email'])
         self.enable_twitter_integration = bool(

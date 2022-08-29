@@ -4,13 +4,13 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Any, List, Optional, Union
 
 from mipac.core.models.user import RawChannel, RawPinnedNote, RawUser
+from mipac.models.emoji import CustomEmoji
 from mipac.types.user import FieldContentPayload, PinnedPagePayload
 
 if TYPE_CHECKING:
     from mipac.actions.user import UserActions
     from mipac.manager.client import ClientActions
     from mipac.models.drive import File
-    from mipac.models.emoji import Emoji
     from mipac.models.instance import Instance
 
 __all__ = ['User', 'FollowRequest', 'Followee']
@@ -178,9 +178,9 @@ class PinnedNote:
         return self._raw_data.local_only
 
     @property
-    def emojis(self) -> Optional[list[Emoji]]:
+    def emojis(self) -> list[CustomEmoji] | None:
         return [
-            self._client._modeler.new_emoji(i) for i in self._raw_data.emojis
+            CustomEmoji(i, client=self._client) for i in self._raw_data.emojis
         ]
 
     @property

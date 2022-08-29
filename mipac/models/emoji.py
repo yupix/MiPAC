@@ -2,43 +2,55 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.core.models.emoji import RawEmoji
+from mipac.types.emoji import ICustomEmoji
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
 
-__all__ = ('Emoji',)
+__all__ = ('CustomEmoji', )
 
 
-class Emoji:
-    def __init__(self, raw_data: RawEmoji, *, client: ClientActions):
-        self._raw_data = raw_data
-        self._client = client
+class CustomEmoji:
+    """
+    Attributes
+    ----------
+    id : Optional[str]
+        絵文字のID
+    aliases : Optional[list[str]]
+        絵文字のエイリアス
+    name : Optional[str]
+        絵文字の名前
+    category : Optional[str]
+        絵文字のカテゴリ
+    host : Optional[str]
+        絵文字のホスト
+    url : Optional[str]
+        絵文字のURL
+    """
+
+    __slots__ = ('id', 'aliases', 'name', 'category', 'url', '__emoji', '__client')
+
+    def __init__(self, emoji: ICustomEmoji, *, client: ClientActions):
+        self.__emoji: ICustomEmoji = emoji
+        self.__client: ClientActions = client
+    
 
     @property
-    def id(self):
-        return self._raw_data.id
+    def id(self) -> str:
+        return self.__emoji['id']
 
     @property
-    def aliases(self):
-        return self._raw_data.aliases
+    def aliases(self) -> list[str]:
+        return self.__emoji['aliases']
 
     @property
-    def name(self):
-        return self._raw_data.name
+    def name(self) -> str:
+        return self.__emoji['name']
 
     @property
-    def category(self):
-        return self._raw_data.category
+    def category(self) -> str:
+        return self.__emoji['category']
 
     @property
-    def host(self):
-        return self._raw_data.host
-
-    @property
-    def url(self):
-        return self._raw_data.url
-
-    # @property
-    # def action(self):
-    #     return mi.framework.manager.ClientActions().emoji
+    def url(self) -> str:
+        return self.__emoji['url']
