@@ -4,6 +4,7 @@ MiPAを使用する上でちょっとした際に便利なツール一覧
 from __future__ import annotations
 
 import asyncio
+import json
 import re
 import uuid
 from datetime import datetime, timedelta
@@ -11,6 +12,13 @@ from typing import Any, Optional
 from urllib.parse import urlencode
 
 import aiohttp
+
+try:
+    import orjson # type: ignore
+except ModuleNotFoundError:
+    HAS_ORJSON = False
+else:
+    HAS_ORJSON = True
 
 __all__ = (
     'deprecated_func',
@@ -23,7 +31,14 @@ __all__ = (
     'upper_to_lower',
     'str_lower',
     'bool_to_string',
+    '_from_json'
 )
+
+
+if HAS_ORJSON:
+    _from_json = orjson.loads # type: ignore
+else:
+    _from_json = json.loads
 
 
 def deprecated_func(func):

@@ -9,8 +9,7 @@ import aiohttp
 from mipac import __version__
 from mipac.exception import APIError
 from mipac.types.endpoints import ENDPOINTS
-from mipac.util import remove_dict_empty, upper_to_lower
-
+from mipac.util import remove_dict_empty, upper_to_lower, _from_json
 
 class _MissingSentinel:
     def __eq__(self, other):
@@ -31,7 +30,7 @@ async def json_or_text(response: aiohttp.ClientResponse):
     text = await response.text(encoding='utf-8')
     try:
         if 'application/json' in response.headers['Content-Type']:
-            return json.loads(text)
+            return _from_json(text)
     except KeyError:
         pass
 
