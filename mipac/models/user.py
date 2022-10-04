@@ -164,7 +164,7 @@ class UserDetailed(LiteUser):
         return self.__detail.get('description')
 
     @property
-    def ff_visibility(self) -> Literal['public', 'followers', 'private']:
+    def ff_visibility(self) -> Literal['public', 'followers', 'private'] | None:
         return self.__detail.get('ff_visibility')
 
     @property

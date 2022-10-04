@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import sys
 from typing import Any, Literal, TypeVar
 
@@ -9,6 +8,7 @@ import aiohttp
 from mipac import __version__
 from mipac.exception import APIError
 from mipac.types.endpoints import ENDPOINTS
+from mipac.types.user import IUserDetailed
 from mipac.util import remove_dict_empty, upper_to_lower, _from_json
 
 class _MissingSentinel:
@@ -99,10 +99,10 @@ class HTTPClient:
                 raise APIError(data, res.status)
             raise APIError('HTTP ERROR')
 
-    async def close_session(self):
+    async def close_session(self) -> None:
         await self.__session.close()
 
-    async def login(self):
+    async def login(self) -> IUserDetailed:
         self.__session = aiohttp.ClientSession()
-        data = await self.request(Route('POST', '/api/i'), auth=True)
+        data: IUserDetailed = await self.request(Route('POST', '/api/i'), auth=True)
         return data
