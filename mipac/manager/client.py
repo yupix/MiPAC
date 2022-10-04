@@ -7,6 +7,7 @@ from mipac.http import HTTPClient
 from mipac.manager.chart import ChartManager
 from mipac.manager.chat import ChatManager
 from mipac.manager.drive import DriveManager
+from mipac.manager.my import MyManager
 from mipac.manager.note import NoteManager
 from mipac.manager.reaction import ReactionManager
 from mipac.manager.user import UserManager
@@ -21,6 +22,7 @@ __all__ = ('ClientActions',)
 class ClientActions:
     def __init__(self, session: HTTPClient, config: Config):
         self.__session: HTTPClient = session
+        self.i = MyManager(session=session, client=self)
         self.note: NoteManager = NoteManager(session=session, client=self)
         self.chat: ChatManager = ChatManager(session=session, client=self)
         self.user: UserManager = UserManager(session=session, client=self)
