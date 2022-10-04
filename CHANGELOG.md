@@ -40,6 +40,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - change class name `PinnedNotePayload` -> `IPinnedNote`
 - change class name `ChannelPayload` -> `IChannel`
 - change class name `NotePayload` -> `INote`
+- **BREAKING CHANGE** renamed `Client.action` to `Client.api`.
 
 ### Removed
 

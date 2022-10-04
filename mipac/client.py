@@ -15,7 +15,7 @@ class Client:
         self.http: HTTPClient = HTTPClient(url, token)
 
     @property
-    def action(self):
+    def api(self):
         return ClientActions(self.http, self.__config)
 
     async def close_session(self):
