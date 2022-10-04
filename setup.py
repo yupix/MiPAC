@@ -13,7 +13,8 @@ with open('requirements.txt', 'r') as f:
 extras_require = {
     'dev': ['axblack', 'isort', 'mypy', 'pyproject-flake8', 'pre-commit'],
     'ci': ['pyproject-flake8', 'mypy'],
-    'speed': ['orjson']
+    'speed': ['orjson'],
+    'doc': ['sphinx', 'furo', 'sphinxcontrib_trio']
 }
 
 packages = [
