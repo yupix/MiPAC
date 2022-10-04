@@ -3,7 +3,6 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Literal, Optional
 
-from typing_extensions import Self
 
 from mipac.exception import NotExistRequiredData
 from mipac.models.lite.user import LiteUser
@@ -192,7 +191,7 @@ class Note:
         return self.__note['emojis']
 
     @property
-    def renote(self) -> Self | None:
+    def renote(self) -> 'Note' | None:
         return (
             Note(note=self.__note['renote'], client=self._client)
             if 'renote' in self.__note
@@ -200,7 +199,7 @@ class Note:
         )
 
     @property
-    def reply(self) -> Self | None:
+    def reply(self) -> 'Note' | None:
         return (
             Note(note=self.__note['renote'], client=self._client)
             if 'renote' in self.__note
