@@ -42,7 +42,7 @@ if HAS_ORJSON:
 else:
     _from_json = json.loads
 
-DEFAULT_CACHE: dict[str, list[dict[str, any]]] = {}
+DEFAULT_CACHE: dict[str, list[dict[str, Any]]] = {}
 
 
 def deprecated_func(func):
@@ -145,7 +145,7 @@ class AuthClient:
                     return data
             await asyncio.sleep(1)
 
-    async def wait_oldauth(self) -> str:
+    async def wait_oldauth(self) -> None:
         while True:
             async with self.__client_session.post(
                 f'{self.__instance_uri}/api/auth/session/userkey',
@@ -191,7 +191,7 @@ def dynamic_args(decorator):
     return wrapper
 
 
-def set_cache(group: str, key: str, value: any):
+def set_cache(group: str, key: str, value: Any):
     if len(DEFAULT_CACHE.get(group, [])) > 50:
         del DEFAULT_CACHE[group][-1]
 
