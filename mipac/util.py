@@ -207,7 +207,7 @@ def get_cache(group: str, key: str):
 
 
 @dynamic_args
-def cache(func, group: Optional[str] = None, override: bool = False):
+def cache(func, group: str = 'default', override: bool = False):
     async def decorator(self, *args, **kwargs):
         ordered_kwargs = sorted(kwargs.items())
         key = '.{0}' + str(args) + str(ordered_kwargs)
