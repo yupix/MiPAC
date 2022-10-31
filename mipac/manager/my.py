@@ -13,8 +13,7 @@ class MyManager(AbstractManager):
     def __init__(self, *, session: HTTPClient, client: ClientActions):
         self.__session = session
         self.__client = client
-    
+
     @property
     def action(self):
         return MyActions(session=self.__session, client=self.__client)
-    

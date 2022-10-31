@@ -16,5 +16,9 @@ class MyActions(AbstractAction):
         self.__client = client
 
     async def fetch_follow_requests(self):
-        res: list[IFollowRequest] = await self.__session.request(Route('POST', '/api/following/requests/list'), auth=True, lower=True)
+        res: list[IFollowRequest] = await self.__session.request(
+            Route('POST', '/api/following/requests/list'),
+            auth=True,
+            lower=True,
+        )
         return [FollowRequest(i, client=self.__client) for i in res]

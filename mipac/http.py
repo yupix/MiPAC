@@ -11,6 +11,7 @@ from mipac.types.endpoints import ENDPOINTS
 from mipac.types.user import IUserDetailed
 from mipac.util import remove_dict_empty, upper_to_lower, _from_json
 
+
 class _MissingSentinel:
     def __eq__(self, other):
         return False
@@ -104,5 +105,7 @@ class HTTPClient:
 
     async def login(self) -> IUserDetailed:
         self.__session = aiohttp.ClientSession()
-        data: IUserDetailed = await self.request(Route('POST', '/api/i'), auth=True)
+        data: IUserDetailed = await self.request(
+            Route('POST', '/api/i'), auth=True
+        )
         return data
