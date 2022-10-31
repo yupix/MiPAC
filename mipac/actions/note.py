@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
+
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.manager.favorite import FavoriteManager
@@ -13,7 +14,13 @@ from mipac.types.note import INote
 
 __all__ = ['NoteActions']
 
-from mipac.util import check_multi_arg, remove_dict_empty
+from mipac.util import (
+    check_multi_arg,
+    remove_dict_empty,
+    key_builder,
+    get_cache_key,
+    cache,
+)
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
@@ -269,7 +276,8 @@ class NoteActions:
             poll=poll,
         )  # TODO: filesを受け取るように
 
-    async def get_note(self, note_id: Optional[str] = None) -> Note:
+    @cache(group='get_note')
+    async def get(self, note_id: Optional[str] = None, **kwargs) -> Note:
         """
         ノートを取得します
 
@@ -283,6 +291,17 @@ class NoteActions:
         Note
             取得したノートID
         """
+        note_id = note_id or self.__note_id
+        res = await self.__session.request(
+            Route('POST', '/api/notes/show'),
+            json={'noteId': note_id},
+            auth=True,
+            lower=True,
+        )
+        return Note(res, client=self.__client)
+
+    @cache(group='get_note', override=True)
+    async def fetch(self, note_id: Optional[str] = None) -> Note:
         note_id = note_id or self.__note_id
         res = await self.__session.request(
             Route('POST', '/api/notes/show'),
