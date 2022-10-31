@@ -2,15 +2,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from aiocache import Cache, cached
 
 from mipac.exception import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.manager.note import NoteManager
 from mipac.util import (
+    cache,
     check_multi_arg,
-    get_cache_key,
-    key_builder,
     remove_dict_empty,
 )
 
@@ -42,7 +40,7 @@ class UserActions:
         res = await self.__session.request(Route('POST', '/api/i'), auth=True)
         return UserDetailed(res, client=self.__client)  # TODO: 自分用のクラスに変更する
 
-    @cached(ttl=10, namespace='get_user', key_builder=key_builder)
+    @cache(group='get_user')
     async def get(
         self,
         user_id: Optional[str] = None,
@@ -76,13 +74,12 @@ class UserActions:
         )
         return UserDetailed(data, client=self.__client)
 
-    @get_cache_key
+    @cache
     async def fetch(
         self,
         user_id: Optional[str] = None,
         username: Optional[str] = None,
         host: Optional[str] = None,
-        **kwargs,
     ) -> UserDetailed:
         """
         サーバーにアクセスし、ユーザーのプロフィールを取得します。基本的には get_userをお使いください。
@@ -110,8 +107,6 @@ class UserActions:
         data = await self.__session.request(
             Route('POST', '/api/users/show'), json=field, auth=True, lower=True
         )
-        old_cache = Cache(namespace='get_user')
-        await old_cache.delete(kwargs['cache_key'].format('get_user'))
         return UserDetailed(data, client=self.__client)
 
     async def get_notes(
