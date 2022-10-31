@@ -7,14 +7,16 @@ import asyncio
 import json
 import re
 import uuid
+from _operator import itemgetter
 from datetime import datetime, timedelta
 from typing import Any, Optional
 from urllib.parse import urlencode
+import functools
 
 import aiohttp
 
 try:
-    import orjson # type: ignore
+    import orjson  # type: ignore
 except ModuleNotFoundError:
     HAS_ORJSON = False
 else:
@@ -31,14 +33,16 @@ __all__ = (
     'upper_to_lower',
     'str_lower',
     'bool_to_string',
-    '_from_json'
+    '_from_json',
 )
 
 
 if HAS_ORJSON:
-    _from_json = orjson.loads # type: ignore
+    _from_json = orjson.loads  # type: ignore
 else:
     _from_json = json.loads
+
+DEFAULT_CACHE: dict[str, list[dict[str, any]]] = {}
 
 
 def deprecated_func(func):
@@ -170,6 +174,52 @@ class AuthClient:
             data = await self.wait_oldauth()
         await self.__client_session.close()
         return data['token'] if self.__use_miauth else data['accessToken']
+
+
+def dynamic_args(decorator):
+    def wrapper(*args, **kwargs):
+        if len(args) != 0 and callable(args[0]):
+            func = args[0]
+            return functools.wraps(func)(decorator(func))
+        else:
+
+            def _wrapper(func):
+                return functools.wraps(func)(decorator(func, *args, **kwargs))
+
+            return _wrapper
+
+    return wrapper
+
+
+def set_cache(group: str, key: str, value: any):
+    if len(DEFAULT_CACHE.get(group, [])) > 50:
+        del DEFAULT_CACHE[group][-1]
+
+    if DEFAULT_CACHE.get(group) is None:
+        DEFAULT_CACHE[group] = []
+    DEFAULT_CACHE[group].append({key: value})
+
+
+def get_cache(group: str, key: str):
+    if DEFAULT_CACHE.get(group):
+        return list(map(itemgetter(key), DEFAULT_CACHE[group]))[0]
+    return None
+
+
+@dynamic_args
+def cache(func, group: Optional[str] = None, override: bool = False):
+    async def decorator(self, *args, **kwargs):
+        ordered_kwargs = sorted(kwargs.items())
+        key = '.{0}' + str(args) + str(ordered_kwargs)
+        hit_item = get_cache(group, key)
+        print(hit_item)
+        if hit_item and override is False:
+            return hit_item
+        res = await func(self, *args, **kwargs)
+        set_cache(group, key, res)
+        return res
+
+    return decorator
 
 
 def get_cache_key(func):
