@@ -17,8 +17,6 @@ __all__ = ['NoteActions']
 from mipac.util import (
     check_multi_arg,
     remove_dict_empty,
-    key_builder,
-    get_cache_key,
     cache,
 )
 
