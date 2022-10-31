@@ -8,6 +8,7 @@ from mipac.models.lite.user import LiteUser
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
     from mipac.types.chat import IChatGroup, IChatMessage
+    from mipac.actions.chat import BaseChatAction
 
 __all__ = ['ChatGroup', 'ChatMessage']
 
@@ -100,5 +101,15 @@ class ChatMessage:
         return self.__chat['reads']
 
     @property
-    def group(self) -> ChatGroup:
-        return ChatGroup(self.__chat['group'], client=self.__client)
+    def group(self) -> ChatGroup | None:
+        return (
+            ChatGroup(self.__chat['group'], client=self.__client)
+            if self.__chat['group']
+            else None
+        )
+
+    @property
+    def action(self) -> BaseChatAction:
+        return self.__client.chat.custom_base_chat_action(
+            user_id=self.user.id, message_id=self.id
+        )
