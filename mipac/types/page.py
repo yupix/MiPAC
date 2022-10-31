@@ -7,7 +7,7 @@ from mipac.types.user import IUserLite
 
 if TYPE_CHECKING:
     from mipac.types.drive import IFileProperties
-    from mipac.types.user import UserPayload
+    from mipac.types.user import IUserLite
 
 __all__ = (
     'PageContentPayload',
@@ -109,7 +109,7 @@ class PagePayload(TypedDict):
     created_at: str
     updated_at: str
     user_id: str
-    user: UserPayload
+    user: IUserLite
     content: list[PageContentPayload]
     variable: list[VariablePayload]
     title: str
