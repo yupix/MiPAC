@@ -40,19 +40,6 @@ if __name__ == '__main__':
     </tr>
 </table>
 
-### SpecialThanks
-
-開発を手伝ってくれている方々です。
-<table>
-    <tr>
-        <td align="center">
-            <img src="https://avatars.githubusercontent.com/u/26793720?s=120&v=4" alt="uraking"/>
-        </td>
-    </tr>
-    <tr>
-        <td><a href="https://github.com/Uraking-Github">Adviser  ｜ @Uraking</a></td>
-    </tr>
-</table>
 
 ### 開発者向け情報
 
