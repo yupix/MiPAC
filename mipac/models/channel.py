@@ -30,11 +30,11 @@ class Channel:
         return self.__channel['name']
 
     @property
-    def description(self) -> str:
+    def description(self) -> str | None:
         return self.__channel['description']
 
     @property
-    def banner_url(self) -> str:
+    def banner_url(self) -> str | None:
         return self.__channel['banner_url']
 
     @property

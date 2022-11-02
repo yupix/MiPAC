@@ -1,13 +1,13 @@
 from typing import TypedDict
 
 
-class IChannel(TypedDict, total=False):
+class IChannel(TypedDict):
     id: str
     created_at: str
     last_noted_at: str
     name: str
-    description: str
-    banner_url: str
+    description: str | None
+    banner_url: str | None
     notes_count: int
     users_count: int
     is_following: bool
