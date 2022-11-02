@@ -52,3 +52,7 @@ class Channel:
     @property
     def user_id(self) -> str:
         return self.__channel['user_id']
+
+    @property
+    def has_unread_note(self) -> bool:
+        return self.__channel['has_unread_note']

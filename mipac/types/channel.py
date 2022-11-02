@@ -12,3 +12,4 @@ class IChannel(TypedDict):
     users_count: int
     is_following: bool
     user_id: str
+    has_unread_note: bool
