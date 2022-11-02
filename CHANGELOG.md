@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- todo
+
+## [0.2.0] - 2022-11-02
+
+### Added
+
 - added `Modeler` class
 - added `IReactionRequired` class
 - added `IAds` class
@@ -30,7 +36,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - added `ChatGroup` class
 - added `ChatMessage` class
 - added `IChatGroup` class
-
+- NoteActionsクラスに `get` `fetch` メソッドを追加
+- データをキャッシュするためのツールをutils.pyに追加
+- orjsonが使用者の環境にある場合はjsonではなくorjsonを使用するようになりました
 ### Changed
 
 - `Dict[Any, Any]` のような構文を typing モジュールを使わない `dict[any, any]` に変更
@@ -56,6 +64,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `RawFile` クラスを削除しました。 今後は `File` クラスをご利用ください
 - `RawChat`, `Chat` クラスを削除しました。 今後は `ChatMessage` クラスをご利用ください
 - `ChatPayload` クラスを削除しました。 今後は `IChatMessage` クラスをご利用ください
+- `get_note` メソッドを削除しました。今後は `get` もしくは `fetch` メソッドをご利用ください
+- `aiocache` を使用しないようになりました
+
+### Fixed
+
+- 一部の型が正しくないのを修正しました
 
 ## [0.1.0] - 2022-05-28
 

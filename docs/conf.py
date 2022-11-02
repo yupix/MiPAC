@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.abspath('../'))
 project = 'MiPAC'
 copyright = '2022, yupix'
 author = 'yupix'
-release = '0.1.0'
+release = '0.2.0'
 sys.path.append(os.path.abspath('extensions'))
 
 # -- General configuration ---------------------------------------------------
