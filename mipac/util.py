@@ -212,7 +212,6 @@ def cache(func, group: str = 'default', override: bool = False):
         ordered_kwargs = sorted(kwargs.items())
         key = '.{0}' + str(args) + str(ordered_kwargs)
         hit_item = get_cache(group, key)
-        print(hit_item)
         if hit_item and override is False:
             return hit_item
         res = await func(self, *args, **kwargs)
