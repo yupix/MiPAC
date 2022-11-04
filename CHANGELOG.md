@@ -7,9 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-### Added
+### Changed
 
-- todo
+- `IUserLite` を `ILiteUser` に変更しました
+- `LiteUser` の属性 `name` を `nickname` に変更しました。 `LiteUser` を継承しているクラスも同様に変更されていますのでご注意ください。
 
 ## [0.2.0] - 2022-11-02
 

@@ -24,7 +24,7 @@ class LiteUser:
         return self.__user['host']
 
     @property
-    def name(self) -> str:
+    def nickname(self) -> str:
         return self.__user['name']
 
     @property
