@@ -26,6 +26,9 @@ class _MissingSentinel:
 MISSING: Any = _MissingSentinel()
 R = TypeVar('R')
 
+class MisskeyClientWebSocketResponse(aiohttp.ClientWebSocketResponse):
+    async def close(self, *, code: int = 4000, message: bytes = b'') -> bool:
+        return await super().close(code=code, message=message)
 
 async def json_or_text(response: aiohttp.ClientResponse):
     text = await response.text(encoding='utf-8')
@@ -104,7 +107,9 @@ class HTTPClient:
         await self.__session.close()
 
     async def login(self) -> IUserDetailed:
-        self.__session = aiohttp.ClientSession()
+        self.__session = aiohttp.ClientSession(
+            ws_response_class=MisskeyClientWebSocketResponse
+        )
         data: IUserDetailed = await self.request(
             Route('POST', '/api/i'), auth=True
         )
