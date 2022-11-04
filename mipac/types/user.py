@@ -10,13 +10,13 @@ if TYPE_CHECKING:
     from mipac.types.page import IPage
 __all__ = (
     'IChannel',
-    'IUserLite',
+    'ILiteUser',
     'IUserDetailed',
     'IUserDetailedField',
 )
 
 
-class IUserLite(TypedDict):
+class ILiteUser(TypedDict):
     id: str
     username: str
     host: str | None
@@ -33,7 +33,7 @@ class IUserDetailedField(TypedDict):
     value: str
 
 
-class IUserDetailedRequired(IUserLite):
+class IUserDetailedRequired(ILiteUser):
     fields: list[IUserDetailedField]
     followers_count: int
     following_count: int
@@ -79,5 +79,5 @@ class IUserDetailed(IUserDetailedRequired, total=False):
 
 class IFollowRequest(TypedDict):
     id: str
-    follower: IUserLite
-    followee: IUserLite
+    follower: ILiteUser
+    followee: ILiteUser

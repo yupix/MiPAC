@@ -3,11 +3,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, Optional, TypedDict
 
 from mipac.types.drive import IDriveFile
-from mipac.types.user import IUserLite
+from mipac.types.user import ILiteUser
 
 if TYPE_CHECKING:
     from mipac.types.drive import IFileProperties
-    from mipac.types.user import IUserLite
+    from mipac.types.user import ILiteUser
 
 __all__ = (
     'PageContentPayload',
@@ -25,7 +25,7 @@ class IPageRequired(TypedDict):
     createdAt: str
     updatedAt: str
     userId: str
-    user: IUserLite
+    user: ILiteUser
     content: list[dict[str, Any]]
     variables: list[dict[str, Any]]
     title: str
@@ -109,7 +109,7 @@ class PagePayload(TypedDict):
     created_at: str
     updated_at: str
     user_id: str
-    user: IUserLite
+    user: ILiteUser
     content: list[PageContentPayload]
     variable: list[VariablePayload]
     title: str

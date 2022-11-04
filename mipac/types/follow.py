@@ -1,9 +1,9 @@
 from typing import TypedDict
 
-from mipac.types.user import IUserLite
+from mipac.types.user import ILiteUser
 
 
 class IFollowRequest(TypedDict):
     id: str
-    follower: IUserLite
-    followee: IUserLite
+    follower: ILiteUser
+    followee: ILiteUser

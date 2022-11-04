@@ -2,14 +2,14 @@ from typing import Literal
 
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.emoji import ICustomEmojiLite
-from mipac.types.user import IUserLite
+from mipac.types.user import ILiteUser
 
 
 class LiteUser:
     __slots__ = ('__user',)
 
-    def __init__(self, user: IUserLite) -> None:
-        self.__user: IUserLite = user
+    def __init__(self, user: ILiteUser) -> None:
+        self.__user: ILiteUser = user
 
     @property
     def id(self) -> str:

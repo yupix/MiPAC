@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, List, TypedDict
 
 if TYPE_CHECKING:
     from mipac.types import IDriveFile
-    from mipac.types.user import IUserLite
+    from mipac.types.user import ILiteUser
 
 __all__ = ('IChatGroup', 'IChatMessage')
 
@@ -23,7 +23,7 @@ class IChatMessage(TypedDict):
     file: IDriveFile
     text: str | None
     user_id: str
-    user: IUserLite
+    user: ILiteUser
     recipient_id: str
     recipient: str
     group_id: str

@@ -3,7 +3,7 @@ from typing import Any, Literal, Optional, TypedDict
 from .drive import IDriveFile
 from .emoji import ICustomEmojiLite
 from .poll import IPoll
-from .user import IUserLite
+from .user import ILiteUser
 
 
 class GeoPayload(TypedDict):
@@ -24,7 +24,7 @@ class INoteRequired(TypedDict):
     created_at: str
     text: str | None
     cw: str | None
-    user: IUserLite
+    user: ILiteUser
     user_id: str
     reply_id: str
     renote_id: str
@@ -56,5 +56,5 @@ class INote(INoteRequired, total=False):
 class INoteReaction(TypedDict):
     id: str
     created_at: str
-    user: IUserLite
+    user: ILiteUser
     type: str

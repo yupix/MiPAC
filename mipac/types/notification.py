@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, TypedDict
 
 if TYPE_CHECKING:
     from mipac.types.note import INote
-    from mipac.types.user import IUserLite
+    from mipac.types.user import ILiteUser
 
 
 class Notification(TypedDict):
@@ -22,6 +22,6 @@ class Notification(TypedDict):
 class IReactionNf(Notification):
     type: str
     reaction: str
-    user: IUserLite
+    user: ILiteUser
     user_id: str
     note: INote
