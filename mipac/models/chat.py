@@ -54,10 +54,12 @@ class ChatMessage:
 
     @property
     def id(self) -> str:
+        """The message ID."""
         return self.__chat['id']
 
     @property
     def created_at(self) -> str:
+        """Returns the date and time the message was created (UTC)"""
         return self.__chat['created_at']
 
     @property
@@ -66,6 +68,7 @@ class ChatMessage:
 
     @property
     def text(self) -> str | None:
+        """text of the message"""
         return self.__chat['text']
 
     @property
