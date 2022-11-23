@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from mipac.types.notification import IReactionNf
 
 
-class Reaction:
+class NotificationReaction:
     def __init__(
         self, reaction: IReactionNf, *, client: ClientActions
     ) -> None:
