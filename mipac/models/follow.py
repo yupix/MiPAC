@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from typing import TYPE_CHECKING
+
 from mipac.models.lite.user import LiteUser
 from mipac.types.follow import IFollowRequest
 

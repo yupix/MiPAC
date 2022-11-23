@@ -9,7 +9,7 @@ from mipac import __version__
 from mipac.exception import APIError
 from mipac.types.endpoints import ENDPOINTS
 from mipac.types.user import IUserDetailed
-from mipac.util import remove_dict_empty, upper_to_lower, _from_json
+from mipac.util import _from_json, remove_dict_empty, upper_to_lower
 
 
 class _MissingSentinel:
@@ -26,9 +26,11 @@ class _MissingSentinel:
 MISSING: Any = _MissingSentinel()
 R = TypeVar('R')
 
+
 class MisskeyClientWebSocketResponse(aiohttp.ClientWebSocketResponse):
     async def close(self, *, code: int = 4000, message: bytes = b'') -> bool:
         return await super().close(code=code, message=message)
+
 
 async def json_or_text(response: aiohttp.ClientResponse):
     text = await response.text(encoding='utf-8')

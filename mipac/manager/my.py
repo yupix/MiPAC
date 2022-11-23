@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+
 from mipac.abc.manager import AbstractManager
 from mipac.actions.my import MyActions
 from mipac.http import HTTPClient

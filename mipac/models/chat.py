@@ -6,9 +6,9 @@ from mipac.models.drive import File
 from mipac.models.lite.user import LiteUser
 
 if TYPE_CHECKING:
+    from mipac.actions.chat import BaseChatAction
     from mipac.manager.client import ClientActions
     from mipac.types.chat import IChatGroup, IChatMessage
-    from mipac.actions.chat import BaseChatAction
 
 __all__ = ['ChatGroup', 'ChatMessage']
 

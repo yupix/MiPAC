@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncIterator, Generator, Optional
-
+from typing import TYPE_CHECKING, AsyncIterator, Optional
 
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route
@@ -14,11 +13,7 @@ from mipac.types.note import INote
 
 __all__ = ['NoteActions']
 
-from mipac.util import (
-    check_multi_arg,
-    remove_dict_empty,
-    cache,
-)
+from mipac.util import cache, check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
@@ -407,4 +402,3 @@ class NoteActions:
                 if len(res) == 0:
                     break
                 body['untilId'] = res[-1].id
-

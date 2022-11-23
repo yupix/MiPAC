@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+
 from mipac.abc.action import AbstractAction
 from mipac.exception import ParameterError
 from mipac.http import HTTPClient, Route

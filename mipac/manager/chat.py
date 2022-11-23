@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from mipac.actions.chat import BaseChatAction, ChatAction
 
+from mipac.actions.chat import BaseChatAction, ChatAction
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
