@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, AsyncIterator, Generator, Optional
 
 
 from mipac.exception import ParameterError
@@ -275,7 +275,7 @@ class NoteActions:
         )  # TODO: filesを受け取るように
 
     @cache(group='get_note')
-    async def get(self, note_id: Optional[str] = None, **kwargs) -> Note:
+    async def get(self, note_id: Optional[str] = None) -> Note:
         """
         ノートを取得します
 
@@ -357,3 +357,54 @@ class NoteActions:
             note_id=note_id, client=self.__client, session=self.__session
         ).get_reaction(reaction)
         # TODO: self.__clientを使ったインスタンス生成に変えないと循環インポートの原因になりかねない
+
+    async def gets(
+        self,
+        local: bool = False,
+        reply: bool = False,
+        renote: bool = False,
+        with_files: bool = False,
+        poll: bool = False,
+        limit: int = 100,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        all: bool = False
+    ) -> AsyncIterator[Note]:
+        async def request(body) -> list[Note]:
+            res: list[INote] = await self.__session.request(
+                Route('POST', '/api/notes'), lower=True, auth=True, json=body
+            )
+            return [Note(note, client=self.__client) for note in res]
+
+        body = remove_dict_empty(
+            {
+                'local': local,
+                'reply': reply,
+                'renote': renote,
+                'withFiles': with_files,
+                'poll': poll,
+                'limit': limit,
+                'sinceId': since_id,
+                'untilId': until_id,
+            }
+        )
+
+        if all is True:
+            body['limit'] = 100
+        first_req = await request(body)
+
+        for note in first_req:
+            yield note
+
+        if all is True and len(first_req) == 100:
+            body['untilId'] = first_req[-1].id
+            while True:
+                res = await request(body)
+                if len(res) != 100:
+                    for note in res:
+                        yield note
+                if len(res) == 0:
+                    break
+                body['untilId'] = res[-1].id
+
