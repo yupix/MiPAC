@@ -148,7 +148,6 @@ class ChatAction(BaseChatAction):
             'text': text,
             'fileId': file_id,
         }
-        print(vars(self))
         res = await self.__session.request(
             Route('POST', '/api/messaging/messages/create'),
             json=data,
