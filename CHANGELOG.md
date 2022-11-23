@@ -7,10 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- `NoteActions` に `gets` メソッドが追加されました #MP-20
+- Type Hintの追加
+
 ### Changed
 
+- WebSocketを使用した際のレスポンスクラスを `MisskeyClientWebSocketResponse` クラス に
+- `Reaction` クラスを `NotificationReaction` に変更しました
 - `IUserLite` を `ILiteUser` に変更しました
 - `LiteUser` の属性 `name` を `nickname` に変更しました。 `LiteUser` を継承しているクラスも同様に変更されていますのでご注意ください。
+
+### Removed
+
+- printを使用したデバッグログを削除しました
 
 ## [0.2.0] - 2022-11-02
 
