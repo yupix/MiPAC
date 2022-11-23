@@ -45,7 +45,7 @@ else:
 DEFAULT_CACHE: dict[str, list[dict[str, Any]]] = {}
 
 
-def deprecated_func(func):
+def deprecated_func(func) -> None:
     print(f'deprecated function:{func.__name__}')
 
 
