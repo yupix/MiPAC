@@ -11,8 +11,8 @@ with open('requirements.txt', 'r') as f:
     requirements = f.read().splitlines()
 
 extras_require = {
-    'dev': ['axblack', 'isort', 'mypy', 'pyproject-flake8', 'pre-commit'],
-    'ci': ['pyproject-flake8', 'mypy'],
+    'dev': ['axblack', 'isort', 'mypy', 'flake8', 'pre-commit'],
+    'ci': ['flake8', 'mypy'],
     'speed': ['orjson'],
     'doc': ['sphinx', 'furo', 'sphinxcontrib_trio']
 }

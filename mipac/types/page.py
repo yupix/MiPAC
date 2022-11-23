@@ -7,7 +7,6 @@ from mipac.types.user import ILiteUser
 
 if TYPE_CHECKING:
     from mipac.types.drive import IFileProperties
-    from mipac.types.user import ILiteUser
 
 __all__ = (
     'PageContentPayload',

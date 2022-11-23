@@ -30,7 +30,7 @@ class BaseChatAction(AbstractAction):
     async def read(self, message_id: str | None = None) -> bool:
         """
         指定したIdのメッセージを既読にします
-        
+
         Parameters
         ----------
         message_id : str

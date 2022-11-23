@@ -1,0 +1,3 @@
+[flake8]
+per-file-ignores=./mipac/manager/__init__.py:F403,F401
+extend-ignore = "A003, W503,"
