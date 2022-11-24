@@ -4,3 +4,7 @@ line-length = 79
 [tool.isort]
 profile = "black"
 line_length = 79
+
+[build-system]
+requires = ["setuptools", "versioneer[toml]"]
+build-backend = "setuptools.build_meta"

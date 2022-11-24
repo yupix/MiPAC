@@ -1,1 +1,3 @@
 * text=auto eol=lf
+is_number/_version.py export-subst
+mipac/_version.py export-subst

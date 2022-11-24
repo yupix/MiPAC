@@ -2,6 +2,8 @@ import pathlib
 
 from setuptools import setup
 
+import versioneer
+
 description = 'A Python wrapper for the Misskey API'
 readme_file = pathlib.Path(__file__).parent / 'README.md'
 with readme_file.open(encoding='utf-8') as fh:
@@ -32,7 +34,8 @@ packages = [
 
 setup(
     name='mipac',
-    version='0.3.0',
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     install_requires=requirements,
     url='https://github.com/yupix/mipac',
     author='yupix',
