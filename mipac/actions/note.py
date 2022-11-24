@@ -366,10 +366,10 @@ class NoteActions:
         *,
         all: bool = False
     ) -> AsyncIterator[Note]:
-        
-        if (limit > 100):
+
+        if limit > 100:
             raise ParameterError('limit は100以下である必要があります')
-        
+
         async def request(body) -> list[Note]:
             res: list[INote] = await self.__session.request(
                 Route('POST', '/api/notes'), lower=True, auth=True, json=body
