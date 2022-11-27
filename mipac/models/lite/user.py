@@ -3,6 +3,7 @@ from typing import Literal
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.emoji import ICustomEmojiLite
 from mipac.types.user import ILiteUser
+from mipac.util import deprecated_func, deprecated_property
 
 
 class LiteUser:
@@ -22,6 +23,11 @@ class LiteUser:
     @property
     def host(self) -> str | None:
         return self.__user['host']
+
+    @deprecated_property
+    @property
+    def name(self) -> str:
+        return self.__user['name']
 
     @property
     def nickname(self) -> str:
