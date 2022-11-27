@@ -99,6 +99,8 @@ class HTTPClient:
                         upper_to_lower(i, replace_list=replace_list)
                         for i in data
                     ]
+                if isinstance(data, dict):
+                    data = upper_to_lower(data)
             if 300 > res.status >= 200:
                 return data  # type: ignore
             if 511 > res.status >= 300:
