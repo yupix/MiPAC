@@ -22,7 +22,7 @@ class LiteUser:
 
     @property
     def host(self) -> str | None:
-        return self.__user['host']
+        return self.__user['host'] if 'host' in self.__user else None
 
     @property
     @deprecated
