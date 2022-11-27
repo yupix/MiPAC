@@ -24,8 +24,8 @@ class LiteUser:
     def host(self) -> str | None:
         return self.__user['host']
 
-    @deprecated_property
     @property
+    @deprecated
     def name(self) -> str:
         return self.__user['name']
 

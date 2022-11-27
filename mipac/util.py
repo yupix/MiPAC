@@ -11,6 +11,7 @@ import uuid
 from datetime import datetime, timedelta
 from typing import Any, Optional
 from urllib.parse import urlencode
+import warnings
 
 import aiohttp
 from _operator import itemgetter
@@ -23,8 +24,7 @@ else:
     HAS_ORJSON = True
 
 __all__ = (
-    'deprecated_property',
-    'deprecated_func',
+    'deprecated',
     'MiTime',
     'get_cache_key',
     'key_builder',
@@ -46,14 +46,25 @@ else:
 DEFAULT_CACHE: dict[str, list[dict[str, Any]]] = {}
 
 
-def deprecated_property(func: property) -> None:
-    _func = func.fget or func.fdel or func.fset
-    if _func:
-        print(f'deprecated property: {_func.__name__}')
-    
+def deprecated(func):
+    """
+    This is a decorator which can be used to mark functions
+    as deprecated. It will result in a warning being emitted
+    when the function is used.
+    """
 
-def deprecated_func(func) -> None:
-    print(f'deprecated function:{func.__name__}')
+    @functools.wraps(func)
+    def new_func(*args, **kwargs):
+        warnings.simplefilter('always', DeprecationWarning)  # turn off filter
+        warnings.warn(
+            'Call to deprecated function {}.'.format(func.__name__),
+            category=DeprecationWarning,
+            stacklevel=2,
+        )
+        warnings.simplefilter('default', DeprecationWarning)  # reset filter
+        return func(*args, **kwargs)
+
+    return new_func
 
 
 class MiTime:
