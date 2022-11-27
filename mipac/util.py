@@ -23,6 +23,7 @@ else:
     HAS_ORJSON = True
 
 __all__ = (
+    'deprecated_property',
     'deprecated_func',
     'MiTime',
     'get_cache_key',
@@ -44,6 +45,12 @@ else:
 
 DEFAULT_CACHE: dict[str, list[dict[str, Any]]] = {}
 
+
+def deprecated_property(func: property) -> None:
+    _func = func.fget or func.fdel or func.fset
+    if _func:
+        print(f'deprecated property: {_func.__name__}')
+    
 
 def deprecated_func(func) -> None:
     print(f'deprecated function:{func.__name__}')
