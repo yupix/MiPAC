@@ -6,11 +6,12 @@ from mipac.exception import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.manager.note import NoteManager
 from mipac.util import cache, check_multi_arg, remove_dict_empty
+from mipac.models.user import UserDetailed
+
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
     from mipac.models.note import Note
-    from mipac.models.user import UserDetailed
 
 __all__ = ['UserActions']
 
