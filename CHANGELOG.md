@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- None
+
+## [0.2.1] - 2022-11-27
+
+### Added
+
 - `NoteActions` に `gets` メソッドが追加されました #MP-20
 - Type Hintの追加
 
