@@ -12,6 +12,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `LiteUser` に属性 `name` を互換性の為に再追加しましたが、非推奨です。v0.4.0で削除する予定です
     - `username` と `name` の違いを区別しにくい可能性がある為、新たに使用する際は `nickname` を使用することを推奨しています
 
+### Changed
+
+- deprecatedに関する仕組みを変更しました。
+    - 該当するコードを表示するようになっています
+
+### Fixed
+
+- 型の間違い等
+- 使用しているインポートが`TYPE_CHECKING`の条件式の中に入っていた為使用できない
+- `get_mention` メソッドで`username` ではなく`nickname`を使用していた為正しいmentionが作れない
+- `LiteUser` クラスの属性`instance` でBotと同じインスタンスのユーザーの場合はNoneを返せずKeyErrorになる可能性があった
+- `LiteUser` クラスの属性 `host` を取得すると KeyErrorになる可能性があった
+
 ### Removed
 
 - `deprecated_property` decorator を削除しました
