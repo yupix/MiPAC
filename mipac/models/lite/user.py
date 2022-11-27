@@ -3,7 +3,7 @@ from typing import Literal
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.emoji import ICustomEmojiLite
 from mipac.types.user import ILiteUser
-from mipac.util import deprecated_func, deprecated_property
+from mipac.util import deprecated
 
 
 class LiteUser:

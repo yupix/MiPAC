@@ -8,10 +8,10 @@ import functools
 import json
 import re
 import uuid
+import warnings
 from datetime import datetime, timedelta
 from typing import Any, Optional
 from urllib.parse import urlencode
-import warnings
 
 import aiohttp
 from _operator import itemgetter
