@@ -52,5 +52,9 @@ class LiteUser:
         return self.__user['emojis']
 
     @property
-    def instance(self) -> LiteInstance:
-        return LiteInstance(self.__user['instance'])
+    def instance(self) -> LiteInstance | None:
+        return (
+            LiteInstance(self.__user['instance'])
+            if 'instance' in self.__user
+            else None
+        )

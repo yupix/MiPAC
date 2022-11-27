@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     from mipac.types.note import INote
     from mipac.types.page import IPage
 __all__ = (
+    'IUserRequired',
     'IChannel',
     'ILiteUser',
     'IUserDetailed',
@@ -16,15 +17,18 @@ __all__ = (
 )
 
 
-class ILiteUser(TypedDict):
+class IUserRequired(TypedDict):
     id: str
     username: str
-    host: str | None
     name: str
     online_status: Literal['online', 'active', 'offline', 'unknown']
     avatar_url: str
     avatar_blurhash: str
     emojis: list[ICustomEmojiLite]
+
+
+class ILiteUser(IUserRequired, total=False):
+    host: str
     instance: IInstanceLite
 
 
