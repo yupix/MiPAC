@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- None
-
+- `LiteUser` に属性 `name` を互換性の為に再追加しましたが、非推奨です。v0.4.0で削除する予定です
+    - `username` と `name` の違いを区別しにくい可能性がある為、新たに使用する際は `nickname` を使用することを推奨しています
 ## [0.2.1] - 2022-11-27
 
 ### Added
