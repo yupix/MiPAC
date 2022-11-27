@@ -52,6 +52,12 @@ class INote(INoteRequired, total=False):
     is_hidden: bool
     poll: IPoll
 
+class ICreatedNote(TypedDict):
+    """
+    created note
+    """
+    
+    created_note: INote
 
 class INoteReaction(TypedDict):
     id: str

@@ -9,7 +9,7 @@ from mipac.manager.file import MiFile
 from mipac.manager.reaction import ReactionManager
 from mipac.models.note import Note, NoteReaction
 from mipac.models.poll import Poll
-from mipac.types.note import INote
+from mipac.types.note import ICreatedNote, INote
 
 __all__ = ['NoteActions']
 
@@ -163,13 +163,13 @@ class NoteActions:
         # if files:  # TODO: get_file_idsを直さないと使えない
         # field['fileIds'] = await get_file_ids(files=files)
         field = remove_dict_empty(field)
-        res: INote = await self.__session.request(
+        res: ICreatedNote = await self.__session.request(
             Route('POST', '/api/notes/create'),
             json=field,
             auth=True,
             lower=True,
         )
-        return Note(res, client=self.__client)
+        return Note(res['created_note'], client=self.__client)
 
     async def delete(self, note_id: Optional[str] = None) -> bool:
         """
