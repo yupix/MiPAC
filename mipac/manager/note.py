@@ -3,11 +3,32 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Optional
 
 from mipac.abc.manager import AbstractManager
-from mipac.actions.note import NoteActions
+from mipac.actions.note import ClientNoteActions, NoteActions
 from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
+
+
+class ClientNoteManager(AbstractManager):
+    def __init__(
+        self,
+        note_id: str | None = None,
+        *,
+        session: HTTPClient,
+        client: ClientActions
+    ):
+        self.__session: HTTPClient = session
+        self.__client: ClientActions = client
+        self.__note_id = note_id
+
+    @property
+    def action(self) -> ClientNoteActions:
+        return ClientNoteActions(
+            note_id=self.__note_id,
+            session=self.__session,
+            client=self.__client,
+        )
 
 
 class NoteManager(AbstractManager):
@@ -23,6 +44,12 @@ class NoteManager(AbstractManager):
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
         self.__note_id = note_id
+        self.client = ClientNoteManager(session=session, client=client)
+
+    def create_client_note_manager(self, note_id: str) -> ClientNoteManager:
+        return ClientNoteManager(
+            note_id=note_id, session=self.__session, client=self.__client
+        )
 
     @property
     def action(self) -> NoteActions:

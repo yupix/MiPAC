@@ -88,7 +88,6 @@ class HTTPClient:
         for i in ('json', 'data'):
             if kwargs.get(i):
                 kwargs[i] = remove_dict_empty(kwargs[i])
-
         async with self.__session.request(
             route.method, self.__url + route.path, **kwargs
         ) as res:
