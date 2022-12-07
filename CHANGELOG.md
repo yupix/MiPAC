@@ -9,6 +9,29 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- `ClientNoteManager` クラスを追加しました
+- `ClientNoteActions` クラスを追加しました
+
+### Changed
+
+- `NoteActions` が持っているノートに対する操作を `ClientNoteActions` に移動しました
+    - 継承しているため今まで通り使用できます
+
+### Fixed
+
+- sendメソッドの引数 `extract_hashtags` が正常に動作しない
+
+## [0.2.3] - 2022-11-27
+
+### Fixed
+
+- `NoteAction.send` メソッドで作成したノートのモデルが生成できない
+- `request` メソッドで戻り値がlistではなくdistだった場合snake caseに置き換えできない
+
+## [0.2.2] - 2022-11-27
+
+### Added
+
 - `LiteUser` に属性 `name` を互換性の為に再追加しましたが、非推奨です。v0.4.0で削除する予定です
     - `username` と `name` の違いを区別しにくい可能性がある為、新たに使用する際は `nickname` を使用することを推奨しています
 

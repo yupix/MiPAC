@@ -8,7 +8,7 @@ from mipac.models.lite.user import LiteUser
 from mipac.models.poll import Poll
 
 if TYPE_CHECKING:
-    from mipac.actions.note import NoteActions
+    from mipac.actions.note import ClientNoteActions
     from mipac.manager.client import ClientActions
     from mipac.models.user import UserDetailed
     from mipac.types.drive import IDriveFile
@@ -250,7 +250,7 @@ class Note:
         )
 
     @property
-    def action(self) -> NoteActions:
+    def action(self) -> ClientNoteActions:
         """
         ノートに対するアクション
 
@@ -258,4 +258,4 @@ class Note:
         -------
         NoteActions
         """
-        return self._client._create_note_instance(self.id).action
+        return self._client.note.create_client_note_manager(self.id).action
