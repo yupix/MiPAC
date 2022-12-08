@@ -16,6 +16,7 @@ __all__ = (
     'IUserDetailedField',
 )
 
+
 class ISignin(TypedDict):
     id: str
     created_at: str
@@ -23,6 +24,7 @@ class ISignin(TypedDict):
     ip: str
     headers: dict[str, str]
     success: bool
+
 
 class IUserRequired(TypedDict):
     id: str
