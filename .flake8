@@ -1,5 +1,5 @@
 [flake8]
 per-file-ignores=
-    ./mipac/manager/__init__.py:F403,F401
-    ./mipac/_version.py:E501
     ./mipac/__init__.py:E402
+    ./mipac/**/__init__.py:F403,F401
+    ./mipac/_version.py:E501
