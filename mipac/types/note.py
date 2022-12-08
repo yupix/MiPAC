@@ -1,9 +1,28 @@
-from typing import Any, Literal, Optional, TypedDict
+from typing import Any, Generic, Literal, Optional, TypedDict, TypeVar
 
 from .drive import IDriveFile
 from .emoji import ICustomEmojiLite
 from .poll import IPoll
 from .user import ILiteUser
+
+T = TypeVar('T')
+
+
+class INoteUpdated(TypedDict, Generic[T]):
+    type: Literal['noteUpdated']
+    body: T
+
+
+class INoteUpdatedReactionBody(TypedDict):
+    reaction: str
+    emoji: ICustomEmojiLite
+
+
+class INoteUpdatedReaction(TypedDict):
+    id: str
+    type: Literal['reacted']
+    body: INoteUpdatedReactionBody
+    user_id: str
 
 
 class GeoPayload(TypedDict):
