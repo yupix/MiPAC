@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.6] - 2022-12-08
+
+### Added
+
+- `INoteUpdated` クラスを追加しました
+- `INoteUpdatedReactionBody` クラスを追加しました
+- `INoteUpdatedReaction` クラスを追加しました
+- `PartialCustomEmoji` クラスを追加しました
+- `PartialReaction` クラスを追加しました
+
+## [0.2.5] - 2022-12-08
+
 ### Added
 
 - `ISignin` クラスを追加
