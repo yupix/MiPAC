@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.4] - 2022-12-08
+
 ### Added
 
 - `ClientNoteManager` クラスを追加しました
