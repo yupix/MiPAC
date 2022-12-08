@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- `ISignin` クラスを追加
+
+### Fixed
+
+- Noteモデルの `content` が無い場合KeyErrorになる
+- Noteモデルの `cw` が無い場合KeyErrorになる
+
 ## [0.2.4] - 2022-12-08
 
 ### Added
