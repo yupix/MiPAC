@@ -137,11 +137,11 @@ class Note:
 
     @property
     def content(self) -> str | None:
-        return self.__note['text']
+        return self.__note.get('text')
 
     @property
     def cw(self) -> str | None:
-        return self.__note['cw']
+        return self.__note.get('cw')
 
     @property
     def user_id(self) -> str:
