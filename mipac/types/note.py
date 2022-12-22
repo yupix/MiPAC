@@ -8,7 +8,7 @@ from .user import ILiteUser
 T = TypeVar('T')
 
 
-class INoteUpdated(TypedDict, Generic[T]):
+class INoteUpdated(TypedDict):
     type: Literal['noteUpdated']
     body: T
 
