@@ -1,4 +1,4 @@
-from typing import Any, Generic, Literal, Optional, TypedDict, TypeVar
+from typing import Any, Literal, Optional, TypedDict, TypeVar
 
 from .drive import IDriveFile
 from .emoji import ICustomEmojiLite
