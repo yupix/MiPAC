@@ -1,4 +1,4 @@
-from typing import Any, Generic, Literal, Optional, TypedDict, TypeVar
+from typing import Any, Literal, Optional, TypedDict, TypeVar
 
 from .drive import IDriveFile
 from .emoji import ICustomEmojiLite
@@ -8,7 +8,7 @@ from .user import ILiteUser
 T = TypeVar('T')
 
 
-class INoteUpdated(TypedDict, Generic[T]):
+class INoteUpdated(TypedDict):
     type: Literal['noteUpdated']
     body: T
 
