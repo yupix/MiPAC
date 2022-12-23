@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- `User` クラスに `get_profile_link` メソッドを追加しました
+
+## [0.2.7] 2022-12-23
+
+### Fixed
+
+- fix: TypedDict type error by [@omg-xtao](https://github.com/omg-xtao) in [#20](https://github.com/yupix/MiPAC/pull/20)
+
 ## [0.2.6] - 2022-12-08
 
 ### Added

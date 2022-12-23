@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Literal, Optional
 
 from mipac.exception import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
@@ -34,6 +34,26 @@ class UserActions:
 
         res = await self.__session.request(Route('POST', '/api/i'), auth=True)
         return UserDetailed(res, client=self.__client)  # TODO: 自分用のクラスに変更する
+
+    def get_profile_link(
+        self,
+        external: bool = True,
+        protocol: Literal['http', 'https'] = 'https',
+    ):
+        if self.__user:
+            host = (
+                f'{protocol}://{self.__user.host}' or self.__session._url
+                if external
+                else self.__session._url
+            )
+            path = (
+                f'/{self.__user.action.get_mention()}'
+                if external is False
+                else f'/@{self.__user.username}'
+            )
+            return host + path
+        else:
+            return None
 
     @cache(group='get_user')
     async def get(

@@ -56,13 +56,13 @@ class HTTPClient:
         self.user_agent = user_agent.format(
             __version__, sys.version_info, aiohttp.__version__
         )
-        self.__session: aiohttp.ClientSession = MISSING
-        self.__url: str = url
-        self.__token: str = token
+        self._session: aiohttp.ClientSession = MISSING
+        self._url: str = url
+        self._token: str = token
 
     @property
     def session(self) -> aiohttp.ClientSession:
-        return self.__session
+        return self._session
 
     async def request(self, route: Route, **kwargs) -> R:
         headers: dict[str, str] = {
@@ -81,15 +81,15 @@ class HTTPClient:
             )
             if not kwargs.get(key):
                 kwargs[key] = {}
-            kwargs[key]['i'] = self.__token
+            kwargs[key]['i'] = self._token
 
         replace_list = kwargs.pop('replace_list', {})
 
         for i in ('json', 'data'):
             if kwargs.get(i):
                 kwargs[i] = remove_dict_empty(kwargs[i])
-        async with self.__session.request(
-            route.method, self.__url + route.path, **kwargs
+        async with self._session.request(
+            route.method, self._url + route.path, **kwargs
         ) as res:
             data = await json_or_text(res)
             if is_lower:
@@ -107,10 +107,10 @@ class HTTPClient:
             raise APIError('HTTP ERROR')
 
     async def close_session(self) -> None:
-        await self.__session.close()
+        await self._session.close()
 
     async def login(self) -> IUserDetailed:
-        self.__session = aiohttp.ClientSession(
+        self._session = aiohttp.ClientSession(
             ws_response_class=MisskeyClientWebSocketResponse
         )
         data: IUserDetailed = await self.request(
