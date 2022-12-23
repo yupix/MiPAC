@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.8] 2022-12-23
+
 ### Added
 
 - `LiteUser` に `action` プロパティを追加しました。
