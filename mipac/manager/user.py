@@ -8,7 +8,8 @@ from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
-    from mipac.models.user import UserDetailed
+    from mipac.models.lite.user import LiteUser
+
 
 __all__ = ('UserManager',)
 
@@ -16,14 +17,14 @@ __all__ = ('UserManager',)
 class UserManager(AbstractManager):
     def __init__(
         self,
-        user: Optional[UserDetailed] = None,
+        user: Optional[LiteUser] = None,
         *,
         session: HTTPClient,
         client: ClientActions
     ):
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
-        self.user: Optional[UserDetailed] = user
+        self.user: Optional[LiteUser] = user
 
     @property
     def action(self) -> UserActions:

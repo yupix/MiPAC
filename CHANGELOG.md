@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- `User` クラスに `get_profile_link` メソッドを追加しました
+- `LiteUser` に `action` プロパティを追加しました。
+    - これにより `UserDetailed` の方から `action`が削除されていますが、`UserDetailed` は `LiteUser` を継承しているため今まで通りご利用いただけます
+- `UserActions` クラスに `get_profile_link` メソッドを追加しました
 
 ## [0.2.7] 2022-12-23
 

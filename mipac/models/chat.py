@@ -77,7 +77,7 @@ class ChatMessage:
 
     @property
     def user(self) -> LiteUser:
-        return LiteUser(self.__chat['user'])
+        return LiteUser(self.__chat['user'], client=self.__client)
 
     @property
     def recipient_id(self) -> str:

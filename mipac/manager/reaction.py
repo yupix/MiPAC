@@ -74,7 +74,7 @@ class ReactionManager(AbstractManager):
             auth=True,
             lower=True,
         )
-        return [NoteReaction(i) for i in res]
+        return [NoteReaction(i, client=self.__client) for i in res]
 
     async def get_emoji_list(self) -> list[CustomEmoji]:
         data: IInstanceMetaLite = await self.__session.request(

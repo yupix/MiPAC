@@ -8,7 +8,6 @@ from mipac.types.page import IPage
 from mipac.types.user import IFollowRequest, IUserDetailed, IUserDetailedField
 
 if TYPE_CHECKING:
-    from mipac.actions.user import UserActions
     from mipac.manager.client import ClientActions
 
 __all__ = ('UserDetailed', 'FollowRequest')
@@ -25,11 +24,11 @@ class FollowRequest:
 
     @property
     def follower(self) -> LiteUser:
-        return LiteUser(self.__request['follower'])
+        return LiteUser(self.__request['follower'], client=self.__client)
 
     @property
     def followee(self) -> LiteUser:
-        return LiteUser(self.__request['followee'])
+        return LiteUser(self.__request['followee'], client=self.__client)
 
 
 class UserDetailed(LiteUser):
@@ -39,9 +38,8 @@ class UserDetailed(LiteUser):
     )
 
     def __init__(self, user: IUserDetailed, *, client: ClientActions):
-        super().__init__(user=user)
+        super().__init__(user=user, client=client)
         self.__detail = user
-        self.__client: ClientActions = client
 
     @property
     def fields(self) -> list[IUserDetailedField]:
@@ -199,7 +197,3 @@ class UserDetailed(LiteUser):
     @property
     def url(self) -> str | None:
         return self.__detail.get('url')
-
-    @property
-    def action(self) -> UserActions:
-        return self.__client._create_user_instance(self).action

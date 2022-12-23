@@ -15,6 +15,8 @@ from mipac.manager.user import UserManager
 if TYPE_CHECKING:
     from mipac.config import Config
     from mipac.models.user import UserDetailed
+    from mipac.models.lite.user import LiteUser
+
 
 __all__ = ('ClientActions',)
 
@@ -34,7 +36,7 @@ class ClientActions:
         self.chart: ChartManager = ChartManager(session=session, client=self)
         self._config: Config = config
 
-    def _create_user_instance(self, user: UserDetailed) -> UserManager:
+    def _create_user_instance(self, user: LiteUser) -> UserManager:
         return UserManager(session=self.__session, client=self, user=user)
 
     def _create_note_instance(self, note_id: str) -> NoteManager:

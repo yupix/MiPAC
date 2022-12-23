@@ -11,6 +11,7 @@ from mipac.util import cache, check_multi_arg, remove_dict_empty
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
     from mipac.models.note import Note
+    from mipac.models.lite.user import LiteUser
 
 __all__ = ['UserActions']
 
@@ -20,10 +21,10 @@ class UserActions:
         self,
         session: HTTPClient,
         client: ClientActions,
-        user: Optional[UserDetailed] = None,
+        user: Optional[LiteUser] = None,
     ):
         self.__session: HTTPClient = session
-        self.__user: Optional[UserDetailed] = user
+        self.__user: Optional[LiteUser] = user
         self.__client: ClientActions = client
         self.note: NoteManager = NoteManager(session=session, client=client)
 
@@ -161,7 +162,7 @@ class UserActions:
         )
         return [Note(i, client=self.__client) for i in res]
 
-    def get_mention(self, user: Optional[UserDetailed] = None) -> str:
+    def get_mention(self, user: Optional[LiteUser] = None) -> str:
         """
         Get mention name of user.
 

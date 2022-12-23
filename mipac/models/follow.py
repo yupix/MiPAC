@@ -22,8 +22,12 @@ class FollowRequest:
 
     @property
     def follower(self) -> LiteUser:
-        return LiteUser(self.__follow_request['follower'])
+        return LiteUser(
+            self.__follow_request['follower'], client=self.__client
+        )
 
     @property
     def followee(self) -> LiteUser:
-        return LiteUser(self.__follow_request['followee'])
+        return LiteUser(
+            self.__follow_request['followee'], client=self.__client
+        )

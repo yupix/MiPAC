@@ -1,16 +1,22 @@
-from typing import Literal
+from __future__ import annotations
+from typing import TYPE_CHECKING, Literal
 
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.emoji import ICustomEmojiLite
 from mipac.types.user import ILiteUser
 from mipac.util import deprecated
 
+if TYPE_CHECKING:
+    from mipac.manager.client import ClientActions
+    from mipac.actions.user import UserActions
+
 
 class LiteUser:
-    __slots__ = ('__user',)
+    __slots__ = ('__user', '__client')
 
-    def __init__(self, user: ILiteUser) -> None:
+    def __init__(self, user: ILiteUser, *, client: ClientActions) -> None:
         self.__user: ILiteUser = user
+        self.__client: ClientActions = client
 
     @property
     def id(self) -> str:
@@ -58,3 +64,7 @@ class LiteUser:
             if 'instance' in self.__user
             else None
         )
+
+    @property
+    def action(self) -> UserActions:
+        return self.__client._create_user_instance(self).action

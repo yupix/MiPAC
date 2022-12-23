@@ -39,7 +39,7 @@ class NotificationReaction:
 
     @property
     def user(self) -> LiteUser:
-        return LiteUser(self.__reaction['user'])
+        return LiteUser(self.__reaction['user'], client=self.__client)
 
     @property
     def note(self) -> Note:

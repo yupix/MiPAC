@@ -74,10 +74,11 @@ class Header:
 
 
 class NoteReaction:
-    __slots__ = ('__reaction',)
+    __slots__ = ('__reaction', '__client')
 
-    def __init__(self, reaction: INoteReaction):
+    def __init__(self, reaction: INoteReaction, *, client: ClientActions):
         self.__reaction: INoteReaction = reaction
+        self.__client: ClientActions = client
 
     @property
     def id(self) -> str | None:
@@ -99,7 +100,7 @@ class NoteReaction:
 
     @property
     def user(self) -> LiteUser:
-        return LiteUser(self.__reaction['user'])
+        return LiteUser(self.__reaction['user'], client=self.__client)
 
 
 class Note:
@@ -149,7 +150,7 @@ class Note:
 
     @property
     def author(self) -> LiteUser:
-        return LiteUser(self.__note['user'])
+        return LiteUser(self.__note['user'], client=self._client)
 
     @property
     def reply_id(self) -> str:
