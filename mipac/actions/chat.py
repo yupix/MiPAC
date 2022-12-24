@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abc.action import AbstractAction
-from mipac.exception import ParameterError
+from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.chat import ChatMessage
 from mipac.types.chat import IChatMessage

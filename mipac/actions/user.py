@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Literal, Optional
 
-from mipac.exception import NotExistRequiredData, ParameterError
+from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.manager.note import NoteManager
 from mipac.models.user import UserDetailed

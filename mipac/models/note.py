@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Literal, Optional
 
-from mipac.exception import NotExistRequiredData
+from mipac.errors.base import NotExistRequiredData
 from mipac.models.lite.user import LiteUser
 from mipac.models.poll import Poll
 from mipac.types.note import INoteUpdated, INoteUpdatedDelete
