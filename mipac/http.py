@@ -6,12 +6,11 @@ from typing import Any, Literal, TypeVar
 import aiohttp
 
 from mipac import __version__
-from mipac.exception import APIError
+from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
 from mipac.types.user import IUserDetailed
 from mipac.util import (
     _from_json,
-    get_exception_from_id,
     remove_dict_empty,
     upper_to_lower,
 )
@@ -107,18 +106,9 @@ class HTTPClient:
                     data = upper_to_lower(data)
             if 300 > res.status >= 200:
                 return data  # type: ignore
-            if (
-                400
-                and isinstance(data, dict)
-                and data.get('error', {}).get('code')
-            ):
-                error_id = data.get('error', {}).get('id')
-                if error_id:
-                    raise get_exception_from_id(error_id)(data, res.status)
-                raise APIError(data, res.status)
             if 511 > res.status >= 300:
-                raise APIError(data, res.status)
-            raise APIError('HTTP ERROR')
+                APIError(data, res.status).raise_error()
+            APIError('HTTP ERROR', res.status).raise_error()
 
     async def close_session(self) -> None:
         await self._session.close()

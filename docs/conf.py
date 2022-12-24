@@ -8,6 +8,7 @@
 
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath('../'))
 
 project = 'MiPAC'
@@ -19,11 +20,16 @@ sys.path.append(os.path.abspath('extensions'))
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'sphinxcontrib_trio', 'sphinx.ext.autosummary', 'sphinx.ext.todo']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'sphinxcontrib_trio',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.todo',
+]
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
 
 
 # -- Options for HTML output -------------------------------------------------

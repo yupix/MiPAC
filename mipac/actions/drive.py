@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Optional
 
 from mipac.abc.action import AbstractAction
-from mipac.exception import ParameterError
+from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.types.drive import IDriveFile
 from mipac.util import remove_dict_empty
