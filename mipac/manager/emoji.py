@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from mipac.abc.manager import AbstractManager
+from mipac.abstract.manager import AbstractManager
 from mipac.errors.base import NotExistRequiredData
 from mipac.http import HTTPClient, Route
 from mipac.util import check_multi_arg

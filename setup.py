@@ -21,7 +21,7 @@ extras_require = {
 
 packages = [
     'mipac',
-    'mipac.abc',
+    'mipac.abstract',
     'mipac.actions',
     'mipac.core',
     'mipac.core.models',

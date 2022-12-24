@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.abc.action import AbstractAction
+from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
 from mipac.models.follow import FollowRequest
 from mipac.types.follow import IFollowRequest

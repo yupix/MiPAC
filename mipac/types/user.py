@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, List, Literal, TypedDict
 
 if TYPE_CHECKING:
-    from mipac.types.channel import IChannel
     from mipac.types.emoji import ICustomEmojiLite
     from mipac.types.instance import IInstanceLite
     from mipac.types.note import INote
