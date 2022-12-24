@@ -18,4 +18,4 @@ class PartialReaction:
 
     @property
     def user_id(self) -> str:
-        return self.__reaction['body']['user_id']
+        return self.__reaction['body']['body']['user_id']
