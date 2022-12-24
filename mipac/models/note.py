@@ -6,6 +6,8 @@ from typing import TYPE_CHECKING, Literal, Optional
 from mipac.exception import NotExistRequiredData
 from mipac.models.lite.user import LiteUser
 from mipac.models.poll import Poll
+from mipac.types.note import INoteUpdated, INoteUpdatedDelete
+from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.actions.note import ClientNoteActions
@@ -15,12 +17,20 @@ if TYPE_CHECKING:
     from mipac.types.emoji import ICustomEmojiLite
     from mipac.types.note import INote, INoteReaction
 
-__all__ = (
-    'Note',
-    'Follow',
-    'Header',
-    'NoteReaction',
-)
+__all__ = ('Note', 'Follow', 'Header', 'NoteReaction', 'NoteDeleted')
+
+
+class NoteDeleted:
+    def __init__(self, data: INoteUpdated[INoteUpdatedDelete]) -> None:
+        self.__data = data
+
+    @property
+    def note_id(self) -> str:
+        return self.__data['body']['id']
+
+    @property
+    def deleted_at(self) -> datetime:
+        return str_to_datetime(self.__data['body']['body']['deleted_at'])
 
 
 class Follow:
@@ -132,9 +142,7 @@ class Note:
 
     @property
     def created_at(self) -> datetime:
-        return datetime.strptime(
-            self.__note['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
-        )
+        return str_to_datetime(self.__note['created_at'])
 
     @property
     def content(self) -> str | None:

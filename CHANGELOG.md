@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- added `NoteDeleted` class.
+- added `INoteUpdatedDeleteBody` class.
+- added `INoteUpdatedDelete` class.
 - `str_to_datetime` 関数を追加
 
 ### Fixed
