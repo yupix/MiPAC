@@ -1,5 +1,6 @@
 # noqa: F403, F401
 
+from .admin import *
 from .ad import *
 from .chart import *
 from .chat import *
@@ -10,6 +11,7 @@ from .favorite import *
 from .file import *
 from .follow import *
 from .moderator import *
+from .my import *
 from .note import *
 from .page import *
 from .reaction import *

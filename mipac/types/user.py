@@ -10,7 +10,6 @@ if TYPE_CHECKING:
     from mipac.types.page import IPage
 __all__ = (
     'IUserRequired',
-    'IChannel',
     'ILiteUser',
     'IUserDetailed',
     'IUserDetailedField',

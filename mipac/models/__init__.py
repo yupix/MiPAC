@@ -1,18 +1,12 @@
-from .drive import File, FileProperties, Folder
-from .note import Follow, Header, Note, NoteReaction, Poll
-from .notification import NotificationReaction
-from .user import FollowRequest, UserDetailed
-
-__all__ = (
-    'FileProperties',
-    'File',
-    'Folder',
-    'UserDetailed',
-    'FollowRequest',
-    'Note',
-    'Poll',
-    'NotificationReaction',
-    'Follow',
-    'Header',
-    'NoteReaction',
-)
+from .lite import *
+from .channel import *
+from .chat import *
+from .drive import *
+from .emoji import *
+from .follow import *
+from .instance import *
+from .note import *
+from .notification import *
+from .poll import *
+from .reaction import *
+from .user import *
