@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## Added
+
+- None
+
+## [0.3.1] 2022-12-24
+
 ### Added
 
 - added `NoteDeleted` class.
