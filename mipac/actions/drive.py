@@ -5,12 +5,12 @@ from typing import TYPE_CHECKING, Optional
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
+from mipac.models.drive import File, Folder
 from mipac.types.drive import IDriveFile
 from mipac.util import remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
-    from mipac.models.drive import File, Folder
 
 __all__ = ('DriveActions', 'FileActions', 'FolderActions')
 
@@ -117,6 +117,55 @@ class FileActions(AbstractAction):
             Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
         )
         return [File(i, client=self.__client) for i in res]
+
+    async def upload_file(
+        self,
+        file: str,
+        file_name: Optional[str] = None,
+        folder_id: Optional[str] = None,
+        comment: Optional[str] = None,
+        is_sensitive: bool = False,
+        force: bool = False,
+    ) -> File:
+        """
+        ファイルをアップロードします
+
+        Parameters
+        ----------
+        file : str
+            アップロードするファイル
+        file_name : Optional[str], default=None
+            アップロードするファイルの名前
+        folder_id : Optional[str], default=None
+            アップロードするフォルダーのID
+        comment : Optional[str], default=None
+            アップロードするファイルのコメント
+        is_sensitive : bool, default=False
+            アップロードするファイルがNSFWかどうか
+        force : bool, default=False
+            アップロードするファイルが同名のファイルを上書きするかどうか
+
+        Returns
+        -------
+        File
+            アップロードしたファイルの情報
+        """
+        file_byte = open(file, 'rb') if file else None
+        data = {
+            'file': file_byte,
+            'name': file_name,
+            'folderId': folder_id,
+            'comment': comment,
+            'isSensitive': is_sensitive,
+            'force': force,
+        }
+        res: IDriveFile = await self.__session.request(
+            Route('POST', '/api/drive/files/create'),
+            data=data,
+            auth=True,
+            lower=True,
+        )
+        return File(res, client=self.__client)
 
 
 class FolderActions(AbstractAction):

@@ -8,6 +8,7 @@ from mipac.http import HTTPClient, Route
 from mipac.manager.favorite import FavoriteManager
 from mipac.manager.file import MiFile
 from mipac.manager.reaction import ReactionManager
+from mipac.models.drive import File
 from mipac.models.note import Note, NoteReaction
 from mipac.models.poll import Poll
 from mipac.types.note import ICreatedNote, INote
@@ -32,12 +33,21 @@ def create_note_body(
     reply_id: Optional[str] = None,
     renote_id: Optional[str] = None,
     channel_id: Optional[str] = None,
-    files: Optional[list[MiFile]] = None,
+    files: Optional[list[MiFile | File | str]] = None,
     poll: Optional[Poll] = None,
 ):
     file_ids = None
     if files:
-        file_ids = [file.file_id for file in files]
+        file_ids = []
+        for file in files:
+            if isinstance(file, MiFile):
+                file_ids.append(file.file_id)
+            elif isinstance(file, File):
+                file_ids.append(file.id)
+            elif isinstance(file, str):
+                file_ids.append(file)
+            else:
+                raise ParameterError('files must be MiFile or str or File')
 
     body = {
         'visibility': visibility,
@@ -181,7 +191,7 @@ class ClientNoteActions(AbstractAction):
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
-        file_ids: Optional[list[str]] = None,
+        files: Optional[list[MiFile | File | str]] = None,
         poll: Optional[Poll] = None,
         reply_id: Optional[str] = None,
     ) -> Note:
@@ -194,11 +204,12 @@ class ClientNoteActions(AbstractAction):
             visibility=visibility,
             visible_user_ids=visible_user_ids,
             extract_emojis=extract_emojis,
-            extract_hashtags=extract_mentions,
+            extract_hashtags=extract_hashtags,
             extract_mentions=extract_mentions,
             poll=poll,
             local_only=local_only,
             reply_id=reply_id,
+            files=files,
         )
         print(body)
         res: ICreatedNote = await self._session.request(
@@ -219,7 +230,7 @@ class ClientNoteActions(AbstractAction):
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
-        file_ids: Optional[list[str]] = None,
+        files: Optional[list[MiFile | File | str]] = None,
         poll: Optional[Poll] = None,
         note_id: Optional[str] = None,
     ) -> Note:
@@ -244,7 +255,7 @@ class ClientNoteActions(AbstractAction):
             Whether to expand the hashtag
         extract_emojis: bool, default=True
             Whether to expand the emojis
-        file_ids: Optional[list[str]], default=None
+        files: Optional[list[MiFile | File | str]], default=None
             The ID list of files to be attached
         poll: Optional[Poll], default=None
             Questionnaire to be created
@@ -260,11 +271,12 @@ class ClientNoteActions(AbstractAction):
             visibility=visibility,
             visible_user_ids=visible_user_ids,
             extract_emojis=extract_emojis,
-            extract_hashtags=extract_mentions,
+            extract_hashtags=extract_hashtags,
             extract_mentions=extract_mentions,
             poll=poll,
             local_only=local_only,
             renote_id=note_id,
+            files=files,
         )
         res: ICreatedNote = await self._session.request(
             Route('POST', '/api/notes/create'),
@@ -305,7 +317,7 @@ class NoteActions(ClientNoteActions):
         reply_id: Optional[str] = None,
         renote_id: Optional[str] = None,
         channel_id: Optional[str] = None,
-        files: Optional[list[MiFile]] = None,
+        files: Optional[list[MiFile | File | str]] = None,
         poll: Optional[Poll] = None,
     ) -> Note:
         """
@@ -336,7 +348,7 @@ class NoteActions(ClientNoteActions):
             リノート先のid, by default None
         channel_id : Optional[str], optional
             チャンネルid, by default None
-        files : list[MiFile], optional
+        files : list[MiFile | File | str], optional
             添付するファイルのリスト, by default None
         poll : Optional[Poll], optional
             アンケート, by default None
