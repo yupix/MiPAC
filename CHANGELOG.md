@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.0] 2022-12-24
+
+### Fixed
+
+- fix `INoteUpdated` type
+
+### Changed
+
+- **BREAKING CHANGE** Required Python version is 3.11
+
 ## [0.2.8] 2022-12-23
 
 ### Added
