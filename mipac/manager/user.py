@@ -28,6 +28,13 @@ class UserManager(AbstractManager):
 
     @property
     def action(self) -> UserActions:
+        """ユーザーに対するアクション
+
+        Returns
+        -------
+        UserActions
+            ユーザーに対するアクションを行うクラス
+        """
         return UserActions(
             session=self.__session, client=self.__client, user=self.user
         )

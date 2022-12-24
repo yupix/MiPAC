@@ -4,14 +4,13 @@ from typing import TYPE_CHECKING, Literal, Optional
 
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.manager.note import NoteManager
 from mipac.models.user import UserDetailed
 from mipac.util import cache, check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
-    from mipac.models.note import Note
     from mipac.models.lite.user import LiteUser
+    from mipac.models.note import Note
 
 __all__ = ['UserActions']
 
@@ -26,7 +25,6 @@ class UserActions:
         self.__session: HTTPClient = session
         self.__user: Optional[LiteUser] = user
         self.__client: ClientActions = client
-        self.note: NoteManager = NoteManager(session=session, client=client)
 
     async def get_me(self) -> UserDetailed:
         """

@@ -3,7 +3,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Optional
 
 from mipac.abstract.manager import AbstractManager
-from mipac.http import HTTPClient, Route
+from mipac.actions.favorite import FavoriteActions
+from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
@@ -21,24 +22,17 @@ class FavoriteManager(AbstractManager):
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
 
-    async def add(self, note_id: Optional[str] = None) -> bool:
-        note_id = note_id or self.__note_id
-        data = {'noteId': note_id}
-        return bool(
-            await self.__session.request(
-                Route('POST', '/api/notes/favorites/create'),
-                json=data,
-                auth=True,
-            )
-        )
+    @property
+    def action(self) -> FavoriteActions:
+        """お気に入りに関するアクション
 
-    async def remove(self, note_id: Optional[str] = None) -> bool:
-        note_id = note_id or self.__note_id
-        data = {'noteId': note_id}
-        return bool(
-            await self.__session.request(
-                Route('POST', '/api/notes/favorites/delete'),
-                json=data,
-                auth=True,
-            )
+        Returns
+        -------
+        ReactionActions
+            お気に入りに対するアクションを行うクラス
+        """
+        return FavoriteActions(
+            note_id=self.__note_id,
+            session=self.__session,
+            client=self.__client,
         )

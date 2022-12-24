@@ -1,29 +1,28 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
-from mipac.abstract.manager import AbstractManager
-from mipac.http import HTTPClient, Route
+from mipac.abstract.action import AbstractAction
+from mipac.http import Route
 
 if TYPE_CHECKING:
-    from mipac.client import ClientActions
+    from mipac.http import HTTPClient
+    from mipac.manager.client import ClientActions
 
-__all__ = ('AdminModeratorManager',)
 
-
-class AdminModeratorManager(AbstractManager):
+class AdminModeratorActions(AbstractAction):
     def __init__(
         self,
-        user_id: Optional[str] = None,
+        user_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions
     ):
-        self.__user_id: Optional[str] = user_id
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
+        self.__user_id: str | None = user_id
 
-    async def add(self, user_id: Optional[str] = None) -> bool:
+    async def add(self, user_id: str | None = None) -> bool:
         """
         Add a user as a moderator
 
@@ -48,7 +47,7 @@ class AdminModeratorManager(AbstractManager):
         )
         return bool(res)
 
-    async def remove(self, user_id: Optional[str] = None) -> bool:
+    async def remove(self, user_id: str | None = None) -> bool:
         """
         Unmoderate a user
 

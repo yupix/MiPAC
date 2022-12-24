@@ -9,11 +9,7 @@ from mipac import __version__
 from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
 from mipac.types.user import IUserDetailed
-from mipac.util import (
-    _from_json,
-    remove_dict_empty,
-    upper_to_lower,
-)
+from mipac.util import _from_json, remove_dict_empty, upper_to_lower
 
 
 class _MissingSentinel:

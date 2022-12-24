@@ -1,14 +1,14 @@
 from typing import TypedDict
 
 __all__ = (
-    'ActiveUsersChartPayload',
-    'DriveLocalChartPayload',
-    'DriveRemoteChartPayload',
-    'DriveChartPayload',
+    'IActiveUsersChart',
+    'IDriveLocalChart',
+    'IDriveRemoteChart',
+    'IDriveChart',
 )
 
 
-class ActiveUsersChartPayload(TypedDict):
+class IActiveUsersChart(TypedDict):
     read_write: list[int]
     read: list[int]
     write: list[int]
@@ -20,7 +20,7 @@ class ActiveUsersChartPayload(TypedDict):
     registered_outside_year: list[int]
 
 
-class DriveLocalChartPayload(TypedDict):
+class IDriveLocalChart(TypedDict):
     total_count: list[int]
     total_size: list[int]
     inc_count: list[int]
@@ -29,7 +29,7 @@ class DriveLocalChartPayload(TypedDict):
     dec_size: list[int]
 
 
-class DriveRemoteChartPayload(TypedDict):
+class IDriveRemoteChart(TypedDict):
     total_count: list[int]
     total_size: list[int]
     inc_count: list[int]
@@ -38,6 +38,6 @@ class DriveRemoteChartPayload(TypedDict):
     dec_size: list[int]
 
 
-class DriveChartPayload(TypedDict):
-    local: DriveLocalChartPayload
-    remote: DriveRemoteChartPayload
+class IDriveChart(TypedDict):
+    local: IDriveLocalChart
+    remote: IDriveRemoteChart

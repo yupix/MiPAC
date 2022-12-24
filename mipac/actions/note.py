@@ -5,9 +5,7 @@ from typing import TYPE_CHECKING, AsyncIterator, Optional
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.manager.favorite import FavoriteManager
-from mipac.manager.file import MiFile
-from mipac.manager.reaction import ReactionManager
+from mipac.file import MiFile
 from mipac.models.drive import File
 from mipac.models.note import Note, NoteReaction
 from mipac.models.poll import Poll
@@ -176,10 +174,9 @@ class ClientNoteActions(AbstractAction):
         self, reaction: str, note_id: Optional[str] = None
     ) -> list[NoteReaction]:
         note_id = note_id or self._note_id
-        return await ReactionManager(
-            note_id=note_id, client=self._client, session=self._session
-        ).get_reaction(reaction)
-        # TODO: self.__clientを使ったインスタンス生成に変えないと循環インポートの原因になりかねない
+        return await self._client.note.reaction.action.get_reaction(
+            reaction
+        )  # TODO: note.reactionのインタンスを新規作成出来るように
 
     async def reply(
         self,
@@ -296,12 +293,7 @@ class NoteActions(ClientNoteActions):
         session: HTTPClient,
         client: ClientActions
     ):
-        self.favorite = FavoriteManager(
-            note_id=note_id, session=session, client=client
-        )
-        self.reaction = ReactionManager(
-            note_id=note_id, session=session, client=client
-        )
+
         super().__init__(note_id=note_id, session=session, client=client)
 
     async def send(

@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import TYPE_CHECKING, Literal
 
 from mipac.models.lite.instance import LiteInstance
@@ -7,8 +8,8 @@ from mipac.types.user import ILiteUser
 from mipac.util import deprecated
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
     from mipac.actions.user import UserActions
+    from mipac.manager.client import ClientActions
 
 
 class LiteUser:

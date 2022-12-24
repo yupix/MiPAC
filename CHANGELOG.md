@@ -9,8 +9,56 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Added
 
+- 💡 added DocString.
+- ✨ added `AdminEmojiActions` class.
+- ✨ added `AdminManager` class.
+- ✨ added `AdminModeratorManager` class.
+- ✨ added `ActiveUsersChart` class.
+- ✨ added `IDriveChart` class.
+- ✨ added `IDriveLocalChart` class.
+- ✨ added `IDriveRemoteChart` class.
+- ✨ added attribute `is_official` at `Config` class.
+    - 💡 became `is_ayuskey` attribute is deprecated(I'll remove with v0.4.0)
 - ✨ added `get_exception_from_id` function.
 - ✨ Return an exception appropriate for the error encountered.
+
+## Changed
+
+- 🚚 rename `ActiveUsersChartPayload` class to `IActiveUsersChart` class.
+- 🚚 rename `DriveLocalChartPayload` class to `IDriveLocalChart` class.
+- 🚚 rename `DriveRemoteChartPayload` class to `IDriveRemoteChart` .class.
+- 🚚 rename `DriveChartPayload` class to `IDriveChart` class.
+- 💥 **BREAKING CHANGE**
+    - Moved the reaction attribute of `ClientActions` to `NoteManager`.
+        - 💡 Change `api.reaction` to `api.note.reaction`.
+    - Moved methods from `AdminEmojiManager` to `AdminEmojiActions`.
+        - 💡 Change `api.admin.emoji.add` to `api.admin.emoji.action.add`.
+    - Moved methods from `AdminModeratorManager` to `AdminModeratorActions`.
+        - 💡 Change `api.admin.moderator.add` to `api.admin.moderator.action.add`.
+    - Moved methods from `ChartManager` to `ChartActions`.
+        - 💡 Change `api.chart.get_active_user` to `api.chat.action.get_active_user`.
+    - Moved methods from `FollowManager` to `FollowActions`.
+        - 💡 Change `api.user.follow.add` to `api.user.follow.action.add`.
+    - Moved methods from `FollowRequestManager` to `FollowRequestActions`.
+        - 💡 `api.user.follow.action.get_all`.
+    - Moved some attributes of `NoteActions` to `NoteManager`.
+        - 💡 Change `api.note.action.reaction.add` to `api.note.reaction.action.add`.
+    - Moved the reaction attribute of `NoteActions` to `ClientNoteManager`.
+        - 💡 Change `api.note.action.reaction` to `api.note.reaction.action`.
+        - 💡 Change `api.note.action.favorite` to `api.note.favorite.action`.
+
+## Fixed
+
+- 🐛 can't delete emoji with v12.
+
+## Removed
+
+- 🔥 The following attributes have been removed `api.user.action.note`
+- 🔥 Delete `RawActiveUsersChart` class.
+- 🔥 Delete `RawDriveLocalChart` class.
+- 🔥 Delete `RawDriveRemoteChart` class.
+- 🔥 Delete `RawDriveChart` class.
+
 
 ## [0.3.1] 2022-12-24
 

@@ -5,6 +5,8 @@ from typing import TYPE_CHECKING, Optional
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.note import ClientNoteActions, NoteActions
 from mipac.http import HTTPClient, Route
+from mipac.manager.favorite import FavoriteManager
+from mipac.manager.reaction import ReactionManager
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
@@ -18,9 +20,15 @@ class ClientNoteManager(AbstractManager):
         session: HTTPClient,
         client: ClientActions
     ):
+        self.__note_id = note_id
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
-        self.__note_id = note_id
+        self.reaction: ReactionManager = ReactionManager(
+            note_id=note_id, session=session, client=client
+        )
+        self.favorite = FavoriteManager(
+            note_id=note_id, session=session, client=client
+        )
 
     @property
     def action(self) -> ClientNoteActions:
@@ -41,10 +49,18 @@ class NoteManager(AbstractManager):
         session: HTTPClient,
         client: ClientActions
     ):
+        self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
-        self.__note_id = note_id
-        self.client = ClientNoteManager(session=session, client=client)
+        self.reaction: ReactionManager = ReactionManager(
+            note_id=note_id, session=session, client=client
+        )
+        self.favorite = FavoriteManager(
+            note_id=note_id, session=session, client=client
+        )
+        self._client: ClientNoteManager = ClientNoteManager(
+            note_id=note_id, session=session, client=client
+        )
 
     def create_client_note_manager(self, note_id: str) -> ClientNoteManager:
         return ClientNoteManager(
