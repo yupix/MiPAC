@@ -16,13 +16,13 @@ class INoteUpdated(TypedDict, Generic[T]):
 class INoteUpdatedReactionBody(TypedDict):
     reaction: str
     emoji: ICustomEmojiLite
+    user_id: str
 
 
 class INoteUpdatedReaction(TypedDict):
     id: str
-    type: Literal['reacted']
+    type: Literal['reacted', 'unreacted']
     body: INoteUpdatedReactionBody
-    user_id: str
 
 
 class GeoPayload(TypedDict):
