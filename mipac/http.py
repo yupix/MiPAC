@@ -107,7 +107,8 @@ class HTTPClient:
             if 300 > res.status >= 200:
                 return data  # type: ignore
             if 511 > res.status >= 300:
-                APIError(data, res.status).raise_error()
+                if isinstance(data, dict):
+                    APIError(data, res.status).raise_error()
             APIError('HTTP ERROR', res.status).raise_error()
 
     async def close_session(self) -> None:
