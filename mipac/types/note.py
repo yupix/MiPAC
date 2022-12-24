@@ -13,6 +13,16 @@ class INoteUpdated(TypedDict, Generic[T]):
     body: T
 
 
+class INoteUpdatedDeleteBody(TypedDict):
+    deleted_at: str
+
+
+class INoteUpdatedDelete(TypedDict):
+    id: str
+    type: Literal['deleted']
+    body: INoteUpdatedDeleteBody
+
+
 class INoteUpdatedReactionBody(TypedDict):
     reaction: str
     emoji: ICustomEmojiLite
