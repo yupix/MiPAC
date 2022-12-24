@@ -12,3 +12,15 @@ class NotSupportedError(Exception):
 
 class APIError(Exception):
     """APIのエラー"""
+
+
+class InvalidParamError(Exception):
+    """パラメーターが無効"""
+
+
+class NoSuchNoteError(Exception):
+    """指定したIdのノートが見つからない"""
+
+
+class NoSuchUserError(Exception):
+    """指定したIdのユーザーが見つからない"""

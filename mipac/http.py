@@ -9,7 +9,12 @@ from mipac import __version__
 from mipac.exception import APIError
 from mipac.types.endpoints import ENDPOINTS
 from mipac.types.user import IUserDetailed
-from mipac.util import _from_json, remove_dict_empty, upper_to_lower
+from mipac.util import (
+    _from_json,
+    get_exception_from_id,
+    remove_dict_empty,
+    upper_to_lower,
+)
 
 
 class _MissingSentinel:
@@ -64,7 +69,7 @@ class HTTPClient:
     def session(self) -> aiohttp.ClientSession:
         return self._session
 
-    async def request(self, route: Route, **kwargs) -> R:
+    async def request(self, route: Route, auth: bool = False, **kwargs) -> R:
         headers: dict[str, str] = {
             'User-Agent': self.user_agent,
         }
@@ -75,7 +80,7 @@ class HTTPClient:
             headers['Content-Type'] = 'application/json'
             kwargs['json'] = kwargs.pop('json')
 
-        if kwargs.get('auth') and kwargs.pop('auth'):
+        if auth:
             key = (
                 'json' if 'json' in kwargs or 'data' not in kwargs else 'data'
             )
@@ -102,6 +107,15 @@ class HTTPClient:
                     data = upper_to_lower(data)
             if 300 > res.status >= 200:
                 return data  # type: ignore
+            if (
+                400
+                and isinstance(data, dict)
+                and data.get('error', {}).get('code')
+            ):
+                error_id = data.get('error', {}).get('id')
+                if error_id:
+                    raise get_exception_from_id(error_id)(data, res.status)
+                raise APIError(data, res.status)
             if 511 > res.status >= 300:
                 raise APIError(data, res.status)
             raise APIError('HTTP ERROR')

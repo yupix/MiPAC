@@ -16,6 +16,8 @@ from urllib.parse import urlencode
 import aiohttp
 from _operator import itemgetter
 
+from mipac.types.endpoints import EXCEPTION_ID_MAP
+
 try:
     import orjson  # type: ignore
 except ModuleNotFoundError:
@@ -45,6 +47,26 @@ else:
     _from_json = json.loads
 
 DEFAULT_CACHE: dict[str, list[dict[str, Any]]] = {}
+
+
+def get_exception_from_id(exception_id):
+    """
+    Returns the exception class corresponding to the given exception ID.
+
+    Parameters
+    ----------
+    exception_id : int
+        The ID of the exception.
+
+    Returns
+    -------
+    Exception
+        The exception class corresponding to the given ID.
+    """
+    for exception_class, exception_ids in EXCEPTION_ID_MAP.items():
+        if exception_id in exception_ids:
+            return exception_class
+    return Exception
 
 
 def str_to_datetime(
