@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Added
 
-- None
+- ✨ added `get_exception_from_id` function.
+- ✨ Return an exception appropriate for the error encountered.
 
 ## [0.3.1] 2022-12-24
 
