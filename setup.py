@@ -16,7 +16,7 @@ extras_require = {
     'dev': ['axblack', 'isort', 'mypy', 'flake8', 'pre-commit'],
     'ci': ['flake8', 'mypy'],
     'speed': ['orjson'],
-    'doc': ['sphinx', 'furo', 'sphinxcontrib_trio']
+    'doc': ['sphinx', 'furo', 'sphinxcontrib_trio'],
 }
 
 packages = [
@@ -29,7 +29,7 @@ packages = [
     'mipac.manager.admin',
     'mipac.models',
     'mipac.types',
-    'mipac.models.lite'
+    'mipac.models.lite',
 ]
 
 setup(
@@ -41,14 +41,14 @@ setup(
     author='yupix',
     author_email='yupi0982@outlook.jp',
     license='MIT',
-    python_requires='>=3.10, <4.0',
+    python_requires='>=3.11, <4.0',
     description=description,
     long_description=long_description,
     long_description_content_type='text/markdown',
     packages=packages,
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
-        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Natural Language :: Japanese',
         'License :: OSI Approved :: MIT License',
     ],
