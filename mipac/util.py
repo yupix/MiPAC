@@ -35,6 +35,7 @@ __all__ = (
     'str_lower',
     'bool_to_string',
     '_from_json',
+    'str_to_datetime',
 )
 
 
@@ -44,6 +45,25 @@ else:
     _from_json = json.loads
 
 DEFAULT_CACHE: dict[str, list[dict[str, Any]]] = {}
+
+
+def str_to_datetime(
+    data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ'
+) -> datetime:
+    """
+    Parameters
+    ----------
+    data : str
+        datetimeに変更したい文字列
+    format : str
+        dataのフォーマット
+
+    Returns
+    -------
+    datetime
+        変換後のデータ
+    """
+    return datetime.strptime(data, format)
 
 
 def deprecated(func):

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- `str_to_datetime` 関数を追加
+
 ### Fixed
 
 - `PartialReaction` クラスで `user_id` が取得できない
