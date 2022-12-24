@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+- `PartialReaction` クラスで `user_id` が取得できない
+- `INoteUpdatedReaction` の型が間違っている
+
 ## [0.3.0] 2022-12-24
 
 ### Fixed
