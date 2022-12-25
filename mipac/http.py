@@ -100,6 +100,8 @@ class HTTPClient:
                     ]
                 if isinstance(data, dict):
                     data = upper_to_lower(data)
+            if res.status == 204 and data is None:
+                return True  # type: ignore
             if 300 > res.status >= 200:
                 return data  # type: ignore
             if 511 > res.status >= 300:
