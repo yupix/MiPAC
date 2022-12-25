@@ -7,9 +7,19 @@ from mipac.errors.base import APIError, ParameterError
 from mipac.file import MiFile
 from mipac.http import HTTPClient, Route
 from mipac.models.drive import File
-from mipac.models.note import Note, NoteReaction, NoteTranslateResult
+from mipac.models.note import (
+    Note,
+    NoteReaction,
+    NoteState,
+    NoteTranslateResult,
+)
 from mipac.models.poll import MiPoll, Poll
-from mipac.types.note import ICreatedNote, INote, INoteTranslateResult
+from mipac.types.note import (
+    ICreatedNote,
+    INote,
+    INoteState,
+    INoteTranslateResult,
+)
 from mipac.util import cache, check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
@@ -88,6 +98,14 @@ class ClientNoteActions(AbstractAction):
         self._note_id: Optional[str] = note_id
         self._session: HTTPClient = session
         self._client: ClientActions = client
+
+    async def get_state(self, note_id: str | None = None) -> NoteState:
+        note_id = note_id or self._note_id
+        data = {'noteId': note_id}
+        res: INoteState = await self._session.request(
+            Route('POST', '/api/notes/state'), auth=True, json=data
+        )
+        return NoteState(res)
 
     async def add_clips(
         self, clip_id: str, note_id: Optional[str] = None

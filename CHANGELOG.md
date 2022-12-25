@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Added
 
 - 💡 added DocString.
+
+- ✨ added `get_state` method a `ClientNoteActions` class.
+- ✨ added `INoteState` class.
+- ✨ added `NoteState` class.
 - ✨ added `IBasePoll` class.
 - ✨ added `ICreatePoll` class.
 - ✨ added `MiPoll` class.
