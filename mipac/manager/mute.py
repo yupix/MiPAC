@@ -1,7 +1,13 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.mute import MuteActions
 from mipac.http import HTTPClient
-from mipac.manager.client import ClientActions
+
+if TYPE_CHECKING:
+    from mipac.manager.client import ClientActions
 
 
 class MuteManager(AbstractManager):
