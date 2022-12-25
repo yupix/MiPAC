@@ -6,6 +6,7 @@ from mipac.abstract.manager import AbstractManager
 from mipac.actions.user import UserActions
 from mipac.http import HTTPClient
 from mipac.manager.follow import FollowManager
+from mipac.manager.mute import MuteManager
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
@@ -23,11 +24,15 @@ class UserManager(AbstractManager):
         session: HTTPClient,
         client: ClientActions
     ):
+        user_id: str | None = user.id if user else None
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
         self.user: LiteUser | None = user
         self.follow: FollowManager = FollowManager(
-            user_id=user.id if user else None, session=session, client=client
+            user_id=user_id, session=session, client=client
+        )
+        self.mute: MuteManager = MuteManager(
+            user_id=user_id, session=session, client=client
         )
 
     @property

@@ -9,3 +9,4 @@ from .note import *
 from .poll import *
 from .reaction import *
 from .user import *
+from .mute import *

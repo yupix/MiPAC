@@ -8,10 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ## Added
-
 - ✨ added `get_children` method at `ClientNoteActions` class.
 - ✨ added `invalidate` method at `FollowActions` class.
 - ✨ added `cancel` method at `FollowRequestActions` class.
+- ✨ added `mute` attribute at `UserManager` class.
+- ✨ added `MuteManager` class.
+- ✨ added `MuteActions` class.
 
 ## Removed
 
