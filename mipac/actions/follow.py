@@ -67,10 +67,10 @@ class FollowActions(AbstractAction):
         user_id = user_id or self.__user_id
 
         data = {'userId': user_id}
-        res = await self.__session.request(
+        res: bool = await self.__session.request(
             Route('POST', '/api/following/delete'), json=data, auth=True
         )
-        return bool(res.status_code == 204 or 200)
+        return res
 
 
 class FollowRequestActions(AbstractAction):
