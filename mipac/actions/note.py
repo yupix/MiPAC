@@ -99,6 +99,27 @@ class ClientNoteActions(AbstractAction):
         self._session: HTTPClient = session
         self._client: ClientActions = client
 
+    async def un_renote(self, note_id: str | None = None) -> bool:
+        """
+        Releases the note renote for the specified Id
+
+        Parameters
+        ----------
+        note_id : str | None, optional
+            Target note Id., by default None
+
+        Returns
+        -------
+        bool
+            Whether the release was successful
+        """
+
+        body = {'noteId': note_id}
+        res: bool = await self._session.request(
+            Route('POST', '/api/notes/unrenote'), auth=True, json=body
+        )
+        return res
+
     async def get_children(
         self,
         limit: int = 100,

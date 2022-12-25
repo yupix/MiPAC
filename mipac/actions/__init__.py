@@ -4,9 +4,9 @@ from .chat import *
 from .drive import *
 from .favorite import *
 from .follow import *
+from .mute import *
 from .my import *
 from .note import *
 from .poll import *
 from .reaction import *
 from .user import *
-from .mute import *
