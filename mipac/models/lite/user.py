@@ -67,5 +67,5 @@ class LiteUser:
         )
 
     @property
-    def action(self) -> UserManager:
+    def api(self) -> UserManager:
         return self.__client._create_user_instance(self)
