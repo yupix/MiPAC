@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Literal, Optional
 from mipac.errors.base import NotExistRequiredData
 from mipac.models.lite.user import LiteUser
 from mipac.models.poll import Poll
-from mipac.types.note import INoteUpdated, INoteUpdatedDelete
+from mipac.types.note import INoteUpdated, INoteUpdatedDelete, INoteTranslateResult
 from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     from mipac.types.emoji import ICustomEmojiLite
     from mipac.types.note import INote, INoteReaction
 
-__all__ = ('Note', 'Follow', 'Header', 'NoteReaction', 'NoteDeleted')
+__all__ = ('Note', 'Follow', 'Header', 'NoteReaction', 'NoteDeleted', 'NoteTranslateResult')
 
 
 class NoteDeleted:
@@ -268,3 +268,25 @@ class Note:
         NoteActions
         """
         return self._client.note.create_client_note_manager(self.id).action
+
+
+class NoteTranslateResult:
+    """
+    NoteTranslateResultモデル
+
+    Parameters
+    ----------
+    translate_result: INoteTranslateResult
+        アクションを持たないNoteTranslationクラス
+    """
+
+    def __init__(self, translate_result: INoteTranslateResult):
+        self.__translate_result = translate_result
+
+    @property
+    def source_language(self):
+        return self.__translate_result['sourceLang']
+
+    @property
+    def text(self):
+        return self.__translate_result['text']

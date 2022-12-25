@@ -40,6 +40,10 @@ class Poll:
         return self.__poll['expires_at']
 
     @property
+    def expired_after(self) -> int:
+        return self.__poll['expired_after']
+
+    @property
     def choices(self) -> list[PollChoice]:
         return [
             PollChoice(i, client=self.__client) for i in self.__poll['choices']

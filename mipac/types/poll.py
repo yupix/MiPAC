@@ -16,4 +16,5 @@ class IPoll(TypedDict, total=False):
 
     multiple: bool
     expires_at: int
+    expired_after: int
     choices: list[IPollChoice]
