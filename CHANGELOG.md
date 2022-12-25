@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Added
 
+- ✨ added `get_children` method a `ClientNoteActions` class.
+
+## [0.3.99] 2022-12-25
+## Added
+
 - 💡 added DocString.
 - ✨ added `get_state` method a `ClientNoteActions` class.
 - ✨ added `INoteState` class.

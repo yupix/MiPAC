@@ -7,7 +7,7 @@ from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.drive import File, Folder
 from mipac.types.drive import IDriveFile
-from mipac.util import remove_dict_empty, bool_to_string
+from mipac.util import bool_to_string, remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions

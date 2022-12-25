@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncIterator, Optional
+from typing import TYPE_CHECKING, AsyncIterator
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import APIError, ParameterError
@@ -31,7 +31,7 @@ __all__ = ['NoteActions']
 def create_note_body(
     content: str | None = None,
     visibility: str = 'public',
-    visible_user_ids: Optional[list[str]] = None,
+    visible_user_ids: list[str] | None = None,
     cw: str | None = None,
     local_only: bool = False,
     extract_mentions: bool = True,
@@ -40,8 +40,8 @@ def create_note_body(
     reply_id: str | None = None,
     renote_id: str | None = None,
     channel_id: str | None = None,
-    files: Optional[list[MiFile | File | str]] = None,
-    poll: Optional[MiPoll] = None,
+    files: list[MiFile | File | str] | None = None,
+    poll: MiPoll | None = None,
 ):
     body = {
         'visibility': visibility,
@@ -98,6 +98,49 @@ class ClientNoteActions(AbstractAction):
         self._note_id: str | None = note_id
         self._session: HTTPClient = session
         self._client: ClientActions = client
+
+    async def get_children(
+        self,
+        limit: int = 100,
+        since_id: str | None = None,
+        untilId: str | None = None,
+        note_id: str | None = None,
+        all: bool = True,
+    ) -> AsyncIterator[Note]:
+
+        if limit > 100:
+            raise ParameterError('limit は100以下である必要があります')
+
+        async def request(body) -> list[Note]:
+            res: list[INote] = await self._session.request(
+                Route('POST', '/api/notes/children'),
+                lower=True,
+                auth=True,
+                json=body,
+            )
+            return [Note(note, client=self._client) for note in res]
+
+        note_id = note_id or self._note_id
+        data = {
+            'noteId': note_id,
+            'limit': limit,
+            'sinceId': since_id,
+            'untilId': untilId,
+        }
+        first_req = await request(data)
+        for note in first_req:
+            yield note
+
+        if all and len(first_req) == 100:
+            data['untilId'] = first_req[-1].id
+            while True:
+                res = await request(data)
+                if len(res) <= 100:
+                    for note in res:
+                        yield note
+                if len(res) == 0:
+                    break
+                data['untilId'] = res[-1].id
 
     async def get_state(self, note_id: str | None = None) -> NoteState:
         note_id = note_id or self._note_id
@@ -195,14 +238,14 @@ class ClientNoteActions(AbstractAction):
         self,
         content: str | None = None,
         visibility: str = 'public',
-        visible_user_ids: Optional[list[str]] = None,
+        visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
-        files: Optional[list[MiFile | File | str]] = None,
-        poll: Optional[MiPoll] = None,
+        files: list[MiFile | File | str] | None = None,
+        poll: MiPoll | None = None,
         reply_id: str | None = None,
     ) -> Note:
 
@@ -233,13 +276,13 @@ class ClientNoteActions(AbstractAction):
         self,
         content: str | None = None,
         visibility: str = 'public',
-        visible_user_ids: Optional[list[str]] = None,
+        visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
-        files: Optional[list[MiFile | File | str]] = None,
+        files: list[MiFile | File | str] | None = None,
         poll: MiPoll | None = None,
         note_id: str | None = None,
     ) -> Note:
@@ -252,7 +295,7 @@ class ClientNoteActions(AbstractAction):
             text
         visibility: str, default='public'
             Disclosure range
-        visible_user_ids: Optional[list[str]], default=None
+        visible_user_ids: list[str] | None, default=None
             List of users to be published
         cw: str | None, default=None
             Text to be displayed when warning is given
@@ -264,7 +307,7 @@ class ClientNoteActions(AbstractAction):
             Whether to expand the hashtag
         extract_emojis: bool, default=True
             Whether to expand the emojis
-        files: Optional[list[MiFile | File | str]], default=None
+        files: list[MiFile | File | str] | None, default=None
             The ID list of files to be attached
         poll: MiPoll | None, default=None
             Questionnaire to be created
@@ -343,7 +386,7 @@ class NoteActions(ClientNoteActions):
         self,
         content: str | None = None,
         visibility: str = 'public',
-        visible_user_ids: Optional[list[str]] = None,
+        visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
         extract_mentions: bool = True,
@@ -352,7 +395,7 @@ class NoteActions(ClientNoteActions):
         reply_id: str | None = None,
         renote_id: str | None = None,
         channel_id: str | None = None,
-        files: Optional[list[MiFile | File | str]] = None,
+        files: list[MiFile | File | str] | None = None,
         poll: MiPoll | None = None,
     ) -> Note:
         """
@@ -365,7 +408,7 @@ class NoteActions(ClientNoteActions):
         visibility : str, optional
             公開範囲, by default "public"
             Enum: "public" "home" "followers" "specified"
-        visible_user_ids : Optional[list[str]], optional
+        visible_user_ids : list[str] | None, optional
             公開するユーザー, by default None
         cw : str | None, optional
             閲覧注意の文字, by default None

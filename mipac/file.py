@@ -1,5 +1,3 @@
-
-
 class MiFile:
     __slots__ = (
         'path',

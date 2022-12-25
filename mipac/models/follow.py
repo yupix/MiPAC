@@ -6,8 +6,8 @@ from mipac.models.lite.user import LiteUser
 from mipac.types.follow import IFollowRequest
 
 if TYPE_CHECKING:
-    from mipac.manager.follow import FollowRequestManager
     from mipac.manager.client import ClientActions
+    from mipac.manager.follow import FollowRequestManager
 
 
 class FollowRequest:
