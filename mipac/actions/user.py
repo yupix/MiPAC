@@ -255,3 +255,47 @@ class UserActions:
                 if len(res) == 0:
                     break
                 times += 1
+
+    async def search_by_username_and_host(
+        self,
+        username: str,
+        host: str,
+        limit: int = 100,
+        detail: bool = True,
+    ) -> list[UserDetailed | LiteUser]:
+        """
+        ユーザーをユーザー名とインスタンスのホストで検索します。
+
+        Parameters
+        ----------
+        username : str
+            ユーザー名
+        host : str
+            インスタンスのホスト
+        limit : int, default=100
+            取得するユーザーの数
+        detail : bool, default=True
+            ユーザーの詳細情報を取得するかどうか
+
+        Returns
+        -------
+        list[UserDetailed | LiteUser]
+            ユーザーのリスト
+        """
+
+        if limit > 100:
+            raise ParameterError('limit は100以下である必要があります')
+
+        body = remove_dict_empty(
+            {
+                'username': username,
+                'host': host,
+                'limit': limit,
+                'detail': detail,
+            }
+        )
+        res = await self.__session.request(
+            Route('POST', '/api/users/search-by-username-and-host'), lower=True, auth=True, json=body
+        )
+        return [UserDetailed(user, client=self.__client) if detail
+                else LiteUser(user, client=self.__client) for user in res]
