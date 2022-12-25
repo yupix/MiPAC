@@ -10,7 +10,7 @@ from mipac.types.user import IFollowRequest, IUserDetailed, IUserDetailedField
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
 
-__all__ = ('UserDetailed', 'FollowRequest')
+__all__ = ('UserDetailed', 'FollowRequest', 'LiteUser')
 
 
 class FollowRequest:
@@ -54,24 +54,24 @@ class UserDetailed(LiteUser):
         return self.__detail['following_count']
 
     @property
-    def has_pending_follow_request_from_you(self) -> bool:
-        return self.__detail['has_pending_follow_request_from_you']
+    def has_pending_follow_request_from_you(self) -> bool | None:
+        return self.__detail.get('has_pending_follow_request_from_you')
 
     @property
-    def has_pending_follow_request_to_you(self) -> bool:
-        return self.__detail['has_pending_follow_request_to_you']
+    def has_pending_follow_request_to_you(self) -> bool | None:
+        return self.__detail.get('has_pending_follow_request_to_you')
 
     @property
     def is_admin(self) -> bool:
         return self.__detail['is_admin']
 
     @property
-    def is_blocked(self) -> bool:
-        return self.__detail['is_blocked']
+    def is_blocked(self) -> bool | None:
+        return self.__detail.get('is_blocked')
 
     @property
-    def is_blocking(self) -> bool:
-        return self.__detail['is_blocking']
+    def is_blocking(self) -> bool | None:
+        return self.__detail.get('is_blocking')
 
     @property
     def is_bot(self) -> bool:
@@ -82,12 +82,12 @@ class UserDetailed(LiteUser):
         return self.__detail['is_cat']
 
     @property
-    def is_followed(self) -> bool:
-        return self.__detail['is_followed']
+    def is_followed(self) -> bool | None:
+        return self.__detail.get('is_followed')
 
     @property
-    def is_following(self) -> bool:
-        return self.__detail['is_following']
+    def is_following(self) -> bool | None:
+        return self.__detail.get('is_following')
 
     @property
     def is_locked(self) -> bool:
@@ -98,8 +98,8 @@ class UserDetailed(LiteUser):
         return self.__detail['is_moderator']
 
     @property
-    def is_muted(self) -> bool:
-        return self.__detail['is_muted']
+    def is_muted(self) -> bool | None:
+        return self.__detail.get('is_muted')
 
     @property
     def is_silenced(self) -> bool:
@@ -197,3 +197,7 @@ class UserDetailed(LiteUser):
     @property
     def url(self) -> str | None:
         return self.__detail.get('url')
+
+    @property
+    def use_password_less_login(self) -> bool | None:
+        return self.__detail.get('use_password_less_login')
