@@ -10,6 +10,7 @@ from mipac.manager.drive import DriveManager
 from mipac.manager.my import MyManager
 from mipac.manager.note import NoteManager
 from mipac.manager.user import UserManager
+from mipac.manager.follow import FollowManager, FollowRequestManager
 
 if TYPE_CHECKING:
     from mipac.config import Config
@@ -30,6 +31,14 @@ class ClientActions:
         self.admin: AdminManager = AdminManager(session=session, client=self)
         self.drive: DriveManager = DriveManager(session=session, client=self)
         self.chart: ChartManager = ChartManager(session=session, client=self)
+        self.follow: FollowManager = FollowManager(
+            session=session,
+            client=self,
+        )
+        self.follow_request: FollowRequestManager = FollowRequestManager(
+            session=session,
+            client=self,
+        )
         self._config: Config = config
 
     def _create_user_instance(self, user: LiteUser) -> UserManager:
