@@ -13,3 +13,4 @@ from .note import *
 from .page import *
 from .reaction import *
 from .user import *
+from .poll import *

@@ -8,7 +8,7 @@ from mipac.http import HTTPClient, Route
 from mipac.file import MiFile
 from mipac.models.drive import File
 from mipac.models.note import Note, NoteReaction, NoteTranslateResult
-from mipac.models.poll import Poll
+from mipac.models.poll import MiPoll, Poll
 from mipac.types.note import ICreatedNote, INote, INoteTranslateResult
 
 __all__ = ['NoteActions']
@@ -32,7 +32,7 @@ def create_note_body(
     renote_id: Optional[str] = None,
     channel_id: Optional[str] = None,
     files: Optional[list[MiFile | File | str]] = None,
-    poll: Optional[Poll] = None,
+    poll: Optional[MiPoll] = None,
 ):
     body = {
         'visibility': visibility,
@@ -84,7 +84,7 @@ class ClientNoteActions(AbstractAction):
         note_id: Optional[str] = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientActions,
     ):
         self._note_id: Optional[str] = note_id
         self._session: HTTPClient = session
@@ -185,7 +185,7 @@ class ClientNoteActions(AbstractAction):
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
         files: Optional[list[MiFile | File | str]] = None,
-        poll: Optional[Poll] = None,
+        poll: Optional[MiPoll] = None,
         reply_id: Optional[str] = None,
     ) -> Note:
 
@@ -223,7 +223,7 @@ class ClientNoteActions(AbstractAction):
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
         files: Optional[list[MiFile | File | str]] = None,
-        poll: Optional[Poll] = None,
+        poll: MiPoll | None = None,
         note_id: Optional[str] = None,
     ) -> Note:
         """
@@ -249,7 +249,7 @@ class ClientNoteActions(AbstractAction):
             Whether to expand the emojis
         files: Optional[list[MiFile | File | str]], default=None
             The ID list of files to be attached
-        poll: Optional[Poll], default=None
+        poll: MiPoll | None, default=None
             Questionnaire to be created
         note_id: Optional[str], default=None
             Note IDs to target for renote and citations
@@ -281,9 +281,7 @@ class ClientNoteActions(AbstractAction):
 
     @cache(group='translate_note')
     async def translate(
-        self,
-        note_id: Optional[str] = None,
-        target_lang: str = 'en-US',
+        self, note_id: Optional[str] = None, target_lang: str = 'en-US',
     ) -> NoteTranslateResult:
         """
         Translate a note
@@ -308,7 +306,9 @@ class ClientNoteActions(AbstractAction):
         )
         if isinstance(res, dict):
             return NoteTranslateResult(res)
-        APIError(f'Translate Error: {res}', res if isinstance(res, int) else 204).raise_error()
+        APIError(
+            f'Translate Error: {res}', res if isinstance(res, int) else 204
+        ).raise_error()
 
 
 class NoteActions(ClientNoteActions):
@@ -317,7 +317,7 @@ class NoteActions(ClientNoteActions):
         note_id: Optional[str] = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientActions,
     ):
 
         super().__init__(note_id=note_id, session=session, client=client)
@@ -336,7 +336,7 @@ class NoteActions(ClientNoteActions):
         renote_id: Optional[str] = None,
         channel_id: Optional[str] = None,
         files: Optional[list[MiFile | File | str]] = None,
-        poll: Optional[Poll] = None,
+        poll: MiPoll | None = None,
     ) -> Note:
         """
         ノートを投稿します。
@@ -368,7 +368,7 @@ class NoteActions(ClientNoteActions):
             チャンネルid, by default None
         files : list[MiFile | File | str], optional
             添付するファイルのリスト, by default None
-        poll : Optional[Poll], optional
+        poll : MiPoll | None, optional
             アンケート, by default None
 
         Returns
@@ -490,7 +490,7 @@ class NoteActions(ClientNoteActions):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        all: bool = False
+        all: bool = False,
     ) -> AsyncIterator[Note]:
 
         if limit > 100:

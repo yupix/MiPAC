@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Added
 
 - 💡 added DocString.
+- ✨ added `IBasePoll` class.
+- ✨ added `ICreatePoll` class.
+- ✨ added `MiPoll` class.
+- ✨ added `PollManager` class.
+- ✨ added `PollActions` class.
 - ✨ added `AdminEmojiActions` class.
 - ✨ added `AdminManager` class.
 - ✨ added `AdminModeratorManager` class.
