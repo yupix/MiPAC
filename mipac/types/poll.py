@@ -1,6 +1,6 @@
 from typing import TypedDict
 
-__all__ = ('IPoll', 'IPollChoice')
+__all__ = ('IPoll', 'IPollChoice', 'ICreatePoll', 'IBasePoll')
 
 
 class IPollChoice(TypedDict):
@@ -9,12 +9,19 @@ class IPollChoice(TypedDict):
     votes: int
 
 
-class IPoll(TypedDict, total=False):
+class IBasePoll(TypedDict, total=False):
+    multiple: bool
+    expires_at: int
+    expired_after: int
+
+
+class ICreatePoll(IBasePoll, total=False):
+    choices: list[str]
+
+
+class IPoll(IBasePoll):
     """
     アンケート情報
     """
 
-    multiple: bool
-    expires_at: int
-    expired_after: int
     choices: list[IPollChoice]
