@@ -15,7 +15,7 @@ __all__ = ['FolderManager', 'FileManager', 'DriveManager']
 class FileManager(AbstractManager):
     def __init__(
         self,
-        file_id: Optional[str] = None,
+        file_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions
@@ -44,7 +44,7 @@ class FileManager(AbstractManager):
 class FolderManager(AbstractManager):
     def __init__(
         self,
-        folder_id: Optional[str] = None,
+        folder_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions

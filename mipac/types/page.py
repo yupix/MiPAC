@@ -47,23 +47,23 @@ class IPage(IPageRequired, total=False):
 class PageContentPayload(TypedDict):
     id: str
     type: str
-    text: Optional[str]
-    file_id: Optional[str]
-    width: Optional[int]
-    height: Optional[int]
-    note: Optional[str]
+    text: str | None
+    file_id: str | None
+    width: int | None
+    height: int | None
+    note: str | None
     detailed: Optional[bool]
     fn: Optional[Any]
     var: Optional[Any]
     event: Optional[Any]
-    action: Optional[str]
-    content: Optional[str]
+    action: str | None
+    content: str | None
     message: Optional[Any]
     primary: Optional[bool]
-    inc: Optional[int]
-    canvas_id: Optional[str]
+    inc: int | None
+    canvas_id: str | None
     attach_canvas_image: Optional[bool]
-    default: Optional[str]
+    default: str | None
     value: Optional[list[Any]]
 
     children: Optional['PageContentPayload']
@@ -73,7 +73,7 @@ class VariablePayload(TypedDict):
     id: str
     name: str
     type: str
-    value: Optional[str]
+    value: str | None
 
 
 class PageFilePayload(TypedDict):
@@ -88,8 +88,8 @@ class PageFilePayload(TypedDict):
     properties: IFileProperties
     url: str
     thumbnail_url: str
-    comment: Optional[str]
-    folder_id: Optional[str]
+    comment: str | None
+    folder_id: str | None
     folder: Any
     user_id: str
     user: Any
@@ -113,12 +113,12 @@ class PagePayload(TypedDict):
     variable: list[VariablePayload]
     title: str
     name: str
-    summary: Optional[str]
+    summary: str | None
     hide_title_when_pinned: bool
     align_center: bool
     font: str
     script: str
-    eye_catching_image_id: Optional[str]
+    eye_catching_image_id: str | None
     eye_catching_image: EyeCatchingImagePayload
     attached_files: list[AttachedFilePayload]
     liked_count: int

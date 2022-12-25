@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 class FavoriteManager(AbstractManager):
     def __init__(
         self,
-        note_id: Optional[str] = None,
+        note_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions

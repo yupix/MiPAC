@@ -14,17 +14,17 @@ class CustomEmoji:
     """
     Attributes
     ----------
-    id : Optional[str]
+    id : str | None
         絵文字のID
     aliases : Optional[list[str]]
         絵文字のエイリアス
-    name : Optional[str]
+    name : str | None
         絵文字の名前
-    category : Optional[str]
+    category : str | None
         絵文字のカテゴリ
-    host : Optional[str]
+    host : str | None
         絵文字のホスト
-    url : Optional[str]
+    url : str | None
         絵文字のURL
     """
 

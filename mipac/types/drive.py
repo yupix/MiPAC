@@ -12,7 +12,7 @@ class IFileProperties(TypedDict):
 
     width: int
     height: int
-    avg_color: Optional[str]
+    avg_color: str | None
 
 
 class FolderPayload(TypedDict):

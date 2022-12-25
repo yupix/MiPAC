@@ -14,28 +14,28 @@ class MiFile:
 
     def __init__(
         self,
-        path: Optional[str] = None,
-        file_id: Optional[str] = None,
-        name: Optional[str] = None,
-        folder_id: Optional[str] = None,
-        comment: Optional[str] = None,
+        path: str | None = None,
+        file_id: str | None = None,
+        name: str | None = None,
+        folder_id: str | None = None,
+        comment: str | None = None,
         is_sensitive: bool = False,
         force: bool = False,
     ):
         """
         Parameters
         ----------
-        path : Optional[str], default=None
+        path : str | None, default=None
             path to a local file
-        file_id : Optional[str], default=None
+        file_id : str | None, default=None
             ID of the file that exists on the drive
-        name Optional[str], default=None
+        name str | None, default=None
             file name
-        folder_id : Optional[str], default=None
+        folder_id : str | None, default=None
             Folder ID
-        comment : Optional[str], default=None
+        comment : str | None, default=None
             Comments on files
-        is_sensitive : Optional[str], default=None
+        is_sensitive : str | None, default=None
             Whether this item is sensitive
         force : bool, default=False
             Whether to force overwriting even if it already exists on the drive

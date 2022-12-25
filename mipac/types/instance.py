@@ -60,7 +60,7 @@ class MetaPayload(OptionalMeta):
     uri: str
     description: str
     langs: list[str]
-    tos_url: Optional[str]
+    tos_url: str | None
     repository_url: str
     feedback_url: str
     secure: bool

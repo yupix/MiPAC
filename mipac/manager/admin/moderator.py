@@ -15,12 +15,12 @@ __all__ = ('AdminModeratorManager',)
 class AdminModeratorManager(AbstractManager):
     def __init__(
         self,
-        user_id: Optional[str] = None,
+        user_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions
     ):
-        self.__user_id: Optional[str] = user_id
+        self.__user_id: str | None = user_id
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
 

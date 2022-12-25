@@ -15,9 +15,9 @@ class ICustomEmoji(ICustomEmojiLite):
 
 
 class EmojiPayload(TypedDict):
-    id: Optional[str]
+    id: str | None
     aliases: Optional[list[str]]
-    name: Optional[str]
-    category: Optional[str]
-    host: Optional[str]
-    url: Optional[str]
+    name: str | None
+    category: str | None
+    host: str | None
+    url: str | None

@@ -14,7 +14,7 @@ class FileProperties:
         self.__properties: IFileProperties = properties
 
     @property
-    def width(self) -> Optional[int]:
+    def width(self) -> int | None:
         return self.__properties['width']
 
     @property
@@ -22,7 +22,7 @@ class FileProperties:
         return self.__properties['height']
 
     @property
-    def avg_color(self) -> Optional[str]:
+    def avg_color(self) -> str | None:
         return self.__properties['avg_color']
 
 

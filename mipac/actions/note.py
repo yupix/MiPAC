@@ -29,17 +29,17 @@ __all__ = ['NoteActions']
 
 
 def create_note_body(
-    content: Optional[str] = None,
+    content: str | None = None,
     visibility: str = 'public',
     visible_user_ids: Optional[list[str]] = None,
-    cw: Optional[str] = None,
+    cw: str | None = None,
     local_only: bool = False,
     extract_mentions: bool = True,
     extract_hashtags: bool = True,
     extract_emojis: bool = True,
-    reply_id: Optional[str] = None,
-    renote_id: Optional[str] = None,
-    channel_id: Optional[str] = None,
+    reply_id: str | None = None,
+    renote_id: str | None = None,
+    channel_id: str | None = None,
     files: Optional[list[MiFile | File | str]] = None,
     poll: Optional[MiPoll] = None,
 ):
@@ -90,12 +90,12 @@ def create_note_body(
 class ClientNoteActions(AbstractAction):
     def __init__(
         self,
-        note_id: Optional[str] = None,
+        note_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions,
     ):
-        self._note_id: Optional[str] = note_id
+        self._note_id: str | None = note_id
         self._session: HTTPClient = session
         self._client: ClientActions = client
 
@@ -108,18 +108,18 @@ class ClientNoteActions(AbstractAction):
         return NoteState(res)
 
     async def add_clips(
-        self, clip_id: str, note_id: Optional[str] = None
+        self, clip_id: str, note_id: str | None = None
     ) -> bool:
         """
         クリップに追加します
 
         Parameters
         ----------
-        note_id : Optional[str], default=None
+        note_id : str | None, default=None
                 追加するノートのID
         clip_id : str
             クリップのID
-        note_id : Optional[str], default=None
+        note_id : str | None, default=None
             追加したいノートのID
 
         Returns
@@ -137,13 +137,13 @@ class ClientNoteActions(AbstractAction):
             )
         )
 
-    async def delete(self, note_id: Optional[str] = None) -> bool:
+    async def delete(self, note_id: str | None = None) -> bool:
         """
         Delete a note
 
         Parameters
         ----------
-        note_id : Optional[str], default=None
+        note_id : str | None, default=None
             note id
 
         Returns
@@ -160,13 +160,13 @@ class ClientNoteActions(AbstractAction):
         )
         return bool(res)
 
-    async def create_renote(self, note_id: Optional[str] = None) -> Note:
+    async def create_renote(self, note_id: str | None = None) -> Note:
         """
         Renote a note
 
         Parameters
         ----------
-        note_id : Optional[str], default=None
+        note_id : str | None, default=None
             note id
 
         Returns
@@ -184,7 +184,7 @@ class ClientNoteActions(AbstractAction):
         return Note(res['created_note'], client=self._client)
 
     async def get_reaction(
-        self, reaction: str, note_id: Optional[str] = None
+        self, reaction: str, note_id: str | None = None
     ) -> list[NoteReaction]:
         note_id = note_id or self._note_id
         return await self._client.note.reaction.action.get_reaction(
@@ -193,17 +193,17 @@ class ClientNoteActions(AbstractAction):
 
     async def reply(
         self,
-        content: Optional[str] = None,
+        content: str | None = None,
         visibility: str = 'public',
         visible_user_ids: Optional[list[str]] = None,
-        cw: Optional[str] = None,
+        cw: str | None = None,
         local_only: bool = False,
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
         files: Optional[list[MiFile | File | str]] = None,
         poll: Optional[MiPoll] = None,
-        reply_id: Optional[str] = None,
+        reply_id: str | None = None,
     ) -> Note:
 
         reply_id = reply_id or self._note_id
@@ -231,30 +231,30 @@ class ClientNoteActions(AbstractAction):
 
     async def create_quote(
         self,
-        content: Optional[str] = None,
+        content: str | None = None,
         visibility: str = 'public',
         visible_user_ids: Optional[list[str]] = None,
-        cw: Optional[str] = None,
+        cw: str | None = None,
         local_only: bool = False,
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
         files: Optional[list[MiFile | File | str]] = None,
         poll: MiPoll | None = None,
-        note_id: Optional[str] = None,
+        note_id: str | None = None,
     ) -> Note:
         """
         Create a note quote.
 
         Parameters
         ----------
-        content: Optional[str], default=None
+        content: str | None, default=None
             text
         visibility: str, default='public'
             Disclosure range
         visible_user_ids: Optional[list[str]], default=None
             List of users to be published
-        cw: Optional[str], default=None
+        cw: str | None, default=None
             Text to be displayed when warning is given
         local_only: bool, default=False
             Whether to show only locally or not
@@ -268,7 +268,7 @@ class ClientNoteActions(AbstractAction):
             The ID list of files to be attached
         poll: MiPoll | None, default=None
             Questionnaire to be created
-        note_id: Optional[str], default=None
+        note_id: str | None, default=None
             Note IDs to target for renote and citations
         """
 
@@ -298,14 +298,14 @@ class ClientNoteActions(AbstractAction):
 
     @cache(group='translate_note')
     async def translate(
-        self, note_id: Optional[str] = None, target_lang: str = 'en-US',
+        self, note_id: str | None = None, target_lang: str = 'en-US',
     ) -> NoteTranslateResult:
         """
         Translate a note
 
         Parameters
         ----------
-        note_id : Optional[str], default=None
+        note_id : str | None, default=None
             Note ID to target for translation
         target_lang : str, default='en'
             Target language
@@ -331,7 +331,7 @@ class ClientNoteActions(AbstractAction):
 class NoteActions(ClientNoteActions):
     def __init__(
         self,
-        note_id: Optional[str] = None,
+        note_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions,
@@ -341,17 +341,17 @@ class NoteActions(ClientNoteActions):
 
     async def send(
         self,
-        content: Optional[str] = None,
+        content: str | None = None,
         visibility: str = 'public',
         visible_user_ids: Optional[list[str]] = None,
-        cw: Optional[str] = None,
+        cw: str | None = None,
         local_only: bool = False,
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
-        reply_id: Optional[str] = None,
-        renote_id: Optional[str] = None,
-        channel_id: Optional[str] = None,
+        reply_id: str | None = None,
+        renote_id: str | None = None,
+        channel_id: str | None = None,
         files: Optional[list[MiFile | File | str]] = None,
         poll: MiPoll | None = None,
     ) -> Note:
@@ -360,14 +360,14 @@ class NoteActions(ClientNoteActions):
 
         Parameters
         ----------
-        content : Optional[str], default=None
+        content : str | None, default=None
             投稿する内容
         visibility : str, optional
             公開範囲, by default "public"
             Enum: "public" "home" "followers" "specified"
         visible_user_ids : Optional[list[str]], optional
             公開するユーザー, by default None
-        cw : Optional[str], optional
+        cw : str | None, optional
             閲覧注意の文字, by default None
         local_only : bool, optional
             ローカルにのみ表示するか, by default False
@@ -377,11 +377,11 @@ class NoteActions(ClientNoteActions):
             ハッシュタグを展開するか, by default False
         extract_emojis : bool, optional
             絵文字を展開するか, by default False
-        reply_id : Optional[str], optional
+        reply_id : str | None, optional
             リプライ先のid, by default None
-        renote_id : Optional[str], optional
+        renote_id : str | None, optional
             リノート先のid, by default None
-        channel_id : Optional[str], optional
+        channel_id : str | None, optional
             チャンネルid, by default None
         files : list[MiFile | File | str], optional
             添付するファイルのリスト, by default None
@@ -422,13 +422,13 @@ class NoteActions(ClientNoteActions):
         return Note(res['created_note'], client=self._client)
 
     @cache(group='get_note')
-    async def get(self, note_id: Optional[str] = None) -> Note:
+    async def get(self, note_id: str | None = None) -> Note:
         """
         ノートを取得します
 
         Parameters
         ----------
-        note_id : Optional[str], default=None
+        note_id : str | None, default=None
             ノートのID
 
         Returns
@@ -446,7 +446,7 @@ class NoteActions(ClientNoteActions):
         return Note(res, client=self._client)
 
     @cache(group='get_note', override=True)
-    async def fetch(self, note_id: Optional[str] = None) -> Note:
+    async def fetch(self, note_id: str | None = None) -> Note:
         note_id = note_id or self._note_id
         res = await self._session.request(
             Route('POST', '/api/notes/show'),
@@ -458,23 +458,23 @@ class NoteActions(ClientNoteActions):
 
     async def get_replies(
         self,
-        since_id: Optional[str] = None,
-        until_id: Optional[str] = None,
+        since_id: str | None = None,
+        until_id: str | None = None,
         limit: int = 10,
-        note_id: Optional[str] = None,
+        note_id: str | None = None,
     ) -> list[Note]:
         """
         ノートに対する返信を取得します
 
         Parameters
         ---------
-        since_id : Optional[str], default=None
+        since_id : str | None, default=None
             指定すると、その投稿を投稿を起点としてより新しい投稿を取得します
-        until_id : Optional[str], default=None
+        until_id : str | None, default=None
             指定すると、その投稿を投稿を起点としてより古い投稿を取得します
         limit : int, default=10
             取得する上限
-        note_id: Optional[str], default=None
+        note_id: str | None, default=None
             返信を取得したいノートのID
 
         Returns

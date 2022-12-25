@@ -105,7 +105,7 @@ class AuthClient:
         description: str,
         permissions: Optional[list[str]] = None,
         *,
-        icon: Optional[str] = None,
+        icon: str | None = None,
         use_miauth: bool = False,
     ):
         """
@@ -119,7 +119,7 @@ class AuthClient:
             アプリケーションの説明
         permissions : Optional[list[str]], default=None
             アプリケーションが要求する権限
-        icon: Optional[str], default=None
+        icon: str | None, default=None
             アプリケーションのアイコン画像URL
         use_miauth: bool, default=False
             MiAuthを使用するか
@@ -131,7 +131,7 @@ class AuthClient:
         self.__name: str = name
         self.__description: str = description
         self.__permissions: list[str] = permissions
-        self.__icon: Optional[str] = icon
+        self.__icon: str | None = icon
         self.__use_miauth: bool = use_miauth
         self.__session_token: uuid.UUID
         self.__secret: str

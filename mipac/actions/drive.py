@@ -18,7 +18,7 @@ __all__ = ('DriveActions', 'FileActions', 'FolderActions')
 class FileActions(AbstractAction):
     def __init__(
         self,
-        file_id: Optional[str] = None,
+        file_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions
@@ -27,17 +27,15 @@ class FileActions(AbstractAction):
         self.__client: ClientActions = client
         self.__file_id = file_id
 
-    async def show_file(
-        self, file_id: Optional[str], url: Optional[str]
-    ) -> File:
+    async def show_file(self, file_id: str | None, url: str | None) -> File:
         """
         ファイルの情報を取得します。
 
         Parameters
         ----------
-        file_id : Optional[str], default=None
+        file_id : str | None, default=None
             ファイルのID
-        url : Optional[str], default=None
+        url : str | None, default=None
             ファイルのURL
 
         Returns
@@ -55,13 +53,13 @@ class FileActions(AbstractAction):
         )
         return File(res, client=self.__client)
 
-    async def remove_file(self, file_id: Optional[str] = None) -> bool:
+    async def remove_file(self, file_id: str | None = None) -> bool:
         """
         指定したIDのファイルを削除します
 
         Parameters
         ----------
-        file_id : Optional[str], default=None
+        file_id : str | None, default=None
             削除するファイルのID
 
         Returns
@@ -82,10 +80,10 @@ class FileActions(AbstractAction):
     async def get_files(
         self,
         limit: int = 10,
-        since_id: Optional[str] = None,
-        until_id: Optional[str] = None,
-        folder_id: Optional[str] = None,
-        file_type: Optional[str] = None,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        folder_id: str | None = None,
+        file_type: str | None = None,
     ) -> list[File]:
         """
         ファイルを取得します
@@ -94,13 +92,13 @@ class FileActions(AbstractAction):
         ----------
         limit : int, default=10
             取得する上限
-        since_id : Optional[str], default=None
+        since_id : str | None, default=None
             指定すると、そのIDを起点としてより新しいファイルを取得します
-        until_id : Optional[str], default=None
+        until_id : str | None, default=None
             指定すると、そのIDを起点としてより古いファイルを取得します
-        folder_id : Optional[str], default=None
+        folder_id : str | None, default=None
             指定すると、そのフォルダーを起点としてファイルを取得します
-        file_type : Optional[str], default=None
+        file_type : str | None, default=None
             取得したいファイルの拡張子
         """
         if limit > 100:
@@ -121,9 +119,9 @@ class FileActions(AbstractAction):
     async def upload_file(
         self,
         file: str,
-        file_name: Optional[str] = None,
-        folder_id: Optional[str] = None,
-        comment: Optional[str] = None,
+        file_name: str | None = None,
+        folder_id: str | None = None,
+        comment: str | None = None,
         is_sensitive: bool = False,
         force: bool = False,
     ) -> File:
@@ -134,11 +132,11 @@ class FileActions(AbstractAction):
         ----------
         file : str
             アップロードするファイル
-        file_name : Optional[str], default=None
+        file_name : str | None, default=None
             アップロードするファイルの名前
-        folder_id : Optional[str], default=None
+        folder_id : str | None, default=None
             アップロードするフォルダーのID
-        comment : Optional[str], default=None
+        comment : str | None, default=None
             アップロードするファイルのコメント
         is_sensitive : bool, default=False
             アップロードするファイルがNSFWかどうか
@@ -171,7 +169,7 @@ class FileActions(AbstractAction):
 class FolderActions(AbstractAction):
     def __init__(
         self,
-        folder_id: Optional[str] = None,
+        folder_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions
@@ -180,7 +178,7 @@ class FolderActions(AbstractAction):
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
 
-    async def create(self, name: str, parent_id: Optional[str] = None) -> bool:
+    async def create(self, name: str, parent_id: str | None = None) -> bool:
         """
         フォルダーを作成します
 
@@ -188,7 +186,7 @@ class FolderActions(AbstractAction):
         ----------
         name : str, default=None
             フォルダーの名前
-        parent_id : Optional[str], default=None
+        parent_id : str | None, default=None
             親フォルダーのID
 
         Returns
@@ -207,11 +205,11 @@ class FolderActions(AbstractAction):
         )
         return bool(res)
 
-    async def delete(self, folder_id: Optional[str] = None) -> bool:
+    async def delete(self, folder_id: str | None = None) -> bool:
         """
         Parameters
         ----------
-        folder_id : Optional[str] = None
+        folder_id : str | None = None
             削除するノートのID
 
         Returns
@@ -232,10 +230,10 @@ class FolderActions(AbstractAction):
     async def get_files(
         self,
         limit: int = 10,
-        since_id: Optional[str] = None,
-        until_id: Optional[str] = None,
-        folder_id: Optional[str] = None,
-        file_type: Optional[str] = None,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        folder_id: str | None = None,
+        file_type: str | None = None,
     ) -> list[File]:
         """
         ファイルを取得します
@@ -244,13 +242,13 @@ class FolderActions(AbstractAction):
         ----------
         limit : int, default=10
             取得する上限
-        since_id : Optional[str], default=None
+        since_id : str | None, default=None
             指定すると、そのIDを起点としてより新しいファイルを取得します
-        until_id : Optional[str], default=None
+        until_id : str | None, default=None
             指定すると、そのIDを起点としてより古いファイルを取得します
-        folder_id : Optional[str], default=None
+        folder_id : str | None, default=None
             指定すると、そのフォルダーを起点としてファイルを取得します
-        file_type : Optional[str], default=None
+        file_type : str | None, default=None
             取得したいファイルの拡張子
         """
         if limit > 100:
@@ -278,9 +276,9 @@ class DriveActions(AbstractAction):
     async def get_folders(
         self,
         limit: int = 100,
-        since_id: Optional[str] = None,
-        until_id: Optional[str] = None,
-        folder_id: Optional[str] = None,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        folder_id: str | None = None,
     ) -> list[Folder]:
         """
         フォルダーの一覧を取得します
@@ -289,11 +287,11 @@ class DriveActions(AbstractAction):
         ----------
         limit : int, default=10
             取得する上限
-        since_id : Optional[str], default=None
+        since_id : str | None, default=None
             指定すると、その投稿を投稿を起点としてより新しい投稿を取得します
-        until_id : Optional[str], default=None
+        until_id : str | None, default=None
             指定すると、その投稿を投稿を起点としてより古い投稿を取得します
-        folder_id : Optional[str], default=None
+        folder_id : str | None, default=None
             指定すると、そのフォルダーを起点としてフォルダーを取得します
         """
 

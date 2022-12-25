@@ -28,7 +28,7 @@ class AdminModeratorActions(AbstractAction):
 
         Parameters
         ----------
-        user_id : Optional[str], default=None
+        user_id : str | None, default=None
             ユーザーのID
 
         Returns
@@ -53,7 +53,7 @@ class AdminModeratorActions(AbstractAction):
 
         Parameters
         ----------
-        user_id : Optional[str], default=None
+        user_id : str | None, default=None
             ユーザーのID
 
         Returns

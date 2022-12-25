@@ -133,13 +133,13 @@ class ChatAction(BaseChatAction):
 
         Parameters
         ----------
-        text : Optional[str], default=None
+        text : str | None, default=None
             Chat content
-        file_id : Optional[str], default=None
+        file_id : str | None, default=None
             添付するファイルのID
-        user_id : Optional[str], default=None
+        user_id : str | None, default=None
             送信するユーザーのID
-        group_id : Optional[str], default=None
+        group_id : str | None, default=None
             Destination group id
         """
         user_id = user_id or self.__user_id

@@ -8,14 +8,14 @@ class APIError(Exception):
     def __init__(self, data: Union[dict, str], status: int):
         self.raw: Union[dict, str] = data
         self.status: int = status
-        self.code: Optional[str] = None
-        self.id: Optional[str] = None
-        self.message: Optional[str] = None
+        self.code: str | None = None
+        self.id: str | None = None
+        self.message: str | None = None
         if isinstance(data, dict):
             error = data.get('error', {})
-            self.code: Optional[str] = error.get('code', '')
-            self.id: Optional[str] = error.get('id')
-            self.message: Optional[str] = error.get('message', '')
+            self.code: str | None = error.get('code', '')
+            self.id: str | None = error.get('id')
+            self.message: str | None = error.get('message', '')
         super().__init__(self.message or self.raw)
 
     def raise_error(self):

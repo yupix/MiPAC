@@ -48,7 +48,7 @@ class NoteManager(AbstractManager):
 
     def __init__(
         self,
-        note_id: Optional[str] = None,
+        note_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions
@@ -90,8 +90,8 @@ class NoteManager(AbstractManager):
         with_files: bool = False,
         poll: bool = True,
         limit: int = 10,
-        since_id: Optional[str] = None,
-        until_id: Optional[str] = None,
+        since_id: str | None = None,
+        until_id: str | None = None,
     ):
         data = {
             'local': local,

@@ -55,9 +55,9 @@ class UserActions:
     @cache(group='get_user')
     async def get(
         self,
-        user_id: Optional[str] = None,
-        username: Optional[str] = None,
-        host: Optional[str] = None,
+        user_id: str | None = None,
+        username: str | None = None,
+        host: str | None = None,
     ) -> UserDetailed:
         """
         ユーザーのプロフィールを取得します。一度のみサーバーにアクセスしキャッシュをその後は使います。
@@ -89,9 +89,9 @@ class UserActions:
     @cache
     async def fetch(
         self,
-        user_id: Optional[str] = None,
-        username: Optional[str] = None,
-        host: Optional[str] = None,
+        user_id: str | None = None,
+        username: str | None = None,
+        host: str | None = None,
     ) -> UserDetailed:
         """
         サーバーにアクセスし、ユーザーのプロフィールを取得します。基本的には get_userをお使いください。
@@ -123,11 +123,11 @@ class UserActions:
 
     async def get_notes(
         self,
-        user_id: Optional[str] = None,
+        user_id: str | None = None,
         include_replies: bool = True,
         limit: int = 10,
-        since_id: Optional[str] = None,
-        until_id: Optional[str] = None,
+        since_id: str | None = None,
+        until_id: str | None = None,
         since_date: int = 0,
         until_date: int = 0,
         include_my_renotes: bool = True,

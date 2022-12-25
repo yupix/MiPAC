@@ -13,12 +13,12 @@ if TYPE_CHECKING:
 class ReactionManager(AbstractManager):
     def __init__(
         self,
-        note_id: Optional[str] = None,
+        note_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions
     ):
-        self.__note_id: Optional[str] = note_id
+        self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
 

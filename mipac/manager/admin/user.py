@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 class AdminUserManager:
     def __init__(
         self,
-        user_id: Optional[str] = None,
+        user_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientActions
@@ -21,13 +21,13 @@ class AdminUserManager:
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
 
-    async def delete_account(self, user_id: Optional[str] = None) -> bool:
+    async def delete_account(self, user_id: str | None = None) -> bool:
         """
         Deletes the user with the specified user ID.
 
         Parameters
         ----------
-        user_id : Optional[str], default=None
+        user_id : str | None, default=None
             ID of the user to be deleted
         Returns
         -------
@@ -46,13 +46,13 @@ class AdminUserManager:
         )
         return bool(res)
 
-    async def show_user(self, user_id: Optional[str] = None) -> UserDetailed:
+    async def show_user(self, user_id: str | None = None) -> UserDetailed:
         """
         Shows the user with the specified user ID.
 
         Parameters
         ----------
-        user_id : Optional[str], default=None
+        user_id : str | None, default=None
             ID of the user to be shown
 
         Returns
@@ -70,13 +70,13 @@ class AdminUserManager:
         )
         return UserDetailed(res, client=self.__client)
 
-    async def suspend(self, user_id: Optional[str] = None) -> bool:
+    async def suspend(self, user_id: str | None = None) -> bool:
         """
         Suspends the user with the specified user ID.
 
         Parameters
         ----------
-        user_id : Optional[str], default=None
+        user_id : str | None, default=None
             ID of the user to be suspended
 
         Returns
@@ -95,13 +95,13 @@ class AdminUserManager:
         )
         return bool(res)
 
-    async def unsuspend(self, user_id: Optional[str] = None) -> bool:
+    async def unsuspend(self, user_id: str | None = None) -> bool:
         """
         Unsuspends the user with the specified user ID.
 
         Parameters
         ----------
-        user_id : Optional[str], default=None
+        user_id : str | None, default=None
             ID of the user to be unsuspended
 
         Returns
