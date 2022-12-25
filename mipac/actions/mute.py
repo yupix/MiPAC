@@ -41,3 +41,25 @@ class MuteActions(AbstractAction):
             Route('POST', '/api/mute/create'), auth=True, json=data
         )
         return res
+
+    async def delete(self, user_id: str | None = None) -> bool:
+        """
+        Unmute the specified user
+
+        Parameters
+        ----------
+        user_id : str | None, optional
+            Unmute target user Id, by default None
+
+        Returns
+        -------
+        bool
+            Whether the unmute was successful or not.
+        """
+
+        user_id = user_id or self._user_id
+        data = {'userId': user_id}
+        res: bool = await self._session.request(
+            Route('POST', '/api/mute/delete'), auth=True, json=data
+        )
+        return res
