@@ -1,5 +1,5 @@
 from importlib import import_module
-from typing import Optional, Union
+from typing import Union
 
 
 class APIError(Exception):

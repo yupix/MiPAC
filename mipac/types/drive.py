@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Optional, TypedDict
+from typing import Any, TypedDict
 
 __all__ = ('IFileProperties', 'FolderPayload', 'IDriveFile')
 
