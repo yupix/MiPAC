@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Optional
 
 from mipac.abstract.manager import AbstractManager
-from mipac.actions.follow import FollowActions
+from mipac.actions.follow import FollowActions, FollowRequestActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
@@ -49,8 +49,8 @@ class FollowRequestManager(AbstractManager):
         self.__client: ClientActions = client
 
     @property
-    def action(self) -> FollowActions:
-        return FollowActions(
+    def action(self) -> FollowRequestActions:
+        return FollowRequestActions(
             user_id=self.__user_id,
             session=self.__session,
             client=self.__client,
