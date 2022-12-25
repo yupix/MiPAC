@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from mipac.types.note import INote
     from mipac.types.page import IPage
 __all__ = (
+    'IFollowRequest',
     'IUserRequired',
     'ILiteUser',
     'IUserDetailed',
@@ -86,6 +87,7 @@ class IUserDetailed(IUserDetailedRequired, total=False):
     updated_at: str
     uri: str
     url: str
+    use_password_less_login: bool
 
 
 class IFollowRequest(TypedDict):

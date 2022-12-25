@@ -95,3 +95,8 @@ class INoteReaction(TypedDict):
     created_at: str
     user: ILiteUser
     type: str
+
+
+class INoteTranslateResult(TypedDict):
+    sourceLang: str
+    text: str

@@ -3,13 +3,13 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncIterator, Optional
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
+from mipac.errors.base import ParameterError, APIError
 from mipac.http import HTTPClient, Route
 from mipac.file import MiFile
 from mipac.models.drive import File
-from mipac.models.note import Note, NoteReaction
+from mipac.models.note import Note, NoteReaction, NoteTranslateResult
 from mipac.models.poll import Poll
-from mipac.types.note import ICreatedNote, INote
+from mipac.types.note import ICreatedNote, INote, INoteTranslateResult
 
 __all__ = ['NoteActions']
 
@@ -34,19 +34,6 @@ def create_note_body(
     files: Optional[list[MiFile | File | str]] = None,
     poll: Optional[Poll] = None,
 ):
-    file_ids = None
-    if files:
-        file_ids = []
-        for file in files:
-            if isinstance(file, MiFile):
-                file_ids.append(file.file_id)
-            elif isinstance(file, File):
-                file_ids.append(file.id)
-            elif isinstance(file, str):
-                file_ids.append(file)
-            else:
-                raise ParameterError('files must be MiFile or str or File')
-
     body = {
         'visibility': visibility,
         'visibleUserIds': visible_user_ids,
@@ -59,7 +46,6 @@ def create_note_body(
         'replyId': reply_id,
         'renoteId': renote_id,
         'channelId': channel_id,
-        'fileIds': file_ids,
     }
     if not check_multi_arg(content, files, renote_id, poll):
         raise ParameterError(
@@ -76,9 +62,19 @@ def create_note_body(
             }
         )
         body['poll'] = poll_data
+    if files:
+        file_ids = []
+        for file in files:
+            if isinstance(file, MiFile):
+                file_ids.append(file.file_id)
+            elif isinstance(file, File):
+                file_ids.append(file.id)
+            elif isinstance(file, str):
+                file_ids.append(file)
+            else:
+                raise ParameterError('files must be MiFile or str or File')
+        body['fileIds'] = file_ids
 
-    # if files:  # TODO: get_file_idsを直さないと使えない
-    # field['fileIds'] = await get_file_ids(files=files)
     return remove_dict_empty(body)
 
 
@@ -126,17 +122,17 @@ class ClientNoteActions(AbstractAction):
 
     async def delete(self, note_id: Optional[str] = None) -> bool:
         """
-        ノートを削除します
+        Delete a note
 
         Parameters
         ----------
         note_id : Optional[str], default=None
-            削除したいノートのID
+            note id
 
         Returns
         -------
         bool
-            削除に成功したか否か
+            success or not
         """
 
         note_id = note_id or self._note_id
@@ -149,17 +145,17 @@ class ClientNoteActions(AbstractAction):
 
     async def create_renote(self, note_id: Optional[str] = None) -> Note:
         """
-        リノートを作成します
+        Renote a note
 
         Parameters
         ----------
         note_id : Optional[str], default=None
-            ノートのID
+            note id
 
         Returns
         -------
         Note
-            作成したリノート
+            Renoted note
         """
         body = create_note_body(renote_id=note_id,)
         res: ICreatedNote = await self._session.request(
@@ -208,7 +204,6 @@ class ClientNoteActions(AbstractAction):
             reply_id=reply_id,
             files=files,
         )
-        print(body)
         res: ICreatedNote = await self._session.request(
             Route('POST', '/api/notes/create'),
             json=body,
@@ -283,6 +278,37 @@ class ClientNoteActions(AbstractAction):
         )
 
         return Note(res['created_note'], client=self._client)
+
+    @cache(group='translate_note')
+    async def translate(
+        self,
+        note_id: Optional[str] = None,
+        target_lang: str = 'en-US',
+    ) -> NoteTranslateResult:
+        """
+        Translate a note
+
+        Parameters
+        ----------
+        note_id : Optional[str], default=None
+            Note ID to target for translation
+        target_lang : str, default='en'
+            Target language
+
+        Returns
+        -------
+        NoteTranslateResult
+            Translated result
+        """
+        note_id = note_id or self._note_id
+
+        data = {'noteId': note_id, 'targetLang': target_lang}
+        res: INoteTranslateResult = await self._session.request(
+            Route('POST', '/api/notes/translate'), json=data, auth=True
+        )
+        if isinstance(res, dict):
+            return NoteTranslateResult(res)
+        APIError(f'Translate Error: {res}', res if isinstance(res, int) else 204).raise_error()
 
 
 class NoteActions(ClientNoteActions):
@@ -489,14 +515,14 @@ class NoteActions(ClientNoteActions):
             }
         )
 
-        if all is True:
+        if all:
             body['limit'] = 100
         first_req = await request(body)
 
         for note in first_req:
             yield note
 
-        if all is True and len(first_req) == 100:
+        if all and len(first_req) == 100:
             body['untilId'] = first_req[-1].id
             while True:
                 res = await request(body)

@@ -1,15 +1,14 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal, Optional
+from typing import TYPE_CHECKING, Literal, Optional, AsyncIterator
 
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.user import UserDetailed
+from mipac.models.user import UserDetailed, LiteUser
 from mipac.util import cache, check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
-    from mipac.models.lite.user import LiteUser
     from mipac.models.note import Note
 
 __all__ = ['UserActions']
@@ -39,20 +38,19 @@ class UserActions:
         external: bool = True,
         protocol: Literal['http', 'https'] = 'https',
     ):
-        if self.__user:
-            host = (
-                f'{protocol}://{self.__user.host}' or self.__session._url
-                if external
-                else self.__session._url
-            )
-            path = (
-                f'/{self.__user.action.get_mention()}'
-                if external is False
-                else f'/@{self.__user.username}'
-            )
-            return host + path
-        else:
+        if not self.__user:
             return None
+        host = (
+            f'{protocol}://{self.__user.host}'
+            if external and self.__user.host
+            else self.__session._url
+        )
+        path = (
+            f'/@{self.__user.username}'
+            if external
+            else f'/{self.__user.action.get_mention()}'
+        )
+        return host + path
 
     @cache(group='get_user')
     async def get(
@@ -184,3 +182,120 @@ class UserActions:
             if user.instance
             else f'@{user.username}'
         )
+
+    async def search(
+        self,
+        query: str,
+        limit: int = 100,
+        offset: int = 0,
+        origin: Literal['local', 'remote', 'combined'] = 'combined',
+        detail: bool = True,
+        *,
+        all: bool = False
+    ) -> AsyncIterator[UserDetailed | LiteUser]:
+        """
+        Search users by keyword.
+
+        Parameters
+        ----------
+        query : str
+            Keyword to search.
+        limit : int, default=100
+            The maximum number of users to return.
+        offset : int, default=0
+            The number of users to skip.
+        origin : Literal['local', 'remote', 'combined'], default='combined'
+            The origin of users to search.
+        detail : bool, default=True
+            Whether to return detailed user information.
+        all : bool, default=False
+            Whether to return all users.
+
+        Returns
+        -------
+        AsyncIterator[UserDetailed | LiteUser]
+            A AsyncIterator of users.
+        """
+
+        if limit > 100:
+            raise ParameterError('limit は100以下である必要があります')
+
+        async def request(body) -> list[UserDetailed | LiteUser]:
+            res = await self.__session.request(
+                Route('POST', '/api/users/search'), lower=True, auth=True, json=body
+            )
+            return [UserDetailed(user, client=self.__client) if detail
+                    else LiteUser(user, client=self.__client) for user in res]
+
+        body = remove_dict_empty(
+            {
+                'query': query,
+                'limit': limit,
+                'offset': offset,
+                'origin': origin,
+                'detail': detail,
+            }
+        )
+
+        if all:
+            body['limit'] = 100
+        first_req = await request(body)
+
+        for user in first_req:
+            yield user
+
+        if all and len(first_req) == 100:
+            times = 1
+            while True:
+                body['offset'] = times * 100
+                res = await request(body)
+                if len(res) <= 100:
+                    for user in res:
+                        yield user
+                if len(res) == 0:
+                    break
+                times += 1
+
+    async def search_by_username_and_host(
+        self,
+        username: str,
+        host: str,
+        limit: int = 100,
+        detail: bool = True,
+    ) -> list[UserDetailed | LiteUser]:
+        """
+        Search users by username and host.
+
+        Parameters
+        ----------
+        username : str
+            Username of user.
+        host : str
+            Host of user.
+        limit : int, default=100
+            The maximum number of users to return.
+        detail : bool, default=True
+            Weather to get detailed user information.
+
+        Returns
+        -------
+        list[UserDetailed | LiteUser]
+            A list of users.
+        """
+
+        if limit > 100:
+            raise ParameterError('limit は100以下である必要があります')
+
+        body = remove_dict_empty(
+            {
+                'username': username,
+                'host': host,
+                'limit': limit,
+                'detail': detail,
+            }
+        )
+        res = await self.__session.request(
+            Route('POST', '/api/users/search-by-username-and-host'), lower=True, auth=True, json=body
+        )
+        return [UserDetailed(user, client=self.__client) if detail
+                else LiteUser(user, client=self.__client) for user in res]
