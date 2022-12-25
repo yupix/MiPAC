@@ -7,7 +7,7 @@ from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.drive import File, Folder
 from mipac.types.drive import IDriveFile
-from mipac.util import remove_dict_empty
+from mipac.util import remove_dict_empty, bool_to_string
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
@@ -156,8 +156,8 @@ class FileActions(AbstractAction):
             'name': file_name,
             'folderId': folder_id,
             'comment': comment,
-            'isSensitive': is_sensitive,
-            'force': force,
+            'isSensitive': bool_to_string(is_sensitive),
+            'force': bool_to_string(force),
         }
         res: IDriveFile = await self.__session.request(
             Route('POST', '/api/drive/files/create'),
