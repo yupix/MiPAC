@@ -8,6 +8,12 @@ from .user import ILiteUser
 T = TypeVar('T')
 
 
+class INoteState(TypedDict):
+    is_favorited: bool
+    is_watching: bool
+    is_muted_thread: bool
+
+
 class INoteUpdated(TypedDict, Generic[T]):
     type: Literal['noteUpdated']
     body: T
