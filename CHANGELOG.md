@@ -9,13 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Added
 
-- ✨ added `get_children` method a `ClientNoteActions` class.
+- ✨ added `get_children` method at `ClientNoteActions` class.
+- ✨ added `invalidate` method at `FollowActions` class.
+- ✨ added `cancel` method at `FollowRequestActions` class.
+
+## Removed
+
+- 🔥 Delete `get_user` method at `FollowRequestActions` class.
 
 ## [0.3.99] 2022-12-25
 ## Added
 
 - 💡 added DocString.
-- ✨ added `get_state` method a `ClientNoteActions` class.
+- ✨ added `get_state` method at `ClientNoteActions` class.
 - ✨ added `INoteState` class.
 - ✨ added `NoteState` class.
 - ✨ added `IBasePoll` class.
@@ -34,9 +40,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - 💡 became `is_ayuskey` attribute is deprecated(I'll remove with v0.4.0)
 - ✨ added `get_exception_from_id` function.
 - ✨ Return an exception appropriate for the error encountered.
-- ✨ [@omg-xtao](https://github.com/omg-xtao) added `users_search_by_username_and_host` method a `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
-- ✨ [@omg-xtao](https://github.com/omg-xtao) added `note_translate` method a `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
-- ✨ [@omg-xtao](https://github.com/omg-xtao) added `users_search` method a `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
+- ✨ [@omg-xtao](https://github.com/omg-xtao) added `users_search_by_username_and_host` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
+- ✨ [@omg-xtao](https://github.com/omg-xtao) added `note_translate` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
+- ✨ [@omg-xtao](https://github.com/omg-xtao) added `users_search` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
 
 ## Changed
 

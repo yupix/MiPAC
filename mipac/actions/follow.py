@@ -5,12 +5,13 @@ from typing import TYPE_CHECKING
 from mipac.abstract.action import AbstractAction
 from mipac.http import Route
 from mipac.models.follow import FollowRequest
-from mipac.models.user import UserDetailed
+from mipac.models.user import UserDetailed, LiteUser
 from mipac.types.follow import IFollowRequest
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient
     from mipac.manager.client import ClientActions
+    from mipac.types.user import ILiteUser
 
 
 class FollowActions(AbstractAction):
@@ -25,52 +26,62 @@ class FollowActions(AbstractAction):
         self.__session = session
         self.__client = client
 
-    async def add(self, user_id: str | None = None) -> tuple[bool, str | None]:
+    async def add(self, user_id: str | None = None) -> LiteUser:
         """
-        ユーザーをフォローします
+        Follow a user
 
         Returns
         -------
-        bool
-            成功ならTrue, 失敗ならFalse
-        str
-            実行に失敗した際のエラーコード
+        UserLite:
+            The user that you followed
+        """
+
+        user_id = user_id or self.__user_id
+
+        data = {'userId': user_id}
+        res: ILiteUser = await self.__session.request(
+            Route('POST', '/api/following/create'),
+            json=data,
+            auth=True,
+            lower=True,
+        )
+        return LiteUser(res, client=self.__client)
+
+    async def remove(self, user_id: str | None = None) -> LiteUser:
+        """
+        Unfollow a user
+
+        Returns
+        -------
+        LiteUser
+            The user that you unfollowed
         """
 
         user_id = user_id or self.__user_id
 
         data = {'userId': user_id}
         res = await self.__session.request(
-            Route('POST', '/api/following/create'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/following/delete'), json=data, auth=True
         )
-        if res.get('error'):
-            code = res['error']['code']
-            status = False
-        else:
-            code = None
-            status = True
-        return status, code
+        return LiteUser(res, client=self.__client)
 
-    async def remove(self, user_id: str | None = None) -> bool:
+    async def invalidate(self, user_id: str | None = None) -> LiteUser:
         """
-        ユーザーのフォローを解除します
+        Make the user unfollows you
 
         Returns
         -------
-        bool
-            成功ならTrue, 失敗ならFalse
+        LiteUser
+            The user that followed you
         """
 
         user_id = user_id or self.__user_id
 
         data = {'userId': user_id}
-        res: bool = await self.__session.request(
-            Route('POST', '/api/following/delete'), json=data, auth=True
+        res: ILiteUser = await self.__session.request(
+            Route('POST', '/api/following/invalidate'), json=data, auth=True
         )
-        return res
+        return LiteUser(res, client=self.__client)
 
 
 class FollowRequestActions(AbstractAction):
@@ -87,7 +98,12 @@ class FollowRequestActions(AbstractAction):
 
     async def get_all(self) -> list[FollowRequest]:
         """
-        未承認のフォローリクエストを取得します
+        Get all follow requests
+
+        Returns
+        -------
+        list[FollowRequest]
+            List of follow requests
         """
 
         res: list[IFollowRequest] = await self.__session.request(
@@ -99,27 +115,19 @@ class FollowRequestActions(AbstractAction):
             FollowRequest(follow_request=i, client=self.__client) for i in res
         ]
 
-    async def get_user(self, user_id: str | None = None) -> UserDetailed:
+    async def accept(self, user_id: str | None = None) -> bool:
         """
-        フォローリクエスト元のユーザーを取得します
+        Accept a follow request
+
         Parameters
         ----------
-        user_id : str | None, default=None
-            ユーザーID
+        user_id: str
+            The user ID to accept
 
         Returns
         -------
-        UserDetailed
-            フォローリクエスト元のユーザー
-        """
-
-        user_id = user_id or self.__user_id
-
-        return await self.__client.user.action.get(user_id)
-
-    async def accept(self, user_id: str | None = None) -> bool:
-        """
-        与えられたIDのユーザーのフォローリクエストを承認します
+        bool
+            Whether the request was accepted
         """
 
         user_id = user_id or self.__user_id
@@ -133,9 +141,19 @@ class FollowRequestActions(AbstractAction):
             )
         )
 
-    async def reject(self, user_id: str | None) -> bool:
+    async def reject(self, user_id: str | None = None) -> bool:
         """
-        与えられたIDのユーザーのフォローリクエストを拒否します
+        Reject a follow request
+
+        Parameters
+        ----------
+        user_id: str
+            The user ID to reject
+
+        Returns
+        -------
+        bool
+            Whether the request was rejected
         """
 
         user_id = user_id or self.__user_id
@@ -148,3 +166,29 @@ class FollowRequestActions(AbstractAction):
                 auth=True,
             )
         )
+
+    async def cancel(self, user_id: str | None = None) -> LiteUser:
+        """
+        Cancel a follow request
+
+        Parameters
+        ----------
+        user_id: str
+            The user ID to cancel
+
+        Returns
+        -------
+        LiteUser
+            The user that you canceled to follow
+        """
+
+        user_id = user_id or self.__user_id
+
+        data = {'userId': user_id}
+        res: ILiteUser = await self.__session.request(
+            Route('POST', '/api/following/requests/cancel'),
+            json=data,
+            auth=True,
+            lower=True,
+        )
+        return LiteUser(res, client=self.__client)
