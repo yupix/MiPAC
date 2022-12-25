@@ -332,7 +332,6 @@ def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
     """
     _data = {}
     _data = {k: v for k, v in data.items() if v is not None}
-    _data = {k: v for k, v in data.items() if v}
     return _data
 
 
