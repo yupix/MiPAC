@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - ✨ added `mute` attribute at `UserManager` class.
 - ✨ added `MuteManager` class.
 - ✨ added `MuteActions` class.
+- ✨ added `MuteUser` class.
+- ✨ added `IMuteUser` class.
 
 ## Removed
 
