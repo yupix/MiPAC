@@ -47,7 +47,7 @@ class NoteState:
 
     @property
     def is_muted_thread(self) -> bool:
-        return self.__data['is_muted_thread']
+        return self.__data.get('is_muted_thread', False)
 
 
 class NoteDeleted:
@@ -65,14 +65,14 @@ class NoteDeleted:
 
 class Follow:
     def __init__(self, data):
-        self.id: Optional[str] = data.get('id')
+        self.id: str | None = data.get('id')
         self.created_at: Optional[datetime] = datetime.strptime(
             data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
         ) if data.get('created_at') else None
-        self.type: Optional[str] = data.get('type')
+        self.type: str | None = data.get('type')
         self.user: Optional[UserDetailed] = data.get('user')
 
-    async def follow(self) -> tuple[bool, Optional[str]]:
+    async def follow(self) -> tuple[bool, str | None]:
         """
         ユーザーをフォローします
         Returns
@@ -87,13 +87,13 @@ class Follow:
             raise NotExistRequiredData('user_idがありません')
         return await self._state.user.follow.add(user_id=self.id)
 
-    async def unfollow(self, user_id: Optional[str] = None) -> bool:
+    async def unfollow(self, user_id: str | None = None) -> bool:
         """
         与えられたIDのユーザーのフォローを解除します
 
         Parameters
         ----------
-        user_id : Optional[str] = None
+        user_id : str | None = None
             フォローを解除したいユーザーのID
 
         Returns

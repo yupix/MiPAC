@@ -1,4 +1,12 @@
-from typing import Any, Generic, Literal, Optional, TypedDict, TypeVar
+from typing import (
+    Any,
+    Generic,
+    Literal,
+    NotRequired,
+    Optional,
+    TypedDict,
+    TypeVar,
+)
 
 from .drive import IDriveFile
 from .emoji import ICustomEmojiLite
@@ -11,7 +19,7 @@ T = TypeVar('T')
 class INoteState(TypedDict):
     is_favorited: bool
     is_watching: bool
-    is_muted_thread: bool
+    is_muted_thread: NotRequired[bool]
 
 
 class INoteUpdated(TypedDict, Generic[T]):
@@ -47,11 +55,11 @@ class GeoPayload(TypedDict):
     """
 
     coordinates: Optional[list[Any]]
-    altitude: Optional[int]
-    accuracy: Optional[int]
-    altitude_accuracy: Optional[int]
-    heading: Optional[int]
-    speed: Optional[int]
+    altitude: int | None
+    accuracy: int | None
+    altitude_accuracy: int | None
+    heading: int | None
+    speed: int | None
 
 
 class INoteRequired(TypedDict):
