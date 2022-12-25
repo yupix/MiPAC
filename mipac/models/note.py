@@ -7,6 +7,7 @@ from mipac.errors.base import NotExistRequiredData
 from mipac.models.lite.user import LiteUser
 from mipac.models.poll import Poll
 from mipac.types.note import (
+    INoteState,
     INoteTranslateResult,
     INoteUpdated,
     INoteUpdatedDelete,
@@ -22,6 +23,7 @@ if TYPE_CHECKING:
     from mipac.types.note import INote, INoteReaction
 
 __all__ = (
+    'NoteState',
     'Note',
     'Follow',
     'Header',
@@ -29,6 +31,23 @@ __all__ = (
     'NoteDeleted',
     'NoteTranslateResult',
 )
+
+
+class NoteState:
+    def __init__(self, data: INoteState) -> None:
+        self.__data: INoteState = data
+
+    @property
+    def is_favorite(self) -> bool:
+        return self.__data['is_favorited']
+
+    @property
+    def is_watching(self) -> bool:
+        return self.__data['is_watching']
+
+    @property
+    def is_muted_thread(self) -> bool:
+        return self.__data['is_muted_thread']
 
 
 class NoteDeleted:
