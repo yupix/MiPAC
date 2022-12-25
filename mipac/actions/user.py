@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal, Optional, AsyncIterator
+from typing import TYPE_CHECKING, AsyncIterator, Literal, Optional
 
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.user import UserDetailed, LiteUser
+from mipac.models.user import LiteUser, UserDetailed
 from mipac.util import cache, check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
@@ -191,7 +191,7 @@ class UserActions:
         origin: Literal['local', 'remote', 'combined'] = 'combined',
         detail: bool = True,
         *,
-        all: bool = False
+        all: bool = False,
     ) -> AsyncIterator[UserDetailed | LiteUser]:
         """
         Search users by keyword.
@@ -222,10 +222,17 @@ class UserActions:
 
         async def request(body) -> list[UserDetailed | LiteUser]:
             res = await self.__session.request(
-                Route('POST', '/api/users/search'), lower=True, auth=True, json=body
+                Route('POST', '/api/users/search'),
+                lower=True,
+                auth=True,
+                json=body,
             )
-            return [UserDetailed(user, client=self.__client) if detail
-                    else LiteUser(user, client=self.__client) for user in res]
+            return [
+                UserDetailed(user, client=self.__client)
+                if detail
+                else LiteUser(user, client=self.__client)
+                for user in res
+            ]
 
         body = remove_dict_empty(
             {
@@ -257,11 +264,7 @@ class UserActions:
                 times += 1
 
     async def search_by_username_and_host(
-        self,
-        username: str,
-        host: str,
-        limit: int = 100,
-        detail: bool = True,
+        self, username: str, host: str, limit: int = 100, detail: bool = True,
     ) -> list[UserDetailed | LiteUser]:
         """
         Search users by username and host.
@@ -295,7 +298,14 @@ class UserActions:
             }
         )
         res = await self.__session.request(
-            Route('POST', '/api/users/search-by-username-and-host'), lower=True, auth=True, json=body
+            Route('POST', '/api/users/search-by-username-and-host'),
+            lower=True,
+            auth=True,
+            json=body,
         )
-        return [UserDetailed(user, client=self.__client) if detail
-                else LiteUser(user, client=self.__client) for user in res]
+        return [
+            UserDetailed(user, client=self.__client)
+            if detail
+            else LiteUser(user, client=self.__client)
+            for user in res
+        ]

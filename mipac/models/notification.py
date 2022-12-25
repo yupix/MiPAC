@@ -3,13 +3,12 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-
 from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 
 if TYPE_CHECKING:
-    from mipac.manager.reaction import ReactionManager
     from mipac.manager.client import ClientActions
+    from mipac.manager.reaction import ReactionManager
     from mipac.types.notification import IReactionNf
 
 

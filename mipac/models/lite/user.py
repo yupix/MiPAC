@@ -8,8 +8,8 @@ from mipac.types.user import ILiteUser
 from mipac.util import deprecated
 
 if TYPE_CHECKING:
-    from mipac.manager.user import UserManager
     from mipac.manager.client import ClientActions
+    from mipac.manager.user import UserManager
 
 
 class LiteUser:

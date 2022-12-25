@@ -11,6 +11,6 @@ from .follow import *
 from .my import *
 from .note import *
 from .page import *
+from .poll import *
 from .reaction import *
 from .user import *
-from .poll import *

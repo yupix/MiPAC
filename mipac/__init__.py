@@ -13,9 +13,9 @@ __path__ = __import__('pkgutil').extend_path(__path__, __name__)
 from . import _version
 from .abstract import *  # noqa: F403, F401
 from .actions import *
+from .file import *
 from .manager import *
 from .models import *  # noqa: F403, F401
 from .types import *
-from .file import *
 
 __version__ = _version.get_versions()['version']

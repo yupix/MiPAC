@@ -7,15 +7,15 @@ from mipac.errors.base import NotExistRequiredData
 from mipac.models.lite.user import LiteUser
 from mipac.models.poll import Poll
 from mipac.types.note import (
+    INoteTranslateResult,
     INoteUpdated,
     INoteUpdatedDelete,
-    INoteTranslateResult,
 )
 from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
-    from mipac.manager.note import ClientNoteManager
     from mipac.manager.client import ClientActions
+    from mipac.manager.note import ClientNoteManager
     from mipac.models.user import UserDetailed
     from mipac.types.drive import IDriveFile
     from mipac.types.emoji import ICustomEmojiLite
