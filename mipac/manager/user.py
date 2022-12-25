@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, Optional
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.user import UserActions
 from mipac.http import HTTPClient
+from mipac.manager.follow import FollowManager
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
@@ -17,14 +18,17 @@ __all__ = ('UserManager',)
 class UserManager(AbstractManager):
     def __init__(
         self,
-        user: Optional[LiteUser] = None,
+        user: LiteUser | None = None,
         *,
         session: HTTPClient,
         client: ClientActions
     ):
         self.__session: HTTPClient = session
         self.__client: ClientActions = client
-        self.user: Optional[LiteUser] = user
+        self.user: LiteUser | None = user
+        self.follow: FollowManager = FollowManager(
+            user_id=user.id if user else None, session=session, client=client
+        )
 
     @property
     def action(self) -> UserActions:
