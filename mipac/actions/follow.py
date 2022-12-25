@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.abstract.action import AbstractAction
 from mipac.http import Route
 from mipac.models.follow import FollowRequest
-from mipac.models.user import UserDetailed, LiteUser
+from mipac.models.user import LiteUser
 from mipac.types.follow import IFollowRequest
 
 if TYPE_CHECKING:

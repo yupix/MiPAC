@@ -31,8 +31,14 @@ class ClientActions:
         self.admin: AdminManager = AdminManager(session=session, client=self)
         self.drive: DriveManager = DriveManager(session=session, client=self)
         self.chart: ChartManager = ChartManager(session=session, client=self)
-        self.follow: FollowManager = FollowManager(session=session, client=self)
-        self.follow_request: FollowRequestManager = FollowRequestManager(session=session, client=self)
+        self.follow: FollowManager = FollowManager(
+            session=session,
+            client=self,
+        )
+        self.follow_request: FollowRequestManager = FollowRequestManager(
+            session=session,
+            client=self,
+        )
         self._config: Config = config
 
     def _create_user_instance(self, user: LiteUser) -> UserManager:
