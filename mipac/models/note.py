@@ -272,21 +272,21 @@ class Note:
 
 class NoteTranslateResult:
     """
-    NoteTranslateResultモデル
+    NoteTranslateResult
 
     Parameters
     ----------
     translate_result: INoteTranslateResult
-        アクションを持たないNoteTranslationクラス
+        The raw data of the note translate result
     """
 
     def __init__(self, translate_result: INoteTranslateResult):
         self.__translate_result = translate_result
 
     @property
-    def source_language(self):
+    def source_language(self) -> str:
         return self.__translate_result['sourceLang']
 
     @property
-    def text(self):
+    def text(self) -> str:
         return self.__translate_result['text']

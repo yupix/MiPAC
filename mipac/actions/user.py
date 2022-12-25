@@ -194,27 +194,27 @@ class UserActions:
         all: bool = False
     ) -> AsyncIterator[UserDetailed | LiteUser]:
         """
-        ユーザーを検索します。
+        Search users by keyword.
 
         Parameters
         ----------
         query : str
-            検索クエリ
+            Keyword to search.
         limit : int, default=100
-            取得するユーザーの数
+            The maximum number of users to return.
         offset : int, default=0
-            取得するユーザーのオフセット
+            The number of users to skip.
         origin : Literal['local', 'remote', 'combined'], default='combined'
-            取得するユーザーのインスタンスの種類
+            The origin of users to search.
         detail : bool, default=True
-            ユーザーの詳細情報を取得するかどうか
+            Whether to return detailed user information.
         all : bool, default=False
-            全てのユーザーを取得するかどうか
+            Whether to return all users.
 
         Returns
         -------
         AsyncIterator[UserDetailed | LiteUser]
-            ユーザーのリスト
+            A AsyncIterator of users.
         """
 
         if limit > 100:
@@ -264,23 +264,23 @@ class UserActions:
         detail: bool = True,
     ) -> list[UserDetailed | LiteUser]:
         """
-        ユーザーをユーザー名とインスタンスのホストで検索します。
+        Search users by username and host.
 
         Parameters
         ----------
         username : str
-            ユーザー名
+            Username of user.
         host : str
-            インスタンスのホスト
+            Host of user.
         limit : int, default=100
-            取得するユーザーの数
+            The maximum number of users to return.
         detail : bool, default=True
-            ユーザーの詳細情報を取得するかどうか
+            Weather to get detailed user information.
 
         Returns
         -------
         list[UserDetailed | LiteUser]
-            ユーザーのリスト
+            A list of users.
         """
 
         if limit > 100:

@@ -9,7 +9,7 @@ from mipac.file import MiFile
 from mipac.models.drive import File
 from mipac.models.note import Note, NoteReaction, NoteTranslateResult
 from mipac.models.poll import Poll
-from mipac.types.note import ICreatedNote, INote
+from mipac.types.note import ICreatedNote, INote, INoteTranslateResult
 
 __all__ = ['NoteActions']
 
@@ -122,17 +122,17 @@ class ClientNoteActions(AbstractAction):
 
     async def delete(self, note_id: Optional[str] = None) -> bool:
         """
-        ノートを削除します
+        Delete a note
 
         Parameters
         ----------
         note_id : Optional[str], default=None
-            削除したいノートのID
+            note id
 
         Returns
         -------
         bool
-            削除に成功したか否か
+            success or not
         """
 
         note_id = note_id or self._note_id
@@ -145,17 +145,17 @@ class ClientNoteActions(AbstractAction):
 
     async def create_renote(self, note_id: Optional[str] = None) -> Note:
         """
-        リノートを作成します
+        Renote a note
 
         Parameters
         ----------
         note_id : Optional[str], default=None
-            ノートのID
+            note id
 
         Returns
         -------
         Note
-            作成したリノート
+            Renoted note
         """
         body = create_note_body(renote_id=note_id,)
         res: ICreatedNote = await self._session.request(
@@ -286,24 +286,24 @@ class ClientNoteActions(AbstractAction):
         target_lang: str = 'en-US',
     ) -> NoteTranslateResult:
         """
-        ノートを翻訳します
+        Translate a note
 
         Parameters
         ----------
         note_id : Optional[str], default=None
-            翻訳したいノートのID
+            Note ID to target for translation
         target_lang : str, default='en'
-            翻訳先の言語
+            Target language
 
         Returns
         -------
         NoteTranslateResult
-            翻訳結果
+            Translated result
         """
         note_id = note_id or self._note_id
 
         data = {'noteId': note_id, 'targetLang': target_lang}
-        res = await self._session.request(
+        res: INoteTranslateResult = await self._session.request(
             Route('POST', '/api/notes/translate'), json=data, auth=True
         )
         if isinstance(res, dict):
