@@ -23,8 +23,6 @@ packages = [
     'mipac',
     'mipac.abstract',
     'mipac.actions',
-    'mipac.core',
-    'mipac.core.models',
     'mipac.errors',
     'mipac.manager',
     'mipac.manager.admin',
