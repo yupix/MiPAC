@@ -112,7 +112,7 @@ class ChatMessage:
         )
 
     @property
-    def action(self) -> BaseChatAction:
+    def api(self) -> BaseChatAction:
         return self.__client.chat.custom_base_chat_action(
             user_id=self.user.id, message_id=self.id
         )

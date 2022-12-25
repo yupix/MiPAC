@@ -6,18 +6,29 @@ from typing import TYPE_CHECKING, Literal, Optional
 from mipac.errors.base import NotExistRequiredData
 from mipac.models.lite.user import LiteUser
 from mipac.models.poll import Poll
-from mipac.types.note import INoteUpdated, INoteUpdatedDelete, INoteTranslateResult
+from mipac.types.note import (
+    INoteUpdated,
+    INoteUpdatedDelete,
+    INoteTranslateResult,
+)
 from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
-    from mipac.actions.note import ClientNoteActions
+    from mipac.manager.note import ClientNoteManager
     from mipac.manager.client import ClientActions
     from mipac.models.user import UserDetailed
     from mipac.types.drive import IDriveFile
     from mipac.types.emoji import ICustomEmojiLite
     from mipac.types.note import INote, INoteReaction
 
-__all__ = ('Note', 'Follow', 'Header', 'NoteReaction', 'NoteDeleted', 'NoteTranslateResult')
+__all__ = (
+    'Note',
+    'Follow',
+    'Header',
+    'NoteReaction',
+    'NoteDeleted',
+    'NoteTranslateResult',
+)
 
 
 class NoteDeleted:
@@ -259,7 +270,7 @@ class Note:
         )
 
     @property
-    def action(self) -> ClientNoteActions:
+    def api(self) -> ClientNoteManager:
         """
         ノートに対するアクション
 
@@ -267,7 +278,7 @@ class Note:
         -------
         NoteActions
         """
-        return self._client.note.create_client_note_manager(self.id).action
+        return self._client.note.create_client_note_manager(self.id)
 
 
 class NoteTranslateResult:

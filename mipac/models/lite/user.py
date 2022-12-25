@@ -8,7 +8,7 @@ from mipac.types.user import ILiteUser
 from mipac.util import deprecated
 
 if TYPE_CHECKING:
-    from mipac.actions.user import UserActions
+    from mipac.manager.user import UserManager
     from mipac.manager.client import ClientActions
 
 
@@ -67,5 +67,5 @@ class LiteUser:
         )
 
     @property
-    def action(self) -> UserActions:
-        return self.__client._create_user_instance(self).action
+    def action(self) -> UserManager:
+        return self.__client._create_user_instance(self)

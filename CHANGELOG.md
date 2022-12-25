@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - 💡 became `is_ayuskey` attribute is deprecated(I'll remove with v0.4.0)
 - ✨ added `get_exception_from_id` function.
 - ✨ Return an exception appropriate for the error encountered.
+- ✨ [@omg-xtao](https://github.com/omg-xtao) added `users_search_by_username_and_host` method a `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
+- ✨ [@omg-xtao](https://github.com/omg-xtao) added `note_translate` method a `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
+- ✨ [@omg-xtao](https://github.com/omg-xtao) added `users_search` method a `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
 
 ## Changed
 
@@ -29,6 +32,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - 🚚 rename `DriveRemoteChartPayload` class to `IDriveRemoteChart` .class.
 - 🚚 rename `DriveChartPayload` class to `IDriveChart` class.
 - 💥 **BREAKING CHANGE**
+    - The `action` property in the model has been changed to `api`.
+        - 💡 Change `note.action.send` to `note.api.action.send`. 
     - Moved the reaction attribute of `ClientActions` to `NoteManager`.
         - 💡 Change `api.reaction` to `api.note.reaction`.
     - Moved methods from `AdminEmojiManager` to `AdminEmojiActions`.

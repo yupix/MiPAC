@@ -3,11 +3,12 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
+
 from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 
 if TYPE_CHECKING:
-    from mipac.actions.reaction import ReactionActions
+    from mipac.manager.reaction import ReactionManager
     from mipac.manager.client import ClientActions
     from mipac.types.notification import IReactionNf
 
@@ -50,5 +51,5 @@ class NotificationReaction:
         return self.__reaction['reaction']
 
     @property
-    def action(self) -> ReactionActions:
-        return self.__client.note._client.reaction.action
+    def api(self) -> ReactionManager:
+        return self.__client.note._client.reaction

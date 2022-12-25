@@ -2,10 +2,18 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.types.poll import IPoll, IPollChoice
+from mipac.types.poll import ICreatePoll, IPoll, IPollChoice
 
 if TYPE_CHECKING:
     from mipac.manager import ClientActions
+
+
+class MiPoll:
+    def __init__(self, poll: ICreatePoll) -> None:
+        self.multiple = poll.get('multiple', False)
+        self.choices = poll.get('choices')
+        self.expired_after = poll.get('expired_after')
+        self.expires_at = poll.get('expires_at')
 
 
 class PollChoice:
