@@ -18,6 +18,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - ✨ added `MuteActions` class.
 - ✨ added `MuteUser` class.
 - ✨ added `IMuteUser` class.
+- ✨ added some notification classes.
+  - `Notification` 
+  - `NotificationFollow`
+  - `NotificationFollowRequest`
+  - `NotificationNote`
+  - `NotificationPollEnd`
+  - `NotificationReaction`
+  - `IUserNf`
+  - `INoteNf`
+  - `IPollEndNf`
 
 ## Removed
 

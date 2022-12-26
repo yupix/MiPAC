@@ -8,46 +8,163 @@ from mipac.models.note import Note
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
+    from mipac.manager.follow import FollowManager, FollowRequestManager
+    from mipac.manager.note import NoteManager
     from mipac.manager.reaction import ReactionManager
-    from mipac.types.notification import IReactionNf
+    from mipac.types.notification import INotification, IUserNf, \
+        INoteNf, IPollEndNf, IReactionNf
 
 
-class NotificationReaction:
+class Notification:
     def __init__(
-        self, reaction: IReactionNf, *, client: ClientActions
+        self,
+        notification: INotification,
+        *,
+        client: ClientActions,
     ) -> None:
-        self.__reaction: IReactionNf = reaction
+        self.__notification: INotification = notification
         self.__client: ClientActions = client
 
     @property
     def id(self) -> str:
-        return self.__reaction['id']
+        return self.__notification['id']
+
+    @property
+    def type(self) -> str:
+        return self.__notification['type']
 
     @property
     def created_at(self) -> datetime:
         return datetime.strptime(
-            self.__reaction['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
+            self.__notification['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
         )
 
     @property
-    def type(self) -> str:
-        return self.__reaction['type']
-
-    @property
     def is_read(self) -> bool:
-        return self.__reaction['is_read']
+        return self.__notification['is_read']
+
+
+class NotificationFollow(Notification):
+    def __init__(
+        self,
+        notification: IUserNf,
+        *,
+        client: ClientActions,
+    ) -> None:
+        super().__init__(notification, client=client)
+        self.__notification: IUserNf = notification
+        self.__client: ClientActions = client
 
     @property
     def user(self) -> LiteUser:
-        return LiteUser(self.__reaction['user'], client=self.__client)
+        return LiteUser(
+            self.__notification['user'], client=self.__client,
+        )
+
+    @property
+    def user_id(self) -> str:
+        return self.__notification['user_id']
+
+    @property
+    def api(self) -> FollowManager:
+        return self.__client.follow
+
+
+class NotificationFollowRequest(Notification):
+    def __init__(
+        self,
+        notification: IUserNf,
+        *,
+        client: ClientActions,
+    ) -> None:
+        super().__init__(notification, client=client)
+        self.__notification: IUserNf = notification
+        self.__client: ClientActions = client
+
+    @property
+    def user(self) -> LiteUser:
+        return LiteUser(
+            self.__notification['user'], client=self.__client,
+        )
+
+    @property
+    def user_id(self) -> str:
+        return self.__notification['user_id']
+
+    @property
+    def api(self) -> FollowRequestManager:
+        return self.__client.follow_request
+
+
+class NotificationNote(Notification):
+    def __init__(
+        self,
+        notification: INoteNf,
+        *,
+        client: ClientActions,
+    ) -> None:
+        super().__init__(notification, client=client)
+        self.__notification: INoteNf = notification
+        self.__client: ClientActions = client
+
+    @property
+    def user(self) -> LiteUser:
+        return LiteUser(
+            self.__notification['user'], client=self.__client,
+        )
+
+    @property
+    def user_id(self) -> str:
+        return self.__notification['user_id']
 
     @property
     def note(self) -> Note:
-        return Note(self.__reaction['note'], client=self.__client)
+        return Note(
+            self.__notification['note'], client=self.__client,
+        )
+
+    @property
+    def api(self) -> NoteManager:
+        return self.__client.note
+
+
+class NotificationPollEnd(Notification):
+    def __init__(
+        self,
+        notification: IPollEndNf,
+        *,
+        client: ClientActions,
+    ) -> None:
+        super().__init__(notification, client=client)
+        self.__notification: IPollEndNf = notification
+        self.__client: ClientActions = client
+
+    @property
+    def note(self) -> Note:
+        return Note(
+            self.__notification['note'], client=self.__client,
+        )
+
+
+class NotificationReaction(Notification):
+    def __init__(
+        self, reaction: IReactionNf, *, client: ClientActions
+    ) -> None:
+        super().__init__(reaction, client=client)
+        self.__notification: IReactionNf = reaction
+        self.__client: ClientActions = client
+
+    @property
+    def user(self) -> LiteUser:
+        return LiteUser(self.__notification['user'], client=self.__client)
+
+    @property
+    def note(self) -> Note:
+        return Note(self.__notification['note'], client=self.__client)
 
     @property
     def reaction(self) -> str:
-        return self.__reaction['reaction']
+        return self.__notification['reaction']
 
     @property
     def api(self) -> ReactionManager:
