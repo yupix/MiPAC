@@ -29,6 +29,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   - `INoteNf`
   - `IPollEndNf`
 
+## Changed
+
+- ⚡️ refactor: cache
+
 ## Removed
 
 - 🔥 Delete `get_user` method at `FollowRequestActions` class.

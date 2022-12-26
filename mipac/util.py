@@ -7,6 +7,7 @@ import asyncio
 import functools
 import json
 import re
+import time
 import uuid
 import warnings
 from datetime import datetime, timedelta
@@ -25,7 +26,6 @@ else:
 __all__ = (
     'deprecated',
     'MiTime',
-    'get_cache_key',
     'key_builder',
     'check_multi_arg',
     'remove_list_empty',
@@ -43,8 +43,7 @@ if HAS_ORJSON:
 else:
     _from_json = json.loads
 
-DEFAULT_CACHE: dict[str, list[str]] = {}
-DEFAULT_CACHE_VALUE: dict[str, Any] = {}
+DEFAULT_CACHE: dict[Any, tuple[float, Any]] = {}
 
 
 def str_to_datetime(
@@ -214,72 +213,72 @@ class AuthClient:
         return data['token'] if self.__use_miauth else data['accessToken']
 
 
+class CacheClient:
+    maxsize: int = 1024
+    ttl: int = 3600
+
+    @staticmethod
+    def _clear_cache() -> None:
+        """ Clear items. """
+
+        now = time.time()
+
+        for key, value in DEFAULT_CACHE.copy().items():
+            if value[0] < now:
+                del DEFAULT_CACHE[key]
+
+        if len(DEFAULT_CACHE) > CacheClient.maxsize:
+            overflow = len(DEFAULT_CACHE) - CacheClient.maxsize
+            keys = list(DEFAULT_CACHE.keys())[:overflow]
+            for key in keys:
+                del DEFAULT_CACHE[key]
+
+    @staticmethod
+    async def get_cache(key: Any) -> Any:
+        CacheClient._clear_cache()
+        return None if key not in DEFAULT_CACHE else DEFAULT_CACHE[key][1]
+
+    @staticmethod
+    async def set_cache(key: Any, value: Any) -> None:
+        DEFAULT_CACHE[key] = (time.time() + CacheClient.ttl, value)
+        CacheClient._clear_cache()
+
+
 def dynamic_args(decorator):
     def wrapper(*args, **kwargs):
-        if len(args) != 0 and callable(args[0]):
+        if args and callable(args[0]):
             func = args[0]
             return functools.wraps(func)(decorator(func))
         else:
-
             def _wrapper(func):
                 return functools.wraps(func)(decorator(func, *args, **kwargs))
-
             return _wrapper
-
     return wrapper
 
 
-def set_cache(group: str, key: str, value: Any):
-    if len(DEFAULT_CACHE.get(group, [])) > 50:
-        del DEFAULT_CACHE[group][-1]
-        del DEFAULT_CACHE_VALUE[key]
-
-    if DEFAULT_CACHE.get(group) is None:
-        DEFAULT_CACHE[group] = []
-    DEFAULT_CACHE[group].append(key)
-    DEFAULT_CACHE_VALUE[key] = value
+def key_builder(group: str, func, *args, **kwargs):
+    ordered_kwargs = sorted(kwargs.items())
+    key_list = list(args)
+    key_list.extend([i[1] for i in ordered_kwargs])
+    return (
+        group
+        + f'.{func.__name__}'
+        + f'.{".".join([str(arg) for arg in key_list if arg])}'
+    )
 
 
 @dynamic_args
 def cache(func, group: str = 'default', override: bool = False):
     async def decorator(self, *args, **kwargs):
-        ordered_kwargs = sorted(kwargs.items())
-        key = '.{0}' + str(args) + str(ordered_kwargs)
-        hit_item = DEFAULT_CACHE_VALUE.get(key)
-        if hit_item and override is False:
+        key = key_builder(group, func, *args, **kwargs)
+        hit_item = await CacheClient.get_cache(key)
+        if hit_item and not override:
             return hit_item
         res = await func(self, *args, **kwargs)
-        set_cache(group, key, res)
+        await CacheClient.set_cache(key, res)
         return res
 
     return decorator
-
-
-def get_cache_key(func):
-    async def decorator(self, *args, **kwargs):
-        ordered_kwargs = sorted(kwargs.items())
-        key = (
-            (func.__module__ or '')
-            + '.{0}'
-            + f'{self}'
-            + str(args)
-            + str(ordered_kwargs)
-        )
-        return await func(self, *args, **kwargs, cache_key=key)
-
-    return decorator
-
-
-def key_builder(func, cls, *args, **kwargs):
-    ordered_kwargs = sorted(kwargs.items())
-    key = (
-        (func.__module__ or '')
-        + f'.{func.__name__}'
-        + f'{cls}'
-        + str(args)
-        + str(ordered_kwargs)
-    )
-    return key
 
 
 def check_multi_arg(*args: Any) -> bool:
@@ -326,9 +325,7 @@ def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
     _data: dict
         空のkeyがなくなったdict
     """
-    _data = {}
-    _data = {k: v for k, v in data.items() if v is not None}
-    return _data
+    return {k: v for k, v in data.items() if v is not None}
 
 
 def upper_to_lower(
@@ -366,7 +363,7 @@ def upper_to_lower(
         large = [i.group().lower() for i in pattern.finditer(attr)]
         result = [None] * (len(large + pattern.split(attr)))
         result[::2] = pattern.split(attr)
-        result[1::2] = ['_' + i.lower() for i in large]
+        result[1::2] = [f'_{i.lower()}' for i in large]
         default_key = ''.join(result)
         if replace_list.get(attr):
             default_key = default_key.replace(attr, replace_list.get(attr))
@@ -381,7 +378,7 @@ def str_lower(text: str):
     large = [i.group().lower() for i in pattern.finditer(text)]
     result = [None] * (len(large + pattern.split(text)))
     result[::2] = pattern.split(text)
-    result[1::2] = ['_' + i.lower() for i in large]
+    result[1::2] = [f'_{i.lower()}' for i in large]
     return ''.join(result)
 
 
