@@ -9,8 +9,6 @@ from mipac.models.note import Note
 if TYPE_CHECKING:
     from mipac.manager.client import ClientActions
     from mipac.manager.follow import FollowManager, FollowRequestManager
-    from mipac.manager.note import NoteManager
-    from mipac.manager.reaction import ReactionManager
     from mipac.types.notification import INotification, IUserNf, \
         INoteNf, IPollEndNf, IReactionNf
 
@@ -67,7 +65,9 @@ class NotificationFollow(Notification):
 
     @property
     def api(self) -> FollowManager:
-        return self.__client.follow
+        return self.__client._create_user_instance(
+            user=self.user
+        ).follow
 
 
 class NotificationFollowRequest(Notification):
@@ -93,7 +93,9 @@ class NotificationFollowRequest(Notification):
 
     @property
     def api(self) -> FollowRequestManager:
-        return self.__client.follow_request
+        return self.__client._create_user_instance(
+            user=self.user
+        ).follow.request
 
 
 class NotificationNote(Notification):
@@ -122,10 +124,6 @@ class NotificationNote(Notification):
         return Note(
             self.__notification['note'], client=self.__client,
         )
-
-    @property
-    def api(self) -> NoteManager:
-        return self.__client.note
 
 
 class NotificationPollEnd(Notification):
@@ -165,7 +163,3 @@ class NotificationReaction(Notification):
     @property
     def reaction(self) -> str:
         return self.__notification['reaction']
-
-    @property
-    def api(self) -> ReactionManager:
-        return self.__client.note._client.reaction
