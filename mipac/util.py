@@ -14,7 +14,6 @@ from typing import Any, Optional
 from urllib.parse import urlencode
 
 import aiohttp
-from _operator import itemgetter
 
 try:
     import orjson  # type: ignore
@@ -44,7 +43,8 @@ if HAS_ORJSON:
 else:
     _from_json = json.loads
 
-DEFAULT_CACHE: dict[str, list[dict[str, Any]]] = {}
+DEFAULT_CACHE: dict[str, list[str]] = {}
+DEFAULT_CACHE_VALUE: dict[str, Any] = {}
 
 
 def str_to_datetime(
@@ -232,16 +232,12 @@ def dynamic_args(decorator):
 def set_cache(group: str, key: str, value: Any):
     if len(DEFAULT_CACHE.get(group, [])) > 50:
         del DEFAULT_CACHE[group][-1]
+        del DEFAULT_CACHE_VALUE[key]
 
     if DEFAULT_CACHE.get(group) is None:
         DEFAULT_CACHE[group] = []
-    DEFAULT_CACHE[group].append({key: value})
-
-
-def get_cache(group: str, key: str):
-    if DEFAULT_CACHE.get(group):
-        return list(map(itemgetter(key), DEFAULT_CACHE[group]))[0]
-    return None
+    DEFAULT_CACHE[group].append(key)
+    DEFAULT_CACHE_VALUE[key] = value
 
 
 @dynamic_args
@@ -249,7 +245,7 @@ def cache(func, group: str = 'default', override: bool = False):
     async def decorator(self, *args, **kwargs):
         ordered_kwargs = sorted(kwargs.items())
         key = '.{0}' + str(args) + str(ordered_kwargs)
-        hit_item = get_cache(group, key)
+        hit_item = DEFAULT_CACHE_VALUE.get(key)
         if hit_item and override is False:
             return hit_item
         res = await func(self, *args, **kwargs)
