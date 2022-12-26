@@ -13,14 +13,29 @@ if TYPE_CHECKING:
     from mipac.types.user import ILiteUser
 
 
-class Notification(TypedDict):
+class INotification(TypedDict):
     id: str
+    type: str
     created_at: str
     is_read: bool
 
 
-class IReactionNf(Notification):
-    type: str
+class IUserNf(INotification):
+    user: ILiteUser
+    user_id: str
+
+
+class INoteNf(INotification):
+    user: ILiteUser
+    user_id: str
+    note: INote
+
+
+class IPollEndNf(INotification):
+    note: INote
+
+
+class IReactionNf(INotification):
     reaction: str
     user: ILiteUser
     user_id: str
