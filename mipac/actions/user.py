@@ -48,7 +48,7 @@ class UserActions:
         path = (
             f'/@{self.__user.username}'
             if external
-            else f'/{self.__user.action.get_mention()}'
+            else f'/{self.__user.api.action.get_mention()}'
         )
         return host + path
 
