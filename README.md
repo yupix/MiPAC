@@ -51,12 +51,10 @@ if __name__ == '__main__':
 
 準備中
 
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyupix%2FMiPAC.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyupix%2FMiPAC?ref=badge_large)
+
 <p align="center">
     <a href="">Documentation</a>
     *
     <a href="https://discord.gg/CcT997U">Discord Server</a>
 </p>
-
-
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyupix%2FMiPAC.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyupix%2FMiPAC?ref=badge_large)
