@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - added `MuteActions` class.
 - added `MuteUser` class.
 - added `IMuteUser` class.
+- added `ICustomEmojiLiteRequired` class.
+- The following methods are added to the `AdminEmojiActions` class.
+    - `gets`
+    - `gets_remote`
 - added some federation class.
     - `IFederationInstanceRequired`
     - `IFederationInstance`
@@ -39,9 +43,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Changed
 
 - The attribute `emojis` for Note and LiteUser is obsolete in misskey v13, so v13 will return an empty list.
-- config is now a global variable
-    - If you want to change the config, please use `Client.config.from_dict`
-
+- config is now a global variable.
+    - If you want to change the config, please use `Client.config.from_dict`.
+- CustomEmoji now inherits PartialCustomEmoji.
+- PartialCustomEmoji url has been changed to return `str | None` to match v13.
+    - For v13, the url is automatically generated. (Although it returns None by type, it never actually returns None.
 ## Removed
 
 - Delete `get_user` method at `FollowRequestActions` class.
