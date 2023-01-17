@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, AsyncIterator
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import NotExistRequiredData
+from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import Route
+from mipac.models.emoji import CustomEmoji
+from mipac.types.emoji import ICustomEmoji
 from mipac.util import check_multi_arg
 
 if TYPE_CHECKING:
@@ -79,6 +81,95 @@ class AdminEmojiActions(AbstractAction):
                 auth=True,
             )
         )
+
+    async def gets(
+        self,
+        query: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        all: bool = True
+    ) -> AsyncIterator[CustomEmoji]:
+        if limit > 100:
+            raise ParameterError('limitは100以下である必要があります')
+        if all:
+            limit = 100
+
+        async def request(body) -> list[CustomEmoji]:
+            res: list[ICustomEmoji] = await self.__session.request(
+                Route('POST', '/api/admin/emoji/list'), auth=True, json=body,
+            )
+            return [CustomEmoji(emoji, client=self.__client) for emoji in res]
+
+        body = {
+            'query': query,
+            'limit': limit,
+            'sinceId': since_id,
+            'untilId': until_id,
+        }
+        first_req = await request(body)
+
+        for emoji in first_req:
+            yield emoji
+        if all and len(first_req) == 100:
+            body['untilId'] = first_req[-1].id
+            count = 0
+            while True:
+                count = count + 1
+                res = await request(body)
+                if len(res) <= 100:
+                    for emoji in res:
+                        yield emoji
+                if len(res) < 100:
+                    print(res[-1].id)
+                    break
+
+    async def gets_remote(
+        self,
+        query: str | None = None,
+        host: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        all: bool = True
+    ) -> AsyncIterator[CustomEmoji]:
+        if limit > 100:
+            raise ParameterError('limitは100以下である必要があります')
+        if all:
+            limit = 100
+
+        async def request(body) -> list[CustomEmoji]:
+            res: list[ICustomEmoji] = await self.__session.request(
+                Route('POST', '/api/admin/emoji/list-remote'),
+                auth=True,
+                json=body,
+            )
+            return [CustomEmoji(emoji, client=self.__client) for emoji in res]
+
+        body = {
+            'query': query,
+            'host': host,
+            'limit': limit,
+            'sinceId': since_id,
+            'untilId': until_id,
+        }
+        first_req = await request(body)
+
+        for note in first_req:
+            yield note
+
+        if all and len(first_req) == 100:
+            body['untilId'] = first_req[-1].id
+            while True:
+                res = await request(body)
+                if len(res) <= 100:
+                    for note in res:
+                        yield note
+                if len(res) == 0:
+                    break
+                body['untilId'] = res[-1].id
 
     async def remove(self, emoji_id: str | None = None) -> bool:
         """指定したIdの絵文字を削除します
