@@ -52,6 +52,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Delete `get_user` method at `FollowRequestActions` class.
 
+## Fixed
+
+- fixed `ChatMessage` model.
+
 ## [0.3.99] 2022-12-25
 ## Added
 

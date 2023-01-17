@@ -24,8 +24,8 @@ class IChatMessage(TypedDict):
     text: str | None
     user_id: str
     user: ILiteUser
-    recipient_id: str
-    recipient: str
+    recipient_id: str | None
+    recipient: ILiteUser | None
     group_id: str
     file_id: str
     is_read: list[str]
