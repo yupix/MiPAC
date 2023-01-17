@@ -3,7 +3,12 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.models.lite.instance import LiteInstanceMeta
-from mipac.types.instance import IFederationInstance, IInstanceMeta
+from mipac.types.instance import (
+    IFederationInstance,
+    IInstanceFeatures,
+    IInstanceMeta,
+    IInstancePolicies,
+)
 
 if TYPE_CHECKING:
     from mipac.client import ClientActions
@@ -115,12 +120,11 @@ class FederationInstance:
         return self.__instance.get('last_communicated_at')
 
 
-class InstanceMeta(LiteInstanceMeta):
+class InstanceFeatures:
     def __init__(
-        self, instance: IInstanceMeta, *, client: ClientActions
+        self, features: IInstanceFeatures, *, client: ClientActions
     ) -> None:
-        super().__init__(instance, client=client)
-        self.__features = instance['features']
+        self.__features = features
 
     @property
     def registration(self) -> bool:
@@ -173,3 +177,116 @@ class InstanceMeta(LiteInstanceMeta):
     @property
     def miauth(self) -> bool:
         return self.__features['miauth']
+
+
+class InstancePolicies:
+    def __init__(self, policies: IInstancePolicies) -> None:
+        self.__policies = policies
+
+    @property
+    def gtl_available(self) -> bool:
+        return self.__policies['gtl_available']
+
+    @property
+    def ltl_available(self) -> bool:
+        return self.__policies['ltl_available']
+
+    @property
+    def can_public_note(self) -> bool:
+        return self.__policies['can_public_note']
+
+    @property
+    def can_invite(self) -> bool:
+        return self.__policies['can_invite']
+
+    @property
+    def can_manage_custom_emojis(self) -> bool:
+        return self.__policies['can_manage_custom_emojis']
+
+    @property
+    def can_hide_ads(self) -> bool:
+        return self.__policies['can_hide_ads']
+
+    @property
+    def drive_capacity_mb(self) -> int:
+        return self.__policies['drive_capacity_mb']
+
+    @property
+    def pin_limit(self) -> int:
+        return self.__policies['pin_limit']
+
+    @property
+    def antenna_limit(self) -> int:
+        return self.__policies['antenna_limit']
+
+    @property
+    def word_mute_limit(self) -> int:
+        return self.__policies['word_mute_limit']
+
+    @property
+    def webhook_limit(self) -> int:
+        return self.__policies['webhook_limit']
+
+    @property
+    def clip_limit(self) -> int:
+        return self.__policies['clip_limit']
+
+    @property
+    def note_each_clips_limit(self) -> int:
+        return self.__policies['note_each_clips_limit']
+
+    @property
+    def user_list_limit(self) -> int:
+        return self.__policies['user_list_limit']
+
+    @property
+    def user_each_user_lists_limit(self) -> int:
+        return self.__policies['user_each_user_lists_limit']
+
+    @property
+    def rate_limit_factor(self) -> int:
+        return self.__policies['rate_limit_factor']
+
+
+class InstanceMeta(LiteInstanceMeta):
+    def __init__(
+        self, instance: IInstanceMeta, *, client: ClientActions
+    ) -> None:
+        super().__init__(instance, client=client)
+        self.__meta = instance
+
+    @property
+    def policies(self) -> InstancePolicies | None:
+        return (
+            InstancePolicies(self.__meta['policies'])
+            if 'policies' in self.__meta
+            else None
+        )
+
+    @property
+    def features(self):
+        return InstanceFeatures(self.__meta['features'], client=self.__client)
+
+    @property
+    def cache_remote_files(self) -> bool:
+        return self.__meta['cache_remote_files']
+
+    @property
+    def pinned_pages(self) -> list[str]:
+        return self.__meta.get('pinned_pages', [])
+
+    @property
+    def pinned_clip_id(self) -> str | None:
+        return self.__meta.get('pinned_clip_id')
+
+    @property
+    def require_setup(self) -> bool:
+        return self.__meta.get('require_setup', False)
+
+    @property
+    def proxy_account_name(self) -> str | None:
+        return self.__meta.get('proxy_account_name')
+
+    @property
+    def proxy_account(self) -> str | None:
+        return self.__meta.get('proxy_account')
