@@ -55,6 +55,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Fixed
 
 - fixed `ChatMessage` model.
+- fixed `Chat` action.
 
 ## [0.3.99] 2022-12-25
 ## Added
