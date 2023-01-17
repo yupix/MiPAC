@@ -38,6 +38,7 @@ class ILiteUser(IUserRequired, total=False):
     host: str
     instance: IInstanceLite
     emojis: list[ICustomEmojiLite]
+    avatar_color: str
 
 
 class IUserDetailedField(TypedDict):

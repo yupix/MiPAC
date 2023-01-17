@@ -55,6 +55,21 @@ class LiteUser:
         return self.__user['avatar_blurhash']
 
     @property
+    def avatar_color(self) -> str | None:
+        """
+        Returns the average color of the avatar.
+        Note: Since avatar_color is deprecated in v13,
+        only None is returned for v13 instances.
+
+        Returns
+        -------
+        str | None
+            average color of the avatar
+        """
+
+        return self.__user.get('avatar_color')
+
+    @property
     def emojis(self) -> list[ICustomEmojiLite]:  # TODO: ちゃんとモデルにする
         """
         List of emoji included in nicknames, etc
