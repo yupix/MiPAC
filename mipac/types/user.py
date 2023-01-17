@@ -32,12 +32,12 @@ class IUserRequired(TypedDict):
     online_status: Literal['online', 'active', 'offline', 'unknown']
     avatar_url: str
     avatar_blurhash: str
-    emojis: list[ICustomEmojiLite]
 
 
 class ILiteUser(IUserRequired, total=False):
     host: str
     instance: IInstanceLite
+    emojis: list[ICustomEmojiLite]
 
 
 class IUserDetailedField(TypedDict):

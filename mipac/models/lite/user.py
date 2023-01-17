@@ -56,7 +56,17 @@ class LiteUser:
 
     @property
     def emojis(self) -> list[ICustomEmojiLite]:  # TODO: ちゃんとモデルにする
-        return self.__user['emojis']
+        """
+        List of emoji included in nicknames, etc
+        Note: emojis have been abolished since misskey v13
+
+        Returns
+        -------
+        list[ICustomEmojiLite]
+            List of emoji included in nicknames, etc
+        """
+
+        return self.__user.get('emojis', [])
 
     @property
     def instance(self) -> LiteInstance | None:
