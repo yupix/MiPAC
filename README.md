@@ -7,10 +7,15 @@
 
 MiPAのCoreとなるライブラリです。issueは[こちら](https://code.teamblackcrystal.com/projects/120/issues)で管理しています
 
+MiPACはMisskey v11, 12, 13をサポートしているApi Wrapperです。
+本来気にしないといけないバージョンごとのAPIの違い等を吸収してくれます。
+
 ## サポートしているMisskey
 
-- [Misskey Official v12](https://github.com/misskey-dev/misskey)
-- [Ayuskey latest](https://github.com/teamblackcrystal/misskey)
+|name|version|supported|
+|---|---|---|
+|[Misskey Official](https://github.com/misskey-dev/misskey)|v13, v12, v11|〇|
+|[Ayuskey](https://github.com/teamblackcrystal/misskey)|latest|〇|
 
 ## 使い方
 
@@ -30,23 +35,35 @@ if __name__ == '__main__':
     asyncio.run(main())
 ```
 
-### Collaborators
+### Migration from v0.3.0 to v0.4.0
 
-<table>
-    <tr>
-        <td><img src="https://avatars.githubusercontent.com/u/50538210?s=120&v=4"></img></td>
-    </tr>
-    <tr>
-        <td align="center"><a href="https://github.com/yupix">Author | @yupix</a></td>
-    </tr>
-</table>
+#### configの属性が変更されました
 
+- `is_official` が削除されました
+
+##### `use_version` が追加されました
+
+`is_official` ではv12とv13を区別するには不十分であったため、このように変更されました。v13がリリースされたばかりというのもあり、現状のデフォルト値はv12となっています。v13をご利用の方は`use_version=13`と指定するなどして、バージョンを変更してください。
+
+#### `Client` のオプションから `config`が削除されました
+
+今後configを参照する際は `Client.config` を使用してください。
+また、値を更新する場合はClient.config.from_dict()を用いることをお勧めします。
+通常の変更方法との違いは以下の通りです。
+
+```python
+Client.config.is_ayuskey = True
+Client.config.use_version = 13
+Client.config.from_dict(is_ayuskey=True, use_version=13)
+```
+
+上記のように複数の値を同時に更新する場合特に`from_dict`は有効な方法になります。
 
 ### 開発者向け情報
 
 このプロジェクトでは [black](https://github.com/psf/black)のforkである、[axblack](https://github.com/axiros/axblack)を利用しています。主な違いはダブルクォートがデフォルトではなく、シングルクォートになっている点です
 
-# LICENSE
+## LICENSE
 
 準備中
 
