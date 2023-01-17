@@ -3,6 +3,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
+from mipac.config import config
+from mipac.errors.base import NotSupportVersion
 from mipac.http import Route
 from mipac.models.emoji import CustomEmoji
 from mipac.models.note import NoteReaction
@@ -78,10 +80,16 @@ class ReactionActions(AbstractAction):
         return [NoteReaction(i, client=self.__client) for i in res]
 
     async def get_emoji_list(self) -> list[CustomEmoji]:
+        if config.use_version >= 13:
+            raise NotSupportVersion('Misskey v13以降では使用できません')
+
         data: IInstanceMetaLite = await self.__session.request(
             Route('GET', '/api/meta'),
             json={'detail': False},
             auth=True,
             replace_list={'ToSUrl': 'tos_url', 'ToSTextUrl': 'tos_text_url'},
         )
-        return [CustomEmoji(i, client=self.__client) for i in data['emojis']]
+        return [
+            CustomEmoji(i, client=self.__client)
+            for i in data.get('emojis', [])
+        ]
