@@ -140,26 +140,29 @@ class IMetaV12AndV11Common(TypedDict, total=False):
     emojis: list[ICustomEmoji]
 
 
-class IMetaCommon(IMetaV12AndV11Common):
-    cache_remote_files: bool
+class IMetaCommonV12(TypedDict, total=False):
+    ads: list[IAds]
+    translator_available: bool  # v12 only
     email_required_for_signup: bool
+    mascot_image_url: str
+
+
+class IMetaCommon(IMetaCommonV12, IMetaV12AndV11Common):
+    cache_remote_files: bool
     enable_hcaptch: bool
     hcaptcha_site_key: str | None
     enable_recaptcha: bool
     recaptcha_site_key: str
     sw_publickey: str | None
-    mascot_image_url: str
     banner_url: str | None
     error_image_url: str | None
     icon_url: str | None
     max_note_text_length: int
-    ads: list[IAds]
     enable_email: bool
     enable_twitter_integration: bool
     enable_github_integration: bool
     enable_discord_integration: bool
     enable_service_worker: bool
-    translator_available: bool | None  # v12 only
     proxy_account_name: str
     user_star_for_reaction_fallback: bool
 
