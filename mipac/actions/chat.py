@@ -93,6 +93,10 @@ class ChatAction(BaseChatAction):
         super().__init__(
             session, client, user_id=user_id, message_id=message_id
         )
+        self.__session = session
+        self.__client = client
+        self.__user_id = user_id
+        self.__message_id = message_id
 
     async def get_history(self, limit: int = 100, group: bool = True):
         """
