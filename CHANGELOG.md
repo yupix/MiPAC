@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Added
 
+- added `avatar_color` property at `LiteUser` class.
+    - Note: Since avatar_color is deprecated in v13, only None is returned for v13 instances.
 - ✨ added `un_renote` method at `ClientNoteActions` class.
 - ✨ added `get_children` method at `ClientNoteActions` class.
 - ✨ added `invalidate` method at `FollowActions` class.
@@ -28,6 +30,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   - `IUserNf`
   - `INoteNf`
   - `IPollEndNf`
+
+## Changed
+
+- The attribute `emojis` for Note and LiteUser is obsolete in misskey v13, so v13 will return an empty list.
+- config is now a global variable
+    - If you want to change the config, please use `Client.config.from_dict`
 
 ## Removed
 
