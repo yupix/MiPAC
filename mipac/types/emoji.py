@@ -3,8 +3,11 @@ from typing import Optional, TypedDict
 __all__ = ('EmojiPayload', 'ICustomEmojiLite', 'ICustomEmoji')
 
 
-class ICustomEmojiLite(TypedDict):
+class ICustomEmojiLiteRequired(TypedDict):
     name: str
+
+
+class ICustomEmojiLite(ICustomEmojiLiteRequired, total=False):
     url: str
 
 
