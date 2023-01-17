@@ -59,7 +59,7 @@ class AdminEmojiActions(AbstractAction):
             必要なデータが不足している
         """
 
-        if self.__client._config.is_official:
+        if self.__client._config.use_version >= 12:
             data = {'fileId': file_id}
         else:
             data = {
@@ -106,7 +106,7 @@ class AdminEmojiActions(AbstractAction):
 
         endpoint = (
             '/api/admin/emoji/delete'
-            if self.__client._config.is_official
+            if self.__client._config.use_version >= 12
             else '/api/admin/emoji/remove'
         )
 
