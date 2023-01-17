@@ -13,9 +13,10 @@ class APIError(Exception):
         self.message: str | None = None
         if isinstance(data, dict):
             error = data.get('error', {})
-            self.code: str | None = error.get('code', '')
-            self.id: str | None = error.get('id')
-            self.message: str | None = error.get('message', '')
+            if isinstance(error, dict):
+                self.code: str | None = error.get('code', '')
+                self.id: str | None = error.get('id')
+                self.message: str | None = error.get('message', '')
         super().__init__(self.message or self.raw)
 
     def raise_error(self):

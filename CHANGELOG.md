@@ -9,95 +9,114 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Added
 
-- ✨ added `un_renote` method at `ClientNoteActions` class.
-- ✨ added `get_children` method at `ClientNoteActions` class.
-- ✨ added `invalidate` method at `FollowActions` class.
-- ✨ added `cancel` method at `FollowRequestActions` class.
-- ✨ added `mute` attribute at `UserManager` class.
-- ✨ added `MuteManager` class.
-- ✨ added `MuteActions` class.
-- ✨ added `MuteUser` class.
-- ✨ added `IMuteUser` class.
-- ✨ added some notification classes.
-  - `Notification` 
-  - `NotificationFollow`
-  - `NotificationFollowRequest`
-  - `NotificationNote`
-  - `NotificationPollEnd`
-  - `NotificationReaction`
-  - `IUserNf`
-  - `INoteNf`
-  - `IPollEndNf`
+- added `avatar_color` property at `LiteUser` class.
+    - Note: Since avatar_color is deprecated in v13, only None is returned for v13 instances.
+- added `un_renote` method at `ClientNoteActions` class.
+- added `get_children` method at `ClientNoteActions` class.
+- added `invalidate` method at `FollowActions` class.
+- added `cancel` method at `FollowRequestActions` class.
+- added `mute` attribute at `UserManager` class.
+- added `MuteManager` class.
+- added `MuteActions` class.
+- added `MuteUser` class.
+- added `IMuteUser` class.
+- added `ICustomEmojiLiteRequired` class.
+- The following methods are added to the `AdminEmojiActions` class.
+    - `gets`
+    - `gets_remote`
+- added some federation class.
+    - `IFederationInstanceRequired`
+    - `IFederationInstance`
+    - `FederationInstance`
 
+- added some notification classes.
+    - `Notification` 
+    - `NotificationFollow`
+    - `NotificationFollowRequest`
+    - `NotificationNote`
+    - `NotificationPollEnd`
+    - `NotificationReaction`
+    - `IUserNf`
+    - `INoteNf`
+    - `IPollEndNf`
+
+## Changed
+
+- The attribute `emojis` for Note and LiteUser is obsolete in misskey v13, so v13 will return an empty list.
+- config is now a global variable.
+    - If you want to change the config, please use `Client.config.from_dict`.
+- CustomEmoji now inherits PartialCustomEmoji.
+- PartialCustomEmoji url has been changed to return `str | None` to match v13.
+    - For v13, the url is automatically generated. (Although it returns None by type, it never actually returns None.
 ## Removed
 
-- 🔥 Delete `get_user` method at `FollowRequestActions` class.
+- Delete `get_user` method at `FollowRequestActions` class.
 
 ## [0.3.99] 2022-12-25
 ## Added
 
-- 💡 added DocString.
-- ✨ added `get_state` method at `ClientNoteActions` class.
-- ✨ added `INoteState` class.
-- ✨ added `NoteState` class.
-- ✨ added `IBasePoll` class.
-- ✨ added `ICreatePoll` class.
-- ✨ added `MiPoll` class.
-- ✨ added `PollManager` class.
-- ✨ added `PollActions` class.
-- ✨ added `AdminEmojiActions` class.
-- ✨ added `AdminManager` class.
-- ✨ added `AdminModeratorManager` class.
-- ✨ added `ActiveUsersChart` class.
-- ✨ added `IDriveChart` class.
-- ✨ added `IDriveLocalChart` class.
-- ✨ added `IDriveRemoteChart` class.
-- ✨ added attribute `is_official` at `Config` class.
-    - 💡 became `is_ayuskey` attribute is deprecated(I'll remove with v0.4.0)
-- ✨ added `get_exception_from_id` function.
-- ✨ Return an exception appropriate for the error encountered.
-- ✨ [@omg-xtao](https://github.com/omg-xtao) added `users_search_by_username_and_host` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
-- ✨ [@omg-xtao](https://github.com/omg-xtao) added `note_translate` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
-- ✨ [@omg-xtao](https://github.com/omg-xtao) added `users_search` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
+- added DocString.
+- added `get_state` method at `ClientNoteActions` class.
+- added `INoteState` class.
+- added `NoteState` class.
+- added `IBasePoll` class.
+- added `ICreatePoll` class.
+- added `MiPoll` class.
+- added `PollManager` class.
+- added `PollActions` class.
+- added `AdminEmojiActions` class.
+- added `AdminManager` class.
+- added `AdminModeratorManager` class.
+- added `ActiveUsersChart` class.
+- added `IDriveChart` class.
+- added `IDriveLocalChart` class.
+- added `IDriveRemoteChart` class.
+- added attribute `is_official` at `Config` class.
+    - became `is_ayuskey` attribute is deprecated(I'll remove with v0.4.0)
+- added `get_exception_from_id` function.
+- Return an exception appropriate for the error encountered.
+- [@omg-xtao](https://github.com/omg-xtao) added `users_search_by_username_and_host` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
+- [@omg-xtao](https://github.com/omg-xtao) added `note_translate` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
+- [@omg-xtao](https://github.com/omg-xtao) added `users_search` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
 
 ## Changed
 
-- 🚚 rename `ActiveUsersChartPayload` class to `IActiveUsersChart` class.
-- 🚚 rename `DriveLocalChartPayload` class to `IDriveLocalChart` class.
-- 🚚 rename `DriveRemoteChartPayload` class to `IDriveRemoteChart` .class.
-- 🚚 rename `DriveChartPayload` class to `IDriveChart` class.
-- 💥 **BREAKING CHANGE**
+- rename `ActiveUsersChartPayload` class to `IActiveUsersChart` class.
+- rename `DriveLocalChartPayload` class to `IDriveLocalChart` class.
+- rename `DriveRemoteChartPayload` class to `IDriveRemoteChart` .class.
+- rename `DriveChartPayload` class to `IDriveChart` class.
+- **BREAKING CHANGE**
     - The `action` property in the model has been changed to `api`.
-        - 💡 Change `note.action.send` to `note.api.action.send`. 
+        - Change `note.action.send` to `note.api.action.send`. 
     - Moved the reaction attribute of `ClientActions` to `NoteManager`.
-        - 💡 Change `api.reaction` to `api.note.reaction`.
+        - Change `api.reaction` to `api.note.reaction`.
     - Moved methods from `AdminEmojiManager` to `AdminEmojiActions`.
-        - 💡 Change `api.admin.emoji.add` to `api.admin.emoji.action.add`.
+        - Change `api.admin.emoji.add` to `api.admin.emoji.action.add`.
     - Moved methods from `AdminModeratorManager` to `AdminModeratorActions`.
-        - 💡 Change `api.admin.moderator.add` to `api.admin.moderator.action.add`.
+        - Change `api.admin.moderator.add` to `api.admin.moderator.action.add`.
     - Moved methods from `ChartManager` to `ChartActions`.
-        - 💡 Change `api.chart.get_active_user` to `api.chat.action.get_active_user`.
+        - Change `api.chart.get_active_user` to `api.chat.action.get_active_user`.
     - Moved methods from `FollowManager` to `FollowActions`.
-        - 💡 Change `api.user.follow.add` to `api.user.follow.action.add`.
+        - Change `api.user.follow.add` to `api.user.follow.action.add`.
     - Moved methods from `FollowRequestManager` to `FollowRequestActions`.
-        - 💡 `api.user.follow.action.get_all`.
+        - `api.user.follow.action.get_all`.
     - Moved some attributes of `NoteActions` to `NoteManager`.
-        - 💡 Change `api.note.action.reaction.add` to `api.note.reaction.action.add`.
+        - Change `api.note.action.reaction.add` to `api.note.reaction.action.add`.
     - Moved the reaction attribute of `NoteActions` to `ClientNoteManager`.
-        - 💡 Change `api.note.action.reaction` to `api.note.reaction.action`.
-        - 💡 Change `api.note.action.favorite` to `api.note.favorite.action`.
+        - Change `api.note.action.reaction` to `api.note.reaction.action`.
+        - Change `api.note.action.favorite` to `api.note.favorite.action`.
 
 ## Fixed
 
-- 🐛 can't delete emoji with v12.
+- can't delete emoji with v12.
 
 ## Removed
 
-- 🔥 The following attributes have been removed `api.user.action.note`
-- 🔥 Delete `RawActiveUsersChart` class.
-- 🔥 Delete `RawDriveLocalChart` class.
-- 🔥 Delete `RawDriveRemoteChart` class.
-- 🔥 Delete `RawDriveChart` class.
+- The following attributes have been removed `api.user.action.note`
+- Delete `RawActiveUsersChart` class.
+- Delete `RawDriveLocalChart` class.
+- Delete `RawDriveRemoteChart` class.
+- Delete `RawDriveChart` class.
 
 
 ## [0.3.1] 2022-12-24

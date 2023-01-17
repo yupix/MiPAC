@@ -226,7 +226,17 @@ class Note:
 
     @property
     def emojis(self) -> list[ICustomEmojiLite]:  # TODO: モデルに
-        return self.__note['emojis']
+        """
+        Note text contains a list of emojis
+        Note: emojis have been abolished since misskey v13
+
+        Returns
+        -------
+        list[ICustomEmojiLite]
+            List of emojis contained in note text
+        """
+
+        return self.__note.get('emojis', [])
 
     @property
     def renote(self) -> 'Note' | None:

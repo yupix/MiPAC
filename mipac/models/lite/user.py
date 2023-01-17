@@ -55,8 +55,33 @@ class LiteUser:
         return self.__user['avatar_blurhash']
 
     @property
+    def avatar_color(self) -> str | None:
+        """
+        Returns the average color of the avatar.
+        Note: Since avatar_color is deprecated in v13,
+        only None is returned for v13 instances.
+
+        Returns
+        -------
+        str | None
+            average color of the avatar
+        """
+
+        return self.__user.get('avatar_color')
+
+    @property
     def emojis(self) -> list[ICustomEmojiLite]:  # TODO: ちゃんとモデルにする
-        return self.__user['emojis']
+        """
+        List of emoji included in nicknames, etc
+        Note: emojis have been abolished since misskey v13
+
+        Returns
+        -------
+        list[ICustomEmojiLite]
+            List of emoji included in nicknames, etc
+        """
+
+        return self.__user.get('emojis', [])
 
     @property
     def instance(self) -> LiteInstance | None:

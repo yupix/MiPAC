@@ -77,7 +77,6 @@ class INoteRequired(TypedDict):
     reactions: dict[str, int]
     renote_count: int
     replies_count: int
-    emojis: list[ICustomEmojiLite]
 
 
 class INote(INoteRequired, total=False):
@@ -94,6 +93,7 @@ class INote(INoteRequired, total=False):
     url: str
     is_hidden: bool
     poll: IPoll
+    emojis: list[ICustomEmojiLite]
 
 
 class ICreatedNote(TypedDict):
