@@ -63,8 +63,12 @@ class ChatMessage:
         return self.__chat['created_at']
 
     @property
-    def file(self) -> File:
-        return File(self.__chat['file'], client=self.__client)
+    def file(self) -> File | None:
+        return (
+            File(self.__chat['file'], client=self.__client)
+            if self.__chat['file']
+            else None
+        )
 
     @property
     def text(self) -> str | None:
@@ -80,19 +84,25 @@ class ChatMessage:
         return LiteUser(self.__chat['user'], client=self.__client)
 
     @property
-    def recipient_id(self) -> str:
+    def recipient_id(self) -> str | None:
+        """ The id of the bot self """
         return self.__chat['recipient_id']
 
     @property
-    def recipient(self) -> str:
-        return self.__chat['recipient']
+    def recipient(self) -> LiteUser | None:
+        """ The user of the bot self """
+        return (
+            LiteUser(self.__chat['recipient'], client=self.__client)
+            if self.__chat.get('recipient')
+            else None
+        )
 
     @property
-    def group_id(self) -> str:
+    def group_id(self) -> str | None:
         return self.__chat['group_id']
 
     @property
-    def file_id(self) -> str:
+    def file_id(self) -> str | None:
         return self.__chat['file_id']
 
     @property
@@ -107,7 +117,7 @@ class ChatMessage:
     def group(self) -> ChatGroup | None:
         return (
             ChatGroup(self.__chat['group'], client=self.__client)
-            if self.__chat['group']
+            if self.__chat.get('group')
             else None
         )
 
