@@ -1,4 +1,5 @@
 from __future__ import annotations
+import re
 
 import sys
 from typing import Any, Literal, TypeVar
@@ -6,10 +7,15 @@ from typing import Any, Literal, TypeVar
 import aiohttp
 
 from mipac import __version__
+from mipac.config import config
 from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
 from mipac.types.user import IUserDetailed
-from mipac.util import _from_json, remove_dict_empty, upper_to_lower
+from mipac.util import (
+    _from_json,
+    remove_dict_empty,
+    upper_to_lower,
+)
 
 
 class _MissingSentinel:
@@ -113,6 +119,14 @@ class HTTPClient:
         await self._session.close()
 
     async def login(self) -> IUserDetailed:
+        match_domain = re.search(r'https?:\/\/([^\/]+)', self._url)
+        match_protocol = re.search(r'^(http|https)', self._url)
+        if match_domain is None or match_protocol is None:
+            raise Exception()
+        protocol = True if match_protocol.group(1) == 'https' else False
+        config.from_dict(
+            host=match_domain.group(1), is_ssl=protocol,
+        )
         self._session = aiohttp.ClientSession(
             ws_response_class=MisskeyClientWebSocketResponse
         )
