@@ -38,3 +38,7 @@ class NotExistRequiredData(Exception):
 
 class ParameterError(Exception):
     """引数に関するエラー"""
+
+
+class NotSupportVersion(Exception):
+    """サポートされていないバージョンのインスタンス"""
