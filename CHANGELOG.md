@@ -7,8 +7,39 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## Added
+### Added
 
+- none
+
+
+
+## [0.4.0] 2023-01-18
+
+### Added
+
+- added DocString.
+- added `get_state` method at `ClientNoteActions` class.
+- added `INoteState` class.
+- added `NoteState` class.
+- added `IBasePoll` class.
+- added `ICreatePoll` class.
+- added `MiPoll` class.
+- added `PollManager` class.
+- added `PollActions` class.
+- added `AdminEmojiActions` class.
+- added `AdminManager` class.
+- added `AdminModeratorManager` class.
+- added `ActiveUsersChart` class.
+- added `IDriveChart` class.
+- added `IDriveLocalChart` class.
+- added `IDriveRemoteChart` class.
+- added attribute `is_official` at `Config` class.
+    - became `is_ayuskey` attribute is deprecated(I'll remove with v0.4.0)
+- added `get_exception_from_id` function.
+- Return an exception appropriate for the error encountered.
+- [@omg-xtao](https://github.com/omg-xtao) added `users_search_by_username_and_host` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
+- [@omg-xtao](https://github.com/omg-xtao) added `note_translate` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
+- [@omg-xtao](https://github.com/omg-xtao) added `users_search` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
 - added new `ClientActions` class.
 - added `avatar_color` property at `LiteUser` class.
     - Note: Since avatar_color is deprecated in v13, only None is returned for v13 instances.
@@ -66,8 +97,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `INoteNf`
     - `IPollEndNf`
 
-## Changed
+### Changed
 
+- rename `ActiveUsersChartPayload` class to `IActiveUsersChart` class.
+- rename `DriveLocalChartPayload` class to `IDriveLocalChart` class.
+- rename `DriveRemoteChartPayload` class to `IDriveRemoteChart` .class.
+- rename `DriveChartPayload` class to `IDriveChart` class.
 - The attribute `emojis` for Note and LiteUser is obsolete in misskey v13, so v13 will return an empty list.
 - config is now a global variable.
     - If you want to change the config, please use `Client.config.from_dict`.
@@ -79,57 +114,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `manager.admin` -> `manager.admins`
     - `manager.admin.manager` -> `manager.admins.admin`
     - `actions.admin` -> `actions.admins`
-
-## Fixed
-
-- fixed `ChatMessage` model.
-    - For v13, the url is automatically generated. (Although it returns None by type, it never actually returns None.
-- fixed `Chat` action.
-- fixed `Chat` action.
-
-## Removed
-
-- Delete `get_user` method at `FollowRequestActions` class.
-- removed some meta classes.
-    - `LiteInstanceMeta`
-    - `IInstanceMetaLite`
-    - `IInstanceFeatures`
-    - `IInstancePolicies`
-    - `InstanceMeta`
-
-## [0.3.99] 2022-12-25
-## Added
-
-- added DocString.
-- added `get_state` method at `ClientNoteActions` class.
-- added `INoteState` class.
-- added `NoteState` class.
-- added `IBasePoll` class.
-- added `ICreatePoll` class.
-- added `MiPoll` class.
-- added `PollManager` class.
-- added `PollActions` class.
-- added `AdminEmojiActions` class.
-- added `AdminManager` class.
-- added `AdminModeratorManager` class.
-- added `ActiveUsersChart` class.
-- added `IDriveChart` class.
-- added `IDriveLocalChart` class.
-- added `IDriveRemoteChart` class.
-- added attribute `is_official` at `Config` class.
-    - became `is_ayuskey` attribute is deprecated(I'll remove with v0.4.0)
-- added `get_exception_from_id` function.
-- Return an exception appropriate for the error encountered.
-- [@omg-xtao](https://github.com/omg-xtao) added `users_search_by_username_and_host` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
-- [@omg-xtao](https://github.com/omg-xtao) added `note_translate` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
-- [@omg-xtao](https://github.com/omg-xtao) added `users_search` method at `UserActions` class [#24](https://github.com/yupix/MiPAC/pull/24).
-
-## Changed
-
-- rename `ActiveUsersChartPayload` class to `IActiveUsersChart` class.
-- rename `DriveLocalChartPayload` class to `IDriveLocalChart` class.
-- rename `DriveRemoteChartPayload` class to `IDriveRemoteChart` .class.
-- rename `DriveChartPayload` class to `IDriveChart` class.
 - **BREAKING CHANGE**
     - The `action` property in the model has been changed to `api`.
         - Change `note.action.send` to `note.api.action.send`. 
@@ -151,18 +135,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
         - Change `api.note.action.reaction` to `api.note.reaction.action`.
         - Change `api.note.action.favorite` to `api.note.favorite.action`.
 
-## Fixed
+### Fixed
 
 - can't delete emoji with v12.
+- fixed `ChatMessage` model.
+    - For v13, the url is automatically generated. (Although it returns None by type, it never actually returns None.
+- fixed `Chat` action.
+- fixed `Chat` action.
 
-## Removed
+### Removed
 
 - The following attributes have been removed `api.user.action.note`
 - Delete `RawActiveUsersChart` class.
 - Delete `RawDriveLocalChart` class.
 - Delete `RawDriveRemoteChart` class.
 - Delete `RawDriveChart` class.
-
+- Delete `get_user` method at `FollowRequestActions` class.
+- removed some meta classes.
+    - `LiteInstanceMeta`
+    - `IInstanceMetaLite`
+    - `IInstanceFeatures`
+    - `IInstancePolicies`
+    - `InstanceMeta`
 
 ## [0.3.1] 2022-12-24
 
