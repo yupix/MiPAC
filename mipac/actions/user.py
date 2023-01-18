@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncIterator, Literal, Optional
+from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional
 
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
@@ -192,7 +192,7 @@ class UserActions:
         detail: bool = True,
         *,
         all: bool = False,
-    ) -> AsyncIterator[UserDetailed | LiteUser]:
+    ) -> AsyncGenerator[UserDetailed | LiteUser, None]:
         """
         Search users by keyword.
 
@@ -213,8 +213,8 @@ class UserActions:
 
         Returns
         -------
-        AsyncIterator[UserDetailed | LiteUser]
-            A AsyncIterator of users.
+        AsyncGenerator[UserDetailed | LiteUser, None]
+            A AsyncGenerator of users.
         """
 
         if limit > 100:

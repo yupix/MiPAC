@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncIterable
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
@@ -75,7 +75,7 @@ class MuteActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         all: bool = True,
-    ) -> AsyncIterable[MuteUser]:
+    ) -> AsyncGenerator[MuteUser, None]:
         if limit > 100:
             raise ParameterError('limit は100以下である必要があります')
 

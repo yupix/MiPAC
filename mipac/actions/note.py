@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncIterator
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import APIError, ParameterError
@@ -127,7 +127,7 @@ class ClientNoteActions(AbstractAction):
         untilId: str | None = None,
         note_id: str | None = None,
         all: bool = True,
-    ) -> AsyncIterator[Note]:
+    ) -> AsyncGenerator[Note, None]:
 
         if limit > 100:
             raise ParameterError('limit は100以下である必要があります')
@@ -572,7 +572,7 @@ class NoteActions(ClientNoteActions):
         until_id: str | None = None,
         *,
         all: bool = False,
-    ) -> AsyncIterator[Note]:
+    ) -> AsyncGenerator[Note, None]:
 
         if limit > 100:
             raise ParameterError('limit は100以下である必要があります')

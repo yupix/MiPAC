@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncIterator
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import NotExistRequiredData, ParameterError
@@ -90,7 +90,7 @@ class AdminEmojiActions(AbstractAction):
         until_id: str | None = None,
         *,
         all: bool = True
-    ) -> AsyncIterator[CustomEmoji]:
+    ) -> AsyncGenerator[CustomEmoji, None]:
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
         if all:
@@ -134,7 +134,7 @@ class AdminEmojiActions(AbstractAction):
         until_id: str | None = None,
         *,
         all: bool = True
-    ) -> AsyncIterator[CustomEmoji]:
+    ) -> AsyncGenerator[CustomEmoji, None]:
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
         if all:
