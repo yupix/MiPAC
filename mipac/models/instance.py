@@ -5,15 +5,15 @@ from typing import TYPE_CHECKING
 from mipac.types.instance import IFederationInstance
 
 if TYPE_CHECKING:
-    from mipac.client import ClientActions
+    from mipac.client import ClientManager
 
 
 class FederationInstance:
     def __init__(
-        self, instance: IFederationInstance, *, client: ClientActions
+        self, instance: IFederationInstance, *, client: ClientManager
     ) -> None:
         self.__instance: IFederationInstance = instance
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:

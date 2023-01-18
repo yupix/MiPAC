@@ -23,7 +23,7 @@ from mipac.types.note import (
 from mipac.util import cache, check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
-    from mipac.client import ClientActions
+    from mipac.client import ClientManager
 
 __all__ = ['NoteActions']
 
@@ -93,11 +93,11 @@ class ClientNoteActions(AbstractAction):
         note_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions,
+        client: ClientManager,
     ):
         self._note_id: str | None = note_id
         self._session: HTTPClient = session
-        self._client: ClientActions = client
+        self._client: ClientManager = client
 
     async def un_renote(self, note_id: str | None = None) -> bool:
         """
@@ -398,7 +398,7 @@ class NoteActions(ClientNoteActions):
         note_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions,
+        client: ClientManager,
     ):
 
         super().__init__(note_id=note_id, session=session, client=client)

@@ -6,13 +6,13 @@ from mipac.models.lite.user import LiteUser
 from mipac.types.follow import IFollowRequest
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
     from mipac.manager.follow import FollowRequestManager
 
 
 class FollowRequest:
     def __init__(
-        self, follow_request: IFollowRequest, *, client: ClientActions
+        self, follow_request: IFollowRequest, *, client: ClientManager
     ) -> None:
         self.__follow_request = follow_request
         self.__client = client

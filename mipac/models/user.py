@@ -8,15 +8,15 @@ from mipac.types.page import IPage
 from mipac.types.user import IFollowRequest, IUserDetailed, IUserDetailedField
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 __all__ = ('UserDetailed', 'FollowRequest', 'LiteUser')
 
 
 class FollowRequest:
-    def __init__(self, request: IFollowRequest, *, client: ClientActions):
+    def __init__(self, request: IFollowRequest, *, client: ClientManager):
         self.__request: IFollowRequest = request
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:
@@ -37,7 +37,7 @@ class UserDetailed(LiteUser):
         '__client',
     )
 
-    def __init__(self, user: IUserDetailed, *, client: ClientActions):
+    def __init__(self, user: IUserDetailed, *, client: ClientManager):
         super().__init__(user=user, client=client)
         self.__detail = user
 

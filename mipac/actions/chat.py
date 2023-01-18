@@ -10,14 +10,14 @@ from mipac.types.chat import IChatMessage
 from mipac.util import check_multi_arg
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class BaseChatAction(AbstractAction):
     def __init__(
         self,
         session: HTTPClient,
-        client: ClientActions,
+        client: ClientManager,
         *,
         user_id: str | None = None,
         message_id: str | None = None,
@@ -85,7 +85,7 @@ class ChatAction(BaseChatAction):
     def __init__(
         self,
         session: HTTPClient,
-        client: ClientActions,
+        client: ClientManager,
         *,
         user_id: str | None = None,
         message_id: str | None = None,

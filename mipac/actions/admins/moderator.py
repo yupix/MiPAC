@@ -7,7 +7,7 @@ from mipac.http import Route
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class AdminModeratorActions(AbstractAction):
@@ -16,10 +16,10 @@ class AdminModeratorActions(AbstractAction):
         user_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
         self.__user_id: str | None = user_id
 
     async def add(self, user_id: str | None = None) -> bool:

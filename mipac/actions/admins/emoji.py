@@ -11,7 +11,7 @@ from mipac.util import check_multi_arg
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class AdminEmojiActions(AbstractAction):
@@ -20,7 +20,7 @@ class AdminEmojiActions(AbstractAction):
         emoji_id: None | str = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__emoji_id = emoji_id
         self.__session = session

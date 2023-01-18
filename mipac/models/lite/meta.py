@@ -12,7 +12,7 @@ from mipac.types.meta import (
 )
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class CPU:
@@ -30,7 +30,7 @@ class CPU:
 
 class MetaCommon:
     def __init__(
-        self, meta_common: IMetaCommon, *, client: ClientActions
+        self, meta_common: IMetaCommon, *, client: ClientManager
     ) -> None:
         self.__meta_common: IMetaCommon = meta_common
         self.__client = client
@@ -151,7 +151,7 @@ class MetaCommon:
 
 
 class LiteMeta(MetaCommon):
-    def __init__(self, meta: ILiteMeta, *, client: ClientActions) -> None:
+    def __init__(self, meta: ILiteMeta, *, client: ClientManager) -> None:
         super().__init__(meta, client=client)
 
         self.__lite_meta: ILiteMeta = meta

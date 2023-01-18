@@ -6,13 +6,13 @@ from mipac.abstract.manager import AbstractManager
 from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
-    from mipac.client import ClientActions
+    from mipac.client import ClientManager
 
 
 class PagesManager(AbstractManager):
-    def __init__(self, *, session: HTTPClient, client: ClientActions):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     async def get_pages(
         self,

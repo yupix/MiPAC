@@ -10,7 +10,7 @@ from mipac.types.meta import (
 )
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class Policies:
@@ -140,7 +140,7 @@ class Features:
 
 
 class Meta(LiteMeta):
-    def __init__(self, meta: IMeta, *, client: ClientActions) -> None:
+    def __init__(self, meta: IMeta, *, client: ClientManager) -> None:
         super().__init__(meta, client=client)
         self.__meta = meta
 
@@ -175,7 +175,7 @@ class Meta(LiteMeta):
 
 class AdminMeta(MetaCommon):
     def __init__(
-        self, admin_meta: IAdminMeta, *, client: ClientActions
+        self, admin_meta: IAdminMeta, *, client: ClientManager
     ) -> None:
         super().__init__(admin_meta, client=client)
         self.__admin_meta = admin_meta

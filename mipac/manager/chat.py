@@ -6,17 +6,17 @@ from mipac.actions.chat import BaseChatAction, ChatAction
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 __all__ = ('ChatManager',)
 
 
 class ChatManager:
     def __init__(
-        self, session: HTTPClient, client: ClientActions,
+        self, session: HTTPClient, client: ClientManager,
     ):
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def action(self) -> ChatAction:

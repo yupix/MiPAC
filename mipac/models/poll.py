@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.types.poll import ICreatePoll, IPoll, IPollChoice
 
 if TYPE_CHECKING:
-    from mipac.manager import ClientActions
+    from mipac.manager import ClientManager
 
 
 class MiPoll:
@@ -17,9 +17,9 @@ class MiPoll:
 
 
 class PollChoice:
-    def __init__(self, choice: IPollChoice, *, client: ClientActions):
+    def __init__(self, choice: IPollChoice, *, client: ClientManager):
         self.__choice: IPollChoice = choice
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def is_voted(self) -> bool:
@@ -35,9 +35,9 @@ class PollChoice:
 
 
 class Poll:
-    def __init__(self, poll: IPoll, *, client: ClientActions):
+    def __init__(self, poll: IPoll, *, client: ClientManager):
         self.__poll: IPoll = poll
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def multiple(self) -> bool:

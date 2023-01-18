@@ -7,13 +7,13 @@ from mipac.actions.admins.emoji import AdminEmojiActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
-    from mipac.client import ClientActions
+    from mipac.client import ClientManager
 
 
 class AdminEmojiManager(AbstractManager):
-    def __init__(self, session: HTTPClient, client: ClientActions):
+    def __init__(self, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def action(self) -> AdminEmojiActions:

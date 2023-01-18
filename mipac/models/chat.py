@@ -7,16 +7,16 @@ from mipac.models.lite.user import LiteUser
 
 if TYPE_CHECKING:
     from mipac.actions.chat import BaseChatAction
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
     from mipac.types.chat import IChatGroup, IChatMessage
 
 __all__ = ['ChatGroup', 'ChatMessage']
 
 
 class ChatGroup:
-    def __init__(self, group: IChatGroup, *, client: ClientActions):
+    def __init__(self, group: IChatGroup, *, client: ClientManager):
         self.__group: IChatGroup = group
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:
@@ -48,9 +48,9 @@ class ChatMessage:
     チャットオブジェクト
     """
 
-    def __init__(self, chat: IChatMessage, *, client: ClientActions):
+    def __init__(self, chat: IChatMessage, *, client: ClientManager):
         self.__chat: IChatMessage = chat
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:

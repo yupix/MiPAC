@@ -1,6 +1,6 @@
 from mipac.config import Config, config
 from mipac.http import HTTPClient
-from mipac.manager.client import ClientActions
+from mipac.manager.client import ClientManager
 
 
 class Client:
@@ -11,8 +11,8 @@ class Client:
         self.http: HTTPClient = HTTPClient(url, token)
 
     @property
-    def api(self) -> ClientActions:
-        return ClientActions(self.http, self.config)
+    def api(self) -> ClientManager:
+        return ClientManager(self.http, self.config)
 
     async def close_session(self) -> None:
         await self.http.close_session()

@@ -6,12 +6,12 @@ from typing import TYPE_CHECKING
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 __all__ = ('AbstractAction',)
 
 
 class AbstractAction(ABC):
     @abstractmethod
-    def __init__(self, session: HTTPClient, client: ClientActions):
+    def __init__(self, session: HTTPClient, client: ClientManager):
         pass

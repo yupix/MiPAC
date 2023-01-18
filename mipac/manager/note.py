@@ -10,7 +10,7 @@ from mipac.manager.poll import PollManager
 from mipac.manager.reaction import ReactionManager
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class ClientNoteManager(AbstractManager):
@@ -19,11 +19,11 @@ class ClientNoteManager(AbstractManager):
         note_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__note_id = note_id
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
         self.reaction: ReactionManager = ReactionManager(
             note_id=note_id, session=session, client=client
         )
@@ -51,11 +51,11 @@ class NoteManager(AbstractManager):
         note_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
         self.reaction: ReactionManager = ReactionManager(
             note_id=note_id, session=session, client=client
         )

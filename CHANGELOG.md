@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Added
 
+- added new `ClientActions` class.
 - added `avatar_color` property at `LiteUser` class.
     - Note: Since avatar_color is deprecated in v13, only None is returned for v13 instances.
 - added `un_renote` method at `ClientNoteActions` class.
@@ -73,6 +74,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - CustomEmoji now inherits PartialCustomEmoji.
 - PartialCustomEmoji url has been changed to return `str | None` to match v13.
 - AdminManager's `get_invite` method has been moved to `AdminActions.
+- **BREAKING CHANGE** `ClientActions` has been changed to `ClientManager`
 - **BREAKING CHANGE** Some paths will be changed as follows
     - `manager.admin` -> `manager.admins`
     - `manager.admin.manager` -> `manager.admins.admin`

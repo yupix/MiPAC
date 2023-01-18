@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from mipac.actions.client import ClientActions
 
 from mipac.http import HTTPClient
 from mipac.manager.admins.admin import AdminManager
@@ -18,10 +19,10 @@ if TYPE_CHECKING:
     from mipac.models.user import UserDetailed
 
 
-__all__ = ('ClientActions',)
+__all__ = ('ClientManager',)
 
 
-class ClientActions:
+class ClientManager:
     def __init__(self, session: HTTPClient, config: Config):
         self.__session: HTTPClient = session
         self.i = MyManager(session=session, client=self)
@@ -38,6 +39,10 @@ class ClientActions:
             session=session, client=self,
         )
         self._config: Config = config
+
+    @property
+    def action(self) -> ClientActions:
+        return ClientActions(session=self.__session, client=self)
 
     def _create_user_instance(self, user: LiteUser) -> UserManager:
         return UserManager(session=self.__session, client=self, user=user)

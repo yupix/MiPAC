@@ -6,13 +6,13 @@ from mipac.models.user import UserDetailed
 from mipac.types.mute import IMuteUser
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class MuteUser:
-    def __init__(self, data: IMuteUser, *, client: ClientActions) -> None:
+    def __init__(self, data: IMuteUser, *, client: ClientManager) -> None:
         self.__data: IMuteUser = data
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:

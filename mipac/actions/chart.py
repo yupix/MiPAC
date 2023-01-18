@@ -7,11 +7,11 @@ from mipac.http import HTTPClient, Route
 from mipac.models.chart import ActiveUsersChart, DriveChart
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class ChartActions(AbstractAction):
-    def __init__(self, session: HTTPClient, client: ClientActions):
+    def __init__(self, session: HTTPClient, client: ClientManager):
         self.__session = session
         self.__client = client
 

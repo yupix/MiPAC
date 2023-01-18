@@ -7,7 +7,7 @@ from mipac.actions.drive import DriveActions, FileActions, FolderActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
-    from mipac.client import ClientActions
+    from mipac.client import ClientManager
 
 __all__ = ['FolderManager', 'FileManager', 'DriveManager']
 
@@ -18,10 +18,10 @@ class FileManager(AbstractManager):
         file_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
         self.__file_id = file_id
 
     @property
@@ -47,11 +47,11 @@ class FolderManager(AbstractManager):
         folder_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__folder_id = folder_id
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
         self.file: FileManager = FileManager(session=session, client=client)
 
     @property
@@ -77,9 +77,9 @@ class FolderManager(AbstractManager):
 
 
 class DriveManager(AbstractManager):
-    def __init__(self, *, session: HTTPClient, client: ClientActions):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
         self.folder: FolderManager = FolderManager(
             session=session, client=client
         )

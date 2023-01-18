@@ -10,7 +10,7 @@ from mipac.types.drive import IDriveFile
 from mipac.util import bool_to_string, remove_dict_empty
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 __all__ = ('DriveActions', 'FileActions', 'FolderActions')
 
@@ -21,10 +21,10 @@ class FileActions(AbstractAction):
         file_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ) -> None:
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
         self.__file_id = file_id
 
     async def show_file(self, file_id: str | None, url: str | None) -> File:
@@ -172,11 +172,11 @@ class FolderActions(AbstractAction):
         folder_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__folder_id = folder_id
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     async def create(self, name: str, parent_id: str | None = None) -> bool:
         """
@@ -269,9 +269,9 @@ class FolderActions(AbstractAction):
 
 
 class DriveActions(AbstractAction):
-    def __init__(self, session: HTTPClient, client: ClientActions):
+    def __init__(self, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     async def get_folders(
         self,
