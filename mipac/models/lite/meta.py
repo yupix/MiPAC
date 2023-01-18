@@ -6,7 +6,7 @@ from mipac.types.ads import IAds
 
 from mipac.types.meta import (
     ICPU,
-    IAnnouncement,
+    IMetaAnnouncement,
     ILiteMeta,
     IMetaCommon,
 )
@@ -221,7 +221,7 @@ class LiteMeta(MetaCommon):
     # v11のMeta
 
     @property
-    def announcements(self) -> list[IAnnouncement] | None:  # TODO: 型確認
+    def announcements(self) -> list[IMetaAnnouncement] | None:  # TODO: 型確認
         return self.__lite_meta.get('announcements', None)
 
     @property

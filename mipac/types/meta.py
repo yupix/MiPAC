@@ -28,7 +28,7 @@ class IPolicies(TypedDict):
     rate_limit_factor: int
 
 
-class IAnnouncement(TypedDict):
+class IMetaAnnouncement(TypedDict):
     image: str | None
     text: str
     title: str
@@ -122,7 +122,7 @@ class ICommonV11(TypedDict, total=False):
 
 
 class ILiteV11Meta(ICommonV11, total=False):
-    announcements: list[IAnnouncement]
+    announcements: list[IMetaAnnouncement]
     cpu: ICPU
     disable_local_timeline: bool
     disable_global_timeline: bool
