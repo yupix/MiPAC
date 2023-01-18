@@ -19,15 +19,9 @@ class AdminManager(AbstractManager):
     def __init__(self, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
-        self.emoji: AdminEmojiManager = AdminEmojiManager(
-            session=session, client=client
-        )
-        self.user: AdminUserManager = AdminUserManager(
-            session=session, client=client
-        )
-        self.ad: AdminAdvertisingManager = AdminAdvertisingManager(
-            session=session, client=client
-        )
+        self.emoji: AdminEmojiManager = AdminEmojiManager(session=session, client=client)
+        self.user: AdminUserManager = AdminUserManager(session=session, client=client)
+        self.ad: AdminAdvertisingManager = AdminAdvertisingManager(session=session, client=client)
         self.moderator: AdminModeratorManager = AdminModeratorManager(
             session=session, client=client
         )

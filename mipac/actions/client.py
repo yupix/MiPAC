@@ -1,11 +1,6 @@
 from __future__ import annotations
 
-from typing import (
-    TYPE_CHECKING,
-    AsyncGenerator,
-    Literal,
-    overload,
-)
+from typing import TYPE_CHECKING, AsyncGenerator, Literal, overload
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
@@ -64,10 +59,7 @@ class ClientActions(AbstractAction):
             res: list[IAnnouncement] = await self.__session.request(
                 Route('POST', '/api/announcements'), auth=True, json=req_body,
             )
-            return [
-                Announcement(announcement, client=self.__client)
-                for announcement in res
-            ]
+            return [Announcement(announcement, client=self.__client) for announcement in res]
 
         body = {
             'limit': limit,

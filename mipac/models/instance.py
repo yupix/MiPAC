@@ -9,9 +9,7 @@ if TYPE_CHECKING:
 
 
 class FederationInstance:
-    def __init__(
-        self, instance: IFederationInstance, *, client: ClientManager
-    ) -> None:
+    def __init__(self, instance: IFederationInstance, *, client: ClientManager) -> None:
         self.__instance: IFederationInstance = instance
         self.__client: ClientManager = client
 

@@ -1,15 +1,10 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+
 from mipac.models.emoji import CustomEmoji
 from mipac.types.ads import IAds
-
-from mipac.types.meta import (
-    ICPU,
-    IMetaAnnouncement,
-    ILiteMeta,
-    IMetaCommon,
-)
+from mipac.types.meta import ICPU, ILiteMeta, IMetaAnnouncement, IMetaCommon
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -29,9 +24,7 @@ class CPU:
 
 
 class MetaCommon:
-    def __init__(
-        self, meta_common: IMetaCommon, *, client: ClientManager
-    ) -> None:
+    def __init__(self, meta_common: IMetaCommon, *, client: ClientManager) -> None:
         self.__meta_common: IMetaCommon = meta_common
         self.__client = client
 
@@ -114,9 +107,7 @@ class MetaCommon:
         bool
             有効かどうか
         """
-        return self.__meta_common.get(
-            'object_storage_s3_force_path_style', False
-        )
+        return self.__meta_common.get('object_storage_s3_force_path_style', False)
 
     # v12 only
 
@@ -141,10 +132,7 @@ class MetaCommon:
     @property
     def emojis(self) -> list[CustomEmoji]:
         return (
-            [
-                CustomEmoji(i, client=self.__client)
-                for i in self.__meta_common['emojis']
-            ]
+            [CustomEmoji(i, client=self.__client) for i in self.__meta_common['emojis']]
             if 'emojis' in self.__meta_common
             else []
         )
@@ -226,9 +214,7 @@ class LiteMeta(MetaCommon):
 
     @property
     def cpu(self) -> CPU | None:
-        return (
-            CPU(self.__lite_meta['cpu']) if 'cpu' in self.__lite_meta else None
-        )
+        return CPU(self.__lite_meta['cpu']) if 'cpu' in self.__lite_meta else None
 
     @property
     def disable_local_timeline(self) -> bool:

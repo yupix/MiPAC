@@ -1,9 +1,4 @@
-from mipac.types.chart import (
-    IActiveUsersChart,
-    IDriveChart,
-    IDriveLocalChart,
-    IDriveRemoteChart,
-)
+from mipac.types.chart import IActiveUsersChart, IDriveChart, IDriveLocalChart, IDriveRemoteChart
 
 
 class ActiveUsersChart:

@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+- Maximum number of characters has been changed from 79 to 99
+    - The main reason for this change is to solve the problem that the MiPAC code is inevitably longer because of the method chain. We have kept it to the maximum of [pep8](https://peps.python.org/pep-0008/#maximum-line-length).
 - Changed a method that was returning an `AsyncIterator` to return an `AsyncGenerator`.
     - Generator is more correct than Iterator because it is the correct usage.
 - Changed class name the given below.

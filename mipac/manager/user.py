@@ -18,22 +18,14 @@ __all__ = ('UserManager',)
 
 class UserManager(AbstractManager):
     def __init__(
-        self,
-        user: LiteUser | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
+        self, user: LiteUser | None = None, *, session: HTTPClient, client: ClientManager
     ):
         user_id: str | None = user.id if user else None
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
         self.user: LiteUser | None = user
-        self.follow: FollowManager = FollowManager(
-            user_id=user_id, session=session, client=client
-        )
-        self.mute: MuteManager = MuteManager(
-            user_id=user_id, session=session, client=client
-        )
+        self.follow: FollowManager = FollowManager(user_id=user_id, session=session, client=client)
+        self.mute: MuteManager = MuteManager(user_id=user_id, session=session, client=client)
 
     @property
     def action(self) -> UserActions:
@@ -44,6 +36,4 @@ class UserManager(AbstractManager):
         UserActions
             ユーザーに対するアクションを行うクラス
         """
-        return UserActions(
-            session=self.__session, client=self.__client, user=self.user
-        )
+        return UserActions(session=self.__session, client=self.__client, user=self.user)

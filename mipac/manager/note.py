@@ -14,73 +14,45 @@ if TYPE_CHECKING:
 
 
 class ClientNoteManager(AbstractManager):
-    def __init__(
-        self,
-        note_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__note_id = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
         self.reaction: ReactionManager = ReactionManager(
             note_id=note_id, session=session, client=client
         )
-        self.favorite = FavoriteManager(
-            note_id=note_id, session=session, client=client
-        )
-        self.poll: PollManager = PollManager(
-            note_id=note_id, session=session, client=client
-        )
+        self.favorite = FavoriteManager(note_id=note_id, session=session, client=client)
+        self.poll: PollManager = PollManager(note_id=note_id, session=session, client=client)
 
     @property
     def action(self) -> ClientNoteActions:
         return ClientNoteActions(
-            note_id=self.__note_id,
-            session=self.__session,
-            client=self.__client,
+            note_id=self.__note_id, session=self.__session, client=self.__client,
         )
 
 
 class NoteManager(AbstractManager):
     """User behavior for notes"""
 
-    def __init__(
-        self,
-        note_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
         self.reaction: ReactionManager = ReactionManager(
             note_id=note_id, session=session, client=client
         )
-        self.favorite = FavoriteManager(
-            note_id=note_id, session=session, client=client
-        )
+        self.favorite = FavoriteManager(note_id=note_id, session=session, client=client)
         self._client: ClientNoteManager = ClientNoteManager(
             note_id=note_id, session=session, client=client
         )
-        self.poll: PollManager = PollManager(
-            note_id=note_id, session=session, client=client
-        )
+        self.poll: PollManager = PollManager(note_id=note_id, session=session, client=client)
 
     def create_client_note_manager(self, note_id: str) -> ClientNoteManager:
-        return ClientNoteManager(
-            note_id=note_id, session=self.__session, client=self.__client
-        )
+        return ClientNoteManager(note_id=note_id, session=self.__session, client=self.__client)
 
     @property
     def action(self) -> NoteActions:
-        return NoteActions(
-            note_id=self.__note_id,
-            session=self.__session,
-            client=self.__client,
-        )
+        return NoteActions(note_id=self.__note_id, session=self.__session, client=self.__client,)
 
     async def get(
         self,
@@ -103,6 +75,4 @@ class NoteManager(AbstractManager):
             'sinceId': since_id,
             'untilId': until_id,
         }
-        await self.__session.request(
-            Route('POST', '/api/notes'), json=data, auth=True, lower=True
-        )
+        await self.__session.request(Route('POST', '/api/notes'), json=data, auth=True, lower=True)

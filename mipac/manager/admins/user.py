@@ -10,13 +10,7 @@ if TYPE_CHECKING:
 
 
 class AdminUserManager:
-    def __init__(
-        self,
-        user_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__user_id = user_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -39,10 +33,7 @@ class AdminUserManager:
 
         data = {'userId': user_id}
         res = await self.__session.request(
-            Route('POST', '/api/admin/accounts/delete'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/admin/accounts/delete'), json=data, auth=True, lower=True,
         )
         return bool(res)
 
@@ -63,10 +54,7 @@ class AdminUserManager:
         user_id = user_id or self.__user_id
         data = {'userId': user_id}
         res = await self.__session.request(
-            Route('GET', '/api/admin/show-user'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('GET', '/api/admin/show-user'), json=data, auth=True, lower=True,
         )
         return UserDetailed(res, client=self.__client)
 
@@ -88,10 +76,7 @@ class AdminUserManager:
         user_id = user_id or self.__user_id
         data = {'userId': user_id}
         res = await self.__session.request(
-            Route('POST', '/api/admin/suspend-user'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/admin/suspend-user'), json=data, auth=True, lower=True,
         )
         return bool(res)
 
@@ -113,9 +98,6 @@ class AdminUserManager:
         user_id = user_id or self.__user_id
         data = {'userId': user_id}
         res: bool = await self.__session.request(
-            Route('POST', '/api/admin/unsuspend-user'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/admin/unsuspend-user'), json=data, auth=True, lower=True,
         )
         return bool(res)

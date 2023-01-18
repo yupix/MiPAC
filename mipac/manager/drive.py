@@ -13,13 +13,7 @@ __all__ = ['FolderManager', 'FileManager', 'DriveManager']
 
 
 class FileManager(AbstractManager):
-    def __init__(
-        self,
-        file_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, file_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
         self.__file_id = file_id
@@ -34,20 +28,12 @@ class FileManager(AbstractManager):
         FileActions
             ファイルに対するアクション
         """
-        return FileActions(
-            file_id=self.__file_id,
-            client=self.__client,
-            session=self.__session,
-        )
+        return FileActions(file_id=self.__file_id, client=self.__client, session=self.__session,)
 
 
 class FolderManager(AbstractManager):
     def __init__(
-        self,
-        folder_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
+        self, folder_id: str | None = None, *, session: HTTPClient, client: ClientManager
     ):
         self.__folder_id = folder_id
         self.__session: HTTPClient = session
@@ -65,24 +51,18 @@ class FolderManager(AbstractManager):
             フォルダーに対するアクション
         """
         return FolderActions(
-            folder_id=self.__folder_id,
-            session=self.__session,
-            client=self.__client,
+            folder_id=self.__folder_id, session=self.__session, client=self.__client,
         )
 
     def _get_file_instance(self, file_id: str) -> FileManager:
-        return FileManager(
-            file_id=file_id, session=self.__session, client=self.__client
-        )
+        return FileManager(file_id=file_id, session=self.__session, client=self.__client)
 
 
 class DriveManager(AbstractManager):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
-        self.folder: FolderManager = FolderManager(
-            session=session, client=client
-        )
+        self.folder: FolderManager = FolderManager(session=session, client=client)
         self.file: FileManager = FileManager(session=session, client=client)
 
     @property
@@ -98,6 +78,4 @@ class DriveManager(AbstractManager):
         return DriveActions(client=self.__client, session=self.__session)
 
     def _get_folder_instance(self, folder_id: str) -> FolderManager:
-        return FolderManager(
-            session=self.__session, client=self.__client, folder_id=folder_id
-        )
+        return FolderManager(session=self.__session, client=self.__client, folder_id=folder_id)

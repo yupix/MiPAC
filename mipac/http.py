@@ -1,6 +1,6 @@
 from __future__ import annotations
-import re
 
+import re
 import sys
 from typing import Any, Literal, TypeVar
 
@@ -11,11 +11,7 @@ from mipac.config import config
 from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
 from mipac.types.user import IUserDetailed
-from mipac.util import (
-    _from_json,
-    remove_dict_empty,
-    upper_to_lower,
-)
+from mipac.util import _from_json, remove_dict_empty, upper_to_lower
 
 
 class _MissingSentinel:
@@ -56,12 +52,9 @@ class Route:
 class HTTPClient:
     def __init__(self, url: str, token: str) -> None:
         user_agent = (
-            'Misskey Bot (https://github.com/yupix/MiPA {0})'
-            + 'Python/{1[0]}.{1[1]} aiohttp/{2}'
+            'Misskey Bot (https://github.com/yupix/MiPA {0})' + 'Python/{1[0]}.{1[1]} aiohttp/{2}'
         )
-        self.user_agent = user_agent.format(
-            __version__, sys.version_info, aiohttp.__version__
-        )
+        self.user_agent = user_agent.format(__version__, sys.version_info, aiohttp.__version__)
         self._session: aiohttp.ClientSession = MISSING
         self._url: str = url
         self._token: str = token
@@ -71,11 +64,7 @@ class HTTPClient:
         return self._session
 
     async def request(
-        self,
-        route: Route,
-        auth: bool = False,
-        remove_none: bool = True,
-        **kwargs
+        self, route: Route, auth: bool = False, remove_none: bool = True, **kwargs
     ) -> R:
         headers: dict[str, str] = {
             'User-Agent': self.user_agent,
@@ -88,9 +77,7 @@ class HTTPClient:
             kwargs['json'] = kwargs.pop('json')
 
         if auth:
-            key = (
-                'json' if 'json' in kwargs or 'data' not in kwargs else 'data'
-            )
+            key = 'json' if 'json' in kwargs or 'data' not in kwargs else 'data'
             if not kwargs.get(key):
                 kwargs[key] = {}
             kwargs[key]['i'] = self._token
@@ -100,16 +87,11 @@ class HTTPClient:
         for i in ('json', 'data'):
             if kwargs.get(i) and remove_none:
                 kwargs[i] = remove_dict_empty(kwargs[i])
-        async with self._session.request(
-            route.method, self._url + route.path, **kwargs
-        ) as res:
+        async with self._session.request(route.method, self._url + route.path, **kwargs) as res:
             data = await json_or_text(res)
             if is_lower:
                 if isinstance(data, list):
-                    data = [
-                        upper_to_lower(i, replace_list=replace_list)
-                        for i in data
-                    ]
+                    data = [upper_to_lower(i, replace_list=replace_list) for i in data]
                 if isinstance(data, dict):
                     data = upper_to_lower(data)
             if res.status == 204 and data is None:
@@ -133,10 +115,6 @@ class HTTPClient:
         config.from_dict(
             host=match_domain.group(1), is_ssl=protocol,
         )
-        self._session = aiohttp.ClientSession(
-            ws_response_class=MisskeyClientWebSocketResponse
-        )
-        data: IUserDetailed = await self.request(
-            Route('POST', '/api/i'), auth=True
-        )
+        self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
+        data: IUserDetailed = await self.request(Route('POST', '/api/i'), auth=True)
         return data

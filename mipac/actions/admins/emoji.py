@@ -15,13 +15,7 @@ if TYPE_CHECKING:
 
 
 class AdminEmojiActions(AbstractAction):
-    def __init__(
-        self,
-        emoji_id: None | str = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, emoji_id: None | str = None, *, session: HTTPClient, client: ClientManager):
         self.__emoji_id = emoji_id
         self.__session = session
         self.__client = client
@@ -75,10 +69,7 @@ class AdminEmojiActions(AbstractAction):
             raise NotExistRequiredData('required a file_id or url')
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/emoji/add'),
-                json=data,
-                lower=True,
-                auth=True,
+                Route('POST', '/api/admin/emoji/add'), json=data, lower=True, auth=True,
             )
         )
 
@@ -139,9 +130,7 @@ class AdminEmojiActions(AbstractAction):
 
         async def request(body) -> list[CustomEmoji]:
             res: list[ICustomEmoji] = await self.__session.request(
-                Route('POST', '/api/admin/emoji/list-remote'),
-                auth=True,
-                json=body,
+                Route('POST', '/api/admin/emoji/list-remote'), auth=True, json=body,
             )
             return [CustomEmoji(emoji, client=self.__client) for emoji in res]
 
@@ -200,9 +189,6 @@ class AdminEmojiActions(AbstractAction):
 
         return bool(
             await self.__session.request(
-                Route('POST', endpoint),
-                auth=True,
-                json={'id': emoji_id},
-                lower=True,
+                Route('POST', endpoint), auth=True, json={'id': emoji_id}, lower=True,
             )
         )

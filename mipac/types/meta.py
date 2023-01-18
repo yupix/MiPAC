@@ -1,6 +1,6 @@
 from typing import NotRequired, TypedDict
-from mipac.types.ads import IAds
 
+from mipac.types.ads import IAds
 from mipac.types.emoji import ICustomEmoji
 
 

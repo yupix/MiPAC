@@ -53,6 +53,4 @@ class Poll:
 
     @property
     def choices(self) -> list[PollChoice]:
-        return [
-            PollChoice(i, client=self.__client) for i in self.__poll['choices']
-        ]
+        return [PollChoice(i, client=self.__client) for i in self.__poll['choices']]

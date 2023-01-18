@@ -47,9 +47,7 @@ DEFAULT_CACHE: dict[str, list[str]] = {}
 DEFAULT_CACHE_VALUE: dict[str, Any] = {}
 
 
-def str_to_datetime(
-    data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ'
-) -> datetime:
+def str_to_datetime(data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ') -> datetime:
     """
     Parameters
     ----------
@@ -146,19 +144,13 @@ class AuthClient:
             認証に使用するURL
         """
         field = remove_dict_empty(
-            {
-                'name': self.__name,
-                'description': self.__description,
-                'icon': self.__icon,
-            }
+            {'name': self.__name, 'description': self.__description, 'icon': self.__icon,}
         )
         if self.__use_miauth:
             field['permissions'] = self.__permissions
             query = urlencode(field)
             self.__session_token = uuid.uuid4()
-            return (
-                f'{self.__instance_uri}/miauth/{self.__session_token}?{query}'
-            )
+            return f'{self.__instance_uri}/miauth/{self.__session_token}?{query}'
         else:
             field['permission'] = self.__permissions
             async with self.__client_session.post(
@@ -187,10 +179,7 @@ class AuthClient:
         while True:
             async with self.__client_session.post(
                 f'{self.__instance_uri}/api/auth/session/userkey',
-                json={
-                    'appSecret': self.__secret,
-                    'token': self.__session_token,
-                },
+                json={'appSecret': self.__secret, 'token': self.__session_token,},
             ) as res:
                 data = await res.json()
                 if data.get('error', {}).get('code') != 'PENDING_SESSION':
@@ -245,13 +234,7 @@ def cache(group: str = 'default', override: bool = False):
 def get_cache_key(func):
     async def decorator(self, *args, **kwargs):
         ordered_kwargs = sorted(kwargs.items())
-        key = (
-            (func.__module__ or '')
-            + '.{0}'
-            + f'{self}'
-            + str(args)
-            + str(ordered_kwargs)
-        )
+        key = (func.__module__ or '') + '.{0}' + f'{self}' + str(args) + str(ordered_kwargs)
         return await func(self, *args, **kwargs, cache_key=key)
 
     return decorator
@@ -260,11 +243,7 @@ def get_cache_key(func):
 def key_builder(func, cls, *args, **kwargs):
     ordered_kwargs = sorted(kwargs.items())
     key = (
-        (func.__module__ or '')
-        + f'.{func.__name__}'
-        + f'{cls}'
-        + str(args)
-        + str(ordered_kwargs)
+        (func.__module__ or '') + f'.{func.__name__}' + f'{cls}' + str(args) + str(ordered_kwargs)
     )
     return key
 

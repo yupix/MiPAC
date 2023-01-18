@@ -6,12 +6,7 @@ from typing import TYPE_CHECKING, Literal, Optional
 from mipac.errors.base import NotExistRequiredData
 from mipac.models.lite.user import LiteUser
 from mipac.models.poll import Poll
-from mipac.types.note import (
-    INoteState,
-    INoteTranslateResult,
-    INoteUpdated,
-    INoteUpdatedDelete,
-)
+from mipac.types.note import INoteState, INoteTranslateResult, INoteUpdated, INoteUpdatedDelete
 from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
@@ -127,9 +122,7 @@ class NoteReaction:
     @property
     def created_at(self) -> datetime | None:
         return (
-            datetime.strptime(
-                self.__reaction['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
-            )
+            datetime.strptime(self.__reaction['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ')
             if 'created_at' in self.__reaction
             else None
         )
@@ -207,9 +200,7 @@ class Note:
         return self.__note['file_ids']
 
     @property
-    def visibility(
-        self,
-    ) -> Literal['public', 'home', 'followers', 'specified']:
+    def visibility(self,) -> Literal['public', 'home', 'followers', 'specified']:
         return self.__note['visibility']
 
     @property
@@ -256,25 +247,15 @@ class Note:
 
     @property
     def visible_user_ids(self) -> list[str]:
-        return (
-            self.__note['visible_user_ids']
-            if 'visible_user_ids' in self.__note
-            else []
-        )
+        return self.__note['visible_user_ids'] if 'visible_user_ids' in self.__note else []
 
     @property
     def local_only(self) -> bool:
-        return (
-            self.__note['local_only'] if 'local_only' in self.__note else False
-        )
+        return self.__note['local_only'] if 'local_only' in self.__note else False
 
     @property
     def my_reaction(self) -> str | None:
-        return (
-            self.__note['my_reaction']
-            if 'my_reaction' in self.__note
-            else None
-        )
+        return self.__note['my_reaction'] if 'my_reaction' in self.__note else None
 
     @property
     def uri(self) -> str | None:
@@ -286,17 +267,11 @@ class Note:
 
     @property
     def is_hidden(self) -> bool:
-        return (
-            self.__note['is_hidden'] if 'is_hidden' in self.__note else False
-        )
+        return self.__note['is_hidden'] if 'is_hidden' in self.__note else False
 
     @property
     def poll(self) -> Poll | None:
-        return (
-            Poll(self.__note['poll'], client=self._client)
-            if 'poll' in self.__note
-            else None
-        )
+        return Poll(self.__note['poll'], client=self._client) if 'poll' in self.__note else None
 
     @property
     def api(self) -> ClientNoteManager:

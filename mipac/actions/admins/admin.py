@@ -18,14 +18,9 @@ class AdminActions(AbstractAction):
 
     async def get_meta(self, detail: bool = False) -> AdminMeta:
         res: IAdminMeta = await self.__session.request(
-            Route('POST', '/api/admin/meta'),
-            json={'detail': detail},
-            auth=True,
-            lower=True,
+            Route('POST', '/api/admin/meta'), json={'detail': detail}, auth=True, lower=True,
         )
         return AdminMeta(res, client=self.__client)
 
     async def get_invite(self) -> bool:
-        return bool(
-            await self.__session.request(Route('POST', '/api/admin/invite'))
-        )
+        return bool(await self.__session.request(Route('POST', '/api/admin/invite')))

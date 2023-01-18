@@ -16,10 +16,7 @@ __all__ = ['UserActions']
 
 class UserActions:
     def __init__(
-        self,
-        session: HTTPClient,
-        client: ClientManager,
-        user: Optional[LiteUser] = None,
+        self, session: HTTPClient, client: ClientManager, user: Optional[LiteUser] = None,
     ):
         self.__session: HTTPClient = session
         self.__user: Optional[LiteUser] = user
@@ -34,9 +31,7 @@ class UserActions:
         return UserDetailed(res, client=self.__client)  # TODO: 自分用のクラスに変更する
 
     def get_profile_link(
-        self,
-        external: bool = True,
-        protocol: Literal['http', 'https'] = 'https',
+        self, external: bool = True, protocol: Literal['http', 'https'] = 'https',
     ):
         if not self.__user:
             return None
@@ -46,18 +41,13 @@ class UserActions:
             else self.__session._url
         )
         path = (
-            f'/@{self.__user.username}'
-            if external
-            else f'/{self.__user.api.action.get_mention()}'
+            f'/@{self.__user.username}' if external else f'/{self.__user.api.action.get_mention()}'
         )
         return host + path
 
     @cache(group='get_user')
     async def get(
-        self,
-        user_id: str | None = None,
-        username: str | None = None,
-        host: str | None = None,
+        self, user_id: str | None = None, username: str | None = None, host: str | None = None,
     ) -> UserDetailed:
         """
         ユーザーのプロフィールを取得します。一度のみサーバーにアクセスしキャッシュをその後は使います。
@@ -78,9 +68,7 @@ class UserActions:
             ユーザー情報
         """
 
-        field = remove_dict_empty(
-            {'userId': user_id, 'username': username, 'host': host}
-        )
+        field = remove_dict_empty({'userId': user_id, 'username': username, 'host': host})
         data = await self.__session.request(
             Route('POST', '/api/users/show'), json=field, auth=True, lower=True
         )
@@ -88,10 +76,7 @@ class UserActions:
 
     @cache
     async def fetch(
-        self,
-        user_id: str | None = None,
-        username: str | None = None,
-        host: str | None = None,
+        self, user_id: str | None = None, username: str | None = None, host: str | None = None,
     ) -> UserDetailed:
         """
         サーバーにアクセスし、ユーザーのプロフィールを取得します。基本的には get_userをお使いください。
@@ -113,9 +98,7 @@ class UserActions:
         if not check_multi_arg(user_id, username):
             raise ParameterError('user_id, usernameどちらかは必須です')
 
-        field = remove_dict_empty(
-            {'userId': user_id, 'username': username, 'host': host}
-        )
+        field = remove_dict_empty({'userId': user_id, 'username': username, 'host': host})
         data = await self.__session.request(
             Route('POST', '/api/users/show'), json=field, auth=True, lower=True
         )
@@ -177,11 +160,7 @@ class UserActions:
 
         if user is None:
             raise NotExistRequiredData('Required parameters: user')
-        return (
-            f'@{user.username}@{user.host}'
-            if user.instance
-            else f'@{user.username}'
-        )
+        return f'@{user.username}@{user.host}' if user.instance else f'@{user.username}'
 
     async def search(
         self,
@@ -222,10 +201,7 @@ class UserActions:
 
         async def request(body) -> list[UserDetailed | LiteUser]:
             res = await self.__session.request(
-                Route('POST', '/api/users/search'),
-                lower=True,
-                auth=True,
-                json=body,
+                Route('POST', '/api/users/search'), lower=True, auth=True, json=body,
             )
             return [
                 UserDetailed(user, client=self.__client)
@@ -235,13 +211,7 @@ class UserActions:
             ]
 
         body = remove_dict_empty(
-            {
-                'query': query,
-                'limit': limit,
-                'offset': offset,
-                'origin': origin,
-                'detail': detail,
-            }
+            {'query': query, 'limit': limit, 'offset': offset, 'origin': origin, 'detail': detail,}
         )
 
         if all:
@@ -290,12 +260,7 @@ class UserActions:
             raise ParameterError('limit は100以下である必要があります')
 
         body = remove_dict_empty(
-            {
-                'username': username,
-                'host': host,
-                'limit': limit,
-                'detail': detail,
-            }
+            {'username': username, 'host': host, 'limit': limit, 'detail': detail,}
         )
         res = await self.__session.request(
             Route('POST', '/api/users/search-by-username-and-host'),

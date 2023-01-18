@@ -1,12 +1,4 @@
-from typing import (
-    Any,
-    Generic,
-    Literal,
-    NotRequired,
-    Optional,
-    TypedDict,
-    TypeVar,
-)
+from typing import Any, Generic, Literal, NotRequired, Optional, TypedDict, TypeVar
 
 from .drive import IDriveFile
 from .emoji import ICustomEmojiLite

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from mipac.models.lite.emoji import PartialCustomEmoji
 
+from mipac.models.lite.emoji import PartialCustomEmoji
 from mipac.types.emoji import ICustomEmoji
 
 if TYPE_CHECKING:

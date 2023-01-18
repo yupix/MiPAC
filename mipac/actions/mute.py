@@ -14,13 +14,7 @@ if TYPE_CHECKING:
 
 
 class MuteActions(AbstractAction):
-    def __init__(
-        self,
-        user_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self._user_id: str | None = user_id
         self._session: HTTPClient = session
         self._client: ClientManager = client
@@ -81,16 +75,11 @@ class MuteActions(AbstractAction):
 
         async def request(body) -> list[MuteUser]:
             res: list[IMuteUser] = await self._session.request(
-                Route('POST', '/api/mute/list'),
-                lower=True,
-                auth=True,
-                json=body,
+                Route('POST', '/api/mute/list'), lower=True, auth=True, json=body,
             )
             return [MuteUser(user, client=self._client) for user in res]
 
-        data = remove_dict_empty(
-            {'limit': limit, 'sinceId': since_id, 'untilId': until_id}
-        )
+        data = remove_dict_empty({'limit': limit, 'sinceId': since_id, 'untilId': until_id})
 
         if all:
             data['limit'] = 100
