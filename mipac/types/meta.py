@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 from mipac.types.ads import IAds
 
 from mipac.types.emoji import ICustomEmoji
@@ -34,20 +34,17 @@ class IAnnouncement(TypedDict):
     title: str
 
 
-class IV12Features(TypedDict):
+class IV12Features(TypedDict, total=False):
     email_required_for_signup: bool
-
-
-class IAyuskeyFeatures(TypedDict):
     miauth: bool
 
 
-class IV11Features(TypedDict):
+class IV11Features(TypedDict, total=False):
     global_time_line: bool
     local_time_line: bool
 
 
-class IFeatures(IV12Features, IV11Features, IAyuskeyFeatures):
+class IFeatures(IV12Features, IV11Features):
     registration: bool
     elasticsearch: bool
     hcaptcha: bool
@@ -136,10 +133,6 @@ class ILiteV11Meta(IV11AdminMeta, total=False):
     turnstile_secret_key: str
 
 
-class IMetaV12AndV11Common(TypedDict, total=False):
-    emojis: list[ICustomEmoji]
-
-
 class IMetaCommonV12(TypedDict, total=False):
     ads: list[IAds]
     translator_available: bool  # v12 only
@@ -147,7 +140,7 @@ class IMetaCommonV12(TypedDict, total=False):
     mascot_image_url: str
 
 
-class IMetaCommon(IMetaCommonV12, IMetaV12AndV11Common):
+class IMetaCommon(IMetaCommonV12):
     cache_remote_files: bool
     enable_hcaptch: bool
     hcaptcha_site_key: str | None
@@ -163,8 +156,9 @@ class IMetaCommon(IMetaCommonV12, IMetaV12AndV11Common):
     enable_github_integration: bool
     enable_discord_integration: bool
     enable_service_worker: bool
-    proxy_account_name: str
+    proxy_account_name: str | None
     user_star_for_reaction_fallback: bool
+    emojis: NotRequired[list[ICustomEmoji]]
 
 
 class ILiteMeta(IMetaCommon, ILiteV12Meta, ILiteV11Meta, ISharedAdminMeta):
