@@ -83,6 +83,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - fixed `ChatMessage` model.
     - For v13, the url is automatically generated. (Although it returns None by type, it never actually returns None.
+- fixed `Chat` action.
+
 ## Removed
 
 - Delete `get_user` method at `FollowRequestActions` class.
