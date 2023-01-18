@@ -65,7 +65,7 @@ class ReactionActions(AbstractAction):
         return bool(res)
 
     async def get_reaction(
-        self, reaction: str, note_id: str | None = None, *, limit: int = 11
+        self, reaction: str, note_id: str | None = None, *, limit: int = 10
     ) -> list[NoteReaction]:
         note_id = note_id or self.__note_id
         data = remove_dict_empty(
