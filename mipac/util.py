@@ -214,21 +214,6 @@ class AuthClient:
         return data['token'] if self.__use_miauth else data['accessToken']
 
 
-def dynamic_args(decorator):
-    def wrapper(*args, **kwargs):
-        if len(args) != 0 and callable(args[0]):
-            func = args[0]
-            return functools.wraps(func)(decorator(func))
-        else:
-
-            def _wrapper(func):
-                return functools.wraps(func)(decorator(func, *args, **kwargs))
-
-            return _wrapper
-
-    return wrapper
-
-
 def set_cache(group: str, key: str, value: Any):
     if len(DEFAULT_CACHE.get(group, [])) > 50:
         del DEFAULT_CACHE[group][-1]
