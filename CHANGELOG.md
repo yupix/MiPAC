@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Added `ClientActions` method the given below.
+- Added method to`ClientActions` class the given below.
     - `get_announcements`
 - Added class the given below.
     - `Announcement`
@@ -17,9 +17,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+- Changed a method that was returning an `AsyncIterator` to return an `AsyncGenerator`.
+    - Generator is more correct than Iterator because it is the correct usage.
 - Changed class name the given below.
     - `IAnnouncement` -> `IMetaAnnouncement`
+- `cache` decorator no longer uses `dynamic_args` decorator
 
+### Removed
+
+- removed `dynamic_args` decorator.
 
 ## [0.4.0] 2023-01-18
 
