@@ -24,11 +24,36 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - The following methods are added to the `AdminEmojiActions` class.
     - `gets`
     - `gets_remote`
+- added some meta class.
+    - `ICPU`
+    - `IPolicies`
+    - `IAnnouncement`
+    - `IV12Features`
+    - `IAyuskeyFeatures`
+    - `IV11Features`
+    - `IFeatures`
+    - `IV12AdminMeta`
+    - `IV11AdminMeta`
+    - `ISharedAdminMeta`
+    - `ILiteV12Meta`
+    - `ILiteV11Meta`
+    - `IMetaCommonV12`
+    - `IMetaCommon`
+    - `ILiteMeta`
+    - `IV12Meta`
+    - `IMeta`
+    - `IAdminMeta`
+    - `Policies`
+    - `Features`
+    - `Meta`
+    - `AdminMeta`
+    - `CPU`
+    - `MetaCommon`
+    - `LiteMeta`
 - added some federation class.
     - `IFederationInstanceRequired`
     - `IFederationInstance`
     - `FederationInstance`
-
 - added some notification classes.
     - `Notification` 
     - `NotificationFollow`
@@ -47,14 +72,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - If you want to change the config, please use `Client.config.from_dict`.
 - CustomEmoji now inherits PartialCustomEmoji.
 - PartialCustomEmoji url has been changed to return `str | None` to match v13.
-    - For v13, the url is automatically generated. (Although it returns None by type, it never actually returns None.
-## Removed
-
-- Delete `get_user` method at `FollowRequestActions` class.
 
 ## Fixed
 
 - fixed `ChatMessage` model.
+    - For v13, the url is automatically generated. (Although it returns None by type, it never actually returns None.
+## Removed
+
+- Delete `get_user` method at `FollowRequestActions` class.
+- removed some meta classes.
+    - `LiteInstanceMeta`
+    - `IInstanceMetaLite`
+    - `IInstanceFeatures`
+    - `IInstancePolicies`
+    - `InstanceMeta`
 
 ## [0.3.99] 2022-12-25
 ## Added
