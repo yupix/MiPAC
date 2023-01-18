@@ -68,10 +68,6 @@ class IV12AdminMeta(TypedDict, total=False):
     enable_active_email_validation: bool
 
 
-class IV11AdminMeta(TypedDict, total=False):
-    object_storage_s3_force_path_style: bool
-
-
 class ISharedAdminMeta(TypedDict, total=False):
     drive_capacity_per_local_user_mb: int
     drive_capacity_per_remote_user_mb: int
@@ -114,7 +110,18 @@ class ILiteV12Meta(TypedDict, total=False):
     theme_color: str
 
 
-class ILiteV11Meta(IV11AdminMeta, total=False):
+class IMetaCommonV12(TypedDict, total=False):
+    ads: list[IAds]
+    translator_available: bool  # v12 only
+    email_required_for_signup: bool
+    mascot_image_url: str
+
+
+class ICommonV11(TypedDict, total=False):
+    object_storage_s3_force_path_style: bool
+
+
+class ILiteV11Meta(ICommonV11, total=False):
     announcements: list[IAnnouncement]
     cpu: ICPU
     disable_local_timeline: bool
@@ -133,14 +140,7 @@ class ILiteV11Meta(IV11AdminMeta, total=False):
     turnstile_secret_key: str
 
 
-class IMetaCommonV12(TypedDict, total=False):
-    ads: list[IAds]
-    translator_available: bool  # v12 only
-    email_required_for_signup: bool
-    mascot_image_url: str
-
-
-class IMetaCommon(IMetaCommonV12):
+class IMetaCommon(IMetaCommonV12, ICommonV11):
     cache_remote_files: bool
     enable_hcaptch: bool
     hcaptcha_site_key: str | None

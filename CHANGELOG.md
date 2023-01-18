@@ -30,15 +30,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `IPolicies`
     - `IAnnouncement`
     - `IV12Features`
-    - `IAyuskeyFeatures`
     - `IV11Features`
     - `IFeatures`
     - `IV12AdminMeta`
-    - `IV11AdminMeta`
     - `ISharedAdminMeta`
     - `ILiteV12Meta`
     - `ILiteV11Meta`
     - `IMetaCommonV12`
+    - `ICommonV11`
     - `IMetaCommon`
     - `ILiteMeta`
     - `IV12Meta`

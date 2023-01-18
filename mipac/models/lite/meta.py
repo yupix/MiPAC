@@ -103,6 +103,21 @@ class MetaCommon:
     def use_star_for_reaction_fallback(self) -> bool:
         return self.__meta_common.get('use_star_for_reaction_fallback', False)
 
+    @property
+    def object_storage_s3_force_path_style(self) -> bool:
+        """
+        objectStorageでs3ForcePathStyleを使用するかどうか
+        注意: v11の管理者のみ取得できます
+
+        Returns
+        -------
+        bool
+            有効かどうか
+        """
+        return self.__meta_common.get(
+            'object_storage_s3_force_path_style', False
+        )
+
     # v12 only
 
     @property
@@ -120,14 +135,6 @@ class MetaCommon:
     @property
     def mascot_image_url(self) -> str | None:
         return self.__meta_common.get('mascot_image_url')
-
-    # v11 admin only
-
-    @property
-    def object_storage_s3_force_path_style(self) -> bool:
-        return self.__meta_common.get(
-            'object_storage_s3_force_path_style', False
-        )
 
     # v12とv11の共通情報
 
