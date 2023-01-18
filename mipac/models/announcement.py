@@ -1,18 +1,14 @@
 from __future__ import annotations
-from datetime import datetime
 
+from datetime import datetime
 from typing import TYPE_CHECKING, Generic, TypeVar
 
-from mipac.types.announcement import (
-    IAnnouncement,
-    IAnnouncementCommon,
-    IAnnouncementSystem,
-)
+from mipac.types.announcement import IAnnouncement, IAnnouncementCommon, IAnnouncementSystem
 from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
+    from mipac.actions.admins.announcement import AdminAnnouncementClientActions
     from mipac.manager.client import ClientManager
-    from mipac.actions.admins.announcement import AdminAnnouncementActions
 
 T = TypeVar('T', bound=IAnnouncementCommon)
 
@@ -51,16 +47,14 @@ class AnnouncementCommon(Generic[T]):
         return self.__announcement['image_url']
 
     @property
-    def action(self) -> AdminAnnouncementActions:
-        return self.__client.admin.announcement._create_admin_announcement_instance(
+    def action(self) -> AdminAnnouncementClientActions:
+        return self.__client.admin.announcement._create_client_announcement_instance(
             announce_id=self.id
         )
 
 
 class Announcement(AnnouncementCommon):
-    def __init__(
-        self, announcement: IAnnouncement, *, client: ClientManager
-    ) -> None:
+    def __init__(self, announcement: IAnnouncement, *, client: ClientManager) -> None:
         super().__init__(announcement, client=client)
         self.__announcement: IAnnouncement
 
@@ -70,9 +64,7 @@ class Announcement(AnnouncementCommon):
 
 
 class AnnouncementSystem(AnnouncementCommon):
-    def __init__(
-        self, announcement: IAnnouncementSystem, *, client: ClientManager
-    ) -> None:
+    def __init__(self, announcement: IAnnouncementSystem, *, client: ClientManager) -> None:
         super().__init__(announcement, client=client)
         self.__announcement: IAnnouncementSystem
 
