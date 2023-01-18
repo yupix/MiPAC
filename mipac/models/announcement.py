@@ -22,7 +22,7 @@ class AnnouncementCommon(Generic[T]):
         self.__client: ClientManager = client
 
     @property
-    def id(self) -> str | None:
+    def id(self) -> str:
         return self.__announcement['id']
 
     @property
