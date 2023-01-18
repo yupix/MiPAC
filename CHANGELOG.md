@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - added `MuteActions` class.
 - added `MuteUser` class.
 - added `IMuteUser` class.
+- added `AdminActions` class.
 - added `ICustomEmojiLiteRequired` class.
 - The following methods are added to the `AdminEmojiActions` class.
     - `gets`
@@ -72,6 +73,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - If you want to change the config, please use `Client.config.from_dict`.
 - CustomEmoji now inherits PartialCustomEmoji.
 - PartialCustomEmoji url has been changed to return `str | None` to match v13.
+- AdminManager's `get_invite` method has been moved to `AdminActions.
+- **BREAKING CHANGE** Some paths will be changed as follows
+    - `manager.admin` -> `manager.admins`
+    - `manager.admin.manager` -> `manager.admins.admin`
+    - `actions.admin` -> `actions.admins`
 
 ## Fixed
 
