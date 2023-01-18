@@ -9,8 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- none
+- Added `ClientActions` method the given below.
+    - `get_announcements`
+- Added class the given below.
+    - `Announcement`
+    - `IMetaAnnouncement`
 
+### Changed
+
+- Changed class name the given below.
+    - `IAnnouncement` -> `IMetaAnnouncement`
 
 
 ## [0.4.0] 2023-01-18
