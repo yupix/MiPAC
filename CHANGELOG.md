@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `AnnouncementSystem`
     - `IMetaAnnouncement`
     - `IAnnouncementSystem`
+    - `AdminAnnouncementClientActions`
     - `AdminAnnouncementActions`
     - `AdminAnnouncementManager`
 
