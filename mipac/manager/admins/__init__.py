@@ -1,4 +1,4 @@
 from .emoji import *
-from .manager import *
+from .admin import *
 from .moderator import *
 from .user import *

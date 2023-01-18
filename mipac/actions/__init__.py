@@ -1,4 +1,4 @@
-from .admin import *
+from .admins import *
 from .chart import *
 from .chat import *
 from .drive import *

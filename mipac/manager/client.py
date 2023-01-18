@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.http import HTTPClient
-from mipac.manager.admin.manager import AdminManager
+from mipac.manager.admins.admin import AdminManager
 from mipac.manager.chart import ChartManager
 from mipac.manager.chat import ChatManager
 from mipac.manager.drive import DriveManager

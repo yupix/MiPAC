@@ -1,7 +1,7 @@
 # noqa: F403, F401
 
 from .ad import *
-from .admin import *
+from .admins import *
 from .chart import *
 from .chat import *
 from .client import *
