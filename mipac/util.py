@@ -225,17 +225,19 @@ def set_cache(group: str, key: str, value: Any):
     DEFAULT_CACHE_VALUE[key] = value
 
 
-@dynamic_args
-def cache(func, group: str = 'default', override: bool = False):
-    async def decorator(self, *args, **kwargs):
-        ordered_kwargs = sorted(kwargs.items())
-        key = '.{0}' + str(args) + str(ordered_kwargs)
-        hit_item = DEFAULT_CACHE_VALUE.get(key)
-        if hit_item and override is False:
-            return hit_item
-        res = await func(self, *args, **kwargs)
-        set_cache(group, key, res)
-        return res
+def cache(group: str = 'default', override: bool = False):
+    def decorator(func):
+        async def wrapper(self, *args, **kwargs):
+            ordered_kwargs = sorted(kwargs.items())
+            key = '.{0}' + str(args) + str(ordered_kwargs)
+            hit_item = DEFAULT_CACHE_VALUE.get(key)
+            if hit_item and override is False:
+                return hit_item
+            res = await func(self, *args, **kwargs)
+            set_cache(group, key, res)
+            return res
+
+        return wrapper
 
     return decorator
 
