@@ -114,9 +114,7 @@ class AdminEmojiActions(AbstractAction):
             yield emoji
         if all and len(first_req) == 100:
             body['untilId'] = first_req[-1].id
-            count = 0
             while True:
-                count = count + 1
                 res = await request(body)
                 if len(res) <= 100:
                     for emoji in res:

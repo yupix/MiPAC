@@ -70,7 +70,13 @@ class HTTPClient:
     def session(self) -> aiohttp.ClientSession:
         return self._session
 
-    async def request(self, route: Route, auth: bool = False, **kwargs) -> R:
+    async def request(
+        self,
+        route: Route,
+        auth: bool = False,
+        remove_none: bool = True,
+        **kwargs
+    ) -> R:
         headers: dict[str, str] = {
             'User-Agent': self.user_agent,
         }
@@ -92,7 +98,7 @@ class HTTPClient:
         replace_list = kwargs.pop('replace_list', {})
 
         for i in ('json', 'data'):
-            if kwargs.get(i):
+            if kwargs.get(i) and remove_none:
                 kwargs[i] = remove_dict_empty(kwargs[i])
         async with self._session.request(
             route.method, self._url + route.path, **kwargs
