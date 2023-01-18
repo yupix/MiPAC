@@ -21,6 +21,7 @@ class AdminActions(AbstractAction):
             Route('POST', '/api/admin/meta'),
             json={'detail': detail},
             auth=True,
+            lower=True,
         )
         return AdminMeta(res, client=self.__client)
 
