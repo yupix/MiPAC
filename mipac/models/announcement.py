@@ -12,6 +12,7 @@ from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
+    from mipac.actions.admins.announcement import AdminAnnouncementActions
 
 T = TypeVar('T', bound=IAnnouncementCommon)
 
@@ -48,6 +49,12 @@ class AnnouncementCommon(Generic[T]):
     @property
     def image_url(self) -> str | None:
         return self.__announcement['image_url']
+
+    @property
+    def action(self) -> AdminAnnouncementActions:
+        return self.__client.admin.announcement._create_admin_announcement_instance(
+            announce_id=self.id
+        )
 
 
 class Announcement(AnnouncementCommon):
