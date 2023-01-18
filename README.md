@@ -6,7 +6,7 @@
 
 ## 概要
 
-MiPAのCoreとなるライブラリです。issueは[こちら](https://code.teamblackcrystal.com/projects/120/issues)で管理しています
+MiPAのCoreとなるライブラリです。
 
 MiPACはMisskey v11, 12, 13をサポートしているApi Wrapperです。
 本来気にしないといけないバージョンごとのAPIの違い等を吸収してくれます。
