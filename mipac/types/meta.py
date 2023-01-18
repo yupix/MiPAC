@@ -157,7 +157,7 @@ class IMetaCommon(IMetaCommonV12):
     enable_discord_integration: bool
     enable_service_worker: bool
     proxy_account_name: str | None
-    user_star_for_reaction_fallback: bool
+    use_star_for_reaction_fallback: bool
     emojis: NotRequired[list[ICustomEmoji]]
 
 
