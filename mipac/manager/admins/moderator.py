@@ -3,11 +3,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.manager import AbstractManager
-from mipac.actions.admin.moderator import AdminModeratorActions
+from mipac.actions.admins.moderator import AdminModeratorActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
-    from mipac.client import ClientActions
+    from mipac.client import ClientManager
 
 __all__ = ('AdminModeratorManager',)
 
@@ -18,11 +18,11 @@ class AdminModeratorManager(AbstractManager):
         user_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__user_id: str | None = user_id
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def action(self) -> AdminModeratorActions:

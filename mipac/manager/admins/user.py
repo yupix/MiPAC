@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
-    from mipac.client import ClientActions
+    from mipac.client import ClientManager
     from mipac.models.user import UserDetailed
 
 
@@ -15,11 +15,11 @@ class AdminUserManager:
         user_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__user_id = user_id
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     async def delete_account(self, user_id: str | None = None) -> bool:
         """

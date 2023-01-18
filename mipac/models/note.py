@@ -15,7 +15,7 @@ from mipac.types.note import (
 from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
     from mipac.manager.note import ClientNoteManager
     from mipac.models.user import UserDetailed
     from mipac.types.drive import IDriveFile
@@ -116,9 +116,9 @@ class Header:
 class NoteReaction:
     __slots__ = ('__reaction', '__client')
 
-    def __init__(self, reaction: INoteReaction, *, client: ClientActions):
+    def __init__(self, reaction: INoteReaction, *, client: ClientManager):
         self.__reaction: INoteReaction = reaction
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str | None:
@@ -151,12 +151,12 @@ class Note:
     ----------
     note: INote
         アクションを持たないNoteクラス
-    client: ClientActions
+    client: ClientManager
     """
 
-    def __init__(self, note: INote, client: ClientActions):
+    def __init__(self, note: INote, client: ClientManager):
         self.__note = note
-        self._client: ClientActions = client
+        self._client: ClientManager = client
 
     @property
     def id(self) -> str:

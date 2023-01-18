@@ -16,7 +16,7 @@ MiPACはMisskey v11, 12, 13をサポートしているApi Wrapperです。
 |name|version|supported|
 |---|---|---|
 |[Misskey Official](https://github.com/misskey-dev/misskey)|v13, v12, v11|〇|
-|[Ayuskey](https://github.com/teamblackcrystal/misskey)|latest|〇|
+|[Ayuskey](https://github.com/teamblackcrystal/misskey)|v5, v6|〇|
 
 ## 使い方
 

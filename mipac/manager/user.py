@@ -9,7 +9,7 @@ from mipac.manager.follow import FollowManager
 from mipac.manager.mute import MuteManager
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
     from mipac.models.lite.user import LiteUser
 
 
@@ -22,11 +22,11 @@ class UserManager(AbstractManager):
         user: LiteUser | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         user_id: str | None = user.id if user else None
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
         self.user: LiteUser | None = user
         self.follow: FollowManager = FollowManager(
             user_id=user_id, session=session, client=client

@@ -7,7 +7,7 @@ from mipac.actions.favorite import FavoriteActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
-    from mipac.client import ClientActions
+    from mipac.client import ClientManager
 
 
 class FavoriteManager(AbstractManager):
@@ -16,11 +16,11 @@ class FavoriteManager(AbstractManager):
         note_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__note_id = note_id
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def action(self) -> FavoriteActions:

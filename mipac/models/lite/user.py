@@ -8,16 +8,16 @@ from mipac.types.user import ILiteUser
 from mipac.util import deprecated
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
     from mipac.manager.user import UserManager
 
 
 class LiteUser:
     __slots__ = ('__user', '__client')
 
-    def __init__(self, user: ILiteUser, *, client: ClientActions) -> None:
+    def __init__(self, user: ILiteUser, *, client: ClientManager) -> None:
         self.__user: ILiteUser = user
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:

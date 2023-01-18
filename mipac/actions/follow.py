@@ -10,7 +10,7 @@ from mipac.types.follow import IFollowRequest
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
     from mipac.types.user import ILiteUser
 
 
@@ -20,7 +20,7 @@ class FollowActions(AbstractAction):
         user_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__user_id: str | None = user_id
         self.__session = session
@@ -90,7 +90,7 @@ class FollowRequestActions(AbstractAction):
         user_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__user_id: str | None = user_id
         self.__session = session

@@ -8,13 +8,13 @@ from mipac.errors.base import NotSupportVersion
 from mipac.http import Route
 from mipac.models.emoji import CustomEmoji
 from mipac.models.note import NoteReaction
-from mipac.types.instance import IInstanceMetaLite
+from mipac.types.meta import ILiteMeta
 from mipac.types.note import INoteReaction
 from mipac.util import remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class ReactionActions(AbstractAction):
@@ -23,11 +23,11 @@ class ReactionActions(AbstractAction):
         note_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     async def add(self, reaction: str, note_id: str | None = None) -> bool:
         """
@@ -83,7 +83,7 @@ class ReactionActions(AbstractAction):
         if config.use_version >= 13:
             raise NotSupportVersion('Misskey v13以降では使用できません')
 
-        data: IInstanceMetaLite = await self.__session.request(
+        data: ILiteMeta = await self.__session.request(
             Route('GET', '/api/meta'),
             json={'detail': False},
             auth=True,

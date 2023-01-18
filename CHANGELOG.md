@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Added
 
+- added new `ClientActions` class.
 - added `avatar_color` property at `LiteUser` class.
     - Note: Since avatar_color is deprecated in v13, only None is returned for v13 instances.
 - added `un_renote` method at `ClientNoteActions` class.
@@ -20,15 +21,40 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - added `MuteActions` class.
 - added `MuteUser` class.
 - added `IMuteUser` class.
+- added `AdminActions` class.
 - added `ICustomEmojiLiteRequired` class.
 - The following methods are added to the `AdminEmojiActions` class.
     - `gets`
     - `gets_remote`
+- added some meta class.
+    - `ICPU`
+    - `IPolicies`
+    - `IAnnouncement`
+    - `IV12Features`
+    - `IV11Features`
+    - `IFeatures`
+    - `IV12AdminMeta`
+    - `ISharedAdminMeta`
+    - `ILiteV12Meta`
+    - `ILiteV11Meta`
+    - `IMetaCommonV12`
+    - `ICommonV11`
+    - `IMetaCommon`
+    - `ILiteMeta`
+    - `IV12Meta`
+    - `IMeta`
+    - `IAdminMeta`
+    - `Policies`
+    - `Features`
+    - `Meta`
+    - `AdminMeta`
+    - `CPU`
+    - `MetaCommon`
+    - `LiteMeta`
 - added some federation class.
     - `IFederationInstanceRequired`
     - `IFederationInstance`
     - `FederationInstance`
-
 - added some notification classes.
     - `Notification` 
     - `NotificationFollow`
@@ -47,15 +73,29 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - If you want to change the config, please use `Client.config.from_dict`.
 - CustomEmoji now inherits PartialCustomEmoji.
 - PartialCustomEmoji url has been changed to return `str | None` to match v13.
-    - For v13, the url is automatically generated. (Although it returns None by type, it never actually returns None.
-## Removed
-
-- Delete `get_user` method at `FollowRequestActions` class.
+- AdminManager's `get_invite` method has been moved to `AdminActions.
+- **BREAKING CHANGE** `ClientActions` has been changed to `ClientManager`
+- **BREAKING CHANGE** Some paths will be changed as follows
+    - `manager.admin` -> `manager.admins`
+    - `manager.admin.manager` -> `manager.admins.admin`
+    - `actions.admin` -> `actions.admins`
 
 ## Fixed
 
 - fixed `ChatMessage` model.
+    - For v13, the url is automatically generated. (Although it returns None by type, it never actually returns None.
 - fixed `Chat` action.
+- fixed `Chat` action.
+
+## Removed
+
+- Delete `get_user` method at `FollowRequestActions` class.
+- removed some meta classes.
+    - `LiteInstanceMeta`
+    - `IInstanceMetaLite`
+    - `IInstanceFeatures`
+    - `IInstancePolicies`
+    - `InstanceMeta`
 
 ## [0.3.99] 2022-12-25
 ## Added

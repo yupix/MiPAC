@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
     from mipac.types import FolderPayload, IDriveFile, IFileProperties
 
 __all__ = ['FileProperties', 'File', 'Folder']
@@ -27,9 +27,9 @@ class FileProperties:
 
 
 class Folder:
-    def __init__(self, folder: FolderPayload, client: ClientActions):
+    def __init__(self, folder: FolderPayload, client: ClientManager):
         self.__folder: FolderPayload = folder
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:
@@ -66,9 +66,9 @@ class Folder:
 
 
 class File:
-    def __init__(self, file: IDriveFile, *, client: ClientActions):
+    def __init__(self, file: IDriveFile, *, client: ClientManager):
         self.__file: IDriveFile = file
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:

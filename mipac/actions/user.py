@@ -8,7 +8,7 @@ from mipac.models.user import LiteUser, UserDetailed
 from mipac.util import cache, check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
     from mipac.models.note import Note
 
 __all__ = ['UserActions']
@@ -18,12 +18,12 @@ class UserActions:
     def __init__(
         self,
         session: HTTPClient,
-        client: ClientActions,
+        client: ClientManager,
         user: Optional[LiteUser] = None,
     ):
         self.__session: HTTPClient = session
         self.__user: Optional[LiteUser] = user
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     async def get_me(self) -> UserDetailed:
         """

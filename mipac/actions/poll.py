@@ -9,7 +9,7 @@ from mipac.models.note import Note
 from mipac.types.note import INote
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class PollActions(AbstractAction):
@@ -18,11 +18,11 @@ class PollActions(AbstractAction):
         note_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     async def vote(self, choice: int, note_id: str | None = None) -> bool:
         note_id = note_id or self.__note_id

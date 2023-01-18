@@ -5,13 +5,13 @@ from typing import TYPE_CHECKING
 from mipac.types.channel import IChannel
 
 if TYPE_CHECKING:
-    from mipac.manager import ClientActions
+    from mipac.manager import ClientManager
 
 
 class Channel:
-    def __init__(self, channel: IChannel, *, client: ClientActions) -> None:
+    def __init__(self, channel: IChannel, *, client: ClientManager) -> None:
         self.__channel: IChannel = channel
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:

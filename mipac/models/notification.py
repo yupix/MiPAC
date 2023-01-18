@@ -7,7 +7,7 @@ from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
     from mipac.manager.follow import FollowManager, FollowRequestManager
     from mipac.types.notification import (
         INotification,
@@ -20,10 +20,10 @@ if TYPE_CHECKING:
 
 class Notification:
     def __init__(
-        self, notification: INotification, *, client: ClientActions,
+        self, notification: INotification, *, client: ClientManager,
     ) -> None:
         self.__notification: INotification = notification
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:
@@ -46,11 +46,11 @@ class Notification:
 
 class NotificationFollow(Notification):
     def __init__(
-        self, notification: IUserNf, *, client: ClientActions,
+        self, notification: IUserNf, *, client: ClientManager,
     ) -> None:
         super().__init__(notification, client=client)
         self.__notification: IUserNf = notification
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def user(self) -> LiteUser:
@@ -67,11 +67,11 @@ class NotificationFollow(Notification):
 
 class NotificationFollowRequest(Notification):
     def __init__(
-        self, notification: IUserNf, *, client: ClientActions,
+        self, notification: IUserNf, *, client: ClientManager,
     ) -> None:
         super().__init__(notification, client=client)
         self.__notification: IUserNf = notification
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def user(self) -> LiteUser:
@@ -90,11 +90,11 @@ class NotificationFollowRequest(Notification):
 
 class NotificationNote(Notification):
     def __init__(
-        self, notification: INoteNf, *, client: ClientActions,
+        self, notification: INoteNf, *, client: ClientManager,
     ) -> None:
         super().__init__(notification, client=client)
         self.__notification: INoteNf = notification
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def user(self) -> LiteUser:
@@ -111,11 +111,11 @@ class NotificationNote(Notification):
 
 class NotificationPollEnd(Notification):
     def __init__(
-        self, notification: IPollEndNf, *, client: ClientActions,
+        self, notification: IPollEndNf, *, client: ClientManager,
     ) -> None:
         super().__init__(notification, client=client)
         self.__notification: IPollEndNf = notification
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def note(self) -> Note:
@@ -124,11 +124,11 @@ class NotificationPollEnd(Notification):
 
 class NotificationReaction(Notification):
     def __init__(
-        self, reaction: IReactionNf, *, client: ClientActions
+        self, reaction: IReactionNf, *, client: ClientManager
     ) -> None:
         super().__init__(reaction, client=client)
         self.__notification: IReactionNf = reaction
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def user(self) -> LiteUser:

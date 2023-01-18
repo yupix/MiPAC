@@ -10,7 +10,7 @@ from mipac.types.mute import IMuteUser
 from mipac.util import remove_dict_empty
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class MuteActions(AbstractAction):
@@ -19,11 +19,11 @@ class MuteActions(AbstractAction):
         user_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self._user_id: str | None = user_id
         self._session: HTTPClient = session
-        self._client: ClientActions = client
+        self._client: ClientManager = client
 
     async def add(self, user_id: str | None = None) -> bool:
         """

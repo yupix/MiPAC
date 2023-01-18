@@ -5,15 +5,15 @@ from mipac.types.emoji import ICustomEmojiLite
 from mipac.config import config
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class PartialCustomEmoji:
     def __init__(
-        self, emoji: ICustomEmojiLite, *, client: ClientActions
+        self, emoji: ICustomEmojiLite, *, client: ClientManager
     ) -> None:
         self.__emoji = emoji
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def name(self) -> str:

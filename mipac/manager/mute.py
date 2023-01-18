@@ -7,7 +7,7 @@ from mipac.actions.mute import MuteActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class MuteManager(AbstractManager):
@@ -16,11 +16,11 @@ class MuteManager(AbstractManager):
         user_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ) -> None:
         self._user_id: str | None = user_id
         self._session: HTTPClient = session
-        self._client: ClientActions = client
+        self._client: ClientManager = client
 
     @property
     def action(self) -> MuteActions:

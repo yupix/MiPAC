@@ -6,7 +6,7 @@ from mipac.models.lite.emoji import PartialCustomEmoji
 from mipac.types.emoji import ICustomEmoji
 
 if TYPE_CHECKING:
-    from mipac.client import ClientActions
+    from mipac.client import ClientManager
 
 __all__ = ('CustomEmoji',)
 
@@ -25,7 +25,7 @@ class CustomEmoji(PartialCustomEmoji):
         絵文字のホスト
     """
 
-    def __init__(self, emoji: ICustomEmoji, *, client: ClientActions):
+    def __init__(self, emoji: ICustomEmoji, *, client: ClientManager):
         super().__init__(emoji, client=client)
         self.__emoji: ICustomEmoji = emoji
 

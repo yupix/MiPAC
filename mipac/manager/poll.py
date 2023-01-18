@@ -7,7 +7,7 @@ from mipac.actions.poll import PollActions
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient
-    from mipac.manager.client import ClientActions
+    from mipac.manager.client import ClientManager
 
 
 class PollManager(AbstractManager):
@@ -16,11 +16,11 @@ class PollManager(AbstractManager):
         note_id: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientActions
+        client: ClientManager
     ):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
-        self.__client: ClientActions = client
+        self.__client: ClientManager = client
 
     @property
     def action(self) -> PollActions:
