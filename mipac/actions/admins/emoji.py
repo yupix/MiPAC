@@ -122,7 +122,6 @@ class AdminEmojiActions(AbstractAction):
                     for emoji in res:
                         yield emoji
                 if len(res) < 100:
-                    print(res[-1].id)
                     break
 
     async def gets_remote(
