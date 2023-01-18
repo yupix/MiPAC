@@ -25,7 +25,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-- removed `dynamic_args` decorator.
+- Delete `dynamic_args` decorator.
+- Delete debug log.
 
 ## [0.4.0] 2023-01-18
 
