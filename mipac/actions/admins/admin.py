@@ -5,12 +5,12 @@ from mipac.abstract.action import AbstractAction
 
 from mipac.errors.base import NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.admin import ModerationLog
+from mipac.models.admin import ModerationLog, ServerInfo
 from mipac.models.meta import AdminMeta
-from mipac.types.admin import IModerationLog
+from mipac.types.admin import IModerationLog, IServerInfo
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
 from mipac.config import config
-from mipac.util import convert_dict_keys_to_camel
+from mipac.util import cache, convert_dict_keys_to_camel
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -149,3 +149,13 @@ class AdminActions(AbstractAction):
             Route('POST', '/api/admin/show-moderation-logs'), json=body, auth=True, lower=True
         )
         return ModerationLog(moderation_log_payload, client=self.__client)
+
+    @cache('server_info')
+    async def get_server_info(self, **kwargs) -> ServerInfo:
+        server_info_payload: IServerInfo = await self.__session.request(
+            Route('POST', '/api/admin/server-info'), auth=True, lower=True
+        )
+        return ServerInfo(server_info_payload)
+
+    async def fetch_server_info(self) -> ServerInfo:
+        return await self.get_server_info(cache_override=True)
