@@ -117,3 +117,22 @@ class AdminActions(AbstractAction):
                 Route('POST', '/api/admin/suspend-user'), json={'userId': user_id}, auth=True
             )
         )
+
+    async def silence_user(self, user_id: str) -> bool:
+        """Silences the user of the specified Id
+
+        Parameters
+        ----------
+        user_id : str
+            Id of user to silence
+
+        Returns
+        -------
+        bool
+            success or failed
+        """
+        return bool(
+            await self.__session.request(
+                Route('POST', '/api/admin/silence-user'), json={'userId': user_id}, auth=True
+            )
+        )
