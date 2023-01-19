@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import NotSupportVersion
+
+from mipac.errors.base import NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
+from mipac.models.admin import ModerationLog
 from mipac.models.meta import AdminMeta
+from mipac.types.admin import IModerationLog
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
 from mipac.config import config
 from mipac.util import convert_dict_keys_to_camel
@@ -136,3 +138,14 @@ class AdminActions(AbstractAction):
                 Route('POST', '/api/admin/silence-user'), json={'userId': user_id}, auth=True
             )
         )
+
+    async def get_moderation_logs(
+        self, limit: int = 10, since_id: str | None = None, until_id: str | None = None
+    ) -> ModerationLog:
+        if limit > 100:
+            raise ParameterError('limit must be less than 100')
+        body = {'limit': limit, 'sinceId': since_id, 'untilId': until_id}
+        moderation_log_payload: IModerationLog = await self.__session.request(
+            Route('POST', '/api/admin/show-moderation-logs'), json=body, auth=True, lower=True
+        )
+        return ModerationLog(moderation_log_payload, client=self.__client)
