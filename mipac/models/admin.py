@@ -4,7 +4,14 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 
 from mipac.models.user import UserDetailed
-from mipac.types.admin import IModerationLog
+from mipac.types.admin import (
+    IModerationLog,
+    IServerInfo,
+    IServerInfoCpu,
+    IServerInfoFs,
+    IServerInfoMem,
+    IServerInfoNet,
+)
 from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
@@ -39,3 +46,84 @@ class ModerationLog:
     @property
     def user(self) -> UserDetailed:
         return UserDetailed(self.__moderation_log['user'], client=self.__client)
+
+
+class ServerInfoCpu:
+    def __init__(self, server_info_cpu: IServerInfoCpu) -> None:
+        self.__server_info_cpu = server_info_cpu
+
+    @property
+    def models(self) -> str:
+        return self.__server_info_cpu['models']
+
+    @property
+    def cores(self) -> int:
+        return self.__server_info_cpu['cores']
+
+
+class ServerInfoMem:
+    def __init__(self, server_info_mem: IServerInfoMem) -> None:
+        self.__server_info_mem = server_info_mem
+
+    @property
+    def total(self) -> int:
+        return self.__server_info_mem['total']
+
+
+class ServerInfoFs:
+    def __init__(self, server_info_fs: IServerInfoFs) -> None:
+        self.__server_info_fs = server_info_fs
+
+    @property
+    def total(self) -> int:
+        return self.__server_info_fs['total']
+
+    @property
+    def used(self) -> int:
+        return self.__server_info_fs['used']
+
+
+class ServerInfoNet:
+    def __init__(self, server_info_net: IServerInfoNet) -> None:
+        self.__server_info_net = server_info_net
+
+    @property
+    def interface(self) -> str:
+        return self.__server_info_net['interface']
+
+
+class ServerInfo:
+    def __init__(self, server_info: IServerInfo) -> None:
+        self.__server_info = server_info
+
+    @property
+    def machine(self) -> str:
+        return self.__server_info['machine']
+
+    @property
+    def os(self) -> str:
+        return self.__server_info['os']
+
+    @property
+    def node(self) -> str:
+        return self.__server_info['node']
+
+    @property
+    def psql(self) -> str:
+        return self.__server_info['psql']
+
+    @property
+    def cpu(self) -> ServerInfoCpu:
+        return ServerInfoCpu(self.__server_info['cpu'])
+
+    @property
+    def mem(self) -> ServerInfoMem:
+        return ServerInfoMem(self.__server_info['mem'])
+
+    @property
+    def fs(self) -> ServerInfoFs:
+        return ServerInfoFs(self.__server_info['fs'])
+
+    @property
+    def net(self) -> ServerInfoNet:
+        return ServerInfoNet(self.__server_info['net'])
