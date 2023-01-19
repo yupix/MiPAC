@@ -58,3 +58,23 @@ class AdminActions(AbstractAction):
                 remove_none=False,
             )
         )
+
+    async def unsuspend_user(self, user_id: str) -> bool:
+        """Unsuspend user with specified Id
+
+        Parameters
+        ----------
+        user_id : str
+            Id of user to unsuspend
+
+        Returns
+        -------
+        bool
+            success or failed
+        """
+
+        return bool(
+            await self.__session.request(
+                Route('POST', '/api/admin/unsuspend-user'), json={'userId': user_id}, auth=True
+            )
+        )
