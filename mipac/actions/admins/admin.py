@@ -24,3 +24,9 @@ class AdminActions(AbstractAction):
 
     async def get_invite(self) -> bool:
         return bool(await self.__session.request(Route('POST', '/api/admin/invite')))
+
+    async def vacuum(self, full: bool = False, analyze: bool = False) -> bool:
+        body = {'full': full, 'analyze': analyze}
+        return bool(
+            await self.__session.request(Route('POST', '/api/admin/vacuum'), auth=True, json=body)
+        )
