@@ -10,7 +10,7 @@ import re
 import uuid
 import warnings
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any, Mapping, Optional
 from urllib.parse import urlencode
 
 import aiohttp
@@ -35,6 +35,8 @@ __all__ = (
     'bool_to_string',
     '_from_json',
     'str_to_datetime',
+    'convert_dict_keys_to_camel',
+    'snake_to_camel',
 )
 
 
@@ -45,6 +47,26 @@ else:
 
 DEFAULT_CACHE: dict[str, list[str]] = {}
 DEFAULT_CACHE_VALUE: dict[str, Any] = {}
+
+
+def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
+    components: list[str] = snake_str.split('_')
+    for i in range(len(components)):
+        if components[i] in replace_list:
+            components[i] = replace_list[components[i]]
+    return components[0] + ''.join(x.title() for x in components[1:])
+
+
+def convert_dict_keys_to_camel(
+    data: Mapping[Any, Any], replace_list: dict[str, str] | None = None
+) -> Mapping[Any, Any]:
+    if replace_list is None:
+        replace_list = {}
+    new_dict = {}
+    for key, value in data.items():
+        new_key = snake_to_camel(key, replace_list)
+        new_dict[new_key] = value
+    return new_dict
 
 
 def str_to_datetime(data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ') -> datetime:
