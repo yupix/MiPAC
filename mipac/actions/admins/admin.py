@@ -78,3 +78,23 @@ class AdminActions(AbstractAction):
                 Route('POST', '/api/admin/unsuspend-user'), json={'userId': user_id}, auth=True
             )
         )
+
+    async def unsilence_user(self, user_id) -> bool:
+        """Unsilence user with specified Id
+
+        Parameters
+        ----------
+        user_id : str
+            Id of user to unsilence
+
+        Returns
+        -------
+        bool
+            success or failed
+        """
+
+        return bool(
+            await self.__session.request(
+                Route('POST', '/api/admin/unsilence-user'), json={'userId': user_id}, auth=True
+            )
+        )
