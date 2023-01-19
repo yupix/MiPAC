@@ -3,9 +3,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
+from mipac.errors.base import NotSupportVersion
 from mipac.http import HTTPClient, Route
 from mipac.models.meta import AdminMeta
 from mipac.types.meta import IAdminMeta
+from mipac.config import config
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -29,4 +31,14 @@ class AdminActions(AbstractAction):
         body = {'full': full, 'analyze': analyze}
         return bool(
             await self.__session.request(Route('POST', '/api/admin/vacuum'), auth=True, json=body)
+        )
+
+    async def update_user_note(self, user_id: str, text: str) -> bool:
+        if config.use_version < 12:
+            raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
+        body = {'userId': user_id, 'text': text}
+        return bool(
+            await self.__session.request(
+                Route('POST', '/api/admin/update-user-note'), auth=True, json=body
+            )
         )
