@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added method to`ClientActions` class the given below.
     - `get_announcements`
 - Added class the given below.
+    - `AdminUserActions`
     - `AnnouncementCommon`
     - `Announcement`
     - `AnnouncementSystem`
@@ -21,6 +22,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `AdminAnnouncementClientActions`
     - `AdminAnnouncementActions`
     - `AdminAnnouncementManager`
+    - `IModerationLog`
+    - `ModerationLog`
 
 ### Changed
 
