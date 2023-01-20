@@ -6,6 +6,11 @@ if TYPE_CHECKING:
     from mipac.types.user import IUserDetailed
 
 
+class IUserIP(TypedDict):
+    ip: str
+    created_at: str
+
+
 class IIndexStat(TypedDict):
     schemaname: str
     tablename: str
