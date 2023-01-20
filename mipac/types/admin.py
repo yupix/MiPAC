@@ -6,6 +6,14 @@ if TYPE_CHECKING:
     from mipac.types.user import IUserDetailed
 
 
+class IIndexStat(TypedDict):
+    schemaname: str
+    tablename: str
+    indexname: str
+    tablespace: str | None
+    indexdef: str
+
+
 class ITableStats(TypedDict):
     count: int
     size: int
