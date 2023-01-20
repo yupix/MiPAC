@@ -160,7 +160,7 @@ class AdminActions(AbstractAction):
     async def fetch_server_info(self) -> ServerInfo:
         return await self.get_server_info(cache_override=True)
 
-    async def send_mail(self, to: str, subject: str, text: str) -> bool:
+    async def send_email(self, to: str, subject: str, text: str) -> bool:
         body = {'to': to, 'subject': subject, 'text': text}
         return bool(
             await self.__session.request(
