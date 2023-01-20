@@ -211,7 +211,7 @@ class UserActions:
             ]
 
         body = remove_dict_empty(
-            {'query': query, 'limit': limit, 'offset': offset, 'origin': origin, 'detail': detail,}
+            {'query': query, 'limit': limit, 'offset': offset, 'origin': origin, 'detail': detail}
         )
 
         if all:
@@ -260,7 +260,7 @@ class UserActions:
             raise ParameterError('limit は100以下である必要があります')
 
         body = remove_dict_empty(
-            {'username': username, 'host': host, 'limit': limit, 'detail': detail,}
+            {'username': username, 'host': host, 'limit': limit, 'detail': detail}
         )
         res = await self.__session.request(
             Route('POST', '/api/users/search-by-username-and-host'),

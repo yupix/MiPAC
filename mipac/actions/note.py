@@ -498,7 +498,7 @@ class NoteActions(ClientNoteActions):
         note_id = note_id or self._note_id
         res = await self._session.request(
             Route('POST', '/api/notes/replies'),
-            json={'noteId': note_id, 'sinceId': since_id, 'untilId': until_id, 'limit': limit,},
+            json={'noteId': note_id, 'sinceId': since_id, 'untilId': until_id, 'limit': limit},
             auth=True,
             lower=True,
         )

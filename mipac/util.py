@@ -166,7 +166,7 @@ class AuthClient:
             認証に使用するURL
         """
         field = remove_dict_empty(
-            {'name': self.__name, 'description': self.__description, 'icon': self.__icon,}
+            {'name': self.__name, 'description': self.__description, 'icon': self.__icon}
         )
         if self.__use_miauth:
             field['permissions'] = self.__permissions
@@ -201,7 +201,7 @@ class AuthClient:
         while True:
             async with self.__client_session.post(
                 f'{self.__instance_uri}/api/auth/session/userkey',
-                json={'appSecret': self.__secret, 'token': self.__session_token,},
+                json={'appSecret': self.__secret, 'token': self.__session_token},
             ) as res:
                 data = await res.json()
                 if data.get('error', {}).get('code') != 'PENDING_SESSION':
