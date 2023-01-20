@@ -12,11 +12,25 @@ from mipac.types.admin import (
     IServerInfoFs,
     IServerInfoMem,
     IServerInfoNet,
+    IUserIP,
 )
 from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
+
+
+class UserIP:
+    def __init__(self, user_ip: IUserIP) -> None:
+        self.__user_ip: IUserIP = user_ip
+
+    @property
+    def ip(self) -> str:
+        return self.__user_ip['ip']
+
+    @property
+    def created_at(self) -> datetime:
+        return str_to_datetime(self.__user_ip['created_at'])
 
 
 class IndexStat:
