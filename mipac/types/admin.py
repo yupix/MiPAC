@@ -6,6 +6,11 @@ if TYPE_CHECKING:
     from mipac.types.user import IUserDetailed
 
 
+class ITableStats(TypedDict):
+    count: int
+    size: int
+
+
 class IModerationLog(TypedDict):
     id: str
     created_at: str

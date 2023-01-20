@@ -7,7 +7,7 @@ from mipac.errors.base import NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.admin import ModerationLog, ServerInfo
 from mipac.models.meta import AdminMeta
-from mipac.types.admin import IModerationLog, IServerInfo
+from mipac.types.admin import IModerationLog, IServerInfo, ITableStats
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
 from mipac.config import config
 from mipac.util import cache, convert_dict_keys_to_camel
@@ -192,3 +192,6 @@ class AdminActions(AbstractAction):
         return await self.__session.request(
             Route('POST', '/api/admin/reset-password'), auth=True, json={'userId': user_id}
         )
+
+    async def get_table_stats(self) -> dict[str, ITableStats]:
+        return await self.__session.request(Route('POST', '/api/admin/get-table-stats'), auth=True)
