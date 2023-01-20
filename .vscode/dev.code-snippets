@@ -1,0 +1,23 @@
+{
+	"create actions class": {
+		"prefix": "mic.actions",
+		"body": [
+		  "class $1(AbstractAction):",
+		  "    def __init__(self, *, session: HTTPClient, client: ClientManager):",
+		  "        self.__session = session",
+		  "        self.__client = client",
+		  ""
+		],
+		"description": "create actions class"
+	  },
+	  "create manager class": {
+		"prefix": "mic.manager",
+		"body": [
+		  "class $1(AbstractManager):",
+		  "    def __init__(self, *, session: HTTPClient, client: ClientManager):",
+		  "        self.__session: HTTPClient = session",
+		  "        self.__client: ClientManager = client"
+		],
+		"description": "create manager class"
+	  }
+}
