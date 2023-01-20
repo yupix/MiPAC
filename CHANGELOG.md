@@ -24,7 +24,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `AdminAnnouncementManager`
     - `IModerationLog`
     - `ModerationLog`
-
+    - `ServerInfoCpu`
+    - `ServerInfoMem`
+    - `ServerInfoFs`
+    - `ServerInfoNet`
+    - `ServerInfo`
+    - `IServerInfoCpu`
+    - `IServerInfoMem`
+    - `IServerInfoFs`
+    - `IServerInfoNet`
+    - `IServerInfo`
+    - `ITableStats`
+    - `IIndexStat`
+    - `IndexStat`
+    - `IUserIP`
+    - `UserIP`
 ### Changed
 
 - Maximum number of characters has been changed from 79 to 99
