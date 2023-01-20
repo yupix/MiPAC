@@ -142,8 +142,12 @@ class AdminActions(AbstractAction):
     async def get_moderation_logs(
         self, limit: int = 10, since_id: str | None = None, until_id: str | None = None
     ) -> ModerationLog:
+        if config.use_version < 12:
+            raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
+
         if limit > 100:
             raise ParameterError('limit must be less than 100')
+
         body = {'limit': limit, 'sinceId': since_id, 'untilId': until_id}
         moderation_log_payload: IModerationLog = await self.__session.request(
             Route('POST', '/api/admin/show-moderation-logs'), json=body, auth=True, lower=True
@@ -169,6 +173,9 @@ class AdminActions(AbstractAction):
         )
 
     async def resolve_abuse_user_report(self, report_id: str, forward: bool = False) -> bool:
+        if config.use_version < 12:
+            raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
+
         body = {'reportId': report_id, 'forward': forward}
         return bool(
             await self.__session.request(
