@@ -167,3 +167,11 @@ class AdminActions(AbstractAction):
                 Route('POST', '/api/admin/send-email'), auth=True, json=body
             )
         )
+
+    async def resolve_abuse_user_report(self, report_id: str, forward: bool = False) -> bool:
+        body = {'reportId': report_id, 'forward': forward}
+        return bool(
+            await self.__session.request(
+                Route('POST', '/api/admin/resolve-abuse-user-report'), auth=True, json=body
+            )
+        )
