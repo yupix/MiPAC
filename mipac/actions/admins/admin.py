@@ -175,3 +175,20 @@ class AdminActions(AbstractAction):
                 Route('POST', '/api/admin/resolve-abuse-user-report'), auth=True, json=body
             )
         )
+
+    async def reset_password(self, user_id: str) -> str:
+        """指定したIDのユーザーのパスワードをリセットします
+
+        Parameters
+        ----------
+        user_id : str
+            パスワードをリセットする対象のユーザーID
+
+        Returns
+        -------
+        str
+            新しいパスワード
+        """
+        return await self.__session.request(
+            Route('POST', '/api/admin/reset-password'), auth=True, json={'userId': user_id}
+        )
