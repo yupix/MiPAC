@@ -5,9 +5,9 @@ from mipac.abstract.action import AbstractAction
 
 from mipac.errors.base import NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.admin import ModerationLog, ServerInfo
+from mipac.models.admin import IndexStat, ModerationLog, ServerInfo
 from mipac.models.meta import AdminMeta
-from mipac.types.admin import IModerationLog, IServerInfo, ITableStats
+from mipac.types.admin import IIndexStat, IModerationLog, IServerInfo, ITableStats
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
 from mipac.config import config
 from mipac.util import cache, convert_dict_keys_to_camel
@@ -195,3 +195,9 @@ class AdminActions(AbstractAction):
 
     async def get_table_stats(self) -> dict[str, ITableStats]:
         return await self.__session.request(Route('POST', '/api/admin/get-table-stats'), auth=True)
+
+    async def get_index_stats(self) -> list[IndexStat]:
+        res: list[IIndexStat] = await self.__session.request(
+            Route('POST', '/api/admin/get-index-stats'), auth=True
+        )
+        return [IndexStat(i) for i in res]
