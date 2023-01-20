@@ -5,9 +5,9 @@ from mipac.abstract.action import AbstractAction
 
 from mipac.errors.base import NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.admin import IndexStat, ModerationLog, ServerInfo
+from mipac.models.admin import IndexStat, ModerationLog, ServerInfo, UserIP
 from mipac.models.meta import AdminMeta
-from mipac.types.admin import IIndexStat, IModerationLog, IServerInfo, ITableStats
+from mipac.types.admin import IIndexStat, IModerationLog, IServerInfo, ITableStats, IUserIP
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
 from mipac.config import config
 from mipac.util import cache, convert_dict_keys_to_camel
@@ -201,3 +201,15 @@ class AdminActions(AbstractAction):
             Route('POST', '/api/admin/get-index-stats'), auth=True
         )
         return [IndexStat(i) for i in res]
+
+    async def get_user_ips(self, user_id: str) -> list[UserIP]:
+        if config.use_version < 12:
+            raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
+
+        res: list[IUserIP] = await self.__session.request(
+            Route('POST', '/api/admin/get-user-ips'),
+            auth=True,
+            json={'userId': user_id},
+            lower=True,
+        )
+        return [UserIP(i) for i in res]
