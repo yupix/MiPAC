@@ -228,3 +228,27 @@ class AdminActions(AbstractAction):
             Route('POST', '/api/admin/show-user'), auth=True, json={'userId': user_id}
         )
         return UserDetailed(res, client=self.__client)
+
+    async def show_users(
+        self,
+        limit: int = 10,
+        offset: int = 0,
+        sort: str | None = None,
+        state: str = 'all',
+        origin: str = 'combined',
+        username: str | None = None,
+        hostname: str | None = None,
+    ) -> list[UserDetailed]:
+        body = {
+            'limit': limit,
+            'offset': offset,
+            'sort': sort,
+            'state': state,
+            'origin': origin,
+            'username': username,
+            'hostname': hostname,
+        }
+        res: list[IUserDetailed] = await self.__session.request(
+            Route('POST', '/api/admin/show-users'), auth=True, json=body
+        )
+        return [UserDetailed(i, client=self.__client) for i in res]
