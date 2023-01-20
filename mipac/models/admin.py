@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING
 
 from mipac.models.user import UserDetailed
 from mipac.types.admin import (
+    IIndexStat,
     IModerationLog,
     IServerInfo,
     IServerInfoCpu,
@@ -16,6 +17,31 @@ from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
+
+
+class IndexStat:
+    def __init__(self, index_stat: IIndexStat) -> None:
+        self.__index_stat: IIndexStat = index_stat
+
+    @property
+    def schemaname(self) -> str:
+        return self.__index_stat['schemaname']
+
+    @property
+    def tablename(self) -> str:
+        return self.__index_stat['tablename']
+
+    @property
+    def indexname(self) -> str:
+        return self.__index_stat['indexname']
+
+    @property
+    def tablespace(self) -> str | None:
+        return self.__index_stat['tablespace']
+
+    @property
+    def indexdef(self) -> str:
+        return self.__index_stat['indexdef']
 
 
 class ModerationLog:
