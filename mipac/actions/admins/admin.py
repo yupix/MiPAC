@@ -7,9 +7,11 @@ from mipac.errors.base import NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.admin import IndexStat, ModerationLog, ServerInfo, UserIP
 from mipac.models.meta import AdminMeta
+from mipac.models.user import UserDetailed
 from mipac.types.admin import IIndexStat, IModerationLog, IServerInfo, ITableStats, IUserIP
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
 from mipac.config import config
+from mipac.types.user import IUserDetailed
 from mipac.util import cache, convert_dict_keys_to_camel
 
 if TYPE_CHECKING:
@@ -220,3 +222,9 @@ class AdminActions(AbstractAction):
             lower=True,
         )
         return [UserIP(i) for i in res]
+
+    async def show_user(self, user_id: str) -> UserDetailed:
+        res: IUserDetailed = await self.__session.request(
+            Route('POST', '/api/admin/show-user'), auth=True, json={'userId': user_id}
+        )
+        return UserDetailed(res, client=self.__client)
