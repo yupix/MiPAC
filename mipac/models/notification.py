@@ -15,6 +15,7 @@ if TYPE_CHECKING:
         INoteNf,
         IPollEndNf,
         IReactionNf,
+        IAchievementNf,
     )
 
 
@@ -141,3 +142,16 @@ class NotificationReaction(Notification):
     @property
     def reaction(self) -> str:
         return self.__notification['reaction']
+
+
+class NotificationAchievement(Notification):
+    def __init__(
+        self, notification: IAchievementNf, *, client: ClientManager,
+    ) -> None:
+        super().__init__(notification, client=client)
+        self.__notification: IAchievementNf = notification
+        self.__client: ClientManager = client
+
+    @property
+    def achievement(self) -> str:
+        return self.__notification['achievement']

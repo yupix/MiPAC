@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- none
-
-
+- Achievements
+  - added `IAchievementNf` class.
+  - added `NotificationAchievement` class.
+  - added `Achievement` class.
+  - added `get_achievements` method at `UserActions` class.
+  - added `achievements` property at `UserDetailed` class.
 
 ## [0.4.0] 2023-01-18
 
