@@ -39,6 +39,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `IndexStat`
     - `IUserIP`
     - `UserIP`
+    - `FederationActions`
+    - `FederationManager`
+    - `IFederationInstanceStat`
+    - `IFederationFollowCommon`
+    - `IFederationFollower`
+    - `IFederationFollowing`
 - Achievements
     - added `IAchievementNf` class.
     - added `NotificationAchievement` class.
