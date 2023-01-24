@@ -64,11 +64,7 @@ class ChatMessage:
 
     @property
     def file(self) -> File | None:
-        return (
-            File(self.__chat['file'], client=self.__client)
-            if self.__chat['file']
-            else None
-        )
+        return File(self.__chat['file'], client=self.__client) if self.__chat['file'] else None
 
     @property
     def text(self) -> str | None:
@@ -123,6 +119,4 @@ class ChatMessage:
 
     @property
     def api(self) -> BaseChatAction:
-        return self.__client.chat.custom_base_chat_action(
-            user_id=self.user.id, message_id=self.id
-        )
+        return self.__client.chat.custom_base_chat_action(user_id=self.user.id, message_id=self.id)

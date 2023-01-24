@@ -10,7 +10,7 @@ import re
 import uuid
 import warnings
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any, Mapping, Optional
 from urllib.parse import urlencode
 
 import aiohttp
@@ -35,6 +35,8 @@ __all__ = (
     'bool_to_string',
     '_from_json',
     'str_to_datetime',
+    'convert_dict_keys_to_camel',
+    'snake_to_camel',
 )
 
 
@@ -47,9 +49,27 @@ DEFAULT_CACHE: dict[str, list[str]] = {}
 DEFAULT_CACHE_VALUE: dict[str, Any] = {}
 
 
-def str_to_datetime(
-    data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ'
-) -> datetime:
+def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
+    components: list[str] = snake_str.split('_')
+    for i in range(len(components)):
+        if components[i] in replace_list:
+            components[i] = replace_list[components[i]]
+    return components[0] + ''.join(x.title() for x in components[1:])
+
+
+def convert_dict_keys_to_camel(
+    data: Mapping[Any, Any], replace_list: dict[str, str] | None = None
+) -> Mapping[Any, Any]:
+    if replace_list is None:
+        replace_list = {}
+    new_dict = {}
+    for key, value in data.items():
+        new_key = snake_to_camel(key, replace_list)
+        new_dict[new_key] = value
+    return new_dict
+
+
+def str_to_datetime(data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ') -> datetime:
     """
     Parameters
     ----------
@@ -146,19 +166,13 @@ class AuthClient:
             認証に使用するURL
         """
         field = remove_dict_empty(
-            {
-                'name': self.__name,
-                'description': self.__description,
-                'icon': self.__icon,
-            }
+            {'name': self.__name, 'description': self.__description, 'icon': self.__icon}
         )
         if self.__use_miauth:
             field['permissions'] = self.__permissions
             query = urlencode(field)
             self.__session_token = uuid.uuid4()
-            return (
-                f'{self.__instance_uri}/miauth/{self.__session_token}?{query}'
-            )
+            return f'{self.__instance_uri}/miauth/{self.__session_token}?{query}'
         else:
             field['permission'] = self.__permissions
             async with self.__client_session.post(
@@ -187,10 +201,7 @@ class AuthClient:
         while True:
             async with self.__client_session.post(
                 f'{self.__instance_uri}/api/auth/session/userkey',
-                json={
-                    'appSecret': self.__secret,
-                    'token': self.__session_token,
-                },
+                json={'appSecret': self.__secret, 'token': self.__session_token},
             ) as res:
                 data = await res.json()
                 if data.get('error', {}).get('code') != 'PENDING_SESSION':
@@ -214,21 +225,6 @@ class AuthClient:
         return data['token'] if self.__use_miauth else data['accessToken']
 
 
-def dynamic_args(decorator):
-    def wrapper(*args, **kwargs):
-        if len(args) != 0 and callable(args[0]):
-            func = args[0]
-            return functools.wraps(func)(decorator(func))
-        else:
-
-            def _wrapper(func):
-                return functools.wraps(func)(decorator(func, *args, **kwargs))
-
-            return _wrapper
-
-    return wrapper
-
-
 def set_cache(group: str, key: str, value: Any):
     if len(DEFAULT_CACHE.get(group, [])) > 50:
         del DEFAULT_CACHE[group][-1]
@@ -240,17 +236,19 @@ def set_cache(group: str, key: str, value: Any):
     DEFAULT_CACHE_VALUE[key] = value
 
 
-@dynamic_args
-def cache(func, group: str = 'default', override: bool = False):
-    async def decorator(self, *args, **kwargs):
-        ordered_kwargs = sorted(kwargs.items())
-        key = '.{0}' + str(args) + str(ordered_kwargs)
-        hit_item = DEFAULT_CACHE_VALUE.get(key)
-        if hit_item and override is False:
-            return hit_item
-        res = await func(self, *args, **kwargs)
-        set_cache(group, key, res)
-        return res
+def cache(group: str = 'default', override: bool = False):
+    def decorator(func):
+        async def wrapper(self, *args, **kwargs):
+            ordered_kwargs = sorted(kwargs.items())
+            key = '.{0}' + str(args) + str(ordered_kwargs)
+            hit_item = DEFAULT_CACHE_VALUE.get(key)
+            if hit_item and override is False and kwargs.get('cache_override') is None:
+                return hit_item
+            res = await func(self, *args, **kwargs)
+            set_cache(group, key, res)
+            return res
+
+        return wrapper
 
     return decorator
 
@@ -258,13 +256,7 @@ def cache(func, group: str = 'default', override: bool = False):
 def get_cache_key(func):
     async def decorator(self, *args, **kwargs):
         ordered_kwargs = sorted(kwargs.items())
-        key = (
-            (func.__module__ or '')
-            + '.{0}'
-            + f'{self}'
-            + str(args)
-            + str(ordered_kwargs)
-        )
+        key = (func.__module__ or '') + '.{0}' + f'{self}' + str(args) + str(ordered_kwargs)
         return await func(self, *args, **kwargs, cache_key=key)
 
     return decorator
@@ -273,11 +265,7 @@ def get_cache_key(func):
 def key_builder(func, cls, *args, **kwargs):
     ordered_kwargs = sorted(kwargs.items())
     key = (
-        (func.__module__ or '')
-        + f'.{func.__name__}'
-        + f'{cls}'
-        + str(args)
-        + str(ordered_kwargs)
+        (func.__module__ or '') + f'.{func.__name__}' + f'{cls}' + str(args) + str(ordered_kwargs)
     )
     return key
 

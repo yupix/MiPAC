@@ -1,13 +1,9 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+
 from mipac.models.lite.meta import LiteMeta, MetaCommon
-from mipac.types.meta import (
-    IAdminMeta,
-    IFeatures,
-    IMeta,
-    IPolicies,
-)
+from mipac.types.meta import IAdminMeta, IFeatures, IMeta, IPolicies
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -162,11 +158,7 @@ class Meta(LiteMeta):
 
     @property
     def policies(self) -> Policies | None:
-        return (
-            Policies(self.__meta['policies'])
-            if 'policies' in self.__meta
-            else None
-        )
+        return Policies(self.__meta['policies']) if 'policies' in self.__meta else None
 
     @property
     def require_setup(self) -> bool:
@@ -174,9 +166,7 @@ class Meta(LiteMeta):
 
 
 class AdminMeta(MetaCommon):
-    def __init__(
-        self, admin_meta: IAdminMeta, *, client: ClientManager
-    ) -> None:
+    def __init__(self, admin_meta: IAdminMeta, *, client: ClientManager) -> None:
         super().__init__(admin_meta, client=client)
         self.__admin_meta = admin_meta
 
@@ -328,9 +318,7 @@ class AdminMeta(MetaCommon):
 
     @property
     def enable_sensitive_media_detection_for_videos(self) -> bool:
-        return self.__admin_meta.get(
-            'enable_sensitive_media_detection_for_videos', False
-        )
+        return self.__admin_meta.get('enable_sensitive_media_detection_for_videos', False)
 
     @property
     def proxy_account_id(self) -> str | None:

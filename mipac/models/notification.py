@@ -10,19 +10,18 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
     from mipac.manager.follow import FollowManager, FollowRequestManager
     from mipac.types.notification import (
-        INotification,
-        IUserNf,
+        IAchievementNf,
         INoteNf,
+        INotification,
         IPollEndNf,
         IReactionNf,
+        IUserNf,
         IAchievementNf,
     )
 
 
 class Notification:
-    def __init__(
-        self, notification: INotification, *, client: ClientManager,
-    ) -> None:
+    def __init__(self, notification: INotification, *, client: ClientManager,) -> None:
         self.__notification: INotification = notification
         self.__client: ClientManager = client
 
@@ -36,9 +35,7 @@ class Notification:
 
     @property
     def created_at(self) -> datetime:
-        return datetime.strptime(
-            self.__notification['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
-        )
+        return datetime.strptime(self.__notification['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ')
 
     @property
     def is_read(self) -> bool:
@@ -46,9 +43,7 @@ class Notification:
 
 
 class NotificationFollow(Notification):
-    def __init__(
-        self, notification: IUserNf, *, client: ClientManager,
-    ) -> None:
+    def __init__(self, notification: IUserNf, *, client: ClientManager,) -> None:
         super().__init__(notification, client=client)
         self.__notification: IUserNf = notification
         self.__client: ClientManager = client
@@ -67,9 +62,7 @@ class NotificationFollow(Notification):
 
 
 class NotificationFollowRequest(Notification):
-    def __init__(
-        self, notification: IUserNf, *, client: ClientManager,
-    ) -> None:
+    def __init__(self, notification: IUserNf, *, client: ClientManager,) -> None:
         super().__init__(notification, client=client)
         self.__notification: IUserNf = notification
         self.__client: ClientManager = client
@@ -84,15 +77,11 @@ class NotificationFollowRequest(Notification):
 
     @property
     def api(self) -> FollowRequestManager:
-        return self.__client._create_user_instance(
-            user=self.user
-        ).follow.request
+        return self.__client._create_user_instance(user=self.user).follow.request
 
 
 class NotificationNote(Notification):
-    def __init__(
-        self, notification: INoteNf, *, client: ClientManager,
-    ) -> None:
+    def __init__(self, notification: INoteNf, *, client: ClientManager,) -> None:
         super().__init__(notification, client=client)
         self.__notification: INoteNf = notification
         self.__client: ClientManager = client
@@ -111,9 +100,7 @@ class NotificationNote(Notification):
 
 
 class NotificationPollEnd(Notification):
-    def __init__(
-        self, notification: IPollEndNf, *, client: ClientManager,
-    ) -> None:
+    def __init__(self, notification: IPollEndNf, *, client: ClientManager,) -> None:
         super().__init__(notification, client=client)
         self.__notification: IPollEndNf = notification
         self.__client: ClientManager = client
@@ -124,9 +111,7 @@ class NotificationPollEnd(Notification):
 
 
 class NotificationReaction(Notification):
-    def __init__(
-        self, reaction: IReactionNf, *, client: ClientManager
-    ) -> None:
+    def __init__(self, reaction: IReactionNf, *, client: ClientManager) -> None:
         super().__init__(reaction, client=client)
         self.__notification: IReactionNf = reaction
         self.__client: ClientManager = client

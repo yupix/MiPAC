@@ -149,10 +149,7 @@ class UserDetailed(LiteUser):
 
     @property
     def pinned_notes(self) -> list[Note]:
-        return [
-            Note(i, client=self.__client)
-            for i in self.__detail['pinned_notes']
-        ]
+        return [Note(i, client=self.__client) for i in self.__detail['pinned_notes']]
 
     @property
     def banner_blurhash(self) -> str | None:
@@ -179,9 +176,7 @@ class UserDetailed(LiteUser):
         return self.__detail.get('description')
 
     @property
-    def ff_visibility(
-        self,
-    ) -> Literal['public', 'followers', 'private'] | None:
+    def ff_visibility(self,) -> Literal['public', 'followers', 'private'] | None:
         return self.__detail.get('ff_visibility')
 
     @property

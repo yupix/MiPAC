@@ -9,12 +9,57 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- Added `remove_none` argument to request method.
+- Added method to`ClientActions` class the given below.
+    - `get_announcements`
+- Added class the given below.
+    - `AdminUserActions`
+    - `AnnouncementCommon`
+    - `Announcement`
+    - `AnnouncementSystem`
+    - `IMetaAnnouncement`
+    - `IAnnouncementSystem`
+    - `AdminAnnouncementClientActions`
+    - `AdminAnnouncementActions`
+    - `AdminAnnouncementManager`
+    - `IModerationLog`
+    - `ModerationLog`
+    - `ServerInfoCpu`
+    - `ServerInfoMem`
+    - `ServerInfoFs`
+    - `ServerInfoNet`
+    - `ServerInfo`
+    - `IServerInfoCpu`
+    - `IServerInfoMem`
+    - `IServerInfoFs`
+    - `IServerInfoNet`
+    - `IServerInfo`
+    - `ITableStats`
+    - `IIndexStat`
+    - `IndexStat`
+    - `IUserIP`
+    - `UserIP`
 - Achievements
-  - added `IAchievementNf` class.
-  - added `NotificationAchievement` class.
-  - added `Achievement` class.
-  - added `get_achievements` method at `UserActions` class.
-  - added `achievements` property at `UserDetailed` class.
+    - added `IAchievementNf` class.
+    - added `NotificationAchievement` class.
+    - added `Achievement` class.
+    - added `get_achievements` method at `UserActions` class.
+    - added `achievements` property at `UserDetailed` class.
+
+### Changed
+
+- Maximum number of characters has been changed from 79 to 99
+    - The main reason for this change is to solve the problem that the MiPAC code is inevitably longer because of the method chain. We have kept it to the maximum of [pep8](https://peps.python.org/pep-0008/#maximum-line-length).
+- Changed a method that was returning an `AsyncIterator` to return an `AsyncGenerator`.
+    - Generator is more correct than Iterator because it is the correct usage.
+- Changed class name the given below.
+    - `IAnnouncement` -> `IMetaAnnouncement`
+- `cache` decorator no longer uses `dynamic_args` decorator
+
+### Removed
+
+- Delete `dynamic_args` decorator.
+- Delete debug log.
 
 ## [0.4.0] 2023-01-18
 

@@ -20,21 +20,13 @@ class ChartActions(AbstractAction):
     ) -> ActiveUsersChart:
         data = {'span': span, 'limit': limit, 'offset': offset}
         data = await self.__session.request(
-            Route('POST', '/api/charts/active-users'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/charts/active-users'), json=data, auth=True, lower=True,
         )
         return ActiveUsersChart(data)
 
-    async def get_drive(
-        self, span: str = 'day', limit: int = 30, offset: int = 0
-    ) -> DriveChart:
+    async def get_drive(self, span: str = 'day', limit: int = 30, offset: int = 0) -> DriveChart:
         data = {'span': span, 'limit': limit, 'offset': offset}
         data = await self.__session.request(
-            Route('POST', '/api/charts/drive'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/charts/drive'), json=data, auth=True, lower=True,
         )
         return DriveChart(data)

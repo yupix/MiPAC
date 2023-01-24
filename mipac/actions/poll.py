@@ -13,13 +13,7 @@ if TYPE_CHECKING:
 
 
 class PollActions(AbstractAction):
-    def __init__(
-        self,
-        note_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -36,9 +30,7 @@ class PollActions(AbstractAction):
         )
         return res
 
-    async def recommendation(
-        self, limit: int = 100, offset: int = 0, all: bool = True
-    ):
+    async def recommendation(self, limit: int = 100, offset: int = 0, all: bool = True):
 
         if limit > 100:
             raise ParameterError('limit must be less than 100')
@@ -48,10 +40,7 @@ class PollActions(AbstractAction):
 
         async def request(body) -> list[Note]:
             res: list[INote] = await self.__session.request(
-                Route('POST', '/api/notes/polls/recommendation'),
-                lower=True,
-                auth=True,
-                json=body,
+                Route('POST', '/api/notes/polls/recommendation'), lower=True, auth=True, json=body,
             )
             return [Note(note, client=self.__client) for note in res]
 

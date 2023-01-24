@@ -11,21 +11,11 @@ if TYPE_CHECKING:
 
 
 class PollManager(AbstractManager):
-    def __init__(
-        self,
-        note_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
 
     @property
     def action(self) -> PollActions:
-        return PollActions(
-            note_id=self.__note_id,
-            session=self.__session,
-            client=self.__client,
-        )
+        return PollActions(note_id=self.__note_id, session=self.__session, client=self.__client,)

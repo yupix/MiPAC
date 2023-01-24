@@ -13,13 +13,7 @@ __all__ = ('AdminModeratorManager',)
 
 
 class AdminModeratorManager(AbstractManager):
-    def __init__(
-        self,
-        user_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__user_id: str | None = user_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -34,6 +28,4 @@ class AdminModeratorManager(AbstractManager):
             Moderatorに対するアクションを行うクラス
         """
 
-        return AdminModeratorActions(
-            session=self.__session, client=self.__client
-        )
+        return AdminModeratorActions(session=self.__session, client=self.__client)
