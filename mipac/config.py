@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, TypedDict
 
 
 @dataclass
@@ -14,15 +14,25 @@ class CacheConfig:
         self.ttl: int = options.ttl
 
 
+IMisskeyDistribution = Literal[
+    'ayuskey',
+    'm544',
+    'areionskey',
+    'official'
+]
+
+
 class Config:
     def __init__(
         self,
         host: str = '',
         is_ssl: bool = True,
+        distro: IMisskeyDistribution = 'official',
         is_ayuskey: bool = False,
         use_version: Literal[13, 12, 11] = 12,
         cache: CacheConfigData | None = None,
     ) -> None:
+        self.distro: IMisskeyDistribution = distro
         self.is_ssl: bool = is_ssl
         self.host: str = host
         self.is_ayuskey: bool = is_ayuskey
