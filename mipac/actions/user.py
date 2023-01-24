@@ -27,9 +27,7 @@ class UserActions:
         ログインしているユーザーの情報を取得します
         """
 
-        res = await self.__session.request(
-            Route('POST', '/api/i'), auth=True, lower=True,
-        )
+        res = await self.__session.request(Route('POST', '/api/i'), auth=True, lower=True,)
         return UserDetailed(res, client=self.__client)  # TODO: 自分用のクラスに変更する
 
     def get_profile_link(
@@ -49,7 +47,11 @@ class UserActions:
 
     @cache(group='get_user')
     async def get(
-        self, user_id: str | None = None, username: str | None = None, host: str | None = None,
+        self,
+        user_id: str | None = None,
+        username: str | None = None,
+        host: str | None = None,
+        **kwargs,
     ) -> UserDetailed:
         """
         ユーザーのプロフィールを取得します。一度のみサーバーにアクセスしキャッシュをその後は使います。
@@ -76,7 +78,6 @@ class UserActions:
         )
         return UserDetailed(data, client=self.__client)
 
-    @cache
     async def fetch(
         self, user_id: str | None = None, username: str | None = None, host: str | None = None,
     ) -> UserDetailed:
@@ -97,14 +98,7 @@ class UserActions:
         UserDetailed
             ユーザー情報
         """
-        if not check_multi_arg(user_id, username):
-            raise ParameterError('user_id, usernameどちらかは必須です')
-
-        field = remove_dict_empty({'userId': user_id, 'username': username, 'host': host})
-        data = await self.__session.request(
-            Route('POST', '/api/users/show'), json=field, auth=True, lower=True
-        )
-        return UserDetailed(data, client=self.__client)
+        return await self.get(user_id=user_id, username=username, host=host, cache_override=True)
 
     async def get_notes(
         self,
@@ -277,10 +271,7 @@ class UserActions:
             for user in res
         ]
 
-    async def get_achievements(
-        self,
-        user_id: str | None = None
-    ) -> list[Achievement]:
+    async def get_achievements(self, user_id: str | None = None) -> list[Achievement]:
         """ Get achievements of user. """
 
         user_id = user_id or self.__user and self.__user.id
@@ -292,7 +283,6 @@ class UserActions:
             'userId': user_id,
         }
         res = await self.__session.request(
-            Route('POST', '/api/users/achievements'),
-            json=data, auth=True, lower=True,
+            Route('POST', '/api/users/achievements'), json=data, auth=True, lower=True,
         )
         return [Achievement(i) for i in res]
