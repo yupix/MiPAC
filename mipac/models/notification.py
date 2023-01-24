@@ -16,7 +16,6 @@ if TYPE_CHECKING:
         IPollEndNf,
         IReactionNf,
         IUserNf,
-        IAchievementNf,
     )
 
 
@@ -130,9 +129,7 @@ class NotificationReaction(Notification):
 
 
 class NotificationAchievement(Notification):
-    def __init__(
-        self, notification: IAchievementNf, *, client: ClientManager,
-    ) -> None:
+    def __init__(self, notification: IAchievementNf, *, client: ClientManager,) -> None:
         super().__init__(notification, client=client)
         self.__notification: IAchievementNf = notification
         self.__client: ClientManager = client

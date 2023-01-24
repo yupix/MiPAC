@@ -5,8 +5,7 @@ from typing import TYPE_CHECKING, Literal
 from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 from mipac.types.page import IPage
-from mipac.types.user import IFollowRequest, IUserDetailed, \
-    IUserDetailedField, IAchievement
+from mipac.types.user import IAchievement, IFollowRequest, IUserDetailed, IUserDetailedField
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager

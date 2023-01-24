@@ -363,8 +363,7 @@ def upper_to_lower(
             field[default_key] = upper_to_lower(field[default_key])
         elif isinstance(field[default_key], list) and nest:
             field[default_key] = [
-                upper_to_lower(i) if isinstance(i, dict)
-                else i for i in field[default_key]
+                upper_to_lower(i) if isinstance(i, dict) else i for i in field[default_key]
             ]
     return field
 

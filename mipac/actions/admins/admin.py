@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from mipac.abstract.action import AbstractAction
 
+from mipac.abstract.action import AbstractAction
+from mipac.config import config
 from mipac.errors.base import NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.admin import IndexStat, ModerationLog, ServerInfo, UserIP
@@ -10,7 +11,6 @@ from mipac.models.meta import AdminMeta
 from mipac.models.user import UserDetailed
 from mipac.types.admin import IIndexStat, IModerationLog, IServerInfo, ITableStats, IUserIP
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
-from mipac.config import config
 from mipac.types.user import IUserDetailed
 from mipac.util import cache, convert_dict_keys_to_camel
 

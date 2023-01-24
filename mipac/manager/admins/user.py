@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from mipac.actions.admins.user import AdminUserActions
 
+from mipac.actions.admins.user import AdminUserActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:

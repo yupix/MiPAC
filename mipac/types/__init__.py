@@ -1,3 +1,4 @@
+from .admin import *
 from .ads import *
 from .announcement import *
 from .channel import *
@@ -15,4 +16,3 @@ from .page import *
 from .poll import *
 from .reaction import *
 from .user import *
-from .admin import *

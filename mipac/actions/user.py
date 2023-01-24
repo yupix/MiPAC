@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional
-from mipac.config import config
 
+from mipac.config import config
 from mipac.errors.base import NotExistRequiredData, NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.user import LiteUser, UserDetailed, Achievement
+from mipac.models.user import Achievement, LiteUser, UserDetailed
 from mipac.util import cache, check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
@@ -275,7 +275,7 @@ class UserActions:
     async def get_achievements(self, user_id: str | None = None) -> list[Achievement]:
         """ Get achievements of user. """
 
-        if (config.use_version < 13):
+        if config.use_version < 13:
             raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
 
         user_id = user_id or self.__user and self.__user.id

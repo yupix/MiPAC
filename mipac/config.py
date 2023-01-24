@@ -14,12 +14,7 @@ class CacheConfig:
         self.ttl: int = options.ttl
 
 
-IMisskeyDistribution = Literal[
-    'ayuskey',
-    'm544',
-    'areionskey',
-    'official'
-]
+IMisskeyDistribution = Literal['ayuskey', 'm544', 'areionskey', 'official']
 
 
 class Config:
