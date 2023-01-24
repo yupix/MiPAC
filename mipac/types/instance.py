@@ -3,6 +3,13 @@ from __future__ import annotations
 from typing import TypedDict
 
 
+class IFederationInstanceStat(TypedDict):
+    top_sub_instances: list[IFederationInstance]
+    other_followers_count: int
+    top_pub_instances: list[IFederationInstance]
+    other_following_count: int
+
+
 class IFederationInstanceRequired(TypedDict):
     id: str
     host: str
