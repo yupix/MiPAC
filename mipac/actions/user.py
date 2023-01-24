@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional
 
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.user import LiteUser, UserDetailed
+from mipac.models.user import LiteUser, UserDetailed, Achievement
 from mipac.util import cache, check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
@@ -27,7 +27,9 @@ class UserActions:
         ログインしているユーザーの情報を取得します
         """
 
-        res = await self.__session.request(Route('POST', '/api/i'), auth=True)
+        res = await self.__session.request(
+            Route('POST', '/api/i'), auth=True, lower=True,
+        )
         return UserDetailed(res, client=self.__client)  # TODO: 自分用のクラスに変更する
 
     def get_profile_link(
@@ -274,3 +276,23 @@ class UserActions:
             else LiteUser(user, client=self.__client)
             for user in res
         ]
+
+    async def get_achievements(
+        self,
+        user_id: str | None = None
+    ) -> list[Achievement]:
+        """ Get achievements of user. """
+
+        user_id = user_id or self.__user and self.__user.id
+
+        if not user_id:
+            raise ParameterError('user_id is required')
+
+        data = {
+            'userId': user_id,
+        }
+        res = await self.__session.request(
+            Route('POST', '/api/users/achievements'),
+            json=data, auth=True, lower=True,
+        )
+        return [Achievement(i) for i in res]

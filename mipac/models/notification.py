@@ -9,7 +9,15 @@ from mipac.models.note import Note
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
     from mipac.manager.follow import FollowManager, FollowRequestManager
-    from mipac.types.notification import INoteNf, INotification, IPollEndNf, IReactionNf, IUserNf
+    from mipac.types.notification import (
+        IAchievementNf,
+        INoteNf,
+        INotification,
+        IPollEndNf,
+        IReactionNf,
+        IUserNf,
+        IAchievementNf,
+    )
 
 
 class Notification:
@@ -119,3 +127,16 @@ class NotificationReaction(Notification):
     @property
     def reaction(self) -> str:
         return self.__notification['reaction']
+
+
+class NotificationAchievement(Notification):
+    def __init__(
+        self, notification: IAchievementNf, *, client: ClientManager,
+    ) -> None:
+        super().__init__(notification, client=client)
+        self.__notification: IAchievementNf = notification
+        self.__client: ClientManager = client
+
+    @property
+    def achievement(self) -> str:
+        return self.__notification['achievement']

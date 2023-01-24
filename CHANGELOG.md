@@ -39,6 +39,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `IndexStat`
     - `IUserIP`
     - `UserIP`
+- Achievements
+    - added `IAchievementNf` class.
+    - added `NotificationAchievement` class.
+    - added `Achievement` class.
+    - added `get_achievements` method at `UserActions` class.
+    - added `achievements` property at `UserDetailed` class.
+
 ### Changed
 
 - Maximum number of characters has been changed from 79 to 99

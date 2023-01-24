@@ -13,6 +13,7 @@ __all__ = (
     'ILiteUser',
     'IUserDetailed',
     'IUserDetailedField',
+    'IAchievement',
 )
 
 
@@ -23,6 +24,11 @@ class ISignin(TypedDict):
     ip: str
     headers: dict[str, str]
     success: bool
+
+
+class IAchievement(TypedDict):
+    name: str
+    unlocked_at: int
 
 
 class IUserRequired(TypedDict):
@@ -73,6 +79,7 @@ class IUserDetailedRequired(ILiteUser):
 
 
 class IUserDetailed(IUserDetailedRequired, total=False):
+    achievements: List[IAchievement]
     banner_blurhash: str
     banner_color: str
     banner_url: str
@@ -83,6 +90,7 @@ class IUserDetailed(IUserDetailedRequired, total=False):
     lang: str
     last_fetched_at: str
     location: str
+    logged_in_days: int
     pinned_page: IPage
     pinned_page_id: str
     updated_at: str

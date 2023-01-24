@@ -5,12 +5,13 @@ from typing import TYPE_CHECKING, Literal
 from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 from mipac.types.page import IPage
-from mipac.types.user import IFollowRequest, IUserDetailed, IUserDetailedField
+from mipac.types.user import IFollowRequest, IUserDetailed, \
+    IUserDetailedField, IAchievement
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
-__all__ = ('UserDetailed', 'FollowRequest', 'LiteUser')
+__all__ = ('UserDetailed', 'FollowRequest', 'LiteUser', 'Achievement')
 
 
 class FollowRequest:
@@ -31,6 +32,19 @@ class FollowRequest:
         return LiteUser(self.__request['followee'], client=self.__client)
 
 
+class Achievement:
+    def __init__(self, detail: IAchievement):
+        self.__detail: IAchievement = detail
+
+    @property
+    def name(self) -> str:
+        return self.__detail['name']
+
+    @property
+    def unlocked_at(self) -> int:
+        return self.__detail['unlocked_at']
+
+
 class UserDetailed(LiteUser):
     __slots__ = (
         '__detail',
@@ -40,6 +54,10 @@ class UserDetailed(LiteUser):
     def __init__(self, user: IUserDetailed, *, client: ClientManager):
         super().__init__(user=user, client=client)
         self.__detail = user
+
+    @property
+    def achievements(self) -> list[Achievement]:
+        return [Achievement(i) for i in self.__detail.get('achievements', [])]
 
     @property
     def fields(self) -> list[IUserDetailedField]:
@@ -172,6 +190,10 @@ class UserDetailed(LiteUser):
     @property
     def location(self) -> str | None:
         return self.__detail.get('location')
+
+    @property
+    def logged_in_days(self) -> int | None:
+        return self.__detail.get('logged_in_days')
 
     @property
     def pinned_page(self) -> IPage | None:

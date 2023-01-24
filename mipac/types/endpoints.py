@@ -274,6 +274,7 @@ ENDPOINTS = Literal[
     '/api/test',
     '/api/username/available',
     '/api/users',
+    '/api/users/achievements',
     '/api/users/clips',
     '/api/users/followers',
     '/api/users/following',
