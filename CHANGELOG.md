@@ -56,6 +56,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `IAnnouncement` -> `IMetaAnnouncement`
 - `cache` decorator no longer uses `dynamic_args` decorator
 
+### Fixed
+
+- The content field no longer supports empty string.
+
 ### Removed
 
 - Delete `dynamic_args` decorator.
