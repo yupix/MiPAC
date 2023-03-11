@@ -6,6 +6,7 @@ from mipac.abstract.action import AbstractAction
 from mipac.errors.base import NotSupportVersion, NotSupportVersionText, ParameterError
 from mipac.http import Route
 from mipac.models.roles import Role
+from mipac.types.meta import IPolicies
 from mipac.types.roles import IRole
 
 if TYPE_CHECKING:
@@ -201,3 +202,35 @@ class AdminRoleActions(AdminRoleModelActions):
             )
             return [Role(i, client=self._client) for i in res]
         raise NotSupportVersion(NotSupportVersionText)
+
+    async def update_default_policies(self, policies: IPolicies):
+        if self._client._config.use_version >= 13:
+            body = {
+                'policies': {
+                    'gtlAvailable': policies.get('gtl_available'),
+                    'ltlAvailable': policies.get('ltl_available'),
+                    'canPublicNote': policies.get('can_public_note'),
+                    'canInvite': policies.get('can_invite'),
+                    'canManageCustomEmojis': policies.get('can_manage_custom_emojis'),
+                    'canHideAds': policies.get('can_hide_ads'),
+                    'driveCapacityMb': policies.get('drive_capacity_mb'),
+                    'pinLimit': policies.get('pin_limit'),
+                    'antennaLimit': policies.get('antenna_limit'),
+                    'wordMuteLimit': policies.get('word_mute_limit'),
+                    'webhookLimit': policies.get('webhook_limit'),
+                    'clipLimit': policies.get('clip_limit'),
+                    'noteEachClipsLimit': policies.get('note_each_clips_limit'),
+                    'userListLimit': policies.get('user_list_limit'),
+                    'userEachUserListsLimit': policies.get('user_each_user_lists_limit'),
+                    'rateLimitFactor': policies.get('rate_limit_factor'),
+                }
+            }
+            res = await self._session.request(
+                Route('POST', '/api/admin/roles/update-default-policies'),
+                auth=True,
+                lower=True,
+                json=body,
+            )
+            return res
+        raise NotSupportVersion(NotSupportVersionText)
+
