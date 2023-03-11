@@ -10,6 +10,7 @@ from mipac import __version__
 from mipac.config import config
 from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
+from mipac.types.meta import IMeta
 from mipac.types.user import IUserDetailed
 from mipac.util import _from_json, remove_dict_empty, upper_to_lower
 
@@ -117,4 +118,9 @@ class HTTPClient:
         )
         self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
         data: IUserDetailed = await self.request(Route('POST', '/api/i'), auth=True)
+        if config.use_version_autodetect:
+            meta: IMeta = await self.request(Route('POST', '/api/meta'), auth=True)
+            use_version = int(meta['version'].split('.')[0])
+            if isinstance(use_version, int) and use_version in (13, 12, 11):
+                config.use_version = use_version
         return data
