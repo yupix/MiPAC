@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.federation import FederationActions
