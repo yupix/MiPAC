@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Misskey公式のバージョンニングを元に判断している為、独自のバージョニングを行っているフォーク等では正常に動作しない可能性があります。その際は `client.config.use_version_autodetect = False` とすることで無効にすることが可能です。また、手動でバージョンを設定する場合もoffにしてください。
 一部のAPIはバージョンとフォークの種類で判断しています。そのため公式のバージョン的には使用できないが、フォークの機能として存在するという場合は報告をくださればサポートします。
 
+- Added `role` property to `AdminManager`.
 - Added `remove_none` argument to request method.
 - Added method to`ClientActions` class the given below.
     - `get_announcements`
@@ -54,6 +55,15 @@ Misskey公式のバージョンニングを元に判断している為、独自�
     - `IFederationFollowCommon`
     - `IFederationFollower`
     - `IFederationFollowing`
+- Roles
+    - `IRolePolicieValue`
+    - `IRolePolicies`
+    - `IRole`
+    - `RolePolicyValue`
+    - `RolePolicies`
+    - `Role`
+    - `AdminRoleActions`
+    - `AdminRolesManager`
 - Achievements
     - added `IAchievementNf` class.
     - added `NotificationAchievement` class.
