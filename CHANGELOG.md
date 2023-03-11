@@ -45,6 +45,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - added `Achievement` class.
     - added `get_achievements` method at `UserActions` class.
     - added `achievements` property at `UserDetailed` class.
+- Note
+    - content field auto convert empty string to None
 
 ### Changed
 
@@ -55,10 +57,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Changed class name the given below.
     - `IAnnouncement` -> `IMetaAnnouncement`
 - `cache` decorator no longer uses `dynamic_args` decorator
-
-### Fixed
-
-- The content field no longer supports empty string.
 
 ### Removed
 
