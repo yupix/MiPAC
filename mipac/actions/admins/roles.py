@@ -197,7 +197,7 @@ class AdminRoleActions(AdminRoleModelActions):
     async def get_list(self) -> list[Role]:
         if self._client._config.use_version >= 13:
             res: list[IRole] = await self._session.request(
-                Route('POST', '/api/roles/list'), auth=True, lower=True
+                Route('POST', '/api/admin/roles/list'), auth=True, lower=True
             )
             return [Role(i, client=self._client) for i in res]
         raise NotSupportVersion(NotSupportVersionText)
