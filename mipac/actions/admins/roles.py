@@ -19,6 +19,44 @@ class AdminRoleActions(AbstractAction):
         self.__client: ClientManager = client
         self.__role_id: str | None = role_id
 
+    async def create(
+        self,
+        name: str,
+        description: str,
+        color: str | None = None,
+        iconUrl: str| None = None,
+        target: Literal['manual', 'conditional'] = 'manual',
+        cond_formula: dict[Any, Any] | None = None,
+        is_public: bool = False,
+        is_moderator: bool = False,
+        is_administrator: bool = False,
+        as_badge: bool = False,
+        can_edit_members_by_moderator: bool = False,
+        policies: dict[Any, Any] | None = None,
+    ) -> Role:
+        body = {
+            'name': name,
+            'description': description,
+            'color': color,
+            'iconUrl': iconUrl,
+            'target': target,
+            'condFormula': cond_formula or {},
+            'isPublic': is_public,
+            'isModerator': is_moderator,
+            'isAdministrator': is_administrator,
+            'asBadge': as_badge,
+            'canEditMembersByModerator': can_edit_members_by_moderator,
+            'policies': policies or {},
+        }
+        if self.__client._config.use_version >= 13:
+            res: IRole = await self.__session.request(
+                Route('POST', '/api/admin/roles/create'),
+                auth=True, json=body, lower=True, remove_none=False
+            )
+            return Role(res)
+        raise NotSupportVersion(NotSupportVersionText)
+
+
     async def show(self, role_id: str) -> Role:
         if self.__client._config.use_version >= 13:
             res: IRole = await self.__session.request(
