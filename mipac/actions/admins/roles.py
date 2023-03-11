@@ -78,7 +78,9 @@ class AdminRoleModelActions(AbstractAction):
             return res
         raise NotSupportVersion(NotSupportVersionText)
 
-    async def assign(self, role_id: str, user_id: str, expires_at: int | None = None) -> bool:
+    async def assign(
+        self, user_id: str, role_id: str | None = None, expires_at: int | None = None
+    ) -> bool:
         """指定したユーザーに指定したロールを付与します
 
         Parameters
@@ -96,8 +98,6 @@ class AdminRoleModelActions(AbstractAction):
             成功したか否か
         """
         if self._client._config.use_version >= 13:
-
-            role_id = self._role_id or role_id
             if role_id is None:
                 raise ParameterError('role_idは必須です')
             body = {'roleId': role_id, 'userId': user_id, 'expiresAt': expires_at}
@@ -105,6 +105,48 @@ class AdminRoleModelActions(AbstractAction):
                 Route('POST', '/api/admin/roles/assign'), auth=True, json=body
             )
             return res
+        raise NotSupportVersion(NotSupportVersionText)
+
+    async def unassign(self, user_id: str, role_id: str | None = None) -> bool:
+        """指定したユーザーに指定したロールを付与します
+
+        Parameters
+        ----------
+        role_id : str
+            ロールのID
+        user_id : str
+            ロールを付与する対象のユーザーID
+        expires_at : int | None, optional
+            いつまでロールを付与するか, by default None
+
+        Returns
+        -------
+        bool
+            成功したか否か
+        """
+        if self._client._config.use_version >= 13:
+            role_id = self._role_id or role_id
+            if role_id is None:
+                raise ParameterError('role_idは必須です')
+            body = {'roleId': role_id, 'userId': user_id}
+            res: bool = await self._session.request(
+                Route('POST', '/api/admin/roles/unassign'), auth=True, json=body
+            )
+            return res
+        raise NotSupportVersion(NotSupportVersionText)
+
+    async def show(self, role_id: str | None = None) -> Role:
+        if self._client._config.use_version >= 13:
+            role_id = self._role_id or role_id
+            if role_id is None:
+                raise ParameterError('role_idは必須です')
+            res: IRole = await self._session.request(
+                Route('POST', '/api/admin/roles/show'),
+                json={'roleId': role_id},
+                auth=True,
+                lower=True,
+            )
+            return Role(res, client=self._client)
         raise NotSupportVersion(NotSupportVersionText)
 
 
@@ -159,15 +201,3 @@ class AdminRoleActions(AdminRoleModelActions):
             )
             return [Role(i, client=self._client) for i in res]
         raise NotSupportVersion(NotSupportVersionText)
-
-    async def show(self, role_id: str) -> Role:
-        if self._client._config.use_version >= 13:
-            res: IRole = await self._session.request(
-                Route('POST', '/api/admin/roles/show'),
-                json={'roleId': role_id},
-                auth=True,
-                lower=True,
-            )
-            return Role(res, client=self._client)
-        raise NotSupportVersion(NotSupportVersionText)
-
