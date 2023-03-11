@@ -33,6 +33,7 @@ def create_note_body(
     files: list[MiFile | File | str] | None = None,
     poll: MiPoll | None = None,
 ):
+    content = content or None
     body = {
         'visibility': visibility,
         'visibleUserIds': visible_user_ids,
