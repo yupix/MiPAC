@@ -24,7 +24,7 @@ class AdminRoleActions(AbstractAction):
         name: str,
         description: str,
         color: str | None = None,
-        iconUrl: str| None = None,
+        iconUrl: str | None = None,
         target: Literal['manual', 'conditional'] = 'manual',
         cond_formula: dict[Any, Any] | None = None,
         is_public: bool = False,
@@ -51,7 +51,10 @@ class AdminRoleActions(AbstractAction):
         if self.__client._config.use_version >= 13:
             res: IRole = await self.__session.request(
                 Route('POST', '/api/admin/roles/create'),
-                auth=True, json=body, lower=True, remove_none=False
+                auth=True,
+                json=body,
+                lower=True,
+                remove_none=False,
             )
             return Role(res)
         raise NotSupportVersion(NotSupportVersionText)
@@ -60,9 +63,19 @@ class AdminRoleActions(AbstractAction):
         if self.__client._config.use_version >= 13:
             res: bool = await self.__session.request(
                 Route('POST', '/api/admin/roles/delete'),
-                auth=True, json={'roleId': role_id}, lower=True
+                auth=True,
+                json={'roleId': role_id},
+                lower=True,
             )
             return res
+        raise NotSupportVersion(NotSupportVersionText)
+
+    async def get_list(self) -> list[Role]:
+        if self.__client._config.use_version >= 13:
+            res: list[IRole] = await self.__session.request(
+                Route('POST', '/api/roles/list'), auth=True, lower=True
+            )
+            return [Role(i) for i in res]
         raise NotSupportVersion(NotSupportVersionText)
 
     async def show(self, role_id: str) -> Role:
