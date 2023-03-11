@@ -9,6 +9,7 @@ from mipac.manager.ad import AdminAdvertisingManager
 from mipac.manager.admins.announcement import AdminAnnouncementManager
 from mipac.manager.admins.emoji import AdminEmojiManager
 from mipac.manager.admins.moderator import AdminModeratorManager
+from mipac.manager.admins.roles import AdminRolesManager
 from mipac.manager.admins.user import AdminUserManager
 
 if TYPE_CHECKING:
@@ -28,6 +29,7 @@ class AdminManager(AbstractManager):
         self.announcement: AdminAnnouncementManager = AdminAnnouncementManager(
             session=session, client=client
         )
+        self.role: AdminRolesManager = AdminRolesManager(session=session, client=client)
 
     @property
     def action(self) -> AdminActions:
