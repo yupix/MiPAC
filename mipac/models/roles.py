@@ -1,5 +1,12 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
 from mipac.types.roles import IRole, IRolePolicies, IRolePolicieValue
 
+
+if TYPE_CHECKING:
+    from mipac.manager.client import ClientManager
+    from mipac.manager.admins.roles import AdminRolesModelManager
 
 class RolePolicyValue:
     def __init__(self, policiy_value_data: IRolePolicieValue) -> None:
@@ -88,8 +95,9 @@ class RolePolicies:
 
 
 class Role:
-    def __init__(self, role_data: IRole) -> None:
+    def __init__(self, role_data: IRole, *, client: ClientManager) -> None:
         self.__role_data: IRole = role_data
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:
@@ -154,3 +162,7 @@ class Role:
     @property
     def users_count(self) -> int:
         return self.__role_data.get('users_count')
+
+    @property
+    def api(self) -> AdminRolesModelManager:
+        return self.__client.admin.create_roles_model_manager(self.id)
