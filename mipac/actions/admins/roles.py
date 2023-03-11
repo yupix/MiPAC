@@ -56,6 +56,14 @@ class AdminRoleActions(AbstractAction):
             return Role(res)
         raise NotSupportVersion(NotSupportVersionText)
 
+    async def delete(self, role_id: str) -> bool:
+        if self.__client._config.use_version >= 13:
+            res: bool = await self.__session.request(
+                Route('POST', '/api/admin/roles/delete'),
+                auth=True, json={'roleId': role_id}, lower=True
+            )
+            return res
+        raise NotSupportVersion(NotSupportVersionText)
 
     async def show(self, role_id: str) -> Role:
         if self.__client._config.use_version >= 13:
