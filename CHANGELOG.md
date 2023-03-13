@@ -64,6 +64,8 @@ Misskey公式のバージョンニングを元に判断している為、独自�
     - `Role`
     - `AdminRoleActions`
     - `AdminRolesManager`
+    - `IRoleUser`
+    - `RoleUser`
 - Achievements
     - added `IAchievementNf` class.
     - added `NotificationAchievement` class.
