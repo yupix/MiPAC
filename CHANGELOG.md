@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- none
+
+## [0.4.1] 2023-03-14
+
+### Added
+
 #### バージョンの自動検出機能が追加されました（β）
 
 これはデフォルトで有効になっており、有効の間は自動的に `/api/meta` からバージョンを推論します。機能としては以下の通りです
