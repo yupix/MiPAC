@@ -3,7 +3,7 @@
 - mipac/manager/**/*
 
 'Manager📦':
-- packages/manager/**/*
+- mipac/manager/**/*
 
 'Actions⚙':
-- packages/actions/**/*
+- mipac/actions/**/*

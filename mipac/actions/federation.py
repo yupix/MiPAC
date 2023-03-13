@@ -1,15 +1,15 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
+
 from mipac.abstract.action import AbstractAction
+from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.instance import FederationInstance
+from mipac.models.user import UserDetailed
 from mipac.types.follow import IFederationFollower, IFederationFollowing
-from mipac.errors.base import ParameterError
 from mipac.types.instance import IFederationInstance, IFederationInstanceStat
 from mipac.types.user import IUserDetailed
-
-from mipac.models.user import UserDetailed
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -21,9 +21,11 @@ class FederationActions(AbstractAction):
         self.__client = client
 
     async def get_ap(self, uri: str) -> dict[Any, Any]:
-        return dict(await self.__session.request(
-            Route('POST', '/api/ap/get'), auth=True, json={'uri': uri}, lower=True
-        ))
+        return dict(
+            await self.__session.request(
+                Route('POST', '/api/ap/get'), auth=True, json={'uri': uri}, lower=True
+            )
+        )
 
     async def show_ap(
         self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10

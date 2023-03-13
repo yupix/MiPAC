@@ -42,3 +42,6 @@ class ParameterError(Exception):
 
 class NotSupportVersion(Exception):
     """サポートされていないバージョンのインスタンス"""
+
+
+NotSupportVersionText = 'ご利用のインスタンスのバージョンではサポートされていない機能です'
