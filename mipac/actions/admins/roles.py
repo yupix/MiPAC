@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING, Any, AsyncGenerator, Literal
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import NotSupportVersion, NotSupportVersionText, ParameterError
 from mipac.http import Route
-from mipac.models.roles import Role
+from mipac.models.roles import Role, RoleUser
 from mipac.types.meta import IPolicies
-from mipac.types.roles import IRole
+from mipac.types.roles import IRole, IRoleUser
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient
@@ -150,6 +150,44 @@ class AdminRoleModelActions(AbstractAction):
             return Role(res, client=self._client)
         raise NotSupportVersion(NotSupportVersionText)
 
+    async def get_users(
+        self,
+        role_id: str | None = None,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 100,
+        all: bool = False,
+    ) -> AsyncGenerator[RoleUser, None]:
+        if self._client._config.use_version < 13:
+            raise NotSupportVersion(NotSupportVersionText)
+        role_id = self._role_id or role_id
+        if role_id is None:
+            raise ParameterError('role_idは必須です')
+
+        async def request(body) -> list[RoleUser]:
+            res: list[IRoleUser] = await self._session.request(
+                Route('POST', '/api/admin/roles/users'), lower=True, auth=True, json=body,
+            )
+            return [RoleUser(role, client=self._client) for role in res]
+
+        data = {'limit': limit, 'sinceId': since_id, 'untilId': until_id, 'roleId': role_id}
+        if all:
+            data['limit'] = 100
+        first_req = await request(data)
+        for user in first_req:
+            yield user
+
+        if all and len(first_req) == 100:
+            data['untilId'] = first_req[-1].id
+            while True:
+                res = await request(data)
+                if len(res) <= 100:
+                    for user in res:
+                        yield user
+                if len(res) == 0:
+                    break
+                data['untilId'] = res[-1].id
+
 
 class AdminRoleActions(AdminRoleModelActions):
     def __init__(self, role_id: str | None = None, *, session: HTTPClient, client: ClientManager):
@@ -233,4 +271,3 @@ class AdminRoleActions(AdminRoleModelActions):
             )
             return res
         raise NotSupportVersion(NotSupportVersionText)
-
