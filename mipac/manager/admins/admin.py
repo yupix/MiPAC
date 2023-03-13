@@ -39,4 +39,3 @@ class AdminManager(AbstractManager):
         return AdminRolesModelManager(
             role_id=role_id, session=self.__session, client=self.__client
         )
-

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from mipac.abstract.manager import AbstractManager
 
+from mipac.abstract.manager import AbstractManager
 from mipac.actions.admins.roles import AdminRoleActions, AdminRoleModelActions
 from mipac.http import HTTPClient
 
