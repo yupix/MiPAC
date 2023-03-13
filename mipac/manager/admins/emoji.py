@@ -20,6 +20,4 @@ class AdminEmojiManager(AbstractManager):
         return AdminEmojiActions(session=self.__session, client=self.__client)
 
     def _create_admin_emoji_instance(self, emoji_id: str) -> AdminEmojiActions:
-        return AdminEmojiActions(
-            emoji_id=emoji_id, session=self.__session, client=self.__client
-        )
+        return AdminEmojiActions(emoji_id=emoji_id, session=self.__session, client=self.__client)

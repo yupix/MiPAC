@@ -18,13 +18,7 @@ if TYPE_CHECKING:
 
 
 class ReactionActions(AbstractAction):
-    def __init__(
-        self,
-        note_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -49,9 +43,7 @@ class ReactionActions(AbstractAction):
 
         data = remove_dict_empty({'noteId': note_id, 'reaction': reaction})
         route = Route('POST', '/api/notes/reactions/create')
-        res: bool = await self.__session.request(
-            route, json=data, auth=True, lower=True
-        )
+        res: bool = await self.__session.request(route, json=data, auth=True, lower=True)
         return bool(res)
 
     async def remove(self, note_id: str | None = None) -> bool:
@@ -59,23 +51,16 @@ class ReactionActions(AbstractAction):
 
         data = remove_dict_empty({'noteId': note_id})
         route = Route('POST', '/api/notes/reactions/delete')
-        res: bool = await self.__session.request(
-            route, json=data, auth=True, lower=True
-        )
+        res: bool = await self.__session.request(route, json=data, auth=True, lower=True)
         return bool(res)
 
     async def get_reaction(
-        self, reaction: str, note_id: str | None = None, *, limit: int = 11
+        self, reaction: str, note_id: str | None = None, *, limit: int = 10
     ) -> list[NoteReaction]:
         note_id = note_id or self.__note_id
-        data = remove_dict_empty(
-            {'noteId': note_id, 'limit': limit, 'type': reaction}
-        )
+        data = remove_dict_empty({'noteId': note_id, 'limit': limit, 'type': reaction})
         res: list[INoteReaction] = await self.__session.request(
-            Route('POST', '/api/notes/reactions'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/notes/reactions'), json=data, auth=True, lower=True,
         )
         return [NoteReaction(i, client=self.__client) for i in res]
 
@@ -89,7 +74,4 @@ class ReactionActions(AbstractAction):
             auth=True,
             replace_list={'ToSUrl': 'tos_url', 'ToSTextUrl': 'tos_text_url'},
         )
-        return [
-            CustomEmoji(i, client=self.__client)
-            for i in data.get('emojis', [])
-        ]
+        return [CustomEmoji(i, client=self.__client) for i in data.get('emojis', [])]

@@ -12,11 +12,7 @@ if TYPE_CHECKING:
 
 class MuteManager(AbstractManager):
     def __init__(
-        self,
-        user_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
+        self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager
     ) -> None:
         self._user_id: str | None = user_id
         self._session: HTTPClient = session
@@ -24,6 +20,4 @@ class MuteManager(AbstractManager):
 
     @property
     def action(self) -> MuteActions:
-        return MuteActions(
-            user_id=self._user_id, session=self._session, client=self._client
-        )
+        return MuteActions(user_id=self._user_id, session=self._session, client=self._client)

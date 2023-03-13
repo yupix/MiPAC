@@ -1,0 +1,9 @@
+'topic/API🧩':
+- mipac/actions/**/*
+- mipac/manager/**/*
+
+'Manager📦':
+- mipac/manager/**/*
+
+'Actions⚙':
+- mipac/actions/**/*

@@ -46,10 +46,7 @@ class BaseChatAction(AbstractAction):
         message_id = message_id or self.__message_id
         body = {'messageId': message_id}
         res: bool = await self.__session.request(
-            Route('POST', '/api/messaging/messages/read'),
-            json=body,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/messaging/messages/read'), json=body, auth=True, lower=True,
         )
         return res
 
@@ -74,9 +71,7 @@ class BaseChatAction(AbstractAction):
         message_id = message_id or self.__message_id
         body = {'messageId': f'{message_id}'}
         res: bool = await self.__session.request(
-            Route('POST', '/api/messaging/messages/delete'),
-            json=body,
-            auth=True,
+            Route('POST', '/api/messaging/messages/delete'), json=body, auth=True,
         )
         return bool(res)
 
@@ -90,9 +85,7 @@ class ChatAction(BaseChatAction):
         user_id: str | None = None,
         message_id: str | None = None,
     ):
-        super().__init__(
-            session, client, user_id=user_id, message_id=message_id
-        )
+        super().__init__(session, client, user_id=user_id, message_id=message_id)
         self.__session = session
         self.__client = client
         self.__user_id = user_id
@@ -154,9 +147,6 @@ class ChatAction(BaseChatAction):
             'fileId': file_id,
         }
         res = await self.__session.request(
-            Route('POST', '/api/messaging/messages/create'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/messaging/messages/create'), json=data, auth=True, lower=True,
         )
         return ChatMessage(res, client=self.__client)

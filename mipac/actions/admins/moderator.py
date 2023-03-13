@@ -11,13 +11,7 @@ if TYPE_CHECKING:
 
 
 class AdminModeratorActions(AbstractAction):
-    def __init__(
-        self,
-        user_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
         self.__user_id: str | None = user_id
@@ -40,10 +34,7 @@ class AdminModeratorActions(AbstractAction):
         user_id = user_id or self.__user_id
         data = {'userId': user_id}
         res = await self.__session.request(
-            Route('POST', '/api/admin/moderators/add'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/admin/moderators/add'), json=data, auth=True, lower=True,
         )
         return bool(res)
 
@@ -64,9 +55,6 @@ class AdminModeratorActions(AbstractAction):
         user_id = user_id or self.__user_id
         data = {'userId': user_id}
         res = await self.__session.request(
-            Route('POST', '/api/admin/moderators/remove'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/admin/moderators/remove'), json=data, auth=True, lower=True,
         )
         return bool(res)

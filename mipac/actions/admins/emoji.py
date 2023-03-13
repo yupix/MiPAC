@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncIterator
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import NotExistRequiredData, ParameterError
@@ -15,13 +15,7 @@ if TYPE_CHECKING:
 
 
 class AdminEmojiActions(AbstractAction):
-    def __init__(
-        self,
-        emoji_id: None | str = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, emoji_id: None | str = None, *, session: HTTPClient, client: ClientManager):
         self.__emoji_id = emoji_id
         self.__session = session
         self.__client = client
@@ -75,10 +69,7 @@ class AdminEmojiActions(AbstractAction):
             raise NotExistRequiredData('required a file_id or url')
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/emoji/add'),
-                json=data,
-                lower=True,
-                auth=True,
+                Route('POST', '/api/admin/emoji/add'), json=data, lower=True, auth=True,
             )
         )
 
@@ -90,7 +81,7 @@ class AdminEmojiActions(AbstractAction):
         until_id: str | None = None,
         *,
         all: bool = True
-    ) -> AsyncIterator[CustomEmoji]:
+    ) -> AsyncGenerator[CustomEmoji, None]:
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
         if all:
@@ -114,15 +105,12 @@ class AdminEmojiActions(AbstractAction):
             yield emoji
         if all and len(first_req) == 100:
             body['untilId'] = first_req[-1].id
-            count = 0
             while True:
-                count = count + 1
                 res = await request(body)
                 if len(res) <= 100:
                     for emoji in res:
                         yield emoji
                 if len(res) < 100:
-                    print(res[-1].id)
                     break
 
     async def gets_remote(
@@ -134,7 +122,7 @@ class AdminEmojiActions(AbstractAction):
         until_id: str | None = None,
         *,
         all: bool = True
-    ) -> AsyncIterator[CustomEmoji]:
+    ) -> AsyncGenerator[CustomEmoji, None]:
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
         if all:
@@ -142,9 +130,7 @@ class AdminEmojiActions(AbstractAction):
 
         async def request(body) -> list[CustomEmoji]:
             res: list[ICustomEmoji] = await self.__session.request(
-                Route('POST', '/api/admin/emoji/list-remote'),
-                auth=True,
-                json=body,
+                Route('POST', '/api/admin/emoji/list-remote'), auth=True, json=body,
             )
             return [CustomEmoji(emoji, client=self.__client) for emoji in res]
 
@@ -203,9 +189,6 @@ class AdminEmojiActions(AbstractAction):
 
         return bool(
             await self.__session.request(
-                Route('POST', endpoint),
-                auth=True,
-                json={'id': emoji_id},
-                lower=True,
+                Route('POST', endpoint), auth=True, json={'id': emoji_id}, lower=True,
             )
         )

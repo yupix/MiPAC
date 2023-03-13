@@ -1,25 +1,15 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncIterator
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import APIError, ParameterError
 from mipac.file import MiFile
 from mipac.http import HTTPClient, Route
 from mipac.models.drive import File
-from mipac.models.note import (
-    Note,
-    NoteReaction,
-    NoteState,
-    NoteTranslateResult,
-)
+from mipac.models.note import Note, NoteReaction, NoteState, NoteTranslateResult
 from mipac.models.poll import MiPoll, Poll
-from mipac.types.note import (
-    ICreatedNote,
-    INote,
-    INoteState,
-    INoteTranslateResult,
-)
+from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult
 from mipac.util import cache, check_multi_arg, remove_dict_empty
 
 if TYPE_CHECKING:
@@ -43,6 +33,7 @@ def create_note_body(
     files: list[MiFile | File | str] | None = None,
     poll: MiPoll | None = None,
 ):
+    content = content or None
     body = {
         'visibility': visibility,
         'visibleUserIds': visible_user_ids,
@@ -57,9 +48,7 @@ def create_note_body(
         'channelId': channel_id,
     }
     if not check_multi_arg(content, files, renote_id, poll):
-        raise ParameterError(
-            'ノートの送信にはcontent, file_ids, renote_id またはpollのいずれか1つが無くてはいけません'
-        )
+        raise ParameterError('ノートの送信にはcontent, file_ids, renote_id またはpollのいずれか1つが無くてはいけません')
 
     if poll and type(Poll):
         poll_data = remove_dict_empty(
@@ -89,11 +78,7 @@ def create_note_body(
 
 class ClientNoteActions(AbstractAction):
     def __init__(
-        self,
-        note_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager,
+        self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager,
     ):
         self._note_id: str | None = note_id
         self._session: HTTPClient = session
@@ -127,17 +112,14 @@ class ClientNoteActions(AbstractAction):
         untilId: str | None = None,
         note_id: str | None = None,
         all: bool = True,
-    ) -> AsyncIterator[Note]:
+    ) -> AsyncGenerator[Note, None]:
 
         if limit > 100:
             raise ParameterError('limit は100以下である必要があります')
 
         async def request(body) -> list[Note]:
             res: list[INote] = await self._session.request(
-                Route('POST', '/api/notes/children'),
-                lower=True,
-                auth=True,
-                json=body,
+                Route('POST', '/api/notes/children'), lower=True, auth=True, json=body,
             )
             return [Note(note, client=self._client) for note in res]
 
@@ -171,9 +153,7 @@ class ClientNoteActions(AbstractAction):
         )
         return NoteState(res)
 
-    async def add_clips(
-        self, clip_id: str, note_id: str | None = None
-    ) -> bool:
+    async def add_clips(self, clip_id: str, note_id: str | None = None) -> bool:
         """
         クリップに追加します
 
@@ -196,9 +176,7 @@ class ClientNoteActions(AbstractAction):
 
         data = {'noteId': note_id, 'clipId': clip_id}
         return bool(
-            await self._session.request(
-                Route('POST', '/api/clips/add-note'), json=data, auth=True
-            )
+            await self._session.request(Route('POST', '/api/clips/add-note'), json=data, auth=True)
         )
 
     async def delete(self, note_id: str | None = None) -> bool:
@@ -219,9 +197,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         data = {'noteId': note_id}
-        res = await self._session.request(
-            Route('POST', '/api/notes/delete'), json=data, auth=True
-        )
+        res = await self._session.request(Route('POST', '/api/notes/delete'), json=data, auth=True)
         return bool(res)
 
     async def create_renote(self, note_id: str | None = None) -> Note:
@@ -240,16 +216,11 @@ class ClientNoteActions(AbstractAction):
         """
         body = create_note_body(renote_id=note_id,)
         res: ICreatedNote = await self._session.request(
-            Route('POST', '/api/notes/create'),
-            json=body,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/notes/create'), json=body, auth=True, lower=True,
         )
         return Note(res['created_note'], client=self._client)
 
-    async def get_reaction(
-        self, reaction: str, note_id: str | None = None
-    ) -> list[NoteReaction]:
+    async def get_reaction(self, reaction: str, note_id: str | None = None) -> list[NoteReaction]:
         note_id = note_id or self._note_id
         return await self._client.note.reaction.action.get_reaction(
             reaction
@@ -286,10 +257,7 @@ class ClientNoteActions(AbstractAction):
             files=files,
         )
         res: ICreatedNote = await self._session.request(
-            Route('POST', '/api/notes/create'),
-            json=body,
-            lower=True,
-            auth=True,
+            Route('POST', '/api/notes/create'), json=body, lower=True, auth=True,
         )
         return Note(res['created_note'], client=self._client)
 
@@ -352,10 +320,7 @@ class ClientNoteActions(AbstractAction):
             files=files,
         )
         res: ICreatedNote = await self._session.request(
-            Route('POST', '/api/notes/create'),
-            json=body,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/notes/create'), json=body, auth=True, lower=True,
         )
 
         return Note(res['created_note'], client=self._client)
@@ -387,18 +352,12 @@ class ClientNoteActions(AbstractAction):
         )
         if isinstance(res, dict):
             return NoteTranslateResult(res)
-        APIError(
-            f'Translate Error: {res}', res if isinstance(res, int) else 204
-        ).raise_error()
+        APIError(f'Translate Error: {res}', res if isinstance(res, int) else 204).raise_error()
 
 
 class NoteActions(ClientNoteActions):
     def __init__(
-        self,
-        note_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager,
+        self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager,
     ):
 
         super().__init__(note_id=note_id, session=session, client=client)
@@ -478,10 +437,7 @@ class NoteActions(ClientNoteActions):
             reply_id=reply_id,
         )
         res: ICreatedNote = await self._session.request(
-            Route('POST', '/api/notes/create'),
-            json=body,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/notes/create'), json=body, auth=True, lower=True,
         )
         return Note(res['created_note'], client=self._client)
 
@@ -502,10 +458,7 @@ class NoteActions(ClientNoteActions):
         """
         note_id = note_id or self._note_id
         res = await self._session.request(
-            Route('POST', '/api/notes/show'),
-            json={'noteId': note_id},
-            auth=True,
-            lower=True,
+            Route('POST', '/api/notes/show'), json={'noteId': note_id}, auth=True, lower=True,
         )
         return Note(res, client=self._client)
 
@@ -513,10 +466,7 @@ class NoteActions(ClientNoteActions):
     async def fetch(self, note_id: str | None = None) -> Note:
         note_id = note_id or self._note_id
         res = await self._session.request(
-            Route('POST', '/api/notes/show'),
-            json={'noteId': note_id},
-            auth=True,
-            lower=True,
+            Route('POST', '/api/notes/show'), json={'noteId': note_id}, auth=True, lower=True,
         )
         return Note(res, client=self._client)
 
@@ -549,12 +499,7 @@ class NoteActions(ClientNoteActions):
         note_id = note_id or self._note_id
         res = await self._session.request(
             Route('POST', '/api/notes/replies'),
-            json={
-                'noteId': note_id,
-                'sinceId': since_id,
-                'untilId': until_id,
-                'limit': limit,
-            },
+            json={'noteId': note_id, 'sinceId': since_id, 'untilId': until_id, 'limit': limit},
             auth=True,
             lower=True,
         )
@@ -572,7 +517,7 @@ class NoteActions(ClientNoteActions):
         until_id: str | None = None,
         *,
         all: bool = False,
-    ) -> AsyncIterator[Note]:
+    ) -> AsyncGenerator[Note, None]:
 
         if limit > 100:
             raise ParameterError('limit は100以下である必要があります')

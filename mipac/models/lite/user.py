@@ -41,9 +41,7 @@ class LiteUser:
         return self.__user['name']
 
     @property
-    def online_status(
-        self,
-    ) -> Literal['online', 'active', 'offline', 'unknown']:
+    def online_status(self,) -> Literal['online', 'active', 'offline', 'unknown']:
         return self.__user['online_status']
 
     @property
@@ -85,11 +83,7 @@ class LiteUser:
 
     @property
     def instance(self) -> LiteInstance | None:
-        return (
-            LiteInstance(self.__user['instance'])
-            if 'instance' in self.__user
-            else None
-        )
+        return LiteInstance(self.__user['instance']) if 'instance' in self.__user else None
 
     @property
     def api(self) -> UserManager:

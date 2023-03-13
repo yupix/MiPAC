@@ -13,13 +13,7 @@ __all__ = ('FollowManager', 'FollowRequestManager')
 
 
 class FollowManager(AbstractManager):
-    def __init__(
-        self,
-        user_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__user_id: str | None = user_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -29,21 +23,11 @@ class FollowManager(AbstractManager):
 
     @property
     def action(self) -> FollowActions:
-        return FollowActions(
-            user_id=self.__user_id,
-            session=self.__session,
-            client=self.__client,
-        )
+        return FollowActions(user_id=self.__user_id, session=self.__session, client=self.__client,)
 
 
 class FollowRequestManager(AbstractManager):
-    def __init__(
-        self,
-        user_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__user_id: str | None = user_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -51,7 +35,5 @@ class FollowRequestManager(AbstractManager):
     @property
     def action(self) -> FollowRequestActions:
         return FollowRequestActions(
-            user_id=self.__user_id,
-            session=self.__session,
-            client=self.__client,
+            user_id=self.__user_id, session=self.__session, client=self.__client,
         )

@@ -17,11 +17,7 @@ __all__ = ('DriveActions', 'FileActions', 'FolderActions')
 
 class FileActions(AbstractAction):
     def __init__(
-        self,
-        file_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
+        self, file_id: str | None = None, *, session: HTTPClient, client: ClientManager
     ) -> None:
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -46,10 +42,7 @@ class FileActions(AbstractAction):
 
         data = remove_dict_empty({'fileId': file_id, 'url': url})
         res: IDriveFile = await self.__session.request(
-            Route('POST', '/api/admin/drive/show-file'),
-            json=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/admin/drive/show-file'), json=data, auth=True, lower=True,
         )
         return File(res, client=self.__client)
 
@@ -71,9 +64,7 @@ class FileActions(AbstractAction):
         file_id = file_id or self.__file_id
         return bool(
             await self.__session.request(
-                Route('POST', '/api/drive/files/delete'),
-                json={'fileId': file_id},
-                auth=True,
+                Route('POST', '/api/drive/files/delete'), json={'fileId': file_id}, auth=True,
             )
         )
 
@@ -158,21 +149,14 @@ class FileActions(AbstractAction):
             'force': bool_to_string(force),
         }
         res: IDriveFile = await self.__session.request(
-            Route('POST', '/api/drive/files/create'),
-            data=data,
-            auth=True,
-            lower=True,
+            Route('POST', '/api/drive/files/create'), data=data, auth=True, lower=True,
         )
         return File(res, client=self.__client)
 
 
 class FolderActions(AbstractAction):
     def __init__(
-        self,
-        folder_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
+        self, folder_id: str | None = None, *, session: HTTPClient, client: ClientManager
     ):
         self.__folder_id = folder_id
         self.__session: HTTPClient = session
@@ -198,10 +182,7 @@ class FolderActions(AbstractAction):
 
         data = {'name': name, 'parent_id': parent_id}
         res: bool = await self.__session.request(
-            Route('POST', '/api/drive/folders/create'),
-            json=data,
-            lower=True,
-            auth=True,
+            Route('POST', '/api/drive/folders/create'), json=data, lower=True, auth=True,
         )
         return bool(res)
 
@@ -220,10 +201,7 @@ class FolderActions(AbstractAction):
         folder_id = folder_id or self.__folder_id
         data = {'folderId': folder_id}
         res: bool = await self.__session.request(
-            Route('POST', '/api/drive/folders/delete'),
-            json=data,
-            lower=True,
-            auth=True,
+            Route('POST', '/api/drive/folders/delete'), json=data, lower=True, auth=True,
         )
         return bool(res)
 
@@ -302,9 +280,6 @@ class DriveActions(AbstractAction):
             'folderId': folder_id,
         }
         data = await self.__session.request(
-            Route('POST', '/api/drive/folders'),
-            json=data,
-            lower=True,
-            auth=True,
+            Route('POST', '/api/drive/folders'), json=data, lower=True, auth=True,
         )
         return [Folder(i, client=self.__client) for i in data]

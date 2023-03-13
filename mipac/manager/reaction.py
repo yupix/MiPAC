@@ -11,13 +11,7 @@ if TYPE_CHECKING:
 
 
 class ReactionManager(AbstractManager):
-    def __init__(
-        self,
-        note_id: str | None = None,
-        *,
-        session: HTTPClient,
-        client: ClientManager
-    ):
+    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -32,7 +26,5 @@ class ReactionManager(AbstractManager):
             Reactionに対するアクションを行うクラス
         """
         return ReactionActions(
-            note_id=self.__note_id,
-            session=self.__session,
-            client=self.__client,
+            note_id=self.__note_id, session=self.__session, client=self.__client,
         )

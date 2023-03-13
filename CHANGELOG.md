@@ -9,9 +9,86 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- none
+#### バージョンの自動検出機能が追加されました（β）
 
+これはデフォルトで有効になっており、有効の間は自動的に `/api/meta` からバージョンを推論します。機能としては以下の通りです
 
+- 11, 12, 13にヒットした場合それらにバージョンを変更する
+    - ヒットしなかった場合は何もしない
+Misskey公式のバージョンニングを元に判断している為、独自のバージョニングを行っているフォーク等では正常に動作しない可能性があります。その際は `client.config.use_version_autodetect = False` とすることで無効にすることが可能です。また、手動でバージョンを設定する場合もoffにしてください。
+一部のAPIはバージョンとフォークの種類で判断しています。そのため公式のバージョン的には使用できないが、フォークの機能として存在するという場合は報告をくださればサポートします。
+
+- Added `role` property to `AdminManager`.
+- Added `remove_none` argument to request method.
+- Added method to`ClientActions` class the given below.
+    - `get_announcements`
+- Added class the given below.
+    - `AdminUserActions`
+    - `AnnouncementCommon`
+    - `Announcement`
+    - `AnnouncementSystem`
+    - `IMetaAnnouncement`
+    - `IAnnouncementSystem`
+    - `AdminAnnouncementClientActions`
+    - `AdminAnnouncementActions`
+    - `AdminAnnouncementManager`
+    - `IModerationLog`
+    - `ModerationLog`
+    - `ServerInfoCpu`
+    - `ServerInfoMem`
+    - `ServerInfoFs`
+    - `ServerInfoNet`
+    - `ServerInfo`
+    - `IServerInfoCpu`
+    - `IServerInfoMem`
+    - `IServerInfoFs`
+    - `IServerInfoNet`
+    - `IServerInfo`
+    - `ITableStats`
+    - `IIndexStat`
+    - `IndexStat`
+    - `IUserIP`
+    - `UserIP`
+    - `FederationActions`
+    - `FederationManager`
+    - `IFederationInstanceStat`
+    - `IFederationFollowCommon`
+    - `IFederationFollower`
+    - `IFederationFollowing`
+- Roles
+    - `IRolePolicieValue`
+    - `IRolePolicies`
+    - `IRole`
+    - `RolePolicyValue`
+    - `RolePolicies`
+    - `Role`
+    - `AdminRoleActions`
+    - `AdminRolesManager`
+    - `IRoleUser`
+    - `RoleUser`
+- Achievements
+    - added `IAchievementNf` class.
+    - added `NotificationAchievement` class.
+    - added `Achievement` class.
+    - added `get_achievements` method at `UserActions` class.
+    - added `achievements` property at `UserDetailed` class.
+- Note
+    - content field auto convert empty string to None
+
+### Changed
+
+- Maximum number of characters has been changed from 79 to 99
+    - The main reason for this change is to solve the problem that the MiPAC code is inevitably longer because of the method chain. We have kept it to the maximum of [pep8](https://peps.python.org/pep-0008/#maximum-line-length).
+- Changed a method that was returning an `AsyncIterator` to return an `AsyncGenerator`.
+    - Generator is more correct than Iterator because it is the correct usage.
+- Changed class name the given below.
+    - `IAnnouncement` -> `IMetaAnnouncement`
+- `cache` decorator no longer uses `dynamic_args` decorator
+
+### Removed
+
+- Delete `dynamic_args` decorator.
+- Delete debug log.
 
 ## [0.4.0] 2023-01-18
 

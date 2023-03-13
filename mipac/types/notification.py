@@ -40,3 +40,7 @@ class IReactionNf(INotification):
     user: ILiteUser
     user_id: str
     note: INote
+
+
+class IAchievementNf(INotification):
+    achievement: str

@@ -2,11 +2,12 @@
 
 <a href="https://discord.gg/CcT997U"><img src="https://img.shields.io/discord/530299114387406860?style=flat-square&color=5865f2&logo=discord&logoColor=ffffff&label=discord" alt="Discord server invite" /></a>
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-axblack-8bd124.svg"></a>
+<a href="https://www.codacy.com/gh/yupix/MiPAC/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yupix/MiPAC&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/c9bf85f195f94ab58bc72ad018a2be9f"/></a>
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fyupix%2FMiPAC?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyupix%2FMiPAC.svg?type=shield"/></a>
 
 ## 概要
 
-MiPAのCoreとなるライブラリです。issueは[こちら](https://code.teamblackcrystal.com/projects/120/issues)で管理しています
+MiPAのCoreとなるライブラリです。
 
 MiPACはMisskey v11, 12, 13をサポートしているApi Wrapperです。
 本来気にしないといけないバージョンごとのAPIの違い等を吸収してくれます。
@@ -42,9 +43,11 @@ if __name__ == '__main__':
 
 - `is_official` が削除されました
 
-##### `use_version` が追加されました
+##### **重要** `use_version` が追加されました
 
-`is_official` ではv12とv13を区別するには不十分であったため、このように変更されました。v13がリリースされたばかりというのもあり、現状のデフォルト値はv12となっています。v13をご利用の方は`use_version=13`と指定するなどして、バージョンを変更してください。
+Misskeyではv11,v12,v13とバージョンがあり、バージョンによっては使用できないAPIがあったりします。MiPACでは`use_version`を指定することで事前に使用できるかどうかを確認し、使用できない場合は`NotSupportVersion`という例外を返します。このようにご自分のインスタンスのバージョンを書いていただくだけで、よくわからないエラーを事前に防ぐことが出来ます。（issue等にエラーを報告場合は必ず適切に設定されているか確認してください）
+
+v13はまだリリースされて日が浅く、全てのインスタンスがアップデートしたとは考えにくいため、現在のデフォルト値は`12`となっています。
 
 #### `Client` のオプションから `config`が削除されました
 
