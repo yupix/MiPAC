@@ -1,4 +1,15 @@
-from typing import NotRequired, TypedDict
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, NotRequired, TypedDict
+
+if TYPE_CHECKING:
+    from mipac.types.user import ILiteUser
+
+
+class IRoleUser(TypedDict):
+    id: str
+    user: ILiteUser
+    expires_at: str | None
 
 
 class IRolePolicieValue(TypedDict):
