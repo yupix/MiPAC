@@ -1,12 +1,43 @@
 from __future__ import annotations
+
+from datetime import datetime
 from typing import TYPE_CHECKING
 
-from mipac.types.roles import IRole, IRolePolicies, IRolePolicieValue
-
+from mipac.models.lite.user import LiteUser
+from mipac.types.roles import IRole, IRolePolicies, IRolePolicieValue, IRoleUser
+from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientManager
     from mipac.manager.admins.roles import AdminRolesModelManager
+    from mipac.manager.client import ClientManager
+    from mipac.manager.user import UserManager
+
+
+class RoleUser:
+    def __init__(self, role_user: IRoleUser, *, client: ClientManager) -> None:
+        self.__role_user = role_user
+        self.__client = client
+
+    @property
+    def id(self) -> str:
+        return self.__role_user['id']
+
+    @property
+    def user(self) -> LiteUser:
+        return LiteUser(self.__role_user['user'], client=self.__client)
+
+    @property
+    def expires_at(self) -> datetime | None:
+        return (
+            str_to_datetime(self.__role_user['expires_at'])
+            if self.__role_user['expires_at']
+            else None
+        )
+
+    @property
+    def action(self) -> UserManager:
+        return self.__client._create_user_instance(self.user)
+
 
 class RolePolicyValue:
     def __init__(self, policiy_value_data: IRolePolicieValue) -> None:
