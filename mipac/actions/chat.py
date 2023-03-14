@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
+from mipac.errors.base import NotSupportVersion, NotSupportVersionText, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.chat import ChatMessage
 from mipac.types.chat import IChatMessage
@@ -107,6 +107,11 @@ class ChatAction(BaseChatAction):
         list[ChatMessage]
             List of chat history
         """
+        if (
+            self.__client._config.use_version >= 13
+            and self.__client._config.features.chat is False
+        ):
+            raise NotSupportVersion(NotSupportVersionText)
 
         if limit > 100:
             raise ParameterError('limit must be greater than 100')
@@ -139,6 +144,11 @@ class ChatAction(BaseChatAction):
         group_id : str | None, default=None
             Destination group id
         """
+        if (
+            self.__client._config.use_version >= 13
+            and self.__client._config.features.chat is False
+        ):
+            raise NotSupportVersion(NotSupportVersionText)
         user_id = user_id or self.__user_id
         data = {
             'userId': user_id,
