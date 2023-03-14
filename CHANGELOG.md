@@ -9,7 +9,39 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- none
+#### `config.features` が追加されました
+
+MiPACはv13, v12, v11という大きな区切りでエンドポイントが利用可能かを確認しています。その都合上、v13でサポートされいた物、例えばチャットが`13.7.0`で廃止されたような場合、MiPACは最新のMisskeyに追従しているため、デフォルトの挙動を変更します。これにより、`13.7.0`に更新してなかったり、`fork`を使用していてチャットが存在する場合でもチャットを使用すると例外である`NotSupportVersion`が発生してしまいます。その対策としてこの機能が追加されました。
+このconfigの主な役割は以下の通りです。
+
+- 最新のMisskeyでは使用できないが、自身が使用しているサーバーのバージョンでは使用できる場合に該当する物を有効にすることで例外を返さず、使用できるようにする
+
+使い方は以下の通りです。また、現在サポートされているfeatureは`chat`のみです。
+
+```py
+async def main():
+    client = Client(auth.currentUser.url, auth.currentUser.token)
+    await client.http.login()
+    api = client.api
+    client.config.from_dict(features={'chat': True})
+```
+
+また、自分で作成・使用しているForkでこれ存在するからデフォルトでサポートしてくれない？という物がありましたら、Issueを作成してくだされば検討します。
+
+- 以下のエンドポイントがサポートされます。
+    - `i/claim-achievement`
+- Added class the given below.
+    - `IT_ACHIEVEMENT_NAME`
+
+### Changed
+
+- chatがv13で廃止された為v13を利用している際は例外を返すように変更しました。
+    - v13だが、forkやchatが廃止される前のバージョンを使用していてチャットが使用したい際は新しい機能である `config.features` をご利用ください
+- aiohttpのバージョンを `3.8.4`に固定
+
+### Removed
+
+- サポートする気が無いため、sphinxを用いたドキュメントを削除
 
 ## [0.4.1] 2023-03-14
 
