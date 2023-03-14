@@ -1,5 +1,0 @@
-sphinx
-furo
-sphinxcontrib_trio
-aiohttp
-
