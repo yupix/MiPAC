@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.user import UserActions
 from mipac.http import HTTPClient
+from mipac.manager.blocking import BlockingManager
 from mipac.manager.follow import FollowManager
 from mipac.manager.mute import MuteManager
 
@@ -26,6 +27,7 @@ class UserManager(AbstractManager):
         self.user: LiteUser | None = user
         self.follow: FollowManager = FollowManager(user_id=user_id, session=session, client=client)
         self.mute: MuteManager = MuteManager(user_id=user_id, session=session, client=client)
+        self.block = BlockingManager(user_id=user_id, session=session, client=client)
 
     @property
     def action(self) -> UserActions:
