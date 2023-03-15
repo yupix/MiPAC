@@ -1,12 +1,15 @@
 import argparse
 import os
 
+from templates import TEMPLATES
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--name', '-n')
 parser.add_argument('--type', '-t')
 parser.add_argument('--generate', '-g', action=argparse.BooleanOptionalAction)
 args = parser.parse_args()
+
+
 
 if args.generate:
     if args.type not in ['manager', 'actions', 'auto']:
@@ -22,4 +25,5 @@ if args.generate:
             with open(f'../mipac/{module_type}/{path}__init__.py', mode='w', encoding='utf-8') as f:
                 f.close()
         with open(f'../mipac/{module_type}/{path}{split_name[-1]}.py', mode='w', encoding='utf-8') as f:
+            f.write(TEMPLATES[module_type].format(split_name[-1].title()))
             f.close()
