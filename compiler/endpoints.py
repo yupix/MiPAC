@@ -26,7 +26,7 @@ with open('./datas/ayuskey_api.json') as f:
         PATHS.append(f'{PREFIX}{path}')
 
 with open('../mipac/types/endpoints.py', 'w', encoding='utf-8') as f:
-    data = json.dumps(list(dict.fromkeys(PATHS)), ensure_ascii=False, indent=4)
+    data = json.dumps(list(dict.fromkeys(PATHS)), ensure_ascii=False, indent=4).replace('"', '\'')
     f.write(
-        f'{TOP_COMMENT}{IMPORTS}{TEMPLATES}Literal{data}'
+        f'{TOP_COMMENT}{IMPORTS}{TEMPLATES}Literal{data}\n'
     )
