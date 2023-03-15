@@ -32,7 +32,7 @@ if TYPE_CHECKING:
 
 
 class {0}Actions(AbstractAction):
-    def __init__(self, session: HTTPClient, client: ClientManager):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client\n
 """
