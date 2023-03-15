@@ -14,7 +14,15 @@ __all__ = (
     'IUserDetailed',
     'IUserDetailedField',
     'IAchievement',
+    'IBlockingUser',
 )
+
+
+class IBlockingUser(TypedDict):
+    id: str
+    created_at: str
+    blockee_id: str
+    blockee: IUserDetailed
 
 
 class ISignin(TypedDict):

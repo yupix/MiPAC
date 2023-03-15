@@ -1,16 +1,46 @@
 from __future__ import annotations
 
+from datetime import datetime
 from typing import TYPE_CHECKING, Literal
 
 from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 from mipac.types.page import IPage
-from mipac.types.user import IAchievement, IFollowRequest, IUserDetailed, IUserDetailedField
+from mipac.types.user import (
+    IAchievement,
+    IBlockingUser,
+    IFollowRequest,
+    IUserDetailed,
+    IUserDetailedField,
+)
+from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
-__all__ = ('UserDetailed', 'FollowRequest', 'LiteUser', 'Achievement')
+__all__ = ('UserDetailed', 'FollowRequest', 'LiteUser', 'Achievement', 'BlockingUser')
+
+
+class BlockingUser:
+    def __init__(self, blocking_user_data: IBlockingUser, *, client: ClientManager) -> None:
+        self.__blocking_user_data: IBlockingUser = blocking_user_data
+        self.__client: ClientManager = client
+
+    @property
+    def id(self) -> str:
+        return self.__blocking_user_data['id']
+
+    @property
+    def created_at(self) -> datetime:
+        return str_to_datetime(self.__blocking_user_data['created_at'])
+
+    @property
+    def blockee_id(self) -> str:
+        return self.__blocking_user_data['blockee_id']
+
+    @property
+    def blockee(self) -> UserDetailed:
+        return UserDetailed(self.__blocking_user_data['blockee'], client=self.__client)
 
 
 class FollowRequest:

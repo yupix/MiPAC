@@ -30,8 +30,16 @@ async def main():
 
 - 以下のエンドポイントがサポートされます。
     - `i/claim-achievement`
+    - `blocking/create`
+    - `blocking/delete`
+    - `blocking/list`
 - Added class the given below.
     - `IT_ACHIEVEMENT_NAME`
+    - `BlockingUser`
+    - `IBlockingUser`
+    - `BlockingActions`
+    - `BlockingManager`
+- Added `Block` property to `UserManager`.
 
 ### Changed
 

@@ -1,6 +1,6 @@
 [tool.black]
 line-length = 99
-exclude = 'mipac/_version.py'
+exclude = ['mipac/_version.py', 'mipac/types/endpoints.py']
 
 
 [tool.isort]
