@@ -86,6 +86,8 @@ class INote(INoteRequired, total=False):
     is_hidden: bool
     poll: IPoll
     emojis: list[ICustomEmojiLite]
+    reaction_emojis: dict[str, str]
+    reaction_acceptance: Literal['likeOnly', 'likeOnlyForRemote'] | None
 
 
 class ICreatedNote(TypedDict):
