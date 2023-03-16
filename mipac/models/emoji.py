@@ -12,19 +12,6 @@ __all__ = ('CustomEmoji',)
 
 
 class CustomEmoji(PartialCustomEmoji):
-    """
-    Attributes
-    ----------
-    id : str | None
-        絵文字のID
-    aliases : Optional[list[str]]
-        絵文字のエイリアス
-    category : str | None
-        絵文字のカテゴリ
-    host : str | None
-        絵文字のホスト
-    """
-
     def __init__(self, emoji: ICustomEmoji, *, client: ClientManager):
         super().__init__(emoji, client=client)
         self.__emoji: ICustomEmoji = emoji
@@ -40,3 +27,7 @@ class CustomEmoji(PartialCustomEmoji):
     @property
     def category(self) -> str:
         return self.__emoji['category']
+
+    @property
+    def license(self) -> str | None:
+        return self.__emoji['license']

@@ -15,6 +15,7 @@ class ICustomEmoji(ICustomEmojiLite):
     id: str
     category: str
     aliases: list[str]
+    license: str | None  # v13 only
 
 
 class EmojiPayload(TypedDict):
@@ -24,3 +25,4 @@ class EmojiPayload(TypedDict):
     category: str | None
     host: str | None
     url: str | None
+    license: str | None  # v13 only
