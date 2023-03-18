@@ -33,14 +33,27 @@ async def main():
     - `blocking/create`
     - `blocking/delete`
     - `blocking/list`
+    - `admin/ad/create`
+    - `admin/ad/delete`
+    - `admin/ad/list`
+    - `admin/ad/update`
+- Added `IT_ACHIEVEMENT_NAME` fixed variable.
 - Added class the given below.
-    - `IT_ACHIEVEMENT_NAME`
-    - `BlockingUser`
-    - `IBlockingUser`
-    - `BlockingActions`
-    - `BlockingManager`
-- Added `Block` property to `UserManager`.
-
+    - Blocking
+        - `BlockingUser`
+        - `IBlockingUser`
+        - `BlockingActions`
+        - `BlockingManager`
+    - Ad
+        - `AdminAdvertisingModelActions`
+        - `AdminAdvertisingActions`
+        - `Ad`
+        - `IAd`
+        - `AdminAdvertisingModelManager`
+        - `AdminAdvertisingManager`
+- Added `block` attribute to `UserManager`.
+- Added `reaction_emojis` property to `Note`.
+- Added `reaction_acceptance` property to `Note`.
 ### Changed
 
 - chatがv13で廃止された為v13を利用している際は例外を返すように変更しました。
