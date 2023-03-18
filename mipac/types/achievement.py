@@ -1,6 +1,5 @@
 from typing import Literal
 
-
 IT_ACHIEVEMENT_NAME = Literal[
     'notes1',
     'notes10',

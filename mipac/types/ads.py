@@ -8,6 +8,7 @@ class IAds(TypedDict):
     url: str
     image_url: str
 
+
 class IAd(TypedDict):
     id: str
     created_at: str

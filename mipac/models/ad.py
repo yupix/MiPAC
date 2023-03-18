@@ -1,14 +1,14 @@
 from __future__ import annotations
-from datetime import datetime
 
+from datetime import datetime
 from typing import TYPE_CHECKING, Literal
 
 from mipac.types.ads import IAd
 from mipac.util import str_to_datetime
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientManager
     from mipac.manager.admins.ad import AdminAdvertisingModelManager
+    from mipac.manager.client import ClientManager
 
 
 class Ad:
