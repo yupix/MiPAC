@@ -50,6 +50,9 @@ class AdminAdvertisingModelActions(AbstractAction):
         return res
 
     async def delete(self, id: str | None = None) -> bool:
+        if self._client._config.use_version < 12:
+            raise NotSupportVersion(NotSupportVersionText)
+
         ad_id = self._ad_id or id
         res: bool = await self._session.request(
             Route('POST', '/api/admin/ad/delete'), json={'id': ad_id}, auth=True, lower=True
@@ -72,6 +75,9 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
         expires_at: int = 0,
         memo: str | None = None,
     ) -> bool:
+        if self._client._config.use_version < 12:
+            raise NotSupportVersion(NotSupportVersionText)
+
         data = {
             'url': url,
             'memo': memo or '',
@@ -90,7 +96,7 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
     async def get_list(
         self, limit: int = 10, since_id: str | None = None, until_id: str | None = None
     ) -> AsyncGenerator[Ad, None]:
-        if self._client._config.use_version < 13:
+        if self._client._config.use_version < 12:
             raise NotSupportVersion(NotSupportVersionText)
 
         async def request(body) -> list[Ad]:
