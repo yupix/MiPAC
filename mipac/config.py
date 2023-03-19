@@ -17,9 +17,24 @@ class CacheConfig:
 IMisskeyDistribution = Literal['ayuskey', 'm544', 'areionskey', 'official']
 
 
+
+class ILimits(TypedDict, total=False):
+    channel_name: int
+    channel_description: int
+
 class IFeatures(TypedDict, total=False):
     chat: bool
 
+class Limits:
+    def __init__(self, limits: ILimits | None = None) -> None:
+        limits = limits or {}
+        self.channel_name: int = limits.get('channel_name', 128)
+        self.channel_description: int = limits.get('channel_description', 2048)
+
+    def from_dict(self, limits: ILimits):
+        self.channel_name = limits.get('channel_name') or self.channel_description
+        self.channel_description = limits.get('channel_description') or self.channel_description
+        return self
 
 class Features:
     def __init__(self, features: IFeatures | None = None) -> None:
@@ -42,6 +57,7 @@ class Config:
         cache: CacheConfigData | None = None,
         use_version_autodetect: bool = True,
         features: IFeatures | None = None,
+        limits: ILimits | None = None
     ) -> None:
         self.distro: IMisskeyDistribution = distro
         self.is_ssl: bool = is_ssl
@@ -51,6 +67,7 @@ class Config:
         self.cache: CacheConfig = CacheConfig(cache or CacheConfigData())
         self.use_version_autodetect: bool = use_version_autodetect
         self.features: Features = Features(features) if features else Features()
+        self.limits: Limits = Limits(limits) if limits else Limits()
 
     def from_dict(
         self,
@@ -61,6 +78,7 @@ class Config:
         cache: CacheConfigData | None = None,
         use_version_autodetect: bool | None = None,
         features: IFeatures | None = None,
+        limits: ILimits | None = None,
     ):
         self.host = host or self.host
         self.is_ssl = is_ssl if is_ssl is not None else self.is_ssl
@@ -70,6 +88,7 @@ class Config:
             self.cache = CacheConfig(cache)
         self.use_version_autodetect = use_version_autodetect or self.use_version_autodetect
         self.features = self.features.from_dict(features) if features else self.features
+        self.limits = self.limits.from_dict(limits) if limits else self.limits
 
 
 config = Config()
