@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator
+from typing import TYPE_CHECKING, AsyncGenerator, Literal
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import APIError, ParameterError
@@ -20,7 +20,7 @@ __all__ = ['NoteActions']
 
 def create_note_body(
     content: str | None = None,
-    visibility: str = 'public',
+    visibility: Literal['public', 'home', 'followers', 'specified'] = 'public',
     visible_user_ids: list[str] | None = None,
     cw: str | None = None,
     local_only: bool = False,
@@ -229,7 +229,7 @@ class ClientNoteActions(AbstractAction):
     async def reply(
         self,
         content: str | None = None,
-        visibility: str = 'public',
+        visibility: Literal['public', 'home', 'followers', 'specified'] = 'public',
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
@@ -264,7 +264,7 @@ class ClientNoteActions(AbstractAction):
     async def create_quote(
         self,
         content: str | None = None,
-        visibility: str = 'public',
+        visibility: Literal['public', 'home', 'followers', 'specified'] = 'public',
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
@@ -282,7 +282,7 @@ class ClientNoteActions(AbstractAction):
         ----------
         content: str | None, default=None
             text
-        visibility: str, default='public'
+        visibility: Literal['public', 'home', 'followers', 'specified'], default='public'
             Disclosure range
         visible_user_ids: list[str] | None, default=None
             List of users to be published
@@ -365,7 +365,7 @@ class NoteActions(ClientNoteActions):
     async def send(
         self,
         content: str | None = None,
-        visibility: str = 'public',
+        visibility: Literal['public', 'home', 'followers', 'specified'] = 'public',
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
@@ -385,7 +385,7 @@ class NoteActions(ClientNoteActions):
         ----------
         content : str | None, default=None
             投稿する内容
-        visibility : str, optional
+        visibility : Literal['public', 'home', 'followers', 'specified'], optional
             公開範囲, by default "public"
             Enum: "public" "home" "followers" "specified"
         visible_user_ids : list[str] | None, optional
