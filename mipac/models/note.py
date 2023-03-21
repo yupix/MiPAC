@@ -261,8 +261,8 @@ class Note:
     @property
     def reply(self) -> 'Note' | None:
         return (
-            Note(note=self.__note['renote'], client=self._client)
-            if 'renote' in self.__note
+            Note(note=self.__note['reply'], client=self._client)
+            if 'reply' in self.__note
             else None
         )
 
