@@ -4,9 +4,9 @@ from mipac.manager.client import ClientManager
 
 
 class Client:
-    def __init__(self, url: str, token: str) -> None:
+    def __init__(self, url: str, token: str | None = None) -> None:
         self.__url: str = url
-        self.__token: str = token
+        self.__token: str | None = token
         self.config: Config = config
         self.http: HTTPClient = HTTPClient(url, token)
 

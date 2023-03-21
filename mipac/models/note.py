@@ -204,6 +204,27 @@ class Note:
         return self.__note['visibility']
 
     @property
+    def reaction_acceptance(self) -> Literal['likeOnly', 'likeOnlyForRemote'] | None:
+        """リアクションを受け入れ
+
+        Returns
+        -------
+        Literal['likeOnly', 'likeOnlyForRemote'] | None
+        """
+        return self.__note.get('reaction_acceptance')
+
+    @property
+    def reaction_emojis(self) -> dict[str, str] | None:
+        """リアクション一覧です
+
+        Returns
+        -------
+        dict[str, str] | None
+            リアクション名がキー、値はリアクション画像のリンクです
+        """
+        return self.__note.get('reaction_emojis')
+
+    @property
     def reactions(self) -> dict[str, int]:
         return self.__note['reactions']
 
@@ -240,8 +261,8 @@ class Note:
     @property
     def reply(self) -> 'Note' | None:
         return (
-            Note(note=self.__note['renote'], client=self._client)
-            if 'renote' in self.__note
+            Note(note=self.__note['reply'], client=self._client)
+            if 'reply' in self.__note
             else None
         )
 

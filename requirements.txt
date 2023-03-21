@@ -1,2 +1,2 @@
-aiohttp
+aiohttp==3.8.4
 versioneer

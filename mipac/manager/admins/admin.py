@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.admins.admin import AdminActions
 from mipac.http import HTTPClient
-from mipac.manager.ad import AdminAdvertisingManager
+from mipac.manager.admins.ad import AdminAdvertisingManager, AdminAdvertisingModelManager
 from mipac.manager.admins.announcement import AdminAnnouncementManager
 from mipac.manager.admins.emoji import AdminEmojiManager
 from mipac.manager.admins.moderator import AdminModeratorManager
@@ -38,4 +38,9 @@ class AdminManager(AbstractManager):
     def create_roles_model_manager(self, role_id: str | None = None) -> AdminRolesModelManager:
         return AdminRolesModelManager(
             role_id=role_id, session=self.__session, client=self.__client
+        )
+
+    def create_ad_model_manager(self, ad_id: str | None = None) -> AdminAdvertisingModelManager:
+        return AdminAdvertisingModelManager(
+            ad_id=ad_id, session=self.__session, client=self.__client
         )

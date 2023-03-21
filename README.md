@@ -3,7 +3,11 @@
 <a href="https://discord.gg/CcT997U"><img src="https://img.shields.io/discord/530299114387406860?style=flat-square&color=5865f2&logo=discord&logoColor=ffffff&label=discord" alt="Discord server invite" /></a>
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-axblack-8bd124.svg"></a>
 <a href="https://www.codacy.com/gh/yupix/MiPAC/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yupix/MiPAC&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/c9bf85f195f94ab58bc72ad018a2be9f"/></a>
-<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fyupix%2FMiPAC?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyupix%2FMiPAC.svg?type=shield"/></a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fyupix%2FMiPAC?
+ref=badge_shield" alt="FOSSA Status">
+<a><img src="https://img.shields.io/pypi/dm/MiPAC?label=PyPI"></a>
+<img src="https://app.fossa.com/api/projects/
+git%2Bgithub.com%2Fyupix%2FMiPAC.svg?type=shield"/></a>
 
 ## 概要
 
