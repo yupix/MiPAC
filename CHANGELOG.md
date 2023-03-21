@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- None
+
+## [0.4.2] 2023-03-22
+
+### Added
+
 #### `config.features` が追加されました
 
 MiPACはv13, v12, v11という大きな区切りでエンドポイントが利用可能かを確認しています。その都合上、v13でサポートされいた物、例えばチャットが`13.7.0`で廃止されたような場合、MiPACは最新のMisskeyに追従しているため、デフォルトの挙動を変更します。これにより、`13.7.0`に更新してなかったり、`fork`を使用していてチャットが存在する場合でもチャットを使用すると例外である`NotSupportVersion`が発生してしまいます。その対策としてこの機能が追加されました。
@@ -26,8 +32,14 @@ async def main():
     client.config.from_dict(features={'chat': True})
 ```
 
+#### `config.limits` が追加されました
+
+MiPACでは文字数等にデフォルトで最新のMisskeyの値を入れています。しかし、一部のForkで文字数の制限が緩和されている・制限されている場合に正しくエラーを返せなくなる可能性があります。その対策としてこの機能が追加されました。
+
+
 また、自分で作成・使用しているForkでこれ存在するからデフォルトでサポートしてくれない？という物がありましたら、Issueを作成してくだされば検討します。
 
+- Note周りのメソッドで`visibility`の型を正確に
 - 以下のエンドポイントがサポートされます。
     - `i/claim-achievement`
     - `blocking/create`
@@ -39,6 +51,11 @@ async def main():
     - `admin/ad/update`
 - Added `IT_ACHIEVEMENT_NAME` fixed variable.
 - Added class the given below.
+    - Channel
+        - `IChannelLite`
+        - `ChannelLite`
+        - `ChannelActions`
+        - `ChannelManager`
     - Blocking
         - `BlockingUser`
         - `IBlockingUser`
@@ -52,6 +69,7 @@ async def main():
         - `AdminAdvertisingModelManager`
         - `AdminAdvertisingManager`
 - Added `block` attribute to `UserManager`.
+- Added `channel` attribute to `ClientManager`.
 - Added `reaction_emojis` property to `Note`.
 - Added `reaction_acceptance` property to `Note`.
 ### Changed
@@ -59,10 +77,16 @@ async def main():
 - chatがv13で廃止された為v13を利用している際は例外を返すように変更しました。
     - v13だが、forkやchatが廃止される前のバージョンを使用していてチャットが使用したい際は新しい機能である `config.features` をご利用ください
 - aiohttpのバージョンを `3.8.4`に固定
+- Tokenを使用しなくてもAPIが一部使用できるようになりました。当然ですが、認証が必要なAPIを使用した場合はエラーが出ます。
+- `Config.from_dict` の引数が全てキーワード引数になりました。これは今後Configに引数が増えた際など、変更に強くするためです。
 
 ### Removed
 
 - サポートする気が無いため、sphinxを用いたドキュメントを削除
+
+### Fixed
+
+- `Note.reply`のキーが`renote`になっていて取得不可になっていた
 
 ## [0.4.1] 2023-03-14
 
