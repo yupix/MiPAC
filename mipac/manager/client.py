@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.actions.client import ClientActions
 from mipac.http import HTTPClient
 from mipac.manager.admins.admin import AdminManager
+from mipac.manager.channel import ChannelManager
 from mipac.manager.chart import ChartManager
 from mipac.manager.chat import ChatManager
 from mipac.manager.drive import DriveManager
@@ -32,6 +33,7 @@ class ClientManager:
         self.admin: AdminManager = AdminManager(session=session, client=self)
         self.drive: DriveManager = DriveManager(session=session, client=self)
         self.chart: ChartManager = ChartManager(session=session, client=self)
+        self.channel: ChannelManager = ChannelManager(session=session, client=self)
         self.follow: FollowManager = FollowManager(
             session=session, client=self,
         )

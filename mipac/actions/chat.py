@@ -7,7 +7,7 @@ from mipac.errors.base import NotSupportVersion, NotSupportVersionText, Paramete
 from mipac.http import HTTPClient, Route
 from mipac.models.chat import ChatMessage
 from mipac.types.chat import IChatMessage
-from mipac.util import check_multi_arg
+from mipac.utils.util import check_multi_arg
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager

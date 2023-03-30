@@ -10,7 +10,9 @@ from mipac.models.drive import File
 from mipac.models.note import Note, NoteReaction, NoteState, NoteTranslateResult
 from mipac.models.poll import MiPoll, Poll
 from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult
-from mipac.util import cache, check_multi_arg, remove_dict_empty
+from mipac.utils.cache import cache
+from mipac.utils.format import remove_dict_empty
+from mipac.utils.util import check_multi_arg
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager

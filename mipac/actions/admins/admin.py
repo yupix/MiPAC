@@ -12,7 +12,8 @@ from mipac.models.user import UserDetailed
 from mipac.types.admin import IIndexStat, IModerationLog, IServerInfo, ITableStats, IUserIP
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
 from mipac.types.user import IUserDetailed
-from mipac.util import cache, convert_dict_keys_to_camel
+from mipac.utils.cache import cache
+from mipac.utils.format import convert_dict_keys_to_camel
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager

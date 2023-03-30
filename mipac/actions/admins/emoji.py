@@ -7,7 +7,7 @@ from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import Route
 from mipac.models.emoji import CustomEmoji
 from mipac.types.emoji import ICustomEmoji
-from mipac.util import check_multi_arg
+from mipac.utils.util import check_multi_arg
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient

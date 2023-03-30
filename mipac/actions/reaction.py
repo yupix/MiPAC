@@ -10,7 +10,7 @@ from mipac.models.emoji import CustomEmoji
 from mipac.models.note import NoteReaction
 from mipac.types.meta import ILiteMeta
 from mipac.types.note import INoteReaction
-from mipac.util import remove_dict_empty
+from mipac.utils.format import remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient

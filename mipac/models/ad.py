@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Literal
 
 from mipac.types.ads import IAd
-from mipac.util import str_to_datetime
+from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.admins.ad import AdminAdvertisingModelManager

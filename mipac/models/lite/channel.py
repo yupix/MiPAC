@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Generic, TypeVar
 
 from mipac.types.channel import IChannelLite
-from mipac.util import str_to_datetime
+from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager import ClientManager
