@@ -1,5 +1,7 @@
 from __future__ import annotations
+import json
 
+import logging
 import re
 import sys
 from typing import Any, Literal, TypeVar
@@ -12,7 +14,10 @@ from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
 from mipac.types.meta import IMeta
 from mipac.types.user import IUserDetailed
-from mipac.util import _from_json, remove_dict_empty, upper_to_lower
+from mipac.utils.format import remove_dict_empty, upper_to_lower
+from mipac.utils.util import COLORS, _from_json
+
+_log = logging.getLogger(__name__)
 
 
 class _MissingSentinel:
@@ -71,7 +76,6 @@ class HTTPClient:
             'User-Agent': self.user_agent,
         }
 
-        is_lower = kwargs.pop('lower') if kwargs.get('lower') else False
 
         if 'json' in kwargs:
             headers['Content-Type'] = 'application/json'
@@ -96,6 +100,14 @@ class HTTPClient:
                     data = [upper_to_lower(i, replace_list=replace_list) for i in data]
                 if isinstance(data, dict):
                     data = upper_to_lower(data)
+            _log.debug(
+                f'''{COLORS.green}
+REQUEST:{COLORS.reset}
+    {kwargs}
+{COLORS.green}RESPONSE:{COLORS.reset}
+    {json.dumps(data, ensure_ascii=False, indent=4) if data else data}
+                '''
+            )
             if res.status == 204 and data is None:
                 return True  # type: ignore
             if 300 > res.status >= 200:
