@@ -65,7 +65,7 @@ class HTTPClient:
         return self._session
 
     async def request(
-        self, route: Route, auth: bool = False, remove_none: bool = True, **kwargs
+        self, route: Route, auth: bool = False, remove_none: bool = True, lower:bool=True, **kwargs
     ) -> R:
         headers: dict[str, str] = {
             'User-Agent': self.user_agent,
@@ -91,7 +91,7 @@ class HTTPClient:
                 kwargs[i] = remove_dict_empty(kwargs[i])
         async with self._session.request(route.method, self._url + route.path, **kwargs) as res:
             data = await json_or_text(res)
-            if is_lower:
+            if lower:
                 if isinstance(data, list):
                     data = [upper_to_lower(i, replace_list=replace_list) for i in data]
                 if isinstance(data, dict):
