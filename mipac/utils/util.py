@@ -59,3 +59,11 @@ class MiTime:
     def __init__(self, start: timedelta, end: datetime):
         self.start = start
         self.end = end
+
+
+class Colors:
+    def __init__(self) -> None:
+        self.green = '\x1b[92;1m'
+        self.reset = '\x1b[0m'
+
+COLORS = Colors()
