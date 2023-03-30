@@ -5,7 +5,6 @@ from typing import TYPE_CHECKING, Literal
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.emoji import ICustomEmojiLite
 from mipac.types.user import ILiteUser
-from mipac.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -30,11 +29,6 @@ class LiteUser:
     @property
     def host(self) -> str | None:
         return self.__user['host'] if 'host' in self.__user else None
-
-    @property
-    @deprecated
-    def name(self) -> str:
-        return self.__user['name']
 
     @property
     def nickname(self) -> str:
