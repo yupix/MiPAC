@@ -13,5 +13,6 @@ class IChannelLite(TypedDict):
     is_following: bool
     user_id: str
 
+
 class IChannel(IChannelLite):
     has_unread_note: bool

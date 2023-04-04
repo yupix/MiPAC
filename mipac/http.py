@@ -1,6 +1,6 @@
 from __future__ import annotations
-import json
 
+import json
 import logging
 import re
 import sys
@@ -70,12 +70,16 @@ class HTTPClient:
         return self._session
 
     async def request(
-        self, route: Route, auth: bool = False, remove_none: bool = True, lower:bool=True, **kwargs
+        self,
+        route: Route,
+        auth: bool = False,
+        remove_none: bool = True,
+        lower: bool = True,
+        **kwargs,
     ) -> R:
         headers: dict[str, str] = {
             'User-Agent': self.user_agent,
         }
-
 
         if 'json' in kwargs:
             headers['Content-Type'] = 'application/json'
