@@ -9,6 +9,7 @@ from mipac.manager.channel import ChannelManager
 from mipac.manager.chart import ChartManager
 from mipac.manager.chat import ChatManager
 from mipac.manager.drive import DriveManager
+from mipac.manager.emoji import EmojiManager
 from mipac.manager.follow import FollowManager, FollowRequestManager
 from mipac.manager.my import MyManager
 from mipac.manager.note import NoteManager
@@ -40,6 +41,7 @@ class ClientManager:
         self.follow_request: FollowRequestManager = FollowRequestManager(
             session=session, client=self,
         )
+        self.emoji: EmojiManager = EmojiManager(session=session, client=self)
         self._config: Config = config
 
     @property
