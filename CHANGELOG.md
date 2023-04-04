@@ -9,7 +9,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- None
+- 以下のエンドポイントがサポートされます。
+    - `emoji`
+- `CustomEmoji` に `host` プロパティを追加
+- `ClientManager` の属性に　`emoji` を追加
+
+### Changed
+
+- `mipac.util` モジュールは `mipac.utils` 配下の `auth`, `cache`, `format`, `log`, `util`の5つに分離しました。そのため `v0.5.0`で削除されます。
+    - 今後は `mipac.utils.*` をご利用ください
+
+### Removed
+
+- `LiteUser` から `name` プロパティが削除されました。
+    - 今後は `nickname` をご利用ください
 
 ## [0.4.2] 2023-03-22
 
