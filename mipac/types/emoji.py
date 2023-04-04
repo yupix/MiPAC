@@ -15,6 +15,7 @@ class ICustomEmoji(ICustomEmojiLite):
     id: str
     category: str
     aliases: list[str]
+    host: str | None
     license: str | None  # v13 only
 
 
