@@ -1,10 +1,10 @@
 from __future__ import annotations
-from datetime import datetime
 
+from datetime import datetime
 from typing import TYPE_CHECKING, Generic, Literal, TypeVar
+
 from mipac.models.lite.user import LiteUser
 from mipac.types.drive import IDriveFile
-
 from mipac.types.note import IPartialNote
 from mipac.utils.format import str_to_datetime
 

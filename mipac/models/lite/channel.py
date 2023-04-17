@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from typing import TYPE_CHECKING, Generic, TypeVar
+
 from mipac.types.channel import IChannelLite
 from mipac.utils.format import str_to_datetime
 

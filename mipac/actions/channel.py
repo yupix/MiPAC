@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal, overload
+from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
 from mipac.models.channel import Channel
-from mipac.models.lite.channel import ChannelLite
-from mipac.types.channel import IChannel, IChannelLite
+from mipac.types.channel import IChannel
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
