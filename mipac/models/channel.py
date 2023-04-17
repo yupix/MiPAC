@@ -16,3 +16,11 @@ class Channel(ChannelLite[IChannel]):
     @property
     def has_unread_note(self) -> bool:
         return self._channel['has_unread_note']
+
+    @property
+    def is_following(self) -> bool | None:
+        return self._channel.get('is_following')
+
+    @property
+    def is_favorited(self) -> bool | None:
+        return self._channel.get('is_favorited')
