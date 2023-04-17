@@ -7,12 +7,15 @@ class IChannelLite(TypedDict):
     last_noted_at: str | None
     name: str
     description: str | None
-    banner_url: str | None
-    notes_count: int
-    users_count: int
-    is_following: bool
     user_id: str
+    banner_url: str | None
+    users_count: int
+    notes_count: int
+    pinned_note_ids: list | None  # pinned系は 13.11.0以上が必要
+    pinned_notes: list | None  
 
 
 class IChannel(IChannelLite):
     has_unread_note: bool
+    is_following: bool | None
+    is_favorited: bool | None  # is_favoritedは 13.11.0以上が必要
