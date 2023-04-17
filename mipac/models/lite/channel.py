@@ -2,12 +2,13 @@ from __future__ import annotations
 
 from datetime import datetime
 from typing import TYPE_CHECKING, Generic, TypeVar
-
 from mipac.types.channel import IChannelLite
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager import ClientManager
+    from mipac.manager.channel import ChannelManager
+    
 
 T = TypeVar('T', bound=IChannelLite)
 
@@ -39,21 +40,25 @@ class ChannelLite(Generic[T]):
         return self._channel['description']
 
     @property
-    def banner_url(self) -> str | None:
-        return self._channel['banner_url']
+    def user_id(self) -> str:
+        return self._channel['user_id']
 
     @property
-    def notes_count(self) -> int:
-        return self._channel['notes_count']
+    def banner_url(self) -> str | None:
+        return self._channel['banner_url']
 
     @property
     def users_count(self) -> int:
         return self._channel['users_count']
 
     @property
-    def is_following(self) -> bool:
-        return bool(self._channel['is_following'])
+    def notes_count(self) -> int:
+        return self._channel['notes_count']
 
     @property
-    def user_id(self) -> str:
-        return self._channel['user_id']
+    def pinned_note_ids(self) -> list:
+        return self._channel.get('pinned_note_ids', [])
+
+    @property
+    def api(self) -> ChannelManager:
+        return self.__client._create_channel_instance(channel_id=self.id)
