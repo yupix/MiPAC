@@ -1,18 +1,29 @@
-from typing import TypedDict
+from typing import NotRequired, TypedDict
+
+from mipac.types.note import IPartialNote
 
 
-class IChannelLite(TypedDict):
+class IPartialChannel(TypedDict):
     id: str
+    name: str
+
+
+class IChannelNote(IPartialNote):
+    channel: IPartialChannel
+    channel_id: str
+    local_only: bool
+
+
+class IChannelLite(IPartialChannel):
     created_at: str
     last_noted_at: str | None
-    name: str
     description: str | None
     user_id: str
     banner_url: str | None
     users_count: int
     notes_count: int
-    pinned_note_ids: list | None  # pinned系は 13.11.0以上が必要
-    pinned_notes: list | None  
+    pinned_note_ids: NotRequired[list[str]]  # pinned系は 13.11.0以上が必要
+    pinned_notes: NotRequired[list[IChannelNote]]
 
 
 class IChannel(IChannelLite):
