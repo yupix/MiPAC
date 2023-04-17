@@ -71,4 +71,3 @@ class ChannelActions(ClientChannelActions):
             Route('POST', '/api/channels/my-favorites'), auth=True
         )
         return [Channel(i, client=self._client) for i in res]
-

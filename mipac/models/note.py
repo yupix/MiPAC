@@ -206,7 +206,6 @@ class Note(PartialNote[INote]):
         return Poll(self._note['poll'], client=self._client) if 'poll' in self._note else None
 
 
-
 class NoteTranslateResult:
     """
     NoteTranslateResult
