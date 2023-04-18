@@ -54,5 +54,8 @@ class ClientManager:
     def _create_note_instance(self, note_id: str) -> NoteManager:
         return NoteManager(note_id, session=self.__session, client=self)
 
+    def _create_channel_instance(self, channel_id: str) -> ChannelManager:
+        return ChannelManager(channel_id=channel_id, session=self.__session, client=self)
+
     async def get_me(self) -> UserDetailed:
         return await self.user.action.get_me()

@@ -54,24 +54,27 @@ class GeoPayload(TypedDict):
     speed: int | None
 
 
-class INoteRequired(TypedDict):
-    id: str
+class IPartialNote(TypedDict):
     created_at: str
-    text: str | None
     cw: str | None
+    file_ids: list[str]
+    files: list[IDriveFile]
+    id: str
+    reaction_acceptance: NotRequired[Literal['likeOnly', 'likeOnlyForRemote']]  # v13 only
+    reaction_emojis: NotRequired[dict[str, str]]  # v13 only
+    renote_id: str | None
+    renote_count: int
+    reactions: dict[str, int]
+    replies_count: int
+    reply_id: str | None
+    text: str | None
     user: ILiteUser
     user_id: str
-    reply_id: str
-    renote_id: str
-    files: list[IDriveFile]
-    file_ids: list[str]
     visibility: Literal['public', 'home', 'followers', 'specified']
-    reactions: dict[str, int]
-    renote_count: int
-    replies_count: int
+    tags: NotRequired[list[str]]  # タグがついてないとbodyに存在しない
 
 
-class INote(INoteRequired, total=False):
+class INote(IPartialNote, total=False):
     """
     note object
     """
@@ -86,8 +89,6 @@ class INote(INoteRequired, total=False):
     is_hidden: bool
     poll: IPoll
     emojis: list[ICustomEmojiLite]
-    reaction_emojis: dict[str, str]
-    reaction_acceptance: Literal['likeOnly', 'likeOnlyForRemote'] | None
 
 
 class ICreatedNote(TypedDict):
