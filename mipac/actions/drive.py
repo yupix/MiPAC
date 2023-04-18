@@ -23,7 +23,7 @@ class FileActions(AbstractAction):
         self.__client: ClientManager = client
         self.__file_id = file_id
 
-    async def show_file(self, file_id: str | None, url: str | None) -> File:
+    async def show_file(self, file_id: str | None = None, url: str | None = None) -> File:
         """
         ファイルの情報を取得します。
 

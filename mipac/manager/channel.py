@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
@@ -11,11 +10,15 @@ if TYPE_CHECKING:
 
 
 class ChannelManager(AbstractManager):
-    def __init__(self, channel_id: str | None = None, *, session: HTTPClient, client: ClientManager):
+    def __init__(
+        self, channel_id: str | None = None, *, session: HTTPClient, client: ClientManager
+    ):
         self.__channel_id: str | None = channel_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
 
     @property
     def action(self) -> ChannelActions:
-        return ChannelActions(channel_id=self.__channel_id, session=self.__session, client=self.__client)
+        return ChannelActions(
+            channel_id=self.__channel_id, session=self.__session, client=self.__client
+        )

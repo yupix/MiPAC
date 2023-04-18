@@ -66,4 +66,5 @@ class Colors:
         self.green = '\x1b[92;1m'
         self.reset = '\x1b[0m'
 
+
 COLORS = Colors()
