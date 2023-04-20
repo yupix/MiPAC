@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+- `FileActions` クラスの `show_file` メソッドで引数にデフォルト値が入っていないのを修正
 - `Note` のプロパティで一部戻り値が正しくない
 - `ChannelLite` クラスに `is_following` プロパティは存在してはいけないので修正
   - tip: `Channel` クラスに移動されました
