@@ -359,5 +359,5 @@ ENDPOINTS = Literal[
     '/api/channels/search',
     '/api/emoji',
     '/api/roles/notes',
-    '/api/users/update-memo'
+    '/api/users/update-memo',
 ]

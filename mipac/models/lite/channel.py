@@ -8,7 +8,7 @@ from mipac.utils.format import str_to_datetime
 if TYPE_CHECKING:
     from mipac.manager import ClientManager
     from mipac.manager.channel import ChannelManager
-    
+
 
 T = TypeVar('T', bound=IChannelLite)
 
