@@ -25,10 +25,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `Channel` に `api` プロパティを追加
 - `CustomEmoji` に `host` プロパティを追加
 - `ChannelLite` に `api` プロパティを追加
+- `Folder` に `api` プロパティを追加
+- `File` に `api` プロパティを追加
   - `Channel` クラスは `ChannelLite` を継承しているため必然的にこちらにも `api` プロパティが増えています
 
 ### Changed
 
+- `FileActions` の `remove_file` メソッドが非推奨になります。 今後は `remove` メソッドをご利用ください。
+- `v0.5.0`で削除されます。
 - `INoteRequired` が `IPartialNote` に変更されました
 - `mipac.util` モジュールは `mipac.utils` 配下の `auth`, `cache`, `format`, `log`, `util`の 5 つに分離しました。そのため `v0.5.0`で削除されます。
   - 今後は `mipac.utils.*` をご利用ください
