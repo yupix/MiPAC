@@ -2,11 +2,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
-    from mipac.types import FolderPayload, IDriveFile, IFileProperties
     from mipac.manager.drive import ClientFileManager, ClientFolderManager
+    from mipac.types import FolderPayload, IDriveFile, IFileProperties
 
 __all__ = ['FileProperties', 'File', 'Folder']
 
