@@ -8,6 +8,7 @@ from mipac.http import HTTPClient, Route
 from mipac.models.drive import File, Folder
 from mipac.types.drive import IDriveFile
 from mipac.utils.format import bool_to_string, remove_dict_empty
+from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -15,13 +16,76 @@ if TYPE_CHECKING:
 __all__ = ('DriveActions', 'FileActions', 'FolderActions')
 
 
-class FileActions(AbstractAction):
+class ClientFileActions(AbstractAction):
     def __init__(
-        self, file_id: str | None = None, *, session: HTTPClient, client: ClientManager
+        self,
+        file_id: str | None = None,
+        folder_id: str | None = None,
+        *,
+        session: HTTPClient,
+        client: ClientManager
     ) -> None:
-        self.__session: HTTPClient = session
-        self.__client: ClientManager = client
-        self.__file_id = file_id
+        self._session: HTTPClient = session
+        self._client: ClientManager = client
+        self._file_id = file_id
+        self._folder_id = folder_id
+
+    async def remove(self, file_id: str | None = None) -> bool:
+        """
+        指定したIDのファイルを削除します
+
+        Parameters
+        ----------
+        file_id : str | None, default=None
+            削除するファイルのID
+
+        Returns
+        -------
+        bool
+            削除に成功したかどうか
+        """
+
+        file_id = file_id or self._file_id
+        return bool(
+            await self._session.request(
+                Route('POST', '/api/drive/files/delete'), json={'fileId': file_id}, auth=True,
+            )
+        )
+
+    @deprecated
+    async def remove_file(self, file_id: str | None = None) -> bool:
+        """
+        指定したIDのファイルを削除します
+
+        Parameters
+        ----------
+        file_id : str | None, default=None
+            削除するファイルのID
+
+        Returns
+        -------
+        bool
+            削除に成功したかどうか
+        """
+
+        file_id = file_id or self._file_id
+        return bool(
+            await self._session.request(
+                Route('POST', '/api/drive/files/delete'), json={'fileId': file_id}, auth=True,
+            )
+        )
+
+
+class FileActions(ClientFileActions):
+    def __init__(
+        self,
+        file_id: str | None = None,
+        folder_id: str | None = None,
+        *,
+        session: HTTPClient,
+        client: ClientManager
+    ) -> None:
+        super().__init__(file_id=file_id, folder_id=folder_id, session=session, client=client)
 
     async def show_file(self, file_id: str | None = None, url: str | None = None) -> File:
         """
@@ -41,32 +105,10 @@ class FileActions(AbstractAction):
         """
 
         data = remove_dict_empty({'fileId': file_id, 'url': url})
-        res: IDriveFile = await self.__session.request(
+        res: IDriveFile = await self._session.request(
             Route('POST', '/api/admin/drive/show-file'), json=data, auth=True, lower=True,
         )
-        return File(res, client=self.__client)
-
-    async def remove_file(self, file_id: str | None = None) -> bool:
-        """
-        指定したIDのファイルを削除します
-
-        Parameters
-        ----------
-        file_id : str | None, default=None
-            削除するファイルのID
-
-        Returns
-        -------
-        bool
-            削除に成功したかどうか
-        """
-
-        file_id = file_id or self.__file_id
-        return bool(
-            await self.__session.request(
-                Route('POST', '/api/drive/files/delete'), json={'fileId': file_id}, auth=True,
-            )
-        )
+        return File(res, client=self._client)
 
     async def get_files(
         self,
@@ -95,6 +137,8 @@ class FileActions(AbstractAction):
         if limit > 100:
             raise ParameterError('limit must be less than 100')
 
+        folder_id = self._folder_id or folder_id
+
         data = {
             'limit': limit,
             'sinceId': since_id,
@@ -102,10 +146,10 @@ class FileActions(AbstractAction):
             'folderId': folder_id,
             'Type': file_type,
         }
-        res: list[IDriveFile] = await self.__session.request(
+        res: list[IDriveFile] = await self._session.request(
             Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
         )
-        return [File(i, client=self.__client) for i in res]
+        return [File(i, client=self._client) for i in res]
 
     async def upload_file(
         self,
@@ -140,6 +184,8 @@ class FileActions(AbstractAction):
             アップロードしたファイルの情報
         """
         file_byte = open(file, 'rb') if file else None
+        folder_id = self._folder_id or folder_id
+
         data = {
             'file': file_byte,
             'name': file_name,
@@ -148,19 +194,19 @@ class FileActions(AbstractAction):
             'isSensitive': bool_to_string(is_sensitive),
             'force': bool_to_string(force),
         }
-        res: IDriveFile = await self.__session.request(
+        res: IDriveFile = await self._session.request(
             Route('POST', '/api/drive/files/create'), data=data, auth=True, lower=True,
         )
-        return File(res, client=self.__client)
+        return File(res, client=self._client)
 
 
-class FolderActions(AbstractAction):
+class ClientFolderActions(AbstractAction):
     def __init__(
         self, folder_id: str | None = None, *, session: HTTPClient, client: ClientManager
     ):
-        self.__folder_id = folder_id
-        self.__session: HTTPClient = session
-        self.__client: ClientManager = client
+        self._folder_id = folder_id
+        self._session: HTTPClient = session
+        self._client: ClientManager = client
 
     async def create(self, name: str, parent_id: str | None = None) -> bool:
         """
@@ -178,10 +224,10 @@ class FolderActions(AbstractAction):
         bool
             作成に成功したか否か
         """
-        parent_id = parent_id or self.__folder_id
+        parent_id = parent_id or self._folder_id
 
         data = {'name': name, 'parent_id': parent_id}
-        res: bool = await self.__session.request(
+        res: bool = await self._session.request(
             Route('POST', '/api/drive/folders/create'), json=data, lower=True, auth=True,
         )
         return bool(res)
@@ -198,9 +244,9 @@ class FolderActions(AbstractAction):
         bool
             削除に成功したか否か
         """
-        folder_id = folder_id or self.__folder_id
+        folder_id = folder_id or self._folder_id
         data = {'folderId': folder_id}
-        res: bool = await self.__session.request(
+        res: bool = await self._session.request(
             Route('POST', '/api/drive/folders/delete'), json=data, lower=True, auth=True,
         )
         return bool(res)
@@ -232,7 +278,7 @@ class FolderActions(AbstractAction):
         if limit > 100:
             raise ParameterError('limit must be less than 100')
 
-        folder_id = folder_id or self.__folder_id
+        folder_id = folder_id or self._folder_id
         data = {
             'limit': limit,
             'sinceId': since_id,
@@ -240,16 +286,23 @@ class FolderActions(AbstractAction):
             'folderId': folder_id,
             'Type': file_type,
         }
-        res: list[IDriveFile] = await self.__session.request(
+        res: list[IDriveFile] = await self._session.request(
             Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
         )
-        return [File(i, client=self.__client) for i in res]
+        return [File(i, client=self._client) for i in res]
+
+
+class FolderActions(ClientFolderActions):
+    def __init__(
+        self, folder_id: str | None = None, *, session: HTTPClient, client: ClientManager
+    ):
+        super().__init__(folder_id=folder_id, session=session, client=client)
 
 
 class DriveActions(AbstractAction):
     def __init__(self, session: HTTPClient, client: ClientManager):
-        self.__session: HTTPClient = session
-        self.__client: ClientManager = client
+        self._session: HTTPClient = session
+        self._client: ClientManager = client
 
     async def get_folders(
         self,
@@ -279,7 +332,7 @@ class DriveActions(AbstractAction):
             'untilId': until_id,
             'folderId': folder_id,
         }
-        data = await self.__session.request(
+        data = await self._session.request(
             Route('POST', '/api/drive/folders'), json=data, lower=True, auth=True,
         )
-        return [Folder(i, client=self.__client) for i in data]
+        return [Folder(i, client=self._client) for i in data]
