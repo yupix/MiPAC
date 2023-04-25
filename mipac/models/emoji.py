@@ -31,3 +31,7 @@ class CustomEmoji(PartialCustomEmoji):
     @property
     def license(self) -> str | None:
         return self.__emoji['license']
+
+    @property
+    def host(self) -> str | None:
+        return self.__emoji['host']

@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 from mipac.models.lite.user import LiteUser
 from mipac.types.roles import IRole, IRolePolicies, IRolePolicieValue, IRoleUser
-from mipac.util import str_to_datetime
+from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.admins.roles import AdminRolesModelManager

@@ -1,21 +1,26 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Literal, Optional
+from typing import TYPE_CHECKING, Optional, Self
 
 from mipac.errors.base import NotExistRequiredData
+from mipac.models.lite.note import PartialNote
 from mipac.models.lite.user import LiteUser
 from mipac.models.poll import Poll
-from mipac.types.note import INoteState, INoteTranslateResult, INoteUpdated, INoteUpdatedDelete
-from mipac.util import str_to_datetime
+from mipac.types.note import (
+    INote,
+    INoteReaction,
+    INoteState,
+    INoteTranslateResult,
+    INoteUpdated,
+    INoteUpdatedDelete,
+)
+from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
-    from mipac.manager.note import ClientNoteManager
     from mipac.models.user import UserDetailed
-    from mipac.types.drive import IDriveFile
     from mipac.types.emoji import ICustomEmojiLite
-    from mipac.types.note import INote, INoteReaction
 
 __all__ = (
     'NoteState',
@@ -136,7 +141,7 @@ class NoteReaction:
         return LiteUser(self.__reaction['user'], client=self.__client)
 
 
-class Note:
+class Note(PartialNote[INote]):
     """
     Noteモデル
 
@@ -148,93 +153,7 @@ class Note:
     """
 
     def __init__(self, note: INote, client: ClientManager):
-        self.__note = note
-        self._client: ClientManager = client
-
-    @property
-    def id(self) -> str:
-        """
-        ユーザーのID
-
-        Returns
-        -------
-        str
-            ユーザーのID
-        """
-        return self.__note['id']
-
-    @property
-    def created_at(self) -> datetime:
-        return str_to_datetime(self.__note['created_at'])
-
-    @property
-    def content(self) -> str | None:
-        return self.__note.get('text')
-
-    @property
-    def cw(self) -> str | None:
-        return self.__note.get('cw')
-
-    @property
-    def user_id(self) -> str:
-        return self.__note['user_id']
-
-    @property
-    def author(self) -> LiteUser:
-        return LiteUser(self.__note['user'], client=self._client)
-
-    @property
-    def reply_id(self) -> str:
-        return self.__note['reply_id']
-
-    @property
-    def renote_id(self) -> str:
-        return self.__note['renote_id']
-
-    @property
-    def files(self) -> list[IDriveFile]:  # TODO: モデルに
-        return self.__note['files']
-
-    @property
-    def file_ids(self) -> list[str]:
-        return self.__note['file_ids']
-
-    @property
-    def visibility(self,) -> Literal['public', 'home', 'followers', 'specified']:
-        return self.__note['visibility']
-
-    @property
-    def reaction_acceptance(self) -> Literal['likeOnly', 'likeOnlyForRemote'] | None:
-        """リアクションを受け入れ
-
-        Returns
-        -------
-        Literal['likeOnly', 'likeOnlyForRemote'] | None
-        """
-        return self.__note.get('reaction_acceptance')
-
-    @property
-    def reaction_emojis(self) -> dict[str, str] | None:
-        """リアクション一覧です
-
-        Returns
-        -------
-        dict[str, str] | None
-            リアクション名がキー、値はリアクション画像のリンクです
-        """
-        return self.__note.get('reaction_emojis')
-
-    @property
-    def reactions(self) -> dict[str, int]:
-        return self.__note['reactions']
-
-    @property
-    def renote_count(self) -> int:
-        return self.__note['renote_count']
-
-    @property
-    def replies_count(self) -> int:
-        return self.__note['replies_count']
+        super().__init__(note_data=note, client=client)
 
     @property
     def emojis(self) -> list[ICustomEmojiLite]:  # TODO: モデルに
@@ -248,62 +167,49 @@ class Note:
             List of emojis contained in note text
         """
 
-        return self.__note.get('emojis', [])
+        return self._note.get('emojis', [])
 
     @property
-    def renote(self) -> 'Note' | None:
+    def renote(self) -> Self | None:
         return (
-            Note(note=self.__note['renote'], client=self._client)
-            if 'renote' in self.__note
+            Note(note=self._note['renote'], client=self._client)
+            if 'renote' in self._note
             else None
         )
 
     @property
-    def reply(self) -> 'Note' | None:
+    def reply(self) -> Self | None:
         return (
-            Note(note=self.__note['reply'], client=self._client)
-            if 'reply' in self.__note
-            else None
+            Note(note=self._note['reply'], client=self._client) if 'reply' in self._note else None
         )
 
     @property
     def visible_user_ids(self) -> list[str]:
-        return self.__note['visible_user_ids'] if 'visible_user_ids' in self.__note else []
+        return self._note['visible_user_ids'] if 'visible_user_ids' in self._note else []
 
     @property
     def local_only(self) -> bool:
-        return self.__note['local_only'] if 'local_only' in self.__note else False
+        return self._note['local_only'] if 'local_only' in self._note else False
 
     @property
     def my_reaction(self) -> str | None:
-        return self.__note['my_reaction'] if 'my_reaction' in self.__note else None
+        return self._note['my_reaction'] if 'my_reaction' in self._note else None
 
     @property
     def uri(self) -> str | None:
-        return self.__note['uri'] if 'uri' in self.__note else None
+        return self._note['uri'] if 'uri' in self._note else None
 
     @property
     def url(self) -> str | None:
-        return self.__note['url'] if 'url' in self.__note else None
+        return self._note['url'] if 'url' in self._note else None
 
     @property
     def is_hidden(self) -> bool:
-        return self.__note['is_hidden'] if 'is_hidden' in self.__note else False
+        return self._note['is_hidden'] if 'is_hidden' in self._note else False
 
     @property
     def poll(self) -> Poll | None:
-        return Poll(self.__note['poll'], client=self._client) if 'poll' in self.__note else None
-
-    @property
-    def api(self) -> ClientNoteManager:
-        """
-        ノートに対するアクション
-
-        Returns
-        -------
-        NoteActions
-        """
-        return self._client.note.create_client_note_manager(self.id)
+        return Poll(self._note['poll'], client=self._client) if 'poll' in self._note else None
 
 
 class NoteTranslateResult:

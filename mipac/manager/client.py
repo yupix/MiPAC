@@ -5,9 +5,11 @@ from typing import TYPE_CHECKING
 from mipac.actions.client import ClientActions
 from mipac.http import HTTPClient
 from mipac.manager.admins.admin import AdminManager
+from mipac.manager.channel import ChannelManager
 from mipac.manager.chart import ChartManager
 from mipac.manager.chat import ChatManager
 from mipac.manager.drive import DriveManager
+from mipac.manager.emoji import EmojiManager
 from mipac.manager.follow import FollowManager, FollowRequestManager
 from mipac.manager.my import MyManager
 from mipac.manager.note import NoteManager
@@ -32,12 +34,14 @@ class ClientManager:
         self.admin: AdminManager = AdminManager(session=session, client=self)
         self.drive: DriveManager = DriveManager(session=session, client=self)
         self.chart: ChartManager = ChartManager(session=session, client=self)
+        self.channel: ChannelManager = ChannelManager(session=session, client=self)
         self.follow: FollowManager = FollowManager(
             session=session, client=self,
         )
         self.follow_request: FollowRequestManager = FollowRequestManager(
             session=session, client=self,
         )
+        self.emoji: EmojiManager = EmojiManager(session=session, client=self)
         self._config: Config = config
 
     @property
@@ -49,6 +53,9 @@ class ClientManager:
 
     def _create_note_instance(self, note_id: str) -> NoteManager:
         return NoteManager(note_id, session=self.__session, client=self)
+
+    def _create_channel_instance(self, channel_id: str) -> ChannelManager:
+        return ChannelManager(channel_id=channel_id, session=self.__session, client=self)
 
     async def get_me(self) -> UserDetailed:
         return await self.user.action.get_me()

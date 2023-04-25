@@ -7,7 +7,7 @@ from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.mute import MuteUser
 from mipac.types.mute import IMuteUser
-from mipac.util import remove_dict_empty
+from mipac.utils.format import remove_dict_empty
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager

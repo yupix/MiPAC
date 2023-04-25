@@ -14,7 +14,7 @@ from mipac.types.admin import (
     IServerInfoNet,
     IUserIP,
 )
-from mipac.util import str_to_datetime
+from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager

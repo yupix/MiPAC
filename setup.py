@@ -30,6 +30,7 @@ packages = [
     'mipac.models',
     'mipac.types',
     'mipac.models.lite',
+    'mipac.utils'
 ]
 
 setup(

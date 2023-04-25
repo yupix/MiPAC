@@ -49,6 +49,7 @@ ENDPOINTS = Literal[
     '/api/admin/queue/clear',
     '/api/admin/queue/deliver-delayed',
     '/api/admin/queue/inbox-delayed',
+    '/api/admin/queue/promote',
     '/api/admin/queue/stats',
     '/api/admin/relays/add',
     '/api/admin/relays/list',
@@ -194,6 +195,7 @@ ENDPOINTS = Literal[
     '/api/i/webhooks/delete',
     '/api/meta',
     '/api/emojis',
+    '/api/emoji',
     '/api/mute/create',
     '/api/mute/delete',
     '/api/mute/list',
@@ -357,5 +359,5 @@ ENDPOINTS = Literal[
     '/api/channels/search',
     '/api/emoji',
     '/api/roles/notes',
-    '/api/users/update-memo'
+    '/api/users/update-memo',
 ]

@@ -15,6 +15,8 @@ from urllib.parse import urlencode
 
 import aiohttp
 
+from mipac.utils.util import deprecated as new_deprecated
+
 try:
     import orjson  # type: ignore
 except ModuleNotFoundError:
@@ -49,43 +51,7 @@ DEFAULT_CACHE: dict[str, list[str]] = {}
 DEFAULT_CACHE_VALUE: dict[str, Any] = {}
 
 
-def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
-    components: list[str] = snake_str.split('_')
-    for i in range(len(components)):
-        if components[i] in replace_list:
-            components[i] = replace_list[components[i]]
-    return components[0] + ''.join(x.title() for x in components[1:])
-
-
-def convert_dict_keys_to_camel(
-    data: Mapping[Any, Any], replace_list: dict[str, str] | None = None
-) -> Mapping[Any, Any]:
-    if replace_list is None:
-        replace_list = {}
-    new_dict = {}
-    for key, value in data.items():
-        new_key = snake_to_camel(key, replace_list)
-        new_dict[new_key] = value
-    return new_dict
-
-
-def str_to_datetime(data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ') -> datetime:
-    """
-    Parameters
-    ----------
-    data : str
-        datetimeに変更したい文字列
-    format : str
-        dataのフォーマット
-
-    Returns
-    -------
-    datetime
-        変換後のデータ
-    """
-    return datetime.strptime(data, format)
-
-
+@new_deprecated
 def deprecated(func):
     """
     This is a decorator which can be used to mark functions
@@ -107,12 +73,54 @@ def deprecated(func):
     return new_func
 
 
+@new_deprecated
+def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
+    components: list[str] = snake_str.split('_')
+    for i in range(len(components)):
+        if components[i] in replace_list:
+            components[i] = replace_list[components[i]]
+    return components[0] + ''.join(x.title() for x in components[1:])
+
+
+@new_deprecated
+def convert_dict_keys_to_camel(
+    data: Mapping[Any, Any], replace_list: dict[str, str] | None = None
+) -> Mapping[Any, Any]:
+    if replace_list is None:
+        replace_list = {}
+    new_dict = {}
+    for key, value in data.items():
+        new_key = snake_to_camel(key, replace_list)
+        new_dict[new_key] = value
+    return new_dict
+
+
+@new_deprecated
+def str_to_datetime(data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ') -> datetime:
+    """
+    Parameters
+    ----------
+    data : str
+        datetimeに変更したい文字列
+    format : str
+        dataのフォーマット
+
+    Returns
+    -------
+    datetime
+        変換後のデータ
+    """
+    return datetime.strptime(data, format)
+
+
+@new_deprecated
 class MiTime:
     def __init__(self, start: timedelta, end: datetime):
         self.start = start
         self.end = end
 
 
+@new_deprecated
 class AuthClient:
     """
     Tokenの取得を手助けするクラス
@@ -225,6 +233,7 @@ class AuthClient:
         return data['token'] if self.__use_miauth else data['accessToken']
 
 
+@new_deprecated
 def set_cache(group: str, key: str, value: Any):
     if len(DEFAULT_CACHE.get(group, [])) > 50:
         del DEFAULT_CACHE[group][-1]
@@ -236,6 +245,7 @@ def set_cache(group: str, key: str, value: Any):
     DEFAULT_CACHE_VALUE[key] = value
 
 
+@new_deprecated
 def cache(group: str = 'default', override: bool = False):
     def decorator(func):
         async def wrapper(self, *args, **kwargs):
@@ -253,6 +263,7 @@ def cache(group: str = 'default', override: bool = False):
     return decorator
 
 
+@new_deprecated
 def get_cache_key(func):
     async def decorator(self, *args, **kwargs):
         ordered_kwargs = sorted(kwargs.items())
@@ -262,6 +273,7 @@ def get_cache_key(func):
     return decorator
 
 
+@new_deprecated
 def key_builder(func, cls, *args, **kwargs):
     ordered_kwargs = sorted(kwargs.items())
     key = (
@@ -270,6 +282,7 @@ def key_builder(func, cls, *args, **kwargs):
     return key
 
 
+@new_deprecated
 def check_multi_arg(*args: Any) -> bool:
     """
     複数の値を受け取り値が存在するかをboolで返します
@@ -287,6 +300,7 @@ def check_multi_arg(*args: Any) -> bool:
     return bool([i for i in args if i])
 
 
+@new_deprecated
 def remove_list_empty(data: list[Any]) -> list[Any]:
     """
     Parameters
@@ -302,6 +316,7 @@ def remove_list_empty(data: list[Any]) -> list[Any]:
     return [k for k in data if k]
 
 
+@new_deprecated
 def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
     """
     Parameters
@@ -319,6 +334,7 @@ def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
     return _data
 
 
+@new_deprecated
 def upper_to_lower(
     data: dict[str, Any],
     field: Optional[dict[str, Any]] = None,
@@ -368,6 +384,7 @@ def upper_to_lower(
     return field
 
 
+@new_deprecated
 def str_lower(text: str):
     pattern = re.compile('[A-Z]')
     large = [i.group().lower() for i in pattern.finditer(text)]
@@ -377,6 +394,7 @@ def str_lower(text: str):
     return ''.join(result)
 
 
+@new_deprecated
 def bool_to_string(boolean: bool) -> str:
     """
     boolを小文字にして文字列として返します

@@ -6,7 +6,9 @@ from mipac.config import config
 from mipac.errors.base import NotExistRequiredData, NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.user import Achievement, LiteUser, UserDetailed
-from mipac.util import cache, check_multi_arg, remove_dict_empty
+from mipac.utils.cache import cache
+from mipac.utils.format import remove_dict_empty
+from mipac.utils.util import check_multi_arg
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
