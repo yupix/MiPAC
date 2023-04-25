@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- None
+
+## [0.4.3] 2023-04-25
+
+### Added
+
 - 以下のエンドポイントがサポートされます。
   - `emoji`
   - `channels/favorite`
