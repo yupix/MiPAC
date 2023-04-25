@@ -157,6 +157,13 @@ class AdminEmojiActions(AbstractAction):
                     break
                 body['untilId'] = res[-1].id
 
+    async def set_license_bulk(self, ids: list[str], license: str | None = None) -> bool:
+        body = {'ids': ids, 'license': license}
+        res: bool = await self.__session.request(
+            Route('POST', '/api/admin/emoji/set-license-bulk'), auth=True, json=body, remove_none=False  # remove_noneをFalseにしないとlisenceが消せなくなる
+        )
+        return res
+
     async def remove(self, emoji_id: str | None = None) -> bool:
         """指定したIdの絵文字を削除します
 
