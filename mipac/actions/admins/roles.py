@@ -207,6 +207,7 @@ class AdminRoleActions(AdminRoleModelActions):
         as_badge: bool = False,
         can_edit_members_by_moderator: bool = False,
         policies: dict[Any, Any] | None = None,
+        is_explorable: bool = False
     ) -> Role:
         if self._client._config.use_version >= 13:
             body = {
@@ -222,6 +223,7 @@ class AdminRoleActions(AdminRoleModelActions):
                 'asBadge': as_badge,
                 'canEditMembersByModerator': can_edit_members_by_moderator,
                 'policies': policies or {},
+                'isExplorable': is_explorable
             }
             res: IRole = await self._session.request(
                 Route('POST', '/api/admin/roles/create'),
