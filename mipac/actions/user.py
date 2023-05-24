@@ -6,13 +6,15 @@ from mipac.config import config
 from mipac.errors.base import NotExistRequiredData, NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.user import Achievement, LiteUser, UserDetailed
+from mipac.types.note import INote
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
+from mipac.utils.pagination import Pagination
 from mipac.utils.util import check_multi_arg
+from mipac.models.note import Note
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
-    from mipac.models.note import Note
 
 __all__ = ['UserActions']
 
@@ -116,10 +118,11 @@ class UserActions:
         with_files: bool = False,
         file_type: Optional[list[str]] = None,
         exclude_nsfw: bool = True,
-    ) -> list[Note]:
+        get_all: bool = False,
+    ) -> AsyncGenerator[Note, None]:
 
-        if check_multi_arg(user_id, self.__user):
-            raise ParameterError('user_idがありません')
+        if check_multi_arg(user_id, self.__user) is False:
+            raise ParameterError('user_idがありません', user_id, self.__user)
 
         user_id = user_id or self.__user and self.__user.id
         data = {
@@ -135,10 +138,21 @@ class UserActions:
             'fileType': file_type,
             'excludeNsfw': exclude_nsfw,
         }
-        res = await self.__session.request(
-            Route('POST', '/api/users/notes'), json=data, auth=True, lower=True
+
+        if get_all:
+            data['limit'] = 100
+            limit = 100
+
+        pagination = Pagination[INote](
+            self.__session, Route('POST', '/api/users/notes'), json=data, limit=limit
         )
-        return [Note(i, client=self.__client) for i in res]
+
+        while True:
+            res_notes = await pagination.next()
+            for note in res_notes:
+                yield Note(note, client=self.__client)
+            if get_all is False or pagination.is_final:
+                break
 
     def get_mention(self, user: Optional[LiteUser] = None) -> str:
         """
