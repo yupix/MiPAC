@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.config import config
@@ -14,6 +14,7 @@ from mipac.types.meta import IAdminMeta, IUpdateMetaBody
 from mipac.types.user import IUserDetailed
 from mipac.utils.cache import cache
 from mipac.utils.format import convert_dict_keys_to_camel
+from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -143,19 +144,30 @@ class AdminActions(AbstractAction):
         )
 
     async def get_moderation_logs(
-        self, limit: int = 10, since_id: str | None = None, until_id: str | None = None
-    ) -> ModerationLog:
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        get_all: bool = False,
+    ) -> AsyncGenerator[ModerationLog, None]:
         if config.use_version < 12:
             raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
 
         if limit > 100:
             raise ParameterError('limit must be less than 100')
 
+        if get_all:
+            limit = 100
+
         body = {'limit': limit, 'sinceId': since_id, 'untilId': until_id}
-        moderation_log_payload: IModerationLog = await self.__session.request(
-            Route('POST', '/api/admin/show-moderation-logs'), json=body, auth=True, lower=True
+        pagination = Pagination[IModerationLog](
+            self.__session, Route('POST', '/api/admin/show-moderation-logs'), json=body
         )
-        return ModerationLog(moderation_log_payload, client=self.__client)
+
+        while True:
+            res_moderation_logs = await pagination.next()
+            for res_moderation_log in res_moderation_logs:
+                yield ModerationLog(res_moderation_log, client=self.__client)
 
     @cache('server_info')
     async def get_server_info(self, **kwargs) -> ServerInfo:

@@ -12,6 +12,7 @@ from mipac.models.poll import MiPoll, Poll
 from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
+from mipac.utils.pagination import Pagination
 from mipac.utils.util import check_multi_arg
 
 if TYPE_CHECKING:
@@ -113,17 +114,14 @@ class ClientNoteActions(AbstractAction):
         since_id: str | None = None,
         untilId: str | None = None,
         note_id: str | None = None,
-        all: bool = True,
+        get_all: bool = True,
     ) -> AsyncGenerator[Note, None]:
 
         if limit > 100:
             raise ParameterError('limit は100以下である必要があります')
 
-        async def request(body) -> list[Note]:
-            res: list[INote] = await self._session.request(
-                Route('POST', '/api/notes/children'), lower=True, auth=True, json=body,
-            )
-            return [Note(note, client=self._client) for note in res]
+        if get_all:
+            limit = 100
 
         note_id = note_id or self._note_id
         data = {
@@ -132,20 +130,18 @@ class ClientNoteActions(AbstractAction):
             'sinceId': since_id,
             'untilId': untilId,
         }
-        first_req = await request(data)
-        for note in first_req:
-            yield note
 
-        if all and len(first_req) == 100:
-            data['untilId'] = first_req[-1].id
-            while True:
-                res = await request(data)
-                if len(res) <= 100:
-                    for note in res:
-                        yield note
-                if len(res) == 0:
-                    break
-                data['untilId'] = res[-1].id
+        pagination = Pagination[INote](
+            self._session, Route('POST', '/api/notes/children'), json=data
+        )
+
+        while True:
+            res_notes = await pagination.next()
+            for note in res_notes:
+                yield Note(note, self._client)
+
+            if get_all is False or pagination.is_final:
+                break
 
     async def get_state(self, note_id: str | None = None) -> NoteState:
         note_id = note_id or self._note_id
@@ -478,7 +474,8 @@ class NoteActions(ClientNoteActions):
         until_id: str | None = None,
         limit: int = 10,
         note_id: str | None = None,
-    ) -> list[Note]:
+        get_all: bool = False,
+    ) -> AsyncGenerator[Note, None]:
         """
         ノートに対する返信を取得します
 
@@ -495,17 +492,27 @@ class NoteActions(ClientNoteActions):
 
         Returns
         -------
-        list[Note]
-            返信のリスト
+        AsyncGenerator[Note, None]
+            返信
         """
+
+        if limit > 100:
+            raise ParameterError('limitは100以下である必要があります')
+        if get_all:
+            limit = 100
+
         note_id = note_id or self._note_id
-        res = await self._session.request(
-            Route('POST', '/api/notes/replies'),
-            json={'noteId': note_id, 'sinceId': since_id, 'untilId': until_id, 'limit': limit},
-            auth=True,
-            lower=True,
-        )
-        return [Note(i, client=self._client) for i in res]
+        body = {'noteId': note_id, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
+
+        pagination = Pagination[INote](self._session, Route('POST', '/api/notes'), json=body)
+
+        while True:
+            res_notes = await pagination.next()
+            for res_note in res_notes:
+                yield Note(res_note, client=self._client)
+
+            if get_all is False or pagination.is_final:
+                break
 
     async def gets(
         self,
@@ -518,17 +525,13 @@ class NoteActions(ClientNoteActions):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        all: bool = False,
+        get_all: bool = False,
     ) -> AsyncGenerator[Note, None]:
-
         if limit > 100:
             raise ParameterError('limit は100以下である必要があります')
 
-        async def request(body) -> list[Note]:
-            res: list[INote] = await self._session.request(
-                Route('POST', '/api/notes'), lower=True, auth=True, json=body
-            )
-            return [Note(note, client=self._client) for note in res]
+        if get_all:
+            limit = 100
 
         body = remove_dict_empty(
             {
@@ -543,20 +546,13 @@ class NoteActions(ClientNoteActions):
             }
         )
 
-        if all:
-            body['limit'] = 100
-        first_req = await request(body)
+        pagination = Pagination[INote](
+            self._session, Route('POST', '/api/notes'), json=body, limit=limit
+        )
 
-        for note in first_req:
-            yield note
-
-        if all and len(first_req) == 100:
-            body['untilId'] = first_req[-1].id
-            while True:
-                res = await request(body)
-                if len(res) <= 100:
-                    for note in res:
-                        yield note
-                if len(res) == 0:
-                    break
-                body['untilId'] = res[-1].id
+        while True:
+            res_notes = await pagination.next()
+            for note in res_notes:
+                yield Note(note, client=self._client)
+            if get_all is False or pagination.is_final:
+                break
