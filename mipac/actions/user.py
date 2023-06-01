@@ -5,13 +5,13 @@ from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional
 from mipac.config import config
 from mipac.errors.base import NotExistRequiredData, NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
+from mipac.models.note import Note
 from mipac.models.user import Achievement, LiteUser, UserDetailed
 from mipac.types.note import INote
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
 from mipac.utils.util import check_multi_arg
-from mipac.models.note import Note
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager

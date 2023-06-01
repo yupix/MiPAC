@@ -40,31 +40,41 @@ class FederationActions(AbstractAction):
         return res
 
     async def get_followers(
-        self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10, get_all: bool = False
+        self,
+        host: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        get_all: bool = False,
     ):
-        
+
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
 
         if get_all:
             limit = 100
-        
+
         body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
-        
-        pagination = Pagination[IFederationFollower](self.__session, Route('POST', '/api/federation/followers'), json=body)
-        
+
+        pagination = Pagination[IFederationFollower](
+            self.__session, Route('POST', '/api/federation/followers'), json=body
+        )
+
         while True:
             res_federation_followers: list[IFederationFollower] = await pagination.next()
             for federation_follower in res_federation_followers:
                 yield federation_follower
-            
+
             if get_all is False or pagination.is_final:
                 break
-        
-
 
     async def get_following(
-        self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10, get_all: bool = False
+        self,
+        host: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        get_all: bool = False,
     ):
 
         if limit > 100:
@@ -74,9 +84,11 @@ class FederationActions(AbstractAction):
             limit = 100
 
         body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
-        
-        pagination = Pagination[IFederationFollowing](self.__session, Route('POST', '/api/federation/following'), json=body)
-        
+
+        pagination = Pagination[IFederationFollowing](
+            self.__session, Route('POST', '/api/federation/following'), json=body
+        )
+
         while True:
             res_federation_followings: list[IFederationFollowing] = await pagination.next()
             for federation_following in res_federation_followings:
@@ -140,7 +152,7 @@ class FederationActions(AbstractAction):
 
     async def get_users(
         self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10
-    ) -> UserDetailed:
+    ) -> UserDetailed:  # TODO: pagination化する
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
         body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}

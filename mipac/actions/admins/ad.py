@@ -121,4 +121,3 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
 
             if get_all is False or pagination.is_final:
                 break
-

@@ -54,4 +54,3 @@ class BlockingActions(AbstractAction):
                 yield BlockingUser(user, client=self.__client)
             if get_all is False or pagination.is_final:
                 break
-
