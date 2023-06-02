@@ -7,6 +7,7 @@ from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import Route
 from mipac.models.emoji import CustomEmoji
 from mipac.types.emoji import ICustomEmoji
+from mipac.utils.pagination import Pagination
 from mipac.utils.util import check_multi_arg
 
 if TYPE_CHECKING:
@@ -80,18 +81,12 @@ class AdminEmojiActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        all: bool = True
+        get_all: bool = True
     ) -> AsyncGenerator[CustomEmoji, None]:
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
-        if all:
+        if get_all:
             limit = 100
-
-        async def request(body) -> list[CustomEmoji]:
-            res: list[ICustomEmoji] = await self.__session.request(
-                Route('POST', '/api/admin/emoji/list'), auth=True, json=body,
-            )
-            return [CustomEmoji(emoji, client=self.__client) for emoji in res]
 
         body = {
             'query': query,
@@ -99,19 +94,18 @@ class AdminEmojiActions(AbstractAction):
             'sinceId': since_id,
             'untilId': until_id,
         }
-        first_req = await request(body)
 
-        for emoji in first_req:
-            yield emoji
-        if all and len(first_req) == 100:
-            body['untilId'] = first_req[-1].id
-            while True:
-                res = await request(body)
-                if len(res) <= 100:
-                    for emoji in res:
-                        yield emoji
-                if len(res) < 100:
-                    break
+        pagination = Pagination[ICustomEmoji](
+            self.__session, Route('POST', '/api/admin/emoji/list'), json=body
+        )
+
+        while True:
+            res_custom_emojis = await pagination.next()
+            for res_custom_emoji in res_custom_emojis:
+                yield CustomEmoji(res_custom_emoji, client=self.__client)
+
+            if get_all is False or pagination.is_final:
+                break
 
     async def gets_remote(
         self,
@@ -121,18 +115,12 @@ class AdminEmojiActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        all: bool = True
+        get_all: bool = True
     ) -> AsyncGenerator[CustomEmoji, None]:
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
-        if all:
+        if get_all:
             limit = 100
-
-        async def request(body) -> list[CustomEmoji]:
-            res: list[ICustomEmoji] = await self.__session.request(
-                Route('POST', '/api/admin/emoji/list-remote'), auth=True, json=body,
-            )
-            return [CustomEmoji(emoji, client=self.__client) for emoji in res]
 
         body = {
             'query': query,
@@ -141,26 +129,26 @@ class AdminEmojiActions(AbstractAction):
             'sinceId': since_id,
             'untilId': until_id,
         }
-        first_req = await request(body)
 
-        for note in first_req:
-            yield note
+        pagination = Pagination[ICustomEmoji](
+            self.__session, Route('POST', '/api/admin/emoji/list-remote'), json=body
+        )
 
-        if all and len(first_req) == 100:
-            body['untilId'] = first_req[-1].id
-            while True:
-                res = await request(body)
-                if len(res) <= 100:
-                    for note in res:
-                        yield note
-                if len(res) == 0:
-                    break
-                body['untilId'] = res[-1].id
+        while True:
+            res_custom_emojis = await pagination.next()
+            for res_custom_emoji in res_custom_emojis:
+                yield CustomEmoji(res_custom_emoji, client=self.__client)
+
+            if get_all is False or pagination.is_final:
+                break
 
     async def set_license_bulk(self, ids: list[str], license: str | None = None) -> bool:
         body = {'ids': ids, 'license': license}
         res: bool = await self.__session.request(
-            Route('POST', '/api/admin/emoji/set-license-bulk'), auth=True, json=body, remove_none=False  # remove_noneをFalseにしないとlisenceが消せなくなる
+            Route('POST', '/api/admin/emoji/set-license-bulk'),
+            auth=True,
+            json=body,
+            remove_none=False,  # remove_noneをFalseにしないとlisenceが消せなくなる
         )
         return res
 

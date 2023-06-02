@@ -183,7 +183,7 @@ class UserActions:
         origin: Literal['local', 'remote', 'combined'] = 'combined',
         detail: bool = True,
         *,
-        all: bool = False,
+        get_all: bool = False,
     ) -> AsyncGenerator[UserDetailed | LiteUser, None]:
         """
         Search users by keyword.
@@ -200,7 +200,7 @@ class UserActions:
             The origin of users to search.
         detail : bool, default=True
             Whether to return detailed user information.
-        all : bool, default=False
+        get_all : bool, default=False
             Whether to return all users.
 
         Returns
@@ -212,39 +212,23 @@ class UserActions:
         if limit > 100:
             raise ParameterError('limit は100以下である必要があります')
 
-        async def request(body) -> list[UserDetailed | LiteUser]:
-            res = await self.__session.request(
-                Route('POST', '/api/users/search'), lower=True, auth=True, json=body,
-            )
-            return [
-                UserDetailed(user, client=self.__client)
-                if detail
-                else LiteUser(user, client=self.__client)
-                for user in res
-            ]
+        if get_all:
+            limit = 100
 
         body = remove_dict_empty(
             {'query': query, 'limit': limit, 'offset': offset, 'origin': origin, 'detail': detail}
         )
 
-        if all:
-            body['limit'] = 100
-        first_req = await request(body)
+        pagination = Pagination[UserDetailed | LiteUser](
+            self.__session, Route('POST', '/api/users/search'), json=body, pagination_type='count'
+        )
 
-        for user in first_req:
-            yield user
-
-        if all and len(first_req) == 100:
-            times = 1
-            while True:
-                body['offset'] = times * 100
-                res = await request(body)
-                if len(res) <= 100:
-                    for user in res:
-                        yield user
-                if len(res) == 0:
-                    break
-                times += 1
+        while True:
+            res_users = await pagination.next()
+            for user in res_users:
+                yield UserDetailed(user, client=self.__client) if detail else LiteUser(user, client=self.__client)  # type: ignore
+            if get_all is False or pagination.is_final:
+                break
 
     async def search_by_username_and_host(
         self, username: str, host: str, limit: int = 100, detail: bool = True,

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
@@ -151,16 +151,26 @@ class FederationActions(AbstractAction):
         )
 
     async def get_users(
-        self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10
-    ) -> UserDetailed:  # TODO: pagination化する
+        self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10, get_all: bool = False
+    ) -> AsyncGenerator[UserDetailed, None]:
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
+        
+        if get_all:
+            limit = 100
+        
         body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
 
-        res: IUserDetailed = await self.__session.request(
-            Route('POST', '/api/federation/users'), auth=True, json=body
-        )
-        return UserDetailed(res, client=self.__client)
+        pagination = Pagination[IUserDetailed](self.__session, Route('POST', '/api/federation/users'), json=body)
+        
+        while True:
+            res_users: list[IUserDetailed] = await pagination.next()
+            for user in res_users:
+                yield UserDetailed(user, client=self.__client)
+            
+            if get_all is False or pagination.is_final:
+                break
+
 
     async def get_stats(self, limit: int = 10) -> IFederationInstanceStat:
         if limit > 100:
