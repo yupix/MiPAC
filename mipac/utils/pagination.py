@@ -1,4 +1,5 @@
 from typing import Any, Generic, Literal, TypeVar
+
 from mipac.http import HTTPClient, Route
 
 T = TypeVar('T')
@@ -29,7 +30,9 @@ class Pagination(Generic[T]):
         self.limit: int = limit
         self.max_limit: int = max_limit
         self.count = 0
-        self.latest_res: list[Any] = []
+        self.next_id: str = ''
+        self.previous_id: str = ''
+        self.latest_res_count: int = 0
 
     async def next(self) -> list[T]:
         if self.pagination_type == 'count':
@@ -43,19 +46,20 @@ class Pagination(Generic[T]):
             json=self.json,
         )
         if self.pagination_type == 'until':
-            self.json['untilId'] = res[-1]['id']  # type: ignore
-        self.latest_res = res
+            self.previous_id = self.json.get('untilId', '')  # 前のIDを保存しておく
+            self.next_id = res[-1]['id']  # type: ignore
+            self.json['untilId'] = self.next_id
+        self.latest_res_count = len(res)
         return res
 
     @property
     def is_final(self) -> bool:
         if (
             self.pagination_type == 'count'
-            and len(self.latest_res) == 0
-            or len(self.latest_res) < self.max_limit
+            and self.latest_res_count == 0
+            or self.latest_res_count < self.max_limit
         ):
             return True
-        if self.pagination_type == 'until' and len(self.latest_res) == 0:
+        if self.pagination_type == 'until' and self.latest_res_count == 0:
             return True
         return False
-
