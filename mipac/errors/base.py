@@ -17,7 +17,7 @@ class APIError(Exception):
                 self.code: str | None = error.get('code', '')
                 self.id: str | None = error.get('id')
                 self.message: str | None = error.get('message', '')
-        super().__init__(self.message or self.raw)
+        super().__init__(f'{self.message}\nRaw error: {self.raw} ' if self.message else self.raw)
 
     def raise_error(self):
         if not self.code:
