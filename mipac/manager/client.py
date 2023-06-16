@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.actions.client import ClientActions
 from mipac.http import HTTPClient
 from mipac.manager.admins.admin import AdminManager
+from mipac.manager.antenna import AntennaManager
 from mipac.manager.channel import ChannelManager
 from mipac.manager.chart import ChartManager
 from mipac.manager.chat import ChatManager
@@ -42,6 +43,7 @@ class ClientManager:
             session=session, client=self,
         )
         self.emoji: EmojiManager = EmojiManager(session=session, client=self)
+        self.antenna: AntennaManager = AntennaManager(session=session, client=self)
         self._config: Config = config
 
     @property
