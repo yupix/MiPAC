@@ -338,7 +338,7 @@ class DriveActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         folder_id: str | None = None,
-        get_all: bool=False
+        get_all: bool = False,
     ) -> AsyncGenerator[Folder, None]:
         """
         フォルダーの一覧を取得します
@@ -368,12 +368,14 @@ class DriveActions(AbstractAction):
             'untilId': until_id,
             'folderId': folder_id,
         }
-        
-        pagination = Pagination[FolderPayload](self._session, Route('POST', '/api/drive/folders'), json=body)
-        
+
+        pagination = Pagination[FolderPayload](
+            self._session, Route('POST', '/api/drive/folders'), json=body
+        )
+
         while True:
             res_folders = await pagination.next()
             for res_folder in res_folders:
-                yield Folder(res_folder,client=self._client)
+                yield Folder(res_folder, client=self._client)
             if get_all is False or pagination.is_final:
                 break

@@ -90,4 +90,3 @@ class MuteActions(AbstractAction):
 
             if get_all is False or pagination.is_final:
                 break
-
