@@ -128,7 +128,7 @@ REQUEST:{COLORS.reset}
         match_domain = re.search(r'https?:\/\/([^\/]+)', self._url)
         match_protocol = re.search(r'^(http|https)', self._url)
         if match_domain is None or match_protocol is None:
-            raise Exception()
+            raise Exception('Server URL cannot be retrieved or protocol (http / https) is missing')
         protocol = True if match_protocol.group(1) == 'https' else False
         config.from_dict(
             host=match_domain.group(1), is_ssl=protocol,
