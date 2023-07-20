@@ -1,25 +1,72 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
-
 ## [Unreleased]
 
-### Added
+### New Features ✨
 
-#### 以下のエンドポイントがサポートされます。
+#### `Client` で `async with` 構文がサポートされました
+
+一時的にセッションを作成したい場合などに `login` メソッドや `close_session` メソッドを使用するのは非常に手間であるため、一時的にセッションを作成したいといった場合におすすめします。
+
+```py
+async with Client('server url', 'token') as client:
+    api = client.api
+    async for emoji in api.admin.emoji.action.gets():
+        print(emoji)
+```
+
+#### 以下のエンドポイントがサポートされました
 
 - `/api/admin/emoji/set-license-bulk`
+- `/api/antennas/create`
+- `/api/antennas/delete`
+- `/api/antennas/list`
+- `/api/antennas/notes`
+- `/api/antennas/show`
+- `/api/antennas/update`
 
-#### 詳細な変更点
+### Breaking changes 💔
+
+#### 全取得の際の引数 `all` が `get_all` に変更されます。
+
+影響を受けるのはキーワード引数を使用していた方です。位置引数を使用していた方は特に問題ありません。
+
+```diff
+-Client.api.admin.emoji.action.gets(all=True)
++Client.api.admin.emoji.action.gets(get_all=True)
+```
+
+#### `NoteManager.get` が削除されました
+
+何故あったのか分かりませんが、Managerの責務から逸脱しているためです
+
+### Fixed 🛠️
+
+- 一部 `all` 引数が存在しないが、 built-inの `all` が存在することで動作していた箇所が修正されました
+
+### Other notable changes 📜
 
 - 新しい実績をサポートしました
 - ロールの作成時に `is_explorable` を使用できるようになりました。
   - 最新のインスタンス等で無いと使用できない可能性があります
 - update_metaのリクエスト時に `server_rules` パラメータが使用できるようになりました
   - このパラメータは `13.11.3` 以降のバージョン（`13.11.3`は含みません）を使用している場合は必須であり、それ以前のバージョンを使用している場合は指定するとエラーが発生する可能性があります。
+- 全取得が以下のメソッドでサポートされました。それに伴い、一部のメソッドがジェネレーターになっています。
+  - `FederationActions.get_followers`
+  - `FederationActions.get_following`
+  - `FederationActions.get_users`
+  - `AdminAnnouncementActions.gets`
+  - `AdminRoleModelActions.get_users`
+  - `AdminAdvertisingActions.get_list`
+  - `AdminActions.get_moderation_logs`
+  - `NoteActions.get_replies`
+  - `NoteActions.gets`
+  - `FileActions.get_files`
+  - `ClientFolderActions.get_files`
+  - `DriveActions.get_folders`
+- `Pagination` クラスが追加されました
+  - 基本的にユーザーが使うことは想定されていません
+
 
 ## [0.4.3] 2023-04-25
 
