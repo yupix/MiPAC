@@ -9,6 +9,7 @@ T = TypeVar('T')
 
 INoteVisibility = Literal['public', 'home', 'followers', 'specified']
 
+
 class INoteState(TypedDict):
     is_favorited: bool
     is_watching: bool

@@ -7,8 +7,6 @@ import sys
 from typing import Any, Literal, TypeVar
 
 import aiohttp
-
-from mipac import __version__
 from mipac.config import config
 from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
@@ -16,6 +14,8 @@ from mipac.types.meta import IMeta
 from mipac.types.user import IUserDetailed
 from mipac.utils.format import remove_dict_empty, upper_to_lower
 from mipac.utils.util import COLORS, _from_json
+
+from mipac import __version__
 
 _log = logging.getLogger(__name__)
 

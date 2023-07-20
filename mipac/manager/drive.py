@@ -23,7 +23,7 @@ class ClientFileManager(AbstractManager):
         self,
         file_id: str | None = None,
         folder_id: str | None = None,
-        url: str |None = None,
+        url: str | None = None,
         *,
         session: HTTPClient,
         client: ClientManager
@@ -50,7 +50,7 @@ class FileManager(AbstractManager):
         self,
         file_id: str | None = None,
         folder_id: str | None = None,
-        url: str |None = None,
+        url: str | None = None,
         *,
         session: HTTPClient,
         client: ClientManager
@@ -167,5 +167,9 @@ class DriveManager(AbstractManager):
         self, *, file_id: str, url: str, folder_id: str | None = None
     ) -> ClientFileManager:
         return ClientFileManager(
-            file_id=file_id, folder_id=folder_id, url=url, session=self.__session, client=self.__client
+            file_id=file_id,
+            folder_id=folder_id,
+            url=url,
+            session=self.__session,
+            client=self.__client,
         )

@@ -1,9 +1,10 @@
 from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 from mipac.abstract.manager import AbstractManager
-from mipac.http import HTTPClient
 from mipac.actions.antenna import AntennaActions, ClientAntennaActions
+from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager

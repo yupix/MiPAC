@@ -21,7 +21,7 @@ class Client:
         self.config: Config = config
         self.http: HTTPClient = HTTPClient(url, token)
 
-    async def __aenter__(self ) -> Self:
+    async def __aenter__(self) -> Self:
         await self.http.login()
         return self
 

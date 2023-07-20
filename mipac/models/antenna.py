@@ -1,14 +1,14 @@
 from __future__ import annotations
-from datetime import datetime
 
+from datetime import datetime
 from typing import TYPE_CHECKING
+
 from mipac.types.antenna import IAntenna, IAntennaReceiveSource
 from mipac.utils.format import str_to_datetime
 
-
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientManager
     from mipac.manager.antenna import ClientAntennaManager
+    from mipac.manager.client import ClientManager
 
 
 class Antenna:

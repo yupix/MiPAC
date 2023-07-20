@@ -1,8 +1,8 @@
 from __future__ import annotations
-from http.client import HTTPException
-import io
-from os import PathLike
 
+import io
+from http.client import HTTPException
+from os import PathLike
 from typing import TYPE_CHECKING, Any, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
@@ -25,7 +25,7 @@ class ClientFileActions(AbstractAction):
         self,
         file_id: str | None = None,
         folder_id: str | None = None,
-        url: str |None = None,
+        url: str | None = None,
         *,
         session: HTTPClient,
         client: ClientManager
@@ -61,7 +61,12 @@ class ClientFileActions(AbstractAction):
             )
         )
 
-    async def save(self, fp: io.BufferedIOBase | PathLike[Any], file_id:str | None =None, url: str |None=None):
+    async def save(
+        self,
+        fp: io.BufferedIOBase | PathLike[Any],
+        file_id: str | None = None,
+        url: str | None = None,
+    ):
         file_id = file_id or self._file_id
         url = url or self._url
         if any([file_id, url]) is False:
@@ -70,7 +75,7 @@ class ClientFileActions(AbstractAction):
         if url is None:
             result = await self._client.drive.file.action.show_file(file_id=file_id)
             url = result.url
-        
+
         async with self._session.session.get(url) as resp:
             if resp.status == 200:
                 content = await resp.read()
@@ -80,8 +85,6 @@ class ClientFileActions(AbstractAction):
                 raise FileNotFoundError('File not found')
             else:
                 raise HTTPException(resp, 'Failed to get file')
-                
-
 
     @deprecated
     async def remove_file(self, file_id: str | None = None) -> bool:
@@ -112,12 +115,14 @@ class FileActions(ClientFileActions):
         self,
         file_id: str | None = None,
         folder_id: str | None = None,
-        url: str |None = None,
+        url: str | None = None,
         *,
         session: HTTPClient,
         client: ClientManager
     ) -> None:
-        super().__init__(file_id=file_id, folder_id=folder_id, url=url, session=session, client=client)
+        super().__init__(
+            file_id=file_id, folder_id=folder_id, url=url, session=session, client=client
+        )
 
     async def show_file(self, file_id: str | None = None, url: str | None = None) -> File:
         """
