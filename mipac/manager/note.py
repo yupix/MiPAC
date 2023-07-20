@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.note import ClientNoteActions, NoteActions
-from mipac.http import HTTPClient, Route
+from mipac.http import HTTPClient
 from mipac.manager.favorite import FavoriteManager
 from mipac.manager.poll import PollManager
 from mipac.manager.reaction import ReactionManager

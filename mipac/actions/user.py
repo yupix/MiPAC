@@ -226,7 +226,9 @@ class UserActions:
         while True:
             res_users = await pagination.next()
             for user in res_users:
-                yield UserDetailed(user, client=self.__client) if detail else LiteUser(user, client=self.__client)  # type: ignore
+                if detail:
+                    yield UserDetailed(user, client=self.__client)
+                yield LiteUser(user, client=self.__client)
             if get_all is False or pagination.is_final:
                 break
 
