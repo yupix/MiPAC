@@ -15,8 +15,6 @@ class Client:
         use_version_autodetect: bool = True
     ) -> None:
         setup_logging(level=log_level)
-        self.__url: str = url
-        self.__token: str | None = token
         config.from_dict(use_version=use_version, use_version_autodetect=use_version_autodetect)
         self.config: Config = config
         self.http: HTTPClient = HTTPClient(url, token)
