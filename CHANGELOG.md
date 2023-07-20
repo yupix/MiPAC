@@ -15,7 +15,19 @@ async with Client('server url', 'token') as client:
         print(emoji)
 ```
 
-#### `ClientFileActions` に `save` メソッドが追加されました
+#### File モデルに `api` プロパティーが追加されました
+
+今まではモデルに `api` プロパティーが無かったため、 `api` プロパティーからアクションにアクセスし、対象のメソッドに対してファイルIDなどといった引数を自分で渡す必要がありましたが、今後はモデルから直接実行できます。
+
+```diff
+-async for file in api.drive.file.action.get_files(get_all=True):
+-  await api.drive.file.action.remove(file.id)
++async for file in api.drive.file.action.get_files(get_all=True):
++  await file.api.action.remove()
+```
+
+
+#### `FileActions` に `save` メソッドが追加されました
 
 指定したパス、またはBufferにファイルをダウンロードできるようになりました。
 パスを指定する場合
