@@ -30,5 +30,3 @@ jobs:
     - name: Lint with flake8
       run: |
         flake8 mipac
-    - name: Lint with Ruff
-      run: ruff mipac
