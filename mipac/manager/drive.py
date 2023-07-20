@@ -23,6 +23,7 @@ class ClientFileManager(AbstractManager):
         self,
         file_id: str | None = None,
         folder_id: str | None = None,
+        url: str |None = None,
         *,
         session: HTTPClient,
         client: ClientManager
@@ -31,12 +32,14 @@ class ClientFileManager(AbstractManager):
         self.__client: ClientManager = client
         self.__file_id: str | None = file_id
         self.__folder_id: str | None = folder_id
+        self.__url: str | None = url
 
     @property
     def action(self) -> ClientFileActions:
         return ClientFileActions(
             file_id=self.__file_id,
             folder_id=self.__folder_id,
+            url=self.__url,
             client=self.__client,
             session=self.__session,
         )
@@ -47,6 +50,7 @@ class FileManager(AbstractManager):
         self,
         file_id: str | None = None,
         folder_id: str | None = None,
+        url: str |None = None,
         *,
         session: HTTPClient,
         client: ClientManager
@@ -55,6 +59,7 @@ class FileManager(AbstractManager):
         self.__client: ClientManager = client
         self.__file_id = file_id
         self.__folder_id: str | None = folder_id
+        self.__url: str | None = url
 
     @property
     def action(self) -> FileActions:
@@ -69,6 +74,7 @@ class FileManager(AbstractManager):
         return FileActions(
             file_id=self.__file_id,
             folder_id=self.__folder_id,
+            url=self.__url,
             client=self.__client,
             session=self.__session,
         )
@@ -158,8 +164,8 @@ class DriveManager(AbstractManager):
         )
 
     def _get_client_file_instance(
-        self, file_id: str, folder_id: str | None = None
+        self, *, file_id: str, url: str, folder_id: str | None = None
     ) -> ClientFileManager:
         return ClientFileManager(
-            file_id=file_id, folder_id=folder_id, session=self.__session, client=self.__client
+            file_id=file_id, folder_id=folder_id, url=url, session=self.__session, client=self.__client
         )

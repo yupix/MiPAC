@@ -15,6 +15,22 @@ async with Client('server url', 'token') as client:
         print(emoji)
 ```
 
+#### `ClientFileActions` に `save` メソッドが追加されました
+
+指定したパス、またはBufferにファイルをダウンロードできるようになりました。
+パスを指定する場合
+```py
+async for file in api.drive.file.action.get_files(get_all=True):
+    await file.api.action.save(f'./test/{file.name}')
+```
+
+Bufferを指定する場合:
+```py
+async for file in api.drive.file.action.get_files(get_all=True):
+    with open(f'./test/{file.name}', mode='mb') as f:
+      await file.api.action.save(f)
+```
+
 #### 以下のエンドポイントがサポートされました
 
 - `/api/admin/emoji/set-license-bulk`

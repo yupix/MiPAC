@@ -121,4 +121,4 @@ class File:
 
     @property
     def api(self) -> ClientFileManager:
-        return self.__client.drive._get_client_file_instance(file_id=self.id)
+        return self.__client.drive._get_client_file_instance(file_id=self.id, url=self.url)
