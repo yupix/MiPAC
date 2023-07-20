@@ -3,9 +3,9 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Generic, Literal, TypeVar
 
+from mipac.models.drive import File
 from mipac.models.lite.user import LiteUser
-from mipac.types.drive import IDriveFile
-from mipac.types.note import IPartialNote
+from mipac.types.note import INoteVisibility, IPartialNote
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
@@ -34,8 +34,8 @@ class PartialNote(Generic[T]):
         return self._note['file_ids']
 
     @property
-    def files(self) -> list[IDriveFile]:  # TODO: モデルに
-        return self._note['files']
+    def files(self) -> list[File]:
+        return [File(file, client=self._client) for file in self._note['files']]
 
     @property
     def id(self) -> str:
