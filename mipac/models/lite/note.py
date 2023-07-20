@@ -107,7 +107,7 @@ class PartialNote(Generic[T]):
         return self._note['user_id']
 
     @property
-    def visibility(self,) -> Literal['public', 'home', 'followers', 'specified']:
+    def visibility(self,) -> INoteVisibility:
         return self._note['visibility']
 
     @property

@@ -7,6 +7,7 @@ from .user import ILiteUser
 
 T = TypeVar('T')
 
+INoteVisibility = Literal['public', 'home', 'followers', 'specified']
 
 class INoteState(TypedDict):
     is_favorited: bool
@@ -70,7 +71,7 @@ class IPartialNote(TypedDict):
     text: str | None
     user: ILiteUser
     user_id: str
-    visibility: Literal['public', 'home', 'followers', 'specified']
+    visibility: INoteVisibility
     tags: NotRequired[list[str]]  # タグがついてないとbodyに存在しない
 
 

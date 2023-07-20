@@ -9,7 +9,7 @@ from mipac.http import HTTPClient, Route
 from mipac.models.drive import File
 from mipac.models.note import Note, NoteReaction, NoteState, NoteTranslateResult
 from mipac.models.poll import MiPoll, Poll
-from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult
+from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult, INoteVisibility
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
@@ -23,7 +23,7 @@ __all__ = ['NoteActions']
 
 def create_note_body(
     content: str | None = None,
-    visibility: Literal['public', 'home', 'followers', 'specified'] = 'public',
+    visibility: INoteVisibility = 'public',
     visible_user_ids: list[str] | None = None,
     cw: str | None = None,
     local_only: bool = False,
@@ -227,7 +227,7 @@ class ClientNoteActions(AbstractAction):
     async def reply(
         self,
         content: str | None = None,
-        visibility: Literal['public', 'home', 'followers', 'specified'] = 'public',
+        visibility: INoteVisibility = 'public',
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
@@ -262,7 +262,7 @@ class ClientNoteActions(AbstractAction):
     async def create_quote(
         self,
         content: str | None = None,
-        visibility: Literal['public', 'home', 'followers', 'specified'] = 'public',
+        visibility: INoteVisibility = 'public',
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
@@ -280,7 +280,7 @@ class ClientNoteActions(AbstractAction):
         ----------
         content: str | None, default=None
             text
-        visibility: Literal['public', 'home', 'followers', 'specified'], default='public'
+        visibility: INoteVisibility, default='public'
             Disclosure range
         visible_user_ids: list[str] | None, default=None
             List of users to be published
@@ -363,7 +363,7 @@ class NoteActions(ClientNoteActions):
     async def send(
         self,
         content: str | None = None,
-        visibility: Literal['public', 'home', 'followers', 'specified'] = 'public',
+        visibility: INoteVisibility = 'public',
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
@@ -383,7 +383,7 @@ class NoteActions(ClientNoteActions):
         ----------
         content : str | None, default=None
             投稿する内容
-        visibility : Literal['public', 'home', 'followers', 'specified'], optional
+        visibility : INoteVisibility, optional
             公開範囲, by default "public"
             Enum: "public" "home" "followers" "specified"
         visible_user_ids : list[str] | None, optional
