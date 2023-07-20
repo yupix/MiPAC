@@ -101,6 +101,10 @@ class ClientNoteActions(AbstractAction):
         bool
             Whether the release was successful
         """
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError('note_id is required')
 
         body = {'noteId': note_id}
         res: bool = await self._session.request(
@@ -124,6 +128,10 @@ class ClientNoteActions(AbstractAction):
             limit = 100
 
         note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError('note_id is required')
+
         data = {
             'noteId': note_id,
             'limit': limit,
@@ -145,6 +153,10 @@ class ClientNoteActions(AbstractAction):
 
     async def get_state(self, note_id: str | None = None) -> NoteState:
         note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError('note_id is required')
+
         data = {'noteId': note_id}
         res: INoteState = await self._session.request(
             Route('POST', '/api/notes/state'), auth=True, json=data
@@ -172,6 +184,9 @@ class ClientNoteActions(AbstractAction):
 
         note_id = note_id or self._note_id
 
+        if note_id is None:
+            raise ParameterError('note_id is required')
+
         data = {'noteId': note_id, 'clipId': clip_id}
         return bool(
             await self._session.request(Route('POST', '/api/clips/add-note'), json=data, auth=True)
@@ -194,6 +209,9 @@ class ClientNoteActions(AbstractAction):
 
         note_id = note_id or self._note_id
 
+        if note_id is None:
+            raise ParameterError('note_id is required')
+
         data = {'noteId': note_id}
         res = await self._session.request(Route('POST', '/api/notes/delete'), json=data, auth=True)
         return bool(res)
@@ -212,7 +230,13 @@ class ClientNoteActions(AbstractAction):
         Note
             Renoted note
         """
-        body = create_note_body(renote_id=note_id,)
+
+        note_id = self._note_id or note_id
+
+        if note_id is None:
+            raise ParameterError('note_id is required')
+
+        body = create_note_body(renote_id=note_id)
         res: ICreatedNote = await self._session.request(
             Route('POST', '/api/notes/create'), json=body, auth=True, lower=True,
         )
@@ -240,6 +264,9 @@ class ClientNoteActions(AbstractAction):
     ) -> Note:
 
         reply_id = reply_id or self._note_id
+
+        if reply_id is None:
+            raise ParameterError('reply_id is required')
 
         body = create_note_body(
             content=content,
@@ -304,6 +331,9 @@ class ClientNoteActions(AbstractAction):
 
         note_id = note_id or self._note_id
 
+        if note_id is None:
+            raise ParameterError('note_id is required')
+
         body = create_note_body(
             content=content,
             cw=cw,
@@ -344,6 +374,9 @@ class ClientNoteActions(AbstractAction):
         """
         note_id = note_id or self._note_id
 
+        if note_id is None:
+            raise ParameterError('note_id is required')
+
         data = {'noteId': note_id, 'targetLang': target_lang}
         res: INoteTranslateResult = await self._session.request(
             Route('POST', '/api/notes/translate'), json=data, auth=True
@@ -351,6 +384,56 @@ class ClientNoteActions(AbstractAction):
         if isinstance(res, dict):
             return NoteTranslateResult(res)
         APIError(f'Translate Error: {res}', res if isinstance(res, int) else 204).raise_error()
+
+    async def get_replies(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        note_id: str | None = None,
+        get_all: bool = False,
+    ) -> AsyncGenerator[Note, None]:
+        """
+        ノートに対する返信を取得します
+
+        Parameters
+        ---------
+        since_id : str | None, default=None
+            指定すると、その投稿を投稿を起点としてより新しい投稿を取得します
+        until_id : str | None, default=None
+            指定すると、その投稿を投稿を起点としてより古い投稿を取得します
+        limit : int, default=10
+            取得する上限
+        note_id: str | None, default=None
+            返信を取得したいノートのID
+
+        Returns
+        -------
+        AsyncGenerator[Note, None]
+            返信
+        """
+
+        if limit > 100:
+            raise ParameterError('limitは100以下である必要があります')
+        if get_all:
+            limit = 100
+
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError('note_id is required')
+
+        body = {'noteId': note_id, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
+
+        pagination = Pagination[INote](self._session, Route('POST', '/api/notes'), json=body)
+
+        while True:
+            res_notes = await pagination.next()
+            for res_note in res_notes:
+                yield Note(res_note, client=self._client)
+
+            if get_all is False or pagination.is_final:
+                break
 
 
 class NoteActions(ClientNoteActions):
@@ -440,13 +523,13 @@ class NoteActions(ClientNoteActions):
         return Note(res['created_note'], client=self._client)
 
     @cache(group='get_note')
-    async def get(self, note_id: str | None = None) -> Note:
+    async def get(self, note_id: str) -> Note:
         """
         ノートを取得します
 
         Parameters
         ----------
-        note_id : str | None, default=None
+        note_id : str
             ノートのID
 
         Returns
@@ -454,65 +537,17 @@ class NoteActions(ClientNoteActions):
         Note
             取得したノートID
         """
-        note_id = note_id or self._note_id
         res = await self._session.request(
             Route('POST', '/api/notes/show'), json={'noteId': note_id}, auth=True, lower=True,
         )
         return Note(res, client=self._client)
 
     @cache(group='get_note', override=True)
-    async def fetch(self, note_id: str | None = None) -> Note:
-        note_id = note_id or self._note_id
+    async def fetch(self, note_id: str) -> Note:
         res = await self._session.request(
             Route('POST', '/api/notes/show'), json={'noteId': note_id}, auth=True, lower=True,
         )
         return Note(res, client=self._client)
-
-    async def get_replies(
-        self,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        limit: int = 10,
-        note_id: str | None = None,
-        get_all: bool = False,
-    ) -> AsyncGenerator[Note, None]:
-        """
-        ノートに対する返信を取得します
-
-        Parameters
-        ---------
-        since_id : str | None, default=None
-            指定すると、その投稿を投稿を起点としてより新しい投稿を取得します
-        until_id : str | None, default=None
-            指定すると、その投稿を投稿を起点としてより古い投稿を取得します
-        limit : int, default=10
-            取得する上限
-        note_id: str | None, default=None
-            返信を取得したいノートのID
-
-        Returns
-        -------
-        AsyncGenerator[Note, None]
-            返信
-        """
-
-        if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
-        if get_all:
-            limit = 100
-
-        note_id = note_id or self._note_id
-        body = {'noteId': note_id, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
-
-        pagination = Pagination[INote](self._session, Route('POST', '/api/notes'), json=body)
-
-        while True:
-            res_notes = await pagination.next()
-            for res_note in res_notes:
-                yield Note(res_note, client=self._client)
-
-            if get_all is False or pagination.is_final:
-                break
 
     async def gets(
         self,
