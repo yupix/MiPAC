@@ -1,3 +1,5 @@
+from typing import Self
+
 from mipac.config import Config, IMisskeyVersions, config
 from mipac.http import HTTPClient
 from mipac.manager.client import ClientManager
@@ -18,6 +20,13 @@ class Client:
         config.from_dict(use_version=use_version, use_version_autodetect=use_version_autodetect)
         self.config: Config = config
         self.http: HTTPClient = HTTPClient(url, token)
+
+    async def __aenter__(self ) -> Self:
+        await self.http.login()
+        return self
+
+    async def __aexit__(self, exc_type, exc, tb) -> None:
+        await self.close_session()
 
     @property
     def api(self) -> ClientManager:
