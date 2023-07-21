@@ -24,7 +24,7 @@ class UserManager(AbstractManager):
         user_id: str | None = user.id if user else None
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
-        self.user: LiteUser | None = user
+        self.__user: LiteUser | None = user
         self.follow: FollowManager = FollowManager(user_id=user_id, session=session, client=client)
         self.mute: MuteManager = MuteManager(user_id=user_id, session=session, client=client)
         self.block = BlockingManager(user_id=user_id, session=session, client=client)
@@ -38,4 +38,4 @@ class UserManager(AbstractManager):
         UserActions
             ユーザーに対するアクションを行うクラス
         """
-        return UserActions(session=self.__session, client=self.__client, user=self.user)
+        return UserActions(session=self.__session, client=self.__client, user=self.__user)

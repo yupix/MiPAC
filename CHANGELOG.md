@@ -65,6 +65,17 @@ async for file in api.drive.file.action.get_files(get_all=True):
 - `/api/antennas/notes`
 - `/api/antennas/show`
 - `/api/antennas/update`
+- `/api/clips/create`
+- `/api/clips/delete`
+- `/api/clips/list`
+- `/api/clips/show`
+- `/api/clips/update`
+- `/api/notes/clips`
+- `/api/clips/add-note`
+- `/api/clips/remove-note`
+- `/api/clips/notes`
+- `/api/clips/my-favorites`
+- `/api/users/clips`
 
 ### Breaking changes 💔
 
@@ -93,6 +104,7 @@ async for file in api.drive.file.action.get_files(get_all=True):
 ### Other notable changes 📜
 
 - 新しい実績をサポートしました
+- クリップがサポートされました
 - ロールの作成時に `is_explorable` を使用できるようになりました。
   - 最新のインスタンス等で無いと使用できない可能性があります
 - update_metaのリクエスト時に `server_rules` パラメータが使用できるようになりました

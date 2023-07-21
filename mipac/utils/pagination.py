@@ -47,7 +47,8 @@ class Pagination(Generic[T]):
         )
         if self.pagination_type == 'until':
             self.previous_id = self.json.get('untilId', '')  # 前のIDを保存しておく
-            self.next_id = res[-1]['id']  # type: ignore
+            if len(res) > 0:
+                self.next_id = res[-1]['id']  # type: ignore
             self.json['untilId'] = self.next_id
         self.latest_res_count = len(res)
         return res
