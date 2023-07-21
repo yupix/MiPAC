@@ -6,9 +6,11 @@ from mipac.abstract.action import AbstractAction
 from mipac.errors.base import APIError, ParameterError
 from mipac.file import MiFile
 from mipac.http import HTTPClient, Route
+from mipac.models.clip import Clip
 from mipac.models.drive import File
 from mipac.models.note import Note, NoteReaction, NoteState, NoteTranslateResult
 from mipac.models.poll import MiPoll, Poll
+from mipac.types.clip import IClip
 from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult, INoteVisibility
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
@@ -120,7 +122,6 @@ class ClientNoteActions(AbstractAction):
         note_id: str | None = None,
         get_all: bool = True,
     ) -> AsyncGenerator[Note, None]:
-
         if limit > 100:
             raise ParameterError('limit は100以下である必要があります')
 
@@ -192,6 +193,32 @@ class ClientNoteActions(AbstractAction):
             await self._session.request(Route('POST', '/api/clips/add-note'), json=data, auth=True)
         )
 
+    async def get_clips(self, note_id: str | None = None) -> list[Clip]:
+        """
+        クリップを取得します
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            取得したいノートのID
+
+        Returns
+        -------
+        list[Clip]
+            クリップのリスト
+        """
+
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError('note_id is required')
+
+        data = {'noteId': note_id}
+        res: list[IClip] = await self._session.request(
+            Route('POST', '/api/notes/clips'), json=data, auth=True
+        )
+        return [Clip(clip, client=self._client) for clip in res]
+
     async def delete(self, note_id: str | None = None) -> bool:
         """
         Delete a note
@@ -262,7 +289,6 @@ class ClientNoteActions(AbstractAction):
         poll: MiPoll | None = None,
         reply_id: str | None = None,
     ) -> Note:
-
         reply_id = reply_id or self._note_id
 
         if reply_id is None:
@@ -440,7 +466,6 @@ class NoteActions(ClientNoteActions):
     def __init__(
         self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager,
     ):
-
         super().__init__(note_id=note_id, session=session, client=client)
 
     async def send(
