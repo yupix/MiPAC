@@ -41,32 +41,6 @@ if __name__ == '__main__':
     asyncio.run(main())
 ```
 
-### Migration from v0.3.0 to v0.4.0
-
-#### configの属性が変更されました
-
-- `is_official` が削除されました
-
-##### **重要** `use_version` が追加されました
-
-Misskeyではv11,v12,v13とバージョンがあり、バージョンによっては使用できないAPIがあったりします。MiPACでは`use_version`を指定することで事前に使用できるかどうかを確認し、使用できない場合は`NotSupportVersion`という例外を返します。このようにご自分のインスタンスのバージョンを書いていただくだけで、よくわからないエラーを事前に防ぐことが出来ます。（issue等にエラーを報告場合は必ず適切に設定されているか確認してください）
-
-v13はまだリリースされて日が浅く、全てのインスタンスがアップデートしたとは考えにくいため、現在のデフォルト値は`12`となっています。
-
-#### `Client` のオプションから `config`が削除されました
-
-今後configを参照する際は `Client.config` を使用してください。
-また、値を更新する場合はClient.config.from_dict()を用いることをお勧めします。
-通常の変更方法との違いは以下の通りです。
-
-```python
-Client.config.is_ayuskey = True
-Client.config.use_version = 13
-Client.config.from_dict(is_ayuskey=True, use_version=13)
-```
-
-上記のように複数の値を同時に更新する場合特に`from_dict`は有効な方法になります。
-
 ### 注意事項
 
 ### Python3.12.0 final がリリースされ、3カ月経過後に最低バージョンを 3.12.0 に変更します
