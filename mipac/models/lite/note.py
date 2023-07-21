@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING, Generic, Literal, TypeVar
 from mipac.models.drive import File
 from mipac.models.lite.user import LiteUser
 from mipac.types.note import INoteVisibility, IPartialNote
+from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
@@ -50,12 +51,12 @@ class PartialNote(Generic[T]):
         return self._note['id']
 
     @property
-    def reaction_acceptance(self) -> Literal['likeOnly', 'likeOnlyForRemote'] | None:
+    def reaction_acceptance(self) -> IReactionAcceptance | None:
         """リアクションを受け入れ
 
         Returns
         -------
-        Literal['likeOnly', 'likeOnlyForRemote'] | None
+        IReactionAcceptance | None
         """
         return self._note.get('reaction_acceptance')
 
