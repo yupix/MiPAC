@@ -12,11 +12,12 @@ class Client:
         url: str,
         token: str | None = None,
         *,
-        log_level: LOGING_LEVEL_TYPE = 'INFO',
+        log_level: LOGING_LEVEL_TYPE | None = 'INFO',
         use_version: IMisskeyVersions = 12,
         use_version_autodetect: bool = True
     ) -> None:
-        setup_logging(level=log_level)
+        if log_level is not None:
+            setup_logging(level=log_level)
         config.from_dict(use_version=use_version, use_version_autodetect=use_version_autodetect)
         self.config: Config = config
         self.http: HTTPClient = HTTPClient(url, token)
