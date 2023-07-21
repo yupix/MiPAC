@@ -15,6 +15,19 @@ async with Client('server url', 'token') as client:
         print(emoji)
 ```
 
+#### 一意のIDを持つモデルで比較演算がサポートされました
+
+サポートされた演算は `__eq__` と `__ne__` の2つです。一意のIDと判断しにくい物は現状サポートしていません。
+一意のIDがあるにもかかわらず、サポートされていないモデルがある際はIssueを作成してください。
+
+```py
+note_one = await api.note.action.get('note one')
+note_two = await api.note.action.get('note one')
+note_three = await api.note.action.get('note two')
+print(note_one == note_two, note_one != note_two)
+print(note_one == note_three, note_one != note_three)
+```
+
 #### File モデルに `api` プロパティーが追加されました
 
 今まではモデルに `api` プロパティーが無かったため、 `api` プロパティーからアクションにアクセスし、対象のメソッドに対してファイルIDなどといった引数を自分で渡す必要がありましたが、今後はモデルから直接実行できます。
@@ -64,7 +77,7 @@ async for file in api.drive.file.action.get_files(get_all=True):
 +Client.api.admin.emoji.action.gets(get_all=True)
 ```
 
-#### `NoteManager.get` が削除されました
+#### `NoteManager.get` メソッドが削除されました
 
 何故あったのか分かりませんが、Managerの責務から逸脱しているためです
 
@@ -101,6 +114,7 @@ async for file in api.drive.file.action.get_files(get_all=True):
 - `Pagination` クラスが追加されました
   - 基本的にユーザーが使うことは想定されていません
 - [@omg-xtao](https://github.com/omg-xtao) can cancel setup_logging when init client.
+- models/user にあった `FollowRequest` クラスが削除されました
 
 ## [0.4.3] 2023-04-25
 

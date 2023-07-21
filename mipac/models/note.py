@@ -62,8 +62,14 @@ class NoteDeleted:
     def deleted_at(self) -> datetime:
         return str_to_datetime(self.__data['body']['body']['deleted_at'])
 
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, NoteDeleted) and self.note_id == __value.note_id
 
-class Follow:
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
+
+
+class Follow:  # TODO: 消す
     def __init__(self, data):
         self.id: str | None = data.get('id')
         self.created_at: Optional[datetime] = datetime.strptime(
@@ -139,6 +145,12 @@ class NoteReaction:
     @property
     def user(self) -> LiteUser:
         return LiteUser(self.__reaction['user'], client=self.__client)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, NoteReaction) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
 
 
 class Note(PartialNote[INote]):

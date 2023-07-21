@@ -75,3 +75,9 @@ class Antenna:
     @property
     def api(self) -> ClientAntennaManager:
         return self.__client.antenna._create_client_antenna_manager(antenna_id=self.id)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, Antenna) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)

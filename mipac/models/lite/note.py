@@ -120,3 +120,9 @@ class PartialNote(Generic[T]):
         NoteActions
         """
         return self._client.note.create_client_note_manager(self.id)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, PartialNote) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
