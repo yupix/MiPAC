@@ -100,7 +100,7 @@ async for file in api.drive.file.action.get_files(get_all=True):
   - `DriveActions.get_folders`
 - `Pagination` クラスが追加されました
   - 基本的にユーザーが使うことは想定されていません
-
+- [@omg-xtao](https://github.com/omg-xtao) can cancel setup_logging when init client.
 
 ## [0.4.3] 2023-04-25
 
