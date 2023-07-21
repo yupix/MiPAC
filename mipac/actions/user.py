@@ -5,8 +5,10 @@ from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional
 from mipac.config import config
 from mipac.errors.base import NotExistRequiredData, NotSupportVersion, ParameterError
 from mipac.http import HTTPClient, Route
+from mipac.models.clip import Clip
 from mipac.models.note import Note
 from mipac.models.user import Achievement, LiteUser, UserDetailed
+from mipac.types.clip import IClip
 from mipac.types.note import INote
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
@@ -120,7 +122,6 @@ class UserActions:
         exclude_nsfw: bool = True,
         get_all: bool = False,
     ) -> AsyncGenerator[Note, None]:
-
         if check_multi_arg(user_id, self.__user) is False:
             raise ParameterError('user_idがありません', user_id, self.__user)
 
@@ -275,7 +276,7 @@ class UserActions:
         ]
 
     async def get_achievements(self, user_id: str | None = None) -> list[Achievement]:
-        """ Get achievements of user. """
+        """Get achievements of user."""
 
         if config.use_version < 13:
             raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
@@ -292,3 +293,35 @@ class UserActions:
             Route('POST', '/api/users/achievements'), json=data, auth=True, lower=True,
         )
         return [Achievement(i) for i in res]
+
+    async def get_clips(
+        self,
+        user_id: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        get_all: bool = False,
+    ):
+        user_id = user_id or self.__user and self.__user.id
+
+        if not user_id:
+            raise ParameterError('user_id is required')
+
+        if limit > 100:
+            raise ParameterError('limit must be less than 100')
+
+        if get_all:
+            limit = 100
+
+        body = {'userId': user_id, 'limit': limit, 'sinceId': since_id, 'untilId': until_id}
+
+        pagination = Pagination[IClip](
+            self.__session, Route('POST', '/api/users/clips'), json=body, auth=True
+        )
+
+        while True:
+            clips: list[IClip] = await pagination.next()
+            for clip in clips:
+                yield Clip(clip, client=self.__client)
+            if get_all is False or pagination.is_final:
+                break
