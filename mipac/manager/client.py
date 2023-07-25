@@ -5,9 +5,11 @@ from typing import TYPE_CHECKING
 from mipac.actions.client import ClientActions
 from mipac.http import HTTPClient
 from mipac.manager.admins.admin import AdminManager
+from mipac.manager.antenna import AntennaManager
 from mipac.manager.channel import ChannelManager
 from mipac.manager.chart import ChartManager
 from mipac.manager.chat import ChatManager
+from mipac.manager.clip import ClipManager
 from mipac.manager.drive import DriveManager
 from mipac.manager.emoji import EmojiManager
 from mipac.manager.follow import FollowManager, FollowRequestManager
@@ -41,7 +43,9 @@ class ClientManager:
         self.follow_request: FollowRequestManager = FollowRequestManager(
             session=session, client=self,
         )
+        self.clip: ClipManager = ClipManager(session=session, client=self)
         self.emoji: EmojiManager = EmojiManager(session=session, client=self)
+        self.antenna: AntennaManager = AntennaManager(session=session, client=self)
         self._config: Config = config
 
     @property

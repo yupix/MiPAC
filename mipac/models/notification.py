@@ -40,6 +40,12 @@ class Notification:
     def is_read(self) -> bool:
         return self.__notification['is_read']
 
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, Notification) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
+
 
 class NotificationFollow(Notification):
     def __init__(self, notification: IUserNf, *, client: ClientManager,) -> None:

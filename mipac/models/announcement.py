@@ -52,6 +52,12 @@ class AnnouncementCommon(Generic[T]):
             announce_id=self.id
         )
 
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, Announcement) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
+
 
 class Announcement(AnnouncementCommon):
     def __init__(self, announcement: IAnnouncement, *, client: ClientManager) -> None:

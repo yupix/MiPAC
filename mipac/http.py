@@ -7,8 +7,6 @@ import sys
 from typing import Any, Literal, TypeVar
 
 import aiohttp
-
-from mipac import __version__
 from mipac.config import config
 from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
@@ -16,6 +14,8 @@ from mipac.types.meta import IMeta
 from mipac.types.user import IUserDetailed
 from mipac.utils.format import remove_dict_empty, upper_to_lower
 from mipac.utils.util import COLORS, _from_json
+
+from mipac import __version__
 
 _log = logging.getLogger(__name__)
 
@@ -128,7 +128,7 @@ REQUEST:{COLORS.reset}
         match_domain = re.search(r'https?:\/\/([^\/]+)', self._url)
         match_protocol = re.search(r'^(http|https)', self._url)
         if match_domain is None or match_protocol is None:
-            raise Exception()
+            raise Exception('Server URL cannot be retrieved or protocol (http / https) is missing')
         protocol = True if match_protocol.group(1) == 'https' else False
         config.from_dict(
             host=match_domain.group(1), is_ssl=protocol,

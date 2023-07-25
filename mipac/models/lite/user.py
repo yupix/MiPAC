@@ -82,3 +82,9 @@ class LiteUser:
     @property
     def api(self) -> UserManager:
         return self.__client._create_user_instance(self)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, LiteUser) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)

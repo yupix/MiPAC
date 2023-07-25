@@ -8,6 +8,7 @@ from mipac.http import Route
 from mipac.models.roles import Role, RoleUser
 from mipac.types.meta import IPolicies
 from mipac.types.roles import IRole, IRoleUser
+from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient
@@ -156,37 +157,35 @@ class AdminRoleModelActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         limit: int = 100,
-        all: bool = False,
+        get_all: bool = False,
     ) -> AsyncGenerator[RoleUser, None]:
+        role_id = self._role_id or role_id
+
         if self._client._config.use_version < 13:
             raise NotSupportVersion(NotSupportVersionText)
-        role_id = self._role_id or role_id
+
         if role_id is None:
             raise ParameterError('role_idは必須です')
 
-        async def request(body) -> list[RoleUser]:
-            res: list[IRoleUser] = await self._session.request(
-                Route('POST', '/api/admin/roles/users'), lower=True, auth=True, json=body,
-            )
-            return [RoleUser(role, client=self._client) for role in res]
+        if limit > 100:
+            raise ParameterError('limitは100以下である必要があります')
 
-        data = {'limit': limit, 'sinceId': since_id, 'untilId': until_id, 'roleId': role_id}
-        if all:
-            data['limit'] = 100
-        first_req = await request(data)
-        for user in first_req:
-            yield user
+        if get_all:
+            limit = 100
 
-        if all and len(first_req) == 100:
-            data['untilId'] = first_req[-1].id
-            while True:
-                res = await request(data)
-                if len(res) <= 100:
-                    for user in res:
-                        yield user
-                if len(res) == 0:
-                    break
-                data['untilId'] = res[-1].id
+        body = {'limit': limit, 'sinceId': since_id, 'untilId': until_id, 'roleId': role_id}
+
+        pagination = Pagination[IRoleUser](
+            self._session, Route('POST', '/api/admin/roles/users'), json=body
+        )
+
+        while True:
+            raw_role_users = await pagination.next()
+            for role_user in raw_role_users:
+                yield RoleUser(role_user, client=self._client)
+
+            if get_all is False or pagination.is_final:
+                break
 
 
 class AdminRoleActions(AdminRoleModelActions):
@@ -207,6 +206,7 @@ class AdminRoleActions(AdminRoleModelActions):
         as_badge: bool = False,
         can_edit_members_by_moderator: bool = False,
         policies: dict[Any, Any] | None = None,
+        is_explorable: bool = False,
     ) -> Role:
         if self._client._config.use_version >= 13:
             body = {
@@ -222,6 +222,7 @@ class AdminRoleActions(AdminRoleModelActions):
                 'asBadge': as_badge,
                 'canEditMembersByModerator': can_edit_members_by_moderator,
                 'policies': policies or {},
+                'isExplorable': is_explorable,
             }
             res: IRole = await self._session.request(
                 Route('POST', '/api/admin/roles/create'),

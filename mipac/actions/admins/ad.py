@@ -7,6 +7,7 @@ from mipac.errors.base import NotSupportVersion, NotSupportVersionText, Paramete
 from mipac.http import HTTPClient, Route
 from mipac.models.ad import Ad
 from mipac.types.ads import IAd
+from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
@@ -94,31 +95,29 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
         return res
 
     async def get_list(
-        self, limit: int = 10, since_id: str | None = None, until_id: str | None = None
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        get_all: bool = False,
     ) -> AsyncGenerator[Ad, None]:
         if self._client._config.use_version < 12:
             raise NotSupportVersion(NotSupportVersionText)
 
-        async def request(body) -> list[Ad]:
-            res: list[IAd] = await self._session.request(
-                Route('POST', '/api/admin/ad/list'), lower=True, auth=True, json=body,
-            )
-            return [Ad(ad, client=self._client) for ad in res]
+        if limit > 100:
+            raise ParameterError('limitは100以下である必要があります')
+
+        if get_all:
+            limit = 100
 
         data = {'limit': limit, 'sinceId': since_id, 'untilId': until_id}
-        if all:
-            data['limit'] = 100
-        first_req = await request(data)
-        for ad in first_req:
-            yield ad
 
-        if all and len(first_req) == 100:
-            data['untilId'] = first_req[-1].id
-            while True:
-                res = await request(data)
-                if len(res) <= 100:
-                    for ad in res:
-                        yield ad
-                if len(res) == 0:
-                    break
-                data['untilId'] = res[-1].id
+        pagination = Pagination[IAd](self._session, Route('POST', '/api/admin/ad/list'), json=data)
+
+        while True:
+            raw_ads = await pagination.next()
+            for raw_ad in raw_ads:
+                yield Ad(raw_ad, client=self._client)
+
+            if get_all is False or pagination.is_final:
+                break

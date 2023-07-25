@@ -63,3 +63,9 @@ class ChannelLite(Generic[T]):
     @property
     def api(self) -> ChannelManager:
         return self.__client._create_channel_instance(channel_id=self.id)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, ChannelLite) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)

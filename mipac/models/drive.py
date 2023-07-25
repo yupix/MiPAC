@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
+    from mipac.manager.drive import ClientFileManager, ClientFolderManager
     from mipac.types import FolderPayload, IDriveFile, IFileProperties
 
 __all__ = ['FileProperties', 'File', 'Folder']
@@ -64,6 +65,16 @@ class Folder:
     def parent(self) -> dict[str, Any]:
         return self.__folder['parent']
 
+    @property
+    def api(self) -> ClientFolderManager:
+        return self.__client.drive._get_client_folder_instance(folder_id=self.id)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, Folder) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
+
 
 class File:
     def __init__(self, file: IDriveFile, *, client: ClientManager):
@@ -113,3 +124,13 @@ class File:
     @property
     def properties(self) -> FileProperties:
         return FileProperties(self.__file['properties'])
+
+    @property
+    def api(self) -> ClientFileManager:
+        return self.__client.drive._get_client_file_instance(file_id=self.id, url=self.url)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, File) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)

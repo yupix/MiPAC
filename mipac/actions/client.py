@@ -10,6 +10,7 @@ from mipac.models.lite.meta import LiteMeta
 from mipac.models.meta import Meta
 from mipac.types.announcement import IAnnouncement
 from mipac.types.meta import ILiteMeta, IMeta
+from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -48,18 +49,12 @@ class ClientActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        all: bool = False
+        get_all: bool = False
     ) -> AsyncGenerator[Announcement, None]:
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
-        if all:
+        if get_all:
             limit = 100
-
-        async def request(req_body) -> list[Announcement]:
-            res: list[IAnnouncement] = await self.__session.request(
-                Route('POST', '/api/announcements'), auth=True, json=req_body,
-            )
-            return [Announcement(announcement, client=self.__client) for announcement in res]
 
         body = {
             'limit': limit,
@@ -67,16 +62,15 @@ class ClientActions(AbstractAction):
             'sinceId': since_id,
             'untilId': until_id,
         }
-        first_req = await request(body)
 
-        for announcement in first_req:
-            yield announcement
-        if all and len(first_req) == 100:
-            body['untilId'] = first_req[-1].id
-            while True:
-                res = await request(body)
-                if len(res) <= 100:
-                    for announcement in res:
-                        yield announcement
-                if len(res) < 100:
-                    break
+        pagination = Pagination[IAnnouncement](
+            self.__session, Route('POST', '/api/announcements'), json=body
+        )
+
+        while True:
+            res_announcements = await pagination.next()
+            for announcement in res_announcements:
+                yield Announcement(announcement, client=self.__client)
+
+            if get_all is False or pagination.is_final:
+                break

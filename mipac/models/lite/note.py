@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Generic, Literal, TypeVar
+from typing import TYPE_CHECKING, Generic, TypeVar
 
+from mipac.models.drive import File
 from mipac.models.lite.user import LiteUser
-from mipac.types.drive import IDriveFile
-from mipac.types.note import IPartialNote
+from mipac.types.note import INoteVisibility, IPartialNote
+from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
@@ -34,8 +35,8 @@ class PartialNote(Generic[T]):
         return self._note['file_ids']
 
     @property
-    def files(self) -> list[IDriveFile]:  # TODO: モデルに
-        return self._note['files']
+    def files(self) -> list[File]:
+        return [File(file, client=self._client) for file in self._note['files']]
 
     @property
     def id(self) -> str:
@@ -50,12 +51,12 @@ class PartialNote(Generic[T]):
         return self._note['id']
 
     @property
-    def reaction_acceptance(self) -> Literal['likeOnly', 'likeOnlyForRemote'] | None:
+    def reaction_acceptance(self) -> IReactionAcceptance | None:
         """リアクションを受け入れ
 
         Returns
         -------
-        Literal['likeOnly', 'likeOnlyForRemote'] | None
+        IReactionAcceptance | None
         """
         return self._note.get('reaction_acceptance')
 
@@ -107,7 +108,7 @@ class PartialNote(Generic[T]):
         return self._note['user_id']
 
     @property
-    def visibility(self,) -> Literal['public', 'home', 'followers', 'specified']:
+    def visibility(self,) -> INoteVisibility:
         return self._note['visibility']
 
     @property
@@ -120,3 +121,9 @@ class PartialNote(Generic[T]):
         NoteActions
         """
         return self._client.note.create_client_note_manager(self.id)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, PartialNote) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)

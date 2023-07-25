@@ -38,6 +38,12 @@ class RoleUser:
     def action(self) -> UserManager:
         return self.__client._create_user_instance(self.user)
 
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, RoleUser) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
+
 
 class RolePolicyValue:
     def __init__(self, policiy_value_data: IRolePolicieValue) -> None:
@@ -197,3 +203,9 @@ class Role:
     @property
     def api(self) -> AdminRolesModelManager:
         return self.__client.admin.create_roles_model_manager(self.id)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, Role) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)

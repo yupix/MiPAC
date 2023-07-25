@@ -7,6 +7,7 @@ from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.note import Note
 from mipac.types.note import INote
+from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -30,34 +31,26 @@ class PollActions(AbstractAction):
         )
         return res
 
-    async def recommendation(self, limit: int = 100, offset: int = 0, all: bool = True):
+    async def recommendation(self, limit: int = 100, offset: int = 0, get_all: bool = True):
 
         if limit > 100:
             raise ParameterError('limit must be less than 100')
 
-        if all:
+        if get_all:
             limit = 100
 
-        async def request(body) -> list[Note]:
-            res: list[INote] = await self.__session.request(
-                Route('POST', '/api/notes/polls/recommendation'), lower=True, auth=True, json=body,
-            )
-            return [Note(note, client=self.__client) for note in res]
-
         data = {'limit': limit, 'offset': offset}
-        first_res: list[Note] = await request(data)
-        for note in first_res:
-            yield note
-        offset = limit
-        count = 1
-        if all and len(first_res) == limit:
-            data['offset'] = limit * count
-            while True:
-                res = await request(data)
-                if len(res) <= limit:
-                    for note in res:
-                        yield note
-                if len(res) == 0 or len(res) < limit:
-                    break
-                data['offset'] = limit * count
-                count = count + 1
+
+        pagination = Pagination[INote](
+            self.__session,
+            Route('POST', '/api/notes/polls/recommendation'),
+            json=data,
+            pagination_type='count',
+        )
+
+        while True:
+            res_notes = await pagination.next()
+            for note in res_notes:
+                yield Note(note, client=self.__client)
+            if get_all is False or pagination.is_final:
+                break

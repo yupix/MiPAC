@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
@@ -10,6 +10,7 @@ from mipac.models.user import UserDetailed
 from mipac.types.follow import IFederationFollower, IFederationFollowing
 from mipac.types.instance import IFederationInstance, IFederationInstanceStat
 from mipac.types.user import IUserDetailed
+from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -30,6 +31,7 @@ class FederationActions(AbstractAction):
     async def show_ap(
         self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10
     ) -> FederationInstance:
+        # TODO: これ本当にuntilId必要なのか確認する
         body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
 
         res: FederationInstance = await self.__session.request(
@@ -38,22 +40,62 @@ class FederationActions(AbstractAction):
         return res
 
     async def get_followers(
-        self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10
+        self,
+        host: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        get_all: bool = False,
     ):
+
+        if limit > 100:
+            raise ParameterError('limitは100以下である必要があります')
+
+        if get_all:
+            limit = 100
+
         body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
-        res: list[IFederationFollower] = await self.__session.request(
-            Route('POST', '/api/federation/followers'), auth=True, json=body, lower=True
+
+        pagination = Pagination[IFederationFollower](
+            self.__session, Route('POST', '/api/federation/followers'), json=body
         )
-        return res
+
+        while True:
+            res_federation_followers: list[IFederationFollower] = await pagination.next()
+            for federation_follower in res_federation_followers:
+                yield federation_follower
+
+            if get_all is False or pagination.is_final:
+                break
 
     async def get_following(
-        self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10
+        self,
+        host: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        get_all: bool = False,
     ):
+
+        if limit > 100:
+            raise ParameterError('limitは100以下である必要があります')
+
+        if get_all:
+            limit = 100
+
         body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
-        res: list[IFederationFollowing] = await self.__session.request(
-            Route('POST', '/api/federation/following'), auth=True, json=body, lower=True
+
+        pagination = Pagination[IFederationFollowing](
+            self.__session, Route('POST', '/api/federation/following'), json=body
         )
-        return res
+
+        while True:
+            res_federation_followings: list[IFederationFollowing] = await pagination.next()
+            for federation_following in res_federation_followings:
+                yield federation_following
+
+            if get_all is False or pagination.is_final:
+                break
 
     async def get_instances(
         self,
@@ -109,16 +151,32 @@ class FederationActions(AbstractAction):
         )
 
     async def get_users(
-        self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10
-    ) -> UserDetailed:
+        self,
+        host: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        get_all: bool = False,
+    ) -> AsyncGenerator[UserDetailed, None]:
         if limit > 100:
             raise ParameterError('limitは100以下である必要があります')
+
+        if get_all:
+            limit = 100
+
         body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
 
-        res: IUserDetailed = await self.__session.request(
-            Route('POST', '/api/federation/users'), auth=True, json=body
+        pagination = Pagination[IUserDetailed](
+            self.__session, Route('POST', '/api/federation/users'), json=body
         )
-        return UserDetailed(res, client=self.__client)
+
+        while True:
+            res_users: list[IUserDetailed] = await pagination.next()
+            for user in res_users:
+                yield UserDetailed(user, client=self.__client)
+
+            if get_all is False or pagination.is_final:
+                break
 
     async def get_stats(self, limit: int = 10) -> IFederationInstanceStat:
         if limit > 100:
