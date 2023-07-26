@@ -76,6 +76,18 @@ async for file in api.drive.file.action.get_files(get_all=True):
 - `/api/clips/notes`
 - `/api/clips/my-favorites`
 - `/api/users/clips`
+- `/api/channels/create`
+- `/api/channels/featured`
+- `/api/channels/follow`
+- `/api/channels/followed`
+- `/api/channels/owned`
+- `/api/channels/show`
+- `/api/channels/unfollow`
+- `/api/channels/update`
+- `/api/channels/favorite`
+- `/api/channels/unfavorite`
+- `/api/channels/my-favorites`
+- `/api/channels/search`
 
 ### Breaking changes 💔
 
