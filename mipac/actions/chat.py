@@ -41,6 +41,12 @@ class BaseChatAction(AbstractAction):
         bool
             Success or Failure.
         """
+        if (
+            self.__client._config.use_version >= 13
+            and self.__client._config.features.chat is False
+        ):
+            raise NotSupportVersion(NotSupportVersionText)
+
         if check_multi_arg(message_id, self.__message_id) is False:
             raise ParameterError('message_idがありません')
         message_id = message_id or self.__message_id
@@ -64,6 +70,11 @@ class BaseChatAction(AbstractAction):
         bool
             Success or Failure.
         """
+        if (
+            self.__client._config.use_version >= 13
+            and self.__client._config.features.chat is False
+        ):
+            raise NotSupportVersion(NotSupportVersionText)
 
         if check_multi_arg(message_id, self.__message_id) is False:
             raise ParameterError('message_idがありません')
