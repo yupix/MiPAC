@@ -352,12 +352,11 @@ ENDPOINTS = Literal[
     '/api/users/groups/transfer',
     '/api/users/groups/update',
     '/api/version',
-    '/api/admin/queue/promote',
     '/api/channels/favorite',
     '/api/channels/unfavorite',
     '/api/channels/my-favorites',
     '/api/channels/search',
-    '/api/emoji',
     '/api/roles/notes',
     '/api/users/update-memo',
+    '/api/admin/emoji/set-license-bulk'
 ]

@@ -42,6 +42,12 @@ class ChatGroup:
     def user_ids(self) -> list[str]:
         return self.__group['user_ids']
 
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, ChatGroup) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
+
 
 class ChatMessage:
     """
@@ -120,3 +126,9 @@ class ChatMessage:
     @property
     def api(self) -> BaseChatAction:
         return self.__client.chat.custom_base_chat_action(user_id=self.user.id, message_id=self.id)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, ChatMessage) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)

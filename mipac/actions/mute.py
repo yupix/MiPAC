@@ -8,6 +8,7 @@ from mipac.http import HTTPClient, Route
 from mipac.models.mute import MuteUser
 from mipac.types.mute import IMuteUser
 from mipac.utils.format import remove_dict_empty
+from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -68,33 +69,24 @@ class MuteActions(AbstractAction):
         limit: int = 100,
         since_id: str | None = None,
         until_id: str | None = None,
-        all: bool = True,
+        get_all: bool = True,
     ) -> AsyncGenerator[MuteUser, None]:
         if limit > 100:
             raise ParameterError('limit は100以下である必要があります')
 
-        async def request(body) -> list[MuteUser]:
-            res: list[IMuteUser] = await self._session.request(
-                Route('POST', '/api/mute/list'), lower=True, auth=True, json=body,
-            )
-            return [MuteUser(user, client=self._client) for user in res]
+        if get_all:
+            limit = 100
 
-        data = remove_dict_empty({'limit': limit, 'sinceId': since_id, 'untilId': until_id})
+        body = remove_dict_empty({'limit': limit, 'sinceId': since_id, 'untilId': until_id})
 
-        if all:
-            data['limit'] = 100
-        first_req = await request(data)
+        pagination = Pagination[IMuteUser](
+            self._session, Route('POST', '/api/mute/list'), json=body
+        )
 
-        for user in first_req:
-            yield user
+        while True:
+            raw_mute_users = await pagination.next()
+            for raw_mute_user in raw_mute_users:
+                yield MuteUser(raw_mute_user, client=self._client)
 
-        if all and len(first_req) == 100:
-            data['untilId'] = first_req[-1].id
-            while True:
-                res = await request(data)
-                if len(res) <= 100:
-                    for user in res:
-                        yield user
-                if len(res) == 0:
-                    break
-                data['untilId'] = res[-1].id
+            if get_all is False or pagination.is_final:
+                break

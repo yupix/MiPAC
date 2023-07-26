@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  type-check:
 
     runs-on: ubuntu-latest
 
@@ -30,5 +30,3 @@ jobs:
     - name: Lint with flake8
       run: |
         flake8 mipac
-    - name: Lint with Ruff
-      run: ruff mipac

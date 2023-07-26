@@ -258,3 +258,4 @@ class IUpdateMetaBody(TypedDict, total=False):
     object_storage_use_proxy: bool
     object_storage_set_public_read: bool
     object_storage_s3_force_path_style: bool
+    server_rules: NotRequired[list[str]]  # v13.11.3以降のバージョンから追加。その場合は使わないとエラー出るかも

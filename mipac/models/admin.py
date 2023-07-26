@@ -32,6 +32,12 @@ class UserIP:
     def created_at(self) -> datetime:
         return str_to_datetime(self.__user_ip['created_at'])
 
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, UserIP) and self.ip == __value.ip
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
+
 
 class IndexStat:
     def __init__(self, index_stat: IIndexStat) -> None:
@@ -86,6 +92,12 @@ class ModerationLog:
     @property
     def user(self) -> UserDetailed:
         return UserDetailed(self.__moderation_log['user'], client=self.__client)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, ModerationLog) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
 
 
 class ServerInfoCpu:

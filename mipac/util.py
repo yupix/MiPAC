@@ -14,7 +14,6 @@ from typing import Any, Mapping, Optional
 from urllib.parse import urlencode
 
 import aiohttp
-
 from mipac.utils.util import deprecated as new_deprecated
 
 try:

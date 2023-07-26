@@ -1,11 +1,14 @@
 from typing import Any, Generic, Literal, NotRequired, Optional, TypedDict, TypeVar
 
-from .drive import IDriveFile
-from .emoji import ICustomEmojiLite
-from .poll import IPoll
-from .user import ILiteUser
+from mipac.types.drive import IDriveFile
+from mipac.types.emoji import ICustomEmojiLite
+from mipac.types.poll import IPoll
+from mipac.types.reaction import IReactionAcceptance
+from mipac.types.user import ILiteUser
 
 T = TypeVar('T')
+
+INoteVisibility = Literal['public', 'home', 'followers', 'specified']
 
 
 class INoteState(TypedDict):
@@ -60,7 +63,7 @@ class IPartialNote(TypedDict):
     file_ids: list[str]
     files: list[IDriveFile]
     id: str
-    reaction_acceptance: NotRequired[Literal['likeOnly', 'likeOnlyForRemote']]  # v13 only
+    reaction_acceptance: NotRequired[IReactionAcceptance]  # v13 only
     reaction_emojis: NotRequired[dict[str, str]]  # v13 only
     renote_id: str | None
     renote_count: int
@@ -70,7 +73,7 @@ class IPartialNote(TypedDict):
     text: str | None
     user: ILiteUser
     user_id: str
-    visibility: Literal['public', 'home', 'followers', 'specified']
+    visibility: INoteVisibility
     tags: NotRequired[list[str]]  # タグがついてないとbodyに存在しない
 
 

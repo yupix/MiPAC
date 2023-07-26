@@ -1,15 +1,148 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
-
 ## [Unreleased]
 
-### Added
+### New Features ✨
 
-- None
+## [0.5.0] 2023-07-26
+
+### New Features ✨
+
+#### `Client` で `async with` 構文がサポートされました
+
+一時的にセッションを作成したい場合などに `login` メソッドや `close_session` メソッドを使用するのは非常に手間であるため、一時的にセッションを作成したいといった場合におすすめします。
+
+```py
+async with Client('server url', 'token') as client:
+    api = client.api
+    async for emoji in api.admin.emoji.action.gets():
+        print(emoji)
+```
+
+#### 一意のIDを持つモデルで比較演算がサポートされました
+
+サポートされた演算は `__eq__` と `__ne__` の2つです。一意のIDと判断しにくい物は現状サポートしていません。
+一意のIDがあるにもかかわらず、サポートされていないモデルがある際はIssueを作成してください。
+
+```py
+note_one = await api.note.action.get('note one')
+note_two = await api.note.action.get('note one')
+note_three = await api.note.action.get('note two')
+print(note_one == note_two, note_one != note_two)
+print(note_one == note_three, note_one != note_three)
+```
+
+#### File モデルに `api` プロパティーが追加されました
+
+今まではモデルに `api` プロパティーが無かったため、 `api` プロパティーからアクションにアクセスし、対象のメソッドに対してファイルIDなどといった引数を自分で渡す必要がありましたが、今後はモデルから直接実行できます。
+
+```diff
+-async for file in api.drive.file.action.get_files(get_all=True):
+-  await api.drive.file.action.remove(file.id)
++async for file in api.drive.file.action.get_files(get_all=True):
++  await file.api.action.remove()
+```
+
+
+#### `FileActions` に `save` メソッドが追加されました
+
+指定したパス、またはBufferにファイルをダウンロードできるようになりました。
+パスを指定する場合
+```py
+async for file in api.drive.file.action.get_files(get_all=True):
+    await file.api.action.save(f'./test/{file.name}')
+```
+
+Bufferを指定する場合:
+```py
+async for file in api.drive.file.action.get_files(get_all=True):
+    with open(f'./test/{file.name}', mode='mb') as f:
+      await file.api.action.save(f)
+```
+
+#### 以下のエンドポイントがサポートされました
+
+- `/api/admin/emoji/set-license-bulk`
+- `/api/antennas/create`
+- `/api/antennas/delete`
+- `/api/antennas/list`
+- `/api/antennas/notes`
+- `/api/antennas/show`
+- `/api/antennas/update`
+- `/api/clips/create`
+- `/api/clips/delete`
+- `/api/clips/list`
+- `/api/clips/show`
+- `/api/clips/update`
+- `/api/notes/clips`
+- `/api/clips/add-note`
+- `/api/clips/remove-note`
+- `/api/clips/notes`
+- `/api/clips/my-favorites`
+- `/api/users/clips`
+- `/api/channels/create`
+- `/api/channels/featured`
+- `/api/channels/follow`
+- `/api/channels/followed`
+- `/api/channels/owned`
+- `/api/channels/show`
+- `/api/channels/unfollow`
+- `/api/channels/update`
+- `/api/channels/favorite`
+- `/api/channels/unfavorite`
+- `/api/channels/my-favorites`
+- `/api/channels/search`
+
+### Breaking changes 💔
+
+#### 全取得の際の引数 `all` が `get_all` に変更されます。
+
+影響を受けるのはキーワード引数を使用していた方です。位置引数を使用していた方は特に問題ありません。
+
+```diff
+-Client.api.admin.emoji.action.gets(all=True)
++Client.api.admin.emoji.action.gets(get_all=True)
+```
+
+#### `NoteManager.get` メソッドが削除されました
+
+何故あったのか分かりませんが、Managerの責務から逸脱しているためです
+
+#### NoteActionsに関する変更
+
+- `NoteActions.get` `NoteActions.fetch` メソッドにおいて `note_id` が optionalになっているのはおかしいため必須の引数に変更しました
+
+### Fixed 🛠️
+
+- 一部 `all` 引数が存在しないが、 built-inの `all` が存在することで動作していた箇所が修正されました
+- `ClientNoteActions` において `note_id` が無かった場合の例外処理が無かった為追加
+
+### Other notable changes 📜
+
+- 新しい実績をサポートしました
+- クリップがサポートされました
+- ロールの作成時に `is_explorable` を使用できるようになりました。
+  - 最新のインスタンス等で無いと使用できない可能性があります
+- update_metaのリクエスト時に `server_rules` パラメータが使用できるようになりました
+  - このパラメータは `13.11.3` 以降のバージョン（`13.11.3`は含みません）を使用している場合は必須であり、それ以前のバージョンを使用している場合は指定するとエラーが発生する可能性があります。
+- `NoteActions.get_replies` が `ClientNoteActions.getriplies` に移動され、 `ClientNoteActions` でも使用可能になりました。（NoteActionsはClientNoteActionsを継承しているため今後とも使用できます）
+- 全取得が以下のメソッドでサポートされました。それに伴い、一部のメソッドがジェネレーターになっています。
+  - `FederationActions.get_followers`
+  - `FederationActions.get_following`
+  - `FederationActions.get_users`
+  - `AdminAnnouncementActions.gets`
+  - `AdminRoleModelActions.get_users`
+  - `AdminAdvertisingActions.get_list`
+  - `AdminActions.get_moderation_logs`
+  - `NoteActions.get_replies`
+  - `NoteActions.gets`
+  - `FileActions.get_files`
+  - `ClientFolderActions.get_files`
+  - `DriveActions.get_folders`
+- `Pagination` クラスが追加されました
+  - 基本的にユーザーが使うことは想定されていません
+- [@omg-xtao](https://github.com/omg-xtao) can cancel setup_logging when init client.
+- models/user にあった `FollowRequest` クラスが削除されました
 
 ## [0.4.3] 2023-04-25
 

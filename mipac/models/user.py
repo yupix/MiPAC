@@ -6,19 +6,13 @@ from typing import TYPE_CHECKING, Literal
 from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 from mipac.types.page import IPage
-from mipac.types.user import (
-    IAchievement,
-    IBlockingUser,
-    IFollowRequest,
-    IUserDetailed,
-    IUserDetailedField,
-)
+from mipac.types.user import IAchievement, IBlockingUser, IUserDetailed, IUserDetailedField
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
-__all__ = ('UserDetailed', 'FollowRequest', 'LiteUser', 'Achievement', 'BlockingUser')
+__all__ = ('UserDetailed', 'LiteUser', 'Achievement', 'BlockingUser')
 
 
 class BlockingUser:
@@ -42,23 +36,11 @@ class BlockingUser:
     def blockee(self) -> UserDetailed:
         return UserDetailed(self.__blocking_user_data['blockee'], client=self.__client)
 
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, BlockingUser) and self.id == __value.id
 
-class FollowRequest:
-    def __init__(self, request: IFollowRequest, *, client: ClientManager):
-        self.__request: IFollowRequest = request
-        self.__client: ClientManager = client
-
-    @property
-    def id(self) -> str:
-        return self.__request['id']
-
-    @property
-    def follower(self) -> LiteUser:
-        return LiteUser(self.__request['follower'], client=self.__client)
-
-    @property
-    def followee(self) -> LiteUser:
-        return LiteUser(self.__request['followee'], client=self.__client)
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
 
 
 class Achievement:

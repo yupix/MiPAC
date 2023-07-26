@@ -1,13 +1,17 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+import io
+from http.client import HTTPException
+from os import PathLike
+from typing import TYPE_CHECKING, Any, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.drive import File, Folder
-from mipac.types.drive import IDriveFile
+from mipac.types.drive import FolderPayload, IDriveFile
 from mipac.utils.format import bool_to_string, remove_dict_empty
+from mipac.utils.pagination import Pagination
 from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
@@ -21,6 +25,7 @@ class ClientFileActions(AbstractAction):
         self,
         file_id: str | None = None,
         folder_id: str | None = None,
+        url: str | None = None,
         *,
         session: HTTPClient,
         client: ClientManager
@@ -29,6 +34,7 @@ class ClientFileActions(AbstractAction):
         self._client: ClientManager = client
         self._file_id = file_id
         self._folder_id = folder_id
+        self._url = url
 
     async def remove(self, file_id: str | None = None) -> bool:
         """
@@ -46,11 +52,39 @@ class ClientFileActions(AbstractAction):
         """
 
         file_id = file_id or self._file_id
+        if file_id is None:
+            raise ParameterError('file_id is required')
+
         return bool(
             await self._session.request(
                 Route('POST', '/api/drive/files/delete'), json={'fileId': file_id}, auth=True,
             )
         )
+
+    async def save(
+        self,
+        fp: io.BufferedIOBase | PathLike[Any],
+        file_id: str | None = None,
+        url: str | None = None,
+    ):
+        file_id = file_id or self._file_id
+        url = url or self._url
+        if any([file_id, url]) is False:
+            raise ParameterError('file_id is required')
+
+        if url is None:
+            result = await self._client.drive.file.action.show_file(file_id=file_id)
+            url = result.url
+
+        async with self._session.session.get(url) as resp:
+            if resp.status == 200:
+                content = await resp.read()
+                with open(fp, 'wb') as f:
+                    return f.write(content)
+            elif resp.status == 400:
+                raise FileNotFoundError('File not found')
+            else:
+                raise HTTPException(resp, 'Failed to get file')
 
     @deprecated
     async def remove_file(self, file_id: str | None = None) -> bool:
@@ -81,11 +115,14 @@ class FileActions(ClientFileActions):
         self,
         file_id: str | None = None,
         folder_id: str | None = None,
+        url: str | None = None,
         *,
         session: HTTPClient,
         client: ClientManager
     ) -> None:
-        super().__init__(file_id=file_id, folder_id=folder_id, session=session, client=client)
+        super().__init__(
+            file_id=file_id, folder_id=folder_id, url=url, session=session, client=client
+        )
 
     async def show_file(self, file_id: str | None = None, url: str | None = None) -> File:
         """
@@ -117,7 +154,8 @@ class FileActions(ClientFileActions):
         until_id: str | None = None,
         folder_id: str | None = None,
         file_type: str | None = None,
-    ) -> list[File]:
+        get_all: bool = False,
+    ) -> AsyncGenerator[File, None]:
         """
         ファイルを取得します
 
@@ -137,19 +175,31 @@ class FileActions(ClientFileActions):
         if limit > 100:
             raise ParameterError('limit must be less than 100')
 
+        if get_all:
+            limit = 100
+
         folder_id = self._folder_id or folder_id
 
-        data = {
+        body = {
             'limit': limit,
             'sinceId': since_id,
             'untilId': until_id,
             'folderId': folder_id,
             'Type': file_type,
         }
-        res: list[IDriveFile] = await self._session.request(
-            Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
+
+        pagination = Pagination[IDriveFile](
+            self._session, Route('POST', '/api/drive/files'), json=body
         )
-        return [File(i, client=self._client) for i in res]
+
+        while True:
+            res_drive_files = await pagination.next()
+
+            for res_drive_file in res_drive_files:
+                yield File(res_drive_file, client=self._client)
+
+            if get_all is False or pagination.is_final:
+                break
 
     async def upload_file(
         self,
@@ -258,7 +308,8 @@ class ClientFolderActions(AbstractAction):
         until_id: str | None = None,
         folder_id: str | None = None,
         file_type: str | None = None,
-    ) -> list[File]:
+        get_all: bool = False,
+    ) -> AsyncGenerator[File, None]:
         """
         ファイルを取得します
 
@@ -278,18 +329,31 @@ class ClientFolderActions(AbstractAction):
         if limit > 100:
             raise ParameterError('limit must be less than 100')
 
-        folder_id = folder_id or self._folder_id
-        data = {
+        if get_all:
+            limit = 100
+
+        folder_id = self._folder_id or folder_id
+
+        body = {
             'limit': limit,
             'sinceId': since_id,
             'untilId': until_id,
             'folderId': folder_id,
             'Type': file_type,
         }
-        res: list[IDriveFile] = await self._session.request(
-            Route('POST', '/api/drive/files'), json=data, auth=True, lower=True
+
+        pagination = Pagination[IDriveFile](
+            self._session, Route('POST', '/api/drive/files'), json=body
         )
-        return [File(i, client=self._client) for i in res]
+
+        while True:
+            res_drive_files = await pagination.next()
+
+            for res_drive_file in res_drive_files:
+                yield File(res_drive_file, client=self._client)
+
+            if get_all is False or pagination.is_final:
+                break
 
 
 class FolderActions(ClientFolderActions):
@@ -310,7 +374,8 @@ class DriveActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         folder_id: str | None = None,
-    ) -> list[Folder]:
+        get_all: bool = False,
+    ) -> AsyncGenerator[Folder, None]:
         """
         フォルダーの一覧を取得します
 
@@ -324,15 +389,29 @@ class DriveActions(AbstractAction):
             指定すると、その投稿を投稿を起点としてより古い投稿を取得します
         folder_id : str | None, default=None
             指定すると、そのフォルダーを起点としてフォルダーを取得します
+        get_all : bool, default=False
+            Whether to retrieve all folders or not
         """
 
-        data = {
+        if limit > 100:
+            raise ParameterError('limitは100以下である必要があります')
+        if get_all:
+            limit = 100
+
+        body = {
             'limit': limit,
             'sinceId': since_id,
             'untilId': until_id,
             'folderId': folder_id,
         }
-        data = await self._session.request(
-            Route('POST', '/api/drive/folders'), json=data, lower=True, auth=True,
+
+        pagination = Pagination[FolderPayload](
+            self._session, Route('POST', '/api/drive/folders'), json=body
         )
-        return [Folder(i, client=self._client) for i in data]
+
+        while True:
+            res_folders = await pagination.next()
+            for res_folder in res_folders:
+                yield Folder(res_folder, client=self._client)
+            if get_all is False or pagination.is_final:
+                break

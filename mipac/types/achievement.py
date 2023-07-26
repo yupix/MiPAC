@@ -59,6 +59,7 @@ IT_ACHIEVEMENT_NAME = Literal[
     'iLoveMisskey',
     'foundTreasure',
     'client30min',
+    'client60min',
     'noteDeletedWithin1min',
     'postedAtLateNight',
     'postedAt0min0sec',

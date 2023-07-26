@@ -59,3 +59,9 @@ class Ad:
     @property
     def api(self) -> AdminAdvertisingModelManager:
         return self.__client.admin.create_ad_model_manager(ad_id=self.id)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, Ad) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
