@@ -161,7 +161,7 @@ class ClientChannelActions(AbstractAction):
             Channel color
         channel_id : str, optional, by default None
             Channel id
-        
+
         Returns
         -------
         Channel
@@ -214,7 +214,7 @@ class ClientChannelActions(AbstractAction):
         res = await self.update(channel_id=channel_id, is_archived=True)
 
         return res
-    
+
     async def unarchive(self, channel_id: str | None = None) -> Channel:
         """
         Unarchive a channel.
@@ -239,6 +239,7 @@ class ClientChannelActions(AbstractAction):
         res = await self.update(channel_id=channel_id, is_archived=False)
 
         return res
+
 
 class ChannelActions(ClientChannelActions):
     def __init__(
