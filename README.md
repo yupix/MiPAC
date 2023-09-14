@@ -9,21 +9,23 @@ ref=badge_shield" alt="FOSSA Status">
 <img src="https://app.fossa.com/api/projects/
 git%2Bgithub.com%2Fyupix%2FMiPAC.svg?type=shield"/></a>
 
-## 概要
+## Overview
 
-MiPAのCoreとなるライブラリです。
+[日本語のREADMEもあります](./README_JP.md)
 
-MiPACはMisskey v11, 12, 13をサポートしているApi Wrapperです。
-本来気にしないといけないバージョンごとのAPIの違い等を吸収してくれます。
+This library is the Core of MiPA.
 
-## サポートしているMisskey
+MiPAC is an Api Wrapper that supports Misskey v11, 12, and 13.
+It absorbs API differences between versions, etc., which you don't have to worry about originally.
+
+## Supported Misskey
 
 |name|version|supported|
 |---|---|---|
 |[Misskey Official](https://github.com/misskey-dev/misskey)|v13, v12, v11|〇|
 |[Ayuskey](https://github.com/teamblackcrystal/misskey)|v5, v6|〇|
 
-## 使い方
+## Usage
 
 ```python
 import asyncio
@@ -41,35 +43,35 @@ if __name__ == '__main__':
     asyncio.run(main())
 ```
 
-### 注意事項
+### Notes
 
-### Python3.12.0 final がリリースされ、3カ月経過後に最低バージョンを 3.12.0 に変更します
+### Python 3.12.0 final will be released and the minimum version will be changed to 3.12.0 after 3 months
 
-これは主にMiPACの開発を行う上で、新規構文の使用などによってDXがより良くなり開発ペースが向上する為です。
-また、使用者の皆様においてはPythonの高速化や新規構文の使用などが使用できるといった恩恵を得ることができます。
+This is mainly to improve the pace of development of MiPAC by using new syntax and other features to improve DX.
+Users will also benefit from faster Python and the use of new syntax.
 
-現在Python3.12.0のリリースは以下のように記載されているため、早くて **2024年01月02日** に変更を実施する予定です。
+The current release of Python 3.12.0 is listed as follows, so the change will be implemented as early as **January 02, 2024**.
 
  > `3.12.0 final: Monday, 2023-10-02`
 
- これについて意見がある場合はDiscussionを作成することができます。
+If you have an opinion on this, you can create a Discussion.
 
-### 一部サーバー(インスタンス)のバージョンによっては正常に動作しない可能性があります
+### Some server (instance) versions may not work properly.
 
-MiPACの特徴として、v11,v12,v13のバージョンごとに生じる変更点をなるべく気にしなくてよいように作成していますが、現状の最新版であるv13でもv13の中で削除されたり、増えたりした物があります。結果的に追従しきれていない箇所があることがあります。そのため、そのような物を見つけた場合は、使用しているサーバーのバージョンと使用できないエンドポイント名をIssueに送信してください。
+One of the features of MiPAC is that it is created so that you do not have to worry about the changes that occur in each version of v11, v12, and v13 as much as possible. However, even in v13, which is the current latest version, some items have been removed or increased within v13. As a result, there may be some parts that have not been fully followed. Therefore, if you find such items, please send an Issue with the version of the server you are using and the name of the endpoint that cannot be used.
 
-### モデルを自分でインスタンス化することは推奨されません
+### It is not expected that you will instantiate the model yourself
 
-MiPACのモデルでは多くの場合、キーワード引数に `client`を受け取り、それを用いて`api` プロパティを生成します。しかし、サポート途中の機能なのではそこが省かれ、リリース後にモデルのインスタンス化に必要な引数として `client` が追加されることがあります。また、他にもモデルの更新のために引数が変更される可能性があります。そのため、引数の変更に関することをCHANGELOG等で通知することはありません。
+MiPAC models often take `client` as a keyword argument and use it to generate the `api` property. However, since it is a feature in the middle of support, that part may be omitted, and `client` may be added as a necessary argument to instantiate the model after release. Also, other arguments may be changed to update the model. Therefore, we will not notify you about changes in arguments via CHANGELOG or other means.
 
 ## LICENSE
 
-準備中
+MiPAC is provided with [MIT LICENSE](./LICENSE).
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyupix%2FMiPAC.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyupix%2FMiPAC?ref=badge_large)
 
 <p align="center">
-    <a href="">Documentation</a>
+    <a href="#">Documentation</a>
     *
     <a href="https://discord.gg/CcT997U">Discord Server</a>
 </p>
