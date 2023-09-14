@@ -1,9 +1,8 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Optional, Self
+from typing import TYPE_CHECKING, Self
 
-from mipac.errors.base import NotExistRequiredData
 from mipac.models.lite.note import PartialNote
 from mipac.models.lite.user import LiteUser
 from mipac.models.poll import Poll
@@ -19,13 +18,11 @@ from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
-    from mipac.models.user import UserDetailed
     from mipac.types.emoji import ICustomEmojiLite
 
 __all__ = (
     "NoteState",
     "Note",
-    "Follow",
     "Header",
     "NoteReaction",
     "NoteDeleted",
@@ -67,52 +64,6 @@ class NoteDeleted:
 
     def __ne__(self, __value: object) -> bool:
         return not self.__eq__(__value)
-
-
-class Follow:  # TODO: 消す
-    def __init__(self, data):
-        self.id: str | None = data.get("id")
-        self.created_at: Optional[datetime] = (
-            datetime.strptime(data["created_at"], "%Y-%m-%dT%H:%M:%S.%fZ")
-            if data.get("created_at")
-            else None
-        )
-        self.type: str | None = data.get("type")
-        self.user: Optional[UserDetailed] = data.get("user")
-
-    async def follow(self) -> tuple[bool, str | None]:
-        """
-        ユーザーをフォローします
-        Returns
-        -------
-        bool
-            成功ならTrue, 失敗ならFalse
-        str
-            実行に失敗した際のエラーコード
-        """
-
-        if self.id:
-            raise NotExistRequiredData("user_idがありません")
-        return await self._state.user.follow.add(user_id=self.id)
-
-    async def unfollow(self, user_id: str | None = None) -> bool:
-        """
-        与えられたIDのユーザーのフォローを解除します
-
-        Parameters
-        ----------
-        user_id : str | None = None
-            フォローを解除したいユーザーのID
-
-        Returns
-        -------
-        status
-            成功ならTrue, 失敗ならFalse
-        """
-
-        if user_id is None:
-            user_id = self.user.id
-        return await self._state.user.follow.remove(user_id)
 
 
 class Header:
@@ -162,7 +113,8 @@ class Note(PartialNote[INote]):
     Parameters
     ----------
     note: INote
-        アクションを持たないNoteクラス
+        The raw data of the note
+
     client: ClientManager
     """
 
