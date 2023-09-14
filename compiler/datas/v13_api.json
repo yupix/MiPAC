@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "13.11.3",
+    "version": "2023.9.0-beta.2",
     "title": "Misskey API",
     "x-logo": { "url": "/static-assets/api-doc.png" }
   },
@@ -41,6 +41,11 @@
                   "nullable": false,
                   "properties": {
                     "cacheRemoteFiles": {
+                      "type": "boolean",
+                      "optional": false,
+                      "nullable": false
+                    },
+                    "cacheRemoteSensitiveFiles": {
                       "type": "boolean",
                       "optional": false,
                       "nullable": false
@@ -96,11 +101,20 @@
                       "optional": false,
                       "nullable": true
                     },
-                    "errorImageUrl": {
+                    "serverErrorImageUrl": {
                       "type": "string",
                       "optional": false,
-                      "nullable": true,
-                      "default": "https://xn--931a.moe/aiart/yubitun.png"
+                      "nullable": true
+                    },
+                    "infoImageUrl": {
+                      "type": "string",
+                      "optional": false,
+                      "nullable": true
+                    },
+                    "notFoundImageUrl": {
+                      "type": "string",
+                      "optional": false,
+                      "nullable": true
                     },
                     "iconUrl": {
                       "type": "string",
@@ -160,6 +174,16 @@
                     "sensitiveWords": {
                       "type": "array",
                       "optional": true,
+                      "nullable": false,
+                      "items": {
+                        "type": "string",
+                        "optional": false,
+                        "nullable": false
+                      }
+                    },
+                    "preservedUsernames": {
+                      "type": "array",
+                      "optional": false,
                       "nullable": false,
                       "items": {
                         "type": "string",
@@ -328,6 +352,16 @@
                       "optional": false,
                       "nullable": false
                     },
+                    "enableServerMachineStats": {
+                      "type": "boolean",
+                      "optional": false,
+                      "nullable": false
+                    },
+                    "enableIdenticonGeneration": {
+                      "type": "boolean",
+                      "optional": false,
+                      "nullable": false
+                    },
                     "policies": {
                       "type": "object",
                       "optional": false,
@@ -336,6 +370,7 @@
                   },
                   "required": [
                     "cacheRemoteFiles",
+                    "cacheRemoteSensitiveFiles",
                     "emailRequiredForSignup",
                     "enableHcaptcha",
                     "hcaptchaSiteKey",
@@ -346,13 +381,18 @@
                     "swPublickey",
                     "mascotImageUrl",
                     "bannerUrl",
-                    "errorImageUrl",
+                    "serverErrorImageUrl",
+                    "infoImageUrl",
+                    "notFoundImageUrl",
                     "iconUrl",
                     "enableEmail",
                     "enableServiceWorker",
                     "translatorAvailable",
+                    "preservedUsernames",
                     "enableChartsForRemoteUser",
                     "enableChartsForFederatedInstances",
+                    "enableServerMachineStats",
+                    "enableIdenticonGeneration",
                     "policies"
                   ]
                 }
@@ -993,7 +1033,8 @@
                   "ratio": { "type": "integer" },
                   "expiresAt": { "type": "integer" },
                   "startsAt": { "type": "integer" },
-                  "imageUrl": { "type": "string", "minLength": 1 }
+                  "imageUrl": { "type": "string", "minLength": 1 },
+                  "dayOfWeek": { "type": "integer" }
                 },
                 "required": [
                   "url",
@@ -1003,7 +1044,8 @@
                   "ratio",
                   "expiresAt",
                   "startsAt",
-                  "imageUrl"
+                  "imageUrl",
+                  "dayOfWeek"
                 ]
               }
             }
@@ -1401,7 +1443,8 @@
                   "priority": { "type": "string" },
                   "ratio": { "type": "integer" },
                   "expiresAt": { "type": "integer" },
-                  "startsAt": { "type": "integer" }
+                  "startsAt": { "type": "integer" },
+                  "dayOfWeek": { "type": "integer" }
                 },
                 "required": [
                   "id",
@@ -1412,7 +1455,8 @@
                   "priority",
                   "ratio",
                   "expiresAt",
-                  "startsAt"
+                  "startsAt",
+                  "dayOfWeek"
                 ]
               }
             }
@@ -1551,6 +1595,27 @@
                     "type": "string",
                     "nullable": true,
                     "minLength": 1
+                  },
+                  "icon": {
+                    "type": "string",
+                    "enum": ["info", "warning", "error", "success"],
+                    "default": "info"
+                  },
+                  "display": {
+                    "type": "string",
+                    "enum": ["normal", "banner", "dialog"],
+                    "default": "normal"
+                  },
+                  "forExistingUsers": { "type": "boolean", "default": false },
+                  "needConfirmationToRead": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "userId": {
+                    "type": "string",
+                    "format": "misskey:id",
+                    "nullable": true,
+                    "default": null
                   }
                 },
                 "required": ["title", "text", "imageUrl"]
@@ -1872,7 +1937,12 @@
                     "default": 10
                   },
                   "sinceId": { "type": "string", "format": "misskey:id" },
-                  "untilId": { "type": "string", "format": "misskey:id" }
+                  "untilId": { "type": "string", "format": "misskey:id" },
+                  "userId": {
+                    "type": "string",
+                    "format": "misskey:id",
+                    "nullable": true
+                  }
                 },
                 "required": []
               }
@@ -2069,10 +2139,21 @@
                   "imageUrl": {
                     "type": "string",
                     "nullable": true,
-                    "minLength": 1
-                  }
+                    "minLength": 0
+                  },
+                  "icon": {
+                    "type": "string",
+                    "enum": ["info", "warning", "error", "success"]
+                  },
+                  "display": {
+                    "type": "string",
+                    "enum": ["normal", "banner", "dialog"]
+                  },
+                  "forExistingUsers": { "type": "boolean" },
+                  "needConfirmationToRead": { "type": "boolean" },
+                  "isActive": { "type": "boolean" }
                 },
-                "required": ["id", "title", "text", "imageUrl"]
+                "required": ["id"]
               }
             }
           }
@@ -3172,9 +3253,23 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "fileId": { "type": "string", "format": "misskey:id" }
+                  "name": { "type": "string", "pattern": "^[a-zA-Z0-9_]+$" },
+                  "fileId": { "type": "string", "format": "misskey:id" },
+                  "category": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "Use `null` to reset the category."
+                  },
+                  "aliases": { "type": "array", "items": { "type": "string" } },
+                  "license": { "type": "string", "nullable": true },
+                  "isSensitive": { "type": "boolean" },
+                  "localOnly": { "type": "boolean" },
+                  "roleIdsThatCanBeUsedThisEmojiAsReaction": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
                 },
-                "required": ["fileId"]
+                "required": ["name", "fileId"]
               }
             }
           }
@@ -4654,13 +4749,20 @@
                 "properties": {
                   "id": { "type": "string", "format": "misskey:id" },
                   "name": { "type": "string", "pattern": "^[a-zA-Z0-9_]+$" },
+                  "fileId": { "type": "string", "format": "misskey:id" },
                   "category": {
                     "type": "string",
                     "nullable": true,
                     "description": "Use `null` to reset the category."
                   },
                   "aliases": { "type": "array", "items": { "type": "string" } },
-                  "license": { "type": "string", "nullable": true }
+                  "license": { "type": "string", "nullable": true },
+                  "isSensitive": { "type": "boolean" },
+                  "localOnly": { "type": "boolean" },
+                  "roleIdsThatCanBeUsedThisEmojiAsReaction": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
                 },
                 "required": ["id", "name", "aliases"]
               }
@@ -4681,6 +4783,15 @@
                         "message": "No such emoji.",
                         "code": "NO_SUCH_EMOJI",
                         "id": "684dec9d-a8c2-4364-9aa8-456c49cb1dc8"
+                      }
+                    }
+                  },
+                  "NO_SUCH_FILE": {
+                    "value": {
+                      "error": {
+                        "message": "No such file.",
+                        "code": "NO_SUCH_FILE",
+                        "id": "14fb9fd9-0731-4e2f-aeb9-f09e4740333d"
                       }
                     }
                   },
@@ -5655,22 +5766,34 @@
         }
       }
     },
-    "/invite": {
+    "/admin/invite/create": {
       "post": {
-        "operationId": "invite",
-        "summary": "invite",
+        "operationId": "admin/invite/create",
+        "summary": "admin/invite/create",
         "description": "No description provided.\n\n**Credential required**: *Yes*",
         "externalDocs": {
           "description": "Source code",
-          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/invite.ts"
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/admin/invite/create.ts"
         },
-        "tags": ["meta"],
+        "tags": ["admin"],
         "security": [{ "ApiKeyAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "type": "object", "properties": {}, "required": [] }
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "default": 1
+                  },
+                  "expiresAt": { "type": "string", "nullable": true }
+                },
+                "required": []
+              }
             }
           }
         },
@@ -5680,20 +5803,188 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
+                  "type": "array",
                   "optional": false,
                   "nullable": false,
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "optional": false,
-                      "nullable": false,
-                      "example": "2ERUA5VR",
-                      "maxLength": 8,
-                      "minLength": 8
+                  "items": {
+                    "type": "object",
+                    "optional": false,
+                    "nullable": false,
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "optional": false,
+                        "nullable": false,
+                        "example": "GR6S02ERUA5VR"
+                      }
+                    },
+                    "required": ["code"]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INVALID_DATE_TIME": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid date-time format",
+                        "code": "INVALID_DATE_TIME",
+                        "id": "f1380b15-3760-4c6c-a1db-5c3aaf1cbd49"
+                      }
                     }
                   },
-                  "required": ["code"]
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/invite/list": {
+      "post": {
+        "operationId": "admin/invite/list",
+        "summary": "admin/invite/list",
+        "description": "No description provided.\n\n**Credential required**: *Yes*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/admin/invite/list.ts"
+        },
+        "tags": ["admin"],
+        "security": [{ "ApiKeyAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "default": 30
+                  },
+                  "offset": { "type": "integer", "default": 0 },
+                  "type": {
+                    "type": "string",
+                    "enum": ["unused", "used", "expired", "all"],
+                    "default": "all"
+                  },
+                  "sort": {
+                    "type": "string",
+                    "enum": ["+createdAt", "-createdAt", "+usedAt", "-usedAt"]
+                  }
+                },
+                "required": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK (with results)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "optional": false,
+                  "nullable": false,
+                  "items": {
+                    "type": "object",
+                    "optional": false,
+                    "nullable": false
+                  }
                 }
               }
             }
@@ -8511,7 +8802,9 @@
                   },
                   "mascotImageUrl": { "type": "string", "nullable": true },
                   "bannerUrl": { "type": "string", "nullable": true },
-                  "errorImageUrl": { "type": "string", "nullable": true },
+                  "serverErrorImageUrl": { "type": "string", "nullable": true },
+                  "infoImageUrl": { "type": "string", "nullable": true },
+                  "notFoundImageUrl": { "type": "string", "nullable": true },
                   "iconUrl": { "type": "string", "nullable": true },
                   "backgroundImageUrl": { "type": "string", "nullable": true },
                   "logoImageUrl": { "type": "string", "nullable": true },
@@ -8520,6 +8813,7 @@
                   "defaultLightTheme": { "type": "string", "nullable": true },
                   "defaultDarkTheme": { "type": "string", "nullable": true },
                   "cacheRemoteFiles": { "type": "boolean" },
+                  "cacheRemoteSensitiveFiles": { "type": "boolean" },
                   "emailRequiredForSignup": { "type": "boolean" },
                   "enableHcaptcha": { "type": "boolean" },
                   "hcaptchaSiteKey": { "type": "string", "nullable": true },
@@ -8595,7 +8889,13 @@
                   "enableActiveEmailValidation": { "type": "boolean" },
                   "enableChartsForRemoteUser": { "type": "boolean" },
                   "enableChartsForFederatedInstances": { "type": "boolean" },
+                  "enableServerMachineStats": { "type": "boolean" },
+                  "enableIdenticonGeneration": { "type": "boolean" },
                   "serverRules": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "preservedUsernames": {
                     "type": "array",
                     "items": { "type": "string" }
                   }
@@ -10270,9 +10570,9 @@
                     "maximum": 100,
                     "default": 10
                   },
-                  "withUnreads": { "type": "boolean", "default": false },
                   "sinceId": { "type": "string", "format": "misskey:id" },
-                  "untilId": { "type": "string", "format": "misskey:id" }
+                  "untilId": { "type": "string", "format": "misskey:id" },
+                  "isActive": { "type": "boolean", "default": true }
                 },
                 "required": []
               }
@@ -10292,55 +10592,8 @@
                     "type": "object",
                     "optional": false,
                     "nullable": false,
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "optional": false,
-                        "nullable": false,
-                        "format": "id",
-                        "example": "xxxxxxxxxx"
-                      },
-                      "createdAt": {
-                        "type": "string",
-                        "optional": false,
-                        "nullable": false,
-                        "format": "date-time"
-                      },
-                      "updatedAt": {
-                        "type": "string",
-                        "optional": false,
-                        "nullable": true,
-                        "format": "date-time"
-                      },
-                      "text": {
-                        "type": "string",
-                        "optional": false,
-                        "nullable": false
-                      },
-                      "title": {
-                        "type": "string",
-                        "optional": false,
-                        "nullable": false
-                      },
-                      "imageUrl": {
-                        "type": "string",
-                        "optional": false,
-                        "nullable": true
-                      },
-                      "isRead": {
-                        "type": "boolean",
-                        "optional": true,
-                        "nullable": false
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "createdAt",
-                      "updatedAt",
-                      "text",
-                      "title",
-                      "imageUrl"
-                    ]
+                    "ref": "Announcement",
+                    "$ref": "#/components/schemas/Announcement"
                   }
                 }
               }
@@ -13102,7 +13355,13 @@
                     "type": "string",
                     "format": "misskey:id",
                     "nullable": true
-                  }
+                  },
+                  "color": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 16
+                  },
+                  "isSensitive": { "type": "boolean", "nullable": true }
                 },
                 "required": ["name"]
               }
@@ -14296,10 +14555,17 @@
                     "format": "misskey:id",
                     "nullable": true
                   },
+                  "isArchived": { "type": "boolean", "nullable": true },
                   "pinnedNoteIds": {
                     "type": "array",
                     "items": { "type": "string", "format": "misskey:id" }
-                  }
+                  },
+                  "color": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 16
+                  },
+                  "isSensitive": { "type": "boolean", "nullable": true }
                 },
                 "required": ["channelId"]
               }
@@ -20410,6 +20676,15 @@
                         "message": "No such folder.",
                         "code": "NO_SUCH_FOLDER",
                         "id": "ea8fb7a5-af77-4a08-b608-c0218176cd73"
+                      }
+                    }
+                  },
+                  "RESTRICTED_BY_ROLE": {
+                    "value": {
+                      "error": {
+                        "message": "This feature is restricted by your role.",
+                        "code": "RESTRICTED_BY_ROLE",
+                        "id": "7f59dccb-f465-75ab-5cf4-3ce44e3282f7"
                       }
                     }
                   },
@@ -28368,15 +28643,6 @@
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/Error" },
                 "examples": {
-                  "NO_SUCH_ANNOUNCEMENT": {
-                    "value": {
-                      "error": {
-                        "message": "No such announcement.",
-                        "code": "NO_SUCH_ANNOUNCEMENT",
-                        "id": "184663db-df88-4bc2-8b52-fb85f0681939"
-                      }
-                    }
-                  },
                   "INVALID_PARAM": {
                     "value": {
                       "error": {
@@ -28915,9 +29181,9 @@
                   "carefulBot": { "type": "boolean" },
                   "autoAcceptFollowed": { "type": "boolean" },
                   "noCrawle": { "type": "boolean" },
+                  "preventAiLearning": { "type": "boolean" },
                   "isBot": { "type": "boolean" },
                   "isCat": { "type": "boolean" },
-                  "showTimelineReplies": { "type": "boolean" },
                   "injectFeaturedNote": { "type": "boolean" },
                   "receiveAnnouncementEmail": { "type": "boolean" },
                   "alwaysMarkNsfw": { "type": "boolean" },
@@ -28926,7 +29192,11 @@
                     "type": "string",
                     "enum": ["public", "followers", "private"]
                   },
-                  "pinnedPageId": { "type": "string", "format": "misskey:id" },
+                  "pinnedPageId": {
+                    "type": "string",
+                    "format": "misskey:id",
+                    "nullable": true
+                  },
                   "mutedWords": { "type": "array" },
                   "mutedInstances": {
                     "type": "array",
@@ -28953,6 +29223,12 @@
                   },
                   "emailNotificationTypes": {
                     "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "alsoKnownAs": {
+                    "type": "array",
+                    "maxItems": 10,
+                    "uniqueItems": true,
                     "items": { "type": "string" }
                   }
                 }
@@ -29041,6 +29317,42 @@
                         "message": "Too many muted words.",
                         "code": "TOO_MANY_MUTED_WORDS",
                         "id": "010665b1-a211-42d2-bc64-8f6609d79785"
+                      }
+                    }
+                  },
+                  "NO_SUCH_USER": {
+                    "value": {
+                      "error": {
+                        "message": "No such user.",
+                        "code": "NO_SUCH_USER",
+                        "id": "fcd2eef9-a9b2-4c4f-8624-038099e90aa5"
+                      }
+                    }
+                  },
+                  "URI_NULL": {
+                    "value": {
+                      "error": {
+                        "message": "User ActivityPup URI is null.",
+                        "code": "URI_NULL",
+                        "id": "bf326f31-d430-4f97-9933-5d61e4d48a23"
+                      }
+                    }
+                  },
+                  "FORBIDDEN_TO_SET_YOURSELF": {
+                    "value": {
+                      "error": {
+                        "message": "You can't set yourself as your own alias.",
+                        "code": "FORBIDDEN_TO_SET_YOURSELF",
+                        "id": "25c90186-4ab0-49c8-9bba-a1fa6c202ba4"
+                      }
+                    }
+                  },
+                  "RESTRICTED_BY_ROLE": {
+                    "value": {
+                      "error": {
+                        "message": "This feature is restricted by your role.",
+                        "code": "RESTRICTED_BY_ROLE",
+                        "id": "8feff0ba-5ab5-585b-31f4-4df816663fad"
                       }
                     }
                   },
@@ -29860,6 +30172,592 @@
         }
       }
     },
+    "/invite/create": {
+      "post": {
+        "operationId": "invite/create",
+        "summary": "invite/create",
+        "description": "No description provided.\n\n**Credential required**: *Yes*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/invite/create.ts"
+        },
+        "tags": ["meta"],
+        "security": [{ "ApiKeyAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "type": "object", "properties": {}, "required": [] }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK (with results)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "optional": false,
+                  "nullable": false,
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "optional": false,
+                      "nullable": false,
+                      "example": "GR6S02ERUA5VR"
+                    }
+                  },
+                  "required": ["code"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "EXCEEDED_LIMIT_OF_CREATE_INVITE_CODE": {
+                    "value": {
+                      "error": {
+                        "message": "You have exceeded the limit for creating an invitation code.",
+                        "code": "EXCEEDED_LIMIT_OF_CREATE_INVITE_CODE",
+                        "id": "8b165dd3-6f37-4557-8db1-73175d63c641"
+                      }
+                    }
+                  },
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invite/delete": {
+      "post": {
+        "operationId": "invite/delete",
+        "summary": "invite/delete",
+        "description": "No description provided.\n\n**Credential required**: *Yes*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/invite/delete.ts"
+        },
+        "tags": ["meta"],
+        "security": [{ "ApiKeyAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "inviteId": { "type": "string", "format": "misskey:id" }
+                },
+                "required": ["inviteId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "OK (without any results)" },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "NO_SUCH_INVITE_CODE": {
+                    "value": {
+                      "error": {
+                        "message": "No such invite code.",
+                        "code": "NO_SUCH_INVITE_CODE",
+                        "id": "cd4f9ae4-7854-4e3e-8df9-c296f051e634"
+                      }
+                    }
+                  },
+                  "CAN_NOT_DELETE_INVITE_CODE": {
+                    "value": {
+                      "error": {
+                        "message": "You can't delete this invite code.",
+                        "code": "CAN_NOT_DELETE_INVITE_CODE",
+                        "id": "ff17af39-000c-4d4e-abdf-848fa30fc1ce"
+                      }
+                    }
+                  },
+                  "ACCESS_DENIED": {
+                    "value": {
+                      "error": {
+                        "message": "Access denied.",
+                        "code": "ACCESS_DENIED",
+                        "id": "5eb8d909-2540-4970-90b8-dd6f86088121"
+                      }
+                    }
+                  },
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invite/list": {
+      "post": {
+        "operationId": "invite/list",
+        "summary": "invite/list",
+        "description": "No description provided.\n\n**Credential required**: *Yes*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/invite/list.ts"
+        },
+        "tags": ["meta"],
+        "security": [{ "ApiKeyAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "default": 30
+                  },
+                  "sinceId": { "type": "string", "format": "misskey:id" },
+                  "untilId": { "type": "string", "format": "misskey:id" }
+                },
+                "required": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK (with results)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "optional": false,
+                  "nullable": false,
+                  "items": {
+                    "type": "object",
+                    "optional": false,
+                    "nullable": false
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invite/limit": {
+      "post": {
+        "operationId": "invite/limit",
+        "summary": "invite/limit",
+        "description": "No description provided.\n\n**Credential required**: *Yes*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/invite/limit.ts"
+        },
+        "tags": ["meta"],
+        "security": [{ "ApiKeyAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "type": "object", "properties": {}, "required": [] }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK (with results)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "optional": false,
+                  "nullable": false,
+                  "properties": {
+                    "remaining": {
+                      "type": "integer",
+                      "optional": false,
+                      "nullable": true
+                    }
+                  },
+                  "required": ["remaining"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/meta": {
       "post": {
         "operationId": "meta",
@@ -29973,6 +30871,11 @@
                       "optional": false,
                       "nullable": false
                     },
+                    "cacheRemoteSensitiveFiles": {
+                      "type": "boolean",
+                      "optional": false,
+                      "nullable": false
+                    },
                     "emailRequiredForSignup": {
                       "type": "boolean",
                       "optional": false,
@@ -30024,11 +30927,20 @@
                       "optional": false,
                       "nullable": false
                     },
-                    "errorImageUrl": {
+                    "serverErrorImageUrl": {
                       "type": "string",
                       "optional": false,
-                      "nullable": false,
-                      "default": "https://xn--931a.moe/aiart/yubitun.png"
+                      "nullable": true
+                    },
+                    "infoImageUrl": {
+                      "type": "string",
+                      "optional": false,
+                      "nullable": true
+                    },
+                    "notFoundImageUrl": {
+                      "type": "string",
+                      "optional": false,
+                      "nullable": true
                     },
                     "iconUrl": {
                       "type": "string",
@@ -30121,11 +31033,6 @@
                           "optional": false,
                           "nullable": false
                         },
-                        "elasticsearch": {
-                          "type": "boolean",
-                          "optional": false,
-                          "nullable": false
-                        },
                         "hcaptcha": {
                           "type": "boolean",
                           "optional": false,
@@ -30157,7 +31064,6 @@
                         "registration",
                         "localTimeLine",
                         "globalTimeLine",
-                        "elasticsearch",
                         "hcaptcha",
                         "recaptcha",
                         "objectStorage",
@@ -30180,6 +31086,7 @@
                     "defaultLightTheme",
                     "disableRegistration",
                     "cacheRemoteFiles",
+                    "cacheRemoteSensitiveFiles",
                     "emailRequiredForSignup",
                     "enableHcaptcha",
                     "hcaptchaSiteKey",
@@ -30190,7 +31097,9 @@
                     "swPublickey",
                     "mascotImageUrl",
                     "bannerUrl",
-                    "errorImageUrl",
+                    "serverErrorImageUrl",
+                    "infoImageUrl",
+                    "notFoundImageUrl",
                     "iconUrl",
                     "maxNoteTextLength",
                     "ads",
@@ -32332,7 +33241,13 @@
                   "reactionAcceptance": {
                     "type": "string",
                     "nullable": true,
-                    "enum": [null, "likeOnly", "likeOnlyForRemote"],
+                    "enum": [
+                      null,
+                      "likeOnly",
+                      "likeOnlyForRemote",
+                      "nonSensitiveOnly",
+                      "nonSensitiveOnlyForLocalLikeOnlyForRemote"
+                    ],
                     "default": null
                   },
                   "noExtractMentions": { "type": "boolean", "default": false },
@@ -33259,11 +34174,8 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "withFiles": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Only show notes that have attached files."
-                  },
+                  "withFiles": { "type": "boolean", "default": false },
+                  "withReplies": { "type": "boolean", "default": false },
                   "limit": {
                     "type": "integer",
                     "minimum": 1,
@@ -33441,11 +34353,8 @@
                     "default": true
                   },
                   "includeLocalRenotes": { "type": "boolean", "default": true },
-                  "withFiles": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Only show notes that have attached files."
-                  }
+                  "withFiles": { "type": "boolean", "default": false },
+                  "withReplies": { "type": "boolean", "default": false }
                 },
                 "required": []
               }
@@ -33596,11 +34505,8 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "withFiles": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Only show notes that have attached files."
-                  },
+                  "withFiles": { "type": "boolean", "default": false },
+                  "withReplies": { "type": "boolean", "default": false },
                   "fileType": {
                     "type": "array",
                     "items": { "type": "string" }
@@ -35224,8 +36130,7 @@
                   "offset": { "type": "integer", "default": 0 },
                   "host": {
                     "type": "string",
-                    "nullable": true,
-                    "description": "The local host is represented with `null`."
+                    "description": "The local host is represented with `.`."
                   },
                   "userId": {
                     "type": "string",
@@ -35988,11 +36893,8 @@
                     "default": true
                   },
                   "includeLocalRenotes": { "type": "boolean", "default": true },
-                  "withFiles": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Only show notes that have attached files."
-                  }
+                  "withFiles": { "type": "boolean", "default": false },
+                  "withReplies": { "type": "boolean", "default": false }
                 },
                 "required": []
               }
@@ -38859,6 +39761,10 @@
                   "permissions": {
                     "type": "array",
                     "items": { "type": "string" }
+                  },
+                  "visibility": {
+                    "type": "string",
+                    "enum": ["public", "private"]
                   }
                 },
                 "required": [
@@ -43128,18 +44034,23 @@
       "post": {
         "operationId": "users/lists/list",
         "summary": "users/lists/list",
-        "description": "Show all lists that the authenticated user has created.\n\n**Credential required**: *Yes* / **Permission**: *read:account*",
+        "description": "Show all lists that the authenticated user has created.\n\n**Credential required**: *No* / **Permission**: *read:account*",
         "externalDocs": {
           "description": "Source code",
           "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/users/lists/list.ts"
         },
         "tags": ["lists"],
-        "security": [{ "ApiKeyAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "type": "object", "properties": {}, "required": [] }
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": { "type": "string", "format": "misskey:id" }
+                },
+                "required": []
+              }
             }
           }
         },
@@ -43169,6 +44080,24 @@
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/Error" },
                 "examples": {
+                  "NO_SUCH_USER": {
+                    "value": {
+                      "error": {
+                        "message": "No such user.",
+                        "code": "NO_SUCH_USER",
+                        "id": "a8af4a82-0980-4cc4-a6af-8b0ffd54465e"
+                      }
+                    }
+                  },
+                  "REMOTE_USER_NOT_ALLOWED": {
+                    "value": {
+                      "error": {
+                        "message": "Not allowed to load the remote user's list",
+                        "code": "REMOTE_USER_NOT_ALLOWED",
+                        "id": "53858f1b-3315-4a01-81b7-db9b48d4b79a"
+                      }
+                    }
+                  },
                   "INVALID_PARAM": {
                     "value": {
                       "error": {
@@ -43599,13 +44528,12 @@
       "post": {
         "operationId": "users/lists/show",
         "summary": "users/lists/show",
-        "description": "Show the properties of a list.\n\n**Credential required**: *Yes* / **Permission**: *read:account*",
+        "description": "Show the properties of a list.\n\n**Credential required**: *No* / **Permission**: *read:account*",
         "externalDocs": {
           "description": "Source code",
           "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/users/lists/show.ts"
         },
         "tags": ["lists"],
-        "security": [{ "ApiKeyAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {
@@ -43613,7 +44541,8 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "listId": { "type": "string", "format": "misskey:id" }
+                  "listId": { "type": "string", "format": "misskey:id" },
+                  "forPublic": { "type": "boolean", "default": false }
                 },
                 "required": ["listId"]
               }
@@ -43742,6 +44671,290 @@
         }
       }
     },
+    "/users/lists/favorite": {
+      "post": {
+        "operationId": "users/lists/favorite",
+        "summary": "users/lists/favorite",
+        "description": "No description provided.\n\n**Credential required**: *Yes*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/users/lists/favorite.ts"
+        },
+        "security": [{ "ApiKeyAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "listId": { "type": "string", "format": "misskey:id" }
+                },
+                "required": ["listId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "OK (without any results)" },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "NO_SUCH_USER_LIST": {
+                    "value": {
+                      "error": {
+                        "message": "No such user list.",
+                        "code": "NO_SUCH_USER_LIST",
+                        "id": "7dbaf3cf-7b42-4b8f-b431-b3919e580dbe"
+                      }
+                    }
+                  },
+                  "ALREADY_FAVORITED": {
+                    "value": {
+                      "error": {
+                        "message": "The list has already been favorited.",
+                        "code": "ALREADY_FAVORITED",
+                        "id": "6425bba0-985b-461e-af1b-518070e72081"
+                      }
+                    }
+                  },
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/lists/unfavorite": {
+      "post": {
+        "operationId": "users/lists/unfavorite",
+        "summary": "users/lists/unfavorite",
+        "description": "No description provided.\n\n**Credential required**: *Yes*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/users/lists/unfavorite.ts"
+        },
+        "security": [{ "ApiKeyAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "listId": { "type": "string", "format": "misskey:id" }
+                },
+                "required": ["listId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "OK (without any results)" },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "NO_SUCH_USER_LIST": {
+                    "value": {
+                      "error": {
+                        "message": "No such user list.",
+                        "code": "NO_SUCH_USER_LIST",
+                        "id": "baedb33e-76b8-4b0c-86a8-9375c0a7b94b"
+                      }
+                    }
+                  },
+                  "ALREADY_FAVORITED": {
+                    "value": {
+                      "error": {
+                        "message": "You have not favorited the list.",
+                        "code": "ALREADY_FAVORITED",
+                        "id": "835c4b27-463d-4cfa-969b-a9058678d465"
+                      }
+                    }
+                  },
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/lists/update": {
       "post": {
         "operationId": "users/lists/update",
@@ -43761,9 +44974,14 @@
                 "type": "object",
                 "properties": {
                   "listId": { "type": "string", "format": "misskey:id" },
-                  "name": { "type": "string", "minLength": 1, "maxLength": 100 }
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                  },
+                  "isPublic": { "type": "boolean" }
                 },
-                "required": ["listId", "name"]
+                "required": ["listId"]
               }
             }
           }
@@ -43795,6 +45013,202 @@
                         "message": "No such list.",
                         "code": "NO_SUCH_LIST",
                         "id": "796666fe-3dff-4d39-becb-8a5932c1d5b7"
+                      }
+                    }
+                  },
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/lists/create-from-public": {
+      "post": {
+        "operationId": "users/lists/create-from-public",
+        "summary": "users/lists/create-from-public",
+        "description": "No description provided.\n\n**Credential required**: *Yes*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/users/lists/create-from-public.ts"
+        },
+        "security": [{ "ApiKeyAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                  },
+                  "listId": { "type": "string", "format": "misskey:id" }
+                },
+                "required": ["name", "listId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK (with results)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "optional": false,
+                  "nullable": false,
+                  "ref": "UserList",
+                  "$ref": "#/components/schemas/UserList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "TOO_MANY_USERLISTS": {
+                    "value": {
+                      "error": {
+                        "message": "You cannot create user list any more.",
+                        "code": "TOO_MANY_USERLISTS",
+                        "id": "e9c105b2-c595-47de-97fb-7f7c2c33e92f"
+                      }
+                    }
+                  },
+                  "NO_SUCH_LIST": {
+                    "value": {
+                      "error": {
+                        "message": "No such list.",
+                        "code": "NO_SUCH_LIST",
+                        "id": "9292f798-6175-4f7d-93f4-b6742279667d"
+                      }
+                    }
+                  },
+                  "NO_SUCH_USER": {
+                    "value": {
+                      "error": {
+                        "message": "No such user.",
+                        "code": "NO_SUCH_USER",
+                        "id": "13c457db-a8cb-4d88-b70a-211ceeeabb5f"
+                      }
+                    }
+                  },
+                  "ALREADY_ADDED": {
+                    "value": {
+                      "error": {
+                        "message": "That user has already been added to that list.",
+                        "code": "ALREADY_ADDED",
+                        "id": "c3ad6fdb-692b-47ee-a455-7bd12c7af615"
+                      }
+                    }
+                  },
+                  "YOU_HAVE_BEEN_BLOCKED": {
+                    "value": {
+                      "error": {
+                        "message": "You cannot push this user because you have been blocked by this user.",
+                        "code": "YOU_HAVE_BEEN_BLOCKED",
+                        "id": "a2497f2a-2389-439c-8626-5298540530f4"
+                      }
+                    }
+                  },
+                  "TOO_MANY_USERS": {
+                    "value": {
+                      "error": {
+                        "message": "You can not push users any more.",
+                        "code": "TOO_MANY_USERS",
+                        "id": "1845ea77-38d1-426e-8e4e-8b83b24f5bd7"
                       }
                     }
                   },
@@ -44106,6 +45520,156 @@
                     "nullable": false,
                     "ref": "Page",
                     "$ref": "#/components/schemas/Page"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/flashs": {
+      "post": {
+        "operationId": "users/flashs",
+        "summary": "users/flashs",
+        "description": "Show all flashs this user created.\n\n**Credential required**: *No*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/users/flashs.ts"
+        },
+        "tags": ["users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": { "type": "string", "format": "misskey:id" },
+                  "limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "default": 10
+                  },
+                  "sinceId": { "type": "string", "format": "misskey:id" },
+                  "untilId": { "type": "string", "format": "misskey:id" }
+                },
+                "required": ["userId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK (with results)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "optional": false,
+                  "nullable": false,
+                  "items": {
+                    "type": "object",
+                    "optional": false,
+                    "nullable": false,
+                    "ref": "Flash",
+                    "$ref": "#/components/schemas/Flash"
                   }
                 }
               }
@@ -45442,275 +47006,6 @@
         }
       }
     },
-    "/users/stats": {
-      "post": {
-        "operationId": "users/stats",
-        "summary": "users/stats",
-        "description": "Show statistics about a user.\n\n**Credential required**: *No*",
-        "externalDocs": {
-          "description": "Source code",
-          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/users/stats.ts"
-        },
-        "tags": ["users"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "userId": { "type": "string", "format": "misskey:id" }
-                },
-                "required": ["userId"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK (with results)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "optional": false,
-                  "nullable": false,
-                  "properties": {
-                    "notesCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "repliesCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "renotesCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "repliedCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "renotedCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "pollVotesCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "pollVotedCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "localFollowingCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "remoteFollowingCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "localFollowersCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "remoteFollowersCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "followingCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "followersCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "sentReactionsCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "receivedReactionsCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "noteFavoritesCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "pageLikesCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "pageLikedCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "driveFilesCount": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false
-                    },
-                    "driveUsage": {
-                      "type": "integer",
-                      "optional": false,
-                      "nullable": false,
-                      "description": "Drive usage in bytes"
-                    }
-                  },
-                  "required": [
-                    "notesCount",
-                    "repliesCount",
-                    "renotesCount",
-                    "repliedCount",
-                    "renotedCount",
-                    "pollVotesCount",
-                    "pollVotedCount",
-                    "localFollowingCount",
-                    "remoteFollowingCount",
-                    "localFollowersCount",
-                    "remoteFollowersCount",
-                    "followingCount",
-                    "followersCount",
-                    "sentReactionsCount",
-                    "receivedReactionsCount",
-                    "noteFavoritesCount",
-                    "pageLikesCount",
-                    "pageLikedCount",
-                    "driveFilesCount",
-                    "driveUsage"
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
-                "examples": {
-                  "NO_SUCH_USER": {
-                    "value": {
-                      "error": {
-                        "message": "No such user.",
-                        "code": "NO_SUCH_USER",
-                        "id": "9e638e45-3b25-4ef7-8f95-07e8498f1819"
-                      }
-                    }
-                  },
-                  "INVALID_PARAM": {
-                    "value": {
-                      "error": {
-                        "message": "Invalid param.",
-                        "code": "INVALID_PARAM",
-                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Authentication error",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
-                "examples": {
-                  "CREDENTIAL_REQUIRED": {
-                    "value": {
-                      "error": {
-                        "message": "Credential required.",
-                        "code": "CREDENTIAL_REQUIRED",
-                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden error",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
-                "examples": {
-                  "AUTHENTICATION_FAILED": {
-                    "value": {
-                      "error": {
-                        "message": "Authentication failed. Please ensure your token is correct.",
-                        "code": "AUTHENTICATION_FAILED",
-                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "418": {
-            "description": "I'm Ai",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
-                "examples": {
-                  "I_AM_AI": {
-                    "value": {
-                      "error": {
-                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
-                        "code": "I_AM_AI",
-                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
-                "examples": {
-                  "INTERNAL_ERROR": {
-                    "value": {
-                      "error": {
-                        "message": "Internal error occurred. Please contact us if the error persists.",
-                        "code": "INTERNAL_ERROR",
-                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/users/achievements": {
       "post": {
         "operationId": "users/achievements",
@@ -46341,9 +47636,14 @@
           },
           "alsoKnownAs": {
             "type": "array",
-            "format": "uri",
             "nullable": true,
-            "optional": false
+            "optional": false,
+            "items": {
+              "type": "string",
+              "format": "id",
+              "nullable": false,
+              "optional": false
+            }
           },
           "createdAt": {
             "type": "string",
@@ -46413,6 +47713,7 @@
             "type": "array",
             "nullable": false,
             "optional": false,
+            "maxItems": 16,
             "items": {
               "type": "object",
               "nullable": false,
@@ -46429,7 +47730,6 @@
                   "optional": false
                 }
               },
-              "maxLength": 4,
               "required": ["name", "value"]
             }
           },
@@ -46622,7 +47922,12 @@
           },
           "noCrawle": {
             "type": "boolean",
-            "nullable": true,
+            "nullable": false,
+            "optional": false
+          },
+          "preventAiLearning": {
+            "type": "boolean",
+            "nullable": false,
             "optional": false
           },
           "isExplorable": {
@@ -46632,6 +47937,12 @@
           },
           "isDeleted": {
             "type": "boolean",
+            "nullable": false,
+            "optional": false
+          },
+          "twoFactorBackupCodesStock": {
+            "type": "string",
+            "enum": ["full", "partial", "none"],
             "nullable": false,
             "optional": false
           },
@@ -46726,8 +48037,10 @@
           "carefulBot",
           "autoAcceptFollowed",
           "noCrawle",
+          "preventAiLearning",
           "isExplorable",
           "isDeleted",
+          "twoFactorBackupCodesStock",
           "hideOnlineStatus",
           "hasUnreadSpecifiedNotes",
           "hasUnreadMentions",
@@ -46831,9 +48144,62 @@
               "optional": false,
               "format": "id"
             }
+          },
+          "isPublic": {
+            "type": "boolean",
+            "nullable": false,
+            "optional": false
           }
         },
-        "required": ["id", "createdAt", "name"]
+        "required": ["id", "createdAt", "name", "isPublic"]
+      },
+      "Announcement": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "optional": false,
+            "nullable": false,
+            "format": "id",
+            "example": "xxxxxxxxxx"
+          },
+          "createdAt": {
+            "type": "string",
+            "optional": false,
+            "nullable": false,
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "optional": false,
+            "nullable": true,
+            "format": "date-time"
+          },
+          "text": { "type": "string", "optional": false, "nullable": false },
+          "title": { "type": "string", "optional": false, "nullable": false },
+          "imageUrl": { "type": "string", "optional": false, "nullable": true },
+          "icon": { "type": "string", "optional": false, "nullable": false },
+          "display": { "type": "string", "optional": false, "nullable": false },
+          "forYou": { "type": "boolean", "optional": false, "nullable": false },
+          "needConfirmationToRead": {
+            "type": "boolean",
+            "optional": false,
+            "nullable": false
+          },
+          "isRead": { "type": "boolean", "optional": true, "nullable": false }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "text",
+          "title",
+          "imageUrl",
+          "icon",
+          "display",
+          "forYou",
+          "needConfirmationToRead"
+        ]
       },
       "App": {
         "type": "object",
@@ -47012,6 +48378,11 @@
                   "type": "string",
                   "optional": false,
                   "nullable": true
+                },
+                "isSensitive": {
+                  "type": "boolean",
+                  "optional": true,
+                  "nullable": false
                 }
               }
             }
@@ -47563,6 +48934,67 @@
           "attachedRemoteUsersCount"
         ]
       },
+      "InviteCode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "optional": false,
+            "nullable": false,
+            "format": "id",
+            "example": "xxxxxxxxxx"
+          },
+          "code": {
+            "type": "string",
+            "optional": false,
+            "nullable": false,
+            "example": "GR6S02ERUA5VR"
+          },
+          "expiresAt": {
+            "type": "string",
+            "optional": false,
+            "nullable": true,
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "optional": false,
+            "nullable": false,
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "object",
+            "optional": false,
+            "nullable": true,
+            "ref": "UserLite",
+            "$ref": "#/components/schemas/UserLite"
+          },
+          "usedBy": {
+            "type": "object",
+            "optional": false,
+            "nullable": true,
+            "ref": "UserLite",
+            "$ref": "#/components/schemas/UserLite"
+          },
+          "usedAt": {
+            "type": "string",
+            "optional": false,
+            "nullable": true,
+            "format": "date-time"
+          },
+          "used": { "type": "boolean", "optional": false, "nullable": false }
+        },
+        "required": [
+          "id",
+          "code",
+          "expiresAt",
+          "createdAt",
+          "createdBy",
+          "usedBy",
+          "usedAt",
+          "used"
+        ]
+      },
       "Page": {
         "type": "object",
         "properties": {
@@ -47655,6 +49087,11 @@
             "nullable": true,
             "optional": false
           },
+          "isArchived": {
+            "type": "boolean",
+            "optional": false,
+            "nullable": false
+          },
           "notesCount": {
             "type": "number",
             "nullable": false,
@@ -47686,6 +49123,12 @@
             "nullable": false,
             "optional": false,
             "items": { "type": "string", "format": "id" }
+          },
+          "color": { "type": "string", "optional": false, "nullable": false },
+          "isSensitive": {
+            "type": "boolean",
+            "optional": false,
+            "nullable": false
           }
         },
         "required": [
@@ -47695,10 +49138,13 @@
           "name",
           "description",
           "bannerUrl",
+          "isArchived",
           "notesCount",
           "usersCount",
           "userId",
-          "pinnedNoteIds"
+          "pinnedNoteIds",
+          "color",
+          "isSensitive"
         ]
       },
       "QueueCount": {
@@ -48136,7 +49582,23 @@
           },
           "name": { "type": "string", "optional": false, "nullable": false },
           "category": { "type": "string", "optional": false, "nullable": true },
-          "url": { "type": "string", "optional": false, "nullable": false }
+          "url": { "type": "string", "optional": false, "nullable": false },
+          "isSensitive": {
+            "type": "boolean",
+            "optional": true,
+            "nullable": false
+          },
+          "roleIdsThatCanBeUsedThisEmojiAsReaction": {
+            "type": "array",
+            "optional": true,
+            "nullable": false,
+            "items": {
+              "type": "string",
+              "optional": false,
+              "nullable": false,
+              "format": "id"
+            }
+          }
         },
         "required": ["aliases", "name", "category", "url"]
       },
@@ -48169,7 +49631,28 @@
             "description": "The local host is represented with `null`."
           },
           "url": { "type": "string", "optional": false, "nullable": false },
-          "license": { "type": "string", "optional": false, "nullable": true }
+          "license": { "type": "string", "optional": false, "nullable": true },
+          "isSensitive": {
+            "type": "boolean",
+            "optional": false,
+            "nullable": false
+          },
+          "localOnly": {
+            "type": "boolean",
+            "optional": false,
+            "nullable": false
+          },
+          "roleIdsThatCanBeUsedThisEmojiAsReaction": {
+            "type": "array",
+            "optional": false,
+            "nullable": false,
+            "items": {
+              "type": "string",
+              "optional": false,
+              "nullable": false,
+              "format": "id"
+            }
+          }
         },
         "required": [
           "id",
@@ -48178,7 +49661,10 @@
           "category",
           "host",
           "url",
-          "license"
+          "license",
+          "isSensitive",
+          "localOnly",
+          "roleIdsThatCanBeUsedThisEmojiAsReaction"
         ]
       },
       "Flash": {
