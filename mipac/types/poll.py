@@ -21,7 +21,7 @@ class ICreatePoll(IBasePoll, total=False):
 
 class IPoll(IBasePoll):
     """
-    アンケート情報
+    Questionnaire object
     """
 
     choices: list[IPollChoice]
