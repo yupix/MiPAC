@@ -4,6 +4,11 @@
 
 ### New Features ✨
 
+#### 以下のエンドポイントがサポートされました
+
+- `admin/invite/create`
+- `admin/invite/list`
+
 ## [0.5.0] 2023-07-26
 
 ### New Features ✨

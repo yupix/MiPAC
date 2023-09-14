@@ -8,6 +8,7 @@ from mipac.http import HTTPClient
 from mipac.manager.admins.ad import AdminAdvertisingManager, AdminAdvertisingModelManager
 from mipac.manager.admins.announcement import AdminAnnouncementManager
 from mipac.manager.admins.emoji import AdminEmojiManager
+from mipac.manager.admins.invite import AdminInviteManager
 from mipac.manager.admins.moderator import AdminModeratorManager
 from mipac.manager.admins.roles import AdminRolesManager, AdminRolesModelManager
 from mipac.manager.admins.user import AdminUserManager
@@ -30,6 +31,7 @@ class AdminManager(AbstractManager):
             session=session, client=client
         )
         self.role: AdminRolesManager = AdminRolesManager(session=session, client=client)
+        self.invite: AdminInviteManager = AdminInviteManager(session=session, client=client)
 
     @property
     def action(self) -> AdminActions:

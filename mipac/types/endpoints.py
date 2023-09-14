@@ -358,5 +358,15 @@ ENDPOINTS = Literal[
     '/api/channels/search',
     '/api/roles/notes',
     '/api/users/update-memo',
-    '/api/admin/emoji/set-license-bulk'
+    '/api/admin/emoji/set-license-bulk',
+    '/api/admin/invite/create',
+    '/api/admin/invite/list',
+    '/api/invite/create',
+    '/api/invite/delete',
+    '/api/invite/list',
+    '/api/invite/limit',
+    '/api/users/lists/favorite',
+    '/api/users/lists/unfavorite',
+    '/api/users/lists/create-from-public',
+    '/api/users/flashs'
 ]
