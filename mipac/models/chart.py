@@ -1,7 +1,8 @@
+from mipac.abstract.model import AbstractModel
 from mipac.types.chart import IActiveUsersChart, IDriveChart, IDriveLocalChart, IDriveRemoteChart
 
 
-class ActiveUsersChart:
+class ActiveUsersChart(AbstractModel):
     __slots__ = ("__data",)
 
     def __init__(self, data: IActiveUsersChart):
@@ -44,7 +45,7 @@ class ActiveUsersChart:
         return self.__data["registered_outside_year"]
 
 
-class DriveLocalChart:
+class DriveLocalChart(AbstractModel):
     __slots__ = ("__data",)
 
     def __init__(self, data: IDriveLocalChart):
@@ -75,7 +76,7 @@ class DriveLocalChart:
         return self.__data["dec_size"]
 
 
-class DriveRemoteChart:
+class DriveRemoteChart(AbstractModel):
     __slots__ = ("__data",)
 
     def __init__(self, data: IDriveRemoteChart):
@@ -106,7 +107,7 @@ class DriveRemoteChart:
         return self.__data["dec_size"]
 
 
-class DriveChart:
+class DriveChart(AbstractModel):
     __slots__ = ("__data",)
 
     def __init__(self, data: IDriveChart):

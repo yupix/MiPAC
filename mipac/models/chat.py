@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from mipac.abstract.model import AbstractModel
 from mipac.models.drive import File
 from mipac.models.lite.user import LiteUser
 
@@ -13,7 +14,7 @@ if TYPE_CHECKING:
 __all__ = ["ChatGroup", "ChatMessage"]
 
 
-class ChatGroup:
+class ChatGroup(AbstractModel):
     def __init__(self, group: IChatGroup, *, client: ClientManager):
         self.__group: IChatGroup = group
         self.__client: ClientManager = client
@@ -49,7 +50,7 @@ class ChatGroup:
         return not self.__eq__(__value)
 
 
-class ChatMessage:
+class ChatMessage(AbstractModel):
     """
     チャットオブジェクト
     """
@@ -93,9 +94,10 @@ class ChatMessage:
     @property
     def recipient(self) -> LiteUser | None:
         """The user of the bot self"""
+
         return (
-            LiteUser(self.__chat["recipient"], client=self.__client)
-            if self.__chat.get("recipient")
+            LiteUser(user=self.__chat["recipient"], client=self.__client)
+            if self.__chat["recipient"]
             else None
         )
 
@@ -118,9 +120,7 @@ class ChatMessage:
     @property
     def group(self) -> ChatGroup | None:
         return (
-            ChatGroup(self.__chat["group"], client=self.__client)
-            if self.__chat.get("group")
-            else None
+            ChatGroup(self.__chat["group"], client=self.__client) if self.__chat["group"] else None
         )
 
     @property

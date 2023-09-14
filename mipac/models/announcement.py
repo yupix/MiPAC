@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Generic, TypeVar
 
+from mipac.abstract.model import AbstractModel
 from mipac.types.announcement import IAnnouncement, IAnnouncementCommon, IAnnouncementSystem
 from mipac.utils.format import str_to_datetime
 
@@ -13,7 +14,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound=IAnnouncementCommon)
 
 
-class AnnouncementCommon(Generic[T]):
+class AnnouncementCommon(Generic[T], AbstractModel):
     def __init__(self, announcement: T, *, client: ClientManager) -> None:
         self.__announcement: T = announcement
         self.__client: ClientManager = client

@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
+from mipac.abstract.model import AbstractModel
 from mipac.models.user import UserDetailed
 from mipac.types.admin import (
     IIndexStat,
@@ -20,7 +21,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class UserIP:
+class UserIP(AbstractModel):
     def __init__(self, user_ip: IUserIP) -> None:
         self.__user_ip: IUserIP = user_ip
 
@@ -64,7 +65,7 @@ class IndexStat:
         return self.__index_stat["indexdef"]
 
 
-class ModerationLog:
+class ModerationLog(AbstractModel):
     def __init__(self, moderation_log: IModerationLog, *, client: ClientManager) -> None:
         self.__moderation_log: IModerationLog = moderation_log
         self.__client: ClientManager = client
@@ -100,7 +101,7 @@ class ModerationLog:
         return not self.__eq__(__value)
 
 
-class ServerInfoCpu:
+class ServerInfoCpu(AbstractModel):
     def __init__(self, server_info_cpu: IServerInfoCpu) -> None:
         self.__server_info_cpu = server_info_cpu
 
@@ -113,7 +114,7 @@ class ServerInfoCpu:
         return self.__server_info_cpu["cores"]
 
 
-class ServerInfoMem:
+class ServerInfoMem(AbstractModel):
     def __init__(self, server_info_mem: IServerInfoMem) -> None:
         self.__server_info_mem = server_info_mem
 
@@ -122,7 +123,7 @@ class ServerInfoMem:
         return self.__server_info_mem["total"]
 
 
-class ServerInfoFs:
+class ServerInfoFs(AbstractModel):
     def __init__(self, server_info_fs: IServerInfoFs) -> None:
         self.__server_info_fs = server_info_fs
 
@@ -135,7 +136,7 @@ class ServerInfoFs:
         return self.__server_info_fs["used"]
 
 
-class ServerInfoNet:
+class ServerInfoNet(AbstractModel):
     def __init__(self, server_info_net: IServerInfoNet) -> None:
         self.__server_info_net = server_info_net
 
@@ -144,7 +145,7 @@ class ServerInfoNet:
         return self.__server_info_net["interface"]
 
 
-class ServerInfo:
+class ServerInfo(AbstractModel):
     def __init__(self, server_info: IServerInfo) -> None:
         self.__server_info = server_info
 

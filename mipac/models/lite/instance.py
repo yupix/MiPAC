@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from mipac.abstract.model import AbstractModel
 from mipac.types.instance import IInstanceLite
 
 
-class LiteInstance:
+class LiteInstance(AbstractModel):
     def __init__(self, instance: IInstanceLite) -> None:
         self.__instance: IInstanceLite = instance
 

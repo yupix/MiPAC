@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.config import config
-from mipac.errors.base import NotSupportVersion, ParameterError
+from mipac.errors.base import NotSupportVersion, NotSupportVersionText, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.admin import IndexStat, ModerationLog, ServerInfo, UserIP
 from mipac.models.meta import AdminMeta
@@ -45,7 +45,7 @@ class AdminActions(AbstractAction):
 
     async def update_user_note(self, user_id: str, text: str) -> bool:
         if config.use_version < 12:
-            raise NotSupportVersion("ご利用のインスタンスのバージョンではサポートされていない機能です")
+            raise NotSupportVersion(NotSupportVersionText)
         body = {"userId": user_id, "text": text}
         return bool(
             await self.__session.request(
@@ -154,7 +154,7 @@ class AdminActions(AbstractAction):
         get_all: bool = False,
     ) -> AsyncGenerator[ModerationLog, None]:
         if config.use_version < 12:
-            raise NotSupportVersion("ご利用のインスタンスのバージョンではサポートされていない機能です")
+            raise NotSupportVersion(NotSupportVersionText)
 
         if limit > 100:
             raise ParameterError("limit must be less than 100")
@@ -192,7 +192,7 @@ class AdminActions(AbstractAction):
 
     async def resolve_abuse_user_report(self, report_id: str, forward: bool = False) -> bool:
         if config.use_version < 12:
-            raise NotSupportVersion("ご利用のインスタンスのバージョンではサポートされていない機能です")
+            raise NotSupportVersion(NotSupportVersionText)
 
         body = {"reportId": report_id, "forward": forward}
         return bool(
@@ -202,17 +202,17 @@ class AdminActions(AbstractAction):
         )
 
     async def reset_password(self, user_id: str) -> str:
-        """指定したIDのユーザーのパスワードをリセットします
+        """target user's password reset
 
         Parameters
         ----------
         user_id : str
-            パスワードをリセットする対象のユーザーID
+            target user's id
 
         Returns
         -------
         str
-            新しいパスワード
+            new password
         """
         return await self.__session.request(
             Route("POST", "/api/admin/reset-password"), auth=True, json={"userId": user_id}
@@ -229,7 +229,7 @@ class AdminActions(AbstractAction):
 
     async def get_user_ips(self, user_id: str) -> list[UserIP]:
         if config.use_version < 12:
-            raise NotSupportVersion("ご利用のインスタンスのバージョンではサポートされていない機能です")
+            raise NotSupportVersion(NotSupportVersionText)
 
         res: list[IUserIP] = await self.__session.request(
             Route("POST", "/api/admin/get-user-ips"),

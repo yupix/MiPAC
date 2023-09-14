@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Literal
 
+from mipac.abstract.model import AbstractModel
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.emoji import ICustomEmojiLite
 from mipac.types.user import ILiteUser
@@ -11,7 +12,7 @@ if TYPE_CHECKING:
     from mipac.manager.user import UserManager
 
 
-class LiteUser:
+class LiteUser(AbstractModel):
     __slots__ = ("__user", "__client")
 
     def __init__(self, user: ILiteUser, *, client: ClientManager) -> None:

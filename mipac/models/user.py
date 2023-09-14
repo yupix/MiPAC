@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Literal
 
+from mipac.abstract.model import AbstractModel
 from mipac.models.lite.user import LiteUser
 from mipac.models.note import Note
 from mipac.types.page import IPage
@@ -15,7 +16,7 @@ if TYPE_CHECKING:
 __all__ = ("UserDetailed", "LiteUser", "Achievement", "BlockingUser")
 
 
-class BlockingUser:
+class BlockingUser(AbstractModel):
     def __init__(self, blocking_user_data: IBlockingUser, *, client: ClientManager) -> None:
         self.__blocking_user_data: IBlockingUser = blocking_user_data
         self.__client: ClientManager = client
@@ -43,7 +44,7 @@ class BlockingUser:
         return not self.__eq__(__value)
 
 
-class Achievement:
+class Achievement(AbstractModel):
     def __init__(self, detail: IAchievement):
         self.__detail: IAchievement = detail
 

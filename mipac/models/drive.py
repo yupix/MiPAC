@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
+from mipac.abstract.model import AbstractModel
+
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
     from mipac.manager.drive import ClientFileManager, ClientFolderManager
@@ -10,7 +12,7 @@ if TYPE_CHECKING:
 __all__ = ["FileProperties", "File", "Folder"]
 
 
-class FileProperties:
+class FileProperties(AbstractModel):
     def __init__(self, properties: IFileProperties) -> None:
         self.__properties: IFileProperties = properties
 
@@ -27,7 +29,7 @@ class FileProperties:
         return self.__properties["avg_color"]
 
 
-class Folder:
+class Folder(AbstractModel):
     def __init__(self, folder: FolderPayload, client: ClientManager):
         self.__folder: FolderPayload = folder
         self.__client: ClientManager = client
@@ -76,7 +78,7 @@ class Folder:
         return not self.__eq__(__value)
 
 
-class File:
+class File(AbstractModel):
     def __init__(self, file: IDriveFile, *, client: ClientManager):
         self.__file: IDriveFile = file
         self.__client: ClientManager = client

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from mipac.abstract.model import AbstractModel
 from mipac.types.poll import ICreatePoll, IPoll, IPollChoice
 
 if TYPE_CHECKING:
@@ -16,7 +17,7 @@ class MiPoll:
         self.expires_at = poll.get("expires_at")
 
 
-class PollChoice:
+class PollChoice(AbstractModel):
     def __init__(self, choice: IPollChoice, *, client: ClientManager):
         self.__choice: IPollChoice = choice
         self.__client: ClientManager = client
@@ -34,7 +35,7 @@ class PollChoice:
         return self.__choice["votes"]
 
 
-class Poll:
+class Poll(AbstractModel):
     def __init__(self, poll: IPoll, *, client: ClientManager):
         self.__poll: IPoll = poll
         self.__client: ClientManager = client

@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
+from mipac.abstract.model import AbstractModel
 from mipac.types.antenna import IAntenna, IAntennaReceiveSource
 from mipac.utils.format import str_to_datetime
 
@@ -11,7 +12,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class Antenna:
+class Antenna(AbstractModel):
     def __init__(self, antenna: IAntenna, *, client: ClientManager) -> None:
         self.__antenna: IAntenna = antenna
         self.__client: ClientManager = client

@@ -2,13 +2,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from mipac.abstract.model import AbstractModel
 from mipac.types.instance import IFederationInstance
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
 
 
-class FederationInstance:
+class FederationInstance(AbstractModel):
     def __init__(self, instance: IFederationInstance, *, client: ClientManager) -> None:
         self.__instance: IFederationInstance = instance
         self.__client: ClientManager = client

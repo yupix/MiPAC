@@ -1,8 +1,9 @@
 from __future__ import annotations
-from datetime import datetime
 
+from datetime import datetime
 from typing import TYPE_CHECKING, Generic, TypeVar
 
+from mipac.abstract.model import AbstractModel
 from mipac.models.lite.user import LiteUser
 from mipac.types.invite import IInviteCode, IPartialInviteCode
 from mipac.utils.format import str_to_datetime
@@ -14,7 +15,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound=IPartialInviteCode)
 
 
-class PartialInviteCode(Generic[T]):
+class PartialInviteCode(Generic[T], AbstractModel):
     def __init__(self, raw_invite_code: T, *, client: ClientManager) -> None:
         self._raw_invite_code: T = raw_invite_code
         self._client = client

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from mipac.abstract.model import AbstractModel
 from mipac.models.lite.meta import LiteMeta, MetaCommon
 from mipac.types.meta import IAdminMeta, IFeatures, IMeta, IPolicies
 
@@ -9,7 +10,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class Policies:
+class Policies(AbstractModel):
     def __init__(self, policies: IPolicies) -> None:
         self.__policies: IPolicies = policies
 
@@ -78,7 +79,7 @@ class Policies:
         return self.__policies["rate_limit_factor"]
 
 
-class Features:
+class Features(AbstractModel):
     def __init__(self, features: IFeatures) -> None:
         self.__features = features
 

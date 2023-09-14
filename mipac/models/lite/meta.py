@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from mipac.abstract.model import AbstractModel
 from mipac.models.emoji import CustomEmoji
 from mipac.types.ads import IAds
 from mipac.types.meta import ICPU, ILiteMeta, IMetaAnnouncement, IMetaCommon
@@ -10,7 +11,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class CPU:
+class CPU(AbstractModel):
     def __init__(self, cpu: ICPU) -> None:
         self.__cpu: ICPU = cpu
 
@@ -23,7 +24,7 @@ class CPU:
         return self.__cpu["model"]
 
 
-class MetaCommon:
+class MetaCommon(AbstractModel):
     def __init__(self, meta_common: IMetaCommon, *, client: ClientManager) -> None:
         self.__meta_common: IMetaCommon = meta_common
         self.__client = client

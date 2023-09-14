@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Literal
 
+from mipac.abstract.model import AbstractModel
 from mipac.types.ads import IAd
 from mipac.utils.format import str_to_datetime
 
@@ -11,7 +12,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class Ad:
+class Ad(AbstractModel):
     def __init__(self, ad_data: IAd, *, client: ClientManager) -> None:
         self.__ad_data: IAd = ad_data
         self.__client: ClientManager = client

@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Generic, TypeVar
 
+from mipac.abstract.model import AbstractModel
 from mipac.models.drive import File
 from mipac.models.lite.user import LiteUser
 from mipac.types.note import INoteVisibility, IPartialNote
@@ -17,7 +18,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound=IPartialNote)
 
 
-class PartialNote(Generic[T]):
+class PartialNote(Generic[T], AbstractModel):
     def __init__(self, note_data: T, client: ClientManager) -> None:
         self._note: T = note_data
         self._client: ClientManager = client

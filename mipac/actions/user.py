@@ -1,24 +1,32 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional
+from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, TypeVar, Union, overload
 
 from mipac.config import config
-from mipac.errors.base import NotExistRequiredData, NotSupportVersion, ParameterError
+from mipac.errors.base import (
+    NotExistRequiredData,
+    NotSupportVersion,
+    NotSupportVersionText,
+    ParameterError,
+)
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
 from mipac.models.note import Note
 from mipac.models.user import Achievement, LiteUser, UserDetailed
 from mipac.types.clip import IClip
 from mipac.types.note import INote
+from mipac.types.user import ILiteUser, IUserDetailed
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
-from mipac.utils.pagination import Pagination
+from mipac.utils.pagination import Pagination, pagination_iterator
 from mipac.utils.util import check_multi_arg
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 __all__ = ["UserActions"]
+
+T = TypeVar("T", bound=Union[LiteUser, UserDetailed])
 
 
 class UserActions:
@@ -70,22 +78,23 @@ class UserActions:
         **kwargs,
     ) -> UserDetailed:
         """
-        ユーザーのプロフィールを取得します。一度のみサーバーにアクセスしキャッシュをその後は使います。
-        fetch_userを使った場合はキャッシュが廃棄され再度サーバーにアクセスします。
+        Retrieve user information from the user ID using the cache.
+        If there is no cache, `fetch` is automatically used.
+        The `fetch` method is recommended if you want up-to-date user information.
 
         Parameters
         ----------
         user_id : str
-            取得したいユーザーのユーザーID
+            target user id
         username : str
-            取得したいユーザーのユーザー名
+            target username
         host : str, default=None
-            取得したいユーザーがいるインスタンスのhost
+            Hosts with target users
 
         Returns
         -------
         UserDetailed
-            ユーザー情報
+            user information
         """
 
         field = remove_dict_empty({"userId": user_id, "username": username, "host": host})
@@ -101,16 +110,19 @@ class UserActions:
         host: str | None = None,
     ) -> UserDetailed:
         """
-        サーバーにアクセスし、ユーザーのプロフィールを取得します。基本的には get_userをお使いください。
+        Retrieve the latest user information using the target user ID or username.
+        If you do not need the latest information, you should basically use the `get` method.
+        This method accesses the server each time,
+        which may increase the number of server accesses.
 
         Parameters
         ----------
         user_id : str
-            取得したいユーザーのユーザーID
+            target user id
         username : str
-            取得したいユーザーのユーザー名
+            target username
         host : str, default=None
-            取得したいユーザーがいるインスタンスのhost
+            Hosts with target users
 
         Returns
         -------
@@ -135,7 +147,7 @@ class UserActions:
         get_all: bool = False,
     ) -> AsyncGenerator[Note, None]:
         if check_multi_arg(user_id, self.__user) is False:
-            raise ParameterError("user_idがありません", user_id, self.__user)
+            raise ParameterError("missing required argument: user_id", user_id, self.__user)
 
         user_id = user_id or self.__user and self.__user.id
         data = {
@@ -174,7 +186,7 @@ class UserActions:
         Parameters
         ----------
         user : Optional[User], default=None
-            メンションを取得したいユーザーのオブジェクト
+            The object of the user whose mentions you want to retrieve
 
         Returns
         -------
@@ -188,13 +200,39 @@ class UserActions:
             raise NotExistRequiredData("Required parameters: user")
         return f"@{user.username}@{user.host}" if user.instance else f"@{user.username}"
 
+    @overload
     async def search(
         self,
         query: str,
         limit: int = 100,
         offset: int = 0,
         origin: Literal["local", "remote", "combined"] = "combined",
-        detail: bool = True,
+        detail: Literal[False] = ...,
+        *,
+        get_all: bool = False,
+    ) -> AsyncGenerator[LiteUser, None]:
+        ...
+
+    @overload
+    async def search(
+        self,
+        query: str,
+        limit: int = 100,
+        offset: int = 0,
+        origin: Literal["local", "remote", "combined"] = "combined",
+        detail: Literal[True] = True,
+        *,
+        get_all: bool = False,
+    ) -> AsyncGenerator[UserDetailed, None]:
+        ...
+
+    async def search(
+        self,
+        query: str,
+        limit: int = 100,
+        offset: int = 0,
+        origin: Literal["local", "remote", "combined"] = "combined",
+        detail: Literal[True, False] = True,
         *,
         get_all: bool = False,
     ) -> AsyncGenerator[UserDetailed | LiteUser, None]:
@@ -211,14 +249,14 @@ class UserActions:
             The number of users to skip.
         origin : Literal['local', 'remote', 'combined'], default='combined'
             The origin of users to search.
-        detail : bool, default=True
+        detail : Literal[True, False], default=True
             Whether to return detailed user information.
         get_all : bool, default=False
             Whether to return all users.
 
         Returns
         -------
-        AsyncGenerator[UserDetailed | LiteUser, None]
+        AsyncGenerator[Union[LiteUser, UserDetailed], None]
             A AsyncGenerator of users.
         """
 
@@ -232,18 +270,29 @@ class UserActions:
             {"query": query, "limit": limit, "offset": offset, "origin": origin, "detail": detail}
         )
 
-        pagination = Pagination[UserDetailed | LiteUser](
-            self.__session, Route("POST", "/api/users/search"), json=body, pagination_type="count"
-        )
+        if detail:
+            pagination = Pagination[IUserDetailed](
+                self.__session,
+                Route("POST", "/api/users/search"),
+                json=body,
+                pagination_type="count",
+            )
+            iterator = pagination_iterator(
+                pagination, get_all, model=UserDetailed, client=self.__client
+            )
+        else:
+            pagination = Pagination[ILiteUser](
+                self.__session,
+                Route("POST", "/api/users/search"),
+                json=body,
+                pagination_type="count",
+            )
 
-        while True:
-            res_users = await pagination.next()
-            for user in res_users:
-                if detail:
-                    yield UserDetailed(user, client=self.__client)
-                yield LiteUser(user, client=self.__client)
-            if get_all is False or pagination.is_final:
-                break
+            iterator = pagination_iterator(
+                pagination, get_all=get_all, model=LiteUser, client=self.__client
+            )
+        async for user in iterator:
+            yield user
 
     async def search_by_username_and_host(
         self,
@@ -295,7 +344,7 @@ class UserActions:
         """Get achievements of user."""
 
         if config.use_version < 13:
-            raise NotSupportVersion("ご利用のインスタンスのバージョンではサポートされていない機能です")
+            raise NotSupportVersion(NotSupportVersionText)
 
         user_id = user_id or self.__user and self.__user.id
 

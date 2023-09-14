@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Generic, TypeVar
 
+from mipac.abstract.model import AbstractModel
 from mipac.types.channel import IChannelLite
 from mipac.utils.format import str_to_datetime
 
@@ -14,7 +15,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound=IChannelLite)
 
 
-class ChannelLite(Generic[T]):
+class ChannelLite(Generic[T], AbstractModel):
     def __init__(self, channel: T, *, client: ClientManager) -> None:
         self._channel: T = channel
         self.__client: ClientManager = client
