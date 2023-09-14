@@ -28,7 +28,7 @@ class AdminEmojiActions(AbstractAction):
         name: str | None = None,
         url: str | None = None,
         category: str | None = None,
-        aliases: list[str] | None = None
+        aliases: list[str] | None = None,
     ) -> bool:
         """絵文字を追加します
 
@@ -57,20 +57,23 @@ class AdminEmojiActions(AbstractAction):
         """
 
         if self.__client._config.use_version >= 12:
-            data = {'fileId': file_id}
+            data = {"fileId": file_id}
         else:
             data = {
-                'name': name,
-                'url': url,
-                'category': category,
-                'aliases': aliases,
+                "name": name,
+                "url": url,
+                "category": category,
+                "aliases": aliases,
             }
 
         if not check_multi_arg(file_id, url):
-            raise NotExistRequiredData('required a file_id or url')
+            raise NotExistRequiredData("required a file_id or url")
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/emoji/add'), json=data, lower=True, auth=True,
+                Route("POST", "/api/admin/emoji/add"),
+                json=data,
+                lower=True,
+                auth=True,
             )
         )
 
@@ -81,22 +84,22 @@ class AdminEmojiActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        get_all: bool = True
+        get_all: bool = True,
     ) -> AsyncGenerator[CustomEmoji, None]:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
         if get_all:
             limit = 100
 
         body = {
-            'query': query,
-            'limit': limit,
-            'sinceId': since_id,
-            'untilId': until_id,
+            "query": query,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
         }
 
         pagination = Pagination[ICustomEmoji](
-            self.__session, Route('POST', '/api/admin/emoji/list'), json=body
+            self.__session, Route("POST", "/api/admin/emoji/list"), json=body
         )
 
         while True:
@@ -115,23 +118,23 @@ class AdminEmojiActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        get_all: bool = True
+        get_all: bool = True,
     ) -> AsyncGenerator[CustomEmoji, None]:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
         if get_all:
             limit = 100
 
         body = {
-            'query': query,
-            'host': host,
-            'limit': limit,
-            'sinceId': since_id,
-            'untilId': until_id,
+            "query": query,
+            "host": host,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
         }
 
         pagination = Pagination[ICustomEmoji](
-            self.__session, Route('POST', '/api/admin/emoji/list-remote'), json=body
+            self.__session, Route("POST", "/api/admin/emoji/list-remote"), json=body
         )
 
         while True:
@@ -143,9 +146,9 @@ class AdminEmojiActions(AbstractAction):
                 break
 
     async def set_license_bulk(self, ids: list[str], license: str | None = None) -> bool:
-        body = {'ids': ids, 'license': license}
+        body = {"ids": ids, "license": license}
         res: bool = await self.__session.request(
-            Route('POST', '/api/admin/emoji/set-license-bulk'),
+            Route("POST", "/api/admin/emoji/set-license-bulk"),
             auth=True,
             json=body,
             remove_none=False,  # remove_noneをFalseにしないとlisenceが消せなくなる
@@ -174,16 +177,19 @@ class AdminEmojiActions(AbstractAction):
         emoji_id = emoji_id or self.__emoji_id
 
         if emoji_id is None:
-            raise NotExistRequiredData('idが不足しています')
+            raise NotExistRequiredData("idが不足しています")
 
         endpoint = (
-            '/api/admin/emoji/delete'
+            "/api/admin/emoji/delete"
             if self.__client._config.use_version >= 12
-            else '/api/admin/emoji/remove'
+            else "/api/admin/emoji/remove"
         )
 
         return bool(
             await self.__session.request(
-                Route('POST', endpoint), auth=True, json={'id': emoji_id}, lower=True,
+                Route("POST", endpoint),
+                auth=True,
+                json={"id": emoji_id},
+                lower=True,
             )
         )

@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from mipac.actions.admins.announcement import AdminAnnouncementClientActions
     from mipac.manager.client import ClientManager
 
-T = TypeVar('T', bound=IAnnouncementCommon)
+T = TypeVar("T", bound=IAnnouncementCommon)
 
 
 class AnnouncementCommon(Generic[T]):
@@ -20,31 +20,31 @@ class AnnouncementCommon(Generic[T]):
 
     @property
     def id(self) -> str:
-        return self.__announcement['id']
+        return self.__announcement["id"]
 
     @property
     def created_at(self) -> datetime:
-        return str_to_datetime(self.__announcement['created_at'])
+        return str_to_datetime(self.__announcement["created_at"])
 
     @property
     def updated_at(self) -> datetime | None:
         return (
-            str_to_datetime(self.__announcement['updated_at'])
-            if self.__announcement['updated_at']
+            str_to_datetime(self.__announcement["updated_at"])
+            if self.__announcement["updated_at"]
             else None
         )
 
     @property
     def text(self) -> str:
-        return self.__announcement['text']
+        return self.__announcement["text"]
 
     @property
     def title(self) -> str:
-        return self.__announcement['title']
+        return self.__announcement["title"]
 
     @property
     def image_url(self) -> str | None:
-        return self.__announcement['image_url']
+        return self.__announcement["image_url"]
 
     @property
     def action(self) -> AdminAnnouncementClientActions:
@@ -66,7 +66,7 @@ class Announcement(AnnouncementCommon):
 
     @property
     def is_read(self) -> bool:
-        return self.__announcement['is_read']
+        return self.__announcement["is_read"]
 
 
 class AnnouncementSystem(AnnouncementCommon):
@@ -76,4 +76,4 @@ class AnnouncementSystem(AnnouncementCommon):
 
     @property
     def reads(self) -> int:
-        return self.__announcement['reads']
+        return self.__announcement["reads"]

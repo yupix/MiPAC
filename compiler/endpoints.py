@@ -16,28 +16,28 @@ TOP_COMMENT = '''\"\"\"
 IMPORTS = 'from typing import Literal\n\n'
 TEMPLATES = 'ENDPOINTS = '
 
-with open('./datas/v13_api.json', mode='r') as f:
+with open('./datas/v13_api.json', mode='r', encoding='utf-8') as f:
     api: OpenAPI = json.load(f)
     for path in api['paths']:
         PATHS.append(f'{PREFIX}{path}')
 
-with open('./datas/ayuskey_api.json', mode='r') as f:
+with open('./datas/ayuskey_api.json', mode='r', encoding='utf-8') as f:
     api: OpenAPI = json.load(f)
     for path in api['paths']:
         PATHS.append(f'{PREFIX}{path}')
 
 old_endpoints = []
 if os.path.exists('./datas/endpoints.json'):
-    with open('./datas/endpoints.json', mode='r') as f:
+    with open('./datas/endpoints.json', mode='r', encoding='utf-8') as f:
         old_endpoints = json.load(f)
 
-with open('./datas/endpoints.json', mode='w') as f:
+with open('./datas/endpoints.json', mode='w', encoding='utf-8') as f:
     removed_endpoints = []
     for i in old_endpoints:
 
         if i not in list(dict.fromkeys(PATHS)):
             removed_endpoints.append(i)
-    with open('./datas/removed-endpoints.json', mode='w') as removed_endpoints_f:
+    with open('./datas/removed-endpoints.json', mode='w', encoding='utf-8') as removed_endpoints_f:
         json.dump(removed_endpoints, removed_endpoints_f, ensure_ascii=False, indent=4)
 
     old_endpoints.extend(PATHS)

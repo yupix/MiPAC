@@ -26,5 +26,7 @@ class ReactionManager(AbstractManager):
             Reactionに対するアクションを行うクラス
         """
         return ReactionActions(
-            note_id=self.__note_id, session=self.__session, client=self.__client,
+            note_id=self.__note_id,
+            session=self.__session,
+            client=self.__client,
         )

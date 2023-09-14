@@ -10,10 +10,10 @@ if TYPE_CHECKING:
 
 class MiPoll:
     def __init__(self, poll: ICreatePoll) -> None:
-        self.multiple = poll.get('multiple', False)
-        self.choices = poll.get('choices')
-        self.expired_after = poll.get('expired_after')
-        self.expires_at = poll.get('expires_at')
+        self.multiple = poll.get("multiple", False)
+        self.choices = poll.get("choices")
+        self.expired_after = poll.get("expired_after")
+        self.expires_at = poll.get("expires_at")
 
 
 class PollChoice:
@@ -23,15 +23,15 @@ class PollChoice:
 
     @property
     def is_voted(self) -> bool:
-        return self.__choice['is_voted']
+        return self.__choice["is_voted"]
 
     @property
     def text(self) -> str:
-        return self.__choice['text']
+        return self.__choice["text"]
 
     @property
     def votes(self) -> int:
-        return self.__choice['votes']
+        return self.__choice["votes"]
 
 
 class Poll:
@@ -41,16 +41,16 @@ class Poll:
 
     @property
     def multiple(self) -> bool:
-        return self.__poll['multiple']
+        return self.__poll["multiple"]
 
     @property
     def expires_at(self) -> int:
-        return self.__poll['expires_at']
+        return self.__poll["expires_at"]
 
     @property
     def expired_after(self) -> int:
-        return self.__poll['expired_after']
+        return self.__poll["expired_after"]
 
     @property
     def choices(self) -> list[PollChoice]:
-        return [PollChoice(i, client=self.__client) for i in self.__poll['choices']]
+        return [PollChoice(i, client=self.__client) for i in self.__poll["choices"]]

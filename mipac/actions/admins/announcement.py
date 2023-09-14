@@ -15,7 +15,11 @@ if TYPE_CHECKING:
 
 class AdminAnnouncementClientActions(AbstractAction):
     def __init__(
-        self, announce_id: str | None = None, *, session: HTTPClient, client: ClientManager,
+        self,
+        announce_id: str | None = None,
+        *,
+        session: HTTPClient,
+        client: ClientManager,
     ):
         self.__announce_id = announce_id
         self.__session: HTTPClient = session
@@ -24,7 +28,9 @@ class AdminAnnouncementClientActions(AbstractAction):
     async def delete(self, announce_id: str | None = None) -> bool:
         announce_id = announce_id or self.__announce_id
         res: bool = await self.__session.request(
-            Route('POST', '/api/admin/announcements/delete'), json={'id': announce_id}, auth=True,
+            Route("POST", "/api/admin/announcements/delete"),
+            json={"id": announce_id},
+            auth=True,
         )
         return res
 
@@ -38,13 +44,13 @@ class AdminAnnouncementClientActions(AbstractAction):
     ):
         announce_id = announce_id or self.__announce_id
         body = {
-            'id': announce_id,
-            'title': title,
-            'text': text,
-            'imageUrl': image_url,
+            "id": announce_id,
+            "title": title,
+            "text": text,
+            "imageUrl": image_url,
         }
         res: bool = await self.__session.request(
-            Route('POST', '/api/admin/announcements/update'),
+            Route("POST", "/api/admin/announcements/update"),
             json=body,
             auth=True,
             remove_none=False,
@@ -54,14 +60,18 @@ class AdminAnnouncementClientActions(AbstractAction):
 
 class AdminAnnouncementActions(AdminAnnouncementClientActions):
     def __init__(
-        self, announce_id: str | None = None, *, session: HTTPClient, client: ClientManager,
+        self,
+        announce_id: str | None = None,
+        *,
+        session: HTTPClient,
+        client: ClientManager,
     ):
         super().__init__(announce_id=announce_id, session=session, client=client)
 
     async def create(self, title: str, text: str, image_url: str | None = None) -> Announcement:
-        body = {'title': title, 'text': text, 'imageUrl': image_url}
+        body = {"title": title, "text": text, "imageUrl": image_url}
         created_announcement: IAnnouncement = await self.__session.request(
-            Route('POST', '/api/admin/announcements/create'),
+            Route("POST", "/api/admin/announcements/create"),
             json=body,
             auth=True,
             lower=True,
@@ -77,18 +87,18 @@ class AdminAnnouncementActions(AdminAnnouncementClientActions):
         get_all: bool = False,
     ) -> AsyncGenerator[AnnouncementSystem, None]:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
         if get_all:
             limit = 100
 
         body = {
-            'limit': limit,
-            'sinceId': since_id,
-            'untilId': until_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
         }
 
         pagination = Pagination[IAnnouncementSystem](
-            self.__session, Route('POST', '/api/admin/announcements/list'), json=body
+            self.__session, Route("POST", "/api/admin/announcements/list"), json=body
         )
 
         while True:

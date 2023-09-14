@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 
 class LiteUser:
-    __slots__ = ('__user', '__client')
+    __slots__ = ("__user", "__client")
 
     def __init__(self, user: ILiteUser, *, client: ClientManager) -> None:
         self.__user: ILiteUser = user
@@ -20,31 +20,33 @@ class LiteUser:
 
     @property
     def id(self) -> str:
-        return self.__user['id']
+        return self.__user["id"]
 
     @property
     def username(self) -> str:
-        return self.__user['username']
+        return self.__user["username"]
 
     @property
     def host(self) -> str | None:
-        return self.__user['host'] if 'host' in self.__user else None
+        return self.__user["host"] if "host" in self.__user else None
 
     @property
     def nickname(self) -> str:
-        return self.__user['name']
+        return self.__user["name"]
 
     @property
-    def online_status(self,) -> Literal['online', 'active', 'offline', 'unknown']:
-        return self.__user['online_status']
+    def online_status(
+        self,
+    ) -> Literal["online", "active", "offline", "unknown"]:
+        return self.__user["online_status"]
 
     @property
     def avatar_url(self) -> str:
-        return self.__user['avatar_url']
+        return self.__user["avatar_url"]
 
     @property
     def avatar_blurhash(self) -> str:
-        return self.__user['avatar_blurhash']
+        return self.__user["avatar_blurhash"]
 
     @property
     def avatar_color(self) -> str | None:
@@ -59,7 +61,7 @@ class LiteUser:
             average color of the avatar
         """
 
-        return self.__user.get('avatar_color')
+        return self.__user.get("avatar_color")
 
     @property
     def emojis(self) -> list[ICustomEmojiLite]:  # TODO: ちゃんとモデルにする
@@ -73,11 +75,11 @@ class LiteUser:
             List of emoji included in nicknames, etc
         """
 
-        return self.__user.get('emojis', [])
+        return self.__user.get("emojis", [])
 
     @property
     def instance(self) -> LiteInstance | None:
-        return LiteInstance(self.__user['instance']) if 'instance' in self.__user else None
+        return LiteInstance(self.__user["instance"]) if "instance" in self.__user else None
 
     @property
     def api(self) -> UserManager:

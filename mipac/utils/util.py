@@ -26,13 +26,13 @@ def deprecated(func):
 
     @functools.wraps(func)
     def new_func(*args, **kwargs):
-        warnings.simplefilter('always', DeprecationWarning)  # turn off filter
+        warnings.simplefilter("always", DeprecationWarning)  # turn off filter
         warnings.warn(
-            'Call to deprecated function {}.'.format(func.__name__),
+            "Call to deprecated function {}.".format(func.__name__),
             category=DeprecationWarning,
             stacklevel=2,
         )
-        warnings.simplefilter('default', DeprecationWarning)  # reset filter
+        warnings.simplefilter("default", DeprecationWarning)  # reset filter
         return func(*args, **kwargs)
 
     return new_func
@@ -63,8 +63,8 @@ class MiTime:
 
 class Colors:
     def __init__(self) -> None:
-        self.green = '\x1b[92;1m'
-        self.reset = '\x1b[0m'
+        self.green = "\x1b[92;1m"
+        self.reset = "\x1b[0m"
 
 
 COLORS = Colors()

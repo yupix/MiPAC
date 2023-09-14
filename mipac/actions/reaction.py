@@ -41,16 +41,16 @@ class ReactionActions(AbstractAction):
         """
         note_id = note_id or self.__note_id
 
-        data = remove_dict_empty({'noteId': note_id, 'reaction': reaction})
-        route = Route('POST', '/api/notes/reactions/create')
+        data = remove_dict_empty({"noteId": note_id, "reaction": reaction})
+        route = Route("POST", "/api/notes/reactions/create")
         res: bool = await self.__session.request(route, json=data, auth=True, lower=True)
         return bool(res)
 
     async def remove(self, note_id: str | None = None) -> bool:
         note_id = note_id or self.__note_id
 
-        data = remove_dict_empty({'noteId': note_id})
-        route = Route('POST', '/api/notes/reactions/delete')
+        data = remove_dict_empty({"noteId": note_id})
+        route = Route("POST", "/api/notes/reactions/delete")
         res: bool = await self.__session.request(route, json=data, auth=True, lower=True)
         return bool(res)
 
@@ -58,20 +58,23 @@ class ReactionActions(AbstractAction):
         self, reaction: str, note_id: str | None = None, *, limit: int = 10
     ) -> list[NoteReaction]:
         note_id = note_id or self.__note_id
-        data = remove_dict_empty({'noteId': note_id, 'limit': limit, 'type': reaction})
+        data = remove_dict_empty({"noteId": note_id, "limit": limit, "type": reaction})
         res: list[INoteReaction] = await self.__session.request(
-            Route('POST', '/api/notes/reactions'), json=data, auth=True, lower=True,
+            Route("POST", "/api/notes/reactions"),
+            json=data,
+            auth=True,
+            lower=True,
         )
         return [NoteReaction(i, client=self.__client) for i in res]
 
     async def get_emoji_list(self) -> list[CustomEmoji]:
         if config.use_version >= 13:
-            raise NotSupportVersion('Misskey v13以降では使用できません')
+            raise NotSupportVersion("Misskey v13以降では使用できません")
 
         data: ILiteMeta = await self.__session.request(
-            Route('GET', '/api/meta'),
-            json={'detail': False},
+            Route("GET", "/api/meta"),
+            json={"detail": False},
             auth=True,
-            replace_list={'ToSUrl': 'tos_url', 'ToSTextUrl': 'tos_text_url'},
+            replace_list={"ToSUrl": "tos_url", "ToSTextUrl": "tos_text_url"},
         )
-        return [CustomEmoji(i, client=self.__client) for i in data.get('emojis', [])]
+        return [CustomEmoji(i, client=self.__client) for i in data.get("emojis", [])]

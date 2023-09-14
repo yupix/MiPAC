@@ -28,7 +28,7 @@ class AdminRoleModelActions(AbstractAction):
         role_id: str | None = None,
         color: str | None = None,
         iconUrl: str | None = None,
-        target: Literal['manual', 'conditional'] = 'manual',
+        target: Literal["manual", "conditional"] = "manual",
         cond_formula: dict[Any, Any] | None = None,
         is_public: bool = False,
         is_moderator: bool = False,
@@ -40,24 +40,24 @@ class AdminRoleModelActions(AbstractAction):
         if self._client._config.use_version >= 13:
             role_id = self._role_id or role_id
             if role_id is None:
-                raise ParameterError('role_idは必須です')
+                raise ParameterError("role_idは必須です")
             body = {
-                'roleId': role_id,
-                'name': name,
-                'description': description,
-                'color': color,
-                'iconUrl': iconUrl,
-                'target': target,
-                'condFormula': cond_formula or {},
-                'isPublic': is_public,
-                'isModerator': is_moderator,
-                'isAdministrator': is_administrator,
-                'asBadge': as_badge,
-                'canEditMembersByModerator': can_edit_members_by_moderator,
-                'policies': policies or {},
+                "roleId": role_id,
+                "name": name,
+                "description": description,
+                "color": color,
+                "iconUrl": iconUrl,
+                "target": target,
+                "condFormula": cond_formula or {},
+                "isPublic": is_public,
+                "isModerator": is_moderator,
+                "isAdministrator": is_administrator,
+                "asBadge": as_badge,
+                "canEditMembersByModerator": can_edit_members_by_moderator,
+                "policies": policies or {},
             }
             res: bool = await self._session.request(
-                Route('POST', '/api/admin/roles/update'),
+                Route("POST", "/api/admin/roles/update"),
                 json=body,
                 auth=True,
                 lower=True,
@@ -70,11 +70,11 @@ class AdminRoleModelActions(AbstractAction):
         if self._client._config.use_version >= 13:
             role_id = self._role_id or role_id
             if role_id is None:
-                raise ParameterError('role_idは必須です')
+                raise ParameterError("role_idは必須です")
             res: bool = await self._session.request(
-                Route('POST', '/api/admin/roles/delete'),
+                Route("POST", "/api/admin/roles/delete"),
                 auth=True,
-                json={'roleId': role_id},
+                json={"roleId": role_id},
                 lower=True,
             )
             return res
@@ -101,10 +101,10 @@ class AdminRoleModelActions(AbstractAction):
         """
         if self._client._config.use_version >= 13:
             if role_id is None:
-                raise ParameterError('role_idは必須です')
-            body = {'roleId': role_id, 'userId': user_id, 'expiresAt': expires_at}
+                raise ParameterError("role_idは必須です")
+            body = {"roleId": role_id, "userId": user_id, "expiresAt": expires_at}
             res: bool = await self._session.request(
-                Route('POST', '/api/admin/roles/assign'), auth=True, json=body
+                Route("POST", "/api/admin/roles/assign"), auth=True, json=body
             )
             return res
         raise NotSupportVersion(NotSupportVersionText)
@@ -129,10 +129,10 @@ class AdminRoleModelActions(AbstractAction):
         if self._client._config.use_version >= 13:
             role_id = self._role_id or role_id
             if role_id is None:
-                raise ParameterError('role_idは必須です')
-            body = {'roleId': role_id, 'userId': user_id}
+                raise ParameterError("role_idは必須です")
+            body = {"roleId": role_id, "userId": user_id}
             res: bool = await self._session.request(
-                Route('POST', '/api/admin/roles/unassign'), auth=True, json=body
+                Route("POST", "/api/admin/roles/unassign"), auth=True, json=body
             )
             return res
         raise NotSupportVersion(NotSupportVersionText)
@@ -141,10 +141,10 @@ class AdminRoleModelActions(AbstractAction):
         if self._client._config.use_version >= 13:
             role_id = self._role_id or role_id
             if role_id is None:
-                raise ParameterError('role_idは必須です')
+                raise ParameterError("role_idは必須です")
             res: IRole = await self._session.request(
-                Route('POST', '/api/admin/roles/show'),
-                json={'roleId': role_id},
+                Route("POST", "/api/admin/roles/show"),
+                json={"roleId": role_id},
                 auth=True,
                 lower=True,
             )
@@ -165,18 +165,18 @@ class AdminRoleModelActions(AbstractAction):
             raise NotSupportVersion(NotSupportVersionText)
 
         if role_id is None:
-            raise ParameterError('role_idは必須です')
+            raise ParameterError("role_idは必須です")
 
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
 
         if get_all:
             limit = 100
 
-        body = {'limit': limit, 'sinceId': since_id, 'untilId': until_id, 'roleId': role_id}
+        body = {"limit": limit, "sinceId": since_id, "untilId": until_id, "roleId": role_id}
 
         pagination = Pagination[IRoleUser](
-            self._session, Route('POST', '/api/admin/roles/users'), json=body
+            self._session, Route("POST", "/api/admin/roles/users"), json=body
         )
 
         while True:
@@ -198,7 +198,7 @@ class AdminRoleActions(AdminRoleModelActions):
         description: str,
         color: str | None = None,
         iconUrl: str | None = None,
-        target: Literal['manual', 'conditional'] = 'manual',
+        target: Literal["manual", "conditional"] = "manual",
         cond_formula: dict[Any, Any] | None = None,
         is_public: bool = False,
         is_moderator: bool = False,
@@ -210,22 +210,22 @@ class AdminRoleActions(AdminRoleModelActions):
     ) -> Role:
         if self._client._config.use_version >= 13:
             body = {
-                'name': name,
-                'description': description,
-                'color': color,
-                'iconUrl': iconUrl,
-                'target': target,
-                'condFormula': cond_formula or {},
-                'isPublic': is_public,
-                'isModerator': is_moderator,
-                'isAdministrator': is_administrator,
-                'asBadge': as_badge,
-                'canEditMembersByModerator': can_edit_members_by_moderator,
-                'policies': policies or {},
-                'isExplorable': is_explorable,
+                "name": name,
+                "description": description,
+                "color": color,
+                "iconUrl": iconUrl,
+                "target": target,
+                "condFormula": cond_formula or {},
+                "isPublic": is_public,
+                "isModerator": is_moderator,
+                "isAdministrator": is_administrator,
+                "asBadge": as_badge,
+                "canEditMembersByModerator": can_edit_members_by_moderator,
+                "policies": policies or {},
+                "isExplorable": is_explorable,
             }
             res: IRole = await self._session.request(
-                Route('POST', '/api/admin/roles/create'),
+                Route("POST", "/api/admin/roles/create"),
                 auth=True,
                 json=body,
                 lower=True,
@@ -237,7 +237,7 @@ class AdminRoleActions(AdminRoleModelActions):
     async def get_list(self) -> list[Role]:
         if self._client._config.use_version >= 13:
             res: list[IRole] = await self._session.request(
-                Route('POST', '/api/admin/roles/list'), auth=True, lower=True
+                Route("POST", "/api/admin/roles/list"), auth=True, lower=True
             )
             return [Role(i, client=self._client) for i in res]
         raise NotSupportVersion(NotSupportVersionText)
@@ -245,27 +245,27 @@ class AdminRoleActions(AdminRoleModelActions):
     async def update_default_policies(self, policies: IPolicies):
         if self._client._config.use_version >= 13:
             body = {
-                'policies': {
-                    'gtlAvailable': policies.get('gtl_available'),
-                    'ltlAvailable': policies.get('ltl_available'),
-                    'canPublicNote': policies.get('can_public_note'),
-                    'canInvite': policies.get('can_invite'),
-                    'canManageCustomEmojis': policies.get('can_manage_custom_emojis'),
-                    'canHideAds': policies.get('can_hide_ads'),
-                    'driveCapacityMb': policies.get('drive_capacity_mb'),
-                    'pinLimit': policies.get('pin_limit'),
-                    'antennaLimit': policies.get('antenna_limit'),
-                    'wordMuteLimit': policies.get('word_mute_limit'),
-                    'webhookLimit': policies.get('webhook_limit'),
-                    'clipLimit': policies.get('clip_limit'),
-                    'noteEachClipsLimit': policies.get('note_each_clips_limit'),
-                    'userListLimit': policies.get('user_list_limit'),
-                    'userEachUserListsLimit': policies.get('user_each_user_lists_limit'),
-                    'rateLimitFactor': policies.get('rate_limit_factor'),
+                "policies": {
+                    "gtlAvailable": policies.get("gtl_available"),
+                    "ltlAvailable": policies.get("ltl_available"),
+                    "canPublicNote": policies.get("can_public_note"),
+                    "canInvite": policies.get("can_invite"),
+                    "canManageCustomEmojis": policies.get("can_manage_custom_emojis"),
+                    "canHideAds": policies.get("can_hide_ads"),
+                    "driveCapacityMb": policies.get("drive_capacity_mb"),
+                    "pinLimit": policies.get("pin_limit"),
+                    "antennaLimit": policies.get("antenna_limit"),
+                    "wordMuteLimit": policies.get("word_mute_limit"),
+                    "webhookLimit": policies.get("webhook_limit"),
+                    "clipLimit": policies.get("clip_limit"),
+                    "noteEachClipsLimit": policies.get("note_each_clips_limit"),
+                    "userListLimit": policies.get("user_list_limit"),
+                    "userEachUserListsLimit": policies.get("user_each_user_lists_limit"),
+                    "rateLimitFactor": policies.get("rate_limit_factor"),
                 }
             }
             res = await self._session.request(
-                Route('POST', '/api/admin/roles/update-default-policies'),
+                Route("POST", "/api/admin/roles/update-default-policies"),
                 auth=True,
                 lower=True,
                 json=body,

@@ -21,6 +21,6 @@ class EmojiActions(AbstractAction):
         if self.__client._config.use_version < 13:
             raise NotSupportVersion(NotSupportVersionText)
         emoji: ICustomEmoji = await self.__session.request(
-            Route('POST', '/api/emoji'), auth=True, lower=True, json={'name': name}
+            Route("POST", "/api/emoji"), auth=True, lower=True, json={"name": name}
         )
         return CustomEmoji(emoji=emoji, client=self.__client)

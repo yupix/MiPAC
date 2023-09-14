@@ -16,12 +16,12 @@ def set_cache(group: str, key: str, value: Any):
     DEFAULT_CACHE_VALUE[key] = value
 
 
-def cache(group: str = 'default', override: bool = False):
+def cache(group: str = "default", override: bool = False):
     def decorator(func):
         async def wrapper(self, *args, **kwargs):
             key = cache_key_builder(func, self, *args, **kwargs)
             hit_item = DEFAULT_CACHE_VALUE.get(key)
-            if hit_item and override is False and kwargs.get('cache_override') is None:
+            if hit_item and override is False and kwargs.get("cache_override") is None:
                 return hit_item
             res = await func(self, *args, **kwargs)
             set_cache(group, key, res)
@@ -43,5 +43,5 @@ def get_cache_key(func):
 @lru_cache
 def cache_key_builder(func, cls, *args, **kwargs):
     ordered_kwargs = sorted(kwargs.items())
-    key = (func.__module__ or '') + '.{0}' + f'{cls}' + str(args) + str(ordered_kwargs)
+    key = (func.__module__ or "") + ".{0}" + f"{cls}" + str(args) + str(ordered_kwargs)
     return key

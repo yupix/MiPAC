@@ -15,8 +15,8 @@ class IAd(TypedDict):
     starts_at: int
     expires_at: int
     url: str
-    place: Literal['square' 'horizontal' 'horizontal-big']
-    priority: Literal['high' 'middle' 'low']
+    place: Literal["square" "horizontal" "horizontal-big"]
+    priority: Literal["high" "middle" "low"]
     ratio: int
     image_url: str
     memo: str | None

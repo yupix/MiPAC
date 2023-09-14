@@ -5,9 +5,9 @@ from typing import TYPE_CHECKING, Literal, TypedDict
 if TYPE_CHECKING:
     from mipac.types.user import ILiteUser
 
-__all__ = ('NoteReactionPayload',)
+__all__ = ("NoteReactionPayload",)
 
-IReactionAcceptance = Literal['likeOnly', 'likeOnlyForRemote']
+IReactionAcceptance = Literal["likeOnly", "likeOnlyForRemote"]
 
 
 class NoteReactionPayload(TypedDict):

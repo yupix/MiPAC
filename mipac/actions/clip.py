@@ -52,18 +52,18 @@ class ClientClipActions(AbstractAction):
         clip_id = self._clip_id or clip_id
 
         if clip_id is None:
-            raise ParameterError('clip_id is required')
+            raise ParameterError("clip_id is required")
 
         if limit > 100:
-            raise ParameterError('limit must be less than 100')
+            raise ParameterError("limit must be less than 100")
 
         if get_all:
             limit = 100
 
-        body = {'clipId': clip_id, 'limit': limit, 'sinceId': since_id, 'untilId': until_id}
+        body = {"clipId": clip_id, "limit": limit, "sinceId": since_id, "untilId": until_id}
 
         pagination = Pagination[INote](
-            self._session, Route('POST', '/api/clips/notes'), json=body, auth=True
+            self._session, Route("POST", "/api/clips/notes"), json=body, auth=True
         )
 
         while True:
@@ -92,11 +92,11 @@ class ClientClipActions(AbstractAction):
         clip_id = self._clip_id or clip_id
 
         if clip_id is None:
-            raise ParameterError('clip_id is required')
+            raise ParameterError("clip_id is required")
 
-        body = {'clipId': clip_id, 'noteId': note_id}
+        body = {"clipId": clip_id, "noteId": note_id}
         result: bool = await self._session.request(
-            Route('POST', '/api/clips/add-note'), json=body, auth=True
+            Route("POST", "/api/clips/add-note"), json=body, auth=True
         )
         return result
 
@@ -118,11 +118,11 @@ class ClientClipActions(AbstractAction):
         clip_id = self._clip_id or clip_id
 
         if clip_id is None:
-            raise ParameterError('clip_id is required')
+            raise ParameterError("clip_id is required")
 
-        body = {'clipId': clip_id, 'noteId': note_id}
+        body = {"clipId": clip_id, "noteId": note_id}
         result: bool = await self._session.request(
-            Route('POST', '/api/clips/remove-note'), json=body, auth=True
+            Route("POST", "/api/clips/remove-note"), json=body, auth=True
         )
         return result
 
@@ -142,11 +142,11 @@ class ClientClipActions(AbstractAction):
         clip_id = self._clip_id or clip_id
 
         if clip_id is None:
-            raise ParameterError('clip_id is required')
+            raise ParameterError("clip_id is required")
 
-        body = {'clipId': clip_id}
+        body = {"clipId": clip_id}
         result: bool = await self._session.request(
-            Route('POST', '/api/clips/delete'), json=body, auth=True
+            Route("POST", "/api/clips/delete"), json=body, auth=True
         )
         return result
 
@@ -179,11 +179,11 @@ class ClientClipActions(AbstractAction):
         clip_id = self._clip_id or clip_id
 
         if clip_id is None:
-            raise ParameterError('clip_id is required')
+            raise ParameterError("clip_id is required")
 
-        body = {'clipId': clip_id, 'name': name, 'isPublic': is_public, 'description': description}
+        body = {"clipId": clip_id, "name": name, "isPublic": is_public, "description": description}
         result: IClip = await self._session.request(
-            Route('POST', '/api/clips/update'), json=body, auth=True
+            Route("POST", "/api/clips/update"), json=body, auth=True
         )
         return Clip(result, client=self._client)
 
@@ -201,7 +201,7 @@ class ClipActions(ClientClipActions):
             The favorite clips
         """
         clips: list[INote] = await self._session.request(
-            Route('POST', '/api/clips/my-favorites'), auth=True
+            Route("POST", "/api/clips/my-favorites"), auth=True
         )
         return [Note(raw_clip, client=self._client) for raw_clip in clips]
 
@@ -224,9 +224,9 @@ class ClipActions(ClientClipActions):
         Clip
             The created clip
         """
-        body = {'name': name, 'isPublic': is_public, 'description': description}
+        body = {"name": name, "isPublic": is_public, "description": description}
         clip: IClip = await self._session.request(
-            Route('POST', '/api/clips/create'), json=body, auth=True
+            Route("POST", "/api/clips/create"), json=body, auth=True
         )
         return Clip(clip, client=self._client)
 
@@ -239,7 +239,7 @@ class ClipActions(ClientClipActions):
             The clips
         """
         clips: list[IClip] = await self._session.request(
-            Route('POST', '/api/clips/list'), auth=True
+            Route("POST", "/api/clips/list"), auth=True
         )
         return [Clip(raw_clip, client=self._client) for raw_clip in clips]
 
@@ -256,8 +256,8 @@ class ClipActions(ClientClipActions):
         Clip
             The clip
         """
-        body = {'clipId': clip_id}
+        body = {"clipId": clip_id}
         clip: IClip = await self._session.request(
-            Route('POST', '/api/clips/show'), json=body, auth=True
+            Route("POST", "/api/clips/show"), json=body, auth=True
         )
         return Clip(clip, client=self._client)

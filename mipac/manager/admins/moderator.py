@@ -9,7 +9,7 @@ from mipac.http import HTTPClient
 if TYPE_CHECKING:
     from mipac.client import ClientManager
 
-__all__ = ('AdminModeratorManager',)
+__all__ = ("AdminModeratorManager",)
 
 
 class AdminModeratorManager(AbstractManager):

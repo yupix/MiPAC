@@ -6,9 +6,9 @@ from mipac.types.poll import IPoll
 from mipac.types.reaction import IReactionAcceptance
 from mipac.types.user import ILiteUser
 
-T = TypeVar('T')
+T = TypeVar("T")
 
-INoteVisibility = Literal['public', 'home', 'followers', 'specified']
+INoteVisibility = Literal["public", "home", "followers", "specified"]
 
 
 class INoteState(TypedDict):
@@ -18,7 +18,7 @@ class INoteState(TypedDict):
 
 
 class INoteUpdated(TypedDict, Generic[T]):
-    type: Literal['noteUpdated']
+    type: Literal["noteUpdated"]
     body: T
 
 
@@ -28,7 +28,7 @@ class INoteUpdatedDeleteBody(TypedDict):
 
 class INoteUpdatedDelete(TypedDict):
     id: str
-    type: Literal['deleted']
+    type: Literal["deleted"]
     body: INoteUpdatedDeleteBody
 
 
@@ -40,7 +40,7 @@ class INoteUpdatedReactionBody(TypedDict):
 
 class INoteUpdatedReaction(TypedDict):
     id: str
-    type: Literal['reacted', 'unreacted']
+    type: Literal["reacted", "unreacted"]
     body: INoteUpdatedReactionBody
 
 
@@ -82,8 +82,8 @@ class INote(IPartialNote, total=False):
     note object
     """
 
-    renote: 'INote'
-    reply: 'INote'
+    renote: "INote"
+    reply: "INote"
     visible_user_ids: list[str]
     local_only: bool
     my_reaction: str

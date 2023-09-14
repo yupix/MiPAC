@@ -22,8 +22,8 @@ class AdminAdvertisingModelActions(AbstractAction):
     async def update(
         self,
         url: str,
-        place: Literal['square', 'horizontal', 'horizontal-big'],
-        priority: Literal['high', 'middle', 'low'],
+        place: Literal["square", "horizontal", "horizontal-big"],
+        priority: Literal["high", "middle", "low"],
         ratio: int,
         image_url: str,
         id: str | None = None,
@@ -33,20 +33,20 @@ class AdminAdvertisingModelActions(AbstractAction):
     ) -> bool:
         ad_id = self._ad_id or id
         if ad_id is None:
-            raise ParameterError('ad_idは必須です')
+            raise ParameterError("ad_idは必須です")
         data = {
-            'id': ad_id,
-            'url': url,
-            'memo': memo or '',
-            'place': place,
-            'priority': priority,
-            'ratio': ratio,
-            'startsAt': starts_at,
-            'expiresAt': expires_at,
-            'imageUrl': image_url,
+            "id": ad_id,
+            "url": url,
+            "memo": memo or "",
+            "place": place,
+            "priority": priority,
+            "ratio": ratio,
+            "startsAt": starts_at,
+            "expiresAt": expires_at,
+            "imageUrl": image_url,
         }
         res: bool = await self._session.request(
-            Route('POST', '/api/admin/ad/update'), json=data, auth=True, lower=True
+            Route("POST", "/api/admin/ad/update"), json=data, auth=True, lower=True
         )
         return res
 
@@ -56,7 +56,7 @@ class AdminAdvertisingModelActions(AbstractAction):
 
         ad_id = self._ad_id or id
         res: bool = await self._session.request(
-            Route('POST', '/api/admin/ad/delete'), json={'id': ad_id}, auth=True, lower=True
+            Route("POST", "/api/admin/ad/delete"), json={"id": ad_id}, auth=True, lower=True
         )
         return res
 
@@ -68,8 +68,8 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
     async def create(
         self,
         url: str,
-        place: Literal['square', 'horizontal', 'horizontal-big'],
-        priority: Literal['high', 'middle', 'low'],
+        place: Literal["square", "horizontal", "horizontal-big"],
+        priority: Literal["high", "middle", "low"],
         ratio: int,
         image_url: str,
         starts_at: int = 0,
@@ -80,17 +80,17 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
             raise NotSupportVersion(NotSupportVersionText)
 
         data = {
-            'url': url,
-            'memo': memo or '',
-            'place': place,
-            'priority': priority,
-            'ratio': ratio,
-            'startsAt': starts_at,
-            'expiresAt': expires_at,
-            'imageUrl': image_url,
+            "url": url,
+            "memo": memo or "",
+            "place": place,
+            "priority": priority,
+            "ratio": ratio,
+            "startsAt": starts_at,
+            "expiresAt": expires_at,
+            "imageUrl": image_url,
         }
         res: bool = await self._session.request(
-            Route('POST', '/api/admin/ad/create'), json=data, auth=True, lower=True
+            Route("POST", "/api/admin/ad/create"), json=data, auth=True, lower=True
         )
         return res
 
@@ -105,14 +105,14 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
             raise NotSupportVersion(NotSupportVersionText)
 
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
 
         if get_all:
             limit = 100
 
-        data = {'limit': limit, 'sinceId': since_id, 'untilId': until_id}
+        data = {"limit": limit, "sinceId": since_id, "untilId": until_id}
 
-        pagination = Pagination[IAd](self._session, Route('POST', '/api/admin/ad/list'), json=data)
+        pagination = Pagination[IAd](self._session, Route("POST", "/api/admin/ad/list"), json=data)
 
         while True:
             raw_ads = await pagination.next()

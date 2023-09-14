@@ -20,25 +20,30 @@ if TYPE_CHECKING:
 
 
 class Notification:
-    def __init__(self, notification: INotification, *, client: ClientManager,) -> None:
+    def __init__(
+        self,
+        notification: INotification,
+        *,
+        client: ClientManager,
+    ) -> None:
         self.__notification: INotification = notification
         self.__client: ClientManager = client
 
     @property
     def id(self) -> str:
-        return self.__notification['id']
+        return self.__notification["id"]
 
     @property
     def type(self) -> str:
-        return self.__notification['type']
+        return self.__notification["type"]
 
     @property
     def created_at(self) -> datetime:
-        return datetime.strptime(self.__notification['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        return datetime.strptime(self.__notification["created_at"], "%Y-%m-%dT%H:%M:%S.%fZ")
 
     @property
     def is_read(self) -> bool:
-        return self.__notification['is_read']
+        return self.__notification["is_read"]
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, Notification) and self.id == __value.id
@@ -48,18 +53,26 @@ class Notification:
 
 
 class NotificationFollow(Notification):
-    def __init__(self, notification: IUserNf, *, client: ClientManager,) -> None:
+    def __init__(
+        self,
+        notification: IUserNf,
+        *,
+        client: ClientManager,
+    ) -> None:
         super().__init__(notification, client=client)
         self.__notification: IUserNf = notification
         self.__client: ClientManager = client
 
     @property
     def user(self) -> LiteUser:
-        return LiteUser(self.__notification['user'], client=self.__client,)
+        return LiteUser(
+            self.__notification["user"],
+            client=self.__client,
+        )
 
     @property
     def user_id(self) -> str:
-        return self.__notification['user_id']
+        return self.__notification["user_id"]
 
     @property
     def api(self) -> FollowManager:
@@ -67,18 +80,26 @@ class NotificationFollow(Notification):
 
 
 class NotificationFollowRequest(Notification):
-    def __init__(self, notification: IUserNf, *, client: ClientManager,) -> None:
+    def __init__(
+        self,
+        notification: IUserNf,
+        *,
+        client: ClientManager,
+    ) -> None:
         super().__init__(notification, client=client)
         self.__notification: IUserNf = notification
         self.__client: ClientManager = client
 
     @property
     def user(self) -> LiteUser:
-        return LiteUser(self.__notification['user'], client=self.__client,)
+        return LiteUser(
+            self.__notification["user"],
+            client=self.__client,
+        )
 
     @property
     def user_id(self) -> str:
-        return self.__notification['user_id']
+        return self.__notification["user_id"]
 
     @property
     def api(self) -> FollowRequestManager:
@@ -86,33 +107,52 @@ class NotificationFollowRequest(Notification):
 
 
 class NotificationNote(Notification):
-    def __init__(self, notification: INoteNf, *, client: ClientManager,) -> None:
+    def __init__(
+        self,
+        notification: INoteNf,
+        *,
+        client: ClientManager,
+    ) -> None:
         super().__init__(notification, client=client)
         self.__notification: INoteNf = notification
         self.__client: ClientManager = client
 
     @property
     def user(self) -> LiteUser:
-        return LiteUser(self.__notification['user'], client=self.__client,)
+        return LiteUser(
+            self.__notification["user"],
+            client=self.__client,
+        )
 
     @property
     def user_id(self) -> str:
-        return self.__notification['user_id']
+        return self.__notification["user_id"]
 
     @property
     def note(self) -> Note:
-        return Note(self.__notification['note'], client=self.__client,)
+        return Note(
+            self.__notification["note"],
+            client=self.__client,
+        )
 
 
 class NotificationPollEnd(Notification):
-    def __init__(self, notification: IPollEndNf, *, client: ClientManager,) -> None:
+    def __init__(
+        self,
+        notification: IPollEndNf,
+        *,
+        client: ClientManager,
+    ) -> None:
         super().__init__(notification, client=client)
         self.__notification: IPollEndNf = notification
         self.__client: ClientManager = client
 
     @property
     def note(self) -> Note:
-        return Note(self.__notification['note'], client=self.__client,)
+        return Note(
+            self.__notification["note"],
+            client=self.__client,
+        )
 
 
 class NotificationReaction(Notification):
@@ -123,23 +163,28 @@ class NotificationReaction(Notification):
 
     @property
     def user(self) -> LiteUser:
-        return LiteUser(self.__notification['user'], client=self.__client)
+        return LiteUser(self.__notification["user"], client=self.__client)
 
     @property
     def note(self) -> Note:
-        return Note(self.__notification['note'], client=self.__client)
+        return Note(self.__notification["note"], client=self.__client)
 
     @property
     def reaction(self) -> str:
-        return self.__notification['reaction']
+        return self.__notification["reaction"]
 
 
 class NotificationAchievement(Notification):
-    def __init__(self, notification: IAchievementNf, *, client: ClientManager,) -> None:
+    def __init__(
+        self,
+        notification: IAchievementNf,
+        *,
+        client: ClientManager,
+    ) -> None:
         super().__init__(notification, client=client)
         self.__notification: IAchievementNf = notification
         self.__client: ClientManager = client
 
     @property
     def achievement(self) -> str:
-        return self.__notification['achievement']
+        return self.__notification["achievement"]

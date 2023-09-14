@@ -18,18 +18,22 @@ class FavoriteActions(AbstractAction):
 
     async def add(self, note_id: str | None = None) -> bool:
         note_id = note_id or self.__note_id
-        data = {'noteId': note_id}
+        data = {"noteId": note_id}
         return bool(
             await self.__session.request(
-                Route('POST', '/api/notes/favorites/create'), json=data, auth=True,
+                Route("POST", "/api/notes/favorites/create"),
+                json=data,
+                auth=True,
             )
         )
 
     async def remove(self, note_id: str | None = None) -> bool:
         note_id = note_id or self.__note_id
-        data = {'noteId': note_id}
+        data = {"noteId": note_id}
         return bool(
             await self.__session.request(
-                Route('POST', '/api/notes/favorites/delete'), json=data, auth=True,
+                Route("POST", "/api/notes/favorites/delete"),
+                json=data,
+                auth=True,
             )
         )

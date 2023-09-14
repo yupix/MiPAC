@@ -16,12 +16,12 @@ class PartialCustomEmoji:
 
     @property
     def name(self) -> str:
-        return self.__emoji['name']
+        return self.__emoji["name"]
 
     @property
     def url(self) -> str | None:
         if config.use_version == 13:
-            protocol = 'https' if config.is_ssl else 'http'
-            url = f'{protocol}://{config.host}/emoji/{self.name}.webp'
+            protocol = "https" if config.is_ssl else "http"
+            url = f"{protocol}://{config.host}/emoji/{self.name}.webp"
             return url
-        return self.__emoji.get('url')
+        return self.__emoji.get("url")

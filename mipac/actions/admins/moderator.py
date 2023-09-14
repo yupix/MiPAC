@@ -32,9 +32,12 @@ class AdminModeratorActions(AbstractAction):
         """
 
         user_id = user_id or self.__user_id
-        data = {'userId': user_id}
+        data = {"userId": user_id}
         res = await self.__session.request(
-            Route('POST', '/api/admin/moderators/add'), json=data, auth=True, lower=True,
+            Route("POST", "/api/admin/moderators/add"),
+            json=data,
+            auth=True,
+            lower=True,
         )
         return bool(res)
 
@@ -53,8 +56,11 @@ class AdminModeratorActions(AbstractAction):
             成功したか否か
         """
         user_id = user_id or self.__user_id
-        data = {'userId': user_id}
+        data = {"userId": user_id}
         res = await self.__session.request(
-            Route('POST', '/api/admin/moderators/remove'), json=data, auth=True, lower=True,
+            Route("POST", "/api/admin/moderators/remove"),
+            json=data,
+            auth=True,
+            lower=True,
         )
         return bool(res)

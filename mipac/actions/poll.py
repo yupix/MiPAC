@@ -23,29 +23,28 @@ class PollActions(AbstractAction):
         note_id = note_id or self.__note_id
 
         if note_id is None:
-            raise ParameterError('note_id is required')
+            raise ParameterError("note_id is required")
 
-        data = {'noteId': note_id, 'choice': choice}
+        data = {"noteId": note_id, "choice": choice}
         res: bool = await self.__session.request(
-            Route('POST', '/api/notes/polls/vote'), auth=True, json=data
+            Route("POST", "/api/notes/polls/vote"), auth=True, json=data
         )
         return res
 
     async def recommendation(self, limit: int = 100, offset: int = 0, get_all: bool = True):
-
         if limit > 100:
-            raise ParameterError('limit must be less than 100')
+            raise ParameterError("limit must be less than 100")
 
         if get_all:
             limit = 100
 
-        data = {'limit': limit, 'offset': offset}
+        data = {"limit": limit, "offset": offset}
 
         pagination = Pagination[INote](
             self.__session,
-            Route('POST', '/api/notes/polls/recommendation'),
+            Route("POST", "/api/notes/polls/recommendation"),
             json=data,
-            pagination_type='count',
+            pagination_type="count",
         )
 
         while True:

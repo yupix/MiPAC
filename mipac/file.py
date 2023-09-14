@@ -1,12 +1,12 @@
 class MiFile:
     __slots__ = (
-        'path',
-        'file_id',
-        'name',
-        'folder_id',
-        'comment',
-        'is_sensitive',
-        'force',
+        "path",
+        "file_id",
+        "name",
+        "folder_id",
+        "comment",
+        "is_sensitive",
+        "force",
     )
 
     def __init__(

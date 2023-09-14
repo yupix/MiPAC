@@ -32,9 +32,12 @@ class FollowActions(AbstractAction):
 
         user_id = user_id or self.__user_id
 
-        data = {'userId': user_id}
+        data = {"userId": user_id}
         res: ILiteUser = await self.__session.request(
-            Route('POST', '/api/following/create'), json=data, auth=True, lower=True,
+            Route("POST", "/api/following/create"),
+            json=data,
+            auth=True,
+            lower=True,
         )
         return LiteUser(res, client=self.__client)
 
@@ -50,9 +53,9 @@ class FollowActions(AbstractAction):
 
         user_id = user_id or self.__user_id
 
-        data = {'userId': user_id}
+        data = {"userId": user_id}
         res = await self.__session.request(
-            Route('POST', '/api/following/delete'), json=data, auth=True
+            Route("POST", "/api/following/delete"), json=data, auth=True
         )
         return LiteUser(res, client=self.__client)
 
@@ -68,9 +71,9 @@ class FollowActions(AbstractAction):
 
         user_id = user_id or self.__user_id
 
-        data = {'userId': user_id}
+        data = {"userId": user_id}
         res: ILiteUser = await self.__session.request(
-            Route('POST', '/api/following/invalidate'), json=data, auth=True
+            Route("POST", "/api/following/invalidate"), json=data, auth=True
         )
         return LiteUser(res, client=self.__client)
 
@@ -92,7 +95,9 @@ class FollowRequestActions(AbstractAction):
         """
 
         res: list[IFollowRequest] = await self.__session.request(
-            Route('POST', '/api/following/requests/list'), auth=True, lower=True,
+            Route("POST", "/api/following/requests/list"),
+            auth=True,
+            lower=True,
         )
         return [FollowRequest(follow_request=i, client=self.__client) for i in res]
 
@@ -113,10 +118,12 @@ class FollowRequestActions(AbstractAction):
 
         user_id = user_id or self.__user_id
 
-        data = {'userId': user_id}
+        data = {"userId": user_id}
         return bool(
             await self.__session.request(
-                Route('POST', '/api/following/requests/accept'), json=data, auth=True,
+                Route("POST", "/api/following/requests/accept"),
+                json=data,
+                auth=True,
             )
         )
 
@@ -137,10 +144,12 @@ class FollowRequestActions(AbstractAction):
 
         user_id = user_id or self.__user_id
 
-        data = {'userId': user_id}
+        data = {"userId": user_id}
         return bool(
             await self.__session.request(
-                Route('POST', '/api/following/requests/reject'), json=data, auth=True,
+                Route("POST", "/api/following/requests/reject"),
+                json=data,
+                auth=True,
             )
         )
 
@@ -161,8 +170,11 @@ class FollowRequestActions(AbstractAction):
 
         user_id = user_id or self.__user_id
 
-        data = {'userId': user_id}
+        data = {"userId": user_id}
         res: ILiteUser = await self.__session.request(
-            Route('POST', '/api/following/requests/cancel'), json=data, auth=True, lower=True,
+            Route("POST", "/api/following/requests/cancel"),
+            json=data,
+            auth=True,
+            lower=True,
         )
         return LiteUser(res, client=self.__client)

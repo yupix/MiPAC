@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from mipac.client import ClientManager
     from mipac.http import HTTPClient
 
-__all__ = ('ChartManager',)
+__all__ = ("ChartManager",)
 
 
 class ChartManager(AbstractManager):

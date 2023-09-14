@@ -8,13 +8,13 @@ if TYPE_CHECKING:
     from mipac.types.note import INote
     from mipac.types.page import IPage
 __all__ = (
-    'IFollowRequest',
-    'IUserRequired',
-    'ILiteUser',
-    'IUserDetailed',
-    'IUserDetailedField',
-    'IAchievement',
-    'IBlockingUser',
+    "IFollowRequest",
+    "IUserRequired",
+    "ILiteUser",
+    "IUserDetailed",
+    "IUserDetailedField",
+    "IAchievement",
+    "IBlockingUser",
 )
 
 
@@ -43,7 +43,7 @@ class IUserRequired(TypedDict):
     id: str
     username: str
     name: str
-    online_status: Literal['online', 'active', 'offline', 'unknown']
+    online_status: Literal["online", "active", "offline", "unknown"]
     avatar_url: str
     avatar_blurhash: str
 
@@ -94,7 +94,7 @@ class IUserDetailed(IUserDetailedRequired, total=False):
     birthday: str
     created_at: str
     description: str
-    ff_visibility: Literal['public', 'followers', 'private']
+    ff_visibility: Literal["public", "followers", "private"]
     lang: str
     last_fetched_at: str
     location: str

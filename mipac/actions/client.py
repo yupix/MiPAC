@@ -31,10 +31,10 @@ class ClientActions(AbstractAction):
 
     async def get_meta(self, detail: bool = False):
         params = {
-            'route': Route('POST', '/api/meta'),
-            'json': {'detail': detail},
-            'auth': True,
-            'lower': True,
+            "route": Route("POST", "/api/meta"),
+            "json": {"detail": detail},
+            "auth": True,
+            "lower": True,
         }
         if detail is True:
             meta: IMeta = await self.__session.request(**params)
@@ -49,22 +49,22 @@ class ClientActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        get_all: bool = False
+        get_all: bool = False,
     ) -> AsyncGenerator[Announcement, None]:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
         if get_all:
             limit = 100
 
         body = {
-            'limit': limit,
-            'withUnreads': with_unreads,
-            'sinceId': since_id,
-            'untilId': until_id,
+            "limit": limit,
+            "withUnreads": with_unreads,
+            "sinceId": since_id,
+            "untilId": until_id,
         }
 
         pagination = Pagination[IAnnouncement](
-            self.__session, Route('POST', '/api/announcements'), json=body
+            self.__session, Route("POST", "/api/announcements"), json=body
         )
 
         while True:

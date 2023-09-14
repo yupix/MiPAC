@@ -39,7 +39,7 @@ class AuthClient:
             MiAuthを使用するか
         """
         if permissions is None:
-            permissions = ['read:account']
+            permissions = ["read:account"]
         self.__client_session = aiohttp.ClientSession()
         self.__instance_uri: str = instance_uri
         self.__name: str = name
@@ -60,45 +60,45 @@ class AuthClient:
             認証に使用するURL
         """
         field = remove_dict_empty(
-            {'name': self.__name, 'description': self.__description, 'icon': self.__icon}
+            {"name": self.__name, "description": self.__description, "icon": self.__icon}
         )
         if self.__use_miauth:
-            field['permissions'] = self.__permissions
+            field["permissions"] = self.__permissions
             query = urlencode(field)
             self.__session_token = uuid.uuid4()
-            return f'{self.__instance_uri}/miauth/{self.__session_token}?{query}'
+            return f"{self.__instance_uri}/miauth/{self.__session_token}?{query}"
         else:
-            field['permission'] = self.__permissions
+            field["permission"] = self.__permissions
             async with self.__client_session.post(
-                f'{self.__instance_uri}/api/app/create', json=field
+                f"{self.__instance_uri}/api/app/create", json=field
             ) as res:
                 data = await res.json()
-                self.__secret = data['secret']
+                self.__secret = data["secret"]
             async with self.__client_session.post(
-                f'{self.__instance_uri}/api/auth/session/generate',
-                json={'appSecret': self.__secret},
+                f"{self.__instance_uri}/api/auth/session/generate",
+                json={"appSecret": self.__secret},
             ) as res:
                 data = await res.json()
-                self.__session_token = data['token']
-                return data['url']
+                self.__session_token = data["token"]
+                return data["url"]
 
     async def wait_miauth(self) -> str:
-        url = f'{self.__instance_uri}/api/miauth/{self.__session_token}/check'
+        url = f"{self.__instance_uri}/api/miauth/{self.__session_token}/check"
         while True:
             async with self.__client_session.post(url) as res:
                 data = await res.json()
-                if data.get('ok') is True:
+                if data.get("ok") is True:
                     return data
             await asyncio.sleep(1)
 
     async def wait_oldauth(self) -> None:
         while True:
             async with self.__client_session.post(
-                f'{self.__instance_uri}/api/auth/session/userkey',
-                json={'appSecret': self.__secret, 'token': self.__session_token},
+                f"{self.__instance_uri}/api/auth/session/userkey",
+                json={"appSecret": self.__secret, "token": self.__session_token},
             ) as res:
                 data = await res.json()
-                if data.get('error', {}).get('code') != 'PENDING_SESSION':
+                if data.get("error", {}).get("code") != "PENDING_SESSION":
                     break
             await asyncio.sleep(1)
 
@@ -116,4 +116,4 @@ class AuthClient:
         else:
             data = await self.wait_oldauth()
         await self.__client_session.close()
-        return data['token'] if self.__use_miauth else data['accessToken']
+        return data["token"] if self.__use_miauth else data["accessToken"]

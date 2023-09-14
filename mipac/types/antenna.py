@@ -1,6 +1,6 @@
 from typing import Literal, TypedDict
 
-IAntennaReceiveSource = Literal['home', 'all', 'users', 'list']
+IAntennaReceiveSource = Literal["home", "all", "users", "list"]
 
 
 class IAntenna(TypedDict):

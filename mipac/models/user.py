@@ -12,7 +12,7 @@ from mipac.utils.format import str_to_datetime
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
-__all__ = ('UserDetailed', 'LiteUser', 'Achievement', 'BlockingUser')
+__all__ = ("UserDetailed", "LiteUser", "Achievement", "BlockingUser")
 
 
 class BlockingUser:
@@ -22,19 +22,19 @@ class BlockingUser:
 
     @property
     def id(self) -> str:
-        return self.__blocking_user_data['id']
+        return self.__blocking_user_data["id"]
 
     @property
     def created_at(self) -> datetime:
-        return str_to_datetime(self.__blocking_user_data['created_at'])
+        return str_to_datetime(self.__blocking_user_data["created_at"])
 
     @property
     def blockee_id(self) -> str:
-        return self.__blocking_user_data['blockee_id']
+        return self.__blocking_user_data["blockee_id"]
 
     @property
     def blockee(self) -> UserDetailed:
-        return UserDetailed(self.__blocking_user_data['blockee'], client=self.__client)
+        return UserDetailed(self.__blocking_user_data["blockee"], client=self.__client)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, BlockingUser) and self.id == __value.id
@@ -49,17 +49,17 @@ class Achievement:
 
     @property
     def name(self) -> str:
-        return self.__detail['name']
+        return self.__detail["name"]
 
     @property
     def unlocked_at(self) -> int:
-        return self.__detail['unlocked_at']
+        return self.__detail["unlocked_at"]
 
 
 class UserDetailed(LiteUser):
     __slots__ = (
-        '__detail',
-        '__client',
+        "__detail",
+        "__client",
     )
 
     def __init__(self, user: IUserDetailed, *, client: ClientManager):
@@ -68,164 +68,166 @@ class UserDetailed(LiteUser):
 
     @property
     def achievements(self) -> list[Achievement]:
-        return [Achievement(i) for i in self.__detail.get('achievements', [])]
+        return [Achievement(i) for i in self.__detail.get("achievements", [])]
 
     @property
     def fields(self) -> list[IUserDetailedField]:
-        return self.__detail['fields']
+        return self.__detail["fields"]
 
     @property
     def followers_count(self) -> int:
-        return self.__detail['followers_count']
+        return self.__detail["followers_count"]
 
     @property
     def following_count(self) -> int:
-        return self.__detail['following_count']
+        return self.__detail["following_count"]
 
     @property
     def has_pending_follow_request_from_you(self) -> bool | None:
-        return self.__detail.get('has_pending_follow_request_from_you')
+        return self.__detail.get("has_pending_follow_request_from_you")
 
     @property
     def has_pending_follow_request_to_you(self) -> bool | None:
-        return self.__detail.get('has_pending_follow_request_to_you')
+        return self.__detail.get("has_pending_follow_request_to_you")
 
     @property
     def is_admin(self) -> bool:
-        return self.__detail['is_admin']
+        return self.__detail["is_admin"]
 
     @property
     def is_blocked(self) -> bool | None:
-        return self.__detail.get('is_blocked')
+        return self.__detail.get("is_blocked")
 
     @property
     def is_blocking(self) -> bool | None:
-        return self.__detail.get('is_blocking')
+        return self.__detail.get("is_blocking")
 
     @property
     def is_bot(self) -> bool:
-        return self.__detail['is_bot']
+        return self.__detail["is_bot"]
 
     @property
     def is_cat(self) -> bool:
-        return self.__detail['is_cat']
+        return self.__detail["is_cat"]
 
     @property
     def is_followed(self) -> bool | None:
-        return self.__detail.get('is_followed')
+        return self.__detail.get("is_followed")
 
     @property
     def is_following(self) -> bool | None:
-        return self.__detail.get('is_following')
+        return self.__detail.get("is_following")
 
     @property
     def is_locked(self) -> bool:
-        return self.__detail['is_locked']
+        return self.__detail["is_locked"]
 
     @property
     def is_moderator(self) -> bool:
-        return self.__detail['is_moderator']
+        return self.__detail["is_moderator"]
 
     @property
     def is_muted(self) -> bool | None:
-        return self.__detail.get('is_muted')
+        return self.__detail.get("is_muted")
 
     @property
     def is_silenced(self) -> bool:
-        return self.__detail['is_silenced']
+        return self.__detail["is_silenced"]
 
     @property
     def is_suspended(self) -> bool:
-        return self.__detail['is_suspended']
+        return self.__detail["is_suspended"]
 
     @property
     def public_reactions(self) -> bool:
-        return self.__detail['public_reactions']
+        return self.__detail["public_reactions"]
 
     @property
     def security_keys(self) -> bool:
-        return self.__detail['security_keys']
+        return self.__detail["security_keys"]
 
     @property
     def two_factor_enabled(self) -> bool:
-        return self.__detail['two_factor_enabled']
+        return self.__detail["two_factor_enabled"]
 
     @property
     def notes_count(self) -> int:
-        return self.__detail['notes_count']
+        return self.__detail["notes_count"]
 
     @property
     def pinned_note_ids(self) -> list[str]:
-        return self.__detail['pinned_note_ids']
+        return self.__detail["pinned_note_ids"]
 
     @property
     def pinned_notes(self) -> list[Note]:
-        return [Note(i, client=self.__client) for i in self.__detail['pinned_notes']]
+        return [Note(i, client=self.__client) for i in self.__detail["pinned_notes"]]
 
     @property
     def banner_blurhash(self) -> str | None:
-        return self.__detail.get('banner_blurhash')
+        return self.__detail.get("banner_blurhash")
 
     @property
     def banner_color(self) -> str | None:
-        return self.__detail.get('banner_color')
+        return self.__detail.get("banner_color")
 
     @property
     def banner_url(self) -> str | None:
-        return self.__detail.get('banner_url')
+        return self.__detail.get("banner_url")
 
     @property
     def birthday(self) -> str | None:
-        return self.__detail.get('birthday')
+        return self.__detail.get("birthday")
 
     @property
     def created_at(self) -> str | None:
-        return self.__detail.get('created_at')
+        return self.__detail.get("created_at")
 
     @property
     def description(self) -> str | None:
-        return self.__detail.get('description')
+        return self.__detail.get("description")
 
     @property
-    def ff_visibility(self,) -> Literal['public', 'followers', 'private'] | None:
-        return self.__detail.get('ff_visibility')
+    def ff_visibility(
+        self,
+    ) -> Literal["public", "followers", "private"] | None:
+        return self.__detail.get("ff_visibility")
 
     @property
     def lang(self) -> str | None:
-        return self.__detail.get('lang')
+        return self.__detail.get("lang")
 
     @property
     def last_fetched_at(self) -> str | None:
-        return self.__detail.get('last_fetched_at')
+        return self.__detail.get("last_fetched_at")
 
     @property
     def location(self) -> str | None:
-        return self.__detail.get('location')
+        return self.__detail.get("location")
 
     @property
     def logged_in_days(self) -> int | None:
-        return self.__detail.get('logged_in_days')
+        return self.__detail.get("logged_in_days")
 
     @property
     def pinned_page(self) -> IPage | None:
-        return self.__detail.get('pinned_page')
+        return self.__detail.get("pinned_page")
 
     @property
     def pinned_page_id(self) -> str | None:
-        return self.__detail.get('pinned_page_id')
+        return self.__detail.get("pinned_page_id")
 
     @property
     def updated_at(self) -> str | None:
-        return self.__detail.get('updated_at')
+        return self.__detail.get("updated_at")
 
     @property
     def uri(self) -> str | None:
-        return self.__detail.get('uri')
+        return self.__detail.get("uri")
 
     @property
     def url(self) -> str | None:
-        return self.__detail.get('url')
+        return self.__detail.get("url")
 
     @property
     def use_password_less_login(self) -> bool | None:
-        return self.__detail.get('use_password_less_login')
+        return self.__detail.get("use_password_less_login")

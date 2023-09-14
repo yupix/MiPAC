@@ -18,12 +18,12 @@ class PartialReaction:
 
     @property
     def reaction(self) -> str:
-        return self.__reaction['body']['body']['reaction']
+        return self.__reaction["body"]["body"]["reaction"]
 
     @property
     def emoji(self) -> PartialCustomEmoji:
-        return PartialCustomEmoji(self.__reaction['body']['body']['emoji'], client=self.__client)
+        return PartialCustomEmoji(self.__reaction["body"]["body"]["emoji"], client=self.__client)
 
     @property
     def user_id(self) -> str:
-        return self.__reaction['body']['body']['user_id']
+        return self.__reaction["body"]["body"]["user_id"]

@@ -17,15 +17,15 @@ class FollowRequest:
 
     @property
     def id(self) -> str:
-        return self.__follow_request['id']
+        return self.__follow_request["id"]
 
     @property
     def follower(self) -> LiteUser:
-        return LiteUser(self.__follow_request['follower'], client=self.__client)
+        return LiteUser(self.__follow_request["follower"], client=self.__client)
 
     @property
     def followee(self) -> LiteUser:
-        return LiteUser(self.__follow_request['followee'], client=self.__client)
+        return LiteUser(self.__follow_request["followee"], client=self.__client)
 
     @property
     def api(self) -> FollowRequestManager:

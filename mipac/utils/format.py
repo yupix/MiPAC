@@ -4,11 +4,11 @@ from typing import Any, Mapping
 
 
 def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
-    components: list[str] = snake_str.split('_')
+    components: list[str] = snake_str.split("_")
     for i in range(len(components)):
         if components[i] in replace_list:
             components[i] = replace_list[components[i]]
-    return components[0] + ''.join(x.title() for x in components[1:])
+    return components[0] + "".join(x.title() for x in components[1:])
 
 
 def convert_dict_keys_to_camel(
@@ -23,7 +23,7 @@ def convert_dict_keys_to_camel(
     return new_dict
 
 
-def str_to_datetime(data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ') -> datetime:
+def str_to_datetime(data: str, format: str = "%Y-%m-%dT%H:%M:%S.%fZ") -> datetime:
     """
     Parameters
     ----------
@@ -103,12 +103,12 @@ def upper_to_lower(
     if field is None:
         field = {}
     for attr in data:
-        pattern = re.compile('[A-Z]')
+        pattern = re.compile("[A-Z]")
         large = [i.group().lower() for i in pattern.finditer(attr)]
         result = [None] * (len(large + pattern.split(attr)))
         result[::2] = pattern.split(attr)
-        result[1::2] = ['_' + i.lower() for i in large]
-        default_key = ''.join(result)
+        result[1::2] = ["_" + i.lower() for i in large]
+        default_key = "".join(result)
         if replace_list.get(attr):
             default_key = default_key.replace(attr, replace_list.get(attr))
         field[default_key] = data[attr]
@@ -122,12 +122,12 @@ def upper_to_lower(
 
 
 def str_lower(text: str):
-    pattern = re.compile('[A-Z]')
+    pattern = re.compile("[A-Z]")
     large = [i.group().lower() for i in pattern.finditer(text)]
     result = [None] * (len(large + pattern.split(text)))
     result[::2] = pattern.split(text)
-    result[1::2] = ['_' + i.lower() for i in large]
-    return ''.join(result)
+    result[1::2] = ["_" + i.lower() for i in large]
+    return "".join(result)
 
 
 def bool_to_string(boolean: bool) -> str:
@@ -143,4 +143,4 @@ def bool_to_string(boolean: bool) -> str:
     true or false: str
         小文字になったbool文字列
     """
-    return 'true' if boolean else 'false'
+    return "true" if boolean else "false"

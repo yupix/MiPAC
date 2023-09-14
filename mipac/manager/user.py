@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from mipac.models.lite.user import LiteUser
 
 
-__all__ = ('UserManager',)
+__all__ = ("UserManager",)
 
 
 class UserManager(AbstractManager):

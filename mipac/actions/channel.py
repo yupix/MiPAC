@@ -45,7 +45,7 @@ class ClientChannelActions(AbstractAction):
             raise Exception()
 
         res: bool = await self._session.request(
-            Route('POST', '/api/channels/favorite'), auth=True, json={'channelId': channel_id}
+            Route("POST", "/api/channels/favorite"), auth=True, json={"channelId": channel_id}
         )
 
         return res
@@ -72,7 +72,7 @@ class ClientChannelActions(AbstractAction):
             raise Exception()
 
         res: bool = await self._session.request(
-            Route('POST', '/api/channels/unfavorite'), auth=True, json={'channelId': channel_id}
+            Route("POST", "/api/channels/unfavorite"), auth=True, json={"channelId": channel_id}
         )
 
         return res
@@ -96,10 +96,10 @@ class ClientChannelActions(AbstractAction):
 
         channel_id = self._channel_id or channel_id
         if channel_id is None:
-            raise ParameterError('required channel_id')
+            raise ParameterError("required channel_id")
 
         res: bool = await self._session.request(
-            Route('POST', '/api/channels/follow'), auth=True, json={'channelId': channel_id}
+            Route("POST", "/api/channels/follow"), auth=True, json={"channelId": channel_id}
         )
 
         return res
@@ -123,10 +123,10 @@ class ClientChannelActions(AbstractAction):
 
         channel_id = self._channel_id or channel_id
         if channel_id is None:
-            raise ParameterError('required channel_id')
+            raise ParameterError("required channel_id")
 
         res: bool = await self._session.request(
-            Route('POST', '/api/channels/unfollow'), auth=True, json={'channelId': channel_id}
+            Route("POST", "/api/channels/unfollow"), auth=True, json={"channelId": channel_id}
         )
 
         return res
@@ -173,19 +173,19 @@ class ClientChannelActions(AbstractAction):
 
         channel_id = self._channel_id or channel_id
         if channel_id is None:
-            raise ParameterError('required channel_id')
+            raise ParameterError("required channel_id")
 
         body = {
-            'channelId': channel_id,
-            'name': name,
-            'description': description,
-            'bannerId': banner_id,
-            'isArchived': is_archived,
-            'pinnedNoteIds': pinned_note_ids,
-            'color': color,
+            "channelId": channel_id,
+            "name": name,
+            "description": description,
+            "bannerId": banner_id,
+            "isArchived": is_archived,
+            "pinnedNoteIds": pinned_note_ids,
+            "color": color,
         }
         res: IChannel = await self._session.request(
-            Route('POST', '/api/channels/update'), auth=True, json=body
+            Route("POST", "/api/channels/update"), auth=True, json=body
         )
 
         return Channel(res, client=self._client)
@@ -209,7 +209,7 @@ class ClientChannelActions(AbstractAction):
 
         channel_id = self._channel_id or channel_id
         if channel_id is None:
-            raise ParameterError('required channel_id')
+            raise ParameterError("required channel_id")
 
         res = await self.update(channel_id=channel_id, is_archived=True)
 
@@ -234,7 +234,7 @@ class ClientChannelActions(AbstractAction):
 
         channel_id = self._channel_id or channel_id
         if channel_id is None:
-            raise ParameterError('required channel_id')
+            raise ParameterError("required channel_id")
 
         res = await self.update(channel_id=channel_id, is_archived=False)
 
@@ -252,7 +252,7 @@ class ChannelActions(ClientChannelActions):
         name: str,
         description: str | None = None,
         banner_id: str | None = None,
-        color: str = '#000',
+        color: str = "#000",
     ) -> ChannelLite:
         """
         Create a channel.
@@ -276,9 +276,9 @@ class ChannelActions(ClientChannelActions):
         if self._client._config.use_version < 13:
             raise NotSupportVersion(NotSupportVersionText)
 
-        body = {'name': name, 'description': description, 'bannerId': banner_id, 'color': color}
+        body = {"name": name, "description": description, "bannerId": banner_id, "color": color}
         res: IChannel = await self._session.request(
-            Route('POST', '/api/channels/create'), auth=True, json=body
+            Route("POST", "/api/channels/create"), auth=True, json=body
         )
 
         return ChannelLite(res, client=self._client)
@@ -297,7 +297,7 @@ class ChannelActions(ClientChannelActions):
             raise NotSupportVersion(NotSupportVersionText)
 
         res: list[IChannel] = await self._session.request(
-            Route('POST', '/api/channels/featured'), auth=True
+            Route("POST", "/api/channels/featured"), auth=True
         )
         return [Channel(i, client=self._client) for i in res]
 
@@ -332,15 +332,15 @@ class ChannelActions(ClientChannelActions):
             raise NotSupportVersion(NotSupportVersionText)
 
         if limit > 100:
-            raise ParameterError('limit must be less than 100')
+            raise ParameterError("limit must be less than 100")
 
         if get_all:
             limit = 100
 
-        body = {'sinceId': since_id, 'untilId': until_id, 'limit': limit}
+        body = {"sinceId": since_id, "untilId": until_id, "limit": limit}
 
         pagination = Pagination[IChannel](
-            self._session, Route('POST', '/api/channels/followed'), auth=True, json=body
+            self._session, Route("POST", "/api/channels/followed"), auth=True, json=body
         )
 
         while True:
@@ -375,10 +375,10 @@ class ChannelActions(ClientChannelActions):
         if self._client._config.use_version < 13:
             raise NotSupportVersion(NotSupportVersionText)
 
-        body = {'sinceId': since_id, 'untilId': until_id}
+        body = {"sinceId": since_id, "untilId": until_id}
 
         pagination = Pagination[IChannel](
-            self._session, Route('POST', '/api/channels/owned'), auth=True, json=body
+            self._session, Route("POST", "/api/channels/owned"), auth=True, json=body
         )
 
         while True:
@@ -407,7 +407,7 @@ class ChannelActions(ClientChannelActions):
             raise NotSupportVersion(NotSupportVersionText)
 
         res: IChannel = await self._session.request(
-            Route('POST', '/api/channels/show'), auth=True, json={'channelId': channel_id}
+            Route("POST", "/api/channels/show"), auth=True, json={"channelId": channel_id}
         )
         return Channel(res, client=self._client)
 
@@ -424,14 +424,14 @@ class ChannelActions(ClientChannelActions):
             raise NotSupportVersion(NotSupportVersionText)
 
         res: list[IChannel] = await self._session.request(
-            Route('POST', '/api/channels/my-favorites'), auth=True
+            Route("POST", "/api/channels/my-favorites"), auth=True
         )
         return [Channel(i, client=self._client) for i in res]
 
     async def search(
         self,
         query: str,
-        type: Literal['nameAndDescription', 'nameOnly'] = 'nameAndDescription',
+        type: Literal["nameAndDescription", "nameOnly"] = "nameAndDescription",
         since_id: str | None = None,
         until_id: str | None = None,
         limit: int = 5,
@@ -465,21 +465,21 @@ class ChannelActions(ClientChannelActions):
             raise NotSupportVersion(NotSupportVersionText)
 
         if limit > 100:
-            raise ParameterError('limit must be less than 100')
+            raise ParameterError("limit must be less than 100")
 
         if get_all:
             limit = 100
 
         body = {
-            'query': query,
-            'type': type,
-            'sinceId': since_id,
-            'untilId': until_id,
-            'limit': limit,
+            "query": query,
+            "type": type,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
         }
 
         pagination = Pagination[IChannel](
-            self._session, Route('POST', '/api/channels/search'), auth=True, json=body
+            self._session, Route("POST", "/api/channels/search"), auth=True, json=body
         )
 
         while True:

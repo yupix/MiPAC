@@ -24,20 +24,20 @@ else:
     HAS_ORJSON = True
 
 __all__ = (
-    'deprecated',
-    'MiTime',
-    'get_cache_key',
-    'key_builder',
-    'check_multi_arg',
-    'remove_list_empty',
-    'remove_dict_empty',
-    'upper_to_lower',
-    'str_lower',
-    'bool_to_string',
-    '_from_json',
-    'str_to_datetime',
-    'convert_dict_keys_to_camel',
-    'snake_to_camel',
+    "deprecated",
+    "MiTime",
+    "get_cache_key",
+    "key_builder",
+    "check_multi_arg",
+    "remove_list_empty",
+    "remove_dict_empty",
+    "upper_to_lower",
+    "str_lower",
+    "bool_to_string",
+    "_from_json",
+    "str_to_datetime",
+    "convert_dict_keys_to_camel",
+    "snake_to_camel",
 )
 
 
@@ -60,13 +60,13 @@ def deprecated(func):
 
     @functools.wraps(func)
     def new_func(*args, **kwargs):
-        warnings.simplefilter('always', DeprecationWarning)  # turn off filter
+        warnings.simplefilter("always", DeprecationWarning)  # turn off filter
         warnings.warn(
-            'Call to deprecated function {}.'.format(func.__name__),
+            "Call to deprecated function {}.".format(func.__name__),
             category=DeprecationWarning,
             stacklevel=2,
         )
-        warnings.simplefilter('default', DeprecationWarning)  # reset filter
+        warnings.simplefilter("default", DeprecationWarning)  # reset filter
         return func(*args, **kwargs)
 
     return new_func
@@ -74,11 +74,11 @@ def deprecated(func):
 
 @new_deprecated
 def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
-    components: list[str] = snake_str.split('_')
+    components: list[str] = snake_str.split("_")
     for i in range(len(components)):
         if components[i] in replace_list:
             components[i] = replace_list[components[i]]
-    return components[0] + ''.join(x.title() for x in components[1:])
+    return components[0] + "".join(x.title() for x in components[1:])
 
 
 @new_deprecated
@@ -95,7 +95,7 @@ def convert_dict_keys_to_camel(
 
 
 @new_deprecated
-def str_to_datetime(data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ') -> datetime:
+def str_to_datetime(data: str, format: str = "%Y-%m-%dT%H:%M:%S.%fZ") -> datetime:
     """
     Parameters
     ----------
@@ -152,7 +152,7 @@ class AuthClient:
             MiAuthを使用するか
         """
         if permissions is None:
-            permissions = ['read:account']
+            permissions = ["read:account"]
         self.__client_session = aiohttp.ClientSession()
         self.__instance_uri: str = instance_uri
         self.__name: str = name
@@ -173,45 +173,45 @@ class AuthClient:
             認証に使用するURL
         """
         field = remove_dict_empty(
-            {'name': self.__name, 'description': self.__description, 'icon': self.__icon}
+            {"name": self.__name, "description": self.__description, "icon": self.__icon}
         )
         if self.__use_miauth:
-            field['permissions'] = self.__permissions
+            field["permissions"] = self.__permissions
             query = urlencode(field)
             self.__session_token = uuid.uuid4()
-            return f'{self.__instance_uri}/miauth/{self.__session_token}?{query}'
+            return f"{self.__instance_uri}/miauth/{self.__session_token}?{query}"
         else:
-            field['permission'] = self.__permissions
+            field["permission"] = self.__permissions
             async with self.__client_session.post(
-                f'{self.__instance_uri}/api/app/create', json=field
+                f"{self.__instance_uri}/api/app/create", json=field
             ) as res:
                 data = await res.json()
-                self.__secret = data['secret']
+                self.__secret = data["secret"]
             async with self.__client_session.post(
-                f'{self.__instance_uri}/api/auth/session/generate',
-                json={'appSecret': self.__secret},
+                f"{self.__instance_uri}/api/auth/session/generate",
+                json={"appSecret": self.__secret},
             ) as res:
                 data = await res.json()
-                self.__session_token = data['token']
-                return data['url']
+                self.__session_token = data["token"]
+                return data["url"]
 
     async def wait_miauth(self) -> str:
-        url = f'{self.__instance_uri}/api/miauth/{self.__session_token}/check'
+        url = f"{self.__instance_uri}/api/miauth/{self.__session_token}/check"
         while True:
             async with self.__client_session.post(url) as res:
                 data = await res.json()
-                if data.get('ok') is True:
+                if data.get("ok") is True:
                     return data
             await asyncio.sleep(1)
 
     async def wait_oldauth(self) -> None:
         while True:
             async with self.__client_session.post(
-                f'{self.__instance_uri}/api/auth/session/userkey',
-                json={'appSecret': self.__secret, 'token': self.__session_token},
+                f"{self.__instance_uri}/api/auth/session/userkey",
+                json={"appSecret": self.__secret, "token": self.__session_token},
             ) as res:
                 data = await res.json()
-                if data.get('error', {}).get('code') != 'PENDING_SESSION':
+                if data.get("error", {}).get("code") != "PENDING_SESSION":
                     break
             await asyncio.sleep(1)
 
@@ -229,7 +229,7 @@ class AuthClient:
         else:
             data = await self.wait_oldauth()
         await self.__client_session.close()
-        return data['token'] if self.__use_miauth else data['accessToken']
+        return data["token"] if self.__use_miauth else data["accessToken"]
 
 
 @new_deprecated
@@ -245,13 +245,13 @@ def set_cache(group: str, key: str, value: Any):
 
 
 @new_deprecated
-def cache(group: str = 'default', override: bool = False):
+def cache(group: str = "default", override: bool = False):
     def decorator(func):
         async def wrapper(self, *args, **kwargs):
             ordered_kwargs = sorted(kwargs.items())
-            key = '.{0}' + str(args) + str(ordered_kwargs)
+            key = ".{0}" + str(args) + str(ordered_kwargs)
             hit_item = DEFAULT_CACHE_VALUE.get(key)
-            if hit_item and override is False and kwargs.get('cache_override') is None:
+            if hit_item and override is False and kwargs.get("cache_override") is None:
                 return hit_item
             res = await func(self, *args, **kwargs)
             set_cache(group, key, res)
@@ -266,7 +266,7 @@ def cache(group: str = 'default', override: bool = False):
 def get_cache_key(func):
     async def decorator(self, *args, **kwargs):
         ordered_kwargs = sorted(kwargs.items())
-        key = (func.__module__ or '') + '.{0}' + f'{self}' + str(args) + str(ordered_kwargs)
+        key = (func.__module__ or "") + ".{0}" + f"{self}" + str(args) + str(ordered_kwargs)
         return await func(self, *args, **kwargs, cache_key=key)
 
     return decorator
@@ -276,7 +276,7 @@ def get_cache_key(func):
 def key_builder(func, cls, *args, **kwargs):
     ordered_kwargs = sorted(kwargs.items())
     key = (
-        (func.__module__ or '') + f'.{func.__name__}' + f'{cls}' + str(args) + str(ordered_kwargs)
+        (func.__module__ or "") + f".{func.__name__}" + f"{cls}" + str(args) + str(ordered_kwargs)
     )
     return key
 
@@ -365,12 +365,12 @@ def upper_to_lower(
     if field is None:
         field = {}
     for attr in data:
-        pattern = re.compile('[A-Z]')
+        pattern = re.compile("[A-Z]")
         large = [i.group().lower() for i in pattern.finditer(attr)]
         result = [None] * (len(large + pattern.split(attr)))
         result[::2] = pattern.split(attr)
-        result[1::2] = ['_' + i.lower() for i in large]
-        default_key = ''.join(result)
+        result[1::2] = ["_" + i.lower() for i in large]
+        default_key = "".join(result)
         if replace_list.get(attr):
             default_key = default_key.replace(attr, replace_list.get(attr))
         field[default_key] = data[attr]
@@ -385,12 +385,12 @@ def upper_to_lower(
 
 @new_deprecated
 def str_lower(text: str):
-    pattern = re.compile('[A-Z]')
+    pattern = re.compile("[A-Z]")
     large = [i.group().lower() for i in pattern.finditer(text)]
     result = [None] * (len(large + pattern.split(text)))
     result[::2] = pattern.split(text)
-    result[1::2] = ['_' + i.lower() for i in large]
-    return ''.join(result)
+    result[1::2] = ["_" + i.lower() for i in large]
+    return "".join(result)
 
 
 @new_deprecated
@@ -407,4 +407,4 @@ def bool_to_string(boolean: bool) -> str:
     true or false: str
         小文字になったbool文字列
     """
-    return 'true' if boolean else 'false'
+    return "true" if boolean else "false"

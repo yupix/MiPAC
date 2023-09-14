@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from mipac.manager.channel import ChannelManager
 
 
-T = TypeVar('T', bound=IChannelLite)
+T = TypeVar("T", bound=IChannelLite)
 
 
 class ChannelLite(Generic[T]):
@@ -21,44 +21,44 @@ class ChannelLite(Generic[T]):
 
     @property
     def id(self) -> str:
-        return self._channel['id']
+        return self._channel["id"]
 
     @property
     def created_at(self) -> datetime:
-        return str_to_datetime(self._channel['created_at'])
+        return str_to_datetime(self._channel["created_at"])
 
     @property
     def last_noted_at(self) -> datetime | None:
-        last_noted_at = self._channel.get('last_noted_at')
+        last_noted_at = self._channel.get("last_noted_at")
         return str_to_datetime(last_noted_at) if last_noted_at else None
 
     @property
     def name(self) -> str:
-        return self._channel['name']
+        return self._channel["name"]
 
     @property
     def description(self) -> str | None:
-        return self._channel['description']
+        return self._channel["description"]
 
     @property
     def user_id(self) -> str:
-        return self._channel['user_id']
+        return self._channel["user_id"]
 
     @property
     def banner_url(self) -> str | None:
-        return self._channel['banner_url']
+        return self._channel["banner_url"]
 
     @property
     def users_count(self) -> int:
-        return self._channel['users_count']
+        return self._channel["users_count"]
 
     @property
     def notes_count(self) -> int:
-        return self._channel['notes_count']
+        return self._channel["notes_count"]
 
     @property
     def pinned_note_ids(self) -> list:
-        return self._channel.get('pinned_note_ids', [])
+        return self._channel.get("pinned_note_ids", [])
 
     @property
     def api(self) -> ChannelManager:

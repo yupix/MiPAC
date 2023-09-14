@@ -26,5 +26,7 @@ class AdminAnnouncementManager(AbstractManager):
         self, announce_id: str
     ) -> AdminAnnouncementClientActions:
         return AdminAnnouncementClientActions(
-            announce_id=announce_id, session=self.__session, client=self.__client,
+            announce_id=announce_id,
+            session=self.__session,
+            client=self.__client,
         )

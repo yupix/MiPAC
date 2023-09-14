@@ -18,4 +18,8 @@ class PollManager(AbstractManager):
 
     @property
     def action(self) -> PollActions:
-        return PollActions(note_id=self.__note_id, session=self.__session, client=self.__client,)
+        return PollActions(
+            note_id=self.__note_id,
+            session=self.__session,
+            client=self.__client,
+        )

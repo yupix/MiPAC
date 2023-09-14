@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, TypedDict
 
-__all__ = ('IFileProperties', 'FolderPayload', 'IDriveFile')
+__all__ = ("IFileProperties", "FolderPayload", "IDriveFile")
 
 
 class IFileProperties(TypedDict):

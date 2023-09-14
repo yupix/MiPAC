@@ -24,7 +24,7 @@ class FederationActions(AbstractAction):
     async def get_ap(self, uri: str) -> dict[Any, Any]:
         return dict(
             await self.__session.request(
-                Route('POST', '/api/ap/get'), auth=True, json={'uri': uri}, lower=True
+                Route("POST", "/api/ap/get"), auth=True, json={"uri": uri}, lower=True
             )
         )
 
@@ -32,10 +32,10 @@ class FederationActions(AbstractAction):
         self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10
     ) -> FederationInstance:
         # TODO: これ本当にuntilId必要なのか確認する
-        body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
+        body = {"host": host, "sinceId": since_id, "untilId": until_id, "limit": limit}
 
         res: FederationInstance = await self.__session.request(
-            Route('POST', '/api/ap/show'), auth=True, json=body
+            Route("POST", "/api/ap/show"), auth=True, json=body
         )
         return res
 
@@ -47,17 +47,16 @@ class FederationActions(AbstractAction):
         limit: int = 10,
         get_all: bool = False,
     ):
-
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
 
         if get_all:
             limit = 100
 
-        body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
+        body = {"host": host, "sinceId": since_id, "untilId": until_id, "limit": limit}
 
         pagination = Pagination[IFederationFollower](
-            self.__session, Route('POST', '/api/federation/followers'), json=body
+            self.__session, Route("POST", "/api/federation/followers"), json=body
         )
 
         while True:
@@ -76,17 +75,16 @@ class FederationActions(AbstractAction):
         limit: int = 10,
         get_all: bool = False,
     ):
-
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
 
         if get_all:
             limit = 100
 
-        body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
+        body = {"host": host, "sinceId": since_id, "untilId": until_id, "limit": limit}
 
         pagination = Pagination[IFederationFollowing](
-            self.__session, Route('POST', '/api/federation/following'), json=body
+            self.__session, Route("POST", "/api/federation/following"), json=body
         )
 
         while True:
@@ -111,31 +109,31 @@ class FederationActions(AbstractAction):
         sort: str | None = None,
     ) -> list[FederationInstance]:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
         body = {
-            'host': host,
-            'blocked': blocked,
-            'notResponding': not_responding,
-            'suspended': suspended,
-            'federating': federating,
-            'subscribing': subscribing,
-            'publishing': publishing,
-            'limit': limit,
-            'offset': offset,
-            'sort': sort,
+            "host": host,
+            "blocked": blocked,
+            "notResponding": not_responding,
+            "suspended": suspended,
+            "federating": federating,
+            "subscribing": subscribing,
+            "publishing": publishing,
+            "limit": limit,
+            "offset": offset,
+            "sort": sort,
         }
 
         res: list[IFederationInstance] = await self.__session.request(
-            Route('POST', '/api/federation/instances'), auth=True, lower=True, json=body
+            Route("POST", "/api/federation/instances"), auth=True, lower=True, json=body
         )
 
         return [FederationInstance(i, client=self.__client) for i in res]
 
     async def show_instance(self, host: str) -> FederationInstance:
         res: IFederationInstance = await self.__session.request(
-            Route('POST', '/api/federation/show-instance'),
+            Route("POST", "/api/federation/show-instance"),
             auth=True,
-            json={'host': host},
+            json={"host": host},
             lower=True,
         )
 
@@ -144,9 +142,9 @@ class FederationActions(AbstractAction):
     async def update_remote_user(self, user_id: str) -> bool:
         return bool(
             self.__session.request(
-                Route('POST', '/api/federation/update-remote-user'),
+                Route("POST", "/api/federation/update-remote-user"),
                 auth=True,
-                json={'userId': user_id},
+                json={"userId": user_id},
             )
         )
 
@@ -159,15 +157,15 @@ class FederationActions(AbstractAction):
         get_all: bool = False,
     ) -> AsyncGenerator[UserDetailed, None]:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
 
         if get_all:
             limit = 100
 
-        body = {'host': host, 'sinceId': since_id, 'untilId': until_id, 'limit': limit}
+        body = {"host": host, "sinceId": since_id, "untilId": until_id, "limit": limit}
 
         pagination = Pagination[IUserDetailed](
-            self.__session, Route('POST', '/api/federation/users'), json=body
+            self.__session, Route("POST", "/api/federation/users"), json=body
         )
 
         while True:
@@ -180,8 +178,8 @@ class FederationActions(AbstractAction):
 
     async def get_stats(self, limit: int = 10) -> IFederationInstanceStat:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
         res: IFederationInstanceStat = await self.__session.request(
-            Route('POST', '/api/federation/stats'), auth=True, body={'limit': limit}, lower=True
+            Route("POST", "/api/federation/stats"), auth=True, body={"limit": limit}, lower=True
         )
         return res

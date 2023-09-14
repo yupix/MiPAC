@@ -48,11 +48,14 @@ class BaseChatAction(AbstractAction):
             raise NotSupportVersion(NotSupportVersionText)
 
         if check_multi_arg(message_id, self.__message_id) is False:
-            raise ParameterError('message_idがありません')
+            raise ParameterError("message_idがありません")
         message_id = message_id or self.__message_id
-        body = {'messageId': message_id}
+        body = {"messageId": message_id}
         res: bool = await self.__session.request(
-            Route('POST', '/api/messaging/messages/read'), json=body, auth=True, lower=True,
+            Route("POST", "/api/messaging/messages/read"),
+            json=body,
+            auth=True,
+            lower=True,
         )
         return res
 
@@ -77,12 +80,14 @@ class BaseChatAction(AbstractAction):
             raise NotSupportVersion(NotSupportVersionText)
 
         if check_multi_arg(message_id, self.__message_id) is False:
-            raise ParameterError('message_idがありません')
+            raise ParameterError("message_idがありません")
 
         message_id = message_id or self.__message_id
-        body = {'messageId': f'{message_id}'}
+        body = {"messageId": f"{message_id}"}
         res: bool = await self.__session.request(
-            Route('POST', '/api/messaging/messages/delete'), json=body, auth=True,
+            Route("POST", "/api/messaging/messages/delete"),
+            json=body,
+            auth=True,
         )
         return bool(res)
 
@@ -125,11 +130,11 @@ class ChatAction(BaseChatAction):
             raise NotSupportVersion(NotSupportVersionText)
 
         if limit > 100:
-            raise ParameterError('limit must be greater than 100')
+            raise ParameterError("limit must be greater than 100")
 
-        args = {'limit': limit, 'group': group}
+        args = {"limit": limit, "group": group}
         data: list[IChatMessage] = await self.__session.request(
-            Route('POST', '/api/messaging/history'), json=args, auth=True
+            Route("POST", "/api/messaging/history"), json=args, auth=True
         )
         return [ChatMessage(d, client=self.__client) for d in data]
 
@@ -162,12 +167,15 @@ class ChatAction(BaseChatAction):
             raise NotSupportVersion(NotSupportVersionText)
         user_id = user_id or self.__user_id
         data = {
-            'userId': user_id,
-            'groupId': group_id,
-            'text': text,
-            'fileId': file_id,
+            "userId": user_id,
+            "groupId": group_id,
+            "text": text,
+            "fileId": file_id,
         }
         res = await self.__session.request(
-            Route('POST', '/api/messaging/messages/create'), json=data, auth=True, lower=True,
+            Route("POST", "/api/messaging/messages/create"),
+            json=data,
+            auth=True,
+            lower=True,
         )
         return ChatMessage(res, client=self.__client)

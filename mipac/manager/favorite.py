@@ -26,5 +26,7 @@ class FavoriteManager(AbstractManager):
             お気に入りに対するアクションを行うクラス
         """
         return FavoriteActions(
-            note_id=self.__note_id, session=self.__session, client=self.__client,
+            note_id=self.__note_id,
+            session=self.__session,
+            client=self.__client,
         )

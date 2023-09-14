@@ -9,19 +9,19 @@ class LiteInstance:
 
     @property
     def name(self) -> str:
-        return self.__instance['name']
+        return self.__instance["name"]
 
     def software_name(self) -> str:
-        return self.__instance['software_name']
+        return self.__instance["software_name"]
 
     def software_version(self) -> str:
-        return self.__instance['software_version']
+        return self.__instance["software_version"]
 
     def icon_url(self) -> str:
-        return self.__instance['icon_url']
+        return self.__instance["icon_url"]
 
     def favicon_url(self) -> str:
-        return self.__instance['favicon_url']
+        return self.__instance["favicon_url"]
 
     def theme_color(self) -> str:
-        return self.__instance['theme_color']
+        return self.__instance["theme_color"]

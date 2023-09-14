@@ -1,6 +1,6 @@
 from typing import Optional, TypedDict
 
-__all__ = ('EmojiPayload', 'ICustomEmojiLite', 'ICustomEmoji')
+__all__ = ("EmojiPayload", "ICustomEmojiLite", "ICustomEmoji")
 
 
 class ICustomEmojiLiteRequired(TypedDict):

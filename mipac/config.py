@@ -14,7 +14,7 @@ class CacheConfig:
         self.ttl: int = options.ttl
 
 
-IMisskeyDistribution = Literal['ayuskey', 'm544', 'areionskey', 'official']
+IMisskeyDistribution = Literal["ayuskey", "m544", "areionskey", "official"]
 IMisskeyVersions = Literal[13, 12, 11]
 
 
@@ -30,22 +30,22 @@ class IFeatures(TypedDict, total=False):
 class Limits:
     def __init__(self, limits: ILimits | None = None) -> None:
         limits = limits or {}
-        self.channel_name: int = limits.get('channel_name', 128)
-        self.channel_description: int = limits.get('channel_description', 2048)
+        self.channel_name: int = limits.get("channel_name", 128)
+        self.channel_description: int = limits.get("channel_description", 2048)
 
     def from_dict(self, limits: ILimits):
-        self.channel_name = limits.get('channel_name') or self.channel_description
-        self.channel_description = limits.get('channel_description') or self.channel_description
+        self.channel_name = limits.get("channel_name") or self.channel_description
+        self.channel_description = limits.get("channel_description") or self.channel_description
         return self
 
 
 class Features:
     def __init__(self, features: IFeatures | None = None) -> None:
         features = features or {}
-        self.chat = features.get('chat', False)
+        self.chat = features.get("chat", False)
 
     def from_dict(self, features: IFeatures):
-        self.chat = features.get('chat') or self.chat
+        self.chat = features.get("chat") or self.chat
         return self
 
 
@@ -53,9 +53,9 @@ class Config:
     def __init__(
         self,
         *,
-        host: str = '',
+        host: str = "",
         is_ssl: bool = True,
-        distro: IMisskeyDistribution = 'official',
+        distro: IMisskeyDistribution = "official",
         is_ayuskey: bool = False,
         use_version: IMisskeyVersions = 12,
         cache: CacheConfigData | None = None,

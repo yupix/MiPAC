@@ -12,7 +12,7 @@ class Client:
         url: str,
         token: str | None = None,
         *,
-        log_level: LOGING_LEVEL_TYPE | None = 'INFO',
+        log_level: LOGING_LEVEL_TYPE | None = "INFO",
         use_version: IMisskeyVersions = 12,
         use_version_autodetect: bool = True
     ) -> None:

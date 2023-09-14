@@ -17,7 +17,7 @@ from mipac.utils.util import deprecated
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
-__all__ = ('DriveActions', 'FileActions', 'FolderActions')
+__all__ = ("DriveActions", "FileActions", "FolderActions")
 
 
 class ClientFileActions(AbstractAction):
@@ -28,7 +28,7 @@ class ClientFileActions(AbstractAction):
         url: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientManager
+        client: ClientManager,
     ) -> None:
         self._session: HTTPClient = session
         self._client: ClientManager = client
@@ -53,11 +53,13 @@ class ClientFileActions(AbstractAction):
 
         file_id = file_id or self._file_id
         if file_id is None:
-            raise ParameterError('file_id is required')
+            raise ParameterError("file_id is required")
 
         return bool(
             await self._session.request(
-                Route('POST', '/api/drive/files/delete'), json={'fileId': file_id}, auth=True,
+                Route("POST", "/api/drive/files/delete"),
+                json={"fileId": file_id},
+                auth=True,
             )
         )
 
@@ -70,7 +72,7 @@ class ClientFileActions(AbstractAction):
         file_id = file_id or self._file_id
         url = url or self._url
         if any([file_id, url]) is False:
-            raise ParameterError('file_id is required')
+            raise ParameterError("file_id is required")
 
         if url is None:
             result = await self._client.drive.file.action.show_file(file_id=file_id)
@@ -79,12 +81,12 @@ class ClientFileActions(AbstractAction):
         async with self._session.session.get(url) as resp:
             if resp.status == 200:
                 content = await resp.read()
-                with open(fp, 'wb') as f:
+                with open(fp, "wb") as f:
                     return f.write(content)
             elif resp.status == 400:
-                raise FileNotFoundError('File not found')
+                raise FileNotFoundError("File not found")
             else:
-                raise HTTPException(resp, 'Failed to get file')
+                raise HTTPException(resp, "Failed to get file")
 
     @deprecated
     async def remove_file(self, file_id: str | None = None) -> bool:
@@ -105,7 +107,9 @@ class ClientFileActions(AbstractAction):
         file_id = file_id or self._file_id
         return bool(
             await self._session.request(
-                Route('POST', '/api/drive/files/delete'), json={'fileId': file_id}, auth=True,
+                Route("POST", "/api/drive/files/delete"),
+                json={"fileId": file_id},
+                auth=True,
             )
         )
 
@@ -118,7 +122,7 @@ class FileActions(ClientFileActions):
         url: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientManager
+        client: ClientManager,
     ) -> None:
         super().__init__(
             file_id=file_id, folder_id=folder_id, url=url, session=session, client=client
@@ -141,9 +145,12 @@ class FileActions(ClientFileActions):
             ファイルの情報
         """
 
-        data = remove_dict_empty({'fileId': file_id, 'url': url})
+        data = remove_dict_empty({"fileId": file_id, "url": url})
         res: IDriveFile = await self._session.request(
-            Route('POST', '/api/admin/drive/show-file'), json=data, auth=True, lower=True,
+            Route("POST", "/api/admin/drive/show-file"),
+            json=data,
+            auth=True,
+            lower=True,
         )
         return File(res, client=self._client)
 
@@ -173,7 +180,7 @@ class FileActions(ClientFileActions):
             取得したいファイルの拡張子
         """
         if limit > 100:
-            raise ParameterError('limit must be less than 100')
+            raise ParameterError("limit must be less than 100")
 
         if get_all:
             limit = 100
@@ -181,15 +188,15 @@ class FileActions(ClientFileActions):
         folder_id = self._folder_id or folder_id
 
         body = {
-            'limit': limit,
-            'sinceId': since_id,
-            'untilId': until_id,
-            'folderId': folder_id,
-            'Type': file_type,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "folderId": folder_id,
+            "Type": file_type,
         }
 
         pagination = Pagination[IDriveFile](
-            self._session, Route('POST', '/api/drive/files'), json=body
+            self._session, Route("POST", "/api/drive/files"), json=body
         )
 
         while True:
@@ -233,19 +240,22 @@ class FileActions(ClientFileActions):
         File
             アップロードしたファイルの情報
         """
-        file_byte = open(file, 'rb') if file else None
+        file_byte = open(file, "rb") if file else None
         folder_id = self._folder_id or folder_id
 
         data = {
-            'file': file_byte,
-            'name': file_name,
-            'folderId': folder_id,
-            'comment': comment,
-            'isSensitive': bool_to_string(is_sensitive),
-            'force': bool_to_string(force),
+            "file": file_byte,
+            "name": file_name,
+            "folderId": folder_id,
+            "comment": comment,
+            "isSensitive": bool_to_string(is_sensitive),
+            "force": bool_to_string(force),
         }
         res: IDriveFile = await self._session.request(
-            Route('POST', '/api/drive/files/create'), data=data, auth=True, lower=True,
+            Route("POST", "/api/drive/files/create"),
+            data=data,
+            auth=True,
+            lower=True,
         )
         return File(res, client=self._client)
 
@@ -276,9 +286,12 @@ class ClientFolderActions(AbstractAction):
         """
         parent_id = parent_id or self._folder_id
 
-        data = {'name': name, 'parent_id': parent_id}
+        data = {"name": name, "parent_id": parent_id}
         res: bool = await self._session.request(
-            Route('POST', '/api/drive/folders/create'), json=data, lower=True, auth=True,
+            Route("POST", "/api/drive/folders/create"),
+            json=data,
+            lower=True,
+            auth=True,
         )
         return bool(res)
 
@@ -295,9 +308,12 @@ class ClientFolderActions(AbstractAction):
             削除に成功したか否か
         """
         folder_id = folder_id or self._folder_id
-        data = {'folderId': folder_id}
+        data = {"folderId": folder_id}
         res: bool = await self._session.request(
-            Route('POST', '/api/drive/folders/delete'), json=data, lower=True, auth=True,
+            Route("POST", "/api/drive/folders/delete"),
+            json=data,
+            lower=True,
+            auth=True,
         )
         return bool(res)
 
@@ -327,7 +343,7 @@ class ClientFolderActions(AbstractAction):
             取得したいファイルの拡張子
         """
         if limit > 100:
-            raise ParameterError('limit must be less than 100')
+            raise ParameterError("limit must be less than 100")
 
         if get_all:
             limit = 100
@@ -335,15 +351,15 @@ class ClientFolderActions(AbstractAction):
         folder_id = self._folder_id or folder_id
 
         body = {
-            'limit': limit,
-            'sinceId': since_id,
-            'untilId': until_id,
-            'folderId': folder_id,
-            'Type': file_type,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "folderId": folder_id,
+            "Type": file_type,
         }
 
         pagination = Pagination[IDriveFile](
-            self._session, Route('POST', '/api/drive/files'), json=body
+            self._session, Route("POST", "/api/drive/files"), json=body
         )
 
         while True:
@@ -394,19 +410,19 @@ class DriveActions(AbstractAction):
         """
 
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ParameterError("limitは100以下である必要があります")
         if get_all:
             limit = 100
 
         body = {
-            'limit': limit,
-            'sinceId': since_id,
-            'untilId': until_id,
-            'folderId': folder_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "folderId": folder_id,
         }
 
         pagination = Pagination[FolderPayload](
-            self._session, Route('POST', '/api/drive/folders'), json=body
+            self._session, Route("POST", "/api/drive/folders"), json=body
         )
 
         while True:

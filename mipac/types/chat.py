@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from mipac.types import IDriveFile
     from mipac.types.user import ILiteUser
 
-__all__ = ('IChatGroup', 'IChatMessage')
+__all__ = ("IChatGroup", "IChatMessage")
 
 
 class IChatGroup(TypedDict):

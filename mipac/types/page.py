@@ -9,13 +9,13 @@ if TYPE_CHECKING:
     from mipac.types.drive import IFileProperties
 
 __all__ = (
-    'PageContentPayload',
-    'VariablePayload',
-    'PageFilePayload',
-    'EyeCatchingImagePayload',
-    'AttachedFilePayload',
-    'PagePayload',
-    'IPage',
+    "PageContentPayload",
+    "VariablePayload",
+    "PageFilePayload",
+    "EyeCatchingImagePayload",
+    "AttachedFilePayload",
+    "PagePayload",
+    "IPage",
 )
 
 
@@ -66,7 +66,7 @@ class PageContentPayload(TypedDict):
     default: str | None
     value: Optional[list[Any]]
 
-    children: Optional['PageContentPayload']
+    children: Optional["PageContentPayload"]
 
 
 class VariablePayload(TypedDict):

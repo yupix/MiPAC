@@ -1,6 +1,6 @@
 from typing import TypedDict
 
-__all__ = ('IPoll', 'IPollChoice', 'ICreatePoll', 'IBasePoll')
+__all__ = ("IPoll", "IPollChoice", "ICreatePoll", "IBasePoll")
 
 
 class IPollChoice(TypedDict):

@@ -15,7 +15,7 @@ from mipac.http import HTTPClient
 if TYPE_CHECKING:
     from mipac.client import ClientManager
 
-__all__ = ['FolderManager', 'FileManager', 'DriveManager']
+__all__ = ["FolderManager", "FileManager", "DriveManager"]
 
 
 class ClientFileManager(AbstractManager):
@@ -26,7 +26,7 @@ class ClientFileManager(AbstractManager):
         url: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientManager
+        client: ClientManager,
     ):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -53,7 +53,7 @@ class FileManager(AbstractManager):
         url: str | None = None,
         *,
         session: HTTPClient,
-        client: ClientManager
+        client: ClientManager,
     ):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -100,7 +100,9 @@ class ClientFolderManager(AbstractManager):
             フォルダーに対するアクション
         """
         return ClientFolderActions(
-            folder_id=self.__folder_id, session=self.__session, client=self.__client,
+            folder_id=self.__folder_id,
+            session=self.__session,
+            client=self.__client,
         )
 
 
@@ -124,7 +126,9 @@ class FolderManager(AbstractManager):
             フォルダーに対するアクション
         """
         return FolderActions(
-            folder_id=self.__folder_id, session=self.__session, client=self.__client,
+            folder_id=self.__folder_id,
+            session=self.__session,
+            client=self.__client,
         )
 
     def _get_file_instance(self, file_id: str) -> FileManager:

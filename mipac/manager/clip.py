@@ -12,7 +12,11 @@ if TYPE_CHECKING:
 
 class ClientClipManager(AbstractManager):
     def __init__(
-        self, clip_id: str | None = None, *, session: HTTPClient, client: ClientManager,
+        self,
+        clip_id: str | None = None,
+        *,
+        session: HTTPClient,
+        client: ClientManager,
     ):
         self.__clip_id = clip_id
         self.__session = session
@@ -20,7 +24,11 @@ class ClientClipManager(AbstractManager):
 
     @property
     def action(self) -> ClipActions:
-        return ClipActions(clip_id=self.__clip_id, session=self.__session, client=self.__client,)
+        return ClipActions(
+            clip_id=self.__clip_id,
+            session=self.__session,
+            client=self.__client,
+        )
 
 
 class ClipManager(AbstractManager):

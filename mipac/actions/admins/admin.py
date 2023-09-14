@@ -27,37 +27,40 @@ class AdminActions(AbstractAction):
 
     async def get_meta(self, detail: bool = False) -> AdminMeta:
         res: IAdminMeta = await self.__session.request(
-            Route('POST', '/api/admin/meta'), json={'detail': detail}, auth=True, lower=True,
+            Route("POST", "/api/admin/meta"),
+            json={"detail": detail},
+            auth=True,
+            lower=True,
         )
         return AdminMeta(res, client=self.__client)
 
     async def get_invite(self) -> bool:
-        return bool(await self.__session.request(Route('POST', '/api/admin/invite')))
+        return bool(await self.__session.request(Route("POST", "/api/admin/invite")))
 
     async def vacuum(self, full: bool = False, analyze: bool = False) -> bool:
-        body = {'full': full, 'analyze': analyze}
+        body = {"full": full, "analyze": analyze}
         return bool(
-            await self.__session.request(Route('POST', '/api/admin/vacuum'), auth=True, json=body)
+            await self.__session.request(Route("POST", "/api/admin/vacuum"), auth=True, json=body)
         )
 
     async def update_user_note(self, user_id: str, text: str) -> bool:
         if config.use_version < 12:
-            raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
-        body = {'userId': user_id, 'text': text}
+            raise NotSupportVersion("ご利用のインスタンスのバージョンではサポートされていない機能です")
+        body = {"userId": user_id, "text": text}
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/update-user-note'), auth=True, json=body
+                Route("POST", "/api/admin/update-user-note"), auth=True, json=body
             )
         )
 
     async def update_meta(self, meta: IUpdateMetaBody) -> bool:
         body = convert_dict_keys_to_camel(
-            meta, replace_list={'tos_text_url': 'ToSTextUrl', 'tos_url': 'ToSUrl'}
+            meta, replace_list={"tos_text_url": "ToSTextUrl", "tos_url": "ToSUrl"}
         )
 
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/update-meta'),
+                Route("POST", "/api/admin/update-meta"),
                 json=body,
                 auth=True,
                 lower=True,
@@ -81,7 +84,7 @@ class AdminActions(AbstractAction):
 
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/unsuspend-user'), json={'userId': user_id}, auth=True
+                Route("POST", "/api/admin/unsuspend-user"), json={"userId": user_id}, auth=True
             )
         )
 
@@ -101,7 +104,7 @@ class AdminActions(AbstractAction):
 
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/unsilence-user'), json={'userId': user_id}, auth=True
+                Route("POST", "/api/admin/unsilence-user"), json={"userId": user_id}, auth=True
             )
         )
 
@@ -120,7 +123,7 @@ class AdminActions(AbstractAction):
         """
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/suspend-user'), json={'userId': user_id}, auth=True
+                Route("POST", "/api/admin/suspend-user"), json={"userId": user_id}, auth=True
             )
         )
 
@@ -139,7 +142,7 @@ class AdminActions(AbstractAction):
         """
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/silence-user'), json={'userId': user_id}, auth=True
+                Route("POST", "/api/admin/silence-user"), json={"userId": user_id}, auth=True
             )
         )
 
@@ -151,17 +154,17 @@ class AdminActions(AbstractAction):
         get_all: bool = False,
     ) -> AsyncGenerator[ModerationLog, None]:
         if config.use_version < 12:
-            raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
+            raise NotSupportVersion("ご利用のインスタンスのバージョンではサポートされていない機能です")
 
         if limit > 100:
-            raise ParameterError('limit must be less than 100')
+            raise ParameterError("limit must be less than 100")
 
         if get_all:
             limit = 100
 
-        body = {'limit': limit, 'sinceId': since_id, 'untilId': until_id}
+        body = {"limit": limit, "sinceId": since_id, "untilId": until_id}
         pagination = Pagination[IModerationLog](
-            self.__session, Route('POST', '/api/admin/show-moderation-logs'), json=body
+            self.__session, Route("POST", "/api/admin/show-moderation-logs"), json=body
         )
 
         while True:
@@ -169,10 +172,10 @@ class AdminActions(AbstractAction):
             for res_moderation_log in res_moderation_logs:
                 yield ModerationLog(res_moderation_log, client=self.__client)
 
-    @cache('server_info')
+    @cache("server_info")
     async def get_server_info(self, **kwargs) -> ServerInfo:
         server_info_payload: IServerInfo = await self.__session.request(
-            Route('POST', '/api/admin/server-info'), auth=True, lower=True
+            Route("POST", "/api/admin/server-info"), auth=True, lower=True
         )
         return ServerInfo(server_info_payload)
 
@@ -180,21 +183,21 @@ class AdminActions(AbstractAction):
         return await self.get_server_info(cache_override=True)
 
     async def send_email(self, to: str, subject: str, text: str) -> bool:
-        body = {'to': to, 'subject': subject, 'text': text}
+        body = {"to": to, "subject": subject, "text": text}
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/send-email'), auth=True, json=body
+                Route("POST", "/api/admin/send-email"), auth=True, json=body
             )
         )
 
     async def resolve_abuse_user_report(self, report_id: str, forward: bool = False) -> bool:
         if config.use_version < 12:
-            raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
+            raise NotSupportVersion("ご利用のインスタンスのバージョンではサポートされていない機能です")
 
-        body = {'reportId': report_id, 'forward': forward}
+        body = {"reportId": report_id, "forward": forward}
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/resolve-abuse-user-report'), auth=True, json=body
+                Route("POST", "/api/admin/resolve-abuse-user-report"), auth=True, json=body
             )
         )
 
@@ -212,33 +215,33 @@ class AdminActions(AbstractAction):
             新しいパスワード
         """
         return await self.__session.request(
-            Route('POST', '/api/admin/reset-password'), auth=True, json={'userId': user_id}
+            Route("POST", "/api/admin/reset-password"), auth=True, json={"userId": user_id}
         )
 
     async def get_table_stats(self) -> dict[str, ITableStats]:
-        return await self.__session.request(Route('POST', '/api/admin/get-table-stats'), auth=True)
+        return await self.__session.request(Route("POST", "/api/admin/get-table-stats"), auth=True)
 
     async def get_index_stats(self) -> list[IndexStat]:
         res: list[IIndexStat] = await self.__session.request(
-            Route('POST', '/api/admin/get-index-stats'), auth=True
+            Route("POST", "/api/admin/get-index-stats"), auth=True
         )
         return [IndexStat(i) for i in res]
 
     async def get_user_ips(self, user_id: str) -> list[UserIP]:
         if config.use_version < 12:
-            raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
+            raise NotSupportVersion("ご利用のインスタンスのバージョンではサポートされていない機能です")
 
         res: list[IUserIP] = await self.__session.request(
-            Route('POST', '/api/admin/get-user-ips'),
+            Route("POST", "/api/admin/get-user-ips"),
             auth=True,
-            json={'userId': user_id},
+            json={"userId": user_id},
             lower=True,
         )
         return [UserIP(i) for i in res]
 
     async def show_user(self, user_id: str) -> UserDetailed:
         res: IUserDetailed = await self.__session.request(
-            Route('POST', '/api/admin/show-user'), auth=True, json={'userId': user_id}
+            Route("POST", "/api/admin/show-user"), auth=True, json={"userId": user_id}
         )
         return UserDetailed(res, client=self.__client)
 
@@ -247,21 +250,21 @@ class AdminActions(AbstractAction):
         limit: int = 10,
         offset: int = 0,
         sort: str | None = None,
-        state: str = 'all',
-        origin: str = 'combined',
+        state: str = "all",
+        origin: str = "combined",
         username: str | None = None,
         hostname: str | None = None,
     ) -> list[UserDetailed]:
         body = {
-            'limit': limit,
-            'offset': offset,
-            'sort': sort,
-            'state': state,
-            'origin': origin,
-            'username': username,
-            'hostname': hostname,
+            "limit": limit,
+            "offset": offset,
+            "sort": sort,
+            "state": state,
+            "origin": origin,
+            "username": username,
+            "hostname": hostname,
         }
         res: list[IUserDetailed] = await self.__session.request(
-            Route('POST', '/api/admin/show-users'), auth=True, json=body
+            Route("POST", "/api/admin/show-users"), auth=True, json=body
         )
         return [UserDetailed(i, client=self.__client) for i in res]

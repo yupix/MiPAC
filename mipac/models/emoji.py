@@ -8,7 +8,7 @@ from mipac.types.emoji import ICustomEmoji
 if TYPE_CHECKING:
     from mipac.client import ClientManager
 
-__all__ = ('CustomEmoji',)
+__all__ = ("CustomEmoji",)
 
 
 class CustomEmoji(PartialCustomEmoji):
@@ -18,23 +18,23 @@ class CustomEmoji(PartialCustomEmoji):
 
     @property
     def id(self) -> str:
-        return self.__emoji['id']
+        return self.__emoji["id"]
 
     @property
     def aliases(self) -> list[str]:
-        return self.__emoji['aliases']
+        return self.__emoji["aliases"]
 
     @property
     def category(self) -> str:
-        return self.__emoji['category']
+        return self.__emoji["category"]
 
     @property
     def license(self) -> str | None:
-        return self.__emoji['license']
+        return self.__emoji["license"]
 
     @property
     def host(self) -> str | None:
-        return self.__emoji['host']
+        return self.__emoji["host"]
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, CustomEmoji) and self.id == __value.id

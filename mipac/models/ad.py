@@ -18,43 +18,43 @@ class Ad:
 
     @property
     def id(self) -> str:
-        return self.__ad_data['id']
+        return self.__ad_data["id"]
 
     @property
     def created_at(self) -> datetime:
-        return str_to_datetime(self.__ad_data['created_at'])
+        return str_to_datetime(self.__ad_data["created_at"])
 
     @property
     def starts_at(self) -> datetime:
-        return str_to_datetime(self.__ad_data['id'])
+        return str_to_datetime(self.__ad_data["id"])
 
     @property
     def expires_at(self) -> datetime:
-        return str_to_datetime(self.__ad_data['id'])
+        return str_to_datetime(self.__ad_data["id"])
 
     @property
     def url(self) -> str:
-        return self.__ad_data['url']
+        return self.__ad_data["url"]
 
     @property
-    def place(self) -> Literal['square' 'horizontal' 'horizontal-big']:
-        return self.__ad_data['place']
+    def place(self) -> Literal["square" "horizontal" "horizontal-big"]:
+        return self.__ad_data["place"]
 
     @property
-    def priority(self) -> Literal['high' 'middle' 'low']:
-        return self.__ad_data['priority']
+    def priority(self) -> Literal["high" "middle" "low"]:
+        return self.__ad_data["priority"]
 
     @property
     def ratio(self) -> int:
-        return self.__ad_data['ratio']
+        return self.__ad_data["ratio"]
 
     @property
     def image_url(self) -> str:
-        return self.__ad_data['image_url']
+        return self.__ad_data["image_url"]
 
     @property
     def memo(self) -> str | None:
-        return self.__ad_data['memo']
+        return self.__ad_data["memo"]
 
     @property
     def api(self) -> AdminAdvertisingModelManager:

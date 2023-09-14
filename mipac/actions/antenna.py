@@ -44,11 +44,11 @@ class ClientAntennaActions(AbstractAction):
         """
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError('antenna id is required')
+            raise ParameterError("antenna id is required")
 
-        body = {'antennaId': antenna_id}
+        body = {"antennaId": antenna_id}
         res: bool = await self._session.request(
-            Route('POST', '/api/antennas/delete'), auth=True, json=body
+            Route("POST", "/api/antennas/delete"), auth=True, json=body
         )
         return res
 
@@ -72,11 +72,11 @@ class ClientAntennaActions(AbstractAction):
         """
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError('antenna id is required')
+            raise ParameterError("antenna id is required")
 
-        body = {'antennaId': antenna_id}
+        body = {"antennaId": antenna_id}
         res_antenna: IAntenna = await self._session.request(
-            Route('POST', '/api/antennas/show'), auth=True, json=body
+            Route("POST", "/api/antennas/show"), auth=True, json=body
         )
         return Antenna(res_antenna, client=self._client)
 
@@ -92,27 +92,27 @@ class ClientAntennaActions(AbstractAction):
     ) -> AsyncGenerator[Note, None]:
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError('antenna id is required')
+            raise ParameterError("antenna id is required")
 
         if limit > 100:
-            raise ParameterError('limit must be less than 100')
+            raise ParameterError("limit must be less than 100")
 
         if get_all:
             limit = 100
 
         body = remove_dict_empty(
             {
-                'antennaId': antenna_id,
-                'limit': limit,
-                'sinceId': since_id,
-                'untilId': until_id,
-                'sinceDate': since_date,
-                'untilDate': until_date,
+                "antennaId": antenna_id,
+                "limit": limit,
+                "sinceId": since_id,
+                "untilId": until_id,
+                "sinceDate": since_date,
+                "untilDate": until_date,
             }
         )
 
         pagination = Pagination[INote](
-            self._session, Route('POST', '/api/antennas/notes'), json=body
+            self._session, Route("POST", "/api/antennas/notes"), json=body
         )
 
         while True:
@@ -170,26 +170,35 @@ class ClientAntennaActions(AbstractAction):
 
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError('antenna id is required')
+            raise ParameterError("antenna id is required")
 
-        if all([name, src, keywords,]) is False:
-            raise ParameterError('Required parameters are missing')
+        if (
+            all(
+                [
+                    name,
+                    src,
+                    keywords,
+                ]
+            )
+            is False
+        ):
+            raise ParameterError("Required parameters are missing")
         body = {
-            'antennaId': antenna_id,
-            'name': name,
-            'src': src,
-            'userListId': user_list_id,
-            'keywords': keywords,
-            'excludeKeywords': exclude_keywords,
-            'users': users,
-            'caseSensitive': case_sensitive,
-            'withReplies': with_replies,
-            'withFile': with_file,
-            'notify': notify,
+            "antennaId": antenna_id,
+            "name": name,
+            "src": src,
+            "userListId": user_list_id,
+            "keywords": keywords,
+            "excludeKeywords": exclude_keywords,
+            "users": users,
+            "caseSensitive": case_sensitive,
+            "withReplies": with_replies,
+            "withFile": with_file,
+            "notify": notify,
         }
 
         res_antenna: IAntenna = await self._session.request(
-            Route('POST', '/api/antennas/update'), auth=True, json=body, remove_none=False
+            Route("POST", "/api/antennas/update"), auth=True, json=body, remove_none=False
         )
 
         return Antenna(res_antenna, client=self._client)
@@ -244,34 +253,43 @@ class AntennaActions(ClientAntennaActions):
         """
 
         if users is None:
-            users = ['']
+            users = [""]
         if exclude_keywords is None:
             exclude_keywords = [[]]
 
-        if all([name, src, keywords,]) is False:
-            raise ParameterError('Required parameters are missing')
+        if (
+            all(
+                [
+                    name,
+                    src,
+                    keywords,
+                ]
+            )
+            is False
+        ):
+            raise ParameterError("Required parameters are missing")
         body = {
-            'name': name,
-            'src': src,
-            'userListId': user_list_id,
-            'keywords': keywords,
-            'excludeKeywords': exclude_keywords,
-            'users': users,
-            'caseSensitive': case_sensitive,
-            'withReplies': with_replies,
-            'withFile': with_file,
-            'notify': notify,
+            "name": name,
+            "src": src,
+            "userListId": user_list_id,
+            "keywords": keywords,
+            "excludeKeywords": exclude_keywords,
+            "users": users,
+            "caseSensitive": case_sensitive,
+            "withReplies": with_replies,
+            "withFile": with_file,
+            "notify": notify,
         }
 
         res_antenna: IAntenna = await self._session.request(
-            Route('POST', '/api/antennas/create'), auth=True, json=body, remove_none=False
+            Route("POST", "/api/antennas/create"), auth=True, json=body, remove_none=False
         )
 
         return Antenna(res_antenna, client=self._client)
 
     async def get_list(self) -> list[Antenna]:
         res_antennas: list[IAntenna] = await self._session.request(
-            Route('POST', '/api/antennas/list'), auth=True
+            Route("POST", "/api/antennas/list"), auth=True
         )
 
         return [Antenna(res_antenna, client=self._client) for res_antenna in res_antennas]

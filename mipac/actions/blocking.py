@@ -21,14 +21,14 @@ class BlockingActions(AbstractAction):
     async def add(self, user_id: str | None = None) -> UserDetailed:
         user_id = self.__user_id or user_id
         res: IUserDetailed = await self.__session.request(
-            Route('POST', '/api/blocking/create'), auth=True, json={'userId': user_id}, lower=True
+            Route("POST", "/api/blocking/create"), auth=True, json={"userId": user_id}, lower=True
         )
         return UserDetailed(res, client=self.__client)
 
     async def remove(self, user_id: str | None = None) -> UserDetailed:
         user_id = self.__user_id or user_id
         res: IUserDetailed = await self.__session.request(
-            Route('POST', '/api/blocking/delete'), auth=True, json={'userId': user_id}, lower=True
+            Route("POST", "/api/blocking/delete"), auth=True, json={"userId": user_id}, lower=True
         )
         return UserDetailed(res, client=self.__client)
 
@@ -42,10 +42,10 @@ class BlockingActions(AbstractAction):
         if get_all:
             limit = 100
 
-        data = {'limit': limit, 'sinceId': since_id, 'untilId': until_id}
+        data = {"limit": limit, "sinceId": since_id, "untilId": until_id}
 
         pagination = Pagination[IBlockingUser](
-            self.__session, Route('POST', '/api/blocking/list'), json=data
+            self.__session, Route("POST", "/api/blocking/list"), json=data
         )
 
         while True:

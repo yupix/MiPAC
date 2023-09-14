@@ -18,12 +18,15 @@ from mipac.utils.util import check_multi_arg
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
-__all__ = ['UserActions']
+__all__ = ["UserActions"]
 
 
 class UserActions:
     def __init__(
-        self, session: HTTPClient, client: ClientManager, user: Optional[LiteUser] = None,
+        self,
+        session: HTTPClient,
+        client: ClientManager,
+        user: Optional[LiteUser] = None,
     ):
         self.__session: HTTPClient = session
         self.__user: Optional[LiteUser] = user
@@ -34,25 +37,31 @@ class UserActions:
         ログインしているユーザーの情報を取得します
         """
 
-        res = await self.__session.request(Route('POST', '/api/i'), auth=True, lower=True,)
+        res = await self.__session.request(
+            Route("POST", "/api/i"),
+            auth=True,
+            lower=True,
+        )
         return UserDetailed(res, client=self.__client)  # TODO: 自分用のクラスに変更する
 
     def get_profile_link(
-        self, external: bool = True, protocol: Literal['http', 'https'] = 'https',
+        self,
+        external: bool = True,
+        protocol: Literal["http", "https"] = "https",
     ):
         if not self.__user:
             return None
         host = (
-            f'{protocol}://{self.__user.host}'
+            f"{protocol}://{self.__user.host}"
             if external and self.__user.host
             else self.__session._url
         )
         path = (
-            f'/@{self.__user.username}' if external else f'/{self.__user.api.action.get_mention()}'
+            f"/@{self.__user.username}" if external else f"/{self.__user.api.action.get_mention()}"
         )
         return host + path
 
-    @cache(group='get_user')
+    @cache(group="get_user")
     async def get(
         self,
         user_id: str | None = None,
@@ -79,14 +88,17 @@ class UserActions:
             ユーザー情報
         """
 
-        field = remove_dict_empty({'userId': user_id, 'username': username, 'host': host})
+        field = remove_dict_empty({"userId": user_id, "username": username, "host": host})
         data = await self.__session.request(
-            Route('POST', '/api/users/show'), json=field, auth=True, lower=True
+            Route("POST", "/api/users/show"), json=field, auth=True, lower=True
         )
         return UserDetailed(data, client=self.__client)
 
     async def fetch(
-        self, user_id: str | None = None, username: str | None = None, host: str | None = None,
+        self,
+        user_id: str | None = None,
+        username: str | None = None,
+        host: str | None = None,
     ) -> UserDetailed:
         """
         サーバーにアクセスし、ユーザーのプロフィールを取得します。基本的には get_userをお使いください。
@@ -123,29 +135,29 @@ class UserActions:
         get_all: bool = False,
     ) -> AsyncGenerator[Note, None]:
         if check_multi_arg(user_id, self.__user) is False:
-            raise ParameterError('user_idがありません', user_id, self.__user)
+            raise ParameterError("user_idがありません", user_id, self.__user)
 
         user_id = user_id or self.__user and self.__user.id
         data = {
-            'userId': user_id,
-            'includeReplies': include_replies,
-            'limit': limit,
-            'sinceId': since_id,
-            'untilId': until_id,
-            'sinceDate': since_date,
-            'untilDate': until_date,
-            'includeMyRenotes': include_my_renotes,
-            'withFiles': with_files,
-            'fileType': file_type,
-            'excludeNsfw': exclude_nsfw,
+            "userId": user_id,
+            "includeReplies": include_replies,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "sinceDate": since_date,
+            "untilDate": until_date,
+            "includeMyRenotes": include_my_renotes,
+            "withFiles": with_files,
+            "fileType": file_type,
+            "excludeNsfw": exclude_nsfw,
         }
 
         if get_all:
-            data['limit'] = 100
+            data["limit"] = 100
             limit = 100
 
         pagination = Pagination[INote](
-            self.__session, Route('POST', '/api/users/notes'), json=data, limit=limit
+            self.__session, Route("POST", "/api/users/notes"), json=data, limit=limit
         )
 
         while True:
@@ -173,15 +185,15 @@ class UserActions:
         user = user or self.__user
 
         if user is None:
-            raise NotExistRequiredData('Required parameters: user')
-        return f'@{user.username}@{user.host}' if user.instance else f'@{user.username}'
+            raise NotExistRequiredData("Required parameters: user")
+        return f"@{user.username}@{user.host}" if user.instance else f"@{user.username}"
 
     async def search(
         self,
         query: str,
         limit: int = 100,
         offset: int = 0,
-        origin: Literal['local', 'remote', 'combined'] = 'combined',
+        origin: Literal["local", "remote", "combined"] = "combined",
         detail: bool = True,
         *,
         get_all: bool = False,
@@ -211,17 +223,17 @@ class UserActions:
         """
 
         if limit > 100:
-            raise ParameterError('limit は100以下である必要があります')
+            raise ParameterError("limit は100以下である必要があります")
 
         if get_all:
             limit = 100
 
         body = remove_dict_empty(
-            {'query': query, 'limit': limit, 'offset': offset, 'origin': origin, 'detail': detail}
+            {"query": query, "limit": limit, "offset": offset, "origin": origin, "detail": detail}
         )
 
         pagination = Pagination[UserDetailed | LiteUser](
-            self.__session, Route('POST', '/api/users/search'), json=body, pagination_type='count'
+            self.__session, Route("POST", "/api/users/search"), json=body, pagination_type="count"
         )
 
         while True:
@@ -234,7 +246,11 @@ class UserActions:
                 break
 
     async def search_by_username_and_host(
-        self, username: str, host: str, limit: int = 100, detail: bool = True,
+        self,
+        username: str,
+        host: str,
+        limit: int = 100,
+        detail: bool = True,
     ) -> list[UserDetailed | LiteUser]:
         """
         Search users by username and host.
@@ -257,13 +273,13 @@ class UserActions:
         """
 
         if limit > 100:
-            raise ParameterError('limit は100以下である必要があります')
+            raise ParameterError("limit は100以下である必要があります")
 
         body = remove_dict_empty(
-            {'username': username, 'host': host, 'limit': limit, 'detail': detail}
+            {"username": username, "host": host, "limit": limit, "detail": detail}
         )
         res = await self.__session.request(
-            Route('POST', '/api/users/search-by-username-and-host'),
+            Route("POST", "/api/users/search-by-username-and-host"),
             lower=True,
             auth=True,
             json=body,
@@ -279,18 +295,21 @@ class UserActions:
         """Get achievements of user."""
 
         if config.use_version < 13:
-            raise NotSupportVersion('ご利用のインスタンスのバージョンではサポートされていない機能です')
+            raise NotSupportVersion("ご利用のインスタンスのバージョンではサポートされていない機能です")
 
         user_id = user_id or self.__user and self.__user.id
 
         if not user_id:
-            raise ParameterError('user_id is required')
+            raise ParameterError("user_id is required")
 
         data = {
-            'userId': user_id,
+            "userId": user_id,
         }
         res = await self.__session.request(
-            Route('POST', '/api/users/achievements'), json=data, auth=True, lower=True,
+            Route("POST", "/api/users/achievements"),
+            json=data,
+            auth=True,
+            lower=True,
         )
         return [Achievement(i) for i in res]
 
@@ -305,18 +324,18 @@ class UserActions:
         user_id = user_id or self.__user and self.__user.id
 
         if not user_id:
-            raise ParameterError('user_id is required')
+            raise ParameterError("user_id is required")
 
         if limit > 100:
-            raise ParameterError('limit must be less than 100')
+            raise ParameterError("limit must be less than 100")
 
         if get_all:
             limit = 100
 
-        body = {'userId': user_id, 'limit': limit, 'sinceId': since_id, 'untilId': until_id}
+        body = {"userId": user_id, "limit": limit, "sinceId": since_id, "untilId": until_id}
 
         pagination = Pagination[IClip](
-            self.__session, Route('POST', '/api/users/clips'), json=body, auth=True
+            self.__session, Route("POST", "/api/users/clips"), json=body, auth=True
         )
 
         while True:

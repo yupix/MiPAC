@@ -16,19 +16,19 @@ class MuteUser:
 
     @property
     def id(self) -> str:
-        return self.__data['id']
+        return self.__data["id"]
 
     @property
     def created_at(self) -> str:
-        return self.__data['created_at']
+        return self.__data["created_at"]
 
     @property
     def mutee_id(self) -> str:
-        return self.__data['mutee_id']
+        return self.__data["mutee_id"]
 
     @property
     def mutee(self) -> UserDetailed:
-        return UserDetailed(self.__data['mutee'], client=self.__client)
+        return UserDetailed(self.__data["mutee"], client=self.__client)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, IMuteUser) and self.id == __value.id

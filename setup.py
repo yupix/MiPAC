@@ -13,7 +13,7 @@ with open('requirements.txt', 'r') as f:
     requirements = f.read().splitlines()
 
 extras_require = {
-    'dev': ['axblack', 'isort', 'mypy', 'flake8', 'pre-commit', 'ruff'],
+    'dev': ['black', 'isort', 'mypy', 'flake8', 'pre-commit', 'ruff'],
     'ci': ['flake8', 'mypy', 'ruff'],
     'speed': ['orjson'],
     'doc': ['sphinx', 'furo', 'sphinxcontrib_trio'],

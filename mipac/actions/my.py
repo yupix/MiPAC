@@ -20,7 +20,9 @@ class MyActions(AbstractAction):
 
     async def fetch_follow_requests(self) -> list[FollowRequest]:
         res: list[IFollowRequest] = await self.__session.request(
-            Route('POST', '/api/following/requests/list'), auth=True, lower=True,
+            Route("POST", "/api/following/requests/list"),
+            auth=True,
+            lower=True,
         )
         return [FollowRequest(i, client=self.__client) for i in res]
 
@@ -45,6 +47,6 @@ class MyActions(AbstractAction):
         if self.__client._config.use_version < 13:
             raise NotSupportVersion(NotSupportVersionText)
         res: bool = await self.__session.request(
-            Route('POST', '/api/i/claim-achievement'), auth=True, json={'name': name}, lower=True
+            Route("POST", "/api/i/claim-achievement"), auth=True, json={"name": name}, lower=True
         )
         return res

@@ -23,13 +23,13 @@ if TYPE_CHECKING:
     from mipac.types.emoji import ICustomEmojiLite
 
 __all__ = (
-    'NoteState',
-    'Note',
-    'Follow',
-    'Header',
-    'NoteReaction',
-    'NoteDeleted',
-    'NoteTranslateResult',
+    "NoteState",
+    "Note",
+    "Follow",
+    "Header",
+    "NoteReaction",
+    "NoteDeleted",
+    "NoteTranslateResult",
 )
 
 
@@ -39,15 +39,15 @@ class NoteState:
 
     @property
     def is_favorite(self) -> bool:
-        return self.__data['is_favorited']
+        return self.__data["is_favorited"]
 
     @property
     def is_watching(self) -> bool:
-        return self.__data['is_watching']
+        return self.__data["is_watching"]
 
     @property
     def is_muted_thread(self) -> bool:
-        return self.__data.get('is_muted_thread', False)
+        return self.__data.get("is_muted_thread", False)
 
 
 class NoteDeleted:
@@ -56,11 +56,11 @@ class NoteDeleted:
 
     @property
     def note_id(self) -> str:
-        return self.__data['body']['id']
+        return self.__data["body"]["id"]
 
     @property
     def deleted_at(self) -> datetime:
-        return str_to_datetime(self.__data['body']['body']['deleted_at'])
+        return str_to_datetime(self.__data["body"]["body"]["deleted_at"])
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, NoteDeleted) and self.note_id == __value.note_id
@@ -71,12 +71,14 @@ class NoteDeleted:
 
 class Follow:  # TODO: 消す
     def __init__(self, data):
-        self.id: str | None = data.get('id')
-        self.created_at: Optional[datetime] = datetime.strptime(
-            data['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ'
-        ) if data.get('created_at') else None
-        self.type: str | None = data.get('type')
-        self.user: Optional[UserDetailed] = data.get('user')
+        self.id: str | None = data.get("id")
+        self.created_at: Optional[datetime] = (
+            datetime.strptime(data["created_at"], "%Y-%m-%dT%H:%M:%S.%fZ")
+            if data.get("created_at")
+            else None
+        )
+        self.type: str | None = data.get("type")
+        self.user: Optional[UserDetailed] = data.get("user")
 
     async def follow(self) -> tuple[bool, str | None]:
         """
@@ -90,7 +92,7 @@ class Follow:  # TODO: 消す
         """
 
         if self.id:
-            raise NotExistRequiredData('user_idがありません')
+            raise NotExistRequiredData("user_idがありません")
         return await self._state.user.follow.add(user_id=self.id)
 
     async def unfollow(self, user_id: str | None = None) -> bool:
@@ -115,12 +117,12 @@ class Follow:  # TODO: 消す
 
 class Header:
     def __init__(self, data):
-        self.id = data.get('id')
-        self.type = data.get('type')
+        self.id = data.get("id")
+        self.type = data.get("type")
 
 
 class NoteReaction:
-    __slots__ = ('__reaction', '__client')
+    __slots__ = ("__reaction", "__client")
 
     def __init__(self, reaction: INoteReaction, *, client: ClientManager):
         self.__reaction: INoteReaction = reaction
@@ -128,23 +130,23 @@ class NoteReaction:
 
     @property
     def id(self) -> str | None:
-        return self.__reaction['id']
+        return self.__reaction["id"]
 
     @property
     def created_at(self) -> datetime | None:
         return (
-            datetime.strptime(self.__reaction['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ')
-            if 'created_at' in self.__reaction
+            datetime.strptime(self.__reaction["created_at"], "%Y-%m-%dT%H:%M:%S.%fZ")
+            if "created_at" in self.__reaction
             else None
         )
 
     @property
     def type(self) -> str | None:
-        return self.__reaction['type']
+        return self.__reaction["type"]
 
     @property
     def user(self) -> LiteUser:
-        return LiteUser(self.__reaction['user'], client=self.__client)
+        return LiteUser(self.__reaction["user"], client=self.__client)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, NoteReaction) and self.id == __value.id
@@ -179,49 +181,49 @@ class Note(PartialNote[INote]):
             List of emojis contained in note text
         """
 
-        return self._note.get('emojis', [])
+        return self._note.get("emojis", [])
 
     @property
     def renote(self) -> Self | None:
         return (
-            Note(note=self._note['renote'], client=self._client)
-            if 'renote' in self._note
+            Note(note=self._note["renote"], client=self._client)
+            if "renote" in self._note
             else None
         )
 
     @property
     def reply(self) -> Self | None:
         return (
-            Note(note=self._note['reply'], client=self._client) if 'reply' in self._note else None
+            Note(note=self._note["reply"], client=self._client) if "reply" in self._note else None
         )
 
     @property
     def visible_user_ids(self) -> list[str]:
-        return self._note['visible_user_ids'] if 'visible_user_ids' in self._note else []
+        return self._note["visible_user_ids"] if "visible_user_ids" in self._note else []
 
     @property
     def local_only(self) -> bool:
-        return self._note['local_only'] if 'local_only' in self._note else False
+        return self._note["local_only"] if "local_only" in self._note else False
 
     @property
     def my_reaction(self) -> str | None:
-        return self._note['my_reaction'] if 'my_reaction' in self._note else None
+        return self._note["my_reaction"] if "my_reaction" in self._note else None
 
     @property
     def uri(self) -> str | None:
-        return self._note['uri'] if 'uri' in self._note else None
+        return self._note["uri"] if "uri" in self._note else None
 
     @property
     def url(self) -> str | None:
-        return self._note['url'] if 'url' in self._note else None
+        return self._note["url"] if "url" in self._note else None
 
     @property
     def is_hidden(self) -> bool:
-        return self._note['is_hidden'] if 'is_hidden' in self._note else False
+        return self._note["is_hidden"] if "is_hidden" in self._note else False
 
     @property
     def poll(self) -> Poll | None:
-        return Poll(self._note['poll'], client=self._client) if 'poll' in self._note else None
+        return Poll(self._note["poll"], client=self._client) if "poll" in self._note else None
 
 
 class NoteTranslateResult:
@@ -239,8 +241,8 @@ class NoteTranslateResult:
 
     @property
     def source_language(self) -> str:
-        return self.__translate_result['sourceLang']
+        return self.__translate_result["sourceLang"]
 
     @property
     def text(self) -> str:
-        return self.__translate_result['text']
+        return self.__translate_result["text"]

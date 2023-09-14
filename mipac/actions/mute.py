@@ -36,9 +36,9 @@ class MuteActions(AbstractAction):
         """
 
         user_id = user_id or self._user_id
-        data = {'userId': user_id}
+        data = {"userId": user_id}
         res: bool = await self._session.request(
-            Route('POST', '/api/mute/create'), auth=True, json=data
+            Route("POST", "/api/mute/create"), auth=True, json=data
         )
         return res
 
@@ -58,9 +58,9 @@ class MuteActions(AbstractAction):
         """
 
         user_id = user_id or self._user_id
-        data = {'userId': user_id}
+        data = {"userId": user_id}
         res: bool = await self._session.request(
-            Route('POST', '/api/mute/delete'), auth=True, json=data
+            Route("POST", "/api/mute/delete"), auth=True, json=data
         )
         return res
 
@@ -72,15 +72,15 @@ class MuteActions(AbstractAction):
         get_all: bool = True,
     ) -> AsyncGenerator[MuteUser, None]:
         if limit > 100:
-            raise ParameterError('limit は100以下である必要があります')
+            raise ParameterError("limit は100以下である必要があります")
 
         if get_all:
             limit = 100
 
-        body = remove_dict_empty({'limit': limit, 'sinceId': since_id, 'untilId': until_id})
+        body = remove_dict_empty({"limit": limit, "sinceId": since_id, "untilId": until_id})
 
         pagination = Pagination[IMuteUser](
-            self._session, Route('POST', '/api/mute/list'), json=body
+            self._session, Route("POST", "/api/mute/list"), json=body
         )
 
         while True:

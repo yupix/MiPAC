@@ -18,52 +18,52 @@ class Clip:
     @property
     def id(self) -> str:
         """The clip id"""
-        return self.__clip['id']
+        return self.__clip["id"]
 
     @property
     def created_at(self) -> str:
         """The time the clip was created"""
-        return self.__clip['created_at']
+        return self.__clip["created_at"]
 
     @property
     def last_clipped_at(self) -> str:
         """The last time the clip was clipped"""
-        return self.__clip['last_clipped_at']
+        return self.__clip["last_clipped_at"]
 
     @property
     def user_id(self) -> str:
         """The user id who created the clip"""
-        return self.__clip['user_id']
+        return self.__clip["user_id"]
 
     @property
     def user(self) -> LiteUser:
         """The user who created the clip"""
-        return LiteUser(self.__clip['user'], client=self.__client)
+        return LiteUser(self.__clip["user"], client=self.__client)
 
     @property
     def name(self) -> str:
         """The clip name"""
-        return self.__clip['name']
+        return self.__clip["name"]
 
     @property
     def description(self) -> str | None:
         """The clip description"""
-        return self.__clip['description']
+        return self.__clip["description"]
 
     @property
     def is_public(self) -> bool:
         """Whether the clip is public"""
-        return self.__clip['is_public']
+        return self.__clip["is_public"]
 
     @property
     def is_favorited(self) -> bool:
         """Whether the clip is favorited"""
-        return self.__clip['is_favorited']
+        return self.__clip["is_favorited"]
 
     @property
     def favorited_count(self) -> int:
         """The number of times the clip has been favorited"""
-        return self.__clip['favorited_count']
+        return self.__clip["favorited_count"]
 
     @property
     def api(self) -> ClientClipManager:

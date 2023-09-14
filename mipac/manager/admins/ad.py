@@ -9,7 +9,7 @@ from mipac.http import HTTPClient, Route
 if TYPE_CHECKING:
     from mipac.client import ClientManager
 
-__all__ = ('AdminAdvertisingManager', 'AdminAdvertisingModelManager')
+__all__ = ("AdminAdvertisingManager", "AdminAdvertisingModelManager")
 
 
 class AdminAdvertisingModelManager(AbstractManager):
@@ -39,20 +39,23 @@ class AdminAdvertisingManager(AbstractManager):
         url: str,
         memo: str,
         place: str,
-        priority: Literal['high', 'middle', 'low'],
+        priority: Literal["high", "middle", "low"],
         ratio: str,
         expires_at: int,
         image_url: str,
     ):
         data = {
-            'url': url,
-            'memo': memo,
-            'place': place,
-            'priority': priority,
-            'ratio': ratio,
-            'expires_at': expires_at,
-            'image_url': image_url,
+            "url": url,
+            "memo": memo,
+            "place": place,
+            "priority": priority,
+            "ratio": ratio,
+            "expires_at": expires_at,
+            "image_url": image_url,
         }
         return await self.__session.request(
-            Route('POST', '/api/admin/ad/create'), json=data, auth=True, lower=True,
+            Route("POST", "/api/admin/ad/create"),
+            json=data,
+            auth=True,
+            lower=True,
         )

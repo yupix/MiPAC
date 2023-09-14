@@ -23,7 +23,7 @@ if TYPE_CHECKING:
     from mipac.models.user import UserDetailed
 
 
-__all__ = ('ClientManager',)
+__all__ = ("ClientManager",)
 
 
 class ClientManager:
@@ -38,10 +38,12 @@ class ClientManager:
         self.chart: ChartManager = ChartManager(session=session, client=self)
         self.channel: ChannelManager = ChannelManager(session=session, client=self)
         self.follow: FollowManager = FollowManager(
-            session=session, client=self,
+            session=session,
+            client=self,
         )
         self.follow_request: FollowRequestManager = FollowRequestManager(
-            session=session, client=self,
+            session=session,
+            client=self,
         )
         self.clip: ClipManager = ClipManager(session=session, client=self)
         self.emoji: EmojiManager = EmojiManager(session=session, client=self)
