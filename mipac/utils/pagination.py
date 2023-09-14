@@ -1,8 +1,15 @@
-from typing import Any, Generic, Literal, TypeVar
+from __future__ import annotations
 
+from typing import TYPE_CHECKING, Any, AsyncGenerator, Generic, Literal, Type, TypeVar
+
+from mipac.abstract.model import AbstractModel
 from mipac.http import HTTPClient, Route
 
+if TYPE_CHECKING:
+    from mipac.manager.client import ClientManager
+
 T = TypeVar("T")
+M = TypeVar("M", bound=AbstractModel)
 
 
 class Pagination(Generic[T]):
@@ -64,3 +71,14 @@ class Pagination(Generic[T]):
         if self.pagination_type == "until" and self.latest_res_count == 0:
             return True
         return False
+
+
+async def pagination_iterator(
+    pagination: Pagination, get_all: bool = False, *, model: Type[M], client: ClientManager
+) -> AsyncGenerator[M, None]:
+    while True:
+        res = await pagination.next()
+        for i in res:
+            yield model(i, client=client)
+        if pagination.is_final or get_all is False:
+            break
