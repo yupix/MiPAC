@@ -38,6 +38,17 @@ class IAchievement(TypedDict):
     name: str
     unlocked_at: int
 
+class IBadgeRole(TypedDict):
+    name: str
+    icon_url: str | None
+    display_order: int
+
+class IUserRole(IBadgeRole):
+    id: str
+    color: str | None
+    description: str
+    is_moderator: bool
+    is_administrator: bool
 
 class IUserRequired(TypedDict):
     id: str
@@ -53,6 +64,7 @@ class ILiteUser(IUserRequired, total=False):
     instance: IInstanceLite
     emojis: list[ICustomEmojiLite]
     avatar_color: str
+    badge_roles: list[IBadgeRole]  # v13なら絶対あるはずだけど、他のにはロールそのものが無いので
 
 
 class IUserDetailedField(TypedDict):
@@ -105,6 +117,7 @@ class IUserDetailed(IUserDetailedRequired, total=False):
     uri: str
     url: str
     use_password_less_login: bool
+    roles: list[IUserRole]
 
 
 class IFollowRequest(TypedDict):

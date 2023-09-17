@@ -1,16 +1,37 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Any, Generic, Literal, TypeVar
 
 from mipac.abstract.model import AbstractModel
+from mipac.manager.client import ClientManager
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.emoji import ICustomEmojiLite
-from mipac.types.user import ILiteUser
+from mipac.types.user import IBadgeRole, ILiteUser
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
     from mipac.manager.user import UserManager
 
+T = TypeVar("T", bound=IBadgeRole)
+
+class BadgeRole(AbstractModel, Generic[T]):
+    def __init__(self, data: T, *, client: ClientManager) -> None:
+        self._data:T = data
+        self._client = client
+    
+    @property
+    def name(self) -> str:
+        return self._data['name']
+    
+    @property
+    def icon_url(self) -> str | None:
+        return self._data['icon_url']
+    
+    @property
+    def display_order(self) -> int:
+        return self._data['display_order']
+    
+    
 
 class LiteUser(AbstractModel):
     __slots__ = ("__user", "__client")
@@ -40,6 +61,10 @@ class LiteUser(AbstractModel):
         self,
     ) -> Literal["online", "active", "offline", "unknown"]:
         return self.__user["online_status"]
+
+    @property
+    def badge_roles(self) -> list[BadgeRole]:
+        return [BadgeRole(data, client=self.__client) for data in self.__user.get('badge_roles', [])]
 
     @property
     def avatar_url(self) -> str:

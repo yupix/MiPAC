@@ -4,10 +4,11 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Literal
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.lite.user import LiteUser
+from mipac.manager.client import ClientManager
+from mipac.models.lite.user import BadgeRole, LiteUser
 from mipac.models.note import Note
 from mipac.types.page import IPage
-from mipac.types.user import IAchievement, IBlockingUser, IUserDetailed, IUserDetailedField
+from mipac.types.user import IAchievement, IBlockingUser, IUserDetailed, IUserDetailedField, IUserRole
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
@@ -55,6 +56,30 @@ class Achievement(AbstractModel):
     @property
     def unlocked_at(self) -> int:
         return self.__detail["unlocked_at"]
+
+class UserRole(BadgeRole[IUserRole]):
+    def __init__(self, data: IUserRole, *, client: ClientManager) -> None:
+        super().__init__(data, client=client)
+    
+    @property
+    def id(self) -> str:
+        return self._data['id']
+    
+    @property
+    def color(self) -> str | None:
+        return self._data['color']
+    
+    @property
+    def description(self) -> str:
+        return self._data['description']
+    
+    @property
+    def is_moderator(self) -> bool:
+        return self._data['is_moderator']
+    
+    @property
+    def is_administrator(self) -> bool:
+        return self._data['is_administrator']
 
 
 class UserDetailed(LiteUser):
@@ -232,3 +257,7 @@ class UserDetailed(LiteUser):
     @property
     def use_password_less_login(self) -> bool | None:
         return self.__detail.get("use_password_less_login")
+
+    @property
+    def roles(self) -> list[UserRole]:
+        return [UserRole(i, client=self.__client) for i in self.__detail.get("roles", [])]
