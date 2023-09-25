@@ -8,10 +8,10 @@ from mipac.errors.base import NotSupportVersion, NotSupportVersionText, Paramete
 from mipac.http import HTTPClient, Route
 from mipac.models.admin import IndexStat, ModerationLog, ServerInfo, UserIP
 from mipac.models.meta import AdminMeta
-from mipac.models.user import UserDetailed
+from mipac.models.user import MeDetailed, UserDetailed
 from mipac.types.admin import IIndexStat, IModerationLog, IServerInfo, ITableStats, IUserIP
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
-from mipac.types.user import IUserDetailed
+from mipac.types.user import IMeDetailed, IUserDetailed, is_me_detailed
 from mipac.utils.cache import cache
 from mipac.utils.format import convert_dict_keys_to_camel
 from mipac.utils.pagination import Pagination
@@ -254,7 +254,7 @@ class AdminActions(AbstractAction):
         origin: str = "combined",
         username: str | None = None,
         hostname: str | None = None,
-    ) -> list[UserDetailed]:
+    )  -> list[MeDetailed | UserDetailed]:
         body = {
             "limit": limit,
             "offset": offset,
@@ -264,7 +264,10 @@ class AdminActions(AbstractAction):
             "username": username,
             "hostname": hostname,
         }
-        res: list[IUserDetailed] = await self.__session.request(
+        res: list[IUserDetailed | IMeDetailed] = await self.__session.request(
             Route("POST", "/api/admin/show-users"), auth=True, json=body
         )
-        return [UserDetailed(i, client=self.__client) for i in res]
+        
+        
+        return [MeDetailed(i, client=self.__client) if is_me_detailed(i, config.account_id) else UserDetailed(i, client=self.__client) for i in res]
+        
