@@ -1,8 +1,10 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Literal, TypedDict
+from typing import TYPE_CHECKING, List, Literal, TypeGuard, TypedDict, Any
+
 
 if TYPE_CHECKING:
+    from mipac.types.announcement import IAnnouncement
     from mipac.types.emoji import ICustomEmojiLite
     from mipac.types.instance import IInstanceLite
     from mipac.types.note import INote
@@ -38,10 +40,12 @@ class IAchievement(TypedDict):
     name: str
     unlocked_at: int
 
+
 class IBadgeRole(TypedDict):
     name: str
     icon_url: str | None
     display_order: int
+
 
 class IUserRole(IBadgeRole):
     id: str
@@ -49,6 +53,7 @@ class IUserRole(IBadgeRole):
     description: str
     is_moderator: bool
     is_administrator: bool
+
 
 class IUserRequired(TypedDict):
     id: str
@@ -116,11 +121,43 @@ class IUserDetailed(IUserDetailedRequired, total=False):
     updated_at: str
     uri: str
     url: str
-    use_password_less_login: bool
     roles: list[IUserRole]
+    memo: str | None
+    moderation_note: str  # Noneではなく空の文字列
 
+
+class IMeDetailed(IUserDetailed):
+    avatar_id: str
+    banner_id: str
+    auto_accept_followed: bool
+    always_mark_nsfw: bool
+    careful_bot: bool
+    email_notification_types: list[str]
+    has_pending_received_follow_request: bool
+    has_unread_announcement: bool
+    has_unread_antenna: bool
+    has_unread_mentions: bool
+    has_unread_messaging_message: bool
+    has_unread_notification: bool
+    has_unread_specified_notes: bool
+    hide_online_status: bool
+    inject_featured_note: bool
+    integrations: dict[str, Any]
+    is_deleted: bool
+    is_explorable: bool
+    muted_words: list[list[str]]
+    muting_notification_types: list[str]
+    no_crawle: bool
+    receive_announcement_email: bool
+    use_password_less_login: bool
+    unread_announcements: list[IAnnouncement]
+    two_factor_backup_codes_stock: Literal["full", "partial", "none"]
 
 class IFollowRequest(TypedDict):
     id: str
     follower: ILiteUser
     followee: ILiteUser
+
+
+def is_me_detailed(user: IUserDetailed | IMeDetailed, me_id: str) -> TypeGuard[IMeDetailed]:
+    return user.get('avatar_id') is not None and user.get('id') == me_id
