@@ -63,6 +63,7 @@ class Config:
         features: IFeatures | None = None,
         limits: ILimits | None = None,
     ) -> None:
+        self.account_id: str = ""
         self.distro: IMisskeyDistribution = distro
         self.is_ssl: bool = is_ssl
         self.host: str = host
@@ -84,6 +85,7 @@ class Config:
         use_version_autodetect: bool | None = None,
         features: IFeatures | None = None,
         limits: ILimits | None = None,
+        account_id: str | None = None
     ) -> Self:
         self.host = host or self.host
         self.is_ssl = is_ssl if is_ssl is not None else self.is_ssl
@@ -94,6 +96,7 @@ class Config:
         self.use_version_autodetect = use_version_autodetect or self.use_version_autodetect
         self.features = self.features.from_dict(features) if features else self.features
         self.limits = self.limits.from_dict(limits) if limits else self.limits
+        self.account_id = account_id or self.account_id
         return self
 
 

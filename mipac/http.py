@@ -13,7 +13,7 @@ from mipac.config import config
 from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
 from mipac.types.meta import IMeta
-from mipac.types.user import IUserDetailed
+from mipac.types.user import IMeDetailed
 from mipac.utils.format import remove_dict_empty, upper_to_lower
 from mipac.utils.util import COLORS, _from_json
 
@@ -124,7 +124,7 @@ REQUEST:{COLORS.reset}
     async def close_session(self) -> None:
         await self._session.close()
 
-    async def login(self) -> IUserDetailed | None:
+    async def login(self) -> IMeDetailed | None:
         match_domain = re.search(r"https?:\/\/([^\/]+)", self._url)
         match_protocol = re.search(r"^(http|https)", self._url)
         if match_domain is None or match_protocol is None:
@@ -136,10 +136,11 @@ REQUEST:{COLORS.reset}
         )
         self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
         if self._token:
-            data: IUserDetailed = await self.request(Route("POST", "/api/i"), auth=True)
+            data: IMeDetailed = await self.request(Route("POST", "/api/i"), auth=True)
             if config.use_version_autodetect:
                 meta: IMeta = await self.request(Route("POST", "/api/meta"), auth=True)
                 use_version = int(meta["version"].split(".")[0])
                 if isinstance(use_version, int) and use_version in (13, 12, 11):
                     config.use_version = use_version
+            config.from_dict(account_id=data["id"])
             return data
