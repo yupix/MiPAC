@@ -1,0 +1,233 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-30 05:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../mipac.util.rst:2
+msgid "mipac.util module"
+msgstr ""
+
+#: mipac.util:1 of
+msgid "MiPAを使用する上でちょっとした際に便利なツール一覧"
+msgstr ""
+
+#: json.loads:1 of
+msgid ""
+"Deserialize ``s`` (a ``str``, ``bytes`` or ``bytearray`` instance "
+"containing a JSON document) to a Python object."
+msgstr ""
+
+#: json.loads:4 of
+msgid ""
+"``object_hook`` is an optional function that will be called with the "
+"result of any object literal decode (a ``dict``). The return value of "
+"``object_hook`` will be used instead of the ``dict``. This feature can be"
+" used to implement custom decoders (e.g. JSON-RPC class hinting)."
+msgstr ""
+
+#: json.loads:9 of
+msgid ""
+"``object_pairs_hook`` is an optional function that will be called with "
+"the result of any object literal decoded with an ordered list of pairs.  "
+"The return value of ``object_pairs_hook`` will be used instead of the "
+"``dict``. This feature can be used to implement custom decoders.  If "
+"``object_hook`` is also defined, the ``object_pairs_hook`` takes "
+"priority."
+msgstr ""
+
+#: json.loads:15 of
+msgid ""
+"``parse_float``, if specified, will be called with the string of every "
+"JSON float to be decoded. By default this is equivalent to "
+"float(num_str). This can be used to use another datatype or parser for "
+"JSON floats (e.g. decimal.Decimal)."
+msgstr ""
+
+#: json.loads:20 of
+msgid ""
+"``parse_int``, if specified, will be called with the string of every JSON"
+" int to be decoded. By default this is equivalent to int(num_str). This "
+"can be used to use another datatype or parser for JSON integers (e.g. "
+"float)."
+msgstr ""
+
+#: json.loads:25 of
+msgid ""
+"``parse_constant``, if specified, will be called with one of the "
+"following strings: -Infinity, Infinity, NaN. This can be used to raise an"
+" exception if invalid JSON numbers are encountered."
+msgstr ""
+
+#: json.loads:30 of
+msgid ""
+"To use a custom ``JSONDecoder`` subclass, specify it with the ``cls`` "
+"kwarg; otherwise ``JSONDecoder`` is used."
+msgstr ""
+
+#: mipac.util.bool_to_string:1 of
+msgid "boolを小文字にして文字列として返します"
+msgstr ""
+
+#: mipac.util.bool_to_string:4 mipac.util.check_multi_arg:4
+#: mipac.util.remove_dict_empty:2 mipac.util.remove_list_empty:2
+#: mipac.util.str_to_datetime:2 mipac.util.upper_to_lower:2 of
+msgid "Parameters"
+msgstr ""
+
+#: mipac.util.bool_to_string:5 of
+msgid "boolean"
+msgstr ""
+
+#: mipac.util.bool_to_string:-1 mipac.util.check_multi_arg:10 of
+msgid "bool"
+msgstr ""
+
+#: mipac.util.bool_to_string:6 of
+msgid "変更したいbool値"
+msgstr ""
+
+#: mipac.util.bool_to_string:8 mipac.util.check_multi_arg:9
+#: mipac.util.remove_dict_empty:7 mipac.util.remove_list_empty:7
+#: mipac.util.str_to_datetime:9 mipac.util.upper_to_lower:13 of
+msgid "Returns"
+msgstr ""
+
+#: mipac.util.bool_to_string:9 of
+msgid "true or false: str"
+msgstr ""
+
+#: mipac.util.bool_to_string:10 of
+msgid "小文字になったbool文字列"
+msgstr ""
+
+#: mipac.util.check_multi_arg:1 of
+msgid "複数の値を受け取り値が存在するかをboolで返します"
+msgstr ""
+
+#: mipac.util.check_multi_arg:6 of
+msgid "args"
+msgstr ""
+
+#: mipac.util.check_multi_arg:-1 of
+msgid "list"
+msgstr ""
+
+#: mipac.util.check_multi_arg:6 of
+msgid "確認したい変数のリスト"
+msgstr ""
+
+#: mipac.util.check_multi_arg:11 of
+msgid "存在する場合はTrue, 存在しない場合はFalse"
+msgstr ""
+
+#: mipac.util.deprecated:1 of
+msgid ""
+"This is a decorator which can be used to mark functions as deprecated. It"
+" will result in a warning being emitted when the function is used."
+msgstr ""
+
+#: mipac.util.remove_dict_empty:4 mipac.util.remove_list_empty:4
+#: mipac.util.upper_to_lower:3 of
+msgid "data: dict"
+msgstr ""
+
+#: mipac.util.remove_dict_empty:4 mipac.util.remove_list_empty:4 of
+msgid "空のkeyを削除したいdict"
+msgstr ""
+
+#: mipac.util.remove_dict_empty:8 of
+msgid "_data: dict"
+msgstr ""
+
+#: mipac.util.remove_dict_empty:9 mipac.util.remove_list_empty:9 of
+msgid "空のkeyがなくなったdict"
+msgstr ""
+
+#: mipac.util.remove_list_empty:8 of
+msgid "dict[str, Any]"
+msgstr ""
+
+#: mipac.util.str_to_datetime:3 of
+msgid "data"
+msgstr ""
+
+#: mipac.util.str_to_datetime:-1 of
+msgid "str"
+msgstr ""
+
+#: mipac.util.str_to_datetime:4 of
+msgid "datetimeに変更したい文字列"
+msgstr ""
+
+#: mipac.util.str_to_datetime:6 of
+msgid "format"
+msgstr ""
+
+#: mipac.util.str_to_datetime:6 of
+msgid "dataのフォーマット"
+msgstr ""
+
+#: mipac.util.str_to_datetime:10 of
+msgid "datetime"
+msgstr ""
+
+#: mipac.util.str_to_datetime:11 of
+msgid "変換後のデータ"
+msgstr ""
+
+#: mipac.util.upper_to_lower:4 of
+msgid "小文字にしたいkeyがあるdict"
+msgstr ""
+
+#: mipac.util.upper_to_lower:5 of
+msgid "field: dict, default=None"
+msgstr ""
+
+#: mipac.util.upper_to_lower:6 of
+msgid "謎"
+msgstr ""
+
+#: mipac.util.upper_to_lower:7 of
+msgid "nest: bool, default=True"
+msgstr ""
+
+#: mipac.util.upper_to_lower:8 of
+msgid "ネストされたdictのkeyも小文字にするか否か"
+msgstr ""
+
+#: mipac.util.upper_to_lower:10 of
+msgid "replace_list: dict, default=None"
+msgstr ""
+
+#: mipac.util.upper_to_lower:10 of
+msgid "dictのkey名を特定の物に置き換える"
+msgstr ""
+
+#: mipac.util.upper_to_lower:14 of
+msgid "field"
+msgstr ""
+
+#: mipac.util.upper_to_lower:-1 of
+msgid "dict"
+msgstr ""
+
+#: mipac.util.upper_to_lower:15 of
+msgid "小文字になった, key名が変更されたdict"
+msgstr ""
+

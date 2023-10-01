@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-30 05:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../mipac.actions.admins.emoji.rst:2
+msgid "mipac.actions.admins.emoji module"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions:1 of
+msgid "Bases: :py:class:`~mipac.abstract.action.AbstractAction`"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:1 of
+msgid "絵文字を追加します"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:4
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:4 of
+msgid "Parameters"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:5 of
+msgid "file_id"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:-1
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:-1 of
+msgid "str | None, optional"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:6 of
+msgid "追加する絵文字のファイルId, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:7 of
+msgid "name"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:8 of
+msgid "絵文字名, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:9 of
+msgid "url"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:10 of
+msgid "絵文字があるUrl, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:11 of
+msgid "category"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:12 of
+msgid "絵文字のカテゴリー, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:14 of
+msgid "aliases"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:-1 of
+msgid "list[str] | None, optional"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:14 of
+msgid "絵文字のエイリアス, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:17
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:9 of
+msgid "Returns"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:19
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:11 of
+msgid "bool"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:19
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:11 of
+msgid "成功したかどうか"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:22
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:14 of
+msgid "Raises"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:23
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:15 of
+msgid "NotExistRequiredData"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:24 of
+msgid "必要なデータが不足している"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:1 of
+msgid "指定したIdの絵文字を削除します"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:6 of
+msgid "emoji_id"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:6 of
+msgid "削除する絵文字のId, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:16 of
+msgid "Idが不足している"
+msgstr ""
+

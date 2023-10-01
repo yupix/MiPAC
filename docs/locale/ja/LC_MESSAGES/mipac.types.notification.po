@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-30 05:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../mipac.types.notification.rst:2
+msgid "mipac.types.notification module"
+msgstr ""
+
+#: mipac.types.notification:1 of
+msgid "WebSocketで来る通知の型を定義しています"
+msgstr ""
+
+#: mipac.types.notification:3 of
+msgid "NfはNotificationの略です"
+msgstr ""
+
+#: mipac.types.notification.IAchievementNf:1 mipac.types.notification.INoteNf:1
+#: mipac.types.notification.IPollEndNf:1 mipac.types.notification.IReactionNf:1
+#: mipac.types.notification.IUserNf:1 of
+msgid "Bases: :py:class:`dict`"
+msgstr ""
+
+#: mipac.types.notification.INotification:1 of
+msgid "Bases: :py:class:`~typing.TypedDict`"
+msgstr ""
+
