@@ -18,12 +18,26 @@ This library is the Core of MiPA.
 MiPAC is an Api Wrapper that supports Misskey v11, 12, and 13.
 It absorbs API differences between versions, etc., which you don't have to worry about originally.
 
+> [!IMPORTANT]  
+> MiPAC's development policy will be changed. Please see [this discussion](https://github.com/yupix/MiPAC/discussions/90) for more information.
+
 ## Supported Misskey
+
+Indicators of support
+
+|status|meaning|
+|---|---|
+|〇|Operation verified, priority support|
+|△| confirmation of operation, add support for features as and when issues, etc. come in.|
+|×|Not supported and not intended for use|
 
 |name|version|supported|
 |---|---|---|
-|[Misskey Official](https://github.com/misskey-dev/misskey)|v13, v12, v11|〇|
-|[Ayuskey](https://github.com/teamblackcrystal/misskey)|v5, v6|〇|
+|[Misskey Official](https://github.com/misskey-dev/misskey)|v13 or later|〇|
+|[Misskey Official](https://github.com/misskey-dev/misskey)|v12|△|
+|[Misskey Official](https://github.com/misskey-dev/misskey)|v11|△|
+
+If you are using a non-official Fork and it is not working properly, please send us a link to your Fork repository and server in an Issue and we may be able to assist you.
 
 ## Usage
 
