@@ -1,0 +1,55 @@
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 1.7em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+.py-attribute-table {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--color-inline-code-background);
+    margin-bottom: -1rem;
+    border-radius: 4px 4px 0 0;
+    border-left: #5dcfff solid 2px;
+}
+
+.class > .sig-object {
+    background-color: var(--color-inline-code-background);
+    border-left: #5dcfff solid 2px;
+    border-radius: 0 0 0 3px;
+    margin-bottom: 2em;
+}
+
+dd > .deprecated {
+    border-left: solid goldenrod 7px;
+    border-top: solid goldenrod 7px;
+    border-radius: 5px;
+}
+
+.py-attribute-table-entry {
+    list-style: None;
+}
+
+.py-attribute-table-column {
+    flex: .5;
+}
+
+.py-attribute-table-column > span {
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.py-attribute-table-badge {
+    font-weight: bold;
+    /* margin-right: .5rem; */
+}
+
+.sig {
+    background-color: var(--color-inline-code-background);
+}
