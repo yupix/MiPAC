@@ -4,8 +4,8 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.lite.user import LiteUser
-from mipac.types.roles import IRole, IRolePolicies, IRolePolicieValue, IRoleUser
+from mipac.models.user import MeDetailed, UserDetailed
+from mipac.types.roles import IMeRole, IRole, IRolePolicies, IRolePolicieValue, IRoleUser
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
@@ -24,8 +24,40 @@ class RoleUser(AbstractModel):
         return self.__role_user["id"]
 
     @property
-    def user(self) -> LiteUser:
-        return LiteUser(self.__role_user["user"], client=self.__client)
+    def user(self) -> UserDetailed:
+        return UserDetailed(self.__role_user["user"], client=self.__client)
+
+    @property
+    def expires_at(self) -> datetime | None:
+        return (
+            str_to_datetime(self.__role_user["expires_at"])
+            if self.__role_user["expires_at"]
+            else None
+        )
+
+    @property
+    def action(self) -> UserManager:
+        return self.__client._create_user_instance(self.user)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, RoleUser) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
+
+
+class MeRole(AbstractModel):
+    def __init__(self, data: IMeRole, *, client: ClientManager) -> None:
+        self.__role_user = data
+        self.__client = client
+
+    @property
+    def id(self) -> str:
+        return self.__role_user["id"]
+
+    @property
+    def user(self) -> MeDetailed:
+        return MeDetailed(self.__role_user["user"], client=self.__client)
 
     @property
     def expires_at(self) -> datetime | None:
