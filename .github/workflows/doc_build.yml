@@ -23,7 +23,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Install Package
-      run: pip install -e .[docs]
+      run: pip install -e .[doc]
 
     - name: Build Docs
       run: python doc_gen.py
