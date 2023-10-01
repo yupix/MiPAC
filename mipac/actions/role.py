@@ -29,7 +29,7 @@ class RoleActions(AbstractAction):
             Route("POST", "/api/roles/list"), auth=True
         )
 
-        return [Role(role, client=self.__client) for role in res]
+        return [Role(raw_role, client=self.__client) for raw_role in res]
 
     async def get(self, role_id: str) -> Role:
         """Get a role from the API.

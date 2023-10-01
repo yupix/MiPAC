@@ -264,7 +264,7 @@ class AdminActions(AbstractAction):
             "username": username,
             "hostname": hostname,
         }
-        res: list[IUserDetailed | IMeDetailed] = await self.__session.request(
+        res: list[IMeDetailed | IUserDetailed] = await self.__session.request(
             Route("POST", "/api/admin/show-users"), auth=True, json=body
         )
 
