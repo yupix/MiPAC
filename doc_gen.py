@@ -94,4 +94,4 @@ if __name__ == "__main__":
     excluded_files = ["__init__.py", "_version.py"]  # Add files to exclude here
     generate_documentation(source_path, output_path, hierarchy, exclude_files=excluded_files)
     os.chdir("./docs")
-    subprocess.run("sphinx-intl update -p _build/gettext && ./doc_builder.sh", shell=True)
+    subprocess.run("make gettext && sphinx-intl update -p _build/gettext && ./doc_builder.sh", shell=True)
