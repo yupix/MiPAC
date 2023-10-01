@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.config import config
 from mipac.abstract.action import AbstractAction
+from mipac.errors.base import NotSupportVersion
 from mipac.http import HTTPClient, Route
 from mipac.models.note import Note
 from mipac.models.roles import MeRole, Role, RoleUser
@@ -20,7 +21,10 @@ class RoleActions(AbstractAction):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
 
-    async def get_list(self):
+    async def get_list(self) -> list[Role]:
+        if config.use_version < 13:
+            raise NotSupportVersion("This method is only available in version 13 or later")
+
         res: list[IRole] = await self.__session.request(
             Route("POST", "/api/roles/list"), auth=True
         )
@@ -39,7 +43,15 @@ class RoleActions(AbstractAction):
         -------
         Role
             The role data.
+
+        Raises
+        ------
+        NotSupportVersion
+            If the version of the Misskey is less than 13.
         """
+
+        if config.use_version < 13:
+            raise NotSupportVersion("This method is only available in version 13 or later")
 
         raw_role: IRole = await self.__session.request(
             Route("POST", "/api/roles/show"), auth=True, json={"roleId": role_id}
@@ -55,6 +67,9 @@ class RoleActions(AbstractAction):
         *,
         get_all: bool = False,
     ) -> AsyncGenerator[MeRole | RoleUser, None]:
+        if config.use_version < 13:
+            raise NotSupportVersion("This method is only available in version 13 or later")
+
         if limit > 100:
             raise ValueError("Limit cannot be greater than 100")
 
@@ -87,6 +102,9 @@ class RoleActions(AbstractAction):
         *,
         get_all: bool = False,
     ):
+        if config.use_version < 13:
+            raise NotSupportVersion("This method is only available in version 13 or later")
+
         if limit > 100:
             raise ValueError("Limit cannot be greater than 100")
 
