@@ -1,0 +1,260 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-30 05:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../mipac.actions.antenna.rst:2
+msgid "mipac.actions.antenna module"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions:1 of
+msgid "Bases: :py:class:`~mipac.actions.antenna.ClientAntennaActions`"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:1 of
+msgid "Create an antenna."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:4
+#: mipac.actions.antenna.ClientAntennaActions.delete:4
+#: mipac.actions.antenna.ClientAntennaActions.show:4
+#: mipac.actions.antenna.ClientAntennaActions.update:4 of
+msgid "Parameters"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:5
+#: mipac.actions.antenna.ClientAntennaActions.update:5 of
+msgid "name"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:-1
+#: mipac.actions.antenna.ClientAntennaActions.update:-1 of
+msgid "str"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:6
+#: mipac.actions.antenna.ClientAntennaActions.update:6 of
+msgid "Name of the antenna."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:7
+#: mipac.actions.antenna.ClientAntennaActions.update:7 of
+msgid "src"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:-1
+#: mipac.actions.antenna.ClientAntennaActions.update:-1 of
+msgid "IAntennaReceiveSource"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:8
+#: mipac.actions.antenna.ClientAntennaActions.update:8 of
+msgid "Receive source of the antenna."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:9
+#: mipac.actions.antenna.ClientAntennaActions.update:9 of
+msgid "keywords"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:-1
+#: mipac.actions.antenna.ClientAntennaActions.update:-1 of
+msgid "list[list[str]]"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:10
+#: mipac.actions.antenna.ClientAntennaActions.update:10 of
+msgid "Receive keywords."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:11
+#: mipac.actions.antenna.ClientAntennaActions.update:11 of
+msgid "exclude_keywords"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:-1 of
+msgid "list[list[str]] | None, default None"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:12
+#: mipac.actions.antenna.ClientAntennaActions.update:12 of
+msgid "Excluded keywords."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:13
+#: mipac.actions.antenna.ClientAntennaActions.update:13 of
+msgid "users"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:-1 of
+msgid "list[str] | None, default None"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:14
+#: mipac.actions.antenna.ClientAntennaActions.update:14 of
+msgid ""
+"List of target user ID. Required when selecting 'users' as the receive "
+"source."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:15
+#: mipac.actions.antenna.ClientAntennaActions.update:15 of
+msgid "case_sensitive"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:-1 of
+msgid "bool, default False"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:16
+#: mipac.actions.antenna.ClientAntennaActions.update:16 of
+msgid "Whether to differentiate between uppercase and lowercase letters."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:17
+#: mipac.actions.antenna.ClientAntennaActions.update:17 of
+msgid "with_replies"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:18
+#: mipac.actions.antenna.ClientAntennaActions.update:18 of
+msgid "Whether to include replies."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:19
+#: mipac.actions.antenna.ClientAntennaActions.update:19 of
+msgid "with_file"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:20
+#: mipac.actions.antenna.ClientAntennaActions.update:20 of
+msgid "Whether to limit to notes with attached files."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:21
+#: mipac.actions.antenna.ClientAntennaActions.update:21 of
+msgid "notify"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:22
+#: mipac.actions.antenna.ClientAntennaActions.update:22 of
+msgid "Whether to notify for new notes."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:24
+#: mipac.actions.antenna.ClientAntennaActions.update:24 of
+msgid "user_list_id"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:-1
+#: mipac.actions.antenna.ClientAntennaActions.update:-1 of
+msgid "str | None, default None"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:24
+#: mipac.actions.antenna.ClientAntennaActions.update:24 of
+msgid ""
+"List of user IDs when selecting 'users' as the receive source for the "
+"antenna."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:27
+#: mipac.actions.antenna.ClientAntennaActions.delete:13
+#: mipac.actions.antenna.ClientAntennaActions.show:9
+#: mipac.actions.antenna.ClientAntennaActions.update:27 of
+msgid "Returns"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:28
+#: mipac.actions.antenna.ClientAntennaActions.show:11
+#: mipac.actions.antenna.ClientAntennaActions.update:28 of
+msgid "Antenna"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:29
+#: mipac.actions.antenna.ClientAntennaActions.update:29 of
+msgid "The created antenna."
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions:1 of
+msgid "Bases: :py:class:`~mipac.abstract.action.AbstractAction`"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:1 of
+msgid "Delete antenna from identifier"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:6
+#: mipac.actions.antenna.ClientAntennaActions.show:6 of
+msgid "antenna_id"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:-1
+#: mipac.actions.antenna.ClientAntennaActions.show:-1 of
+msgid "str | None, optional"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:6 of
+msgid "target identifier"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:9
+#: mipac.actions.antenna.ClientAntennaActions.show:14 of
+msgid "Raises"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:10
+#: mipac.actions.antenna.ClientAntennaActions.show:15 of
+msgid "ParameterError"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:11
+#: mipac.actions.antenna.ClientAntennaActions.show:16 of
+msgid "antenna id is required"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:14
+#: mipac.actions.antenna.ClientAntennaActions.update:-1 of
+msgid "bool"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:15 of
+msgid "success or failure"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.show:1 of
+msgid "Show antenna from identifier"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.show:6 of
+msgid "target identifier, by default None"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.show:11 of
+msgid "antenna object"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.update:1 of
+msgid "Update an antenna."
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.update:-1 of
+msgid "list[str]"
+msgstr ""
+

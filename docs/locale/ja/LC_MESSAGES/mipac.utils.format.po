@@ -1,0 +1,153 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-30 05:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../mipac.utils.format.rst:2
+msgid "mipac.utils.format module"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:1 of
+msgid "boolを小文字にして文字列として返します"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:4 mipac.utils.format.remove_dict_empty:2
+#: mipac.utils.format.remove_list_empty:2 mipac.utils.format.str_to_datetime:2
+#: mipac.utils.format.upper_to_lower:2 of
+msgid "Parameters"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:5 of
+msgid "boolean"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:-1 of
+msgid "bool"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:6 of
+msgid "変更したいbool値"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:8 mipac.utils.format.remove_dict_empty:7
+#: mipac.utils.format.remove_list_empty:7 mipac.utils.format.str_to_datetime:9
+#: mipac.utils.format.upper_to_lower:13 of
+msgid "Returns"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:9 of
+msgid "true or false: str"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:10 of
+msgid "小文字になったbool文字列"
+msgstr ""
+
+#: mipac.utils.format.remove_dict_empty:4
+#: mipac.utils.format.remove_list_empty:4 mipac.utils.format.upper_to_lower:3
+#: of
+msgid "data: dict"
+msgstr ""
+
+#: mipac.utils.format.remove_dict_empty:4
+#: mipac.utils.format.remove_list_empty:4 of
+msgid "空のkeyを削除したいdict"
+msgstr ""
+
+#: mipac.utils.format.remove_dict_empty:8 of
+msgid "_data: dict"
+msgstr ""
+
+#: mipac.utils.format.remove_dict_empty:9
+#: mipac.utils.format.remove_list_empty:9 of
+msgid "空のkeyがなくなったdict"
+msgstr ""
+
+#: mipac.utils.format.remove_list_empty:8 of
+msgid "dict[str, Any]"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:3 of
+msgid "data"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:-1 of
+msgid "str"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:4 of
+msgid "datetimeに変更したい文字列"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:6 of
+msgid "format"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:6 of
+msgid "dataのフォーマット"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:10 of
+msgid "datetime"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:11 of
+msgid "変換後のデータ"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:4 of
+msgid "小文字にしたいkeyがあるdict"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:5 of
+msgid "field: dict, default=None"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:6 of
+msgid "謎"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:7 of
+msgid "nest: bool, default=True"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:8 of
+msgid "ネストされたdictのkeyも小文字にするか否か"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:10 of
+msgid "replace_list: dict, default=None"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:10 of
+msgid "dictのkey名を特定の物に置き換える"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:14 of
+msgid "field"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:-1 of
+msgid "dict"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:15 of
+msgid "小文字になった, key名が変更されたdict"
+msgstr ""
+

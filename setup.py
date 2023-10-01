@@ -16,7 +16,7 @@ extras_require = {
     'dev': ['black', 'isort', 'mypy', 'flake8', 'pre-commit', 'ruff'],
     'ci': ['flake8', 'mypy', 'ruff'],
     'speed': ['orjson'],
-    'doc': ['sphinx', 'furo', 'sphinxcontrib_trio'],
+    'doc': ['sphinx', 'furo', 'sphinxcontrib_trio', 'sphinx-intl', 'numpydoc'],
 }
 
 packages = [

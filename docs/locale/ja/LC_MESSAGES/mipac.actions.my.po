@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-30 05:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../mipac.actions.my.rst:2
+msgid "mipac.actions.my module"
+msgstr ""
+
+#: mipac.actions.my.MyActions:1 of
+msgid "Bases: :py:class:`~mipac.abstract.action.AbstractAction`"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:1 of
+msgid "指定した名前の実績を解除します"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:4 of
+msgid "Parameters"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:6 of
+msgid "name"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:-1 of
+msgid "実績名"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:6 of
+msgid "解除したい実績の名前"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:9 of
+msgid "Returns"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:11 of
+msgid "bool"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:11 of
+msgid "成功したか否か"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:14 of
+msgid "Raises"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:15 of
+msgid "NotSupportVersion"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:16 of
+msgid "実績機能が存在しないサーバーを使用している"
+msgstr ""
+

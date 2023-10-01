@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-30 05:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../mipac.actions.follow.rst:2
+msgid "mipac.actions.follow module"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions:1
+#: mipac.actions.follow.FollowRequestActions:1 of
+msgid "Bases: :py:class:`~mipac.abstract.action.AbstractAction`"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.add:1 of
+msgid "Follow a user"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.add:4
+#: mipac.actions.follow.FollowActions.invalidate:4
+#: mipac.actions.follow.FollowActions.remove:4
+#: mipac.actions.follow.FollowRequestActions.accept:9
+#: mipac.actions.follow.FollowRequestActions.cancel:9
+#: mipac.actions.follow.FollowRequestActions.get_all:4
+#: mipac.actions.follow.FollowRequestActions.reject:9 of
+msgid "Returns"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.add:5 of
+msgid "UserLite:"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.add:6 of
+msgid "The user that you followed"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.invalidate:1 of
+msgid "Make the user unfollows you"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.invalidate:5
+#: mipac.actions.follow.FollowActions.remove:5
+#: mipac.actions.follow.FollowRequestActions.cancel:10 of
+msgid "LiteUser"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.invalidate:6 of
+msgid "The user that followed you"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.remove:1 of
+msgid "Unfollow a user"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.remove:6 of
+msgid "The user that you unfollowed"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.accept:1 of
+msgid "Accept a follow request"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.accept:4
+#: mipac.actions.follow.FollowRequestActions.cancel:4
+#: mipac.actions.follow.FollowRequestActions.reject:4 of
+msgid "Parameters"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.accept:6
+#: mipac.actions.follow.FollowRequestActions.cancel:6
+#: mipac.actions.follow.FollowRequestActions.reject:6 of
+msgid "user_id: str"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.accept:6 of
+msgid "The user ID to accept"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.accept:10
+#: mipac.actions.follow.FollowRequestActions.reject:10 of
+msgid "bool"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.accept:11 of
+msgid "Whether the request was accepted"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.cancel:1 of
+msgid "Cancel a follow request"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.cancel:6 of
+msgid "The user ID to cancel"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.cancel:11 of
+msgid "The user that you canceled to follow"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.get_all:1 of
+msgid "Get all follow requests"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.get_all:5 of
+msgid "list[FollowRequest]"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.get_all:6 of
+msgid "List of follow requests"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.reject:1 of
+msgid "Reject a follow request"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.reject:6 of
+msgid "The user ID to reject"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.reject:11 of
+msgid "Whether the request was rejected"
+msgstr ""
+

@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-30 05:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../mipac.models.clip.rst:2
+msgid "mipac.models.clip module"
+msgstr ""
+
+#: mipac.models.clip.Clip:1 of
+msgid "Bases: :py:class:`object`"
+msgstr ""
+
+#: mipac.models.clip.Clip.created_at:1 of
+msgid "The time the clip was created"
+msgstr ""
+
+#: mipac.models.clip.Clip.description:1 of
+msgid "The clip description"
+msgstr ""
+
+#: mipac.models.clip.Clip.favorited_count:1 of
+msgid "The number of times the clip has been favorited"
+msgstr ""
+
+#: mipac.models.clip.Clip.id:1 of
+msgid "The clip id"
+msgstr ""
+
+#: mipac.models.clip.Clip.is_favorited:1 of
+msgid "Whether the clip is favorited"
+msgstr ""
+
+#: mipac.models.clip.Clip.is_public:1 of
+msgid "Whether the clip is public"
+msgstr ""
+
+#: mipac.models.clip.Clip.last_clipped_at:1 of
+msgid "The last time the clip was clipped"
+msgstr ""
+
+#: mipac.models.clip.Clip.name:1 of
+msgid "The clip name"
+msgstr ""
+
+#: mipac.models.clip.Clip.user:1 of
+msgid "The user who created the clip"
+msgstr ""
+
+#: mipac.models.clip.Clip.user_id:1 of
+msgid "The user id who created the clip"
+msgstr ""
+

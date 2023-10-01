@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-30 05:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../mipac.actions.drive.rst:2
+msgid "mipac.actions.drive module"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions:1 of
+msgid "Bases: :py:class:`~mipac.abstract.action.AbstractAction`"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:1 of
+msgid "フォルダーの一覧を取得します"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:4
+#: mipac.actions.drive.FileActions.get_files:4
+#: mipac.actions.drive.FileActions.show_file:4
+#: mipac.actions.drive.FileActions.upload_file:4 of
+msgid "Parameters"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:5
+#: mipac.actions.drive.FileActions.get_files:5 of
+msgid "limit"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:-1
+#: mipac.actions.drive.FileActions.get_files:-1 of
+msgid "int, default=10"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:6
+#: mipac.actions.drive.FileActions.get_files:6 of
+msgid "取得する上限"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:7
+#: mipac.actions.drive.FileActions.get_files:7 of
+msgid "since_id"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:-1
+#: mipac.actions.drive.FileActions.get_files:-1
+#: mipac.actions.drive.FileActions.show_file:-1
+#: mipac.actions.drive.FileActions.upload_file:-1 of
+msgid "str | None, default=None"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:8 of
+msgid "指定すると、その投稿を投稿を起点としてより新しい投稿を取得します"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:9
+#: mipac.actions.drive.FileActions.get_files:9 of
+msgid "until_id"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:10 of
+msgid "指定すると、その投稿を投稿を起点としてより古い投稿を取得します"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:11
+#: mipac.actions.drive.FileActions.get_files:11
+#: mipac.actions.drive.FileActions.upload_file:9 of
+msgid "folder_id"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:12 of
+msgid "指定すると、そのフォルダーを起点としてフォルダーを取得します"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:13 of
+msgid "get_all"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:-1
+#: mipac.actions.drive.FileActions.upload_file:-1 of
+msgid "bool, default=False"
+msgstr ""
+
+#: mipac.actions.drive.DriveActions.get_folders:14 of
+msgid "Whether to retrieve all folders or not"
+msgstr ""
+
+#: mipac.actions.drive.FileActions:1 of
+msgid "Bases: :py:class:`~mipac.actions.drive.ClientFileActions`"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.get_files:1 of
+msgid "ファイルを取得します"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.get_files:8 of
+msgid "指定すると、そのIDを起点としてより新しいファイルを取得します"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.get_files:10 of
+msgid "指定すると、そのIDを起点としてより古いファイルを取得します"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.get_files:12 of
+msgid "指定すると、そのフォルダーを起点としてファイルを取得します"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.get_files:13 of
+msgid "file_type"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.get_files:14 of
+msgid "取得したいファイルの拡張子"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.show_file:1 of
+msgid "ファイルの情報を取得します。"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.show_file:5 of
+msgid "file_id"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.show_file:6 of
+msgid "ファイルのID"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.show_file:8 of
+msgid "url"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.show_file:8 of
+msgid "ファイルのURL"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.show_file:11
+#: mipac.actions.drive.FileActions.upload_file:19 of
+msgid "Returns"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.show_file:12
+#: mipac.actions.drive.FileActions.upload_file:20 of
+msgid "File"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.show_file:13 of
+msgid "ファイルの情報"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:1 of
+msgid "ファイルをアップロードします"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:5 of
+msgid "file"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:-1 of
+msgid "str"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:6 of
+msgid "アップロードするファイル"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:7 of
+msgid "file_name"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:8 of
+msgid "アップロードするファイルの名前"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:10 of
+msgid "アップロードするフォルダーのID"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:11 of
+msgid "comment"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:12 of
+msgid "アップロードするファイルのコメント"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:13 of
+msgid "is_sensitive"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:14 of
+msgid "アップロードするファイルがNSFWかどうか"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:16 of
+msgid "force"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:16 of
+msgid "アップロードするファイルが同名のファイルを上書きするかどうか"
+msgstr ""
+
+#: mipac.actions.drive.FileActions.upload_file:21 of
+msgid "アップロードしたファイルの情報"
+msgstr ""
+
+#: mipac.actions.drive.FolderActions:1 of
+msgid "Bases: :py:class:`~mipac.actions.drive.ClientFolderActions`"
+msgstr ""
+

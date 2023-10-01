@@ -1,0 +1,40 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-30 05:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: ../../mipac.types.meta.rst:2
+msgid "mipac.types.meta module"
+msgstr ""
+
+#: mipac.types.meta.IAdminMeta:1 mipac.types.meta.IFeatures:1
+#: mipac.types.meta.ILiteMeta:1 mipac.types.meta.ILiteV11Meta:1
+#: mipac.types.meta.IMeta:1 mipac.types.meta.IMetaCommon:1 of
+msgid "Bases: :py:class:`dict`"
+msgstr ""
+
+#: mipac.types.meta.ICPU:1 mipac.types.meta.ICommonV11:1
+#: mipac.types.meta.ILiteV12Meta:1 mipac.types.meta.IMetaAnnouncement:1
+#: mipac.types.meta.IMetaCommonV12:1 mipac.types.meta.IPolicies:1
+#: mipac.types.meta.ISharedAdminMeta:1 mipac.types.meta.IUpdateMetaBody:1
+#: mipac.types.meta.IV11Features:1 mipac.types.meta.IV12AdminMeta:1
+#: mipac.types.meta.IV12Features:1 mipac.types.meta.IV12Meta:1 of
+msgid "Bases: :py:class:`~typing.TypedDict`"
+msgstr ""
+
