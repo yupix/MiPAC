@@ -85,7 +85,7 @@ class Config:
         use_version_autodetect: bool | None = None,
         features: IFeatures | None = None,
         limits: ILimits | None = None,
-        account_id: str | None = None
+        account_id: str | None = None,
     ) -> Self:
         self.host = host or self.host
         self.is_ssl = is_ssl if is_ssl is not None else self.is_ssl

@@ -12,26 +12,26 @@ if TYPE_CHECKING:
     from mipac.manager.user import UserManager
 
 T = TypeVar("T", bound=IBadgeRole)
-LUT = TypeVar('LUT', bound=ILiteUser)
+LUT = TypeVar("LUT", bound=ILiteUser)
+
 
 class BadgeRole(AbstractModel, Generic[T]):
     def __init__(self, data: T, *, client: ClientManager) -> None:
-        self._data:T = data
+        self._data: T = data
         self._client = client
-    
+
     @property
     def name(self) -> str:
-        return self._data['name']
-    
+        return self._data["name"]
+
     @property
     def icon_url(self) -> str | None:
-        return self._data['icon_url']
-    
+        return self._data["icon_url"]
+
     @property
     def display_order(self) -> int:
-        return self._data['display_order']
-    
-    
+        return self._data["display_order"]
+
 
 class LiteUser(AbstractModel, Generic[LUT]):
     __slots__ = ("_user", "__client")
@@ -65,7 +65,9 @@ class LiteUser(AbstractModel, Generic[LUT]):
 
     @property
     def badge_roles(self) -> list[BadgeRole]:
-        return [BadgeRole(data, client=self.__client) for data in self._user.get('badge_roles', [])]
+        return [
+            BadgeRole(data, client=self.__client) for data in self._user.get("badge_roles", [])
+        ]
 
     @property
     def avatar_url(self) -> str:
@@ -106,9 +108,8 @@ class LiteUser(AbstractModel, Generic[LUT]):
 
     @property
     def instance(self) -> LiteInstance | None:
-        instance = self._user.get('instance')
+        instance = self._user.get("instance")
         return LiteInstance(instance) if instance else None
-        
 
     @property
     def api(self) -> UserManager:

@@ -153,6 +153,7 @@ class IMeDetailed(IUserDetailed):
     unread_announcements: list[IAnnouncement]
     two_factor_backup_codes_stock: Literal["full", "partial", "none"]
 
+
 class IFollowRequest(TypedDict):
     id: str
     follower: ILiteUser
@@ -160,4 +161,4 @@ class IFollowRequest(TypedDict):
 
 
 def is_me_detailed(user: IUserDetailed | IMeDetailed, me_id: str) -> TypeGuard[IMeDetailed]:
-    return user.get('avatar_id') is not None and user.get('id') == me_id
+    return user.get("avatar_id") is not None and user.get("id") == me_id

@@ -11,6 +11,7 @@ class IRoleUser(TypedDict):
     user: IUserDetailed
     expires_at: str | None
 
+
 class IMeRole(TypedDict):
     id: str
     user: IMeDetailed
@@ -60,5 +61,6 @@ class IRole(TypedDict):
     policies: IRolePolicies
     users_count: int
 
+
 def is_me_role(data: IMeRole | IRoleUser, me_id: str) -> TypeGuard[IMeRole]:
-    return data['user']['id'] == me_id and data['user'].get('avatar_id') is not None
+    return data["user"]["id"] == me_id and data["user"].get("avatar_id") is not None

@@ -254,7 +254,7 @@ class AdminActions(AbstractAction):
         origin: str = "combined",
         username: str | None = None,
         hostname: str | None = None,
-    )  -> list[MeDetailed | UserDetailed]:
+    ) -> list[MeDetailed | UserDetailed]:
         body = {
             "limit": limit,
             "offset": offset,
@@ -267,7 +267,10 @@ class AdminActions(AbstractAction):
         res: list[IUserDetailed | IMeDetailed] = await self.__session.request(
             Route("POST", "/api/admin/show-users"), auth=True, json=body
         )
-        
-        
-        return [MeDetailed(i, client=self.__client) if is_me_detailed(i, config.account_id) else UserDetailed(i, client=self.__client) for i in res]
-        
+
+        return [
+            MeDetailed(i, client=self.__client)
+            if is_me_detailed(i, config.account_id)
+            else UserDetailed(i, client=self.__client)
+            for i in res
+        ]
