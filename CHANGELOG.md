@@ -41,6 +41,10 @@ async def main():
 
 - `RoleUser` モデルで `LiteUser` を使用していましたが、正しくは `UserDetailed`
 
+### 依存関係の更新📦
+
+- `aiohttp`: `3.8.4` => `3.8.5`
+
 #### 貢献者向け情報
 
 ##### `axblack` を使ったフォーマットを辞めました
