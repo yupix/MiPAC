@@ -4,10 +4,42 @@
 
 ### New Features ✨
 
+
+#### `MeDetailed` モデルが追加され、自身に関する情報より多く扱えるようになりました
+
+今後はAPIを使用した際に自動でユーザーが自分自身かを判断し、自身であった場合は `UserDetailed` ではなく、 `MeDetailed` を返すようになります。
+`MeDetailed` と `UserDetailed` の共有体型の場合は `isinstance` を用いて判断が行えます。
+また、`RoleUser` 等のように専用のユーザーモデルがある場合は `MeRole` のようなモデルを作成し、どちらかを返すようになります。
+
+
+※まだ全てのメソッドに適応されたわけではなく、ごく一部のみの適応となっています。
+
+```py
+async def main():
+    async with Client("https://nr.akarinext.org", "token") as client:
+        api = client.api
+        users = await api.admin.action.show_users(username="yupix")
+        for user in users:
+            if isinstance(user, MeDetailed):
+                print(user.is_admin)
+```
+
+- `LiteUser` モデルに `badge_roles` プロパティーが追加されました
+
 #### 以下のエンドポイントがサポートされました
 
-- `admin/invite/create`
-- `admin/invite/list`
+|エンドポント|MiPACでのメソッド|
+|---|---|
+|`/api/admin/invite/create`|`api.admin.invite.action.create_invite`|
+|`/api/admin/invite/list`|`api.admin.invite.action.get_invite_list`|
+|`/api/roles/list`|`api.role.action.get_list`|
+|`/api/roles/show`|`api.role.action.get`|
+|`/api/roles/users`|`api.role.action.get_users`|
+|`/api/roles/notes`|`api.role.action.get_notes`|
+
+### Fixed 🛠️
+
+- `RoleUser` モデルで `LiteUser` を使用していましたが、正しくは `UserDetailed`
 
 #### 貢献者向け情報
 

@@ -15,6 +15,7 @@ from mipac.manager.emoji import EmojiManager
 from mipac.manager.follow import FollowManager, FollowRequestManager
 from mipac.manager.my import MyManager
 from mipac.manager.note import NoteManager
+from mipac.manager.role import RoleManager
 from mipac.manager.user import UserManager
 
 if TYPE_CHECKING:
@@ -48,6 +49,7 @@ class ClientManager:
         self.clip: ClipManager = ClipManager(session=session, client=self)
         self.emoji: EmojiManager = EmojiManager(session=session, client=self)
         self.antenna: AntennaManager = AntennaManager(session=session, client=self)
+        self.role: RoleManager = RoleManager(session=session, client=self)
         self._config: Config = config
 
     @property

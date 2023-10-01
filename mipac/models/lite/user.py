@@ -1,53 +1,81 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Generic, Literal, TypeVar
 
 from mipac.abstract.model import AbstractModel
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.emoji import ICustomEmojiLite
-from mipac.types.user import ILiteUser
+from mipac.types.user import IBadgeRole, ILiteUser
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
     from mipac.manager.user import UserManager
 
+T = TypeVar("T", bound=IBadgeRole)
+LUT = TypeVar("LUT", bound=ILiteUser)
 
-class LiteUser(AbstractModel):
-    __slots__ = ("__user", "__client")
 
-    def __init__(self, user: ILiteUser, *, client: ClientManager) -> None:
-        self.__user: ILiteUser = user
+class BadgeRole(AbstractModel, Generic[T]):
+    def __init__(self, data: T, *, client: ClientManager) -> None:
+        self._data: T = data
+        self._client = client
+
+    @property
+    def name(self) -> str:
+        return self._data["name"]
+
+    @property
+    def icon_url(self) -> str | None:
+        return self._data["icon_url"]
+
+    @property
+    def display_order(self) -> int:
+        return self._data["display_order"]
+
+
+class LiteUser(AbstractModel, Generic[LUT]):
+    __slots__ = ("_user", "__client")
+
+    def __init__(self, user: LUT, *, client: ClientManager) -> None:
+        self._user: LUT = user
         self.__client: ClientManager = client
 
     @property
     def id(self) -> str:
-        return self.__user["id"]
+        return self._user["id"]
 
     @property
     def username(self) -> str:
-        return self.__user["username"]
+        return self._user["username"]
 
     @property
     def host(self) -> str | None:
-        return self.__user["host"] if "host" in self.__user else None
+        host = self._user.get("host")
+        return host if host else None
 
     @property
     def nickname(self) -> str:
-        return self.__user["name"]
+        return self._user["name"]
 
     @property
     def online_status(
         self,
     ) -> Literal["online", "active", "offline", "unknown"]:
-        return self.__user["online_status"]
+        return self._user["online_status"]
+
+    @property
+    def badge_roles(self) -> list[BadgeRole]:
+        return [
+            BadgeRole(data, client=self.__client) for data in self._user.get("badge_roles", [])
+        ]
 
     @property
     def avatar_url(self) -> str:
-        return self.__user["avatar_url"]
+        return self._user["avatar_url"]
 
     @property
     def avatar_blurhash(self) -> str:
-        return self.__user["avatar_blurhash"]
+        return self._user["avatar_blurhash"]
 
     @property
     def avatar_color(self) -> str | None:
@@ -62,7 +90,7 @@ class LiteUser(AbstractModel):
             average color of the avatar
         """
 
-        return self.__user.get("avatar_color")
+        return self._user.get("avatar_color")
 
     @property
     def emojis(self) -> list[ICustomEmojiLite]:  # TODO: ちゃんとモデルにする
@@ -76,11 +104,12 @@ class LiteUser(AbstractModel):
             List of emoji included in nicknames, etc
         """
 
-        return self.__user.get("emojis", [])
+        return self._user.get("emojis", [])
 
     @property
     def instance(self) -> LiteInstance | None:
-        return LiteInstance(self.__user["instance"]) if "instance" in self.__user else None
+        instance = self._user.get("instance")
+        return LiteInstance(instance) if instance else None
 
     @property
     def api(self) -> UserManager:
