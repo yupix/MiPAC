@@ -1,6 +1,5 @@
 from .admins import *
 from .chart import *
-from .chat import *
 from .drive import *
 from .favorite import *
 from .follow import *

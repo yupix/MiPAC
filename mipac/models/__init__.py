@@ -1,5 +1,4 @@
 from .channel import *
-from .chat import *
 from .drive import *
 from .emoji import *
 from .follow import *

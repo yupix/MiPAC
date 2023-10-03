@@ -2,7 +2,6 @@
 
 from .admins import *
 from .chart import *
-from .chat import *
 from .client import *
 from .drive import *
 from .favorite import *

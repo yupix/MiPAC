@@ -8,7 +8,6 @@ from mipac.manager.admins.admin import AdminManager
 from mipac.manager.antenna import AntennaManager
 from mipac.manager.channel import ChannelManager
 from mipac.manager.chart import ChartManager
-from mipac.manager.chat import ChatManager
 from mipac.manager.clip import ClipManager
 from mipac.manager.drive import DriveManager
 from mipac.manager.emoji import EmojiManager
@@ -32,7 +31,6 @@ class ClientManager:
         self.__session: HTTPClient = session
         self.i = MyManager(session=session, client=self)
         self.note: NoteManager = NoteManager(session=session, client=self)
-        self.chat: ChatManager = ChatManager(session=session, client=self)
         self.user: UserManager = UserManager(session=session, client=self)
         self.admin: AdminManager = AdminManager(session=session, client=self)
         self.drive: DriveManager = DriveManager(session=session, client=self)
