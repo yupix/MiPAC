@@ -12,7 +12,6 @@ from mipac import __version__
 from mipac.config import config
 from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
-from mipac.types.meta import IMeta
 from mipac.types.user import IMeDetailed
 from mipac.utils.format import remove_dict_empty, upper_to_lower
 from mipac.utils.util import COLORS, _from_json
@@ -137,10 +136,5 @@ REQUEST:{COLORS.reset}
         self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
         if self._token:
             data: IMeDetailed = await self.request(Route("POST", "/api/i"), auth=True)
-            if config.use_version_autodetect:
-                meta: IMeta = await self.request(Route("POST", "/api/meta"), auth=True)
-                use_version = int(meta["version"].split(".")[0])
-                if isinstance(use_version, int) and use_version in (13, 12, 11):
-                    config.use_version = use_version
             config.from_dict(account_id=data["id"])
             return data
