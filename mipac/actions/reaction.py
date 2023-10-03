@@ -8,7 +8,7 @@ from mipac.errors.base import NotSupportVersion
 from mipac.http import Route
 from mipac.models.emoji import CustomEmoji
 from mipac.models.note import NoteReaction
-from mipac.types.meta import ILiteMeta
+from mipac.types.meta import IPartialMeta
 from mipac.types.note import INoteReaction
 from mipac.utils.format import remove_dict_empty
 
@@ -68,10 +68,7 @@ class ReactionActions(AbstractAction):
         return [NoteReaction(i, client=self.__client) for i in res]
 
     async def get_emoji_list(self) -> list[CustomEmoji]:
-        if config.use_version >= 13:
-            raise NotSupportVersion("Misskey v13以降では使用できません")
-
-        data: ILiteMeta = await self.__session.request(
+        data: IPartialMeta = await self.__session.request(
             Route("GET", "/api/meta"),
             json={"detail": False},
             auth=True,

@@ -6,10 +6,10 @@ from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.announcement import Announcement
-from mipac.models.lite.meta import LiteMeta
+from mipac.models.lite.meta import PartialMeta
 from mipac.models.meta import Meta
 from mipac.types.announcement import IAnnouncement
-from mipac.types.meta import ILiteMeta, IMeta
+from mipac.types.meta import IMeta, IPartialMeta
 from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
@@ -22,7 +22,7 @@ class ClientActions(AbstractAction):
         self.__client: ClientManager = client
 
     @overload
-    async def get_meta(self, detail: Literal[False] = ...) -> LiteMeta:
+    async def get_meta(self, detail: Literal[False] = ...) -> PartialMeta:
         ...
 
     @overload
@@ -39,8 +39,8 @@ class ClientActions(AbstractAction):
         if detail is True:
             meta: IMeta = await self.__session.request(**params)
             return Meta(meta, client=self.__client)
-        lite_meta: ILiteMeta = await self.__session.request(**params)
-        return LiteMeta(lite_meta, client=self.__client)
+        lite_meta: IPartialMeta = await self.__session.request(**params)
+        return PartialMeta(lite_meta, client=self.__client)
 
     async def get_announcements(
         self,

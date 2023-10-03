@@ -1,274 +1,270 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Generic, TypeVar
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.emoji import CustomEmoji
-from mipac.types.ads import IAds
-from mipac.types.meta import ICPU, ILiteMeta, IMetaAnnouncement, IMetaCommon
+from mipac.models.lite.ad import PartialAd
+from mipac.types.meta import IPolicies, IPartialMeta, IFeatures
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
+T = TypeVar("T", bound=IPartialMeta)
 
-class CPU(AbstractModel):
-    def __init__(self, cpu: ICPU) -> None:
-        self.__cpu: ICPU = cpu
 
-    @property
-    def cores(self) -> int:
-        return self.__cpu["cores"]
+class Policies(AbstractModel):
+    def __init__(self, raw_policies: IPolicies) -> None:
+        self.__raw_policies: IPolicies = raw_policies
 
     @property
-    def model(self) -> str:
-        return self.__cpu["model"]
-
-
-class MetaCommon(AbstractModel):
-    def __init__(self, meta_common: IMetaCommon, *, client: ClientManager) -> None:
-        self.__meta_common: IMetaCommon = meta_common
-        self.__client = client
+    def gtl_available(self) -> bool:
+        return self.__raw_policies["gtl_available"]
 
     @property
-    def cache_remote_files(self) -> bool:
-        return self.__meta_common["cache_remote_files"]
+    def ltl_available(self) -> bool:
+        return self.__raw_policies["ltl_available"]
 
     @property
-    def enable_hcaptch(self) -> bool:
-        return self.__meta_common["enable_hcaptch"]
+    def can_public_note(self) -> bool:
+        return self.__raw_policies["can_public_note"]
 
     @property
-    def hcaptcha_site_key(self) -> str | None:
-        return self.__meta_common["hcaptcha_site_key"]
+    def can_edit_note(self) -> bool:
+        return self.__raw_policies["can_edit_note"]
 
     @property
-    def enable_recaptcha(self) -> bool:
-        return self.__meta_common["enable_recaptcha"]
+    def can_invite(self) -> bool:
+        return self.__raw_policies["can_invite"]
 
     @property
-    def recaptcha_site_key(self) -> str:
-        return self.__meta_common["recaptcha_site_key"]
+    def invite_limit(self) -> int:
+        return self.__raw_policies["invite_limit"]
 
     @property
-    def sw_publickey(self) -> str | None:
-        return self.__meta_common["sw_publickey"]
+    def invite_limit_cycle(self) -> int:
+        return self.__raw_policies["invite_limit_cycle"]
 
     @property
-    def banner_url(self) -> str | None:
-        return self.__meta_common["banner_url"]
+    def invite_expiration_time(self) -> int:
+        return self.__raw_policies["invite_expiration_time"]
 
     @property
-    def error_image_url(self) -> str | None:
-        return self.__meta_common["error_image_url"]
+    def can_manage_custom_emojis(self) -> bool:
+        return self.__raw_policies["can_manage_custom_emojis"]
 
     @property
-    def icon_url(self) -> str | None:
-        return self.__meta_common["icon_url"]
+    def can_search_notes(self) -> bool:
+        return self.__raw_policies["can_search_notes"]
 
     @property
-    def max_note_text_length(self) -> int:
-        return self.__meta_common["max_note_text_length"]
+    def can_use_translator(self) -> bool:
+        return self.__raw_policies["can_use_translator"]
 
     @property
-    def enable_email(self) -> bool:
-        return self.__meta_common["enable_email"]
+    def can_hide_ads(self) -> bool:
+        return self.__raw_policies["can_hide_ads"]
 
     @property
-    def enable_twitter_integration(self) -> bool:
-        return self.__meta_common["enable_twitter_integration"]
+    def drive_capacity_mb(self) -> int:
+        return self.__raw_policies["drive_capacity_mb"]
 
     @property
-    def enable_github_integration(self) -> bool:
-        return self.__meta_common["enable_github_integration"]
+    def always_mark_nsfw(self) -> bool:
+        return self.__raw_policies["always_mark_nsfw"]
 
     @property
-    def enable_discord_integration(self) -> bool:
-        return self.__meta_common["enable_discord_integration"]
+    def pin_limit(self) -> int:
+        return self.__raw_policies["pin_limit"]
 
     @property
-    def enable_service_worker(self) -> bool:
-        return self.__meta_common["enable_service_worker"]
+    def antenna_limit(self) -> int:
+        return self.__raw_policies["antenna_limit"]
 
     @property
-    def proxy_account_name(self) -> str | None:
-        return self.__meta_common["proxy_account_name"]
+    def word_mute_limit(self) -> int:
+        return self.__raw_policies["word_mute_limit"]
 
     @property
-    def use_star_for_reaction_fallback(self) -> bool:
-        return self.__meta_common.get("use_star_for_reaction_fallback", False)
+    def webhook_limit(self) -> int:
+        return self.__raw_policies["webhook_limit"]
 
     @property
-    def object_storage_s3_force_path_style(self) -> bool:
-        """
-        objectStorageでs3ForcePathStyleを使用するかどうか
-        注意: v11の管理者のみ取得できます
-
-        Returns
-        -------
-        bool
-            有効かどうか
-        """
-        return self.__meta_common.get("object_storage_s3_force_path_style", False)
-
-    # v12 only
+    def clip_limit(self) -> int:
+        return self.__raw_policies["clip_limit"]
 
     @property
-    def ads(self) -> list[IAds] | None:  # TODO: モデルに
-        return self.__meta_common.get("ads")
+    def note_each_clips_limit(self) -> int:
+        return self.__raw_policies["note_each_clips_limit"]
 
     @property
-    def translator_available(self) -> bool:
-        return self.__meta_common.get("translator_available", False)
+    def user_list_limit(self) -> int:
+        return self.__raw_policies["user_list_limit"]
 
     @property
-    def email_required_for_signup(self) -> bool:
-        return self.__meta_common.get("email_required_for_signup", False)
+    def user_each_user_lists_limit(self) -> int:
+        return self.__raw_policies["user_each_user_lists_limit"]
 
     @property
-    def mascot_image_url(self) -> str | None:
-        return self.__meta_common.get("mascot_image_url")
+    def rate_limit_factor(self) -> int:
+        return self.__raw_policies["rate_limit_factor"]
 
-    # v12とv11の共通情報
-
-    @property
-    def emojis(self) -> list[CustomEmoji]:
-        return (
-            [CustomEmoji(i, client=self.__client) for i in self.__meta_common["emojis"]]
-            if "emojis" in self.__meta_common
-            else []
-        )
-
-
-class LiteMeta(MetaCommon):
-    def __init__(self, meta: ILiteMeta, *, client: ClientManager) -> None:
-        super().__init__(meta, client=client)
-
-        self.__lite_meta: ILiteMeta = meta
-
-    @property
-    def description(self) -> str | None:
-        return self.__lite_meta["description"]
-
-    @property
-    def disable_registration(self) -> bool:
-        return self.__lite_meta["disable_registration"]
-
-    @property
-    def feedback_url(self) -> str:
-        return self.__lite_meta["feedback_url"]
-
-    @property
-    def maintainer_email(self) -> str | None:
-        return self.__lite_meta["maintainer_email"]
+class PartialMeta(AbstractModel, Generic[T]):
+    def __init__(self, raw_meta: T, *, client: ClientManager) -> None:
+        self._raw_meta: T = raw_meta
+        self.__client: ClientManager = client
 
     @property
     def maintainer_name(self) -> str | None:
-        return self.__lite_meta["maintainer_name"]
+        return self._raw_meta["maintainer_name"]
 
     @property
-    def name(self) -> str | None:
-        return self.__lite_meta["name"]
-
-    @property
-    def repository_url(self) -> str:
-        return self.__lite_meta["repository_url"]
-
-    @property
-    def tos_url(self) -> str | None:
-        return self.__lite_meta["tos_url"]
-
-    @property
-    def uri(self) -> str:
-        return self.__lite_meta["uri"]
+    def maintainer_email(self) -> str | None:
+        return self._raw_meta["maintainer_email"]
 
     @property
     def version(self) -> str:
-        return self.__lite_meta["version"]
+        return self._raw_meta["version"]
 
-    # v12のMeta
+    @property
+    def name(self) -> str | None:
+        return self._raw_meta["name"]
+
+    @property
+    def short_name(self) -> str | None:
+        return self._raw_meta["short_name"]
+
+    @property
+    def uri(self) -> str:
+        return self._raw_meta["uri"]
+
+    @property
+    def description(self) -> str | None:
+        return self._raw_meta["description"]
+
+    @property
+    def langs(self) -> list[str]:
+        return self._raw_meta["langs"]
+
+    @property
+    def tos_url(self) -> str:
+        return self._raw_meta["tos_url"]
+
+    @property
+    def repository_url(self) -> str:
+        return self._raw_meta["repository_url"]
+
+    @property
+    def feedback_url(self) -> str:
+        return self._raw_meta["feedback_url"]
+
+    @property
+    def disable_registration(self) -> bool:
+        return self._raw_meta["disable_registration"]
+
+    @property
+    def email_required_for_signup(self) -> bool:
+        return self._raw_meta["email_required_for_signup"]
+
+    @property
+    def enable_hcaptcha(self) -> bool:
+        return self._raw_meta["enable_hcaptcha"]
+
+    @property
+    def hcaptcha_site_key(self) -> str | None:
+        return self._raw_meta["hcaptcha_site_key"]
+
+    @property
+    def enable_recaptcha(self) -> bool:
+        return self._raw_meta["enable_recaptcha"]
+
+    @property
+    def recaptcha_site_key(self) -> str:
+        return self._raw_meta["recaptcha_site_key"]
+
+    @property
+    def enable_turnstile(self) -> bool:
+        return self._raw_meta["enable_turnstile"]
+
+    @property
+    def turnstile_site_key(self) -> str:
+        return self._raw_meta["turnstile_site_key"]
+
+    @property
+    def sw_publickey(self) -> str | None:
+        return self._raw_meta["sw_publickey"]
+
+    @property
+    def theme_color(self) -> str:
+        return self._raw_meta["theme_color"]
+
+    @property
+    def mascot_image_url(self) -> str:
+        return self._raw_meta["mascot_image_url"]
+
+    @property
+    def banner_url(self) -> str | None:
+        return self._raw_meta["banner_url"]
+
+    @property
+    def info_image_url(self) -> str | None:
+        return self._raw_meta["info_image_url"]
+
+    @property
+    def server_error_image_url(self) -> str | None:
+        return self._raw_meta["server_error_image_url"]
+
+    @property
+    def not_found_image_url(self) -> str | None:
+        return self._raw_meta["not_found_image_url"]
+
+    @property
+    def icon_url(self) -> str | None:
+        return self._raw_meta["icon_url"]
 
     @property
     def background_image_url(self) -> str | None:
-        return self.__lite_meta.get("background_image_url")
-
-    @property
-    def default_dark_theme(self) -> str | None:
-        return self.__lite_meta.get("default_dark_theme")
-
-    @property
-    def default_light_theme(self) -> str | None:
-        return self.__lite_meta.get("default_light_theme")
+        return self._raw_meta["background_image_url"]
 
     @property
     def logo_image_url(self) -> str | None:
-        return self.__lite_meta.get("logo_image_url")
+        return self._raw_meta["logo_image_url"]
 
     @property
-    def theme_color(self) -> str | None:
-        return self.__lite_meta.get("theme_color")
-
-    # v11のMeta
+    def max_note_text_length(self) -> int:
+        return self._raw_meta["max_note_text_length"]
 
     @property
-    def announcements(self) -> list[IMetaAnnouncement] | None:  # TODO: 型確認
-        return self.__lite_meta.get("announcements", None)
+    def default_light_theme(self) -> str | None:
+        return self._raw_meta["default_light_theme"]
 
     @property
-    def cpu(self) -> CPU | None:
-        return CPU(self.__lite_meta["cpu"]) if "cpu" in self.__lite_meta else None
+    def default_dark_theme(self) -> str | None:
+        return self._raw_meta["default_dark_theme"]
 
     @property
-    def disable_local_timeline(self) -> bool:
-        return self.__lite_meta.get("disable_local_timeline", False)
+    def ads(self) -> list[PartialAd]:
+        return [PartialAd(raw_ad, client=self.__client) for raw_ad in self._raw_meta["ads"]]
 
     @property
-    def disable_global_timeline(self) -> bool:
-        return self.__lite_meta.get("disable_global_timeline", False)
+    def enable_email(self) -> bool:
+        return self._raw_meta["enable_email"]
 
     @property
-    def enable_emoji_reaction(self) -> bool:
-        return self.__lite_meta.get("enable_emoji_reaction", False)
+    def enable_service_worker(self) -> bool:
+        return self._raw_meta["enable_service_worker"]
 
     @property
-    def machine(self) -> str | None:
-        return self.__lite_meta.get("machine")
+    def translator_available(self) -> bool:
+        return self._raw_meta["translator_available"]
 
     @property
-    def node(self) -> str | None:
-        return self.__lite_meta.get("node")
+    def server_rules(self) -> list[str]:
+        return self._raw_meta["server_rules"]
 
     @property
-    def os(self) -> str | None:
-        return self.__lite_meta.get("os")
+    def policies(self) -> IPolicies:
+        return self._raw_meta["policies"]
 
     @property
-    def proxy_account(self) -> str | None:
-        return self.__lite_meta.get("proxy_account")
-
-    @property
-    def proxy_remote_files(self) -> bool:
-        return self.__lite_meta.get("proxy_remote_files", False)
-
-    @property
-    def psql(self) -> str | None:
-        return self.__lite_meta.get("psql")
-
-    @property
-    def redis(self) -> str | None:
-        return self.__lite_meta.get("redis")
-
-    @property
-    def secure(self) -> bool:
-        return self.__lite_meta.get("secure", False)
-
-    @property
-    def summaly_proxy(self) -> str | None:
-        return self.__lite_meta.get("summaly_proxy")
-
-    @property
-    def tos_text_url(self) -> str | None:
-        return self.__lite_meta.get("tos_text_url")
-
-    @property
-    def turnstile_secret_key(self) -> str | None:
-        return self.__lite_meta.get("turnstile_secret_key")
+    def media_proxy(self) -> str:
+        return self._raw_meta["media_proxy"]

@@ -4,11 +4,11 @@ from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.config import config
-from mipac.errors.base import NotSupportVersion, NotSupportVersionText, ParameterError
+from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.admin import IndexStat, ModerationLog, ServerInfo, UserIP
-from mipac.models.meta import AdminMeta
 from mipac.models.user import MeDetailed, UserDetailed
+from mipac.models.meta import AdminMeta
 from mipac.types.admin import IIndexStat, IModerationLog, IServerInfo, ITableStats, IUserIP
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
 from mipac.types.user import IMeDetailed, IUserDetailed, is_me_detailed
@@ -44,8 +44,6 @@ class AdminActions(AbstractAction):
         )
 
     async def update_user_note(self, user_id: str, text: str) -> bool:
-        if config.use_version < 12:
-            raise NotSupportVersion(NotSupportVersionText)
         body = {"userId": user_id, "text": text}
         return bool(
             await self.__session.request(
@@ -153,9 +151,6 @@ class AdminActions(AbstractAction):
         until_id: str | None = None,
         get_all: bool = False,
     ) -> AsyncGenerator[ModerationLog, None]:
-        if config.use_version < 12:
-            raise NotSupportVersion(NotSupportVersionText)
-
         if limit > 100:
             raise ParameterError("limit must be less than 100")
 
@@ -191,9 +186,6 @@ class AdminActions(AbstractAction):
         )
 
     async def resolve_abuse_user_report(self, report_id: str, forward: bool = False) -> bool:
-        if config.use_version < 12:
-            raise NotSupportVersion(NotSupportVersionText)
-
         body = {"reportId": report_id, "forward": forward}
         return bool(
             await self.__session.request(
@@ -228,9 +220,6 @@ class AdminActions(AbstractAction):
         return [IndexStat(i) for i in res]
 
     async def get_user_ips(self, user_id: str) -> list[UserIP]:
-        if config.use_version < 12:
-            raise NotSupportVersion(NotSupportVersionText)
-
         res: list[IUserIP] = await self.__session.request(
             Route("POST", "/api/admin/get-user-ips"),
             auth=True,
