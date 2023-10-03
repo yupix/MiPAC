@@ -21,8 +21,6 @@ class PartialCustomEmoji(AbstractModel):
 
     @property
     def url(self) -> str | None:
-        if config.use_version == 13:
-            protocol = "https" if config.is_ssl else "http"
-            url = f"{protocol}://{config.host}/emoji/{self.name}.webp"
-            return url
-        return self.__emoji.get("url")
+        protocol = "https" if config.is_ssl else "http"
+        url = f"{protocol}://{config.host}/emoji/{self.name}.webp"
+        return url

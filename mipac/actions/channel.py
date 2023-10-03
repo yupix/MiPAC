@@ -36,10 +36,6 @@ class ClientChannelActions(AbstractAction):
         bool
             True if success else False
         """
-
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         channel_id = self._channel_id or channel_id
         if channel_id is None:
             raise Exception()
@@ -64,9 +60,6 @@ class ClientChannelActions(AbstractAction):
         bool
             True if success else False
         """
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         channel_id = self._channel_id or channel_id
         if channel_id is None:
             raise Exception()
@@ -91,9 +84,6 @@ class ClientChannelActions(AbstractAction):
         bool
             True if success else False
         """
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         channel_id = self._channel_id or channel_id
         if channel_id is None:
             raise ParameterError("required channel_id")
@@ -118,9 +108,6 @@ class ClientChannelActions(AbstractAction):
         bool
             True if success else False
         """
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         channel_id = self._channel_id or channel_id
         if channel_id is None:
             raise ParameterError("required channel_id")
@@ -167,10 +154,6 @@ class ClientChannelActions(AbstractAction):
         Channel
             Channel
         """
-
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         channel_id = self._channel_id or channel_id
         if channel_id is None:
             raise ParameterError("required channel_id")
@@ -204,9 +187,6 @@ class ClientChannelActions(AbstractAction):
         Channel
             Channel
         """
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         channel_id = self._channel_id or channel_id
         if channel_id is None:
             raise ParameterError("required channel_id")
@@ -229,9 +209,6 @@ class ClientChannelActions(AbstractAction):
         Channel
             Channel
         """
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         channel_id = self._channel_id or channel_id
         if channel_id is None:
             raise ParameterError("required channel_id")
@@ -273,9 +250,6 @@ class ChannelActions(ClientChannelActions):
         Channel
             ChannelLite
         """
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         body = {"name": name, "description": description, "bannerId": banner_id, "color": color}
         res: IChannel = await self._session.request(
             Route("POST", "/api/channels/create"), auth=True, json=body
@@ -292,10 +266,6 @@ class ChannelActions(ClientChannelActions):
         list[Channel]
             Channel
         """
-
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         res: list[IChannel] = await self._session.request(
             Route("POST", "/api/channels/featured"), auth=True
         )
@@ -328,9 +298,6 @@ class ChannelActions(ClientChannelActions):
         AsyncGenerator[Channel, None]
             Channel
         """
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         if limit > 100:
             raise ParameterError("limit must be less than 100")
 
@@ -371,10 +338,6 @@ class ChannelActions(ClientChannelActions):
         AsyncGenerator[Channel, None]
             Channel
         """
-
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         body = {"sinceId": since_id, "untilId": until_id}
 
         pagination = Pagination[IChannel](
@@ -403,9 +366,6 @@ class ChannelActions(ClientChannelActions):
         Channel
             Channel
         """
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         res: IChannel = await self._session.request(
             Route("POST", "/api/channels/show"), auth=True, json={"channelId": channel_id}
         )
@@ -420,9 +380,6 @@ class ChannelActions(ClientChannelActions):
         list[Channel]
             Channel
         """
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         res: list[IChannel] = await self._session.request(
             Route("POST", "/api/channels/my-favorites"), auth=True
         )
@@ -460,10 +417,6 @@ class ChannelActions(ClientChannelActions):
         AsyncGenerator[Channel, None]
             Channel
         """
-
-        if self._client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         if limit > 100:
             raise ParameterError("limit must be less than 100")
 

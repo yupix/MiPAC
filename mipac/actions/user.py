@@ -342,10 +342,6 @@ class UserActions:
 
     async def get_achievements(self, user_id: str | None = None) -> list[Achievement]:
         """Get achievements of user."""
-
-        if config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
-
         user_id = user_id or self.__user and self.__user.id
 
         if not user_id:

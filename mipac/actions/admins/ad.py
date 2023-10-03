@@ -51,9 +51,6 @@ class AdminAdvertisingModelActions(AbstractAction):
         return res
 
     async def delete(self, id: str | None = None) -> bool:
-        if self._client._config.use_version < 12:
-            raise NotSupportVersion(NotSupportVersionText)
-
         ad_id = self._ad_id or id
         res: bool = await self._session.request(
             Route("POST", "/api/admin/ad/delete"), json={"id": ad_id}, auth=True, lower=True
@@ -76,9 +73,6 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
         expires_at: int = 0,
         memo: str | None = None,
     ) -> bool:
-        if self._client._config.use_version < 12:
-            raise NotSupportVersion(NotSupportVersionText)
-
         data = {
             "url": url,
             "memo": memo or "",
@@ -101,9 +95,6 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
         until_id: str | None = None,
         get_all: bool = False,
     ) -> AsyncGenerator[Ad, None]:
-        if self._client._config.use_version < 12:
-            raise NotSupportVersion(NotSupportVersionText)
-
         if limit > 100:
             raise ParameterError("limitは100以下である必要があります")
 

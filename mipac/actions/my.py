@@ -44,8 +44,6 @@ class MyActions(AbstractAction):
         NotSupportVersion
             実績機能が存在しないサーバーを使用している
         """
-        if self.__client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
         res: bool = await self.__session.request(
             Route("POST", "/api/i/claim-achievement"), auth=True, json={"name": name}, lower=True
         )
