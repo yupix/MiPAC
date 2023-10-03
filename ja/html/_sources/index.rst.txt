@@ -301,15 +301,6 @@ Meta
     :members:
 
 
-Policies
-~~~~~~~~
-
-.. attributetable:: mipac.models.meta.Policies
-
-.. autoclass:: mipac.models.meta.Policies
-    :members:
-
-
 File
 ~~~~
 
@@ -454,24 +445,6 @@ PartialInviteCode
     :members:
 
 
-ChatGroup
-~~~~~~~~~
-
-.. attributetable:: mipac.models.chat.ChatGroup
-
-.. autoclass:: mipac.models.chat.ChatGroup
-    :members:
-
-
-ChatMessage
-~~~~~~~~~~~
-
-.. attributetable:: mipac.models.chat.ChatMessage
-
-.. autoclass:: mipac.models.chat.ChatMessage
-    :members:
-
-
 CustomEmoji
 ~~~~~~~~~~~
 
@@ -589,30 +562,21 @@ PartialNote
     :members:
 
 
-CPU
-~~~
+PartialMeta
+~~~~~~~~~~~
 
-.. attributetable:: mipac.models.lite.meta.CPU
+.. attributetable:: mipac.models.lite.meta.PartialMeta
 
-.. autoclass:: mipac.models.lite.meta.CPU
+.. autoclass:: mipac.models.lite.meta.PartialMeta
     :members:
 
 
-LiteMeta
+Policies
 ~~~~~~~~
 
-.. attributetable:: mipac.models.lite.meta.LiteMeta
+.. attributetable:: mipac.models.lite.meta.Policies
 
-.. autoclass:: mipac.models.lite.meta.LiteMeta
-    :members:
-
-
-MetaCommon
-~~~~~~~~~~
-
-.. attributetable:: mipac.models.lite.meta.MetaCommon
-
-.. autoclass:: mipac.models.lite.meta.MetaCommon
+.. autoclass:: mipac.models.lite.meta.Policies
     :members:
 
 
@@ -631,6 +595,15 @@ PartialCustomEmoji
 .. attributetable:: mipac.models.lite.emoji.PartialCustomEmoji
 
 .. autoclass:: mipac.models.lite.emoji.PartialCustomEmoji
+    :members:
+
+
+PartialAd
+~~~~~~~~~
+
+.. attributetable:: mipac.models.lite.ad.PartialAd
+
+.. autoclass:: mipac.models.lite.ad.PartialAd
     :members:
 Managers
 --------
@@ -821,15 +794,6 @@ RoleManager
 .. attributetable:: mipac.manager.role.RoleManager
 
 .. autoclass:: mipac.manager.role.RoleManager
-    :members:
-
-
-ChatManager
-~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.chat.ChatManager
-
-.. autoclass:: mipac.manager.chat.ChatManager
     :members:
 
 
@@ -1170,24 +1134,6 @@ RoleActions
 .. attributetable:: mipac.actions.role.RoleActions
 
 .. autoclass:: mipac.actions.role.RoleActions
-    :members:
-
-
-BaseChatAction
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.chat.BaseChatAction
-
-.. autoclass:: mipac.actions.chat.BaseChatAction
-    :members:
-
-
-ChatAction
-~~~~~~~~~~
-
-.. attributetable:: mipac.actions.chat.ChatAction
-
-.. autoclass:: mipac.actions.chat.ChatAction
     :members:
 
 
@@ -1624,12 +1570,12 @@ IAd
     :members:
 
 
-IAds
-~~~~
+IPartialAd
+~~~~~~~~~~
 
-.. attributetable:: mipac.types.ads.IAds
+.. attributetable:: mipac.types.ads.IPartialAd
 
-.. autoclass:: mipac.types.ads.IAds
+.. autoclass:: mipac.types.ads.IPartialAd
     :members:
 
 
@@ -1864,57 +1810,12 @@ IAdminMeta
     :members:
 
 
-ICPU
-~~~~
-
-.. attributetable:: mipac.types.meta.ICPU
-
-.. autoclass:: mipac.types.meta.ICPU
-    :members:
-
-
-ICommonV11
-~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.ICommonV11
-
-.. autoclass:: mipac.types.meta.ICommonV11
-    :members:
-
-
 IFeatures
 ~~~~~~~~~
 
 .. attributetable:: mipac.types.meta.IFeatures
 
 .. autoclass:: mipac.types.meta.IFeatures
-    :members:
-
-
-ILiteMeta
-~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.ILiteMeta
-
-.. autoclass:: mipac.types.meta.ILiteMeta
-    :members:
-
-
-ILiteV11Meta
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.ILiteV11Meta
-
-.. autoclass:: mipac.types.meta.ILiteV11Meta
-    :members:
-
-
-ILiteV12Meta
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.ILiteV12Meta
-
-.. autoclass:: mipac.types.meta.ILiteV12Meta
     :members:
 
 
@@ -1927,30 +1828,12 @@ IMeta
     :members:
 
 
-IMetaAnnouncement
-~~~~~~~~~~~~~~~~~
+IPartialMeta
+~~~~~~~~~~~~
 
-.. attributetable:: mipac.types.meta.IMetaAnnouncement
+.. attributetable:: mipac.types.meta.IPartialMeta
 
-.. autoclass:: mipac.types.meta.IMetaAnnouncement
-    :members:
-
-
-IMetaCommon
-~~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IMetaCommon
-
-.. autoclass:: mipac.types.meta.IMetaCommon
-    :members:
-
-
-IMetaCommonV12
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IMetaCommonV12
-
-.. autoclass:: mipac.types.meta.IMetaCommonV12
+.. autoclass:: mipac.types.meta.IPartialMeta
     :members:
 
 
@@ -1963,57 +1846,12 @@ IPolicies
     :members:
 
 
-ISharedAdminMeta
-~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.ISharedAdminMeta
-
-.. autoclass:: mipac.types.meta.ISharedAdminMeta
-    :members:
-
-
 IUpdateMetaBody
 ~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.types.meta.IUpdateMetaBody
 
 .. autoclass:: mipac.types.meta.IUpdateMetaBody
-    :members:
-
-
-IV11Features
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IV11Features
-
-.. autoclass:: mipac.types.meta.IV11Features
-    :members:
-
-
-IV12AdminMeta
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IV12AdminMeta
-
-.. autoclass:: mipac.types.meta.IV12AdminMeta
-    :members:
-
-
-IV12Features
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IV12Features
-
-.. autoclass:: mipac.types.meta.IV12Features
-    :members:
-
-
-IV12Meta
-~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IV12Meta
-
-.. autoclass:: mipac.types.meta.IV12Meta
     :members:
 
 
@@ -2221,24 +2059,6 @@ IPartialInviteCode
 .. attributetable:: mipac.types.invite.IPartialInviteCode
 
 .. autoclass:: mipac.types.invite.IPartialInviteCode
-    :members:
-
-
-IChatGroup
-~~~~~~~~~~
-
-.. attributetable:: mipac.types.chat.IChatGroup
-
-.. autoclass:: mipac.types.chat.IChatGroup
-    :members:
-
-
-IChatMessage
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.chat.IChatMessage
-
-.. autoclass:: mipac.types.chat.IChatMessage
     :members:
 
 
