@@ -1,12 +1,15 @@
 from typing import Literal, TypedDict
 
 
-class IAds(TypedDict):
+IAdPlaces = Literal["square" "horizontal" "horizontal-big"]
+
+class IPartialAd(TypedDict):
     id: str
-    ratio: int
-    place: str
     url: str
+    place: IAdPlaces
+    ratio: int
     image_url: str
+    day_of_week: int
 
 
 class IAd(TypedDict):
