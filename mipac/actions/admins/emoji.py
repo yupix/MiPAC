@@ -23,51 +23,31 @@ class AdminEmojiActions(AbstractAction):
 
     async def add(
         self,
+        name: str,
         file_id: str | None = None,
         *,
-        name: str | None = None,
-        url: str | None = None,
         category: str | None = None,
         aliases: list[str] | None = None,
+        license: str | None = None,
+        is_sensitive: bool = False,
+        local_only: bool = False,
+        role_ids_that_can_be_used_this_emoji_as_reaction: list[str] | None = None,
+        
     ) -> bool:
-        """絵文字を追加します
+        data = {
+            "fileId": file_id,
+            "name": name,
+            "category": category,
+            "aliases": aliases,
+            "license": license,
+            "isSensitive": is_sensitive,
+            "localOnly": local_only,
+            "roleIdsThatCanBeUsedThisEmojiAsReaction": role_ids_that_can_be_used_this_emoji_as_reaction,
+        }
 
-        Parameters
-        ----------
-        file_id : str | None, optional
-            追加する絵文字のファイルId, by default None
-        name : str | None, optional
-            絵文字名, by default None
-        url : str | None, optional
-            絵文字があるUrl, by default None
-        category : str | None, optional
-            絵文字のカテゴリー, by default None
-        aliases : list[str] | None, optional
-            絵文字のエイリアス, by default None
+        if not check_multi_arg(file_id, name):
+            raise NotExistRequiredData("required a file_id or name")
 
-        Returns
-        -------
-        bool
-            成功したかどうか
-
-        Raises
-        ------
-        NotExistRequiredData
-            必要なデータが不足している
-        """
-
-        if self.__client._config.use_version >= 12:
-            data = {"fileId": file_id}
-        else:
-            data = {
-                "name": name,
-                "url": url,
-                "category": category,
-                "aliases": aliases,
-            }
-
-        if not check_multi_arg(file_id, url):
-            raise NotExistRequiredData("required a file_id or url")
         return bool(
             await self.__session.request(
                 Route("POST", "/api/admin/emoji/add"),
@@ -179,15 +159,9 @@ class AdminEmojiActions(AbstractAction):
         if emoji_id is None:
             raise NotExistRequiredData("idが不足しています")
 
-        endpoint = (
-            "/api/admin/emoji/delete"
-            if self.__client._config.use_version >= 12
-            else "/api/admin/emoji/remove"
-        )
-
         return bool(
             await self.__session.request(
-                Route("POST", endpoint),
+                Route("POST", "/api/admin/emoji/delete"),
                 auth=True,
                 json={"id": emoji_id},
                 lower=True,
