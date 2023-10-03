@@ -1,7 +1,7 @@
 from typing import Literal, TypedDict
 
-
 IAdPlaces = Literal["square" "horizontal" "horizontal-big"]
+
 
 class IPartialAd(TypedDict):
     id: str

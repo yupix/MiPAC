@@ -32,7 +32,6 @@ class AdminEmojiActions(AbstractAction):
         is_sensitive: bool = False,
         local_only: bool = False,
         role_ids_that_can_be_used_this_emoji_as_reaction: list[str] | None = None,
-        
     ) -> bool:
         data = {
             "fileId": file_id,
@@ -42,7 +41,7 @@ class AdminEmojiActions(AbstractAction):
             "license": license,
             "isSensitive": is_sensitive,
             "localOnly": local_only,
-            "roleIdsThatCanBeUsedThisEmojiAsReaction": role_ids_that_can_be_used_this_emoji_as_reaction,
+            "roleIdsThatCanBeUsedThisEmojiAsReaction": role_ids_that_can_be_used_this_emoji_as_reaction,  # noqa: E501
         }
 
         if not check_multi_arg(file_id, name):

@@ -3,8 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
-from mipac.config import config
-from mipac.errors.base import NotSupportVersion
 from mipac.http import Route
 from mipac.models.emoji import CustomEmoji
 from mipac.models.note import NoteReaction

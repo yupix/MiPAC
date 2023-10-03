@@ -2,8 +2,9 @@ from typing import Any, Literal, NotRequired, TypedDict
 
 from mipac.types.ads import IPartialAd
 
-ISensitiveMediaDetectionSentivity = Literal['medium', 'low', 'high', 'veryLow', 'veryHigh']
-ISensitiveMediaDetection = Literal['none', 'all', 'local', 'remote']
+ISensitiveMediaDetectionSentivity = Literal["medium", "low", "high", "veryLow", "veryHigh"]
+ISensitiveMediaDetection = Literal["none", "all", "local", "remote"]
+
 
 class IFeatures(TypedDict):
     registration: bool
@@ -99,7 +100,7 @@ class IAdminMeta(TypedDict):  # IMetaに含まれる物が多くあるけど、�
     name: str | None
     short_name: str | None
     uri: str
-    description: str |None
+    description: str | None
     langs: list[str]
     tos_url: str
     repository_url: str
@@ -116,13 +117,13 @@ class IAdminMeta(TypedDict):  # IMetaに含まれる物が多くあるけど、�
     theme_color: str
     mascot_image_url: str
     banner_url: str | None
-    server_error_image_url: str  | None
+    server_error_image_url: str | None
     not_found_image_url: str | None
-    info_image_url: str  | None
+    info_image_url: str | None
     icon_url: str | None
     appint_icon_url: str | None
     appint_icon_url: str | None
-    background_image_url: str  | None
+    background_image_url: str | None
     logo_image_url: str | None
     default_light_theme: str | None
     default_dark_theme: str | None

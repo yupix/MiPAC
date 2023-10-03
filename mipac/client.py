@@ -1,6 +1,6 @@
 from typing import Self
 
-from mipac.config import Config, IMisskeyVersions, config
+from mipac.config import Config, config
 from mipac.http import HTTPClient
 from mipac.manager.client import ClientManager
 from mipac.utils.log import LOGING_LEVEL_TYPE, setup_logging

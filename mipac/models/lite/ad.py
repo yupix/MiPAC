@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, TypeVar, Generic
+from typing import TYPE_CHECKING, Generic, TypeVar
+
 from mipac.abstract.model import AbstractModel
-from mipac.types.ads import IPartialAd, IAdPlaces
+from mipac.types.ads import IAdPlaces, IPartialAd
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager

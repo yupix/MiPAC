@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Literal, TypeGuard, TypedDict, Any
-
+from typing import TYPE_CHECKING, Any, List, Literal, TypedDict, TypeGuard
 
 if TYPE_CHECKING:
     from mipac.types.announcement import IAnnouncement

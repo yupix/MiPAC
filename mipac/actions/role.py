@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, AsyncGenerator
 
-from mipac.config import config
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import NotSupportVersion
+from mipac.config import config
 from mipac.http import HTTPClient, Route
 from mipac.models.note import Note
 from mipac.models.roles import MeRole, Role, RoleUser

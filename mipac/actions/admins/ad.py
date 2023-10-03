@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator, Literal
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import NotSupportVersion, NotSupportVersionText, ParameterError
+from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.ad import Ad
 from mipac.types.ads import IAd

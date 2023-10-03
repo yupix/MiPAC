@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import NotSupportVersion, NotSupportVersionText
 from mipac.http import HTTPClient, Route
 from mipac.models.follow import FollowRequest
 from mipac.types.achievement import IT_ACHIEVEMENT_NAME

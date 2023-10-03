@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, NotRequired, TypeGuard, TypedDict
+from typing import TYPE_CHECKING, NotRequired, TypedDict, TypeGuard
 
 if TYPE_CHECKING:
     from mipac.types.user import IMeDetailed, IUserDetailed

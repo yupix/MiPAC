@@ -7,8 +7,8 @@ from mipac.config import config
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.admin import IndexStat, ModerationLog, ServerInfo, UserIP
-from mipac.models.user import MeDetailed, UserDetailed
 from mipac.models.meta import AdminMeta
+from mipac.models.user import MeDetailed, UserDetailed
 from mipac.types.admin import IIndexStat, IModerationLog, IServerInfo, ITableStats, IUserIP
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
 from mipac.types.user import IMeDetailed, IUserDetailed, is_me_detailed

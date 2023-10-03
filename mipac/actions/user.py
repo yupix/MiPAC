@@ -2,13 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, TypeVar, Union, overload
 
-from mipac.config import config
-from mipac.errors.base import (
-    NotExistRequiredData,
-    NotSupportVersion,
-    NotSupportVersionText,
-    ParameterError,
-)
+from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
 from mipac.models.note import Note

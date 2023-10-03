@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, AsyncGenerator, Literal
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import NotSupportVersion, NotSupportVersionText, ParameterError
+from mipac.errors.base import ParameterError
 from mipac.http import Route
 from mipac.models.roles import Role, RoleUser
 from mipac.types.meta import IPolicies

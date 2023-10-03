@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
-from mipac.manager.client import ClientManager
 from mipac.models.lite.meta import PartialMeta
 from mipac.types.meta import (
     IAdminMeta,
