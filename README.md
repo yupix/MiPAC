@@ -21,7 +21,7 @@ It absorbs API differences between versions, etc., which you don't have to worry
 > [!IMPORTANT]  
 > Extensive work is currently underway. Please see [here](https://github.com/yupix/MiPAC/issues/94) for more information.
 > If you are installing from GitHub for some reason, we recommend using the `shared` branch with the following command.
-> `pip install git+git+https://github.com/yupix/Mi.py.git@shared`
+> `pip install git+https://github.com/yupix/Mi.py.git@shared`
 
 ## Supported Misskey
 

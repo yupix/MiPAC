@@ -18,7 +18,7 @@ MiPACはMisskey v11, 12, 13をサポートしているApi Wrapperです。
 
 > 現在大規模な作業を行っています。詳細については[こちら](https://github.com/yupix/MiPAC/issues/94)を御覧ください。
 > GitHubから何らかの理由でインストールする場合は以下のコマンドで `shared` ブランチを使用することをおすすめします。
-> `pip install git+git+https://github.com/yupix/Mi.py.git@shared`
+> `pip install git+https://github.com/yupix/Mi.py.git@shared`
 
 ## サポートしているMisskey
 
