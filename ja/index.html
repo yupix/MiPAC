@@ -343,6 +343,14 @@
 <dd></dd></dl>
 
 </section>
+<section id="create-user-model">
+<h3>create_user_model<a class="headerlink" href="#create-user-model" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="mipac.models.user.create_user_model">
+<span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">create_user_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">IUser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.user.MeDetailed" title="mipac.models.user.MeDetailed"><span class="pre">MeDetailed</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.types.user.IMeDetailed" title="mipac.types.user.IMeDetailed"><span class="pre">IMeDetailed</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.user.UserDetailedNotLogined" title="mipac.models.user.UserDetailedNotLogined"><span class="pre">UserDetailedNotLogined</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.types.user.IUserDetailedNotLogined" title="mipac.types.user.IUserDetailedNotLogined"><span class="pre">IUserDetailedNotLogined</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.user.UserDetailed" title="mipac.models.user.UserDetailed"><span class="pre">UserDetailed</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.types.user.IUserDetailed" title="mipac.types.user.IUserDetailed"><span class="pre">IUserDetailed</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.user.UserDetailedModerator" title="mipac.models.user.UserDetailedModerator"><span class="pre">UserDetailedModerator</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.user.MeDetailedModerator" title="mipac.models.user.MeDetailedModerator"><span class="pre">MeDetailedModerator</span></a></span></span><a class="headerlink" href="#mipac.models.user.create_user_model" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="achievement">
 <h3>Achievement<a class="headerlink" href="#achievement" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.models.user.Achievement"></div><dl class="py class">
@@ -363,7 +371,15 @@
 <h3>MeDetailed<a class="headerlink" href="#medetailed" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.models.user.MeDetailed"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.user.MeDetailed">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">MeDetailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IMeDetailed" title="mipac.types.user.IMeDetailed"><span class="pre">IMeDetailed</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.MeDetailed" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">MeDetailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.MeDetailed" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="medetailedmoderator">
+<h3>MeDetailedModerator<a class="headerlink" href="#medetailedmoderator" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.models.user.MeDetailedModerator"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.models.user.MeDetailedModerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">MeDetailedModerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IMeDetailedModerator" title="mipac.types.user.IMeDetailedModerator"><span class="pre">IMeDetailedModerator</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.MeDetailedModerator" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -371,7 +387,23 @@
 <h3>UserDetailed<a class="headerlink" href="#userdetailed" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.models.user.UserDetailed"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.user.UserDetailed">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">UserDetailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.UserDetailed" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">UserDetailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">U</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.UserDetailed" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="userdetailedmoderator">
+<h3>UserDetailedModerator<a class="headerlink" href="#userdetailedmoderator" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.models.user.UserDetailedModerator"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.models.user.UserDetailedModerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">UserDetailedModerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IUserDetailedModerator" title="mipac.types.user.IUserDetailedModerator"><span class="pre">IUserDetailedModerator</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.UserDetailedModerator" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="userdetailednotlogined">
+<h3>UserDetailedNotLogined<a class="headerlink" href="#userdetailednotlogined" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.models.user.UserDetailedNotLogined"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.models.user.UserDetailedNotLogined">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">UserDetailedNotLogined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.UserDetailedNotLogined" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -781,7 +813,7 @@ Attributes</span><ul>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="mipac.models.clip.Clip.user">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser"><span class="pre">LiteUser</span></a></em><a class="headerlink" href="#mipac.models.clip.Clip.user" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></em><a class="headerlink" href="#mipac.models.clip.Clip.user" title="Link to this definition">#</a></dt>
 <dd><p>The user who created the clip</p>
 </dd></dl>
 
@@ -812,52 +844,128 @@ Attributes</span><ul>
 </section>
 <section id="badgerole">
 <h3>BadgeRole<a class="headerlink" href="#badgerole" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.models.lite.user.BadgeRole"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.models.lite.user.BadgeRole">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.lite.user.</span></span><span class="sig-name descname"><span class="pre">BadgeRole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.lite.user.BadgeRole" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="liteuser">
-<h3>LiteUser<a class="headerlink" href="#liteuser" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.models.lite.user.LiteUser"><div class="py-attribute-table-column">
+<div class="py-attribute-table" data-move-to-id="mipac.models.lite.user.BadgeRole"><div class="py-attribute-table-column">
 <span>
 Attributes</span><ul>
 <li class="py-attribute-table-entry">
-<a class="reference internal" href="#mipac.models.lite.user.LiteUser.avatar_color">avatar_color</a></li><li class="py-attribute-table-entry">
-<a class="reference internal" href="#mipac.models.lite.user.LiteUser.emojis">emojis</a></li></ul>
+<a class="reference internal" href="#mipac.models.lite.user.BadgeRole.display_order">display_order</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.BadgeRole.icon_url">icon_url</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.BadgeRole.name">name</a></li></ul>
 </div></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.models.lite.user.LiteUser">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.lite.user.</span></span><span class="sig-name descname"><span class="pre">LiteUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">LUT</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.lite.user.LiteUser" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="mipac.models.lite.user.BadgeRole">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.lite.user.</span></span><span class="sig-name descname"><span class="pre">BadgeRole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.lite.user.BadgeRole" title="Link to this definition">#</a></dt>
 <dd><dl class="py property">
-<dt class="sig sig-object py" id="mipac.models.lite.user.LiteUser.avatar_color">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">avatar_color</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.lite.user.LiteUser.avatar_color" title="Link to this definition">#</a></dt>
-<dd><p>Returns the average color of the avatar.
-Note: Since avatar_color is deprecated in v13,
-only None is returned for v13 instances.</p>
-<dl class="field-list simple">
-<dt class="field-odd">戻り値<span class="colon">:</span></dt>
-<dd class="field-odd"><p>average color of the avatar</p>
-</dd>
-<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p>str | None</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="mipac.models.lite.user.BadgeRole.display_order">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">display_order</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mipac.models.lite.user.BadgeRole.display_order" title="Link to this definition">#</a></dt>
+<dd><p>Returns the display order of the badge role.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="mipac.models.lite.user.LiteUser.emojis">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">emojis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.types.emoji.ICustomEmojiLite" title="mipac.types.emoji.ICustomEmojiLite"><span class="pre">ICustomEmojiLite</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.lite.user.LiteUser.emojis" title="Link to this definition">#</a></dt>
-<dd><p>List of emoji included in nicknames, etc
-Note: emojis have been abolished since misskey v13</p>
-<dl class="field-list simple">
-<dt class="field-odd">戻り値<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List of emoji included in nicknames, etc</p>
-</dd>
-<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="#mipac.types.emoji.ICustomEmojiLite" title="mipac.types.emoji.ICustomEmojiLite">ICustomEmojiLite</a>]</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="mipac.models.lite.user.BadgeRole.icon_url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon_url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.lite.user.BadgeRole.icon_url" title="Link to this definition">#</a></dt>
+<dd><p>Returns the icon url of the badge role.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.BadgeRole.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.lite.user.BadgeRole.name" title="Link to this definition">#</a></dt>
+<dd><p>Returns the name of the badge role.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="partialuser">
+<h3>PartialUser<a class="headerlink" href="#partialuser" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.models.lite.user.PartialUser"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.avatar_blurhash">avatar_blurhash</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.avatar_url">avatar_url</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.badge_roles">badge_roles</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.emojis">emojis</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.host">host</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.id">id</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.instance">instance</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.is_bot">is_bot</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.is_cat">is_cat</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.nickname">nickname</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.online_status">online_status</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.username">username</a></li></ul>
+</div></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.lite.user.</span></span><span class="sig-name descname"><span class="pre">PartialUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PU</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.lite.user.PartialUser" title="Link to this definition">#</a></dt>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.avatar_blurhash">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">avatar_blurhash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.avatar_blurhash" title="Link to this definition">#</a></dt>
+<dd><p>Returns the avatar blurhash of the user.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.avatar_url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">avatar_url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.avatar_url" title="Link to this definition">#</a></dt>
+<dd><p>Returns the avatar url of the user.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.badge_roles">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">badge_roles</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.lite.user.BadgeRole" title="mipac.models.lite.user.BadgeRole"><span class="pre">BadgeRole</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.badge_roles" title="Link to this definition">#</a></dt>
+<dd><p>Returns the badge roles of the user.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.emojis">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">emojis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.emojis" title="Link to this definition">#</a></dt>
+<dd><p>Returns the emojis of the user.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.host">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">host</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.host" title="Link to this definition">#</a></dt>
+<dd><p>Returns the host of the user.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.id" title="Link to this definition">#</a></dt>
+<dd><p>Returns the id of the user.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.instance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.lite.instance.LiteInstance" title="mipac.models.lite.instance.LiteInstance"><span class="pre">LiteInstance</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.instance" title="Link to this definition">#</a></dt>
+<dd><p>Returns the instance of the user.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.is_bot">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_bot</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.is_bot" title="Link to this definition">#</a></dt>
+<dd><p>Returns whether the user is a bot.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.is_cat">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_cat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.is_cat" title="Link to this definition">#</a></dt>
+<dd><p>Returns whether the user is a cat.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.nickname">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nickname</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.nickname" title="Link to this definition">#</a></dt>
+<dd><p>Returns the nickname of the user.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.online_status">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">online_status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'online'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'active'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'offline'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'unknown'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.online_status" title="Link to this definition">#</a></dt>
+<dd><p>Returns the online status of the user.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.username">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.lite.user.PartialUser.username" title="Link to this definition">#</a></dt>
+<dd><p>Returns the username of the user.</p>
 </dd></dl>
 
 </dd></dl>
@@ -939,10 +1047,77 @@ Attributes</span><ul>
 </section>
 <section id="policies">
 <h3>Policies<a class="headerlink" href="#policies" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.models.lite.meta.Policies"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.models.lite.meta.Policies"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.meta.Policies.can_edit_note">can_edit_note</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.meta.Policies.can_hide_ads">can_hide_ads</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.meta.Policies.can_invite">can_invite</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.meta.Policies.can_manage_custom_emojis">can_manage_custom_emojis</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.meta.Policies.can_public_note">can_public_note</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.meta.Policies.can_search_notes">can_search_notes</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.meta.Policies.can_use_translator">can_use_translator</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.meta.Policies.gtl_available">gtl_available</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.meta.Policies.ltl_available">ltl_available</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.lite.meta.Policies">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.lite.meta.</span></span><span class="sig-name descname"><span class="pre">Policies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_policies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.meta.IPolicies" title="mipac.types.meta.IPolicies"><span class="pre">IPolicies</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.lite.meta.Policies" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.meta.Policies.can_edit_note">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_edit_note</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.meta.Policies.can_edit_note" title="Link to this definition">#</a></dt>
+<dd><p>Whether you can edit a note</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.meta.Policies.can_hide_ads">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_hide_ads</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.meta.Policies.can_hide_ads" title="Link to this definition">#</a></dt>
+<dd><p>Whether you can hide ads</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.meta.Policies.can_invite">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_invite</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.meta.Policies.can_invite" title="Link to this definition">#</a></dt>
+<dd><p>Whether you can invite</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.meta.Policies.can_manage_custom_emojis">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_manage_custom_emojis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.meta.Policies.can_manage_custom_emojis" title="Link to this definition">#</a></dt>
+<dd><p>Whether you can manage custom emojis</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.meta.Policies.can_public_note">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_public_note</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.meta.Policies.can_public_note" title="Link to this definition">#</a></dt>
+<dd><p>Whether you can post a public note</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.meta.Policies.can_search_notes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_search_notes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.meta.Policies.can_search_notes" title="Link to this definition">#</a></dt>
+<dd><p>Whether you can search note</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.meta.Policies.can_use_translator">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_use_translator</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.meta.Policies.can_use_translator" title="Link to this definition">#</a></dt>
+<dd><p>Whether you can use translator</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.meta.Policies.gtl_available">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gtl_available</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.meta.Policies.gtl_available" title="Link to this definition">#</a></dt>
+<dd><p>Whether GTL is effective</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.meta.Policies.ltl_available">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ltl_available</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.lite.meta.Policies.ltl_available" title="Link to this definition">#</a></dt>
+<dd><p>Whether LTL is effective</p>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="liteinstance">
@@ -1075,7 +1250,7 @@ Attributes</span><ul>
 <a class="reference internal" href="#mipac.manager.user.UserManager.action">action</a></li></ul>
 </div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.manager.user.UserManager">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.user.</span></span><span class="sig-name descname"><span class="pre">UserManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser"><span class="pre">LiteUser</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.user.UserManager" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.user.</span></span><span class="sig-name descname"><span class="pre">UserManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.user.UserManager" title="Link to this definition">#</a></dt>
 <dd><dl class="py property">
 <dt class="sig sig-object py" id="mipac.manager.user.UserManager.action">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">action</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.actions.user.UserActions" title="mipac.actions.user.UserActions"><span class="pre">UserActions</span></a></em><a class="headerlink" href="#mipac.manager.user.UserManager.action" title="Link to this definition">#</a></dt>
@@ -1814,7 +1989,7 @@ def</span><a class="reference internal" href="#mipac.actions.user.UserActions.se
 async</span><a class="reference internal" href="#mipac.actions.user.UserActions.search_by_username_and_host">search_by_username_and_host</a></li></ul>
 </div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.user.UserActions">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.user.</span></span><span class="sig-name descname"><span class="pre">UserActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser"><span class="pre">LiteUser</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.user.UserActions" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.user.</span></span><span class="sig-name descname"><span class="pre">UserActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.user.UserActions" title="Link to this definition">#</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.user.UserActions.fetch">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fetch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.user.UserDetailed" title="mipac.models.user.UserDetailed"><span class="pre">UserDetailed</span></a></span></span><a class="headerlink" href="#mipac.actions.user.UserActions.fetch" title="Link to this definition">#</a></dt>
@@ -1853,7 +2028,7 @@ which may increase the number of server accesses.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.user.UserActions.get_mention">
-<span class="sig-name descname"><span class="pre">get_mention</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser"><span class="pre">LiteUser</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mipac.actions.user.UserActions.get_mention" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_mention</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mipac.actions.user.UserActions.get_mention" title="Link to this definition">#</a></dt>
 <dd><p>Get mention name of user.</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
@@ -1870,7 +2045,7 @@ which may increase the number of server accesses.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.user.UserActions.search">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'local'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'remote'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'combined'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'combined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="k"><span class="pre">False</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_all</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser"><span class="pre">LiteUser</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.user.UserActions.search" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'local'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'remote'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'combined'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'combined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="k"><span class="pre">False</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_all</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.user.UserActions.search" title="Link to this definition">#</a></dt>
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'local'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'remote'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'combined'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'combined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="k"><span class="pre">True</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_all</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.user.UserDetailed" title="mipac.models.user.UserDetailed"><span class="pre">UserDetailed</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span></dt>
 <dd><p>Search users by keyword.</p>
@@ -1889,14 +2064,14 @@ which may increase the number of server accesses.</p>
 <dd class="field-even"><p>A AsyncGenerator of users.</p>
 </dd>
 <dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-odd"><p>AsyncGenerator[Union[<a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser">LiteUser</a>, <a class="reference internal" href="#mipac.models.user.UserDetailed" title="mipac.models.user.UserDetailed">UserDetailed</a>], None]</p>
+<dd class="field-odd"><p>AsyncGenerator[Union[<a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a>, <a class="reference internal" href="#mipac.models.user.UserDetailed" title="mipac.models.user.UserDetailed">UserDetailed</a>], None]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.user.UserActions.search_by_username_and_host">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_by_username_and_host</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.user.UserDetailed" title="mipac.models.user.UserDetailed"><span class="pre">UserDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser"><span class="pre">LiteUser</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.user.UserActions.search_by_username_and_host" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_by_username_and_host</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.user.UserDetailed" title="mipac.models.user.UserDetailed"><span class="pre">UserDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.user.UserActions.search_by_username_and_host" title="Link to this definition">#</a></dt>
 <dd><p>Search users by username and host.</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
@@ -1911,7 +2086,7 @@ which may increase the number of server accesses.</p>
 <dd class="field-even"><p>A list of users.</p>
 </dd>
 <dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.user.UserDetailed" title="mipac.models.user.UserDetailed">UserDetailed</a> | <a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser">LiteUser</a>]</p>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.user.UserDetailed" title="mipac.models.user.UserDetailed">UserDetailed</a> | <a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2520,7 +2695,7 @@ async</span><a class="reference internal" href="#mipac.actions.follow.FollowActi
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.follow.</span></span><span class="sig-name descname"><span class="pre">FollowActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.follow.FollowActions" title="Link to this definition">#</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.follow.FollowActions.add">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser"><span class="pre">LiteUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowActions.add" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowActions.add" title="Link to this definition">#</a></dt>
 <dd><p>Follow a user</p>
 <dl class="field-list simple">
 <dt class="field-odd">戻り値<span class="colon">:</span></dt>
@@ -2534,28 +2709,28 @@ async</span><a class="reference internal" href="#mipac.actions.follow.FollowActi
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.follow.FollowActions.invalidate">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invalidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser"><span class="pre">LiteUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowActions.invalidate" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invalidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowActions.invalidate" title="Link to this definition">#</a></dt>
 <dd><p>Make the user unfollows you</p>
 <dl class="field-list simple">
 <dt class="field-odd">戻り値<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The user that followed you</p>
 </dd>
 <dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser">LiteUser</a></p>
+<dd class="field-even"><p><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.follow.FollowActions.remove">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser"><span class="pre">LiteUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowActions.remove" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowActions.remove" title="Link to this definition">#</a></dt>
 <dd><p>Unfollow a user</p>
 <dl class="field-list simple">
 <dt class="field-odd">戻り値<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The user that you unfollowed</p>
 </dd>
 <dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser">LiteUser</a></p>
+<dd class="field-even"><p><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2599,7 +2774,7 @@ async</span><a class="reference internal" href="#mipac.actions.follow.FollowRequ
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.follow.FollowRequestActions.cancel">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser"><span class="pre">LiteUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowRequestActions.cancel" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowRequestActions.cancel" title="Link to this definition">#</a></dt>
 <dd><p>Cancel a follow request</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
@@ -2609,7 +2784,7 @@ async</span><a class="reference internal" href="#mipac.actions.follow.FollowRequ
 <dd class="field-even"><p>The user that you canceled to follow</p>
 </dd>
 <dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#mipac.models.lite.user.LiteUser" title="mipac.models.lite.user.LiteUser">LiteUser</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3646,8 +3821,76 @@ async</span><a class="reference internal" href="#mipac.actions.admins.roles.Admi
 <h3>is_me_detailed<a class="headerlink" href="#is-me-detailed" title="Link to this heading">#</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.types.user.is_me_detailed">
-<span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">is_me_detailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IUserDetailed" title="mipac.types.user.IUserDetailed"><span class="pre">IUserDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailed" title="mipac.types.user.IMeDetailed"><span class="pre">IMeDetailed</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">me_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TypeGuard</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.types.user.IMeDetailed" title="mipac.types.user.IMeDetailed"><span class="pre">IMeDetailed</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.types.user.is_me_detailed" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">is_me_detailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IUserDetailedNotLogined" title="mipac.types.user.IUserDetailedNotLogined"><span class="pre">IUserDetailedNotLogined</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IUserDetailed" title="mipac.types.user.IUserDetailed"><span class="pre">IUserDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IUserDetailedModerator" title="mipac.types.user.IUserDetailedModerator"><span class="pre">IUserDetailedModerator</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailed" title="mipac.types.user.IMeDetailed"><span class="pre">IMeDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailedModerator" title="mipac.types.user.IMeDetailedModerator"><span class="pre">IMeDetailedModerator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">me_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TypeGuard</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.types.user.IMeDetailed" title="mipac.types.user.IMeDetailed"><span class="pre">IMeDetailed</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.types.user.is_me_detailed" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+</section>
+<section id="is-me-detailed-moderator">
+<h3>is_me_detailed_moderator<a class="headerlink" href="#is-me-detailed-moderator" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="mipac.types.user.is_me_detailed_moderator">
+<span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">is_me_detailed_moderator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IUserDetailedNotLogined" title="mipac.types.user.IUserDetailedNotLogined"><span class="pre">IUserDetailedNotLogined</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IUserDetailed" title="mipac.types.user.IUserDetailed"><span class="pre">IUserDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IUserDetailedModerator" title="mipac.types.user.IUserDetailedModerator"><span class="pre">IUserDetailedModerator</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailed" title="mipac.types.user.IMeDetailed"><span class="pre">IMeDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailedModerator" title="mipac.types.user.IMeDetailedModerator"><span class="pre">IMeDetailedModerator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">me_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TypeGuard</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.types.user.IMeDetailedModerator" title="mipac.types.user.IMeDetailedModerator"><span class="pre">IMeDetailedModerator</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.types.user.is_me_detailed_moderator" title="Link to this definition">#</a></dt>
+<dd><p>渡されたユーザーが自分自身克モデレーターかを判定します</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>IUser</em>) -- user information</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>TypeGuard[<a class="reference internal" href="#mipac.types.user.IMeDetailedModerator" title="mipac.types.user.IMeDetailedModerator">IMeDetailedModerator</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="is-user-detailed">
+<h3>is_user_detailed<a class="headerlink" href="#is-user-detailed" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="mipac.types.user.is_user_detailed">
+<span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">is_user_detailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IUserDetailedNotLogined" title="mipac.types.user.IUserDetailedNotLogined"><span class="pre">IUserDetailedNotLogined</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IUserDetailed" title="mipac.types.user.IUserDetailed"><span class="pre">IUserDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IUserDetailedModerator" title="mipac.types.user.IUserDetailedModerator"><span class="pre">IUserDetailedModerator</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailed" title="mipac.types.user.IMeDetailed"><span class="pre">IMeDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailedModerator" title="mipac.types.user.IMeDetailedModerator"><span class="pre">IMeDetailedModerator</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TypeGuard</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.types.user.IUserDetailed" title="mipac.types.user.IUserDetailed"><span class="pre">IUserDetailed</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.types.user.is_user_detailed" title="Link to this definition">#</a></dt>
+<dd><p>渡されたユーザーがログイン済みで自分自身ではないかを判定します</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>IUser</em>) -- user information</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>TypeGuard[<a class="reference internal" href="#mipac.types.user.IUserDetailed" title="mipac.types.user.IUserDetailed">IUserDetailed</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="is-user-detailed-moderator">
+<h3>is_user_detailed_moderator<a class="headerlink" href="#is-user-detailed-moderator" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="mipac.types.user.is_user_detailed_moderator">
+<span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">is_user_detailed_moderator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IUserDetailedNotLogined" title="mipac.types.user.IUserDetailedNotLogined"><span class="pre">IUserDetailedNotLogined</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IUserDetailed" title="mipac.types.user.IUserDetailed"><span class="pre">IUserDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IUserDetailedModerator" title="mipac.types.user.IUserDetailedModerator"><span class="pre">IUserDetailedModerator</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailed" title="mipac.types.user.IMeDetailed"><span class="pre">IMeDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailedModerator" title="mipac.types.user.IMeDetailedModerator"><span class="pre">IMeDetailedModerator</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TypeGuard</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.types.user.IUserDetailedModerator" title="mipac.types.user.IUserDetailedModerator"><span class="pre">IUserDetailedModerator</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.types.user.is_user_detailed_moderator" title="Link to this definition">#</a></dt>
+<dd><p>渡されたユーザーがモデレーターから見たユーザーかを判定します</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>IUser</em>) -- user information</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>TypeGuard[<a class="reference internal" href="#mipac.types.user.IUserDetailedModerator" title="mipac.types.user.IUserDetailedModerator">IUserDetailedModerator</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="is-user-detailed-not-logined">
+<h3>is_user_detailed_not_logined<a class="headerlink" href="#is-user-detailed-not-logined" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="mipac.types.user.is_user_detailed_not_logined">
+<span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">is_user_detailed_not_logined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IUserDetailedNotLogined" title="mipac.types.user.IUserDetailedNotLogined"><span class="pre">IUserDetailedNotLogined</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IUserDetailed" title="mipac.types.user.IUserDetailed"><span class="pre">IUserDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IUserDetailedModerator" title="mipac.types.user.IUserDetailedModerator"><span class="pre">IUserDetailedModerator</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailed" title="mipac.types.user.IMeDetailed"><span class="pre">IMeDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.types.user.IMeDetailedModerator" title="mipac.types.user.IMeDetailedModerator"><span class="pre">IMeDetailedModerator</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TypeGuard</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.types.user.IUserDetailedNotLogined" title="mipac.types.user.IUserDetailedNotLogined"><span class="pre">IUserDetailedNotLogined</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.types.user.is_user_detailed_not_logined" title="Link to this definition">#</a></dt>
+<dd><p>渡されたユーザーがログイン無しで取得された情報か確認します</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>IUser</em>) -- user information</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>TypeGuard[<a class="reference internal" href="#mipac.types.user.IUserDetailedNotLogined" title="mipac.types.user.IUserDetailedNotLogined">IUserDetailedNotLogined</a>]</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="iachievement">
@@ -3682,19 +3925,29 @@ async</span><a class="reference internal" href="#mipac.actions.admins.roles.Admi
 <dd></dd></dl>
 
 </section>
-<section id="iliteuser">
-<h3>ILiteUser<a class="headerlink" href="#iliteuser" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.types.user.ILiteUser"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.types.user.ILiteUser">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">ILiteUser</span></span><a class="headerlink" href="#mipac.types.user.ILiteUser" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
 <section id="imedetailed">
 <h3>IMeDetailed<a class="headerlink" href="#imedetailed" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.types.user.IMeDetailed"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.types.user.IMeDetailed">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IMeDetailed</span></span><a class="headerlink" href="#mipac.types.user.IMeDetailed" title="Link to this definition">#</a></dt>
+<dd><p>自分自身</p>
+</dd></dl>
+
+</section>
+<section id="imedetailedmoderator">
+<h3>IMeDetailedModerator<a class="headerlink" href="#imedetailedmoderator" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.user.IMeDetailedModerator"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.user.IMeDetailedModerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IMeDetailedModerator</span></span><a class="headerlink" href="#mipac.types.user.IMeDetailedModerator" title="Link to this definition">#</a></dt>
+<dd><p>自分自身でモデレーター</p>
+</dd></dl>
+
+</section>
+<section id="ipartialuser">
+<h3>IPartialUser<a class="headerlink" href="#ipartialuser" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.user.IPartialUser"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.user.IPartialUser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IPartialUser</span></span><a class="headerlink" href="#mipac.types.user.IPartialUser" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -3711,22 +3964,35 @@ async</span><a class="reference internal" href="#mipac.actions.admins.roles.Admi
 <div class="py-attribute-table" data-move-to-id="mipac.types.user.IUserDetailed"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.types.user.IUserDetailed">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IUserDetailed</span></span><a class="headerlink" href="#mipac.types.user.IUserDetailed" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>主に自分から見た相手の情報が追加される
+ログイン済み
+モデレーターではない</p>
+</dd></dl>
 
 </section>
-<section id="iuserdetailedfield">
-<h3>IUserDetailedField<a class="headerlink" href="#iuserdetailedfield" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.types.user.IUserDetailedField"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.types.user.IUserDetailedField">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IUserDetailedField</span></span><a class="headerlink" href="#mipac.types.user.IUserDetailedField" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<section id="iuserdetailedmoderator">
+<h3>IUserDetailedModerator<a class="headerlink" href="#iuserdetailedmoderator" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.user.IUserDetailedModerator"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.user.IUserDetailedModerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IUserDetailedModerator</span></span><a class="headerlink" href="#mipac.types.user.IUserDetailedModerator" title="Link to this definition">#</a></dt>
+<dd><p>モデレーターから見たユーザー</p>
+</dd></dl>
 
 </section>
-<section id="iuserdetailedrequired">
-<h3>IUserDetailedRequired<a class="headerlink" href="#iuserdetailedrequired" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.types.user.IUserDetailedRequired"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.types.user.IUserDetailedRequired">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IUserDetailedRequired</span></span><a class="headerlink" href="#mipac.types.user.IUserDetailedRequired" title="Link to this definition">#</a></dt>
+<section id="iuserdetailednotlogined">
+<h3>IUserDetailedNotLogined<a class="headerlink" href="#iuserdetailednotlogined" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.user.IUserDetailedNotLogined"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.user.IUserDetailedNotLogined">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IUserDetailedNotLogined</span></span><a class="headerlink" href="#mipac.types.user.IUserDetailedNotLogined" title="Link to this definition">#</a></dt>
+<dd><p>ログイン無し</p>
+</dd></dl>
+
+</section>
+<section id="iuserfield">
+<h3>IUserField<a class="headerlink" href="#iuserfield" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.user.IUserField"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.user.IUserField">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IUserField</span></span><a class="headerlink" href="#mipac.types.user.IUserField" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -4125,6 +4391,14 @@ async</span><a class="reference internal" href="#mipac.actions.admins.roles.Admi
 <div class="py-attribute-table" data-move-to-id="mipac.types.roles.IMeRole"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.types.roles.IMeRole">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.roles.</span></span><span class="sig-name descname"><span class="pre">IMeRole</span></span><a class="headerlink" href="#mipac.types.roles.IMeRole" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="ipartialrole">
+<h3>IPartialRole<a class="headerlink" href="#ipartialrole" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.roles.IPartialRole"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.roles.IPartialRole">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.roles.</span></span><span class="sig-name descname"><span class="pre">IPartialRole</span></span><a class="headerlink" href="#mipac.types.roles.IPartialRole" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -5790,6 +6064,10 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.models.reaction.PartialReaction"><code class="docutils literal notranslate"><span class="pre">PartialReaction</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#create-user-model">create_user_model</a><ul>
+<li><a class="reference internal" href="#mipac.models.user.create_user_model"><code class="docutils literal notranslate"><span class="pre">create_user_model()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#achievement">Achievement</a><ul>
 <li><a class="reference internal" href="#mipac.models.user.Achievement"><code class="docutils literal notranslate"><span class="pre">Achievement</span></code></a></li>
 </ul>
@@ -5802,8 +6080,20 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.models.user.MeDetailed"><code class="docutils literal notranslate"><span class="pre">MeDetailed</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#medetailedmoderator">MeDetailedModerator</a><ul>
+<li><a class="reference internal" href="#mipac.models.user.MeDetailedModerator"><code class="docutils literal notranslate"><span class="pre">MeDetailedModerator</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#userdetailed">UserDetailed</a><ul>
 <li><a class="reference internal" href="#mipac.models.user.UserDetailed"><code class="docutils literal notranslate"><span class="pre">UserDetailed</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#userdetailedmoderator">UserDetailedModerator</a><ul>
+<li><a class="reference internal" href="#mipac.models.user.UserDetailedModerator"><code class="docutils literal notranslate"><span class="pre">UserDetailedModerator</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#userdetailednotlogined">UserDetailedNotLogined</a><ul>
+<li><a class="reference internal" href="#mipac.models.user.UserDetailedNotLogined"><code class="docutils literal notranslate"><span class="pre">UserDetailedNotLogined</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#userrole">UserRole</a><ul>
@@ -5973,13 +6263,28 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 </ul>
 </li>
 <li><a class="reference internal" href="#badgerole">BadgeRole</a><ul>
-<li><a class="reference internal" href="#mipac.models.lite.user.BadgeRole"><code class="docutils literal notranslate"><span class="pre">BadgeRole</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.BadgeRole"><code class="docutils literal notranslate"><span class="pre">BadgeRole</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.models.lite.user.BadgeRole.display_order"><code class="docutils literal notranslate"><span class="pre">BadgeRole.display_order</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.BadgeRole.icon_url"><code class="docutils literal notranslate"><span class="pre">BadgeRole.icon_url</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.BadgeRole.name"><code class="docutils literal notranslate"><span class="pre">BadgeRole.name</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#liteuser">LiteUser</a><ul>
-<li><a class="reference internal" href="#mipac.models.lite.user.LiteUser"><code class="docutils literal notranslate"><span class="pre">LiteUser</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.models.lite.user.LiteUser.avatar_color"><code class="docutils literal notranslate"><span class="pre">LiteUser.avatar_color</span></code></a></li>
-<li><a class="reference internal" href="#mipac.models.lite.user.LiteUser.emojis"><code class="docutils literal notranslate"><span class="pre">LiteUser.emojis</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#partialuser">PartialUser</a><ul>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser"><code class="docutils literal notranslate"><span class="pre">PartialUser</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.avatar_blurhash"><code class="docutils literal notranslate"><span class="pre">PartialUser.avatar_blurhash</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.avatar_url"><code class="docutils literal notranslate"><span class="pre">PartialUser.avatar_url</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.badge_roles"><code class="docutils literal notranslate"><span class="pre">PartialUser.badge_roles</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.emojis"><code class="docutils literal notranslate"><span class="pre">PartialUser.emojis</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.host"><code class="docutils literal notranslate"><span class="pre">PartialUser.host</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.id"><code class="docutils literal notranslate"><span class="pre">PartialUser.id</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.instance"><code class="docutils literal notranslate"><span class="pre">PartialUser.instance</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.is_bot"><code class="docutils literal notranslate"><span class="pre">PartialUser.is_bot</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.is_cat"><code class="docutils literal notranslate"><span class="pre">PartialUser.is_cat</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.nickname"><code class="docutils literal notranslate"><span class="pre">PartialUser.nickname</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.online_status"><code class="docutils literal notranslate"><span class="pre">PartialUser.online_status</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.username"><code class="docutils literal notranslate"><span class="pre">PartialUser.username</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -5999,7 +6304,18 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 </ul>
 </li>
 <li><a class="reference internal" href="#policies">Policies</a><ul>
-<li><a class="reference internal" href="#mipac.models.lite.meta.Policies"><code class="docutils literal notranslate"><span class="pre">Policies</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.meta.Policies"><code class="docutils literal notranslate"><span class="pre">Policies</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.models.lite.meta.Policies.can_edit_note"><code class="docutils literal notranslate"><span class="pre">Policies.can_edit_note</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.meta.Policies.can_hide_ads"><code class="docutils literal notranslate"><span class="pre">Policies.can_hide_ads</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.meta.Policies.can_invite"><code class="docutils literal notranslate"><span class="pre">Policies.can_invite</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.meta.Policies.can_manage_custom_emojis"><code class="docutils literal notranslate"><span class="pre">Policies.can_manage_custom_emojis</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.meta.Policies.can_public_note"><code class="docutils literal notranslate"><span class="pre">Policies.can_public_note</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.meta.Policies.can_search_notes"><code class="docutils literal notranslate"><span class="pre">Policies.can_search_notes</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.meta.Policies.can_use_translator"><code class="docutils literal notranslate"><span class="pre">Policies.can_use_translator</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.meta.Policies.gtl_available"><code class="docutils literal notranslate"><span class="pre">Policies.gtl_available</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.meta.Policies.ltl_available"><code class="docutils literal notranslate"><span class="pre">Policies.ltl_available</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#liteinstance">LiteInstance</a><ul>
@@ -6607,6 +6923,22 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.types.user.is_me_detailed"><code class="docutils literal notranslate"><span class="pre">is_me_detailed()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#is-me-detailed-moderator">is_me_detailed_moderator</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.is_me_detailed_moderator"><code class="docutils literal notranslate"><span class="pre">is_me_detailed_moderator()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#is-user-detailed">is_user_detailed</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.is_user_detailed"><code class="docutils literal notranslate"><span class="pre">is_user_detailed()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#is-user-detailed-moderator">is_user_detailed_moderator</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.is_user_detailed_moderator"><code class="docutils literal notranslate"><span class="pre">is_user_detailed_moderator()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#is-user-detailed-not-logined">is_user_detailed_not_logined</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.is_user_detailed_not_logined"><code class="docutils literal notranslate"><span class="pre">is_user_detailed_not_logined()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#iachievement">IAchievement</a><ul>
 <li><a class="reference internal" href="#mipac.types.user.IAchievement"><code class="docutils literal notranslate"><span class="pre">IAchievement</span></code></a></li>
 </ul>
@@ -6623,12 +6955,16 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.types.user.IFollowRequest"><code class="docutils literal notranslate"><span class="pre">IFollowRequest</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#iliteuser">ILiteUser</a><ul>
-<li><a class="reference internal" href="#mipac.types.user.ILiteUser"><code class="docutils literal notranslate"><span class="pre">ILiteUser</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#imedetailed">IMeDetailed</a><ul>
 <li><a class="reference internal" href="#mipac.types.user.IMeDetailed"><code class="docutils literal notranslate"><span class="pre">IMeDetailed</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#imedetailedmoderator">IMeDetailedModerator</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.IMeDetailedModerator"><code class="docutils literal notranslate"><span class="pre">IMeDetailedModerator</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ipartialuser">IPartialUser</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.IPartialUser"><code class="docutils literal notranslate"><span class="pre">IPartialUser</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#isignin">ISignin</a><ul>
@@ -6639,12 +6975,16 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.types.user.IUserDetailed"><code class="docutils literal notranslate"><span class="pre">IUserDetailed</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#iuserdetailedfield">IUserDetailedField</a><ul>
-<li><a class="reference internal" href="#mipac.types.user.IUserDetailedField"><code class="docutils literal notranslate"><span class="pre">IUserDetailedField</span></code></a></li>
+<li><a class="reference internal" href="#iuserdetailedmoderator">IUserDetailedModerator</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.IUserDetailedModerator"><code class="docutils literal notranslate"><span class="pre">IUserDetailedModerator</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#iuserdetailedrequired">IUserDetailedRequired</a><ul>
-<li><a class="reference internal" href="#mipac.types.user.IUserDetailedRequired"><code class="docutils literal notranslate"><span class="pre">IUserDetailedRequired</span></code></a></li>
+<li><a class="reference internal" href="#iuserdetailednotlogined">IUserDetailedNotLogined</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.IUserDetailedNotLogined"><code class="docutils literal notranslate"><span class="pre">IUserDetailedNotLogined</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#iuserfield">IUserField</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.IUserField"><code class="docutils literal notranslate"><span class="pre">IUserField</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#iuserrequired">IUserRequired</a><ul>
@@ -6841,6 +7181,10 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 </li>
 <li><a class="reference internal" href="#imerole">IMeRole</a><ul>
 <li><a class="reference internal" href="#mipac.types.roles.IMeRole"><code class="docutils literal notranslate"><span class="pre">IMeRole</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ipartialrole">IPartialRole</a><ul>
+<li><a class="reference internal" href="#mipac.types.roles.IPartialRole"><code class="docutils literal notranslate"><span class="pre">IPartialRole</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#irole">IRole</a><ul>

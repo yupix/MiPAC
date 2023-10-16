@@ -175,6 +175,12 @@ PartialReaction
     :members:
 
 
+create_user_model
+~~~~~~~~~~~~~~~~~
+
+.. autofunction:: mipac.models.user.create_user_model
+
+
 Achievement
 ~~~~~~~~~~~
 
@@ -202,12 +208,39 @@ MeDetailed
     :members:
 
 
+MeDetailedModerator
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.user.MeDetailedModerator
+
+.. autoclass:: mipac.models.user.MeDetailedModerator
+    :members:
+
+
 UserDetailed
 ~~~~~~~~~~~~
 
 .. attributetable:: mipac.models.user.UserDetailed
 
 .. autoclass:: mipac.models.user.UserDetailed
+    :members:
+
+
+UserDetailedModerator
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.user.UserDetailedModerator
+
+.. autoclass:: mipac.models.user.UserDetailedModerator
+    :members:
+
+
+UserDetailedNotLogined
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.user.UserDetailedNotLogined
+
+.. autoclass:: mipac.models.user.UserDetailedNotLogined
     :members:
 
 
@@ -544,12 +577,12 @@ BadgeRole
     :members:
 
 
-LiteUser
-~~~~~~~~
+PartialUser
+~~~~~~~~~~~
 
-.. attributetable:: mipac.models.lite.user.LiteUser
+.. attributetable:: mipac.models.lite.user.PartialUser
 
-.. autoclass:: mipac.models.lite.user.LiteUser
+.. autoclass:: mipac.models.lite.user.PartialUser
     :members:
 
 
@@ -1585,6 +1618,30 @@ is_me_detailed
 .. autofunction:: mipac.types.user.is_me_detailed
 
 
+is_me_detailed_moderator
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: mipac.types.user.is_me_detailed_moderator
+
+
+is_user_detailed
+~~~~~~~~~~~~~~~~
+
+.. autofunction:: mipac.types.user.is_user_detailed
+
+
+is_user_detailed_moderator
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: mipac.types.user.is_user_detailed_moderator
+
+
+is_user_detailed_not_logined
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: mipac.types.user.is_user_detailed_not_logined
+
+
 IAchievement
 ~~~~~~~~~~~~
 
@@ -1621,21 +1678,30 @@ IFollowRequest
     :members:
 
 
-ILiteUser
-~~~~~~~~~
-
-.. attributetable:: mipac.types.user.ILiteUser
-
-.. autoclass:: mipac.types.user.ILiteUser
-    :members:
-
-
 IMeDetailed
 ~~~~~~~~~~~
 
 .. attributetable:: mipac.types.user.IMeDetailed
 
 .. autoclass:: mipac.types.user.IMeDetailed
+    :members:
+
+
+IMeDetailedModerator
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.user.IMeDetailedModerator
+
+.. autoclass:: mipac.types.user.IMeDetailedModerator
+    :members:
+
+
+IPartialUser
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.user.IPartialUser
+
+.. autoclass:: mipac.types.user.IPartialUser
     :members:
 
 
@@ -1657,21 +1723,30 @@ IUserDetailed
     :members:
 
 
-IUserDetailedField
-~~~~~~~~~~~~~~~~~~
+IUserDetailedModerator
+~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.types.user.IUserDetailedField
+.. attributetable:: mipac.types.user.IUserDetailedModerator
 
-.. autoclass:: mipac.types.user.IUserDetailedField
+.. autoclass:: mipac.types.user.IUserDetailedModerator
     :members:
 
 
-IUserDetailedRequired
-~~~~~~~~~~~~~~~~~~~~~
+IUserDetailedNotLogined
+~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.types.user.IUserDetailedRequired
+.. attributetable:: mipac.types.user.IUserDetailedNotLogined
 
-.. autoclass:: mipac.types.user.IUserDetailedRequired
+.. autoclass:: mipac.types.user.IUserDetailedNotLogined
+    :members:
+
+
+IUserField
+~~~~~~~~~~
+
+.. attributetable:: mipac.types.user.IUserField
+
+.. autoclass:: mipac.types.user.IUserField
     :members:
 
 
@@ -2110,6 +2185,15 @@ IMeRole
 .. attributetable:: mipac.types.roles.IMeRole
 
 .. autoclass:: mipac.types.roles.IMeRole
+    :members:
+
+
+IPartialRole
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.roles.IPartialRole
+
+.. autoclass:: mipac.types.roles.IPartialRole
     :members:
 
 
