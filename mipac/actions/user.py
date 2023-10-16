@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, TypeVar, Union, overload
 
+from mipac.config import config
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
@@ -28,7 +29,6 @@ from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination, pagination_iterator
 from mipac.utils.util import check_multi_arg
-from mipac.config import config
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -69,7 +69,7 @@ class UserActions:
         self,
         external: bool = True,
         protocol: Literal["http", "https"] = "https",
-    ):
+    ):  # TODO: これモデルに移すべきな気がする
         if not self.__user:
             return None
         host = (
@@ -108,7 +108,9 @@ class UserActions:
             Hosts with target users
         """
 
-        field = remove_dict_empty({"userId": user_id, "username": username, "host": host, "userIds": user_ids})
+        field = remove_dict_empty(
+            {"userId": user_id, "username": username, "host": host, "userIds": user_ids}
+        )
         data: IUser = await self.__session.request(
             Route("POST", "/api/users/show"), json=field, auth=True, lower=True
         )
@@ -138,7 +140,9 @@ class UserActions:
         host : str, default=None
             Hosts with target users
         """
-        return await self.get(user_id=user_id, username=username, host=host, user_ids=user_ids, cache_override=True)
+        return await self.get(
+            user_id=user_id, username=username, host=host, user_ids=user_ids, cache_override=True
+        )
 
     async def get_notes(
         self,
@@ -155,7 +159,7 @@ class UserActions:
         file_type: list[str] | None = None,
         exclude_nsfw: bool = False,
         *,
-        get_all: bool = False
+        get_all: bool = False,
     ) -> AsyncGenerator[Note, None]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
         if check_multi_arg(user_id, self.__user) is False:
             raise ParameterError("missing required argument: user_id", user_id, self.__user)

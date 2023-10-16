@@ -4,11 +4,11 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Generic, TypeVar
 
 from mipac.abstract.model import AbstractModel
+from mipac.config import config
 from mipac.models.announcement import Announcement
 from mipac.models.lite.user import BadgeRole, PartialUser
 from mipac.models.note import Note
 from mipac.types.page import IPage
-from mipac.config import config
 from mipac.types.user import (
     IAchievement,
     IBlockingUser,
@@ -459,5 +459,4 @@ def create_user_model(
     if is_user_detailed(user):  # 他人が5
         return UserDetailed(user, client=client)
 
-    
     raise ValueError("Invalid user model")

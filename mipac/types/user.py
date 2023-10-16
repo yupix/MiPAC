@@ -219,7 +219,8 @@ def is_user_detailed_not_logined(user: IUser) -> TypeGuard[IUserDetailedNotLogin
     TypeGuard[IUserDetailedNotLogined]
     """
     return (
-        user.get("is_following", "d3ee116d-1ee7-4a35-b277-0e22d541912e") == "d3ee116d-1ee7-4a35-b277-0e22d541912e"
+        user.get("is_following", "d3ee116d-1ee7-4a35-b277-0e22d541912e")
+        == "d3ee116d-1ee7-4a35-b277-0e22d541912e"
     )
 
 
