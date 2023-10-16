@@ -18,22 +18,27 @@ class Policies(AbstractModel):
 
     @property
     def gtl_available(self) -> bool:
+        """Whether GTL is effective"""
         return self.__raw_policies["gtl_available"]
 
     @property
     def ltl_available(self) -> bool:
+        """Whether LTL is effective"""
         return self.__raw_policies["ltl_available"]
 
     @property
     def can_public_note(self) -> bool:
+        """Whether you can post a public note"""
         return self.__raw_policies["can_public_note"]
 
     @property
     def can_edit_note(self) -> bool:
+        """Whether you can edit a note"""
         return self.__raw_policies["can_edit_note"]
 
     @property
     def can_invite(self) -> bool:
+        """Whether you can invite"""
         return self.__raw_policies["can_invite"]
 
     @property
@@ -50,18 +55,22 @@ class Policies(AbstractModel):
 
     @property
     def can_manage_custom_emojis(self) -> bool:
+        """Whether you can manage custom emojis"""
         return self.__raw_policies["can_manage_custom_emojis"]
 
     @property
     def can_search_notes(self) -> bool:
+        """Whether you can search note"""
         return self.__raw_policies["can_search_notes"]
 
     @property
     def can_use_translator(self) -> bool:
+        """Whether you can use translator"""
         return self.__raw_policies["can_use_translator"]
 
     @property
     def can_hide_ads(self) -> bool:
+        """Whether you can hide ads"""
         return self.__raw_policies["can_hide_ads"]
 
     @property
