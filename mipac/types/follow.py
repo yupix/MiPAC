@@ -1,6 +1,6 @@
 from typing import TypedDict
 
-from mipac.types.user import ILiteUser, IUserDetailed
+from mipac.types.user import IPartialUser, IUserDetailed
 
 
 class IFederationFollowCommon(TypedDict):
@@ -22,5 +22,5 @@ class IFederationFollowing(IFederationFollowCommon):
 
 class IFollowRequest(TypedDict):
     id: str
-    follower: ILiteUser
-    followee: ILiteUser
+    follower: IPartialUser
+    followee: IPartialUser

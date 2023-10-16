@@ -62,5 +62,16 @@ class IRole(TypedDict):
     users_count: int
 
 
+class IPartialRole(TypedDict):
+    id: str
+    name: str
+    color: str | None
+    icon_url: str | None
+    description: str  # 空でもNoneではない
+    is_moderator: bool
+    is_administrator: bool
+    display_order: int
+
+
 def is_me_role(data: IMeRole | IRoleUser, me_id: str) -> TypeGuard[IMeRole]:
     return data["user"]["id"] == me_id and data["user"].get("avatar_id") is not None

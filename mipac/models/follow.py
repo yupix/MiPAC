@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.lite.user import LiteUser
+from mipac.models.lite.user import PartialUser
 from mipac.types.follow import IFollowRequest
 
 if TYPE_CHECKING:
@@ -21,12 +21,12 @@ class FollowRequest(AbstractModel):
         return self.__follow_request["id"]
 
     @property
-    def follower(self) -> LiteUser:
-        return LiteUser(self.__follow_request["follower"], client=self.__client)
+    def follower(self) -> PartialUser:
+        return PartialUser(self.__follow_request["follower"], client=self.__client)
 
     @property
-    def followee(self) -> LiteUser:
-        return LiteUser(self.__follow_request["followee"], client=self.__client)
+    def followee(self) -> PartialUser:
+        return PartialUser(self.__follow_request["followee"], client=self.__client)
 
     @property
     def api(self) -> FollowRequestManager:

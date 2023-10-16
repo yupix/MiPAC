@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.lite.user import LiteUser
+from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
 
 if TYPE_CHECKING:
@@ -65,8 +65,8 @@ class NotificationFollow(Notification):
         self.__client: ClientManager = client
 
     @property
-    def user(self) -> LiteUser:
-        return LiteUser(
+    def user(self) -> PartialUser:
+        return PartialUser(
             self.__notification["user"],
             client=self.__client,
         )
@@ -92,8 +92,8 @@ class NotificationFollowRequest(Notification):
         self.__client: ClientManager = client
 
     @property
-    def user(self) -> LiteUser:
-        return LiteUser(
+    def user(self) -> PartialUser:
+        return PartialUser(
             self.__notification["user"],
             client=self.__client,
         )
@@ -119,8 +119,8 @@ class NotificationNote(Notification):
         self.__client: ClientManager = client
 
     @property
-    def user(self) -> LiteUser:
-        return LiteUser(
+    def user(self) -> PartialUser:
+        return PartialUser(
             self.__notification["user"],
             client=self.__client,
         )
@@ -163,8 +163,8 @@ class NotificationReaction(Notification):
         self.__client: ClientManager = client
 
     @property
-    def user(self) -> LiteUser:
-        return LiteUser(self.__notification["user"], client=self.__client)
+    def user(self) -> PartialUser:
+        return PartialUser(self.__notification["user"], client=self.__client)
 
     @property
     def note(self) -> Note:

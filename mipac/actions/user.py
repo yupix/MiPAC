@@ -5,11 +5,12 @@ from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, TypeVar, Un
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
+from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
-from mipac.models.user import Achievement, LiteUser, UserDetailed
+from mipac.models.user import Achievement, UserDetailed
 from mipac.types.clip import IClip
 from mipac.types.note import INote
-from mipac.types.user import ILiteUser, IUserDetailed
+from mipac.types.user import IPartialUser, IUserDetailed
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination, pagination_iterator
@@ -20,7 +21,7 @@ if TYPE_CHECKING:
 
 __all__ = ["UserActions"]
 
-T = TypeVar("T", bound=Union[LiteUser, UserDetailed])
+T = TypeVar("T", bound=Union[PartialUser, UserDetailed])
 
 
 class UserActions:
@@ -28,10 +29,10 @@ class UserActions:
         self,
         session: HTTPClient,
         client: ClientManager,
-        user: Optional[LiteUser] = None,
+        user: Optional[PartialUser] = None,
     ):
         self.__session: HTTPClient = session
-        self.__user: Optional[LiteUser] = user
+        self.__user: Optional[PartialUser] = user
         self.__client: ClientManager = client
 
     async def get_me(self) -> UserDetailed:
@@ -173,7 +174,7 @@ class UserActions:
             if get_all is False or pagination.is_final:
                 break
 
-    def get_mention(self, user: Optional[LiteUser] = None) -> str:
+    def get_mention(self, user: Optional[PartialUser] = None) -> str:
         """
         Get mention name of user.
 
@@ -204,7 +205,7 @@ class UserActions:
         detail: Literal[False] = ...,
         *,
         get_all: bool = False,
-    ) -> AsyncGenerator[LiteUser, None]:
+    ) -> AsyncGenerator[PartialUser, None]:
         ...
 
     @overload
@@ -229,7 +230,7 @@ class UserActions:
         detail: Literal[True, False] = True,
         *,
         get_all: bool = False,
-    ) -> AsyncGenerator[UserDetailed | LiteUser, None]:
+    ) -> AsyncGenerator[UserDetailed | PartialUser, None]:
         """
         Search users by keyword.
 
@@ -250,7 +251,7 @@ class UserActions:
 
         Returns
         -------
-        AsyncGenerator[Union[LiteUser, UserDetailed], None]
+        AsyncGenerator[Union[PartialUser, UserDetailed], None]
             A AsyncGenerator of users.
         """
 
@@ -275,7 +276,7 @@ class UserActions:
                 pagination, get_all, model=UserDetailed, client=self.__client
             )
         else:
-            pagination = Pagination[ILiteUser](
+            pagination = Pagination[IPartialUser](
                 self.__session,
                 Route("POST", "/api/users/search"),
                 json=body,
@@ -283,7 +284,7 @@ class UserActions:
             )
 
             iterator = pagination_iterator(
-                pagination, get_all=get_all, model=LiteUser, client=self.__client
+                pagination, get_all=get_all, model=PartialUser, client=self.__client
             )
         async for user in iterator:
             yield user
@@ -294,7 +295,7 @@ class UserActions:
         host: str,
         limit: int = 100,
         detail: bool = True,
-    ) -> list[UserDetailed | LiteUser]:
+    ) -> list[UserDetailed | PartialUser]:
         """
         Search users by username and host.
 
@@ -311,7 +312,7 @@ class UserActions:
 
         Returns
         -------
-        list[UserDetailed | LiteUser]
+        list[UserDetailed | PartialUser]
             A list of users.
         """
 
@@ -330,7 +331,7 @@ class UserActions:
         return [
             UserDetailed(user, client=self.__client)
             if detail
-            else LiteUser(user, client=self.__client)
+            else PartialUser(user, client=self.__client)
             for user in res
         ]
 

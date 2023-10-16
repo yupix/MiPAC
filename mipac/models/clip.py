@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.lite.user import LiteUser
+from mipac.models.lite.user import PartialUser
 from mipac.types.clip import IClip
 
 if TYPE_CHECKING:
@@ -37,9 +37,9 @@ class Clip(AbstractModel):
         return self.__clip["user_id"]
 
     @property
-    def user(self) -> LiteUser:
+    def user(self) -> PartialUser:
         """The user who created the clip"""
-        return LiteUser(self.__clip["user"], client=self.__client)
+        return PartialUser(self.__clip["user"], client=self.__client)
 
     @property
     def name(self) -> str:

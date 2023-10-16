@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Generic, TypeVar
 
 from mipac.abstract.model import AbstractModel
 from mipac.models.drive import File
-from mipac.models.lite.user import LiteUser
+from mipac.models.lite.user import PartialUser
 from mipac.types.note import INoteVisibility, IPartialNote
 from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.format import str_to_datetime
@@ -101,8 +101,8 @@ class PartialNote(Generic[T], AbstractModel):
         return self._note.get("text")
 
     @property
-    def author(self) -> LiteUser:
-        return LiteUser(self._note["user"], client=self._client)
+    def author(self) -> PartialUser:
+        return PartialUser(self._note["user"], client=self._client)
 
     @property
     def user_id(self) -> str:

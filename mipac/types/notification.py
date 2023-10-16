@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, TypedDict
 
 if TYPE_CHECKING:
     from mipac.types.note import INote
-    from mipac.types.user import ILiteUser
+    from mipac.types.user import IPartialUser
 
 
 class INotification(TypedDict):
@@ -21,12 +21,12 @@ class INotification(TypedDict):
 
 
 class IUserNf(INotification):
-    user: ILiteUser
+    user: IPartialUser
     user_id: str
 
 
 class INoteNf(INotification):
-    user: ILiteUser
+    user: IPartialUser
     user_id: str
     note: INote
 
@@ -37,7 +37,7 @@ class IPollEndNf(INotification):
 
 class IReactionNf(INotification):
     reaction: str
-    user: ILiteUser
+    user: IPartialUser
     user_id: str
     note: INote
 

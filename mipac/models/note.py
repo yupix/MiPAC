@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Self
 
 from mipac.abstract.model import AbstractModel
 from mipac.models.lite.note import PartialNote
-from mipac.models.lite.user import LiteUser
+from mipac.models.lite.user import PartialUser
 from mipac.models.poll import Poll
 from mipac.types.note import (
     INote,
@@ -97,8 +97,8 @@ class NoteReaction(AbstractModel):
         return self.__reaction["type"]
 
     @property
-    def user(self) -> LiteUser:
-        return LiteUser(self.__reaction["user"], client=self.__client)
+    def user(self) -> PartialUser:
+        return PartialUser(self.__reaction["user"], client=self.__client)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, NoteReaction) and self.id == __value.id

@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Generic, TypeVar
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.lite.user import LiteUser
+from mipac.models.lite.user import PartialUser
 from mipac.types.invite import IInviteCode, IPartialInviteCode
 from mipac.utils.format import str_to_datetime
 
@@ -58,9 +58,9 @@ class InviteCode(PartialInviteCode[IInviteCode]):
         )
 
     @property
-    def used_by(self) -> LiteUser | None:
+    def used_by(self) -> PartialUser | None:
         return (
-            LiteUser(self._raw_invite_code["used_by"], client=self._client)
+            PartialUser(self._raw_invite_code["used_by"], client=self._client)
             if self._raw_invite_code["used_by"]
             else None
         )

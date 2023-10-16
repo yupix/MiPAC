@@ -19,7 +19,7 @@ from mipac.manager.user import UserManager
 
 if TYPE_CHECKING:
     from mipac.config import Config
-    from mipac.models.lite.user import LiteUser
+    from mipac.models.lite.user import PartialUser
     from mipac.models.user import UserDetailed
 
 
@@ -54,7 +54,7 @@ class ClientManager:
     def action(self) -> ClientActions:
         return ClientActions(session=self.__session, client=self)
 
-    def _create_user_instance(self, user: LiteUser) -> UserManager:
+    def _create_user_instance(self, user: PartialUser) -> UserManager:
         return UserManager(session=self.__session, client=self, user=user)
 
     def _create_note_instance(self, note_id: str) -> NoteManager:

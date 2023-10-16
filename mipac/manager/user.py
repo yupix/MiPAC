@@ -11,7 +11,7 @@ from mipac.manager.mute import MuteManager
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
-    from mipac.models.lite.user import LiteUser
+    from mipac.models.lite.user import PartialUser
 
 
 __all__ = ("UserManager",)
@@ -19,12 +19,12 @@ __all__ = ("UserManager",)
 
 class UserManager(AbstractManager):
     def __init__(
-        self, user: LiteUser | None = None, *, session: HTTPClient, client: ClientManager
+        self, user: PartialUser | None = None, *, session: HTTPClient, client: ClientManager
     ):
         user_id: str | None = user.id if user else None
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
-        self.__user: LiteUser | None = user
+        self.__user: PartialUser | None = user
         self.follow: FollowManager = FollowManager(user_id=user_id, session=session, client=client)
         self.mute: MuteManager = MuteManager(user_id=user_id, session=session, client=client)
         self.block = BlockingManager(user_id=user_id, session=session, client=client)

@@ -5,13 +5,13 @@ from typing import TYPE_CHECKING
 from mipac.abstract.action import AbstractAction
 from mipac.http import Route
 from mipac.models.follow import FollowRequest
-from mipac.models.user import LiteUser
+from mipac.models.user import PartialUser
 from mipac.types.follow import IFollowRequest
 
 if TYPE_CHECKING:
     from mipac.http import HTTPClient
     from mipac.manager.client import ClientManager
-    from mipac.types.user import ILiteUser
+    from mipac.types.user import IPartialUser
 
 
 class FollowActions(AbstractAction):
@@ -20,7 +20,7 @@ class FollowActions(AbstractAction):
         self.__session = session
         self.__client = client
 
-    async def add(self, user_id: str | None = None) -> LiteUser:
+    async def add(self, user_id: str | None = None) -> PartialUser:
         """
         Follow a user
 
@@ -33,21 +33,21 @@ class FollowActions(AbstractAction):
         user_id = user_id or self.__user_id
 
         data = {"userId": user_id}
-        res: ILiteUser = await self.__session.request(
+        res: IPartialUser = await self.__session.request(
             Route("POST", "/api/following/create"),
             json=data,
             auth=True,
             lower=True,
         )
-        return LiteUser(res, client=self.__client)
+        return PartialUser(res, client=self.__client)
 
-    async def remove(self, user_id: str | None = None) -> LiteUser:
+    async def remove(self, user_id: str | None = None) -> PartialUser:
         """
         Unfollow a user
 
         Returns
         -------
-        LiteUser
+        PartialUser
             The user that you unfollowed
         """
 
@@ -57,25 +57,25 @@ class FollowActions(AbstractAction):
         res = await self.__session.request(
             Route("POST", "/api/following/delete"), json=data, auth=True
         )
-        return LiteUser(res, client=self.__client)
+        return PartialUser(res, client=self.__client)
 
-    async def invalidate(self, user_id: str | None = None) -> LiteUser:
+    async def invalidate(self, user_id: str | None = None) -> PartialUser:
         """
         Make the user unfollows you
 
         Returns
         -------
-        LiteUser
+        PartialUser
             The user that followed you
         """
 
         user_id = user_id or self.__user_id
 
         data = {"userId": user_id}
-        res: ILiteUser = await self.__session.request(
+        res: IPartialUser = await self.__session.request(
             Route("POST", "/api/following/invalidate"), json=data, auth=True
         )
-        return LiteUser(res, client=self.__client)
+        return PartialUser(res, client=self.__client)
 
 
 class FollowRequestActions(AbstractAction):
@@ -153,7 +153,7 @@ class FollowRequestActions(AbstractAction):
             )
         )
 
-    async def cancel(self, user_id: str | None = None) -> LiteUser:
+    async def cancel(self, user_id: str | None = None) -> PartialUser:
         """
         Cancel a follow request
 
@@ -164,17 +164,17 @@ class FollowRequestActions(AbstractAction):
 
         Returns
         -------
-        LiteUser
+        PartialUser
             The user that you canceled to follow
         """
 
         user_id = user_id or self.__user_id
 
         data = {"userId": user_id}
-        res: ILiteUser = await self.__session.request(
+        res: IPartialUser = await self.__session.request(
             Route("POST", "/api/following/requests/cancel"),
             json=data,
             auth=True,
             lower=True,
         )
-        return LiteUser(res, client=self.__client)
+        return PartialUser(res, client=self.__client)

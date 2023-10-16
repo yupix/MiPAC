@@ -4,7 +4,7 @@ from mipac.types.drive import IDriveFile
 from mipac.types.emoji import ICustomEmojiLite
 from mipac.types.poll import IPoll
 from mipac.types.reaction import IReactionAcceptance
-from mipac.types.user import ILiteUser
+from mipac.types.user import IPartialUser
 
 T = TypeVar("T")
 
@@ -71,7 +71,7 @@ class IPartialNote(TypedDict):
     replies_count: int
     reply_id: str | None
     text: str | None
-    user: ILiteUser
+    user: IPartialUser
     user_id: str
     visibility: INoteVisibility
     tags: NotRequired[list[str]]  # タグがついてないとbodyに存在しない
@@ -105,7 +105,7 @@ class ICreatedNote(TypedDict):
 class INoteReaction(TypedDict):
     id: str
     created_at: str
-    user: ILiteUser
+    user: IPartialUser
     type: str
 
 
