@@ -448,12 +448,12 @@ def create_user_model(
     | UserDetailedModerator
     | MeDetailedModerator
 ):
-    if is_user_detailed_not_logined(user):  # ログインしてないやつを最優先に返す
-        return UserDetailedNotLogined(user, client=client)
     if is_me_detailed_moderator(user, config.account_id):  # 自身でモデレーターが2
         return MeDetailedModerator(user, client=client)
     if is_me_detailed(user, config.account_id):  # 自身が3
         return MeDetailed(user, client=client)
+    if is_user_detailed_not_logined(user):  # ログインしてないやつを最優先に返す
+        return UserDetailedNotLogined(user, client=client)
     if is_user_detailed_moderator(user):  # 他人でモデレーター視点が4
         return UserDetailedModerator(user, client=client)
     if is_user_detailed(user):  # 他人が5

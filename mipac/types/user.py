@@ -207,7 +207,7 @@ def is_me_detailed(user: IUser, me_id: str) -> TypeGuard[IMeDetailed]:
 
 def is_user_detailed_not_logined(user: IUser) -> TypeGuard[IUserDetailedNotLogined]:
     """
-    渡されたユーザーがログイン無しで取得された情報か確認します
+    渡されたユーザーがログイン無しで取得された情報か確認します。またこれは自分自身ではないです。
 
     Parameters
     ----------
@@ -218,11 +218,9 @@ def is_user_detailed_not_logined(user: IUser) -> TypeGuard[IUserDetailedNotLogin
     -------
     TypeGuard[IUserDetailedNotLogined]
     """
-
     return (
-        user.get("notify", "d3ee116d-1ee7-4a35-b277-0e22d541912e")
-        == "d3ee116d-1ee7-4a35-b277-0e22d541912e"
-    )  # 値がNoneの場合があるのでuuidを比較する
+        user.get("is_following", "d3ee116d-1ee7-4a35-b277-0e22d541912e") == "d3ee116d-1ee7-4a35-b277-0e22d541912e"
+    )
 
 
 def is_user_detailed(user: IUser) -> TypeGuard[IUserDetailed]:
