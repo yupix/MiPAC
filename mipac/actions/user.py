@@ -7,14 +7,28 @@ from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
 from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
-from mipac.models.user import Achievement, UserDetailed
+from mipac.models.user import (
+    Achievement,
+    MeDetailed,
+    MeDetailedModerator,
+    UserDetailed,
+    create_user_model,
+)
 from mipac.types.clip import IClip
 from mipac.types.note import INote
-from mipac.types.user import IPartialUser, IUserDetailed
+from mipac.types.user import (
+    IMeDetailed,
+    IMeDetailedModerator,
+    IPartialUser,
+    IUser,
+    IUserDetailed,
+    is_me_detailed_moderator,
+)
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination, pagination_iterator
 from mipac.utils.util import check_multi_arg
+from mipac.config import config
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
