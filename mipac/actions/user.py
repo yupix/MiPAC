@@ -72,10 +72,11 @@ class UserActions:
     async def get(
         self,
         user_id: str | None = None,
+        user_ids: list[str] | None = None,
         username: str | None = None,
         host: str | None = None,
         **kwargs,
-    ) -> UserDetailed:
+    ):
         """
         Retrieve user information from the user ID using the cache.
         If there is no cache, `fetch` is automatically used.
@@ -85,29 +86,27 @@ class UserActions:
         ----------
         user_id : str
             target user id
+        user_ids: list[str]
+            target user ids
         username : str
             target username
         host : str, default=None
             Hosts with target users
-
-        Returns
-        -------
-        UserDetailed
-            user information
         """
 
-        field = remove_dict_empty({"userId": user_id, "username": username, "host": host})
-        data = await self.__session.request(
+        field = remove_dict_empty({"userId": user_id, "username": username, "host": host, "userIds": user_ids})
+        data: IUser = await self.__session.request(
             Route("POST", "/api/users/show"), json=field, auth=True, lower=True
         )
-        return UserDetailed(data, client=self.__client)
+        return create_user_model(data, client=self.__client)
 
     async def fetch(
         self,
         user_id: str | None = None,
+        user_ids: list[str] | None = None,
         username: str | None = None,
         host: str | None = None,
-    ) -> UserDetailed:
+    ):
         """
         Retrieve the latest user information using the target user ID or username.
         If you do not need the latest information, you should basically use the `get` method.
@@ -120,15 +119,12 @@ class UserActions:
             target user id
         username : str
             target username
+        username : str
+            target username
         host : str, default=None
             Hosts with target users
-
-        Returns
-        -------
-        UserDetailed
-            ユーザー情報
         """
-        return await self.get(user_id=user_id, username=username, host=host, cache_override=True)
+        return await self.get(user_id=user_id, username=username, host=host, user_ids=user_ids, cache_override=True)
 
     async def get_notes(
         self,
