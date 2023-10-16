@@ -35,17 +35,21 @@ class UserActions:
         self.__user: Optional[PartialUser] = user
         self.__client: ClientManager = client
 
-    async def get_me(self) -> UserDetailed:
+    async def get_me(self) -> MeDetailed | MeDetailedModerator:  # TODO: トークンが無い場合は例外返すようにする
         """
         ログインしているユーザーの情報を取得します
         """
 
-        res = await self.__session.request(
+        res: IMeDetailedModerator | IMeDetailed = await self.__session.request(
             Route("POST", "/api/i"),
             auth=True,
             lower=True,
         )
-        return UserDetailed(res, client=self.__client)  # TODO: 自分用のクラスに変更する
+        return (
+            MeDetailedModerator(res, client=self.__client)
+            if is_me_detailed_moderator(res, config.account_id)
+            else MeDetailed(res, client=self.__client)
+        )
 
     def get_profile_link(
         self,
