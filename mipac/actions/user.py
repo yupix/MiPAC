@@ -129,30 +129,33 @@ class UserActions:
     async def get_notes(
         self,
         user_id: str | None = None,
-        include_replies: bool = True,
+        with_replies: bool = False,
+        with_renotes: bool = True,
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        since_date: int = 0,
-        until_date: int = 0,
+        since_data: int | None = None,
+        until_data: int | None = None,
         include_my_renotes: bool = True,
         with_files: bool = False,
-        file_type: Optional[list[str]] = None,
-        exclude_nsfw: bool = True,
-        get_all: bool = False,
-    ) -> AsyncGenerator[Note, None]:
+        file_type: list[str] | None = None,
+        exclude_nsfw: bool = False,
+        *,
+        get_all: bool = False
+    ) -> AsyncGenerator[Note, None]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
         if check_multi_arg(user_id, self.__user) is False:
             raise ParameterError("missing required argument: user_id", user_id, self.__user)
 
         user_id = user_id or self.__user and self.__user.id
         data = {
             "userId": user_id,
-            "includeReplies": include_replies,
+            "withReplies": with_replies,
+            "withRenotes": with_renotes,
             "limit": limit,
             "sinceId": since_id,
             "untilId": until_id,
-            "sinceDate": since_date,
-            "untilDate": until_date,
+            "sinceDate": since_data,
+            "untilDate": until_data,
             "includeMyRenotes": include_my_renotes,
             "withFiles": with_files,
             "fileType": file_type,
