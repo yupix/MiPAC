@@ -19,5 +19,8 @@ build-backend = "setuptools.build_meta"
 [tool.ruff]
 line-length = 99
 
+[tool.ruff.format]
+exclude = ["mipac/_version.py"]
+
 [tool.ruff.per-file-ignores]
 "__init__.py" = ["E402", "F403"]
