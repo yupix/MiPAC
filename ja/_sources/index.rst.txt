@@ -4,66 +4,39 @@ API Reference
 Misskey Models
 --------------
 
-Channel
-~~~~~~~
-
-.. attributetable:: mipac.models.channel.Channel
-
-.. autoclass:: mipac.models.channel.Channel
-    :members:
-
-
-Announcement
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.announcement.Announcement
-
-.. autoclass:: mipac.models.announcement.Announcement
-    :members:
-
-
-AnnouncementCommon
-~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.announcement.AnnouncementCommon
-
-.. autoclass:: mipac.models.announcement.AnnouncementCommon
-    :members:
-
-
-AnnouncementSystem
-~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.announcement.AnnouncementSystem
-
-.. autoclass:: mipac.models.announcement.AnnouncementSystem
-    :members:
-
-
-MiPoll
-~~~~~~
-
-.. attributetable:: mipac.models.poll.MiPoll
-
-.. autoclass:: mipac.models.poll.MiPoll
-    :members:
-
-
-Poll
+Clip
 ~~~~
 
-.. attributetable:: mipac.models.poll.Poll
+.. attributetable:: mipac.models.clip.Clip
 
-.. autoclass:: mipac.models.poll.Poll
+.. autoclass:: mipac.models.clip.Clip
     :members:
 
 
-PollChoice
-~~~~~~~~~~
+AdminMeta
+~~~~~~~~~
 
-.. attributetable:: mipac.models.poll.PollChoice
+.. attributetable:: mipac.models.meta.AdminMeta
 
-.. autoclass:: mipac.models.poll.PollChoice
+.. autoclass:: mipac.models.meta.AdminMeta
+    :members:
+
+
+Features
+~~~~~~~~
+
+.. attributetable:: mipac.models.meta.Features
+
+.. autoclass:: mipac.models.meta.Features
+    :members:
+
+
+Meta
+~~~~
+
+.. attributetable:: mipac.models.meta.Meta
+
+.. autoclass:: mipac.models.meta.Meta
     :members:
 
 
@@ -130,126 +103,39 @@ NotificationReaction
     :members:
 
 
-ActiveUsersChart
-~~~~~~~~~~~~~~~~
+MiPoll
+~~~~~~
 
-.. attributetable:: mipac.models.chart.ActiveUsersChart
+.. attributetable:: mipac.models.poll.MiPoll
 
-.. autoclass:: mipac.models.chart.ActiveUsersChart
+.. autoclass:: mipac.models.poll.MiPoll
     :members:
 
 
-DriveChart
+Poll
+~~~~
+
+.. attributetable:: mipac.models.poll.Poll
+
+.. autoclass:: mipac.models.poll.Poll
+    :members:
+
+
+PollChoice
 ~~~~~~~~~~
 
-.. attributetable:: mipac.models.chart.DriveChart
+.. attributetable:: mipac.models.poll.PollChoice
 
-.. autoclass:: mipac.models.chart.DriveChart
+.. autoclass:: mipac.models.poll.PollChoice
     :members:
 
 
-DriveLocalChart
-~~~~~~~~~~~~~~~
+Channel
+~~~~~~~
 
-.. attributetable:: mipac.models.chart.DriveLocalChart
+.. attributetable:: mipac.models.channel.Channel
 
-.. autoclass:: mipac.models.chart.DriveLocalChart
-    :members:
-
-
-DriveRemoteChart
-~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.chart.DriveRemoteChart
-
-.. autoclass:: mipac.models.chart.DriveRemoteChart
-    :members:
-
-
-PartialReaction
-~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.reaction.PartialReaction
-
-.. autoclass:: mipac.models.reaction.PartialReaction
-    :members:
-
-
-create_user_model
-~~~~~~~~~~~~~~~~~
-
-.. autofunction:: mipac.models.user.create_user_model
-
-
-Achievement
-~~~~~~~~~~~
-
-.. attributetable:: mipac.models.user.Achievement
-
-.. autoclass:: mipac.models.user.Achievement
-    :members:
-
-
-BlockingUser
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.user.BlockingUser
-
-.. autoclass:: mipac.models.user.BlockingUser
-    :members:
-
-
-MeDetailed
-~~~~~~~~~~
-
-.. attributetable:: mipac.models.user.MeDetailed
-
-.. autoclass:: mipac.models.user.MeDetailed
-    :members:
-
-
-MeDetailedModerator
-~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.user.MeDetailedModerator
-
-.. autoclass:: mipac.models.user.MeDetailedModerator
-    :members:
-
-
-UserDetailed
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.user.UserDetailed
-
-.. autoclass:: mipac.models.user.UserDetailed
-    :members:
-
-
-UserDetailedModerator
-~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.user.UserDetailedModerator
-
-.. autoclass:: mipac.models.user.UserDetailedModerator
-    :members:
-
-
-UserDetailedNotLogined
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.user.UserDetailedNotLogined
-
-.. autoclass:: mipac.models.user.UserDetailedNotLogined
-    :members:
-
-
-UserRole
-~~~~~~~~
-
-.. attributetable:: mipac.models.user.UserRole
-
-.. autoclass:: mipac.models.user.UserRole
+.. autoclass:: mipac.models.channel.Channel
     :members:
 
 
@@ -307,30 +193,39 @@ NoteTranslateResult
     :members:
 
 
-AdminMeta
-~~~~~~~~~
+CustomEmoji
+~~~~~~~~~~~
 
-.. attributetable:: mipac.models.meta.AdminMeta
+.. attributetable:: mipac.models.emoji.CustomEmoji
 
-.. autoclass:: mipac.models.meta.AdminMeta
+.. autoclass:: mipac.models.emoji.CustomEmoji
     :members:
 
 
-Features
-~~~~~~~~
+PartialReaction
+~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.models.meta.Features
+.. attributetable:: mipac.models.reaction.PartialReaction
 
-.. autoclass:: mipac.models.meta.Features
+.. autoclass:: mipac.models.reaction.PartialReaction
     :members:
 
 
-Meta
-~~~~
+InviteCode
+~~~~~~~~~~
 
-.. attributetable:: mipac.models.meta.Meta
+.. attributetable:: mipac.models.invite.InviteCode
 
-.. autoclass:: mipac.models.meta.Meta
+.. autoclass:: mipac.models.invite.InviteCode
+    :members:
+
+
+PartialInviteCode
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.invite.PartialInviteCode
+
+.. autoclass:: mipac.models.invite.PartialInviteCode
     :members:
 
 
@@ -358,24 +253,6 @@ Folder
 .. attributetable:: mipac.models.drive.Folder
 
 .. autoclass:: mipac.models.drive.Folder
-    :members:
-
-
-Antenna
-~~~~~~~
-
-.. attributetable:: mipac.models.antenna.Antenna
-
-.. autoclass:: mipac.models.antenna.Antenna
-    :members:
-
-
-FollowRequest
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.follow.FollowRequest
-
-.. autoclass:: mipac.models.follow.FollowRequest
     :members:
 
 
@@ -460,42 +337,6 @@ UserIP
     :members:
 
 
-InviteCode
-~~~~~~~~~~
-
-.. attributetable:: mipac.models.invite.InviteCode
-
-.. autoclass:: mipac.models.invite.InviteCode
-    :members:
-
-
-PartialInviteCode
-~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.invite.PartialInviteCode
-
-.. autoclass:: mipac.models.invite.PartialInviteCode
-    :members:
-
-
-CustomEmoji
-~~~~~~~~~~~
-
-.. attributetable:: mipac.models.emoji.CustomEmoji
-
-.. autoclass:: mipac.models.emoji.CustomEmoji
-    :members:
-
-
-Ad
-~~
-
-.. attributetable:: mipac.models.ad.Ad
-
-.. autoclass:: mipac.models.ad.Ad
-    :members:
-
-
 MeRole
 ~~~~~~
 
@@ -541,12 +382,84 @@ RoleUser
     :members:
 
 
-Clip
-~~~~
+Ad
+~~
 
-.. attributetable:: mipac.models.clip.Clip
+.. attributetable:: mipac.models.ad.Ad
 
-.. autoclass:: mipac.models.clip.Clip
+.. autoclass:: mipac.models.ad.Ad
+    :members:
+
+
+ActiveUsersChart
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.chart.ActiveUsersChart
+
+.. autoclass:: mipac.models.chart.ActiveUsersChart
+    :members:
+
+
+DriveChart
+~~~~~~~~~~
+
+.. attributetable:: mipac.models.chart.DriveChart
+
+.. autoclass:: mipac.models.chart.DriveChart
+    :members:
+
+
+DriveLocalChart
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.chart.DriveLocalChart
+
+.. autoclass:: mipac.models.chart.DriveLocalChart
+    :members:
+
+
+DriveRemoteChart
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.chart.DriveRemoteChart
+
+.. autoclass:: mipac.models.chart.DriveRemoteChart
+    :members:
+
+
+Announcement
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.announcement.Announcement
+
+.. autoclass:: mipac.models.announcement.Announcement
+    :members:
+
+
+AnnouncementCommon
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.announcement.AnnouncementCommon
+
+.. autoclass:: mipac.models.announcement.AnnouncementCommon
+    :members:
+
+
+AnnouncementSystem
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.announcement.AnnouncementSystem
+
+.. autoclass:: mipac.models.announcement.AnnouncementSystem
+    :members:
+
+
+FollowRequest
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.follow.FollowRequest
+
+.. autoclass:: mipac.models.follow.FollowRequest
     :members:
 
 
@@ -559,39 +472,90 @@ MuteUser
     :members:
 
 
-ChannelLite
-~~~~~~~~~~~
+Antenna
+~~~~~~~
 
-.. attributetable:: mipac.models.lite.channel.ChannelLite
+.. attributetable:: mipac.models.antenna.Antenna
 
-.. autoclass:: mipac.models.lite.channel.ChannelLite
+.. autoclass:: mipac.models.antenna.Antenna
     :members:
 
 
-BadgeRole
-~~~~~~~~~
+create_user_model
+~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.models.lite.user.BadgeRole
+.. autofunction:: mipac.models.user.create_user_model
 
-.. autoclass:: mipac.models.lite.user.BadgeRole
+
+Achievement
+~~~~~~~~~~~
+
+.. attributetable:: mipac.models.user.Achievement
+
+.. autoclass:: mipac.models.user.Achievement
     :members:
 
 
-PartialUser
-~~~~~~~~~~~
+BlockingUser
+~~~~~~~~~~~~
 
-.. attributetable:: mipac.models.lite.user.PartialUser
+.. attributetable:: mipac.models.user.BlockingUser
 
-.. autoclass:: mipac.models.lite.user.PartialUser
+.. autoclass:: mipac.models.user.BlockingUser
     :members:
 
 
-PartialNote
-~~~~~~~~~~~
+MeDetailed
+~~~~~~~~~~
 
-.. attributetable:: mipac.models.lite.note.PartialNote
+.. attributetable:: mipac.models.user.MeDetailed
 
-.. autoclass:: mipac.models.lite.note.PartialNote
+.. autoclass:: mipac.models.user.MeDetailed
+    :members:
+
+
+MeDetailedModerator
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.user.MeDetailedModerator
+
+.. autoclass:: mipac.models.user.MeDetailedModerator
+    :members:
+
+
+UserDetailed
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.user.UserDetailed
+
+.. autoclass:: mipac.models.user.UserDetailed
+    :members:
+
+
+UserDetailedModerator
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.user.UserDetailedModerator
+
+.. autoclass:: mipac.models.user.UserDetailedModerator
+    :members:
+
+
+UserDetailedNotLogined
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.user.UserDetailedNotLogined
+
+.. autoclass:: mipac.models.user.UserDetailedNotLogined
+    :members:
+
+
+UserRole
+~~~~~~~~
+
+.. attributetable:: mipac.models.user.UserRole
+
+.. autoclass:: mipac.models.user.UserRole
     :members:
 
 
@@ -613,12 +577,21 @@ Policies
     :members:
 
 
-LiteInstance
-~~~~~~~~~~~~
+ChannelLite
+~~~~~~~~~~~
 
-.. attributetable:: mipac.models.lite.instance.LiteInstance
+.. attributetable:: mipac.models.lite.channel.ChannelLite
 
-.. autoclass:: mipac.models.lite.instance.LiteInstance
+.. autoclass:: mipac.models.lite.channel.ChannelLite
+    :members:
+
+
+PartialNote
+~~~~~~~~~~~
+
+.. attributetable:: mipac.models.lite.note.PartialNote
+
+.. autoclass:: mipac.models.lite.note.PartialNote
     :members:
 
 
@@ -631,12 +604,39 @@ PartialCustomEmoji
     :members:
 
 
+LiteInstance
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.lite.instance.LiteInstance
+
+.. autoclass:: mipac.models.lite.instance.LiteInstance
+    :members:
+
+
 PartialAd
 ~~~~~~~~~
 
 .. attributetable:: mipac.models.lite.ad.PartialAd
 
 .. autoclass:: mipac.models.lite.ad.PartialAd
+    :members:
+
+
+BadgeRole
+~~~~~~~~~
+
+.. attributetable:: mipac.models.lite.user.BadgeRole
+
+.. autoclass:: mipac.models.lite.user.BadgeRole
+    :members:
+
+
+PartialUser
+~~~~~~~~~~~
+
+.. attributetable:: mipac.models.lite.user.PartialUser
+
+.. autoclass:: mipac.models.lite.user.PartialUser
     :members:
 Managers
 --------
@@ -650,30 +650,39 @@ PagesManager
     :members:
 
 
-ChannelManager
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.channel.ChannelManager
-
-.. autoclass:: mipac.manager.channel.ChannelManager
-    :members:
-
-
-FederationManager
+ClientClipManager
 ~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.federation.FederationManager
+.. attributetable:: mipac.manager.clip.ClientClipManager
 
-.. autoclass:: mipac.manager.federation.FederationManager
+.. autoclass:: mipac.manager.clip.ClientClipManager
     :members:
 
 
-FavoriteManager
+ClipManager
+~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.clip.ClipManager
+
+.. autoclass:: mipac.manager.clip.ClipManager
+    :members:
+
+
+MyManager
+~~~~~~~~~
+
+.. attributetable:: mipac.manager.my.MyManager
+
+.. autoclass:: mipac.manager.my.MyManager
+    :members:
+
+
+BlockingManager
 ~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.favorite.FavoriteManager
+.. attributetable:: mipac.manager.blocking.BlockingManager
 
-.. autoclass:: mipac.manager.favorite.FavoriteManager
+.. autoclass:: mipac.manager.blocking.BlockingManager
     :members:
 
 
@@ -686,30 +695,12 @@ PollManager
     :members:
 
 
-ChartManager
-~~~~~~~~~~~~
+ChannelManager
+~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.chart.ChartManager
+.. attributetable:: mipac.manager.channel.ChannelManager
 
-.. autoclass:: mipac.manager.chart.ChartManager
-    :members:
-
-
-ReactionManager
-~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.reaction.ReactionManager
-
-.. autoclass:: mipac.manager.reaction.ReactionManager
-    :members:
-
-
-UserManager
-~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.user.UserManager
-
-.. autoclass:: mipac.manager.user.UserManager
+.. autoclass:: mipac.manager.channel.ChannelManager
     :members:
 
 
@@ -728,6 +719,42 @@ NoteManager
 .. attributetable:: mipac.manager.note.NoteManager
 
 .. autoclass:: mipac.manager.note.NoteManager
+    :members:
+
+
+FederationManager
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.federation.FederationManager
+
+.. autoclass:: mipac.manager.federation.FederationManager
+    :members:
+
+
+EmojiManager
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.emoji.EmojiManager
+
+.. autoclass:: mipac.manager.emoji.EmojiManager
+    :members:
+
+
+ReactionManager
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.reaction.ReactionManager
+
+.. autoclass:: mipac.manager.reaction.ReactionManager
+    :members:
+
+
+ClientManager
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.client.ClientManager
+
+.. autoclass:: mipac.manager.client.ClientManager
     :members:
 
 
@@ -776,21 +803,12 @@ FolderManager
     :members:
 
 
-AntennaManager
-~~~~~~~~~~~~~~
+ChartManager
+~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.antenna.AntennaManager
+.. attributetable:: mipac.manager.chart.ChartManager
 
-.. autoclass:: mipac.manager.antenna.AntennaManager
-    :members:
-
-
-ClientAntennaManager
-~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.antenna.ClientAntennaManager
-
-.. autoclass:: mipac.manager.antenna.ClientAntennaManager
+.. autoclass:: mipac.manager.chart.ChartManager
     :members:
 
 
@@ -812,12 +830,12 @@ FollowRequestManager
     :members:
 
 
-MyManager
-~~~~~~~~~
+MuteManager
+~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.my.MyManager
+.. attributetable:: mipac.manager.mute.MuteManager
 
-.. autoclass:: mipac.manager.my.MyManager
+.. autoclass:: mipac.manager.mute.MuteManager
     :members:
 
 
@@ -830,93 +848,48 @@ RoleManager
     :members:
 
 
-EmojiManager
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.emoji.EmojiManager
-
-.. autoclass:: mipac.manager.emoji.EmojiManager
-    :members:
-
-
-ClientManager
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.client.ClientManager
-
-.. autoclass:: mipac.manager.client.ClientManager
-    :members:
-
-
-ClientClipManager
-~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.clip.ClientClipManager
-
-.. autoclass:: mipac.manager.clip.ClientClipManager
-    :members:
-
-
-ClipManager
-~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.clip.ClipManager
-
-.. autoclass:: mipac.manager.clip.ClipManager
-    :members:
-
-
-MuteManager
-~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.mute.MuteManager
-
-.. autoclass:: mipac.manager.mute.MuteManager
-    :members:
-
-
-BlockingManager
+FavoriteManager
 ~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.blocking.BlockingManager
+.. attributetable:: mipac.manager.favorite.FavoriteManager
 
-.. autoclass:: mipac.manager.blocking.BlockingManager
+.. autoclass:: mipac.manager.favorite.FavoriteManager
     :members:
 
 
-AdminAnnouncementManager
-~~~~~~~~~~~~~~~~~~~~~~~~
+AntennaManager
+~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.admins.announcement.AdminAnnouncementManager
+.. attributetable:: mipac.manager.antenna.AntennaManager
 
-.. autoclass:: mipac.manager.admins.announcement.AdminAnnouncementManager
+.. autoclass:: mipac.manager.antenna.AntennaManager
     :members:
 
 
-AdminUserManager
-~~~~~~~~~~~~~~~~
+ClientAntennaManager
+~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.admins.user.AdminUserManager
+.. attributetable:: mipac.manager.antenna.ClientAntennaManager
 
-.. autoclass:: mipac.manager.admins.user.AdminUserManager
+.. autoclass:: mipac.manager.antenna.ClientAntennaManager
     :members:
 
 
-AdminModeratorManager
-~~~~~~~~~~~~~~~~~~~~~
+UserManager
+~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.admins.moderator.AdminModeratorManager
+.. attributetable:: mipac.manager.user.UserManager
 
-.. autoclass:: mipac.manager.admins.moderator.AdminModeratorManager
+.. autoclass:: mipac.manager.user.UserManager
     :members:
 
 
-AdminManager
-~~~~~~~~~~~~
+AdminEmojiManager
+~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.admins.admin.AdminManager
+.. attributetable:: mipac.manager.admins.emoji.AdminEmojiManager
 
-.. autoclass:: mipac.manager.admins.admin.AdminManager
+.. autoclass:: mipac.manager.admins.emoji.AdminEmojiManager
     :members:
 
 
@@ -929,12 +902,30 @@ AdminInviteManager
     :members:
 
 
-AdminEmojiManager
+AdminManager
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.admins.admin.AdminManager
+
+.. autoclass:: mipac.manager.admins.admin.AdminManager
+    :members:
+
+
+AdminRolesManager
 ~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.admins.emoji.AdminEmojiManager
+.. attributetable:: mipac.manager.admins.roles.AdminRolesManager
 
-.. autoclass:: mipac.manager.admins.emoji.AdminEmojiManager
+.. autoclass:: mipac.manager.admins.roles.AdminRolesManager
+    :members:
+
+
+AdminRolesModelManager
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.admins.roles.AdminRolesModelManager
+
+.. autoclass:: mipac.manager.admins.roles.AdminRolesModelManager
     :members:
 
 
@@ -956,24 +947,78 @@ AdminAdvertisingModelManager
     :members:
 
 
-AdminRolesManager
-~~~~~~~~~~~~~~~~~
+AdminAnnouncementManager
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.admins.roles.AdminRolesManager
+.. attributetable:: mipac.manager.admins.announcement.AdminAnnouncementManager
 
-.. autoclass:: mipac.manager.admins.roles.AdminRolesManager
+.. autoclass:: mipac.manager.admins.announcement.AdminAnnouncementManager
     :members:
 
 
-AdminRolesModelManager
-~~~~~~~~~~~~~~~~~~~~~~
+AdminModeratorManager
+~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.admins.roles.AdminRolesModelManager
+.. attributetable:: mipac.manager.admins.moderator.AdminModeratorManager
 
-.. autoclass:: mipac.manager.admins.roles.AdminRolesModelManager
+.. autoclass:: mipac.manager.admins.moderator.AdminModeratorManager
+    :members:
+
+
+AdminUserManager
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.admins.user.AdminUserManager
+
+.. autoclass:: mipac.manager.admins.user.AdminUserManager
     :members:
 Actions
 -------
+
+ClientClipActions
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.clip.ClientClipActions
+
+.. autoclass:: mipac.actions.clip.ClientClipActions
+    :members:
+
+
+ClipActions
+~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.clip.ClipActions
+
+.. autoclass:: mipac.actions.clip.ClipActions
+    :members:
+
+
+MyActions
+~~~~~~~~~
+
+.. attributetable:: mipac.actions.my.MyActions
+
+.. autoclass:: mipac.actions.my.MyActions
+    :members:
+
+
+BlockingActions
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.blocking.BlockingActions
+
+.. autoclass:: mipac.actions.blocking.BlockingActions
+    :members:
+
+
+PollActions
+~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.poll.PollActions
+
+.. autoclass:: mipac.actions.poll.PollActions
+    :members:
+
 
 ChannelActions
 ~~~~~~~~~~~~~~
@@ -990,60 +1035,6 @@ ClientChannelActions
 .. attributetable:: mipac.actions.channel.ClientChannelActions
 
 .. autoclass:: mipac.actions.channel.ClientChannelActions
-    :members:
-
-
-FederationActions
-~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.federation.FederationActions
-
-.. autoclass:: mipac.actions.federation.FederationActions
-    :members:
-
-
-FavoriteActions
-~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.favorite.FavoriteActions
-
-.. autoclass:: mipac.actions.favorite.FavoriteActions
-    :members:
-
-
-PollActions
-~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.poll.PollActions
-
-.. autoclass:: mipac.actions.poll.PollActions
-    :members:
-
-
-ChartActions
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.chart.ChartActions
-
-.. autoclass:: mipac.actions.chart.ChartActions
-    :members:
-
-
-ReactionActions
-~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.reaction.ReactionActions
-
-.. autoclass:: mipac.actions.reaction.ReactionActions
-    :members:
-
-
-UserActions
-~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.user.UserActions
-
-.. autoclass:: mipac.actions.user.UserActions
     :members:
 
 
@@ -1068,6 +1059,42 @@ NoteActions
 .. attributetable:: mipac.actions.note.NoteActions
 
 .. autoclass:: mipac.actions.note.NoteActions
+    :members:
+
+
+FederationActions
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.federation.FederationActions
+
+.. autoclass:: mipac.actions.federation.FederationActions
+    :members:
+
+
+EmojiActions
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.emoji.EmojiActions
+
+.. autoclass:: mipac.actions.emoji.EmojiActions
+    :members:
+
+
+ReactionActions
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.reaction.ReactionActions
+
+.. autoclass:: mipac.actions.reaction.ReactionActions
+    :members:
+
+
+ClientActions
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.client.ClientActions
+
+.. autoclass:: mipac.actions.client.ClientActions
     :members:
 
 
@@ -1116,21 +1143,12 @@ FolderActions
     :members:
 
 
-AntennaActions
-~~~~~~~~~~~~~~
+ChartActions
+~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.antenna.AntennaActions
+.. attributetable:: mipac.actions.chart.ChartActions
 
-.. autoclass:: mipac.actions.antenna.AntennaActions
-    :members:
-
-
-ClientAntennaActions
-~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.antenna.ClientAntennaActions
-
-.. autoclass:: mipac.actions.antenna.ClientAntennaActions
+.. autoclass:: mipac.actions.chart.ChartActions
     :members:
 
 
@@ -1152,12 +1170,12 @@ FollowRequestActions
     :members:
 
 
-MyActions
-~~~~~~~~~
+MuteActions
+~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.my.MyActions
+.. attributetable:: mipac.actions.mute.MuteActions
 
-.. autoclass:: mipac.actions.my.MyActions
+.. autoclass:: mipac.actions.mute.MuteActions
     :members:
 
 
@@ -1170,102 +1188,48 @@ RoleActions
     :members:
 
 
-EmojiActions
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.emoji.EmojiActions
-
-.. autoclass:: mipac.actions.emoji.EmojiActions
-    :members:
-
-
-ClientActions
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.client.ClientActions
-
-.. autoclass:: mipac.actions.client.ClientActions
-    :members:
-
-
-ClientClipActions
-~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.clip.ClientClipActions
-
-.. autoclass:: mipac.actions.clip.ClientClipActions
-    :members:
-
-
-ClipActions
-~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.clip.ClipActions
-
-.. autoclass:: mipac.actions.clip.ClipActions
-    :members:
-
-
-MuteActions
-~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.mute.MuteActions
-
-.. autoclass:: mipac.actions.mute.MuteActions
-    :members:
-
-
-BlockingActions
+FavoriteActions
 ~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.blocking.BlockingActions
+.. attributetable:: mipac.actions.favorite.FavoriteActions
 
-.. autoclass:: mipac.actions.blocking.BlockingActions
+.. autoclass:: mipac.actions.favorite.FavoriteActions
     :members:
 
 
-AdminAnnouncementActions
-~~~~~~~~~~~~~~~~~~~~~~~~
+AntennaActions
+~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.announcement.AdminAnnouncementActions
+.. attributetable:: mipac.actions.antenna.AntennaActions
 
-.. autoclass:: mipac.actions.admins.announcement.AdminAnnouncementActions
+.. autoclass:: mipac.actions.antenna.AntennaActions
     :members:
 
 
-AdminAnnouncementClientActions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ClientAntennaActions
+~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.announcement.AdminAnnouncementClientActions
+.. attributetable:: mipac.actions.antenna.ClientAntennaActions
 
-.. autoclass:: mipac.actions.admins.announcement.AdminAnnouncementClientActions
+.. autoclass:: mipac.actions.antenna.ClientAntennaActions
     :members:
 
 
-AdminUserActions
-~~~~~~~~~~~~~~~~
+UserActions
+~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.user.AdminUserActions
+.. attributetable:: mipac.actions.user.UserActions
 
-.. autoclass:: mipac.actions.admins.user.AdminUserActions
+.. autoclass:: mipac.actions.user.UserActions
     :members:
 
 
-AdminModeratorActions
-~~~~~~~~~~~~~~~~~~~~~
+AdminEmojiActions
+~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.moderator.AdminModeratorActions
+.. attributetable:: mipac.actions.admins.emoji.AdminEmojiActions
 
-.. autoclass:: mipac.actions.admins.moderator.AdminModeratorActions
-    :members:
-
-
-AdminActions
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.admins.admin.AdminActions
-
-.. autoclass:: mipac.actions.admins.admin.AdminActions
+.. autoclass:: mipac.actions.admins.emoji.AdminEmojiActions
     :members:
 
 
@@ -1278,12 +1242,30 @@ AdminInviteActions
     :members:
 
 
-AdminEmojiActions
-~~~~~~~~~~~~~~~~~
+AdminActions
+~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.emoji.AdminEmojiActions
+.. attributetable:: mipac.actions.admins.admin.AdminActions
 
-.. autoclass:: mipac.actions.admins.emoji.AdminEmojiActions
+.. autoclass:: mipac.actions.admins.admin.AdminActions
+    :members:
+
+
+AdminRoleActions
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.roles.AdminRoleActions
+
+.. autoclass:: mipac.actions.admins.roles.AdminRoleActions
+    :members:
+
+
+AdminRoleModelActions
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.roles.AdminRoleModelActions
+
+.. autoclass:: mipac.actions.admins.roles.AdminRoleModelActions
     :members:
 
 
@@ -1305,21 +1287,39 @@ AdminAdvertisingModelActions
     :members:
 
 
-AdminRoleActions
-~~~~~~~~~~~~~~~~
+AdminAnnouncementActions
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.roles.AdminRoleActions
+.. attributetable:: mipac.actions.admins.announcement.AdminAnnouncementActions
 
-.. autoclass:: mipac.actions.admins.roles.AdminRoleActions
+.. autoclass:: mipac.actions.admins.announcement.AdminAnnouncementActions
     :members:
 
 
-AdminRoleModelActions
+AdminAnnouncementClientActions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.announcement.AdminAnnouncementClientActions
+
+.. autoclass:: mipac.actions.admins.announcement.AdminAnnouncementClientActions
+    :members:
+
+
+AdminModeratorActions
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.roles.AdminRoleModelActions
+.. attributetable:: mipac.actions.admins.moderator.AdminModeratorActions
 
-.. autoclass:: mipac.actions.admins.roles.AdminRoleModelActions
+.. autoclass:: mipac.actions.admins.moderator.AdminModeratorActions
+    :members:
+
+
+AdminUserActions
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.user.AdminUserActions
+
+.. autoclass:: mipac.actions.admins.user.AdminUserActions
     :members:
 Type class
 ----------
@@ -1396,102 +1396,66 @@ VariablePayload
     :members:
 
 
-IChannel
-~~~~~~~~
-
-.. attributetable:: mipac.types.channel.IChannel
-
-.. autoclass:: mipac.types.channel.IChannel
-    :members:
-
-
-IChannelLite
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.channel.IChannelLite
-
-.. autoclass:: mipac.types.channel.IChannelLite
-    :members:
-
-
-IChannelNote
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.channel.IChannelNote
-
-.. autoclass:: mipac.types.channel.IChannelNote
-    :members:
-
-
-IPartialChannel
-~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.channel.IPartialChannel
-
-.. autoclass:: mipac.types.channel.IPartialChannel
-    :members:
-
-
-IAnnouncement
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.announcement.IAnnouncement
-
-.. autoclass:: mipac.types.announcement.IAnnouncement
-    :members:
-
-
-IAnnouncementCommon
-~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.announcement.IAnnouncementCommon
-
-.. autoclass:: mipac.types.announcement.IAnnouncementCommon
-    :members:
-
-
-IAnnouncementSystem
-~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.announcement.IAnnouncementSystem
-
-.. autoclass:: mipac.types.announcement.IAnnouncementSystem
-    :members:
-
-
-IBasePoll
-~~~~~~~~~
-
-.. attributetable:: mipac.types.poll.IBasePoll
-
-.. autoclass:: mipac.types.poll.IBasePoll
-    :members:
-
-
-ICreatePoll
-~~~~~~~~~~~
-
-.. attributetable:: mipac.types.poll.ICreatePoll
-
-.. autoclass:: mipac.types.poll.ICreatePoll
-    :members:
-
-
-IPoll
+IClip
 ~~~~~
 
-.. attributetable:: mipac.types.poll.IPoll
+.. attributetable:: mipac.types.clip.IClip
 
-.. autoclass:: mipac.types.poll.IPoll
+.. autoclass:: mipac.types.clip.IClip
     :members:
 
 
-IPollChoice
-~~~~~~~~~~~
+IAdminMeta
+~~~~~~~~~~
 
-.. attributetable:: mipac.types.poll.IPollChoice
+.. attributetable:: mipac.types.meta.IAdminMeta
 
-.. autoclass:: mipac.types.poll.IPollChoice
+.. autoclass:: mipac.types.meta.IAdminMeta
+    :members:
+
+
+IFeatures
+~~~~~~~~~
+
+.. attributetable:: mipac.types.meta.IFeatures
+
+.. autoclass:: mipac.types.meta.IFeatures
+    :members:
+
+
+IMeta
+~~~~~
+
+.. attributetable:: mipac.types.meta.IMeta
+
+.. autoclass:: mipac.types.meta.IMeta
+    :members:
+
+
+IPartialMeta
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.meta.IPartialMeta
+
+.. autoclass:: mipac.types.meta.IPartialMeta
+    :members:
+
+
+IPolicies
+~~~~~~~~~
+
+.. attributetable:: mipac.types.meta.IPolicies
+
+.. autoclass:: mipac.types.meta.IPolicies
+    :members:
+
+
+IUpdateMetaBody
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.meta.IUpdateMetaBody
+
+.. autoclass:: mipac.types.meta.IUpdateMetaBody
     :members:
 
 
@@ -1549,6 +1513,471 @@ IUserNf
     :members:
 
 
+IBasePoll
+~~~~~~~~~
+
+.. attributetable:: mipac.types.poll.IBasePoll
+
+.. autoclass:: mipac.types.poll.IBasePoll
+    :members:
+
+
+ICreatePoll
+~~~~~~~~~~~
+
+.. attributetable:: mipac.types.poll.ICreatePoll
+
+.. autoclass:: mipac.types.poll.ICreatePoll
+    :members:
+
+
+IPoll
+~~~~~
+
+.. attributetable:: mipac.types.poll.IPoll
+
+.. autoclass:: mipac.types.poll.IPoll
+    :members:
+
+
+IPollChoice
+~~~~~~~~~~~
+
+.. attributetable:: mipac.types.poll.IPollChoice
+
+.. autoclass:: mipac.types.poll.IPollChoice
+    :members:
+
+
+IChannel
+~~~~~~~~
+
+.. attributetable:: mipac.types.channel.IChannel
+
+.. autoclass:: mipac.types.channel.IChannel
+    :members:
+
+
+IChannelLite
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.channel.IChannelLite
+
+.. autoclass:: mipac.types.channel.IChannelLite
+    :members:
+
+
+IChannelNote
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.channel.IChannelNote
+
+.. autoclass:: mipac.types.channel.IChannelNote
+    :members:
+
+
+IPartialChannel
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.channel.IPartialChannel
+
+.. autoclass:: mipac.types.channel.IPartialChannel
+    :members:
+
+
+GeoPayload
+~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.GeoPayload
+
+.. autoclass:: mipac.types.note.GeoPayload
+    :members:
+
+
+ICreatedNote
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.ICreatedNote
+
+.. autoclass:: mipac.types.note.ICreatedNote
+    :members:
+
+
+INote
+~~~~~
+
+.. attributetable:: mipac.types.note.INote
+
+.. autoclass:: mipac.types.note.INote
+    :members:
+
+
+INoteReaction
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.INoteReaction
+
+.. autoclass:: mipac.types.note.INoteReaction
+    :members:
+
+
+INoteState
+~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.INoteState
+
+.. autoclass:: mipac.types.note.INoteState
+    :members:
+
+
+INoteTranslateResult
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.INoteTranslateResult
+
+.. autoclass:: mipac.types.note.INoteTranslateResult
+    :members:
+
+
+INoteUpdated
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.INoteUpdated
+
+.. autoclass:: mipac.types.note.INoteUpdated
+    :members:
+
+
+INoteUpdatedDelete
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.INoteUpdatedDelete
+
+.. autoclass:: mipac.types.note.INoteUpdatedDelete
+    :members:
+
+
+INoteUpdatedDeleteBody
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.INoteUpdatedDeleteBody
+
+.. autoclass:: mipac.types.note.INoteUpdatedDeleteBody
+    :members:
+
+
+INoteUpdatedReaction
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.INoteUpdatedReaction
+
+.. autoclass:: mipac.types.note.INoteUpdatedReaction
+    :members:
+
+
+INoteUpdatedReactionBody
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.INoteUpdatedReactionBody
+
+.. autoclass:: mipac.types.note.INoteUpdatedReactionBody
+    :members:
+
+
+IPartialNote
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.note.IPartialNote
+
+.. autoclass:: mipac.types.note.IPartialNote
+    :members:
+
+
+EmojiPayload
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.emoji.EmojiPayload
+
+.. autoclass:: mipac.types.emoji.EmojiPayload
+    :members:
+
+
+ICustomEmoji
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.emoji.ICustomEmoji
+
+.. autoclass:: mipac.types.emoji.ICustomEmoji
+    :members:
+
+
+ICustomEmojiLite
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.emoji.ICustomEmojiLite
+
+.. autoclass:: mipac.types.emoji.ICustomEmojiLite
+    :members:
+
+
+ICustomEmojiLiteRequired
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.emoji.ICustomEmojiLiteRequired
+
+.. autoclass:: mipac.types.emoji.ICustomEmojiLiteRequired
+    :members:
+
+
+NoteReactionPayload
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.reaction.NoteReactionPayload
+
+.. autoclass:: mipac.types.reaction.NoteReactionPayload
+    :members:
+
+
+IInviteCode
+~~~~~~~~~~~
+
+.. attributetable:: mipac.types.invite.IInviteCode
+
+.. autoclass:: mipac.types.invite.IInviteCode
+    :members:
+
+
+IPartialInviteCode
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.invite.IPartialInviteCode
+
+.. autoclass:: mipac.types.invite.IPartialInviteCode
+    :members:
+
+
+FolderPayload
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.drive.FolderPayload
+
+.. autoclass:: mipac.types.drive.FolderPayload
+    :members:
+
+
+IDriveFile
+~~~~~~~~~~
+
+.. attributetable:: mipac.types.drive.IDriveFile
+
+.. autoclass:: mipac.types.drive.IDriveFile
+    :members:
+
+
+IFileProperties
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.drive.IFileProperties
+
+.. autoclass:: mipac.types.drive.IFileProperties
+    :members:
+
+
+IFederationInstance
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.instance.IFederationInstance
+
+.. autoclass:: mipac.types.instance.IFederationInstance
+    :members:
+
+
+IFederationInstanceRequired
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.instance.IFederationInstanceRequired
+
+.. autoclass:: mipac.types.instance.IFederationInstanceRequired
+    :members:
+
+
+IFederationInstanceStat
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.instance.IFederationInstanceStat
+
+.. autoclass:: mipac.types.instance.IFederationInstanceStat
+    :members:
+
+
+IInstanceLite
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.instance.IInstanceLite
+
+.. autoclass:: mipac.types.instance.IInstanceLite
+    :members:
+
+
+IIndexStat
+~~~~~~~~~~
+
+.. attributetable:: mipac.types.admin.IIndexStat
+
+.. autoclass:: mipac.types.admin.IIndexStat
+    :members:
+
+
+IModerationLog
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.admin.IModerationLog
+
+.. autoclass:: mipac.types.admin.IModerationLog
+    :members:
+
+
+IServerInfo
+~~~~~~~~~~~
+
+.. attributetable:: mipac.types.admin.IServerInfo
+
+.. autoclass:: mipac.types.admin.IServerInfo
+    :members:
+
+
+IServerInfoCpu
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.admin.IServerInfoCpu
+
+.. autoclass:: mipac.types.admin.IServerInfoCpu
+    :members:
+
+
+IServerInfoFs
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.admin.IServerInfoFs
+
+.. autoclass:: mipac.types.admin.IServerInfoFs
+    :members:
+
+
+IServerInfoMem
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.admin.IServerInfoMem
+
+.. autoclass:: mipac.types.admin.IServerInfoMem
+    :members:
+
+
+IServerInfoNet
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.admin.IServerInfoNet
+
+.. autoclass:: mipac.types.admin.IServerInfoNet
+    :members:
+
+
+ITableStats
+~~~~~~~~~~~
+
+.. attributetable:: mipac.types.admin.ITableStats
+
+.. autoclass:: mipac.types.admin.ITableStats
+    :members:
+
+
+IUserIP
+~~~~~~~
+
+.. attributetable:: mipac.types.admin.IUserIP
+
+.. autoclass:: mipac.types.admin.IUserIP
+    :members:
+
+
+IAd
+~~~
+
+.. attributetable:: mipac.types.ads.IAd
+
+.. autoclass:: mipac.types.ads.IAd
+    :members:
+
+
+IPartialAd
+~~~~~~~~~~
+
+.. attributetable:: mipac.types.ads.IPartialAd
+
+.. autoclass:: mipac.types.ads.IPartialAd
+    :members:
+
+
+is_me_role
+~~~~~~~~~~
+
+.. autofunction:: mipac.types.roles.is_me_role
+
+
+IMeRole
+~~~~~~~
+
+.. attributetable:: mipac.types.roles.IMeRole
+
+.. autoclass:: mipac.types.roles.IMeRole
+    :members:
+
+
+IPartialRole
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.roles.IPartialRole
+
+.. autoclass:: mipac.types.roles.IPartialRole
+    :members:
+
+
+IRole
+~~~~~
+
+.. attributetable:: mipac.types.roles.IRole
+
+.. autoclass:: mipac.types.roles.IRole
+    :members:
+
+
+IRolePolicieValue
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.roles.IRolePolicieValue
+
+.. autoclass:: mipac.types.roles.IRolePolicieValue
+    :members:
+
+
+IRolePolicies
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.roles.IRolePolicies
+
+.. autoclass:: mipac.types.roles.IRolePolicies
+    :members:
+
+
+IRoleUser
+~~~~~~~~~
+
+.. attributetable:: mipac.types.roles.IRoleUser
+
+.. autoclass:: mipac.types.roles.IRoleUser
+    :members:
+
+
 IActiveUsersChart
 ~~~~~~~~~~~~~~~~~
 
@@ -1585,30 +2014,84 @@ IDriveRemoteChart
     :members:
 
 
-NoteReactionPayload
+IAnnouncement
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.announcement.IAnnouncement
+
+.. autoclass:: mipac.types.announcement.IAnnouncement
+    :members:
+
+
+IAnnouncementCommon
 ~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.types.reaction.NoteReactionPayload
+.. attributetable:: mipac.types.announcement.IAnnouncementCommon
 
-.. autoclass:: mipac.types.reaction.NoteReactionPayload
+.. autoclass:: mipac.types.announcement.IAnnouncementCommon
     :members:
 
 
-IAd
-~~~
+IAnnouncementSystem
+~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.types.ads.IAd
+.. attributetable:: mipac.types.announcement.IAnnouncementSystem
 
-.. autoclass:: mipac.types.ads.IAd
+.. autoclass:: mipac.types.announcement.IAnnouncementSystem
     :members:
 
 
-IPartialAd
-~~~~~~~~~~
+IFederationFollowCommon
+~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.types.ads.IPartialAd
+.. attributetable:: mipac.types.follow.IFederationFollowCommon
 
-.. autoclass:: mipac.types.ads.IPartialAd
+.. autoclass:: mipac.types.follow.IFederationFollowCommon
+    :members:
+
+
+IFederationFollower
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.follow.IFederationFollower
+
+.. autoclass:: mipac.types.follow.IFederationFollower
+    :members:
+
+
+IFederationFollowing
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.follow.IFederationFollowing
+
+.. autoclass:: mipac.types.follow.IFederationFollowing
+    :members:
+
+
+IFollowRequest
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.follow.IFollowRequest
+
+.. autoclass:: mipac.types.follow.IFollowRequest
+    :members:
+
+
+IMuteUser
+~~~~~~~~~
+
+.. attributetable:: mipac.types.mute.IMuteUser
+
+.. autoclass:: mipac.types.mute.IMuteUser
+    :members:
+
+
+IAntenna
+~~~~~~~~
+
+.. attributetable:: mipac.types.antenna.IAntenna
+
+.. autoclass:: mipac.types.antenna.IAntenna
     :members:
 
 
@@ -1622,6 +2105,12 @@ is_me_detailed_moderator
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autofunction:: mipac.types.user.is_me_detailed_moderator
+
+
+is_partial_user
+~~~~~~~~~~~~~~~
+
+.. autofunction:: mipac.types.user.is_partial_user
 
 
 is_user_detailed
@@ -1765,489 +2254,6 @@ IUserRole
 .. attributetable:: mipac.types.user.IUserRole
 
 .. autoclass:: mipac.types.user.IUserRole
-    :members:
-
-
-GeoPayload
-~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.GeoPayload
-
-.. autoclass:: mipac.types.note.GeoPayload
-    :members:
-
-
-ICreatedNote
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.ICreatedNote
-
-.. autoclass:: mipac.types.note.ICreatedNote
-    :members:
-
-
-INote
-~~~~~
-
-.. attributetable:: mipac.types.note.INote
-
-.. autoclass:: mipac.types.note.INote
-    :members:
-
-
-INoteReaction
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.INoteReaction
-
-.. autoclass:: mipac.types.note.INoteReaction
-    :members:
-
-
-INoteState
-~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.INoteState
-
-.. autoclass:: mipac.types.note.INoteState
-    :members:
-
-
-INoteTranslateResult
-~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.INoteTranslateResult
-
-.. autoclass:: mipac.types.note.INoteTranslateResult
-    :members:
-
-
-INoteUpdated
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.INoteUpdated
-
-.. autoclass:: mipac.types.note.INoteUpdated
-    :members:
-
-
-INoteUpdatedDelete
-~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.INoteUpdatedDelete
-
-.. autoclass:: mipac.types.note.INoteUpdatedDelete
-    :members:
-
-
-INoteUpdatedDeleteBody
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.INoteUpdatedDeleteBody
-
-.. autoclass:: mipac.types.note.INoteUpdatedDeleteBody
-    :members:
-
-
-INoteUpdatedReaction
-~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.INoteUpdatedReaction
-
-.. autoclass:: mipac.types.note.INoteUpdatedReaction
-    :members:
-
-
-INoteUpdatedReactionBody
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.INoteUpdatedReactionBody
-
-.. autoclass:: mipac.types.note.INoteUpdatedReactionBody
-    :members:
-
-
-IPartialNote
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.note.IPartialNote
-
-.. autoclass:: mipac.types.note.IPartialNote
-    :members:
-
-
-IAdminMeta
-~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IAdminMeta
-
-.. autoclass:: mipac.types.meta.IAdminMeta
-    :members:
-
-
-IFeatures
-~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IFeatures
-
-.. autoclass:: mipac.types.meta.IFeatures
-    :members:
-
-
-IMeta
-~~~~~
-
-.. attributetable:: mipac.types.meta.IMeta
-
-.. autoclass:: mipac.types.meta.IMeta
-    :members:
-
-
-IPartialMeta
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IPartialMeta
-
-.. autoclass:: mipac.types.meta.IPartialMeta
-    :members:
-
-
-IPolicies
-~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IPolicies
-
-.. autoclass:: mipac.types.meta.IPolicies
-    :members:
-
-
-IUpdateMetaBody
-~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.meta.IUpdateMetaBody
-
-.. autoclass:: mipac.types.meta.IUpdateMetaBody
-    :members:
-
-
-FolderPayload
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.drive.FolderPayload
-
-.. autoclass:: mipac.types.drive.FolderPayload
-    :members:
-
-
-IDriveFile
-~~~~~~~~~~
-
-.. attributetable:: mipac.types.drive.IDriveFile
-
-.. autoclass:: mipac.types.drive.IDriveFile
-    :members:
-
-
-IFileProperties
-~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.drive.IFileProperties
-
-.. autoclass:: mipac.types.drive.IFileProperties
-    :members:
-
-
-IAntenna
-~~~~~~~~
-
-.. attributetable:: mipac.types.antenna.IAntenna
-
-.. autoclass:: mipac.types.antenna.IAntenna
-    :members:
-
-
-IFederationFollowCommon
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.follow.IFederationFollowCommon
-
-.. autoclass:: mipac.types.follow.IFederationFollowCommon
-    :members:
-
-
-IFederationFollower
-~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.follow.IFederationFollower
-
-.. autoclass:: mipac.types.follow.IFederationFollower
-    :members:
-
-
-IFederationFollowing
-~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.follow.IFederationFollowing
-
-.. autoclass:: mipac.types.follow.IFederationFollowing
-    :members:
-
-
-IFollowRequest
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.follow.IFollowRequest
-
-.. autoclass:: mipac.types.follow.IFollowRequest
-    :members:
-
-
-IFederationInstance
-~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.instance.IFederationInstance
-
-.. autoclass:: mipac.types.instance.IFederationInstance
-    :members:
-
-
-IFederationInstanceRequired
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.instance.IFederationInstanceRequired
-
-.. autoclass:: mipac.types.instance.IFederationInstanceRequired
-    :members:
-
-
-IFederationInstanceStat
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.instance.IFederationInstanceStat
-
-.. autoclass:: mipac.types.instance.IFederationInstanceStat
-    :members:
-
-
-IInstanceLite
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.instance.IInstanceLite
-
-.. autoclass:: mipac.types.instance.IInstanceLite
-    :members:
-
-
-IIndexStat
-~~~~~~~~~~
-
-.. attributetable:: mipac.types.admin.IIndexStat
-
-.. autoclass:: mipac.types.admin.IIndexStat
-    :members:
-
-
-IModerationLog
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.admin.IModerationLog
-
-.. autoclass:: mipac.types.admin.IModerationLog
-    :members:
-
-
-IServerInfo
-~~~~~~~~~~~
-
-.. attributetable:: mipac.types.admin.IServerInfo
-
-.. autoclass:: mipac.types.admin.IServerInfo
-    :members:
-
-
-IServerInfoCpu
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.admin.IServerInfoCpu
-
-.. autoclass:: mipac.types.admin.IServerInfoCpu
-    :members:
-
-
-IServerInfoFs
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.admin.IServerInfoFs
-
-.. autoclass:: mipac.types.admin.IServerInfoFs
-    :members:
-
-
-IServerInfoMem
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.admin.IServerInfoMem
-
-.. autoclass:: mipac.types.admin.IServerInfoMem
-    :members:
-
-
-IServerInfoNet
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.admin.IServerInfoNet
-
-.. autoclass:: mipac.types.admin.IServerInfoNet
-    :members:
-
-
-ITableStats
-~~~~~~~~~~~
-
-.. attributetable:: mipac.types.admin.ITableStats
-
-.. autoclass:: mipac.types.admin.ITableStats
-    :members:
-
-
-IUserIP
-~~~~~~~
-
-.. attributetable:: mipac.types.admin.IUserIP
-
-.. autoclass:: mipac.types.admin.IUserIP
-    :members:
-
-
-IInviteCode
-~~~~~~~~~~~
-
-.. attributetable:: mipac.types.invite.IInviteCode
-
-.. autoclass:: mipac.types.invite.IInviteCode
-    :members:
-
-
-IPartialInviteCode
-~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.invite.IPartialInviteCode
-
-.. autoclass:: mipac.types.invite.IPartialInviteCode
-    :members:
-
-
-EmojiPayload
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.emoji.EmojiPayload
-
-.. autoclass:: mipac.types.emoji.EmojiPayload
-    :members:
-
-
-ICustomEmoji
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.emoji.ICustomEmoji
-
-.. autoclass:: mipac.types.emoji.ICustomEmoji
-    :members:
-
-
-ICustomEmojiLite
-~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.emoji.ICustomEmojiLite
-
-.. autoclass:: mipac.types.emoji.ICustomEmojiLite
-    :members:
-
-
-ICustomEmojiLiteRequired
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.emoji.ICustomEmojiLiteRequired
-
-.. autoclass:: mipac.types.emoji.ICustomEmojiLiteRequired
-    :members:
-
-
-is_me_role
-~~~~~~~~~~
-
-.. autofunction:: mipac.types.roles.is_me_role
-
-
-IMeRole
-~~~~~~~
-
-.. attributetable:: mipac.types.roles.IMeRole
-
-.. autoclass:: mipac.types.roles.IMeRole
-    :members:
-
-
-IPartialRole
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.roles.IPartialRole
-
-.. autoclass:: mipac.types.roles.IPartialRole
-    :members:
-
-
-IRole
-~~~~~
-
-.. attributetable:: mipac.types.roles.IRole
-
-.. autoclass:: mipac.types.roles.IRole
-    :members:
-
-
-IRolePolicieValue
-~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.roles.IRolePolicieValue
-
-.. autoclass:: mipac.types.roles.IRolePolicieValue
-    :members:
-
-
-IRolePolicies
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.roles.IRolePolicies
-
-.. autoclass:: mipac.types.roles.IRolePolicies
-    :members:
-
-
-IRoleUser
-~~~~~~~~~
-
-.. attributetable:: mipac.types.roles.IRoleUser
-
-.. autoclass:: mipac.types.roles.IRoleUser
-    :members:
-
-
-IClip
-~~~~~
-
-.. attributetable:: mipac.types.clip.IClip
-
-.. autoclass:: mipac.types.clip.IClip
-    :members:
-
-
-IMuteUser
-~~~~~~~~~
-
-.. attributetable:: mipac.types.mute.IMuteUser
-
-.. autoclass:: mipac.types.mute.IMuteUser
     :members:
 Errors
 ------
@@ -3162,6 +3168,57 @@ YourPostError
 __OTHER
 -------
 
+MiFile
+~~~~~~
+
+.. attributetable:: mipac.file.MiFile
+
+.. autoclass:: mipac.file.MiFile
+    :members:
+
+
+json_or_text
+~~~~~~~~~~~~
+
+.. autofunction:: mipac.http.json_or_text
+
+
+HTTPClient
+~~~~~~~~~~
+
+.. attributetable:: mipac.http.HTTPClient
+
+.. autoclass:: mipac.http.HTTPClient
+    :members:
+
+
+MisskeyClientWebSocketResponse
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.http.MisskeyClientWebSocketResponse
+
+.. autoclass:: mipac.http.MisskeyClientWebSocketResponse
+    :members:
+
+
+Route
+~~~~~
+
+.. attributetable:: mipac.http.Route
+
+.. autoclass:: mipac.http.Route
+    :members:
+
+
+_MissingSentinel
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.http._MissingSentinel
+
+.. autoclass:: mipac.http._MissingSentinel
+    :members:
+
+
 AuthClient
 ~~~~~~~~~~
 
@@ -3258,63 +3315,12 @@ upper_to_lower
 .. autofunction:: mipac.util.upper_to_lower
 
 
-json_or_text
-~~~~~~~~~~~~
-
-.. autofunction:: mipac.http.json_or_text
-
-
-HTTPClient
-~~~~~~~~~~
-
-.. attributetable:: mipac.http.HTTPClient
-
-.. autoclass:: mipac.http.HTTPClient
-    :members:
-
-
-MisskeyClientWebSocketResponse
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.http.MisskeyClientWebSocketResponse
-
-.. autoclass:: mipac.http.MisskeyClientWebSocketResponse
-    :members:
-
-
-Route
-~~~~~
-
-.. attributetable:: mipac.http.Route
-
-.. autoclass:: mipac.http.Route
-    :members:
-
-
-_MissingSentinel
-~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.http._MissingSentinel
-
-.. autoclass:: mipac.http._MissingSentinel
-    :members:
-
-
 Client
 ~~~~~~
 
 .. attributetable:: mipac.client.Client
 
 .. autoclass:: mipac.client.Client
-    :members:
-
-
-MiFile
-~~~~~~
-
-.. attributetable:: mipac.file.MiFile
-
-.. autoclass:: mipac.file.MiFile
     :members:
 
 
@@ -3381,6 +3387,42 @@ Limits
     :members:
 
 
+AbstractManager
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.abstract.manager.AbstractManager
+
+.. autoclass:: mipac.abstract.manager.AbstractManager
+    :members:
+
+
+AbstractModel
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.abstract.model.AbstractModel
+
+.. autoclass:: mipac.abstract.model.AbstractModel
+    :members:
+
+
+AbstractAction
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.abstract.action.AbstractAction
+
+.. autoclass:: mipac.abstract.action.AbstractAction
+    :members:
+
+
+AuthClient
+~~~~~~~~~~
+
+.. attributetable:: mipac.utils.auth.AuthClient
+
+.. autoclass:: mipac.utils.auth.AuthClient
+    :members:
+
+
 check_multi_arg
 ~~~~~~~~~~~~~~~
 
@@ -3409,6 +3451,12 @@ MiTime
 
 .. autoclass:: mipac.utils.util.MiTime
     :members:
+
+
+setup_logging
+~~~~~~~~~~~~~
+
+.. autofunction:: mipac.utils.log.setup_logging
 
 
 bool_to_string
@@ -3459,12 +3507,6 @@ upper_to_lower
 .. autofunction:: mipac.utils.format.upper_to_lower
 
 
-setup_logging
-~~~~~~~~~~~~~
-
-.. autofunction:: mipac.utils.log.setup_logging
-
-
 cache
 ~~~~~
 
@@ -3483,15 +3525,6 @@ set_cache
 .. autofunction:: mipac.utils.cache.set_cache
 
 
-AuthClient
-~~~~~~~~~~
-
-.. attributetable:: mipac.utils.auth.AuthClient
-
-.. autoclass:: mipac.utils.auth.AuthClient
-    :members:
-
-
 pagination_iterator
 ~~~~~~~~~~~~~~~~~~~
 
@@ -3504,31 +3537,4 @@ Pagination
 .. attributetable:: mipac.utils.pagination.Pagination
 
 .. autoclass:: mipac.utils.pagination.Pagination
-    :members:
-
-
-AbstractModel
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.abstract.model.AbstractModel
-
-.. autoclass:: mipac.abstract.model.AbstractModel
-    :members:
-
-
-AbstractAction
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.abstract.action.AbstractAction
-
-.. autoclass:: mipac.abstract.action.AbstractAction
-    :members:
-
-
-AbstractManager
-~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.abstract.manager.AbstractManager
-
-.. autoclass:: mipac.abstract.manager.AbstractManager
     :members:
