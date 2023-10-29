@@ -73,9 +73,11 @@ class RoleActions(AbstractAction):
         while True:
             raw_users = await pagination.next()
             for raw_user in raw_users:
-                yield MeRole(raw_user, client=self.__client) if is_me_role(
-                    raw_user, config.account_id
-                ) else RoleUser(raw_user, client=self.__client)
+                yield (
+                    MeRole(raw_user, client=self.__client)
+                    if is_me_role(raw_user, config.account_id)
+                    else RoleUser(raw_user, client=self.__client)
+                )
 
             if pagination.is_final or get_all is False:
                 break

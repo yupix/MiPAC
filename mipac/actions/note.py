@@ -53,7 +53,9 @@ def create_note_body(
         "channelId": channel_id,
     }
     if not check_multi_arg(content, files, renote_id, poll):
-        raise ParameterError("ノートの送信にはcontent, file_ids, renote_id またはpollのいずれか1つが無くてはいけません")
+        raise ParameterError(
+            "ノートの送信にはcontent, file_ids, renote_id またはpollのいずれか1つが無くてはいけません"
+        )
 
     if poll and type(Poll):
         poll_data = remove_dict_empty(
