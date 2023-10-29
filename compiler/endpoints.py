@@ -45,5 +45,5 @@ with open('./datas/endpoints.json', mode='w', encoding='utf-8') as f:
     json.dump(old_endpoints, f, ensure_ascii=False, indent=4)
 
 with open('../mipac/types/endpoints.py', 'w', encoding='utf-8') as f:
-    data = json.dumps(old_endpoints, ensure_ascii=False, indent=4).replace('"', "'")
+    data = json.dumps(old_endpoints, ensure_ascii=False, indent=4)
     f.write(f'{TOP_COMMENT}{IMPORTS}{TEMPLATES}Literal{data}\n')
