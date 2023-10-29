@@ -187,7 +187,8 @@ class IMeDetailedModerator(IMeDetailed):
 
 # 型が不明確になるため、基本的にはこの共用体は使わないでください。基本的にAPIなどのレスポンスに使うことを想定しています。
 IUser = (
-    IUserDetailedNotLogined
+    IPartialUser
+    | IUserDetailedNotLogined
     | IUserDetailed
     | IUserDetailedModerator
     | IMeDetailed
@@ -199,6 +200,10 @@ class IFollowRequest(TypedDict):
     id: str
     follower: IPartialUser
     followee: IPartialUser
+
+
+def is_partial_user(user: IUser) -> TypeGuard[IPartialUser]:
+    return user.get("created_at") is None
 
 
 def is_me_detailed(user: IUser, me_id: str) -> TypeGuard[IMeDetailed]:
