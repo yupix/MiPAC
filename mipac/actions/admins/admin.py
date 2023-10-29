@@ -43,12 +43,6 @@ class AdminActions(AbstractAction):
         )
         return AdminMeta(res, client=self.__client)
 
-    async def vacuum(self, full: bool = False, analyze: bool = False) -> bool:
-        body = {"full": full, "analyze": analyze}
-        return bool(
-            await self.__session.request(Route("POST", "/api/admin/vacuum"), auth=True, json=body)
-        )
-
     async def update_user_note(self, user_id: str, text: str) -> bool:
         """
         Update user note
