@@ -24,6 +24,7 @@ from mipac.types.user import (
     IUserRole,
     is_me_detailed,
     is_me_detailed_moderator,
+    is_partial_user,
     is_user_detailed,
     is_user_detailed_moderator,
     is_user_detailed_not_logined,
@@ -442,21 +443,42 @@ class MeDetailedModerator(MeDetailed):
 def create_user_model(
     user: IUser, client: ClientManager
 ) -> (
-    MeDetailed[IMeDetailed]
+    PartialUser
+    | MeDetailed[IMeDetailed]
     | UserDetailedNotLogined[IUserDetailedNotLogined]
     | UserDetailed[IUserDetailed]
     | UserDetailedModerator
     | MeDetailedModerator
 ):
+    if is_partial_user(user):
+        return PartialUser(user, client=client)
     if is_me_detailed_moderator(user, config.account_id):  # 自身でモデレーターが2
         return MeDetailedModerator(user, client=client)
     if is_me_detailed(user, config.account_id):  # 自身が3
         return MeDetailed(user, client=client)
-    if is_user_detailed_not_logined(user):  # ログインしてないやつを最優先に返す
+    if is_user_detailed_not_logined(user):  # ログインしてないやつが4
         return UserDetailedNotLogined(user, client=client)
-    if is_user_detailed_moderator(user):  # 他人でモデレーター視点が4
+    if is_user_detailed_moderator(user):  # 他人でモデレーター視点が5
         return UserDetailedModerator(user, client=client)
-    if is_user_detailed(user):  # 他人が5
+    if is_user_detailed(user):  # 他人が6
         return UserDetailed(user, client=client)
 
     raise ValueError("Invalid user model")
+
+
+UserModels = (
+    PartialUser
+    | MeDetailed[IMeDetailed]
+    | UserDetailedNotLogined[IUserDetailedNotLogined]
+    | UserDetailed[IUserDetailed]
+    | UserDetailedModerator
+    | MeDetailedModerator
+)
+
+UserDetailedModels = (
+    MeDetailed[IMeDetailed]
+    | UserDetailedNotLogined[IUserDetailedNotLogined]
+    | UserDetailed[IUserDetailed]
+    | UserDetailedModerator
+    | MeDetailedModerator
+)
