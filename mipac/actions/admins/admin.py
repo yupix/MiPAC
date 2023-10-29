@@ -26,9 +26,18 @@ class AdminActions(AbstractAction):
         self.__client = client
 
     async def get_meta(self, detail: bool = False) -> AdminMeta:
+        """
+        Get admin meta
+        Endpoint: `/api/admin/meta`
+
+        Parameters
+        ----------
+        detail : bool, optional
+            flag of detail, by default False
+        """
         res: IAdminMeta = await self.__session.request(
             Route("POST", "/api/admin/meta"),
-            json={"detail": detail},
+            json={"detail": detail},  # 現状detailがあってもなんも変わらない
             auth=True,
             lower=True,
         )
@@ -41,6 +50,17 @@ class AdminActions(AbstractAction):
         )
 
     async def update_user_note(self, user_id: str, text: str) -> bool:
+        """
+        Update user note
+        Endpoint: `/api/admin/update-user-note`
+
+        Parameters
+        ----------
+        user_id : str
+            target user's id
+        text : str
+            new note
+        """
         body = {"userId": user_id, "text": text}
         return bool(
             await self.__session.request(
@@ -104,7 +124,9 @@ class AdminActions(AbstractAction):
         )
 
     async def suspend_user(self, user_id: str) -> bool:
-        """Suspends the user for the specified Id
+        """
+        Suspends the user for the specified Id
+        Endpoint: `/api/admin/suspend-user`
 
         Parameters
         ----------
@@ -175,6 +197,19 @@ class AdminActions(AbstractAction):
         return await self.get_server_info(cache_override=True)
 
     async def send_email(self, to: str, subject: str, text: str) -> bool:
+        """
+        Send email to specified address
+        Endpoint: `/api/admin/send-email`
+
+        Parameters
+        ----------
+        to : str
+            email address to send
+        subject : str
+            email subject
+        text : str
+            email body
+        """
         body = {"to": to, "subject": subject, "text": text}
         return bool(
             await self.__session.request(
@@ -183,6 +218,17 @@ class AdminActions(AbstractAction):
         )
 
     async def resolve_abuse_user_report(self, report_id: str, forward: bool = False) -> bool:
+        """
+        Resolve abuse user report
+        Endpoint: `/api/admin/resolve-abuse-user-report`
+
+        Parameters
+        ----------
+        report_id : str
+            report id
+        forward : bool, optional
+            Whether to forward the report to a remote server
+        """
         body = {"reportId": report_id, "forward": forward}
         return bool(
             await self.__session.request(
@@ -191,7 +237,9 @@ class AdminActions(AbstractAction):
         )
 
     async def reset_password(self, user_id: str) -> str:
-        """target user's password reset
+        """
+        target user's password reset
+        Endpoint: `/api/admin/reset-password`
 
         Parameters
         ----------
