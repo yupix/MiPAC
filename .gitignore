@@ -6,3 +6,4 @@ build
 dist
 .idea
 docs/_build
+.env
