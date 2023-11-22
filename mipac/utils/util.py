@@ -4,6 +4,8 @@ import warnings
 from datetime import datetime, timedelta
 from typing import Any
 
+from mipac.utils.cache import cache
+
 try:
     import orjson  # type: ignore
 except ModuleNotFoundError:
@@ -15,6 +17,29 @@ if HAS_ORJSON:
     _from_json = orjson.loads  # type: ignore
 else:
     _from_json = json.loads
+
+
+class DeprecatedClass:
+    def __init__(self, remove_in_version: str) -> None:
+        self.remove_in_version = remove_in_version
+
+    def __call__(self, cls):
+        remove_in_version = self.remove_in_version
+
+        class Wrapped(cls):
+            def __init__(self, *args, **kwargs):
+                warnings.simplefilter("always", DeprecationWarning)  # turn off filter
+                warnings.warn(
+                    "Call to deprecated class {}. (Remove will this class at v{})".format(
+                        cls.__name__, remove_in_version
+                    ),
+                    category=DeprecationWarning,
+                    stacklevel=2,
+                )
+                warnings.simplefilter("default", DeprecationWarning)  # reset filter
+                super().__init__(*args, **kwargs)
+
+        return Wrapped
 
 
 def deprecated(func):
