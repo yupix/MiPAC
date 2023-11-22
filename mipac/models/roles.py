@@ -4,12 +4,12 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
+from mipac.models.lite.role import PartialRole
 from mipac.models.user import MeDetailed, UserDetailed
 from mipac.types.roles import IMeRole, IRole, IRolePolicies, IRolePolicieValue, IRoleUser
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
-    from mipac.manager.admins.roles import AdminRolesModelManager
     from mipac.manager.client import ClientManager
     from mipac.manager.user import UserManager
 
@@ -164,81 +164,42 @@ class RolePolicies(AbstractModel):
         return RolePolicyValue(self.__role_policies_data.get("rate_limit_factor"))
 
 
-class Role(AbstractModel):
+class Role(PartialRole[IRole]):
     def __init__(self, role_data: IRole, *, client: ClientManager) -> None:
-        self.__role_data: IRole = role_data
-        self.__client: ClientManager = client
-
-    @property
-    def id(self) -> str:
-        return self.__role_data.get("id")
+        super().__init__(role_data, client=client)
 
     @property
     def created_at(self) -> str:
-        return self.__role_data.get("created_at")
+        return self._raw_role["created_at"]
 
     @property
     def updated_at(self) -> str:
-        return self.__role_data.get("updated_at")
-
-    @property
-    def name(self) -> str:
-        return self.__role_data.get("name")
-
-    @property
-    def description(self) -> str:
-        return self.__role_data.get("description")
-
-    @property
-    def color(self) -> str | None:
-        return self.__role_data.get("color")
-
-    @property
-    def icon_url(self) -> str | None:
-        return self.__role_data.get("icon_url")
+        return self._raw_role["updated_at"]
 
     @property
     def target(self) -> str:
-        return self.__role_data.get("target")
+        return self._raw_role["target"]
 
     @property
     def cond_formula(self) -> dict:
-        return self.__role_data.get("cond_formula")
+        return self._raw_role["cond_formula"]
 
     @property
     def is_public(self) -> bool:
-        return self.__role_data.get("is_public")
-
-    @property
-    def is_administrator(self) -> bool:
-        return self.__role_data.get("is_administrator")
-
-    @property
-    def is_moderator(self) -> bool:
-        return self.__role_data.get("is_moderator")
+        return self._raw_role["is_public"]
 
     @property
     def as_badge(self) -> bool:
-        return self.__role_data.get("as_badge")
+        return self._raw_role["as_badge"]
 
     @property
     def can_edit_members_by_moderator(self) -> bool:
-        return self.__role_data.get("can_edit_members_by_moderator")
+        return self._raw_role["can_edit_members_by_moderator"]
 
     @property
     def policies(self) -> RolePolicies:
-        return RolePolicies(self.__role_data.get("policies"))
+        return RolePolicies(self._raw_role["policies"])
 
     @property
     def users_count(self) -> int:
-        return self.__role_data.get("users_count")
-
-    @property
-    def api(self) -> AdminRolesModelManager:
-        return self.__client.admin.create_roles_model_manager(self.id)
-
-    def __eq__(self, __value: object) -> bool:
-        return isinstance(__value, Role) and self.id == __value.id
-
-    def __ne__(self, __value: object) -> bool:
-        return not self.__eq__(__value)
+        return self._raw_role["users_count"]
