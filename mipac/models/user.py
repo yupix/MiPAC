@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Generic, TypeVar
+from typing import TYPE_CHECKING, Generic, Literal, TypeVar, overload
 
 from mipac.abstract.model import AbstractModel
 from mipac.config import config
@@ -442,17 +442,24 @@ class MeDetailedModerator(MeDetailed):
         return self._raw_user["moderation_note"]
 
 
+@overload
 def create_user_model(
-    user: IUser, client: ClientManager
-) -> (
-    PartialUser
-    | MeDetailed[IMeDetailed]
-    | UserDetailedNotLogined[IUserDetailedNotLogined]
-    | UserDetailed[IUserDetailed]
-    | UserDetailedModerator
-    | MeDetailedModerator
-):
-    if is_partial_user(user):
+    user: IUser, client: ClientManager, *, use_partial_user: Literal[False]
+) -> UserDetailedModels:
+    pass
+
+
+@overload
+def create_user_model(
+    user: IUser, client: ClientManager, *, use_partial_user: Literal[True]
+) -> UserModels:
+    pass
+
+
+def create_user_model(
+    user: IUser, client: ClientManager, *, use_partial_user: Literal[True, False] = True
+) -> UserModels | UserDetailedModels:
+    if use_partial_user and is_partial_user(user):
         return PartialUser(user, client=client)
     if is_me_detailed_moderator(user, config.account_id):  # 自身でモデレーターが2
         return MeDetailedModerator(user, client=client)
