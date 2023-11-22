@@ -21,6 +21,15 @@ class RoleActions(AbstractAction):
         self.__client: ClientManager = client
 
     async def get_list(self) -> list[Role]:
+        """
+        Get a list of roles from the API.
+        Endpoint: `/api/roles/list`
+
+        Returns
+        -------
+        list[Role]
+            The role data.
+        """
         res: list[IRole] = await self.__session.request(
             Route("POST", "/api/roles/list"), auth=True
         )
@@ -28,7 +37,9 @@ class RoleActions(AbstractAction):
         return [Role(raw_role, client=self.__client) for raw_role in res]
 
     async def get(self, role_id: str) -> Role:
-        """Get a role from the API.
+        """
+        Get a role from the API.
+        Endpoint: `/api/roles/show`
 
         Parameters
         ----------
@@ -39,11 +50,6 @@ class RoleActions(AbstractAction):
         -------
         Role
             The role data.
-
-        Raises
-        ------
-        NotSupportVersion
-            If the version of the Misskey is less than 13.
         """
         raw_role: IRole = await self.__session.request(
             Route("POST", "/api/roles/show"), auth=True, json={"roleId": role_id}
@@ -59,6 +65,29 @@ class RoleActions(AbstractAction):
         *,
         get_all: bool = False,
     ) -> AsyncGenerator[MeRole | RoleUser, None]:
+        """
+        Get users in a role.
+        Endpoint: `/api/roles/users`
+
+        Parameters
+        ----------
+        role_id : str
+            The ID of the role to get users.
+        since_id : str, optional
+            The ID of the user to get users after, by default None
+        until_id : str, optional
+            The ID of the user to get users before, by default None
+        limit : int, optional
+            The number of users to get, by default 10
+        get_all : bool, optional
+            Whether to get all users, by default False
+
+        Yields
+        ------
+        AsyncGenerator[MeRole | RoleUser, None]
+            The role user data.
+        """
+
         if limit > 100:
             raise ValueError("Limit cannot be greater than 100")
 
@@ -93,6 +122,33 @@ class RoleActions(AbstractAction):
         *,
         get_all: bool = False,
     ):
+        """
+        Get notes in a role.
+        Endpoint: `/api/roles/notes`
+
+        Parameters
+        ----------
+        role_id : str
+            The ID of the role to get notes.
+        limit : int, optional
+            The number of notes to get, by default 10
+        since_id : str, optional
+            The ID of the note to get notes after, by default None
+        until_id : str, optional
+            The ID of the note to get notes before, by default None
+        since_data : int, optional
+            The timestamp of the note to get notes after, by default None
+        until_data : int, optional
+            The timestamp of the note to get notes before, by default None
+        get_all : bool, optional
+            Whether to get all notes, by default False
+
+        Yields
+        ------
+        AsyncGenerator[Note, None]
+            The note data.
+        """
+
         if limit > 100:
             raise ValueError("Limit cannot be greater than 100")
 
