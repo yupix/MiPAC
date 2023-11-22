@@ -189,6 +189,10 @@ class Role(PartialRole[IRole]):
         return self._raw_role["is_public"]
 
     @property
+    def is_explorable(self) -> bool:
+        return self._raw_role["is_explorable"]
+
+    @property
     def as_badge(self) -> bool:
         return self._raw_role["as_badge"]
 
