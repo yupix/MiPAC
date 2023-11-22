@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING, Generic, Literal, TypeVar, overload
 from mipac.abstract.model import AbstractModel
 from mipac.config import config
 from mipac.models.announcement import Announcement
+from mipac.models.lite.role import PartialRole
 from mipac.models.lite.user import BadgeRole, PartialUser
 from mipac.models.note import Note
 from mipac.types.page import IPage
@@ -240,8 +241,8 @@ class UserDetailedNotLogined(PartialUser[T], Generic[T]):
         return self._raw_user["security_keys"]
 
     @property
-    def roles(self) -> list[UserRole]:
-        return [UserRole(raw_role, client=self._client) for raw_role in self._raw_user["roles"]]
+    def roles(self) -> list[PartialRole]:
+        return [PartialRole(raw_role, client=self._client) for raw_role in self._raw_user["roles"]]
 
     @property
     def memo(self) -> str | None:
