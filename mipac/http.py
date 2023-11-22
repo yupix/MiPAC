@@ -64,6 +64,13 @@ class HTTPClient:
         self._url: str = url
         self._token: str | None = token
 
+    async def __aenter__(self) -> HTTPClient:
+        await self.login()
+        return self
+
+    async def __aexit__(self, exc_type, exc, tb) -> None:
+        await self.close_session()
+
     @property
     def session(self) -> aiohttp.ClientSession:
         return self._session
