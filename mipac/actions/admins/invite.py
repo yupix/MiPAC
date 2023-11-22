@@ -6,7 +6,7 @@ from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
 from mipac.models.invite import InviteCode, PartialInviteCode
 from mipac.types.invite import IInviteCode, IPartialInviteCode
-from mipac.util import remove_dict_empty
+from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
