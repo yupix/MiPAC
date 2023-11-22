@@ -2535,14 +2535,21 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ClientCha
 Methods</span><ul>
 <li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.role.RoleActions.get">get</a></li></ul>
+async</span><a class="reference internal" href="#mipac.actions.role.RoleActions.get">get</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.role.RoleActions.get_list">get_list</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="メソッド">
+def</span><a class="reference internal" href="#mipac.actions.role.RoleActions.get_notes">get_notes</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="メソッド">
+def</span><a class="reference internal" href="#mipac.actions.role.RoleActions.get_users">get_users</a></li></ul>
 </div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.role.RoleActions">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.role.</span></span><span class="sig-name descname"><span class="pre">RoleActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.role.RoleActions" title="Link to this definition">#</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.role.RoleActions.get">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.roles.Role" title="mipac.models.roles.Role"><span class="pre">Role</span></a></span></span><a class="headerlink" href="#mipac.actions.role.RoleActions.get" title="Link to this definition">#</a></dt>
-<dd><p>Get a role from the API.</p>
+<dd><p>Get a role from the API.
+Endpoint: <cite>/api/roles/show</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>role_id</strong> (<em>str</em>) -- The ID of the role to get.</p>
@@ -2553,8 +2560,64 @@ async</span><a class="reference internal" href="#mipac.actions.role.RoleActions.
 <dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#mipac.models.roles.Role" title="mipac.models.roles.Role">Role</a></p>
 </dd>
-<dt class="field-even">例外<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.errors.base.NotSupportVersion" title="mipac.errors.base.NotSupportVersion"><strong>NotSupportVersion</strong></a> -- If the version of the Misskey is less than 13.</p>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.role.RoleActions.get_list">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.roles.Role" title="mipac.models.roles.Role"><span class="pre">Role</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.role.RoleActions.get_list" title="Link to this definition">#</a></dt>
+<dd><p>Get a list of roles from the API.
+Endpoint: <cite>/api/roles/list</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The role data.</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#mipac.models.roles.Role" title="mipac.models.roles.Role">Role</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.role.RoleActions.get_notes">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_all</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.role.RoleActions.get_notes" title="Link to this definition">#</a></dt>
+<dd><p>Get notes in a role.
+Endpoint: <cite>/api/roles/notes</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>role_id</strong> (<em>str</em>) -- The ID of the role to get notes.</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) -- The number of notes to get, by default 10</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) -- The ID of the note to get notes after, by default None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) -- The ID of the note to get notes before, by default None</p></li>
+<li><p><strong>since_data</strong> (<em>int</em><em>, </em><em>optional</em>) -- The timestamp of the note to get notes after, by default None</p></li>
+<li><p><strong>until_data</strong> (<em>int</em><em>, </em><em>optional</em>) -- The timestamp of the note to get notes before, by default None</p></li>
+<li><p><strong>get_all</strong> (<em>bool</em><em>, </em><em>optional</em>) -- Whether to get all notes, by default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">列挙<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>AsyncGenerator[Note, None]</em> -- The note data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.role.RoleActions.get_users">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_users</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_all</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.roles.MeRole" title="mipac.models.roles.MeRole"><span class="pre">MeRole</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.roles.RoleUser" title="mipac.models.roles.RoleUser"><span class="pre">RoleUser</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.role.RoleActions.get_users" title="Link to this definition">#</a></dt>
+<dd><p>Get users in a role.
+Endpoint: <cite>/api/roles/users</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>role_id</strong> (<em>str</em>) -- The ID of the role to get users.</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) -- The ID of the user to get users after, by default None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) -- The ID of the user to get users before, by default None</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) -- The number of users to get, by default 10</p></li>
+<li><p><strong>get_all</strong> (<em>bool</em><em>, </em><em>optional</em>) -- Whether to get all users, by default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">列挙<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>AsyncGenerator[MeRole | RoleUser, None]</em> -- The role user data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -6468,6 +6531,9 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#roleactions">RoleActions</a><ul>
 <li><a class="reference internal" href="#mipac.actions.role.RoleActions"><code class="docutils literal notranslate"><span class="pre">RoleActions</span></code></a><ul>
 <li><a class="reference internal" href="#mipac.actions.role.RoleActions.get"><code class="docutils literal notranslate"><span class="pre">RoleActions.get()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.role.RoleActions.get_list"><code class="docutils literal notranslate"><span class="pre">RoleActions.get_list()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.role.RoleActions.get_notes"><code class="docutils literal notranslate"><span class="pre">RoleActions.get_notes()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.role.RoleActions.get_users"><code class="docutils literal notranslate"><span class="pre">RoleActions.get_users()</span></code></a></li>
 </ul>
 </li>
 </ul>
