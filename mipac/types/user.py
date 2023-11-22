@@ -48,6 +48,12 @@ class IBadgeRole(TypedDict):
 
 
 class IUserRole(IBadgeRole):
+    """
+    Deprecated
+
+    Will be removed in v0.7.0
+    """
+
     id: str
     color: str | None
     description: str
