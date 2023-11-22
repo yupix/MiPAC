@@ -30,6 +30,7 @@ from mipac.types.user import (
     is_user_detailed_not_logined,
 )
 from mipac.utils.format import str_to_datetime
+from mipac.utils.util import DeprecatedClass
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -82,6 +83,7 @@ class Achievement(AbstractModel):
         return self.__detail["unlocked_at"]
 
 
+@DeprecatedClass(remove_in_version="0.7.0")
 class UserRole(BadgeRole[IUserRole]):
     def __init__(self, data: IUserRole, *, client: ClientManager) -> None:
         super().__init__(data, client=client)
