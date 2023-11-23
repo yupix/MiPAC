@@ -7,7 +7,13 @@ if TYPE_CHECKING:
 
 __all__ = ("NoteReactionPayload",)
 
-IReactionAcceptance = Literal["likeOnly", "likeOnlyForRemote"]
+IReactionAcceptance = Literal[
+    None,
+    "likeOnly",
+    "likeOnlyForRemote",
+    "nonSensitiveOnly",
+    "nonSensitiveOnlyForLocalLikeOnlyForRemote",
+]
 
 
 class NoteReactionPayload(TypedDict):
