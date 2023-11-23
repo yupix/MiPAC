@@ -12,6 +12,7 @@ from mipac.models.note import Note, NoteReaction, NoteState, NoteTranslateResult
 from mipac.models.poll import MiPoll, Poll
 from mipac.types.clip import IClip
 from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult, INoteVisibility
+from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
@@ -29,6 +30,7 @@ def create_note_body(
     visible_user_ids: list[str] | None = None,
     cw: str | None = None,
     local_only: bool = False,
+    reaction_acceptance: IReactionAcceptance = None,
     extract_mentions: bool = True,
     extract_hashtags: bool = True,
     extract_emojis: bool = True,
@@ -45,6 +47,7 @@ def create_note_body(
         "text": content,
         "cw": cw,
         "localOnly": local_only,
+        "reactionAcceptance": reaction_acceptance,
         "noExtractMentions": not extract_mentions,
         "noExtractHashtags": not extract_hashtags,
         "noExtractEmojis": not extract_emojis,
@@ -291,6 +294,7 @@ class ClientNoteActions(AbstractAction):
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
+        reaction_acceptance: IReactionAcceptance = None,
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
@@ -313,6 +317,7 @@ class ClientNoteActions(AbstractAction):
             extract_mentions=extract_mentions,
             poll=poll,
             local_only=local_only,
+            reaction_acceptance=reaction_acceptance,
             reply_id=reply_id,
             files=files,
         )
@@ -331,6 +336,7 @@ class ClientNoteActions(AbstractAction):
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
+        reaction_acceptance: IReactionAcceptance = None,
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
@@ -382,6 +388,7 @@ class ClientNoteActions(AbstractAction):
             extract_mentions=extract_mentions,
             poll=poll,
             local_only=local_only,
+            reaction_acceptance=reaction_acceptance,
             renote_id=note_id,
             files=files,
         )
@@ -496,6 +503,7 @@ class NoteActions(ClientNoteActions):
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
+        reaction_acceptance: IReactionAcceptance = None,
         extract_mentions: bool = True,
         extract_hashtags: bool = True,
         extract_emojis: bool = True,
@@ -521,6 +529,8 @@ class NoteActions(ClientNoteActions):
             閲覧注意の文字, by default None
         local_only : bool, optional
             ローカルにのみ表示するか, by default False
+        reaction_acceptance : IReactionAcceptance, optional
+            リアクションの受け入れ設定, by default None
         extract_mentions : bool, optional
             メンションを展開するか, by default False
         extract_hashtags : bool, optional
@@ -560,6 +570,7 @@ class NoteActions(ClientNoteActions):
             files=files,
             poll=poll,
             local_only=local_only,
+            reaction_acceptance=reaction_acceptance,
             renote_id=renote_id,
             reply_id=reply_id,
         )
