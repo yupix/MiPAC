@@ -151,6 +151,13 @@ class ClientNoteActions(AbstractAction):
         )
         return [Note(note, self._client) for note in notes]
 
+    async def get_all_children(
+        self,
+        since_id: str | None = None,
+        untilId: str | None = None,
+        note_id: str | None = None,
+    ) -> AsyncGenerator[Note, None] | list[Note]:
+        limit = 100
 
         note_id = note_id or self._note_id
 
@@ -173,7 +180,7 @@ class ClientNoteActions(AbstractAction):
             for note in res_notes:
                 yield Note(note, self._client)
 
-            if get_all is False or pagination.is_final:
+            if pagination.is_final:
                 break
 
     async def get_state(self, note_id: str | None = None) -> NoteState:
