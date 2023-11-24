@@ -123,19 +123,34 @@ class ClientNoteActions(AbstractAction):
         )
         return res
 
+    @cache(group="get_note_children")
     async def get_children(
         self,
         limit: int = 100,
         since_id: str | None = None,
         untilId: str | None = None,
         note_id: str | None = None,
-        get_all: bool = True,
-    ) -> AsyncGenerator[Note, None]:
+    ) -> list[Note]:
         if limit > 100:
             raise ParameterError("limit は100以下である必要があります")
 
-        if get_all:
-            limit = 100
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        data = {
+            "noteId": note_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": untilId,
+        }
+
+        notes: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/children"), json=data
+        )
+        return [Note(note, self._client) for note in notes]
+
 
         note_id = note_id or self._note_id
 
