@@ -48,14 +48,15 @@ class NoteManager(AbstractManager):
             note_id=note_id, session=session, client=client
         )
         self.poll: PollManager = PollManager(note_id=note_id, session=session, client=client)
+        self.__action: NoteActions = NoteActions(
+            note_id=self.__note_id,
+            session=self.__session,
+            client=self.__client,
+        )  # property側で生成するとcacheが効かなくなる
 
     def create_client_note_manager(self, note_id: str) -> ClientNoteManager:
         return ClientNoteManager(note_id=note_id, session=self.__session, client=self.__client)
 
     @property
     def action(self) -> NoteActions:
-        return NoteActions(
-            note_id=self.__note_id,
-            session=self.__session,
-            client=self.__client,
-        )
+        return self.__action
