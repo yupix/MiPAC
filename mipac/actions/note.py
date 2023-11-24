@@ -151,6 +151,18 @@ class ClientNoteActions(AbstractAction):
         )
         return [Note(note, self._client) for note in notes]
 
+    @cache(group="get_note_children", override=True)
+    async def fetch_children(
+        self,
+        limit: int = 100,
+        since_id: str | None = None,
+        untilId: str | None = None,
+        note_id: str | None = None,
+    ) -> list[Note]:
+        return await self.get_children(
+            limit=limit, since_id=since_id, untilId=untilId, note_id=note_id
+        )
+
     async def get_all_children(
         self,
         since_id: str | None = None,
