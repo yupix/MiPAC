@@ -372,4 +372,15 @@ ENDPOINTS = Literal[
     "/api/following/update",
     "/api/notes/update",
     "/api/notifications/test-notification",
+    "/api/admin/avatar-decorations/create",
+    "/api/admin/avatar-decorations/delete",
+    "/api/admin/avatar-decorations/list",
+    "/api/admin/avatar-decorations/update",
+    "/api/following/update-all",
+    "/api/get-avatar-decorations",
+    "/api/i/notifications-grouped",
+    "/api/users/featured-notes",
+    "/api/users/lists/update-membership",
+    "/api/users/lists/get-memberships",
+    "/api/fetch-external-resources"
 ]

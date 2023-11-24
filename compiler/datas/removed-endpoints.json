@@ -1,4 +1,6 @@
 [
     "/api/invite",
-    "/api/notifications/read"
+    "/api/i/get-word-muted-notes-count",
+    "/api/notifications/read",
+    "/api/notes/update"
 ]
