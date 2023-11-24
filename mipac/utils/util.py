@@ -4,7 +4,8 @@ import warnings
 from datetime import datetime, timedelta
 from typing import Any
 
-from mipac.utils.cache import cache
+from mipac.abstract.action import AbstractAction
+from mipac.errors.base import CredentialsError
 
 try:
     import orjson  # type: ignore
@@ -17,6 +18,16 @@ if HAS_ORJSON:
     _from_json = orjson.loads  # type: ignore
 else:
     _from_json = json.loads
+
+
+def credentials_required(func):
+    @functools.wraps(func)
+    async def wrapper(self: AbstractAction, *args, **kwargs):
+        if self._session._token is None:
+            raise CredentialsError("This feature requires credentials")
+        return await func(*args, **kwargs)
+
+    return wrapper
 
 
 class DeprecatedClass:

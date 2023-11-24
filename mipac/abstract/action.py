@@ -3,10 +3,11 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
-from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
+    from mipac.http import HTTPClient
+
 
 __all__ = ("AbstractAction",)
 
@@ -14,4 +15,5 @@ __all__ = ("AbstractAction",)
 class AbstractAction(ABC):
     @abstractmethod
     def __init__(self, session: HTTPClient, client: ClientManager):
-        pass
+        self._session = session
+        self._client = client
