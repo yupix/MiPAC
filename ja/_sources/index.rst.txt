@@ -2267,21 +2267,21 @@ APIError
     :members:
 
 
+CredentialsError
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.base.CredentialsError
+
+.. autoclass:: mipac.errors.base.CredentialsError
+    :members:
+
+
 NotExistRequiredData
 ~~~~~~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.errors.base.NotExistRequiredData
 
 .. autoclass:: mipac.errors.base.NotExistRequiredData
-    :members:
-
-
-NotSupportVersion
-~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.base.NotSupportVersion
-
-.. autoclass:: mipac.errors.base.NotSupportVersion
     :members:
 
 
@@ -3337,6 +3337,12 @@ check_multi_arg
 ~~~~~~~~~~~~~~~
 
 .. autofunction:: mipac.utils.util.check_multi_arg
+
+
+credentials_required
+~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: mipac.utils.util.credentials_required
 
 
 deprecated

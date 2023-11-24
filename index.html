@@ -1635,7 +1635,7 @@ async</span><a class="reference internal" href="#mipac.actions.my.MyActions.get_
 <dd class="field-odd"><p>bool</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.errors.base.NotSupportVersion" title="mipac.errors.base.NotSupportVersion"><strong>NotSupportVersion</strong></a> – 実績機能が存在しないサーバーを使用している</p>
+<dd class="field-even"><p><strong>NotSupportVersion</strong> – 実績機能が存在しないサーバーを使用している</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4562,21 +4562,21 @@ Endpoint: <cite>/api/admin/update-user-note</cite></p>
 </dd></dl>
 
 </section>
+<section id="credentialserror">
+<h3>CredentialsError<a class="headerlink" href="#credentialserror" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.errors.base.CredentialsError"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.errors.base.CredentialsError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.errors.base.</span></span><span class="sig-name descname"><span class="pre">CredentialsError</span></span><a class="headerlink" href="#mipac.errors.base.CredentialsError" title="Link to this definition">#</a></dt>
+<dd><p>認証情報に関するエラー</p>
+</dd></dl>
+
+</section>
 <section id="notexistrequireddata">
 <h3>NotExistRequiredData<a class="headerlink" href="#notexistrequireddata" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.errors.base.NotExistRequiredData"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.errors.base.NotExistRequiredData">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.errors.base.</span></span><span class="sig-name descname"><span class="pre">NotExistRequiredData</span></span><a class="headerlink" href="#mipac.errors.base.NotExistRequiredData" title="Link to this definition">#</a></dt>
 <dd><p>クラスの中に必要なデータが不足している</p>
-</dd></dl>
-
-</section>
-<section id="notsupportversion">
-<h3>NotSupportVersion<a class="headerlink" href="#notsupportversion" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.errors.base.NotSupportVersion"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.errors.base.NotSupportVersion">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.errors.base.</span></span><span class="sig-name descname"><span class="pre">NotSupportVersion</span></span><a class="headerlink" href="#mipac.errors.base.NotSupportVersion" title="Link to this definition">#</a></dt>
-<dd><p>サポートされていないバージョンのインスタンス</p>
 </dd></dl>
 
 </section>
@@ -5604,6 +5604,14 @@ Endpoint: <cite>/api/admin/update-user-note</cite></p>
 </dd>
 </dl>
 </dd></dl>
+
+</section>
+<section id="credentials-required">
+<h3>credentials_required<a class="headerlink" href="#credentials-required" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="mipac.utils.util.credentials_required">
+<span class="sig-prename descclassname"><span class="pre">mipac.utils.util.</span></span><span class="sig-name descname"><span class="pre">credentials_required</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.utils.util.credentials_required" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="deprecated">
@@ -7127,12 +7135,12 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.errors.base.APIError"><code class="docutils literal notranslate"><span class="pre">APIError</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#notexistrequireddata">NotExistRequiredData</a><ul>
-<li><a class="reference internal" href="#mipac.errors.base.NotExistRequiredData"><code class="docutils literal notranslate"><span class="pre">NotExistRequiredData</span></code></a></li>
+<li><a class="reference internal" href="#credentialserror">CredentialsError</a><ul>
+<li><a class="reference internal" href="#mipac.errors.base.CredentialsError"><code class="docutils literal notranslate"><span class="pre">CredentialsError</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#notsupportversion">NotSupportVersion</a><ul>
-<li><a class="reference internal" href="#mipac.errors.base.NotSupportVersion"><code class="docutils literal notranslate"><span class="pre">NotSupportVersion</span></code></a></li>
+<li><a class="reference internal" href="#notexistrequireddata">NotExistRequiredData</a><ul>
+<li><a class="reference internal" href="#mipac.errors.base.NotExistRequiredData"><code class="docutils literal notranslate"><span class="pre">NotExistRequiredData</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#parametererror">ParameterError</a><ul>
@@ -7608,6 +7616,10 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 </li>
 <li><a class="reference internal" href="#check-multi-arg">check_multi_arg</a><ul>
 <li><a class="reference internal" href="#mipac.utils.util.check_multi_arg"><code class="docutils literal notranslate"><span class="pre">check_multi_arg()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#credentials-required">credentials_required</a><ul>
+<li><a class="reference internal" href="#mipac.utils.util.credentials_required"><code class="docutils literal notranslate"><span class="pre">credentials_required()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#deprecated">deprecated</a><ul>
