@@ -40,8 +40,5 @@ class ParameterError(Exception):
     """引数に関するエラー"""
 
 
-class NotSupportVersion(Exception):
-    """サポートされていないバージョンのインスタンス"""
-
-
-NotSupportVersionText = "ご利用のインスタンスのバージョンではサポートされていない機能です"
+class CredentialsError(Exception):
+    """認証情報に関するエラー"""
