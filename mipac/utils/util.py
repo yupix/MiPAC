@@ -25,7 +25,7 @@ def credentials_required(func):
     async def wrapper(self: AbstractAction, *args, **kwargs):
         if self._session._token is None:
             raise CredentialsError("This feature requires credentials")
-        return await func(*args, **kwargs)
+        return await func(self, *args, **kwargs)
 
     return wrapper
 
