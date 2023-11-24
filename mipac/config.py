@@ -14,10 +14,6 @@ class CacheConfig:
         self.ttl: int = options.ttl
 
 
-IMisskeyDistribution = Literal["ayuskey", "m544", "areionskey", "official"]
-IMisskeyVersions = Literal[13, 12, 11]
-
-
 class ILimits(TypedDict, total=False):
     channel_name: int
     channel_description: int
