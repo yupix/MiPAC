@@ -40,12 +40,8 @@ class NoteState(AbstractModel):
         return self.__data["is_favorited"]
 
     @property
-    def is_watching(self) -> bool:
-        return self.__data["is_watching"]
-
-    @property
     def is_muted_thread(self) -> bool:
-        return self.__data.get("is_muted_thread", False)
+        return self.__data["is_muted_thread"]
 
 
 class NoteDeleted(AbstractModel):

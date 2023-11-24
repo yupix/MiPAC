@@ -13,8 +13,7 @@ INoteVisibility = Literal["public", "home", "followers", "specified"]
 
 class INoteState(TypedDict):
     is_favorited: bool
-    is_watching: bool
-    is_muted_thread: NotRequired[bool]
+    is_muted_thread: bool
 
 
 class INoteUpdated(TypedDict, Generic[T]):
