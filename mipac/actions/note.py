@@ -196,6 +196,7 @@ class ClientNoteActions(AbstractAction):
             if pagination.is_final:
                 break
 
+    @cache(group="get_note_state")
     async def get_state(self, note_id: str | None = None) -> NoteState:
         note_id = note_id or self._note_id
 
@@ -207,6 +208,11 @@ class ClientNoteActions(AbstractAction):
             Route("POST", "/api/notes/state"), auth=True, json=data
         )
         return NoteState(res)
+
+    @cache(group="get_note_state", override=True)
+    async def fetch_state(self, note_id: str | None = None) -> NoteState:
+        note_id = note_id or self._note_id
+        return await self.get_state(note_id=note_id)
 
     async def add_clips(self, clip_id: str, note_id: str | None = None) -> bool:
         """
