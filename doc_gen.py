@@ -1,6 +1,7 @@
 import os
 import importlib
 import inspect
+from pathlib import PurePath
 import subprocess
 from typing import TypedDict
 
@@ -19,7 +20,7 @@ def get_defined_functions_and_classes(module):
 
 
 class IGenerateSphinx(TypedDict):
-    module_path: str
+    module_path: PurePath
     module_name: str
     functions: list[str]
     classes: list[str]
@@ -51,7 +52,7 @@ def generate_sphinx_output(data: list[IGenerateSphinx]):
     for i in data:
         add_to = "__OTHER"
         for category in hierarchy.keys():
-            if category in i["module_path"]:
+            if PurePath(category).as_posix() in i["module_path"].as_posix():
                 add_to = hierarchy[category]
         add_data(i, tmp[add_to])
 
@@ -80,7 +81,7 @@ def generate_documentation(base_path, output_file, hierarchy, exclude_files=[]):
             if functions or classes:
                 items.append(
                     {
-                        "module_path": module_path,
+                        "module_path": PurePath(module_path),
                         "module_name": module_import_path,
                         "functions": functions,
                         "classes": classes,
