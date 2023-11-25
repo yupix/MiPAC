@@ -57,7 +57,7 @@ def create_note_body(
     }
     if not check_multi_arg(content, files, renote_id, poll):
         raise ParameterError(
-            "ノートの送信にはcontent, file_ids, renote_id またはpollのいずれか1つが無くてはいけません"
+            "To send a note, one of content, file_ids, renote_id or poll is required"
         )
 
     if poll and type(Poll):
@@ -99,8 +99,7 @@ class ClientNoteActions(AbstractAction):
         self._client: ClientManager = client
 
     async def un_renote(self, note_id: str | None = None) -> bool:
-        """
-        Releases the note renote for the specified Id
+        """Releases the note renote for the specified Id
 
         Parameters
         ----------
@@ -159,6 +158,27 @@ class ClientNoteActions(AbstractAction):
         untilId: str | None = None,
         note_id: str | None = None,
     ) -> list[Note]:
+        """Get children of the note.
+        update the cache of the :py:meth:`mipac.actions.note.ClientNoteActions.get_children` method
+
+        Endpoint: `/api/notes/children`
+
+        Parameters
+        ----------
+        limit : int, default=100
+            limit
+        since_id : str | None, default=None
+            Since ID
+        untilId : str | None, default=None
+            Until ID
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Note]
+            Children of the note
+        """
         note_id = note_id or self._note_id
         return await self.get_children(
             limit=limit, since_id=since_id, untilId=untilId, note_id=note_id
@@ -170,6 +190,24 @@ class ClientNoteActions(AbstractAction):
         untilId: str | None = None,
         note_id: str | None = None,
     ) -> AsyncGenerator[Note, None] | list[Note]:
+        """Get all children of the note
+
+        Endpoint: `/api/notes/children`
+
+        Parameters
+        ----------
+        since_id : str | None, default=None
+            Since ID
+        untilId : str | None, default=None
+            Until ID
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        AsyncGenerator[Note, None] | list[Note]
+            Children of the note
+        """
         limit = 100
 
         note_id = note_id or self._note_id
@@ -198,6 +236,20 @@ class ClientNoteActions(AbstractAction):
 
     @cache(group="get_note_state")
     async def get_state(self, note_id: str | None = None) -> NoteState:
+        """Get the state of the note
+
+        Endpoint: `/api/notes/state`
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        NoteState
+            Note state
+        """
         note_id = note_id or self._note_id
 
         if note_id is None:
@@ -211,26 +263,41 @@ class ClientNoteActions(AbstractAction):
 
     @cache(group="get_note_state", override=True)
     async def fetch_state(self, note_id: str | None = None) -> NoteState:
-        note_id = note_id or self._note_id
-        return await self.get_state(note_id=note_id)
+        """Get the state of the note.
 
-    async def add_clips(self, clip_id: str, note_id: str | None = None) -> bool:
-        """
-        クリップに追加します
+        update the cache of the :py:meth:`mipac.actions.note.ClientNoteActions.get_state` method
+
+        Endpoint: `/api/notes/state`
 
         Parameters
         ----------
         note_id : str | None, default=None
-                追加するノートのID
-        clip_id : str
-            クリップのID
+            note id
+
+        Returns
+        -------
+        NoteState
+            Note state
+        """
+        note_id = note_id or self._note_id
+        return await self.get_state(note_id=note_id)
+
+    async def add_clips(self, clip_id: str, note_id: str | None = None) -> bool:
+        """Add a note to the clip
+
+        Endpoint: `/api/clips/add-note`
+
+        Parameters
+        ----------
         note_id : str | None, default=None
-            追加したいノートのID
+            note id
+        clip_id : str
+            clip id
 
         Returns
         -------
         bool
-            成功したか否か
+            success or not
         """
 
         note_id = note_id or self._note_id
@@ -244,18 +311,19 @@ class ClientNoteActions(AbstractAction):
         )
 
     async def get_clips(self, note_id: str | None = None) -> list[Clip]:
-        """
-        クリップを取得します
+        """Get the clips of the note
+
+        Endpoint: `/api/notes/clips`
 
         Parameters
         ----------
         note_id : str | None, default=None
-            取得したいノートのID
+            note id
 
         Returns
         -------
         list[Clip]
-            クリップのリスト
+            Clips of the note
         """
 
         note_id = note_id or self._note_id
@@ -270,8 +338,9 @@ class ClientNoteActions(AbstractAction):
         return [Clip(clip, client=self._client) for clip in res]
 
     async def delete(self, note_id: str | None = None) -> bool:
-        """
-        Delete a note
+        """Delete a note
+
+        Endpoint: `/api/notes/delete`
 
         Parameters
         ----------
@@ -294,8 +363,9 @@ class ClientNoteActions(AbstractAction):
         return bool(res)
 
     async def create_renote(self, note_id: str | None = None) -> Note:
-        """
-        Renote a note
+        """Renote a note
+
+        Endpoint: `/api/notes/create`
 
         Parameters
         ----------
@@ -385,8 +455,9 @@ class ClientNoteActions(AbstractAction):
         poll: MiPoll | None = None,
         note_id: str | None = None,
     ) -> Note:
-        """
-        Create a note quote.
+        """Create a note quote.
+
+        Endpoint: `/api/notes/create`
 
         Parameters
         ----------
@@ -448,8 +519,9 @@ class ClientNoteActions(AbstractAction):
         note_id: str | None = None,
         target_lang: str = "en-US",
     ) -> NoteTranslateResult:
-        """
-        Translate a note
+        """Translate a note
+
+        Endpoint: `/api/notes/translate`
 
         Parameters
         ----------
@@ -484,8 +556,9 @@ class ClientNoteActions(AbstractAction):
         note_id: str | None = None,
         get_all: bool = False,
     ) -> AsyncGenerator[Note, None]:
-        """
-        ノートに対する返信を取得します
+        """Get replies to the note
+
+        Endpoint: `/api/notes/replies`
 
         Parameters
         ---------
@@ -554,8 +627,9 @@ class NoteActions(ClientNoteActions):
         files: list[MiFile | File | str] | None = None,
         poll: MiPoll | None = None,
     ) -> Note:
-        """
-        ノートを投稿します。
+        """Send a note
+
+        Endpoint: `/api/notes/create`
 
         Parameters
         ----------
@@ -625,8 +699,9 @@ class NoteActions(ClientNoteActions):
 
     @cache(group="get_note")
     async def get(self, note_id: str) -> Note:
-        """
-        ノートを取得します
+        """Get a note
+
+        Endpoint: `/api/notes/show`
 
         Parameters
         ----------
@@ -648,6 +723,22 @@ class NoteActions(ClientNoteActions):
 
     @cache(group="get_note", override=True)
     async def fetch(self, note_id: str) -> Note:
+        """Get a note.
+
+        update the cache of the :py:meth:`mipac.actions.note.NoteActions.get` method
+
+        Endpoint: `/api/notes/show`
+
+        Parameters
+        ----------
+        note_id : str
+            note id
+
+        Returns
+        -------
+        Note
+            note
+        """
         res = await self._session.request(
             Route("POST", "/api/notes/show"),
             json={"noteId": note_id},
