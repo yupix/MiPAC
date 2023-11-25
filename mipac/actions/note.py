@@ -392,11 +392,13 @@ class ClientNoteActions(AbstractAction):
         )
         return Note(res["created_note"], client=self._client)
 
-    async def get_reaction(self, reaction: str, note_id: str | None = None) -> list[NoteReaction]:
+    async def get_reaction(
+        self, note_id: str | None = None, reaction: str | None = None
+    ) -> list[NoteReaction]:
         note_id = note_id or self._note_id
         return await self._client.note.reaction.action.get_reaction(
-            reaction
-        )  # TODO: note.reactionのインタンスを新規作成出来るように
+            reaction=reaction, note_id=note_id
+        )
 
     async def reply(
         self,
