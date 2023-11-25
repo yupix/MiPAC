@@ -14,17 +14,21 @@ h3 {
     display: flex;
     flex-wrap: wrap;
     background-color: var(--color-inline-code-background);
-    margin-bottom: -1rem;
-    border-radius: 4px 4px 0 0;
     border-left: #5dcfff solid 2px;
 }
 
 .class > .sig-object {
     background-color: var(--color-inline-code-background);
     border-left: #5dcfff solid 2px;
-    border-radius: 0 0 0 3px;
     margin-bottom: 2em;
 }
+
+.class > .sig {
+    margin: 0;
+    border-radius: 0 !important;
+}
+
+
 
 dd > .deprecated {
     border-left: solid goldenrod 7px;
@@ -47,9 +51,13 @@ dd > .deprecated {
 
 .py-attribute-table-badge {
     font-weight: bold;
-    /* margin-right: .5rem; */
+    margin-right: .5rem;
 }
 
 .sig {
+    background-color: var(--color-inline-code-background);
+}
+
+.sig:not(.sig-inline) {
     background-color: var(--color-inline-code-background);
 }
