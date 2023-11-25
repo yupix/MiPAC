@@ -52,11 +52,30 @@ class ReactionActions(AbstractAction):
         res: bool = await self.__session.request(route, json=data, auth=True, lower=True)
         return bool(res)
 
-    async def get_reaction(
-        self, reaction: str | None = None, note_id: str | None = None, *, limit: int = 10
+    @cache(group="get_note_reaction")
+    async def get_reactions(
+        self,
+        note_id: str | None = None,
+        reaction: str | None = None,
+        *,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
     ) -> list[NoteReaction]:
         note_id = note_id or self.__note_id
-        data = remove_dict_empty({"noteId": note_id, "limit": limit, "type": reaction})
+
+        if note_id is None:
+            raise ValueError("note_id is required.")
+
+        data = remove_dict_empty(
+            {
+                "noteId": note_id,
+                "limit": limit,
+                "type": reaction,
+                "sinceId": since_id,
+                "untilId": until_id,
+            }
+        )
         res: list[INoteReaction] = await self.__session.request(
             Route("POST", "/api/notes/reactions"),
             json=data,
