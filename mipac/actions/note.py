@@ -405,6 +405,18 @@ class ClientNoteActions(AbstractAction):
         return await self._client.note.reaction.action.get_reactions(
             reaction=reaction, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
         )
+
+    async def fetch_reactions(
+        self,
+        note_id: str | None = None,
+        reaction: str | None = None,
+        *,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> list[NoteReaction]:
+        return await self._client.note.reaction.action.fetch_reactions(
+            note_id=note_id, reaction=reaction, limit=limit, since_id=since_id, until_id=until_id
         )
 
     async def reply(

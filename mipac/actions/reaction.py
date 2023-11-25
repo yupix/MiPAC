@@ -84,6 +84,20 @@ class ReactionActions(AbstractAction):
         )
         return [NoteReaction(i, client=self.__client) for i in res]
 
+    @cache(group="get_note_reaction", override=True)
+    async def fetch_reactions(
+        self,
+        reaction: str | None = None,
+        note_id: str | None = None,
+        *,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> list[NoteReaction]:
+        return await self.get_reactions(
+            reaction, note_id, limit=limit, since_id=since_id, until_id=until_id
+        )
+
     async def get_emoji_list(self) -> list[CustomEmoji]:
         data: IPartialMeta = await self.__session.request(
             Route("GET", "/api/meta"),
