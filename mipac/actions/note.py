@@ -159,6 +159,7 @@ class ClientNoteActions(AbstractAction):
         untilId: str | None = None,
         note_id: str | None = None,
     ) -> list[Note]:
+        note_id = note_id or self._note_id
         return await self.get_children(
             limit=limit, since_id=since_id, untilId=untilId, note_id=note_id
         )
