@@ -83,23 +83,51 @@ class NoteReaction(AbstractModel):
 
     @property
     def id(self) -> str | None:
+        """note reactionId
+
+        Returns
+        -------
+        str | None
+            note reactionId
+        """
         return self.__reaction["id"]
 
     @property
     def created_at(self) -> datetime | None:
+        """note createdAt
+
+        Returns
+        -------
+        datetime | None
+            note createdAt
+        """
         return (
-            datetime.strptime(self.__reaction["created_at"], "%Y-%m-%dT%H:%M:%S.%fZ")
+            str_to_datetime(self.__reaction["created_at"])
             if "created_at" in self.__reaction
             else None
         )
 
     @property
-    def type(self) -> str | None:
-        return self.__reaction["type"]
+    def user(self) -> PartialUser:
+        """note user
+
+        Returns
+        -------
+        PartialUser
+            note user
+        """
+        return PartialUser(self.__reaction["user"], client=self.__client)
 
     @property
-    def user(self) -> PartialUser:
-        return PartialUser(self.__reaction["user"], client=self.__client)
+    def type(self) -> str | None:
+        """reaction type
+
+        Returns
+        -------
+        str | None
+            reaction type
+        """
+        return self.__reaction["type"]
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, NoteReaction) and self.id == __value.id
@@ -466,7 +494,7 @@ class Note:
             if "channel" in self.__raw_note and self.__raw_note["channel"]
             else None
         )
-    
+
     @property
     def local_only(self) -> bool:
         """note localOnly
@@ -477,7 +505,7 @@ class Note:
             note localOnly
         """
         return self.__raw_note["local_only"]
-    
+
     @property
     def reaction_acceptance(self) -> IReactionAcceptance:
         """note reactionAcceptance
@@ -488,7 +516,7 @@ class Note:
             note reactionAcceptance
         """
         return self.__raw_note["reaction_acceptance"]
-    
+
     @property
     def reactions(self) -> dict[str, int]:
         """note reactions
@@ -499,7 +527,7 @@ class Note:
             note reactions
         """
         return self.__raw_note["reactions"]
-    
+
     @property
     def renote_count(self) -> int:
         """note renoteCount
@@ -510,7 +538,7 @@ class Note:
             note renoteCount
         """
         return self.__raw_note["renote_count"]
-    
+
     @property
     def replies_count(self) -> int:
         """note repliesCount
@@ -521,7 +549,7 @@ class Note:
             note repliesCount
         """
         return self.__raw_note["replies_count"]
-    
+
     @property
     def uri(self) -> str | None:
         """note uri
@@ -531,8 +559,8 @@ class Note:
         str
             note uri
         """
-        return self.__raw_note.get('uri')
-    
+        return self.__raw_note.get("uri")
+
     @property
     def url(self) -> str | None:
         """note url
@@ -542,7 +570,7 @@ class Note:
         str
             note url
         """
-        return self.__raw_note.get('url')
+        return self.__raw_note.get("url")
 
     @property
     def reaction_and_user_pair_cache(self) -> dict[str, list[PartialUser]]:
@@ -562,7 +590,7 @@ class Note:
                 PartialUser(user, client=self.__client) for user in v
             ]
         return reaction_and_user_pair_cache
-    
+
     @property
     def clipped_count(self) -> int | None:
         """note clippedCount
@@ -572,8 +600,8 @@ class Note:
         int | None
             note clippedCount
         """
-        return self.__raw_note.get('clipped_count')
-    
+        return self.__raw_note.get("clipped_count")
+
     @property
     def my_reaction(self) -> str | None:
         """note myReaction
@@ -583,7 +611,7 @@ class Note:
         str | None
             note myReaction
         """
-        return self.__raw_note.get('my_reaction')
+        return self.__raw_note.get("my_reaction")
 
     @property
     def api(self) -> ClientNoteManager:
