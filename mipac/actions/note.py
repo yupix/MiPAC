@@ -421,7 +421,7 @@ class ClientNoteActions(AbstractAction):
 
     async def reply(
         self,
-        content: str | None = None,
+        text: str | None = None,
         visibility: INoteVisibility = "public",
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
@@ -440,7 +440,7 @@ class ClientNoteActions(AbstractAction):
             raise ParameterError("reply_id is required")
 
         body = create_note_body(
-            content=content,
+            content=text,
             cw=cw,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
@@ -689,7 +689,9 @@ class ClientNoteActions(AbstractAction):
 
         body = {"noteId": note_id, "sinceId": since_id, "untilId": until_id, "limit": limit}
 
-        pagination = Pagination[INote](self._session, Route("POST", "/api/notes/replies"), json=body)
+        pagination = Pagination[INote](
+            self._session, Route("POST", "/api/notes/replies"), json=body
+        )
 
         while True:
             res_notes = await pagination.next()
