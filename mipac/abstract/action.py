@@ -14,6 +14,6 @@ __all__ = ("AbstractAction",)
 
 class AbstractAction(ABC):
     @abstractmethod
-    def __init__(self, session: HTTPClient, client: ClientManager):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
         self._session = session
         self._client = client
