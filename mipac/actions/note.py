@@ -419,6 +419,80 @@ class ClientNoteActions(AbstractAction):
             note_id=note_id, reaction=reaction, limit=limit, since_id=since_id, until_id=until_id
         )
 
+    async def renote(
+        self,
+        text: str | None = None,
+        visibility: INoteVisibility = "public",
+        visible_user_ids: list[str] | None = None,
+        cw: str | None = None,
+        local_only: bool = False,
+        reaction_acceptance: IReactionAcceptance = None,
+        extract_mentions: bool = True,
+        extract_hashtags: bool = True,
+        extract_emojis: bool = True,
+        channel_id: str | None = None,
+        files: list[MiFile | File | str] | None = None,
+        poll: MiPoll | None = None,
+        *,
+        renote_id: str | None = None,
+    ):
+        """Renote a note
+
+        Endpoint: `/api/notes/create`
+
+        Parameters
+        ----------
+        text : str | None, default=None
+            text
+        visibility : INoteVisibility, default='public'
+            Disclosure range
+        visible_user_ids : list[str] | None, default=None
+            List of users to be published
+        cw : str | None, default=None
+            Text to be displayed when warning is given
+        local_only : bool, default=False
+            Whether to show only locally or not
+        reaction_acceptance : IReactionAcceptance, default=None
+            Reaction acceptance setting
+        extract_mentions : bool, default=True
+            Whether to expand the mention
+        extract_hashtags : bool, default=True
+            Whether to expand the hashtag
+        extract_emojis : bool, default=True
+            Whether to expand the emojis
+        channel_id : str | None, default=None
+            Channel ID
+        files : list[MiFile | File | str] | None, default=None
+            The ID list of files to be attached
+        poll : MiPoll | None, default=None
+        """
+        renote_id = renote_id or self._note_id
+
+        body = create_note_body(
+            content=text,
+            cw=cw,
+            channel_id=channel_id,
+            visibility=visibility,
+            visible_user_ids=visible_user_ids,
+            extract_emojis=extract_emojis,
+            extract_hashtags=extract_hashtags,
+            extract_mentions=extract_mentions,
+            poll=poll,
+            local_only=local_only,
+            reaction_acceptance=reaction_acceptance,
+            renote_id=renote_id,
+            files=files,
+        )
+
+        res: ICreatedNote = await self._session.request(
+            Route("POST", "/api/notes/create"),
+            json=body,
+            auth=True,
+            lower=True,
+        )
+
+        return Note(res["created_note"], client=self._client)
+
     async def reply(
         self,
         text: str | None = None,
