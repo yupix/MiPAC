@@ -569,6 +569,51 @@ class ClientNoteActions(AbstractAction):
             return NoteTranslateResult(res)
         APIError(f"Translate Error: {res}", res if isinstance(res, int) else 204).raise_error()
 
+    async def get_renotes(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        note_id: str | None = None,
+    ) -> list[Note]:
+        """Get renote of the note
+
+        Endpoint: `/api/notes/renotes`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            limit
+        since_id : str | None, default=None
+            Since ID
+        until_id : str | None, default=None
+            Until ID
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Note]
+            Renotes of the note
+        """
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        data = {
+            "noteId": note_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+        }
+
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/renotes"), json=data, auth=True
+        )
+        return [Note(note, client=self._client) for note in res]
+
     async def get_replies(
         self,
         since_id: str | None = None,
