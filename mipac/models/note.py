@@ -23,6 +23,8 @@ from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
+    from mipac.manager.note import ClientNoteManager
+
 
 __all__ = (
     "NoteState",
@@ -583,6 +585,16 @@ class Note:
         """
         return self.__raw_note.get('my_reaction')
 
+    @property
+    def api(self) -> ClientNoteManager:
+        """note api
+
+        Returns
+        -------
+        ClientNoteManager
+            note api
+        """
+        return self.__client._create_client_note_manager(note_id=self.id)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, Note) and self.id == __value.id
