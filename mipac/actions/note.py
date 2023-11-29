@@ -619,9 +619,9 @@ class ClientNoteActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         limit: int = 10,
+        *,
         note_id: str | None = None,
-        get_all: bool = False,
-    ) -> AsyncGenerator[Note, None]:
+    ) -> list[Note]:
         """Get replies to the note
 
         Endpoint: `/api/notes/replies`
@@ -629,41 +629,31 @@ class ClientNoteActions(AbstractAction):
         Parameters
         ---------
         since_id : str | None, default=None
-            指定すると、その投稿を投稿を起点としてより新しい投稿を取得します
+            since id
         until_id : str | None, default=None
-            指定すると、その投稿を投稿を起点としてより古い投稿を取得します
+            until id
         limit : int, default=10
-            取得する上限
+            limit
         note_id: str | None, default=None
-            返信を取得したいノートのID
+            note id
 
         Returns
         -------
-        AsyncGenerator[Note, None]
-            返信
+        list[Note]
+            replies
         """
-
-        if limit > 100:
-            raise ParameterError("limitは100以下である必要があります")
-        if get_all:
-            limit = 100
-
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ParameterError("note_id is required")
-
-        body = {"noteId": note_id, "sinceId": since_id, "untilId": until_id, "limit": limit}
-
-        pagination = Pagination[INote](self._session, Route("POST", "/api/notes"), json=body)
-
-        while True:
-            res_notes = await pagination.next()
-            for res_note in res_notes:
-                yield Note(res_note, client=self._client)
-
-            if get_all is False or pagination.is_final:
-                break
+        data = {
+            "noteId": note_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+        }
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/replies"), json=data, auth=True
+        )
+        return [Note(note, client=self._client) for note in res]
 
 
 class NoteActions(ClientNoteActions):
