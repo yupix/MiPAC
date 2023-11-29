@@ -655,6 +655,50 @@ class ClientNoteActions(AbstractAction):
         )
         return [Note(note, client=self._client) for note in res]
 
+    async def get_all_replies(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        note_id: str | None = None,
+    ) -> AsyncGenerator[Note, None]:
+        """Get replies to the note
+
+        Endpoint: `/api/notes/replies`
+
+        Parameters
+        ---------
+        since_id : str | None, default=None
+            since id
+        until_id : str | None, default=None
+            until id
+        note_id: str | None, default=None
+            note id
+
+        Returns
+        -------
+        AsyncGenerator[Note, None]
+            replies
+        """
+
+        limit = 100
+
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        body = {"noteId": note_id, "sinceId": since_id, "untilId": until_id, "limit": limit}
+
+        pagination = Pagination[INote](self._session, Route("POST", "/api/notes/replies"), json=body)
+
+        while True:
+            res_notes = await pagination.next()
+            for res_note in res_notes:
+                yield Note(res_note, client=self._client)
+
+            if pagination.is_final:
+                break
+
 
 class NoteActions(ClientNoteActions):
     def __init__(
