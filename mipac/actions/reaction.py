@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
-from mipac.http import Route
+from mipac.http import HTTPClient, Route
 from mipac.models.emoji import CustomEmoji
 from mipac.models.note import NoteReaction
 from mipac.types.meta import IPartialMeta
@@ -12,7 +12,6 @@ from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 
 if TYPE_CHECKING:
-    from mipac.http import HTTPClient
     from mipac.manager.client import ClientManager
 
 
@@ -23,21 +22,23 @@ class ReactionActions(AbstractAction):
         self.__client: ClientManager = client
 
     async def add(self, reaction: str, note_id: str | None = None) -> bool:
-        """
-        指定したnoteに指定したリアクションを付与します（内部用
+        """Add reaction to note
 
+        Endpoint: `/api/notes/reactions/create`
+        
         Parameters
         ----------
-        reaction : str | None
-            付与するリアクション名
-        note_id : str | None
-            付与対象のノートID
+        reaction : str
+            reaction
+        note_id : str, optional
+            note id, by default None
 
         Returns
         -------
         bool
-            成功したならTrue,失敗ならFalse
+            success or not
         """
+
         note_id = note_id or self.__note_id
 
         data = remove_dict_empty({"noteId": note_id, "reaction": reaction})
@@ -46,6 +47,20 @@ class ReactionActions(AbstractAction):
         return bool(res)
 
     async def remove(self, note_id: str | None = None) -> bool:
+        """Remove reaction from note
+        
+        Endpoint: `/api/notes/reactions/delete`
+
+        Parameters
+        ----------
+        note_id : str, optional
+            note id, by default None
+        
+        Returns
+        -------
+        bool
+            success or not
+        """
         note_id = note_id or self.__note_id
 
         data = remove_dict_empty({"noteId": note_id})
