@@ -969,3 +969,42 @@ class NoteActions(ClientNoteActions):
                 yield Note(note, client=self._client)
             if get_all is False or pagination.is_final:
                 break
+
+    async def get_mentions(
+        self,
+        following: bool = False,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        visibility: INoteVisibility = "public",
+    ):
+        """Get notes with mentions addressed to you
+        
+        Endpoint: `/api/notes/mentions`
+
+        Parameters
+        ----------
+        following : bool, default=False
+            Whether to include only users you follow
+        limit : int, default=10
+            limit
+        since_id : str | None, default=None
+            Since ID
+        until_id : str | None, default=None
+            Until ID
+        visibility : INoteVisibility, default='public'
+            Disclosure range
+        """
+        data = {
+            "following": following,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "visibility": visibility,
+        }
+
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/mentions"), json=data, auth=True
+        )
+
+        return [Note(note, client=self._client) for note in res]
