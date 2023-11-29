@@ -1697,7 +1697,7 @@
                 "path": "/username/available",
                 "request_body_hash": "a39a2024889ca9effb961e1aa5dc4aed9ea3ee13d136a6425a8b91f35d925a4f",
                 "response_body_hash": "575afbb648e775447f2ad4fc67d0e4c2abe536e1077eb5ef4e1f57cdf55c5dd3",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/notes": {
                 "path": "/users/notes",

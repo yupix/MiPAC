@@ -1,4 +1,4 @@
-## SUPPORTED ENDPOINTS (38/322)
+## SUPPORTED ENDPOINTS (39/322)
 - [x] /admin/get-index-stats 
 - [x] /admin/get-table-stats 
 - [x] /admin/get-user-ips 
@@ -29,6 +29,7 @@
 - [x] /roles/show 
 - [x] /roles/users 
 - [x] /roles/notes 
+- [x] /username/available 
 - [x] /users/notes 
 - [x] /users/search 
 - [x] /users/show 
@@ -293,7 +294,6 @@
 - [ ] /sw/register 
 - [ ] /sw/unregister 
 - [ ] /test 
-- [ ] /username/available 
 - [ ] /users/clips 
 - [ ] /users/followers 
 - [ ] /users/following 
