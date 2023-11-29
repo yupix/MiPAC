@@ -49,19 +49,23 @@ class PollActions(ClientPollActions):
         )
         return [Note(note, client=self._client) for note in res]
 
+    @credentials_required
+    async def get_all_recommendation(self, offset: int = 0):
+        limit = 100
 
         data = {"limit": limit, "offset": offset}
 
         pagination = Pagination[INote](
-            self.__session,
+            self._session,
             Route("POST", "/api/notes/polls/recommendation"),
             json=data,
             pagination_type="count",
+            auth=True
         )
 
         while True:
             res_notes = await pagination.next()
             for note in res_notes:
-                yield Note(note, client=self.__client)
-            if get_all is False or pagination.is_final:
+                yield Note(note, client=self._client)
+            if pagination.is_final:
                 break
