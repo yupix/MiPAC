@@ -6,7 +6,7 @@ from mipac.abstract.manager import AbstractManager
 from mipac.actions.note import ClientNoteActions, NoteActions
 from mipac.http import HTTPClient
 from mipac.manager.favorite import FavoriteManager
-from mipac.manager.poll import PollManager
+from mipac.manager.poll import ClientPollManager, PollManager
 from mipac.manager.reaction import ReactionManager
 
 if TYPE_CHECKING:
@@ -22,7 +22,9 @@ class ClientNoteManager(AbstractManager):
             note_id=note_id, session=session, client=client
         )
         self.favorite = FavoriteManager(note_id=note_id, session=session, client=client)
-        self.poll: PollManager = PollManager(note_id=note_id, session=session, client=client)
+        self.poll: ClientPollManager = ClientPollManager(
+            note_id=note_id, session=session, client=client
+        )
 
     @property
     def action(self) -> ClientNoteActions:
