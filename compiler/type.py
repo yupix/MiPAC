@@ -22,10 +22,15 @@ class OpenAPIPath(TypedDict):
     externalDocs: OpenAPIExternalDocs
     tags: list[str]
     security: list[dict[str, list[Any]]]
+    requestBody: OpenAPIRequestBody
 
+
+class OpenAPIComponents(TypedDict):
+    schemas: dict[str, dict[str, Any]]
 
 class OpenAPI(TypedDict):
     openapi: str
     info: OpenAPIInfo
     externalDocs: OpenAPIExternalDocs
     paths: dict[str, dict[Literal['post', 'get'], OpenAPIPath]]
+    components: OpenAPIComponents
