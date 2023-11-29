@@ -394,14 +394,18 @@ class ClientNoteActions(AbstractAction):
 
     async def get_reactions(
         self,
-        note_id: str | None = None,
         reaction: str | None = None,
-        *,
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
+        *,
+        note_id: str | None = None,
     ) -> list[NoteReaction]:
         note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
         return await self._client.note.reaction.action.get_reactions(
             reaction=reaction, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
         )
