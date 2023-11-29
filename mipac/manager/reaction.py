@@ -15,6 +15,11 @@ class ReactionManager(AbstractManager):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
+        self.__action = ReactionActions(
+            note_id=self.__note_id,
+            session=self.__session,
+            client=self.__client,
+        )
 
     @property
     def action(self) -> ReactionActions:
@@ -25,8 +30,4 @@ class ReactionManager(AbstractManager):
         ReactionActions
             Reactionに対するアクションを行うクラス
         """
-        return ReactionActions(
-            note_id=self.__note_id,
-            session=self.__session,
-            client=self.__client,
-        )
+        return self.__action

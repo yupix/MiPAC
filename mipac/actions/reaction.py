@@ -3,15 +3,15 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
-from mipac.http import Route
+from mipac.http import HTTPClient, Route
 from mipac.models.emoji import CustomEmoji
 from mipac.models.note import NoteReaction
 from mipac.types.meta import IPartialMeta
 from mipac.types.note import INoteReaction
+from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 
 if TYPE_CHECKING:
-    from mipac.http import HTTPClient
     from mipac.manager.client import ClientManager
 
 
@@ -22,21 +22,23 @@ class ReactionActions(AbstractAction):
         self.__client: ClientManager = client
 
     async def add(self, reaction: str, note_id: str | None = None) -> bool:
-        """
-        指定したnoteに指定したリアクションを付与します（内部用
+        """Add reaction to note
 
+        Endpoint: `/api/notes/reactions/create`
+        
         Parameters
         ----------
-        reaction : str | None
-            付与するリアクション名
-        note_id : str | None
-            付与対象のノートID
+        reaction : str
+            reaction
+        note_id : str, optional
+            note id, by default None
 
         Returns
         -------
         bool
-            成功したならTrue,失敗ならFalse
+            success or not
         """
+
         note_id = note_id or self.__note_id
 
         data = remove_dict_empty({"noteId": note_id, "reaction": reaction})
@@ -45,6 +47,20 @@ class ReactionActions(AbstractAction):
         return bool(res)
 
     async def remove(self, note_id: str | None = None) -> bool:
+        """Remove reaction from note
+        
+        Endpoint: `/api/notes/reactions/delete`
+
+        Parameters
+        ----------
+        note_id : str, optional
+            note id, by default None
+        
+        Returns
+        -------
+        bool
+            success or not
+        """
         note_id = note_id or self.__note_id
 
         data = remove_dict_empty({"noteId": note_id})
@@ -52,11 +68,30 @@ class ReactionActions(AbstractAction):
         res: bool = await self.__session.request(route, json=data, auth=True, lower=True)
         return bool(res)
 
-    async def get_reaction(
-        self, reaction: str, note_id: str | None = None, *, limit: int = 10
+    @cache(group="get_note_reaction")
+    async def get_reactions(
+        self,
+        note_id: str | None = None,
+        reaction: str | None = None,
+        *,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
     ) -> list[NoteReaction]:
         note_id = note_id or self.__note_id
-        data = remove_dict_empty({"noteId": note_id, "limit": limit, "type": reaction})
+
+        if note_id is None:
+            raise ValueError("note_id is required.")
+
+        data = remove_dict_empty(
+            {
+                "noteId": note_id,
+                "limit": limit,
+                "type": reaction,
+                "sinceId": since_id,
+                "untilId": until_id,
+            }
+        )
         res: list[INoteReaction] = await self.__session.request(
             Route("POST", "/api/notes/reactions"),
             json=data,
@@ -64,6 +99,20 @@ class ReactionActions(AbstractAction):
             lower=True,
         )
         return [NoteReaction(i, client=self.__client) for i in res]
+
+    @cache(group="get_note_reaction", override=True)
+    async def fetch_reactions(
+        self,
+        reaction: str | None = None,
+        note_id: str | None = None,
+        *,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> list[NoteReaction]:
+        return await self.get_reactions(
+            reaction, note_id, limit=limit, since_id=since_id, until_id=until_id
+        )
 
     async def get_emoji_list(self) -> list[CustomEmoji]:
         data: IPartialMeta = await self.__session.request(
