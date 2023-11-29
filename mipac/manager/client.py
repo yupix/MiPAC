@@ -13,7 +13,7 @@ from mipac.manager.drive import DriveManager
 from mipac.manager.emoji import EmojiManager
 from mipac.manager.follow import FollowManager, FollowRequestManager
 from mipac.manager.my import MyManager
-from mipac.manager.note import NoteManager
+from mipac.manager.note import ClientNoteManager, NoteManager
 from mipac.manager.role import RoleManager
 from mipac.manager.user import UserManager
 
@@ -62,6 +62,10 @@ class ClientManager:
 
     def _create_channel_instance(self, channel_id: str) -> ChannelManager:
         return ChannelManager(channel_id=channel_id, session=self.__session, client=self)
+
+    def _create_client_note_manager(self, note_id: str) -> ClientNoteManager:
+        return ClientNoteManager(note_id=note_id, session=self.__session, client=self)
+
 
     async def get_me(self) -> UserDetailed:
         return await self.user.action.get_me()
