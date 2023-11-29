@@ -1,4 +1,5 @@
 from functools import lru_cache
+import functools
 from typing import Any
 
 DEFAULT_CACHE: dict[str, list[str]] = {}
@@ -18,6 +19,7 @@ def set_cache(group: str, key: str, value: Any):
 
 def cache(group: str = "default", override: bool = False):
     def decorator(func):
+        @functools.wraps(func)
         async def wrapper(self, *args, **kwargs):
             key = cache_key_builder(func, self, *args, **kwargs)
             hit_item = DEFAULT_CACHE_VALUE.get(key)
