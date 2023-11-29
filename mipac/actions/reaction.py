@@ -8,6 +8,7 @@ from mipac.models.emoji import CustomEmoji
 from mipac.models.note import NoteReaction
 from mipac.types.meta import IPartialMeta
 from mipac.types.note import INoteReaction
+from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 
 if TYPE_CHECKING:
