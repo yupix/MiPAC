@@ -22,9 +22,7 @@ from mipac.types.note import INote
 from mipac.types.user import (
     IMeDetailed,
     IMeDetailedModerator,
-    IPartialUser,
     IUser,
-    IUserDetailed,
     is_me_detailed_moderator,
 )
 from mipac.utils.cache import cache
@@ -92,7 +90,7 @@ class UserActions:
         username: str | None = None,
         host: str | None = None,
         **kwargs,
-    ):
+    ) -> UserDetailedModels:
         """
         Retrieve user information from the user ID using the cache.
         If there is no cache, `fetch` is automatically used.
@@ -116,7 +114,7 @@ class UserActions:
         data: IUser = await self.__session.request(
             Route("POST", "/api/users/show"), json=field, auth=True, lower=True
         )
-        return create_user_model(data, client=self.__client)
+        return create_user_model(data, client=self.__client, use_partial_user=False)
 
     async def fetch(
         self,
@@ -124,7 +122,7 @@ class UserActions:
         user_ids: list[str] | None = None,
         username: str | None = None,
         host: str | None = None,
-    ):
+    ) -> UserDetailedModels:
         """
         Retrieve the latest user information using the target user ID or username.
         If you do not need the latest information, you should basically use the `get` method.
@@ -197,7 +195,7 @@ class UserActions:
             if get_all is False or pagination.is_final:
                 break
 
-    def get_mention(self, user: Optional[PartialUser] = None) -> str:
+    def get_mention(self, user: Optional[PartialUser] = None) -> str:  # TODO: モデルに移す
         """
         Get mention name of user.
 
@@ -272,10 +270,6 @@ class UserActions:
         get_all : bool, default=False
             Whether to return all users.
 
-        Returns
-        -------
-        AsyncGenerator[Union[PartialUser, UserDetailed], None]
-            A AsyncGenerator of users.
         """
 
         if limit > 100:
@@ -308,7 +302,7 @@ class UserActions:
         host: str,
         limit: int = 100,
         detail: bool = True,
-    ) -> list[UserDetailed | PartialUser]:
+    ) -> list[UserDetailed | PartialUser]:  # TODO: 続き
         """
         Search users by username and host.
 
