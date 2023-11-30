@@ -9,6 +9,7 @@ from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
+    from mipac.manager.invite import ClientInviteManager
 
 
 class InviteCode:
@@ -67,3 +68,7 @@ class InviteCode:
     @property
     def used(self) -> bool:
         return self.__raw_invite_code["used"]
+
+    @property
+    def api(self) -> ClientInviteManager:
+        return self.__client._create_client_invite_manager(invite_id=self.id)
