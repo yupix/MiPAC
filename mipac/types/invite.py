@@ -11,7 +11,7 @@ class IInviteCode(IPartialInviteCode):
     id: str
     expires_at: str | None
     created_at: str
-    created_by: str | None
+    created_by: IPartialUser | None
     used_by: IPartialUser | None
     used_at: str | None
     used: bool

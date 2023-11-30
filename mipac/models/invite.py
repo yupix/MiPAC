@@ -50,9 +50,9 @@ class InviteCode(PartialInviteCode[IInviteCode]):
         )
 
     @property
-    def created_by(self) -> datetime | None:
+    def created_by(self) -> PartialUser | None:
         return (
-            str_to_datetime(self._raw_invite_code["created_by"])
+            PartialUser(self._raw_invite_code["created_by"], client=self._client)
             if self._raw_invite_code["created_by"]
             else None
         )
