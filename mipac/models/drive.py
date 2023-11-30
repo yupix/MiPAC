@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 from mipac.abstract.model import AbstractModel
+from mipac.types.drive import IDriveStatus
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -10,6 +11,34 @@ if TYPE_CHECKING:
     from mipac.types import FolderPayload, IDriveFile, IFileProperties
 
 __all__ = ["FileProperties", "File", "Folder"]
+
+
+class DriveStatus:
+    def __init__(self, raw_drive_status: IDriveStatus, *, client: ClientManager) -> None:
+        self.__raw_drive_status: IDriveStatus = raw_drive_status
+        self.__client: ClientManager = client
+
+    @property
+    def capacity(self) -> int:
+        """Total capacity of the drive in bytes
+
+        Returns
+        -------
+        int
+            Total capacity of the drive in bytes
+        """
+        return self.__raw_drive_status["capacity"]
+
+    @property
+    def usage(self) -> int:
+        """Total usage of the drive in bytes
+
+        Returns
+        -------
+        int
+            Total usage of the drive in bytes
+        """
+        return self.__raw_drive_status["usage"]
 
 
 class FileProperties(AbstractModel):

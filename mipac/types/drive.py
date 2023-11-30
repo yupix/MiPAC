@@ -4,6 +4,10 @@ from typing import Any, TypedDict
 
 __all__ = ("IFileProperties", "FolderPayload", "IDriveFile")
 
+class IDriveStatus(TypedDict):
+    capacity: int
+    usage: int
+
 
 class IFileProperties(TypedDict):
     """
