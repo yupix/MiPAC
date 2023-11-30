@@ -39,7 +39,7 @@ class Pagination(Generic[T]):
         self.count = 0
         self.next_id: str = ""
         self.previous_id: str = ""
-        self.latest_res_count: int = 0
+        self.latest_res_count: int | None = None
 
     async def next(self) -> list[T]:
         if self.pagination_type == "count":
@@ -65,10 +65,10 @@ class Pagination(Generic[T]):
         if (
             self.pagination_type == "count"
             and self.latest_res_count == 0
-            or self.latest_res_count < self.max_limit
+            or (self.latest_res_count and self.latest_res_count < self.max_limit)
         ):
             return True
-        if self.pagination_type == "until" and self.latest_res_count == 0:
+        if self.pagination_type == "until" and self.latest_res_count is not None and self.latest_res_count == 0:
             return True
         return False
 
