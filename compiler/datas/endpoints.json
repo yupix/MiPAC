@@ -1223,25 +1223,25 @@
                 "path": "/invite/create",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "f117d309bd0e59b61f8795d4093f1bcca8829c4eb00b1053387ad3e80a9d878e",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/invite/delete": {
                 "path": "/invite/delete",
                 "request_body_hash": "537adfc81074c440eec54f57fb8f7a7e35b7dc53337a58072e9b04fe0d451eb9",
                 "response_body_hash": "6ecf0d16463854de241113a3ce10eda5110a6592335d489fa1fb2af5356fddef",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/invite/list": {
                 "path": "/invite/list",
                 "request_body_hash": "d392bfbe478ea28a41fcb4b1cfd5b120fb85cc71ad890eea4e0abb19916c7fe1",
                 "response_body_hash": "16fe23081b1a24f8833165a1659af55490af9a5d32da87ee24d039e72b0bea99",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/invite/limit": {
                 "path": "/invite/limit",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "75a28c140cfc4e6436ece1c513f6ab479c8250c41d5d0fff079f15ea357cdca1",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/meta": {
                 "path": "/meta",
@@ -2050,7 +2050,7 @@
         "InviteCode": {
             "name": "InviteCode",
             "hash": "18191b88a62364a07e0757facdea0c98a971e63e0f5ac9d3ce4d20c486411781",
-            "status": "notSupported"
+            "status": "supported"
         },
         "Page": {
             "name": "Page",

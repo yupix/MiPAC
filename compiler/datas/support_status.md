@@ -1,4 +1,4 @@
-## SUPPORTED ENDPOINTS (39/322)
+## SUPPORTED ENDPOINTS (43/322)
 - [x] /admin/get-index-stats 
 - [x] /admin/get-table-stats 
 - [x] /admin/get-user-ips 
@@ -9,6 +9,10 @@
 - [x] /admin/unsuspend-user 
 - [x] /admin/update-user-note 
 - [x] /i 
+- [x] /invite/create 
+- [x] /invite/delete 
+- [x] /invite/list 
+- [x] /invite/limit 
 - [x] /notes/create 
 - [x] /notes/children 
 - [x] /notes/delete 
@@ -235,10 +239,6 @@
 - [ ] /i/webhooks/show 
 - [ ] /i/webhooks/update 
 - [ ] /i/webhooks/delete 
-- [ ] /invite/create 
-- [ ] /invite/delete 
-- [ ] /invite/list 
-- [ ] /invite/limit 
 - [ ] /meta 
 - [ ] /emojis 
 - [ ] /emoji 
@@ -359,7 +359,7 @@
 - [ ] RenoteMuting 
 - [ ] Blocking 
 - [ ] Hashtag 
-- [ ] InviteCode 
+- [x] InviteCode 
 - [ ] Page 
 - [ ] Channel 
 - [ ] QueueCount 
