@@ -12,3 +12,6 @@ class IInviteCode(TypedDict):
     used_by: IPartialUser | None
     used_at: str | None
     used: bool
+
+class IInviteLimit(TypedDict):
+    remaining: int | None
