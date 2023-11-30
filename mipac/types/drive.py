@@ -1,8 +1,15 @@
 from __future__ import annotations
 
-from typing import Any, TypedDict
+from typing import TYPE_CHECKING, Any, Literal, NotRequired, TypedDict
+
+if TYPE_CHECKING:
+    from mipac.models.lite.user import PartialUser
+
 
 __all__ = ("IFileProperties", "FolderPayload", "IDriveFile")
+
+IDriveSort = Literal["+createdAt", "-createdAt", "+name", "-name", "+size", "-size"]
+
 
 class IDriveStatus(TypedDict):
     capacity: int
@@ -14,9 +21,10 @@ class IFileProperties(TypedDict):
     プロパティー情報
     """
 
-    width: int
-    height: int
-    avg_color: str | None
+    width: NotRequired[int]
+    height: NotRequired[int]
+    orientation: NotRequired[int]
+    avg_color: NotRequired[str]
 
 
 class FolderPayload(TypedDict):
@@ -27,10 +35,10 @@ class FolderPayload(TypedDict):
     id: str
     created_at: str
     name: str
-    folders_count: int
-    files_count: int
-    parent_id: str
-    parent: dict[str, Any]
+    parent_id: str | None
+    folders_count: NotRequired[int]
+    files_count: NotRequired[int]
+    parent: NotRequired[FolderPayload | None]
 
 
 class IDriveFile(TypedDict):
@@ -40,12 +48,17 @@ class IDriveFile(TypedDict):
 
     id: str
     created_at: str
-    is_sensitive: bool
     name: str
-    thumbnail_url: str
-    url: str
     type: str
-    size: int
     md5: str
-    blurhash: str
+    size: int
+    is_sensitive: bool
+    blurhash: str | None
     properties: IFileProperties
+    url: str
+    thumbnail_url: str | None
+    comment: str | None
+    folder_id: str | None
+    folder: NotRequired[FolderPayload | None]
+    user_id: str | None
+    user: NotRequired[PartialUser | None]

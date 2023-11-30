@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 from mipac.abstract.model import AbstractModel
+from mipac.models.lite.user import PartialUser
 from mipac.types.drive import IDriveStatus
 
 if TYPE_CHECKING:
@@ -42,20 +43,24 @@ class DriveStatus:
 
 
 class FileProperties(AbstractModel):
-    def __init__(self, properties: IFileProperties) -> None:
-        self.__properties: IFileProperties = properties
+    def __init__(self, raw_properties: IFileProperties) -> None:
+        self.__raw_properties: IFileProperties = raw_properties
 
     @property
     def width(self) -> int | None:
-        return self.__properties["width"]
+        return self.__raw_properties.get("width")
 
     @property
-    def height(self) -> int:
-        return self.__properties["height"]
+    def height(self) -> int | None:
+        return self.__raw_properties.get("height")
+
+    @property
+    def orientation(self) -> int | None:
+        return self.__raw_properties.get("orientation")
 
     @property
     def avg_color(self) -> str | None:
-        return self.__properties["avg_color"]
+        return self.__raw_properties.get("avg_color")
 
 
 class Folder(AbstractModel):
@@ -65,36 +70,35 @@ class Folder(AbstractModel):
 
     @property
     def id(self) -> str:
-        """フォルダのID"""
         return self.__folder["id"]
 
     @property
     def created_at(self) -> str:  # TODO: 型
-        """フォルダの作成日時"""
         return self.__folder["created_at"]
 
     @property
     def name(self) -> str:
-        """フォルダ名"""
         return self.__folder["name"]
 
     @property
-    def folders_count(self) -> int:
-        """フォルダ内のフォルダ数"""
-        return self.__folder["folders_count"]
-
-    @property
-    def files_count(self) -> int:
-        """フォルダ内のファイル数"""
-        return self.__folder["files_count"]
-
-    @property
-    def parent_id(self) -> str:
+    def parent_id(self) -> str | None:
         return self.__folder["parent_id"]
 
     @property
-    def parent(self) -> dict[str, Any]:
-        return self.__folder["parent"]
+    def folders_count(self) -> int | None:
+        return self.__folder.get("folders_count")
+
+    @property
+    def files_count(self) -> int | None:
+        return self.__folder.get("files_count")
+
+    @property
+    def parent(self) -> Folder | None:
+        return (
+            Folder(self.__folder["parent"], client=self.__client)
+            if "parent" in self.__folder and self.__folder["parent"]
+            else None
+        )
 
     @property
     def api(self) -> ClientFolderManager:
@@ -121,40 +125,68 @@ class File(AbstractModel):
         return self.__file["created_at"]
 
     @property
-    def is_sensitive(self) -> bool:
-        return self.__file["is_sensitive"]
-
-    @property
     def name(self) -> str:
         return self.__file["name"]
-
-    @property
-    def thumbnail_url(self) -> str:
-        return self.__file["thumbnail_url"]
-
-    @property
-    def url(self) -> str:
-        return self.__file["url"]
 
     @property
     def type(self) -> str:
         return self.__file["type"]
 
     @property
-    def size(self) -> int:
-        return self.__file["size"]
-
-    @property
     def md5(self) -> str:
         return self.__file["md5"]
 
     @property
-    def blurhash(self) -> str:
+    def size(self) -> int:
+        return self.__file["size"]
+
+    @property
+    def is_sensitive(self) -> bool:
+        return self.__file["is_sensitive"]
+
+    @property
+    def blurhash(self) -> str | None:
         return self.__file["blurhash"]
 
     @property
     def properties(self) -> FileProperties:
         return FileProperties(self.__file["properties"])
+
+    @property
+    def url(self) -> str:
+        return self.__file["url"]
+
+    @property
+    def thumbnail_url(self) -> str | None:
+        return self.__file["thumbnail_url"]
+
+    @property
+    def comment(self) -> str | None:
+        return self.__file["comment"]
+
+    @property
+    def folder_id(self) -> str | None:
+        return self.__file["folder_id"]
+
+    @property
+    def folder(self) -> Folder | None:
+        return (
+            Folder(self.__file["folder"], client=self.__client)
+            if "folder" in self.__file and self.__file["folder"]
+            else None
+        )
+
+    @property
+    def user_id(self) -> str | None:
+        return self.__file["user_id"]
+
+    @property
+    def user(self) -> PartialUser | None:
+        return (
+            PartialUser(self.__file["user"], client=self.__client)
+            if "user" in self.__file and self.__file["user"]
+            else None
+        )
 
     @property
     def api(self) -> ClientFileManager:
