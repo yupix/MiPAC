@@ -17,19 +17,22 @@ class ClientInviteActions(AbstractAction):
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
-    async def delete(self, invite_id: str) -> bool:
+    async def delete(self, *, invite_id: str | None = None) -> bool:
         """Delete an invite code.
 
         Parameters
         ----------
-        invite_id : str
-            The invite code ID.
+        invite_id : str | None, optional
+            The invite code to delete, by default None
 
         Returns
         -------
         bool
             Whether the invite code was deleted.
         """
+
+        invite_id = invite_id or self._invite_id
+
         res: bool = await self._session.request(
             Route("POST", "/api/invite/delete"), json={"inviteId": invite_id}, auth=True
         )
@@ -55,3 +58,19 @@ class InviteActions(ClientInviteActions):
             Route("POST", "/api/invite/create"), auth=True
         )
         return InviteCode(raw_code, client=self._client)
+
+    async def delete(self, invite_id: str) -> bool:
+        """Delete an invite code.
+
+        Parameters
+        ----------
+        invite_id : str
+            The invite code to delete
+
+        Returns
+        -------
+        bool
+            Whether the invite code was deleted.
+        """
+
+        return await super().delete(invite_id=invite_id)
