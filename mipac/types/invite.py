@@ -3,12 +3,9 @@ from typing import TypedDict
 from mipac.types.user import IPartialUser
 
 
-class IPartialInviteCode(TypedDict):
-    code: str
-
-
-class IInviteCode(IPartialInviteCode):
+class IInviteCode(TypedDict):
     id: str
+    code: str
     expires_at: str | None
     created_at: str
     created_by: IPartialUser | None

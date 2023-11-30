@@ -4,8 +4,8 @@ from typing import TYPE_CHECKING, AsyncGenerator, Literal
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
-from mipac.models.invite import InviteCode, PartialInviteCode
-from mipac.types.invite import IInviteCode, IPartialInviteCode
+from mipac.models.invite import InviteCode
+from mipac.types.invite import IInviteCode
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
 
@@ -20,13 +20,13 @@ class AdminInviteActions(AbstractAction):
 
     async def create_invite(
         self, count: int = 1, expires_at: str | None = None
-    ) -> list[PartialInviteCode]:
-        raw_codes: list[IPartialInviteCode] = await self.__session.request(
+    ) -> list[InviteCode]:
+        raw_codes: list[IInviteCode] = await self.__session.request(
             route=Route(method="POST", path="/api/admin/invite/create"),
             json={"count": count, "expiresAt": expires_at},
             auth=True,
         )
-        return [PartialInviteCode(raw_code, client=self.__client) for raw_code in raw_codes]
+        return [InviteCode(raw_code, client=self.__client) for raw_code in raw_codes]
 
     async def get_invite_list(
         self,
