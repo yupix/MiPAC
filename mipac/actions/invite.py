@@ -49,6 +49,8 @@ class InviteActions(ClientInviteActions):
     async def create(self) -> InviteCode:
         """Create a new invite code.
 
+        Endpoint: `/api/invite/create`
+
         Returns
         -------
         PartialInviteCode
@@ -61,6 +63,8 @@ class InviteActions(ClientInviteActions):
 
     async def delete(self, invite_id: str) -> bool:
         """Delete an invite code.
+
+        Endpoint: `/api/invite/delete`
 
         Parameters
         ----------
