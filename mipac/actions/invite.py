@@ -141,3 +141,18 @@ class InviteActions(ClientInviteActions):
             for raw_code in raw_codes:
                 yield InviteCode(raw_code, client=self._client)
 
+    async def get_limit(self) -> InviteLimit:
+        """Get the number of invite codes you can create.
+
+        Endpoint: `/api/invite/limit`
+
+        Returns
+        -------
+        int
+            The number of invite codes you can create.
+        """
+
+        raw_invite_limit: IInviteLimit = await self._session.request(
+            Route("POST", "/api/invite/limit"), auth=True
+        )
+        return InviteLimit(raw_invite_limit, client=self._client)
