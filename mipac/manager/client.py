@@ -12,6 +12,7 @@ from mipac.manager.clip import ClipManager
 from mipac.manager.drive import DriveManager
 from mipac.manager.emoji import EmojiManager
 from mipac.manager.follow import FollowManager, FollowRequestManager
+from mipac.manager.invite import ClientInviteManager, InviteManager
 from mipac.manager.my import MyManager
 from mipac.manager.note import ClientNoteManager, NoteManager
 from mipac.manager.role import RoleManager
@@ -50,6 +51,7 @@ class ClientManager:
         self.antenna: AntennaManager = AntennaManager(session=session, client=self)
         self.role: RoleManager = RoleManager(session=session, client=self)
         self.username: UsernameManager = UsernameManager(session=session, client=self)
+        self.invite: InviteManager = InviteManager(session=session, client=self)
         self._config: Config = config
 
     @property
@@ -68,6 +70,8 @@ class ClientManager:
     def _create_client_note_manager(self, note_id: str) -> ClientNoteManager:
         return ClientNoteManager(note_id=note_id, session=self.__session, client=self)
 
+    def _create_client_invite_manager(self, invite_id: str) -> ClientInviteManager:
+        return ClientInviteManager(invite_id=invite_id, session=self.__session, client=self)
 
     async def get_me(self) -> UserDetailed:
         return await self.user.action.get_me()
