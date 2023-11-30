@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
-from mipac.models.invite import InviteCode
-from mipac.types.invite import IInviteCode
+from mipac.models.invite import InviteCode, InviteLimit
+from mipac.types.invite import IInviteCode, IInviteLimit
+from mipac.utils.pagination import Pagination
+from mipac.utils.util import credentials_required
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -78,3 +80,64 @@ class InviteActions(ClientInviteActions):
         """
 
         return await super().delete(invite_id=invite_id)
+
+    @credentials_required
+    async def get_list(
+        self, limit: int = 30, since_id: str | None = None, until_id: str | None = None
+    ) -> list[InviteCode]:
+        """Get a list of invitation codes created by you.
+
+        Endpoint: `/api/invite/list`
+
+        Parameters
+        ----------
+        limit : int, optional
+            The number of invite codes to get, by default 30
+        since_id : str | None, optional
+            The id of the invite code to get since, by default None
+        until_id : str | None, optional
+            The id of the invite code to get until, by default None
+
+        Returns
+        -------
+        list[PartialInviteCode]
+            The list of invite codes.
+        """
+
+        data = {"limit": limit, "sinceId": since_id, "untilId": until_id}
+
+        raw_codes: list[IInviteCode] = await self._session.request(
+            Route("POST", "/api/invite/list"), auth=True, json=data
+        )
+        return [InviteCode(raw_code, client=self._client) for raw_code in raw_codes]
+
+    async def get_all_list(
+        self, since_id: str | None = None, until_id: str | None = None
+    ) -> AsyncGenerator[InviteCode, None]:
+        """Get all invite codes created by you.
+
+        Endpoint: `/api/invite/list`
+
+        Parameters
+        ----------
+        since_id : str | None, optional
+            The id of the invite code to get since, by default None
+        until_id : str | None, optional
+            The id of the invite code to get until, by default None
+
+        Returns
+        -------
+        list[PartialInviteCode]
+            The list of invite codes.
+        """
+
+        data = {"limit": 100, "sinceId": since_id, "untilId": until_id}
+
+        pagination = Pagination[IInviteCode](
+            self._session, Route("POST", "/api/invite/list"), auth=True, json=data
+        )
+        while pagination.is_final is False:
+            raw_codes: list[IInviteCode] = await pagination.next()
+            for raw_code in raw_codes:
+                yield InviteCode(raw_code, client=self._client)
+
