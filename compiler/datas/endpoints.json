@@ -101,25 +101,25 @@
                 "path": "/admin/drive/clean-remote-files",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/drive/cleanup": {
                 "path": "/admin/drive/cleanup",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/drive/files": {
                 "path": "/admin/drive/files",
                 "request_body_hash": "9ebcea5313a97912edcd89706b8a7ea82b795b8cb3d9e33a8666b4f1103e0a22",
                 "response_body_hash": "576b61217cbc7e929e6656690e9898c5b933ac5b2629b0a4f7e2389d65315ab1",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/drive/show-file": {
                 "path": "/admin/drive/show-file",
                 "request_body_hash": "469dab9342135333df7936e6dd1a691a975e6b5c205b5ab3040be3bf31a18a17",
                 "response_body_hash": "d94c18840a05c740b14f2ef553f09c0a2a278a698b21b8cc5cb79a5a7f8dfa25",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/add-aliases-bulk": {
                 "path": "/admin/emoji/add-aliases-bulk",
@@ -815,43 +815,43 @@
                 "path": "/drive/folders",
                 "request_body_hash": "163479964ef668b9c9cd22dc1e66d6802c8c39333935f25db4856b75f49c4fc1",
                 "response_body_hash": "f6400fb425c732cf542f468e2ff22ee8e4d36d83215e7f62e0d193f05febe8ec",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/folders/create": {
                 "path": "/drive/folders/create",
                 "request_body_hash": "704fe9fb2fb297fb5ca12b43d10db5f98c593ae7285c93ba3036f3937ec35170",
                 "response_body_hash": "221664a7a1649aac74388f963da64899b866f1f94e8f064edc4e99b2669170db",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/folders/delete": {
                 "path": "/drive/folders/delete",
                 "request_body_hash": "7ddbf084df376fe1ced074c9454678879e8908a99fe0432fb2abaadfa597afec",
                 "response_body_hash": "c558d54c2fd862408f9556860946477010c0c5b6896032e5e3674ee638e2011b",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/folders/find": {
                 "path": "/drive/folders/find",
                 "request_body_hash": "574816af65798e0bd7e0b75836b95942423d7f4abe90f6e7f589ca84b6398a32",
                 "response_body_hash": "f6400fb425c732cf542f468e2ff22ee8e4d36d83215e7f62e0d193f05febe8ec",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/folders/show": {
                 "path": "/drive/folders/show",
                 "request_body_hash": "7ddbf084df376fe1ced074c9454678879e8908a99fe0432fb2abaadfa597afec",
                 "response_body_hash": "2af351d06be9588d35f8d01cd87b292bc624a7e766d694c769c699096628a4ce",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/folders/update": {
                 "path": "/drive/folders/update",
                 "request_body_hash": "b6f56d4e2737010dcf22a28754fbd127c4b3cdc61db501412d8da2ab9f002295",
                 "response_body_hash": "e98b858e48224fef52ae844a57f5adb5b18c0bf7155471ee27d423b947be52a1",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/stream": {
                 "path": "/drive/stream",
                 "request_body_hash": "bcc9a12d16667bf8e0beeb82f256a9c3acc694244f87fd588eada0896704f2e9",
                 "response_body_hash": "576b61217cbc7e929e6656690e9898c5b933ac5b2629b0a4f7e2389d65315ab1",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/email-address/available": {
                 "path": "/email-address/available",
