@@ -55,12 +55,16 @@ def remove_list_empty(data: list[Any]) -> list[Any]:
     return [k for k in data if k]
 
 
-def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
+def remove_dict_empty(
+    data: dict[str, Any], ignore_keys: list[str] | None = None
+) -> dict[str, Any]:
     """
     Parameters
     ----------
     data: dict
         空のkeyを削除したいdict
+    ignore_keys: list
+        削除したくないkeyのリスト
 
     Returns
     -------
@@ -68,7 +72,10 @@ def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
         空のkeyがなくなったdict
     """
     _data = {}
-    _data = {k: v for k, v in data.items() if v is not None}
+    if ignore_keys is None:
+        ignore_keys = []
+    _data = {k: v for k, v in data.items() if v is not None or k in ignore_keys}
+    return _data
     return _data
 
 
