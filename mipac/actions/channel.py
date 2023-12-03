@@ -301,6 +301,7 @@ class ClientChannelActions(AbstractAction):
             Route("POST", "/api/channels/update"),
             json=data,
             auth=True,
+            remove_none=False
         )
         return Channel(raw_channel=raw_channel, client=self._client)
 
