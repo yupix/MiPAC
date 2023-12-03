@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator
+from typing import TYPE_CHECKING, AsyncGenerator, Literal
 from typing_extensions import override
 
 from mipac.abstract.action import AbstractAction
@@ -770,6 +770,53 @@ class ChannelActions(ClientChannelActions):
         """
         raw_channels: list[IChannel] = await self._session.request(
             Route("POST", "/api/channels/my-favorites"), auth=True, lower=True
+        )
+        return [
+            Channel(raw_channel=raw_channel, client=self._client) for raw_channel in raw_channels
+        ]
+
+    @credentials_required
+    async def search(
+        self,
+        query: str,
+        type: Literal["nameAndDescription", "nameOnly"] = "nameAndDescription",
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 5,
+    ) -> list[Channel]:
+        """Search channels
+
+        Endpoint: `/api/channels/search`
+
+        Parameters
+        ----------
+        query : str
+            Query
+        type : Literal["nameAndDescription","nameOnly"], optional
+            Type of the search, by default "nameAndDescription"
+        since_id : str, optional
+            Since ID, by default None
+        until_id : str, optional
+            Until ID, by default None
+        limit : int, optional
+            Limit, by default 5
+
+        Returns
+        -------
+        list[Channel]
+            List of channels
+        """
+
+        data = {
+            "query": query,
+            "type": type,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+        }
+
+        raw_channels: list[IChannel] = await self._session.request(
+            Route("POST", "/api/channels/search"), auth=True, json=data
         )
         return [
             Channel(raw_channel=raw_channel, client=self._client) for raw_channel in raw_channels
