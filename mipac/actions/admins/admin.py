@@ -1,17 +1,14 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator
+from typing import TYPE_CHECKING, Any, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
-from mipac.config import config
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.admin import IndexStat, ModerationLog, ServerInfo, UserIP
 from mipac.models.meta import AdminMeta
-from mipac.models.user import MeDetailed, UserDetailed
 from mipac.types.admin import IIndexStat, IModerationLog, IServerInfo, ITableStats, IUserIP
 from mipac.types.meta import IAdminMeta, IUpdateMetaBody
-from mipac.types.user import IMeDetailed, IUserDetailed, is_me_detailed
 from mipac.utils.cache import cache
 from mipac.utils.format import convert_dict_keys_to_camel
 from mipac.utils.pagination import Pagination
@@ -62,7 +59,7 @@ class AdminActions(AbstractAction):
             )
         )
 
-    async def update_meta(self, meta: IUpdateMetaBody) -> bool:
+    async def update_meta(self, meta: IUpdateMetaBody) -> bool:  # TODO: 引数を見直すべき
         body = convert_dict_keys_to_camel(
             meta, replace_list={"tos_text_url": "ToSTextUrl", "tos_url": "ToSUrl"}
         )
@@ -78,7 +75,9 @@ class AdminActions(AbstractAction):
         )
 
     async def unsuspend_user(self, user_id: str) -> bool:
-        """Unsuspend user with specified Id
+        """
+        Unsuspend user with specified Id
+        Endpoint: `/api/admin/unsuspend-user`
 
         Parameters
         ----------
@@ -124,7 +123,7 @@ class AdminActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         get_all: bool = False,
-    ) -> AsyncGenerator[ModerationLog, None]:
+    ) -> AsyncGenerator[ModerationLog, None]:  # TODO: モデルを作り直すべき、あと型も
         if limit > 100:
             raise ParameterError("limit must be less than 100")
 
@@ -210,10 +209,10 @@ class AdminActions(AbstractAction):
             Route("POST", "/api/admin/reset-password"), auth=True, json={"userId": user_id}
         )
 
-    async def get_table_stats(self) -> dict[str, ITableStats]:
+    async def get_table_stats(self) -> dict[str, ITableStats]:  # TODO: モデルにしてもいいかも
         return await self.__session.request(Route("POST", "/api/admin/get-table-stats"), auth=True)
 
-    async def get_index_stats(self) -> list[IndexStat]:
+    async def get_index_stats(self) -> list[IndexStat]:  # TODO: モデルを改めて確認する
         res: list[IIndexStat] = await self.__session.request(
             Route("POST", "/api/admin/get-index-stats"), auth=True
         )
@@ -228,11 +227,11 @@ class AdminActions(AbstractAction):
         )
         return [UserIP(i) for i in res]
 
-    async def show_user(self, user_id: str) -> UserDetailed:
-        res: IUserDetailed = await self.__session.request(
+    async def show_user(self, user_id: str):
+        res: Any = await self.__session.request(
             Route("POST", "/api/admin/show-user"), auth=True, json={"userId": user_id}
         )
-        return UserDetailed(res, client=self.__client)
+        return res  # TODO: 専用のモデルを作るべき
 
     async def show_users(
         self,
@@ -243,7 +242,7 @@ class AdminActions(AbstractAction):
         origin: str = "combined",
         username: str | None = None,
         hostname: str | None = None,
-    ) -> list[MeDetailed | UserDetailed]:
+    ):
         body = {
             "limit": limit,
             "offset": offset,
@@ -253,13 +252,8 @@ class AdminActions(AbstractAction):
             "username": username,
             "hostname": hostname,
         }
-        res: list[IMeDetailed | IUserDetailed] = await self.__session.request(
+        res: Any = await self.__session.request(
             Route("POST", "/api/admin/show-users"), auth=True, json=body
         )
 
-        return [
-            MeDetailed(i, client=self.__client)
-            if is_me_detailed(i, config.account_id)
-            else UserDetailed(i, client=self.__client)
-            for i in res
-        ]
+        return res  # TODO: 専用のモデルを作るべき
