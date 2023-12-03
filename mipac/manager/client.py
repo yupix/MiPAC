@@ -6,7 +6,7 @@ from mipac.actions.client import ClientActions
 from mipac.http import HTTPClient
 from mipac.manager.admins.admin import AdminManager
 from mipac.manager.antenna import AntennaManager
-from mipac.manager.channel import ChannelManager
+from mipac.manager.channel import ChannelManager, ClientChannelManager
 from mipac.manager.chart import ChartManager
 from mipac.manager.clip import ClipManager
 from mipac.manager.drive.drive import DriveManager
@@ -64,8 +64,9 @@ class ClientManager:
     def _create_note_instance(self, note_id: str) -> NoteManager:
         return NoteManager(note_id, session=self.__session, client=self)
 
-    def _create_channel_instance(self, channel_id: str) -> ChannelManager:
-        return ChannelManager(channel_id=channel_id, session=self.__session, client=self)
+
+    def _create_client_channel_manager(self, channel_id: str) -> ClientChannelManager:
+        return ClientChannelManager(channel_id=channel_id, session=self.__session, client=self)
 
     def _create_client_note_manager(self, note_id: str) -> ClientNoteManager:
         return ClientNoteManager(note_id=note_id, session=self.__session, client=self)
