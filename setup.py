@@ -24,6 +24,7 @@ packages = [
     "mipac.abstract",
     "mipac.actions",
     "mipac.actions.admins",
+    "mipac.actions.drive",
     "mipac.errors",
     "mipac.manager",
     "mipac.manager.admins",

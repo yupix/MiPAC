@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Generic, Literal, NotRequired, Optional, TypedDict, TypeVar
 
-from mipac.types.drive import IDriveFile
+from mipac.types.drive import IFile
 from mipac.types.emoji import ICustomEmojiLite
 from mipac.types.poll import IPoll
 from mipac.types.reaction import IReactionAcceptance
@@ -90,7 +90,7 @@ class INote(TypedDict):
     mentions: NotRequired[list[str]]
     visible_user_ids: NotRequired[list[str]]
     file_ids: list[str]
-    files: list[IDriveFile]
+    files: list[IFile]
     tags: NotRequired[list[str]]
     poll: NotRequired[IPoll]
     channel_id: NotRequired[str | None]

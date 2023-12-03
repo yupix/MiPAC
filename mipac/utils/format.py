@@ -2,6 +2,8 @@ import re
 from datetime import datetime
 from typing import Any, Mapping
 
+from mipac.utils.util import Missing
+
 
 def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
     components: list[str] = snake_str.split("_")
@@ -55,7 +57,30 @@ def remove_list_empty(data: list[Any]) -> list[Any]:
     return [k for k in data if k]
 
 
-def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
+def remove_dict_empty(
+    data: dict[str, Any], ignore_keys: list[str] | None = None
+) -> dict[str, Any]:
+    """
+    Parameters
+    ----------
+    data: dict
+        空のkeyを削除したいdict
+    ignore_keys: list
+        削除したくないkeyのリスト
+
+    Returns
+    -------
+    _data: dict
+        空のkeyがなくなったdict
+    """
+    _data = {}
+    if ignore_keys is None:
+        ignore_keys = []
+    _data = {k: v for k, v in data.items() if v is not None or k in ignore_keys}
+    return _data
+
+
+def remove_dict_missing(data: dict[str, Any]) -> dict[str, Any]:
     """
     Parameters
     ----------
@@ -65,10 +90,10 @@ def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
     Returns
     -------
     _data: dict
-        空のkeyがなくなったdict
+        MISSINGのkeyがなくなったdict
     """
     _data = {}
-    _data = {k: v for k, v in data.items() if v is not None}
+    _data = {k: v for k, v in data.items() if isinstance(v, Missing) is False}
     return _data
 
 

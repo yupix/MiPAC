@@ -9,7 +9,7 @@ from mipac.manager.antenna import AntennaManager
 from mipac.manager.channel import ChannelManager
 from mipac.manager.chart import ChartManager
 from mipac.manager.clip import ClipManager
-from mipac.manager.drive import DriveManager
+from mipac.manager.drive.drive import DriveManager
 from mipac.manager.emoji import EmojiManager
 from mipac.manager.follow import FollowManager, FollowRequestManager
 from mipac.manager.invite import ClientInviteManager, InviteManager

@@ -1,4 +1,8 @@
-## SUPPORTED ENDPOINTS (43/322)
+## SUPPORTED ENDPOINTS (65/322)
+- [x] /admin/drive/clean-remote-files 
+- [x] /admin/drive/cleanup 
+- [x] /admin/drive/files 
+- [x] /admin/drive/show-file 
 - [x] /admin/get-index-stats 
 - [x] /admin/get-table-stats 
 - [x] /admin/get-user-ips 
@@ -8,6 +12,24 @@
 - [x] /admin/show-moderation-logs 
 - [x] /admin/unsuspend-user 
 - [x] /admin/update-user-note 
+- [x] /drive 
+- [x] /drive/files 
+- [x] /drive/files/attached-notes 
+- [x] /drive/files/check-existence 
+- [x] /drive/files/create 
+- [x] /drive/files/delete 
+- [x] /drive/files/find-by-hash 
+- [x] /drive/files/find 
+- [x] /drive/files/show 
+- [x] /drive/files/update 
+- [x] /drive/files/upload-from-url 
+- [x] /drive/folders 
+- [x] /drive/folders/create 
+- [x] /drive/folders/delete 
+- [x] /drive/folders/find 
+- [x] /drive/folders/show 
+- [x] /drive/folders/update 
+- [x] /drive/stream 
 - [x] /i 
 - [x] /invite/create 
 - [x] /invite/delete 
@@ -62,10 +84,6 @@
 - [ ] /admin/avatar-decorations/list 
 - [ ] /admin/avatar-decorations/update 
 - [ ] /admin/delete-all-files-of-a-user 
-- [ ] /admin/drive/clean-remote-files 
-- [ ] /admin/drive/cleanup 
-- [ ] /admin/drive/files 
-- [ ] /admin/drive/show-file 
 - [ ] /admin/emoji/add-aliases-bulk 
 - [ ] /admin/emoji/add 
 - [ ] /admin/emoji/copy 
@@ -161,24 +179,6 @@
 - [ ] /clips/favorite 
 - [ ] /clips/unfavorite 
 - [ ] /clips/my-favorites 
-- [ ] /drive 
-- [ ] /drive/files 
-- [ ] /drive/files/attached-notes 
-- [ ] /drive/files/check-existence 
-- [ ] /drive/files/create 
-- [ ] /drive/files/delete 
-- [ ] /drive/files/find-by-hash 
-- [ ] /drive/files/find 
-- [ ] /drive/files/show 
-- [ ] /drive/files/update 
-- [ ] /drive/files/upload-from-url 
-- [ ] /drive/folders 
-- [ ] /drive/folders/create 
-- [ ] /drive/folders/delete 
-- [ ] /drive/folders/find 
-- [ ] /drive/folders/show 
-- [ ] /drive/folders/update 
-- [ ] /drive/stream 
 - [ ] /email-address/available 
 - [ ] /endpoint 
 - [ ] /endpoints 
