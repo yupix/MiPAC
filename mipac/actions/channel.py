@@ -12,7 +12,8 @@ from mipac.models.poll import MiPoll
 from mipac.types.channel import IChannel
 from mipac.types.note import INote, INoteVisibility
 from mipac.types.reaction import IReactionAcceptance
-from mipac.utils.util import credentials_required
+from mipac.utils.format import remove_dict_missing
+from mipac.utils.util import MISSING, credentials_required
 from mipac.models.note import Note
 from mipac.utils.pagination import Pagination
 
@@ -243,6 +244,65 @@ class ClientChannelActions(AbstractAction):
             raw_notes: list[INote] = await pagination.next()
             for raw_note in raw_notes:
                 yield Note(raw_note=raw_note, client=self._client)
+
+    async def update(
+        self,
+        name: str | None = MISSING,
+        description: str | None = MISSING,
+        banner_id: str | None = MISSING,
+        is_archived: bool | None = MISSING,
+        pinned_note_ids: list[str] | None = MISSING,
+        color: str | None = MISSING,
+        is_sensitive: bool | None = MISSING,
+        allow_renote_to_external: bool | None = MISSING,
+        *,
+        channel_id: str | None = None,
+    ) -> Channel:
+        """Update a channel
+
+        Endpoint: `/api/channels/update`
+
+        Parameters
+        ----------
+        name : str, optional
+            Name of the channel, by default MISSING
+        description : str, optional
+            Description of the channel, by default MISSING
+        banner_id : str, optional
+            Banner ID of the channel, by default MISSING
+        is_archived : bool, optional
+            Whether the channel is archived, by default MISSING
+        pinned_note_ids : list[str], optional
+            Pinned note IDs, by default MISSING
+        color : str, optional
+            Color of the channel, by default MISSING
+        is_sensitive : bool, optional
+            Whether the channel is sensitive, by default MISSING
+        allow_renote_to_external : bool, optional
+            Whether the channel allows renote to external, by default MISSING
+        channel_id : str, optional
+            ID of the channel, by default None
+        """
+        channel_id = channel_id or self._channel_id
+        data = remove_dict_missing(
+            {
+                "channelId": channel_id,
+                "name": name,
+                "description": description,
+                "bannerId": banner_id,
+                "isArchived": is_archived,
+                "pinnedNoteIds": pinned_note_ids,
+                "color": color,
+                "isSensitive": is_sensitive,
+                "allowRenoteToExternal": allow_renote_to_external,
+            }
+        )
+        raw_channel: IChannel = await self._session.request(
+            Route("POST", "/api/channels/update"),
+            json=data,
+            auth=True,
+        )
+        return Channel(raw_channel=raw_channel, client=self._client)
 
 
 class ChannelActions(ClientChannelActions):
@@ -549,3 +609,58 @@ class ChannelActions(ClientChannelActions):
             channel_id=channel_id,
         ):
             yield i
+
+    async def update(
+        self,
+        channel_id: str,
+        name: str | None = MISSING,
+        description: str | None = MISSING,
+        banner_id: str | None = MISSING,
+        is_archived: bool | None = MISSING,
+        pinned_note_ids: list[str] | None = MISSING,
+        color: str | None = MISSING,
+        is_sensitive: bool | None = MISSING,
+        allow_renote_to_external: bool | None = MISSING,
+    ) -> Channel:
+        """Update a channel
+
+        Endpoint: `/api/channels/update`
+
+        Parameters
+        ----------
+        channel_id : str
+            ID of the channel
+        name : str, optional
+            Name of the channel, by default MISSING
+        description : str, optional
+            Description of the channel, by default MISSING
+        banner_id : str, optional
+            Banner ID of the channel, by default MISSING
+        is_archived : bool, optional
+            Whether the channel is archived, by default MISSING
+        pinned_note_ids : list[str], optional
+            Pinned note IDs, by default MISSING
+        color : str, optional
+            Color of the channel, by default MISSING
+        is_sensitive : bool, optional
+            Whether the channel is sensitive, by default MISSING
+        allow_renote_to_external : bool, optional
+            Whether the channel allows renote to external, by default MISSING
+
+        Returns
+        -------
+        Channel
+            Updated channel
+        """
+
+        return await super().update(
+            name=name,
+            description=description,
+            banner_id=banner_id,
+            is_archived=is_archived,
+            pinned_note_ids=pinned_note_ids,
+            color=color,
+            is_sensitive=is_sensitive,
+            allow_renote_to_external=allow_renote_to_external,
+            channel_id=channel_id,
+        )
