@@ -244,12 +244,12 @@ class FileActions(ClientFileActions):
         folder_id = self._folder_id or folder_id
 
         data = {
-            "file": file_byte,
-            "name": file_name,
             "folderId": folder_id,
+            "name": file_name,
             "comment": comment,
             "isSensitive": bool_to_string(is_sensitive),
             "force": bool_to_string(force),
+            "file": file_byte,
         }
         res: IDriveFile = await self._session.request(
             Route("POST", "/api/drive/files/create"),
