@@ -66,39 +66,39 @@ class FileProperties(AbstractModel):
 
 
 class Folder(AbstractModel):
-    def __init__(self, folder: IFolder, client: ClientManager):
-        self.__folder: IFolder = folder
+    def __init__(self, raw_folder: IFolder, client: ClientManager):
+        self.__raw_folder: IFolder = raw_folder
         self.__client: ClientManager = client
 
     @property
     def id(self) -> str:
-        return self.__folder["id"]
+        return self.__raw_folder["id"]
 
     @property
     def created_at(self) -> str:  # TODO: 型
-        return self.__folder["created_at"]
+        return self.__raw_folder["created_at"]
 
     @property
     def name(self) -> str:
-        return self.__folder["name"]
+        return self.__raw_folder["name"]
 
     @property
     def parent_id(self) -> str | None:
-        return self.__folder["parent_id"]
+        return self.__raw_folder["parent_id"]
 
     @property
     def folders_count(self) -> int | None:
-        return self.__folder.get("folders_count")
+        return self.__raw_folder.get("folders_count")
 
     @property
     def files_count(self) -> int | None:
-        return self.__folder.get("files_count")
+        return self.__raw_folder.get("files_count")
 
     @property
     def parent(self) -> Folder | None:
         return (
-            Folder(self.__folder["parent"], client=self.__client)
-            if "parent" in self.__folder and self.__folder["parent"]
+            Folder(self.__raw_folder["parent"], client=self.__client)
+            if "parent" in self.__raw_folder and self.__raw_folder["parent"]
             else None
         )
 
@@ -114,79 +114,79 @@ class Folder(AbstractModel):
 
 
 class File(AbstractModel):
-    def __init__(self, file: IFile, *, client: ClientManager):
-        self.__file: IFile = file
+    def __init__(self, raw_file: IFile, *, client: ClientManager):
+        self.__raw_file: IFile = raw_file
         self.__client: ClientManager = client
 
     @property
     def id(self) -> str:
-        return self.__file["id"]
+        return self.__raw_file["id"]
 
     @property
     def created_at(self):
-        return self.__file["created_at"]
+        return self.__raw_file["created_at"]
 
     @property
     def name(self) -> str:
-        return self.__file["name"]
+        return self.__raw_file["name"]
 
     @property
     def type(self) -> str:
-        return self.__file["type"]
+        return self.__raw_file["type"]
 
     @property
     def md5(self) -> str:
-        return self.__file["md5"]
+        return self.__raw_file["md5"]
 
     @property
     def size(self) -> int:
-        return self.__file["size"]
+        return self.__raw_file["size"]
 
     @property
     def is_sensitive(self) -> bool:
-        return self.__file["is_sensitive"]
+        return self.__raw_file["is_sensitive"]
 
     @property
     def blurhash(self) -> str | None:
-        return self.__file["blurhash"]
+        return self.__raw_file["blurhash"]
 
     @property
     def properties(self) -> FileProperties:
-        return FileProperties(self.__file["properties"])
+        return FileProperties(self.__raw_file["properties"])
 
     @property
     def url(self) -> str:
-        return self.__file["url"]
+        return self.__raw_file["url"]
 
     @property
     def thumbnail_url(self) -> str | None:
-        return self.__file["thumbnail_url"]
+        return self.__raw_file["thumbnail_url"]
 
     @property
     def comment(self) -> str | None:
-        return self.__file["comment"]
+        return self.__raw_file["comment"]
 
     @property
     def folder_id(self) -> str | None:
-        return self.__file["folder_id"]
+        return self.__raw_file["folder_id"]
 
     @property
     def folder(self) -> Folder | None:
         return (
-            Folder(self.__file["folder"], client=self.__client)
-            if "folder" in self.__file and self.__file["folder"]
+            Folder(self.__raw_file["folder"], client=self.__client)
+            if "folder" in self.__raw_file and self.__raw_file["folder"]
             else None
         )
 
     @property
     def user_id(self) -> str | None:
-        return self.__file["user_id"]
+        return self.__raw_file["user_id"]
 
     @property
     def user(self) -> PartialUser | None:
         return (
-            PartialUser(self.__file["user"], client=self.__client)
-            if "user" in self.__file and self.__file["user"]
+            PartialUser(self.__raw_file["user"], client=self.__client)
+            if "user" in self.__raw_file and self.__raw_file["user"]
             else None
         )
 
