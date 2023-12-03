@@ -2,6 +2,8 @@ import re
 from datetime import datetime
 from typing import Any, Mapping
 
+from mipac.utils.util import Missing
+
 
 def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
     components: list[str] = snake_str.split("_")
