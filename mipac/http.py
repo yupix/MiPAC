@@ -4,7 +4,7 @@ import json
 import logging
 import re
 import sys
-from typing import Any, Literal, TypeVar
+from typing import Literal, TypeVar
 
 import aiohttp
 
