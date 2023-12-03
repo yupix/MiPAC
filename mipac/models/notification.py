@@ -131,10 +131,7 @@ class NotificationNote(Notification):
 
     @property
     def note(self) -> Note:
-        return Note(
-            self.__notification["note"],
-            client=self.__client,
-        )
+        return Note(self.__notification["note"], client=self.__client)
 
 
 class NotificationPollEnd(Notification):
@@ -150,10 +147,7 @@ class NotificationPollEnd(Notification):
 
     @property
     def note(self) -> Note:
-        return Note(
-            self.__notification["note"],
-            client=self.__client,
-        )
+        return Note(self.__notification["note"], client=self.__client)
 
 
 class NotificationReaction(Notification):
