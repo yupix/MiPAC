@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Optional, TypedDict
 
-from mipac.types.drive import IDriveFile
+from mipac.types.drive import IFile
 from mipac.types.user import IPartialUser
 
 if TYPE_CHECKING:
@@ -40,7 +40,7 @@ class IPageRequired(TypedDict):
 class IPage(IPageRequired, total=False):
     is_liked: bool
     eyeCatchingImageId: str
-    eyeCatchingImage: IDriveFile
+    eyeCatchingImage: IFile
     summary: str
 
 

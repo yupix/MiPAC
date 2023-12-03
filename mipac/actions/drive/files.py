@@ -6,7 +6,7 @@ from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
 from mipac.models.drive import File
 from mipac.models.note import Note
-from mipac.types.drive import IDriveFile, IDriveSort
+from mipac.types.drive import IFile, IDriveSort
 from mipac.types.note import INote
 from mipac.utils.format import bool_to_string, remove_dict_missing
 from mipac.utils.util import MISSING, credentials_required
@@ -133,7 +133,7 @@ class ClientFileActions(AbstractAction):
             }
         )
 
-        res: IDriveFile = await self._session.request(
+        res: IFile = await self._session.request(
             Route("POST", "/api/drive/files/update"), json=data, auth=True
         )
         return File(res, client=self._client)
@@ -187,7 +187,7 @@ class FileActions(ClientFileActions):
             "sort": sort,
         }
 
-        raw_files: list[IDriveFile] = await self._session.request(
+        raw_files: list[IFile] = await self._session.request(
             Route("POST", "/api/drive/files"), json=data, auth=True
         )
         return [File(raw_file, client=self._client) for raw_file in raw_files]
@@ -292,7 +292,7 @@ class FileActions(ClientFileActions):
             "force": bool_to_string(force),
             "file": file_byte,
         }
-        res: IDriveFile = await self._session.request(
+        res: IFile = await self._session.request(
             Route("POST", "/api/drive/files/create"),
             data=data,
             auth=True,
@@ -336,7 +336,7 @@ class FileActions(ClientFileActions):
 
         data = {"md5": md5}
 
-        raw_files: list[IDriveFile] = await self._session.request(
+        raw_files: list[IFile] = await self._session.request(
             Route("POST", "/api/drive/files/find-by-hash"), json=data, auth=True
         )
         return [File(raw_file, client=self._client) for raw_file in raw_files]
@@ -361,7 +361,7 @@ class FileActions(ClientFileActions):
 
         data = {"name": name, "folderId": folder_id}
 
-        res: list[IDriveFile] = await self._session.request(
+        res: list[IFile] = await self._session.request(
             Route("POST", "/api/drive/files/find"), json=data, auth=True
         )
         return [File(raw_file, client=self._client) for raw_file in res]
@@ -386,7 +386,7 @@ class FileActions(ClientFileActions):
 
         data = {"fileId": file_id, "url": url}
 
-        res: IDriveFile = await self._session.request(
+        res: IFile = await self._session.request(
             Route("POST", "/api/drive/files/show"), json=data, auth=True
         )
         return File(res, client=self._client)

@@ -9,7 +9,7 @@ from mipac.types.drive import IDriveStatus
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
     from mipac.manager.drive.files import ClientFileManager
-    from mipac.types import FolderPayload, IDriveFile, IFileProperties
+    from mipac.types import IFolder, IFile, IFileProperties
     from mipac.manager.drive.folders import ClientFolderManager
 
 
@@ -66,8 +66,8 @@ class FileProperties(AbstractModel):
 
 
 class Folder(AbstractModel):
-    def __init__(self, folder: FolderPayload, client: ClientManager):
-        self.__folder: FolderPayload = folder
+    def __init__(self, folder: IFolder, client: ClientManager):
+        self.__folder: IFolder = folder
         self.__client: ClientManager = client
 
     @property
@@ -114,8 +114,8 @@ class Folder(AbstractModel):
 
 
 class File(AbstractModel):
-    def __init__(self, file: IDriveFile, *, client: ClientManager):
-        self.__file: IDriveFile = file
+    def __init__(self, file: IFile, *, client: ClientManager):
+        self.__file: IFile = file
         self.__client: ClientManager = client
 
     @property

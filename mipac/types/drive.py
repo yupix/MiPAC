@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from mipac.models.lite.user import PartialUser
 
 
-__all__ = ("IFileProperties", "FolderPayload", "IDriveFile")
+__all__ = ("IFileProperties", "IFolder", "IFile", "IDriveSort", "IDriveStatus")
 
 IDriveSort = Literal["+createdAt", "-createdAt", "+name", "-name", "+size", "-size"]
 
@@ -27,7 +27,7 @@ class IFileProperties(TypedDict):
     avg_color: NotRequired[str]
 
 
-class FolderPayload(TypedDict):
+class IFolder(TypedDict):
     """
     フォルダーの情報
     """
@@ -38,10 +38,10 @@ class FolderPayload(TypedDict):
     parent_id: str | None
     folders_count: NotRequired[int]
     files_count: NotRequired[int]
-    parent: NotRequired[FolderPayload | None]
+    parent: NotRequired[IFolder | None]
 
 
-class IDriveFile(TypedDict):
+class IFile(TypedDict):
     """
     ファイル情報
     """
@@ -59,6 +59,6 @@ class IDriveFile(TypedDict):
     thumbnail_url: str | None
     comment: str | None
     folder_id: str | None
-    folder: NotRequired[FolderPayload | None]
+    folder: NotRequired[IFolder | None]
     user_id: str | None
     user: NotRequired[PartialUser | None]

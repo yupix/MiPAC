@@ -438,7 +438,7 @@ class Note:
 
         Returns
         -------
-        list[IDriveFile]
+        list[IFile]
             note files
         """
         return [File(raw_file, client=self.__client) for raw_file in self.__raw_note["files"]]
