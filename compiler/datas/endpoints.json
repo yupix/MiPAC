@@ -533,79 +533,79 @@
                 "path": "/channels/create",
                 "request_body_hash": "a93b5965ac430f0559117367c477cdbdba3b666dfbcaf6e872f7b8d8ad9a7018",
                 "response_body_hash": "5b021f93f602da140c41c923e0b6b0f11fbf4aa1133f3f4090627f2ee0444707",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/featured": {
                 "path": "/channels/featured",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "636dd2c64e1c2caadfdece63ab5654daab1dd2ad142a9823634965a67e48dcc3",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/follow": {
                 "path": "/channels/follow",
                 "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
                 "response_body_hash": "6b66afa06051d494558994e6b9a3d5229059ac8a6638ef092a26e3f9559f04f9",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/followed": {
                 "path": "/channels/followed",
                 "request_body_hash": "874fe7a09828d52b1e209c103e7d8808af6b0af79213965be746d011906df3d3",
                 "response_body_hash": "636dd2c64e1c2caadfdece63ab5654daab1dd2ad142a9823634965a67e48dcc3",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/owned": {
                 "path": "/channels/owned",
                 "request_body_hash": "874fe7a09828d52b1e209c103e7d8808af6b0af79213965be746d011906df3d3",
                 "response_body_hash": "636dd2c64e1c2caadfdece63ab5654daab1dd2ad142a9823634965a67e48dcc3",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/show": {
                 "path": "/channels/show",
                 "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
                 "response_body_hash": "3d0e4c16a4c8a0b329eaff932045dda300f10b6560fa52b03628af7a5c23e42a",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/timeline": {
                 "path": "/channels/timeline",
                 "request_body_hash": "37acc373792cce6e83ba8dce673302849ea9a986f20627e3552c4e0f9036035c",
                 "response_body_hash": "dd2892a643d7549cc19d7b41adbd2acfbe3b82ea6643caee9538bbe7c84c4b70",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/unfollow": {
                 "path": "/channels/unfollow",
                 "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
                 "response_body_hash": "e4f90abe92cc8eabcb43faa501d98d6be2fd3ca16b3bb4f4f978621012a91381",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/update": {
                 "path": "/channels/update",
                 "request_body_hash": "acd5353c3480f6faad9d555bc73124cca6189dac4480610408fc1225c366e3a3",
                 "response_body_hash": "c3492ae1d3a037efb2a2ae98a56288cfb52ed3717737ebef935a884fdc17d285",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/favorite": {
                 "path": "/channels/favorite",
                 "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
                 "response_body_hash": "0e50dd9d6190d1252681a3a892b43db593f79a296da9440aa0f98b2c6fccd5e3",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/unfavorite": {
                 "path": "/channels/unfavorite",
                 "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
                 "response_body_hash": "4dca34b5e13d095bd1572b4d4665d65dbed089ddeb0b0d51f7e6b9e84aeb1713",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/my-favorites": {
                 "path": "/channels/my-favorites",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "636dd2c64e1c2caadfdece63ab5654daab1dd2ad142a9823634965a67e48dcc3",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/channels/search": {
                 "path": "/channels/search",
                 "request_body_hash": "99efb621a25e5e80a19df58b6cbdccf5d64f8e11f33a4aeedfc3bd6ab9a17b99",
                 "response_body_hash": "636dd2c64e1c2caadfdece63ab5654daab1dd2ad142a9823634965a67e48dcc3",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/charts/active-users": {
                 "path": "/charts/active-users",

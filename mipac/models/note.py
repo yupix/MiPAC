@@ -77,8 +77,8 @@ class Header:
 class NoteReaction(AbstractModel):
     __slots__ = ("__reaction", "__client")
 
-    def __init__(self, reaction: INoteReaction, *, client: ClientManager):
-        self.__reaction: INoteReaction = reaction
+    def __init__(self, raw_reaction: INoteReaction, *, client: ClientManager):
+        self.__reaction: INoteReaction = raw_reaction
         self.__client: ClientManager = client
 
     @property
@@ -208,8 +208,8 @@ class Note:
     client: ClientManager
     """
 
-    def __init__(self, note: INote, client: ClientManager):
-        self.__raw_note: INote = note
+    def __init__(self, raw_note: INote, client: ClientManager):
+        self.__raw_note: INote = raw_note
         self.__client: ClientManager = client
 
     @property

@@ -1,4 +1,4 @@
-## SUPPORTED ENDPOINTS (65/322)
+## SUPPORTED ENDPOINTS (78/322)
 - [x] /admin/drive/clean-remote-files 
 - [x] /admin/drive/cleanup 
 - [x] /admin/drive/files 
@@ -12,6 +12,19 @@
 - [x] /admin/show-moderation-logs 
 - [x] /admin/unsuspend-user 
 - [x] /admin/update-user-note 
+- [x] /channels/create 
+- [x] /channels/featured 
+- [x] /channels/follow 
+- [x] /channels/followed 
+- [x] /channels/owned 
+- [x] /channels/show 
+- [x] /channels/timeline 
+- [x] /channels/unfollow 
+- [x] /channels/update 
+- [x] /channels/favorite 
+- [x] /channels/unfavorite 
+- [x] /channels/my-favorites 
+- [x] /channels/search 
 - [x] /drive 
 - [x] /drive/files 
 - [x] /drive/files/attached-notes 
@@ -143,19 +156,6 @@
 - [ ] /blocking/create 
 - [ ] /blocking/delete 
 - [ ] /blocking/list 
-- [ ] /channels/create 
-- [ ] /channels/featured 
-- [ ] /channels/follow 
-- [ ] /channels/followed 
-- [ ] /channels/owned 
-- [ ] /channels/show 
-- [ ] /channels/timeline 
-- [ ] /channels/unfollow 
-- [ ] /channels/update 
-- [ ] /channels/favorite 
-- [ ] /channels/unfavorite 
-- [ ] /channels/my-favorites 
-- [ ] /channels/search 
 - [ ] /charts/active-users 
 - [ ] /charts/ap-request 
 - [ ] /charts/drive 
