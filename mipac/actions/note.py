@@ -25,7 +25,7 @@ __all__ = ["NoteActions"]
 
 
 def create_note_body(
-    content: str | None = None,
+    text: str | None = None,
     visibility: INoteVisibility = "public",
     visible_user_ids: list[str] | None = None,
     cw: str | None = None,
@@ -40,11 +40,11 @@ def create_note_body(
     files: list[MiFile | File | str] | None = None,
     poll: MiPoll | None = None,
 ):
-    content = content or None
+    text = text or None
     body = {
         "visibility": visibility,
         "visibleUserIds": visible_user_ids,
-        "text": content,
+        "text": text,
         "cw": cw,
         "localOnly": local_only,
         "reactionAcceptance": reaction_acceptance,
@@ -55,7 +55,7 @@ def create_note_body(
         "renoteId": renote_id,
         "channelId": channel_id,
     }
-    if not check_multi_arg(content, files, renote_id, poll):
+    if not check_multi_arg(text, files, renote_id, poll):
         raise ParameterError(
             "To send a note, one of content, file_ids, renote_id or poll is required"
         )
@@ -473,19 +473,19 @@ class ClientNoteActions(AbstractAction):
         renote_id = renote_id or self._note_id
 
         body = create_note_body(
-            content=text,
-            cw=cw,
-            channel_id=channel_id,
+            text=text,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
-            extract_emojis=extract_emojis,
-            extract_hashtags=extract_hashtags,
-            extract_mentions=extract_mentions,
-            poll=poll,
+            cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
+            extract_mentions=extract_mentions,
+            extract_hashtags=extract_hashtags,
+            extract_emojis=extract_emojis,
             renote_id=renote_id,
+            channel_id=channel_id,
             files=files,
+            poll=poll,
         )
 
         res: ICreatedNote = await self._session.request(
@@ -518,18 +518,18 @@ class ClientNoteActions(AbstractAction):
             raise ParameterError("reply_id is required")
 
         body = create_note_body(
-            content=text,
-            cw=cw,
+            text=text,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
-            extract_emojis=extract_emojis,
-            extract_hashtags=extract_hashtags,
-            extract_mentions=extract_mentions,
-            poll=poll,
+            cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
+            extract_mentions=extract_mentions,
+            extract_hashtags=extract_hashtags,
+            extract_emojis=extract_emojis,
             reply_id=reply_id,
             files=files,
+            poll=poll,
         )
         res: ICreatedNote = await self._session.request(
             Route("POST", "/api/notes/create"),
@@ -590,18 +590,18 @@ class ClientNoteActions(AbstractAction):
             raise ParameterError("note_id is required")
 
         body = create_note_body(
-            content=content,
-            cw=cw,
+            text=content,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
-            extract_emojis=extract_emojis,
-            extract_hashtags=extract_hashtags,
-            extract_mentions=extract_mentions,
-            poll=poll,
+            cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
+            extract_mentions=extract_mentions,
+            extract_hashtags=extract_hashtags,
+            extract_emojis=extract_emojis,
             renote_id=note_id,
             files=files,
+            poll=poll,
         )
         res: ICreatedNote = await self._session.request(
             Route("POST", "/api/notes/create"),
@@ -792,15 +792,15 @@ class NoteActions(ClientNoteActions):
 
     async def send(
         self,
-        content: str | None = None,
+        text: str | None = None,
         visibility: INoteVisibility = "public",
         visible_user_ids: list[str] | None = None,
         cw: str | None = None,
         local_only: bool = False,
         reaction_acceptance: IReactionAcceptance = None,
-        extract_mentions: bool = True,
-        extract_hashtags: bool = True,
-        extract_emojis: bool = True,
+        extract_mentions: bool = True,  # 元は noExtractMentions
+        extract_hashtags: bool = True,  # 元は noExtractHashtags
+        extract_emojis: bool = True,  # 元は noExtractEmojis
         reply_id: str | None = None,
         renote_id: str | None = None,
         channel_id: str | None = None,
@@ -813,7 +813,7 @@ class NoteActions(ClientNoteActions):
 
         Parameters
         ----------
-        content : str | None, default=None
+        text : str | None, default=None
             投稿する内容
         visibility : INoteVisibility, optional
             公開範囲, by default "public"
@@ -827,11 +827,11 @@ class NoteActions(ClientNoteActions):
         reaction_acceptance : IReactionAcceptance, optional
             リアクションの受け入れ設定, by default None
         extract_mentions : bool, optional
-            メンションを展開するか, by default False
+            メンションを展開するか, by default True
         extract_hashtags : bool, optional
-            ハッシュタグを展開するか, by default False
+            ハッシュタグを展開するか, by default True
         extract_emojis : bool, optional
-            絵文字を展開するか, by default False
+            絵文字を展開するか, by default True
         reply_id : str | None, optional
             リプライ先のid, by default None
         renote_id : str | None, optional
@@ -854,20 +854,20 @@ class NoteActions(ClientNoteActions):
             [description]
         """
         body = create_note_body(
-            content=content,
-            cw=cw,
-            channel_id=channel_id,
+            text=text,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
-            extract_emojis=extract_emojis,
-            extract_hashtags=extract_hashtags,
-            extract_mentions=extract_mentions,
-            files=files,
-            poll=poll,
+            cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
-            renote_id=renote_id,
+            extract_mentions=extract_mentions,
+            extract_hashtags=extract_hashtags,
+            extract_emojis=extract_emojis,
             reply_id=reply_id,
+            renote_id=renote_id,
+            channel_id=channel_id,
+            files=files,
+            poll=poll,
         )
         res: ICreatedNote = await self._session.request(
             Route("POST", "/api/notes/create"),
@@ -979,7 +979,7 @@ class NoteActions(ClientNoteActions):
         visibility: INoteVisibility = "public",
     ):
         """Get notes with mentions addressed to you
-        
+
         Endpoint: `/api/notes/mentions`
 
         Parameters
