@@ -352,6 +352,7 @@ class ClientChannelActions(AbstractAction):
         )
         return res
 
+
 class ChannelActions(ClientChannelActions):
     def __init__(
         self, channel_id: str | None = None, *, session: HTTPClient, client: ClientManager
@@ -741,17 +742,35 @@ class ChannelActions(ClientChannelActions):
     @override
     async def unfavorite(self, channel_id: str) -> bool:
         """Unfavorite a channel
-        
+
         Endpoint: `/api/channels/unfavorite`
-        
+
         Parameters
         ----------
         channel_id : str
             ID of the channel
-        
+
         Returns
         -------
         bool
             Whether the channel is unfavorited
         """
         return await super().unfavorite(channel_id=channel_id)
+
+    @credentials_required
+    async def my_favorites(self) -> list[Channel]:
+        """Get my favorite channels
+
+        Endpoint: `/api/channels/myFavorites`
+
+        Returns
+        -------
+        list[Channel]
+            List of my favorite channels
+        """
+        raw_channels: list[IChannel] = await self._session.request(
+            Route("POST", "/api/channels/my-favorites"), auth=True, lower=True
+        )
+        return [
+            Channel(raw_channel=raw_channel, client=self._client) for raw_channel in raw_channels
+        ]
