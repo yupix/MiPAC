@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.manager import AbstractManager
-from mipac.actions.drive.folders import FolderActions, ClientFolderActions
+from mipac.actions.drive.folders import ClientFileActionsInFolder, FolderActions, ClientFolderActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
@@ -19,6 +19,7 @@ class ClientFolderManager(AbstractManager):
         self.__action: ClientFolderActions = ClientFolderActions(
             folder_id=folder_id, session=session, client=client
         )
+        self.files = ClientFileActionsInFolder(folder_id=folder_id, session=session, client=client)
 
     @property
     def action(self) -> ClientFolderActions:
