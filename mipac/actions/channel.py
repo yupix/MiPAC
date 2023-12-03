@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, AsyncGenerator
-
+from typing_extensions import override
 
 from mipac.abstract.action import AbstractAction
 from mipac.file import MiFile
@@ -304,6 +304,30 @@ class ClientChannelActions(AbstractAction):
         )
         return Channel(raw_channel=raw_channel, client=self._client)
 
+    @credentials_required
+    async def favorite(self, *, channel_id: str | None = None) -> bool:
+        """Favorite a channel
+
+        Endpoint: `/api/channels/favorite`
+
+        Parameters
+        ----------
+        channel_id : str, optional
+            ID of the channel, by default None
+
+        Returns
+        -------
+        bool
+            Whether the channel is favorited
+        """
+        channel_id = channel_id or self._channel_id
+        data = {"channelId": channel_id}
+
+        res: bool = await self._session.request(
+            Route("POST", "/api/channels/favorite"), json=data, auth=True, lower=True
+        )
+        return res
+
 
 class ChannelActions(ClientChannelActions):
     def __init__(
@@ -312,6 +336,7 @@ class ChannelActions(ClientChannelActions):
         super().__init__(channel_id=channel_id, session=session, client=client)
 
     @credentials_required
+    @override
     async def send(
         self,
         channel_id: str,
@@ -456,6 +481,7 @@ class ChannelActions(ClientChannelActions):
         ]
 
     @credentials_required
+    @override
     async def follow(self, channel_id: str) -> bool:
         """Follow a channel
 
@@ -556,6 +582,7 @@ class ChannelActions(ClientChannelActions):
         return Channel(raw_channel=raw_channel, client=self._client)
 
     @credentials_required
+    @override
     async def unfollow(self, channel_id: str) -> bool:
         """Unfollow a channel
 
@@ -573,6 +600,7 @@ class ChannelActions(ClientChannelActions):
         """
         return await super().unfollow(channel_id=channel_id)
 
+    @override
     async def get_all_timeline(
         self,
         channel_id: str,
@@ -610,6 +638,8 @@ class ChannelActions(ClientChannelActions):
         ):
             yield i
 
+    @credentials_required
+    @override
     async def update(
         self,
         channel_id: str,
@@ -664,3 +694,22 @@ class ChannelActions(ClientChannelActions):
             allow_renote_to_external=allow_renote_to_external,
             channel_id=channel_id,
         )
+
+    @credentials_required
+    @override
+    async def favorite(self, channel_id: str) -> bool:
+        """Favorite a channel
+
+        Endpoint: `/api/channels/favorite`
+
+        Parameters
+        ----------
+        channel_id : str
+            ID of the channel
+
+        Returns
+        -------
+        bool
+            Whether the channel is favorited
+        """
+        return await super().favorite(channel_id=channel_id)
