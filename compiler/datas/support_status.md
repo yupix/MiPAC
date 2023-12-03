@@ -1,4 +1,4 @@
-## SUPPORTED ENDPOINTS (43/322)
+## SUPPORTED ENDPOINTS (54/322)
 - [x] /admin/get-index-stats 
 - [x] /admin/get-table-stats 
 - [x] /admin/get-user-ips 
@@ -8,6 +8,17 @@
 - [x] /admin/show-moderation-logs 
 - [x] /admin/unsuspend-user 
 - [x] /admin/update-user-note 
+- [x] /drive 
+- [x] /drive/files 
+- [x] /drive/files/attached-notes 
+- [x] /drive/files/check-existence 
+- [x] /drive/files/create 
+- [x] /drive/files/delete 
+- [x] /drive/files/find-by-hash 
+- [x] /drive/files/find 
+- [x] /drive/files/show 
+- [x] /drive/files/update 
+- [x] /drive/files/upload-from-url 
 - [x] /i 
 - [x] /invite/create 
 - [x] /invite/delete 
@@ -161,17 +172,6 @@
 - [ ] /clips/favorite 
 - [ ] /clips/unfavorite 
 - [ ] /clips/my-favorites 
-- [ ] /drive 
-- [ ] /drive/files 
-- [ ] /drive/files/attached-notes 
-- [ ] /drive/files/check-existence 
-- [ ] /drive/files/create 
-- [ ] /drive/files/delete 
-- [ ] /drive/files/find-by-hash 
-- [ ] /drive/files/find 
-- [ ] /drive/files/show 
-- [ ] /drive/files/update 
-- [ ] /drive/files/upload-from-url 
 - [ ] /drive/folders 
 - [ ] /drive/folders/create 
 - [ ] /drive/folders/delete 

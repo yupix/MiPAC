@@ -749,67 +749,67 @@
                 "path": "/drive",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "3d1b96d30d248d61c4b1eee203b84f2bad48d6c200851942e368b88104166b1b",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/files": {
                 "path": "/drive/files",
                 "request_body_hash": "b07070c472a648963651db6e280e39b490558d9adb92ce7db9d05590178353b9",
                 "response_body_hash": "576b61217cbc7e929e6656690e9898c5b933ac5b2629b0a4f7e2389d65315ab1",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/files/attached-notes": {
                 "path": "/drive/files/attached-notes",
                 "request_body_hash": "483cf6378fc3db55c9c3acfb484f77012c0e9ab2abf81bef519089ad0ae27a03",
                 "response_body_hash": "507fab37c26ecb65a55f1f6f11ac18dc875d5594d656588a4c15b396cd35414f",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/files/check-existence": {
                 "path": "/drive/files/check-existence",
                 "request_body_hash": "ea75dd1736f53c4238eada5abf871fea88c144b71f03fdaf9f7e56024322a2f3",
                 "response_body_hash": "dd9c6671e5d139f32b17da6b74c2c6498de7ec65cf072b2df951e8c2be5eb477",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/files/create": {
                 "path": "/drive/files/create",
                 "request_body_hash": "ee93867da40daf79738829f3bfb7532aad7c60d97f7e54c3f2843ca00fe8cfb9",
                 "response_body_hash": "28d7477d5157e558c4ab3a0c2e2491c17fefc80ad803879a9f38c8fffec27e2c",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/files/delete": {
                 "path": "/drive/files/delete",
                 "request_body_hash": "d7c20d1b69b13b8c3bdce034764d6b159e21e14eb20dc6f001c023ed47973e4c",
                 "response_body_hash": "01c3864371cb588f305a706f8083f52d6bb7d249280aa302dfef644c27531a67",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/files/find-by-hash": {
                 "path": "/drive/files/find-by-hash",
                 "request_body_hash": "ea75dd1736f53c4238eada5abf871fea88c144b71f03fdaf9f7e56024322a2f3",
                 "response_body_hash": "576b61217cbc7e929e6656690e9898c5b933ac5b2629b0a4f7e2389d65315ab1",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/files/find": {
                 "path": "/drive/files/find",
                 "request_body_hash": "be819aa65c197bbe301a63e26be5bc04e6c2a774fce630c23d710a4a2a38e4cf",
                 "response_body_hash": "576b61217cbc7e929e6656690e9898c5b933ac5b2629b0a4f7e2389d65315ab1",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/files/show": {
                 "path": "/drive/files/show",
                 "request_body_hash": "469dab9342135333df7936e6dd1a691a975e6b5c205b5ab3040be3bf31a18a17",
                 "response_body_hash": "977e40bbf78c7880fbcfeeaf886ab76a912d931e9f46707cb55f2cac64c912d2",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/files/update": {
                 "path": "/drive/files/update",
                 "request_body_hash": "c2f7cb37c89d08770d768c1737d2b1dc5cb1491ca1eacd4729ecd8d9f0701b72",
                 "response_body_hash": "1c935759ba3714e4fc6f6c50ec7505ec744a75714d14ff521ea6a8a2b79f5638",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/files/upload-from-url": {
                 "path": "/drive/files/upload-from-url",
                 "request_body_hash": "6a82791ea48bc99f67991548b827191c536ab8f4c08732f95a06f66b910a2167",
                 "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/drive/folders": {
                 "path": "/drive/folders",
