@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
 from mipac.models.lite.user import PartialUser
@@ -8,8 +8,10 @@ from mipac.types.drive import IDriveStatus
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
-    from mipac.manager.drive import ClientFileManager, ClientFolderManager
+    from mipac.manager.drive.files import ClientFileManager
     from mipac.types import FolderPayload, IDriveFile, IFileProperties
+    from mipac.manager.drive.folders import ClientFolderManager
+
 
 __all__ = ["FileProperties", "File", "Folder"]
 
@@ -102,7 +104,7 @@ class Folder(AbstractModel):
 
     @property
     def api(self) -> ClientFolderManager:
-        return self.__client.drive._get_client_folder_instance(folder_id=self.id)
+        return self.__client.drive._create_client_folder_manager(folder_id=self.id)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, Folder) and self.id == __value.id
@@ -190,7 +192,7 @@ class File(AbstractModel):
 
     @property
     def api(self) -> ClientFileManager:
-        return self.__client.drive._get_client_file_instance(file_id=self.id, url=self.url)
+        return self.__client.drive._create_client_file_manager(file_id=self.id)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, File) and self.id == __value.id
