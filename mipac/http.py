@@ -14,23 +14,11 @@ from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
 from mipac.types.user import IMeDetailed
 from mipac.utils.format import remove_dict_empty, upper_to_lower
-from mipac.utils.util import COLORS, _from_json
+from mipac.utils.util import COLORS, MISSING, _from_json
 
 _log = logging.getLogger(__name__)
 
 
-class _MissingSentinel:
-    def __eq__(self, other):
-        return False
-
-    def __bool__(self):
-        return False
-
-    def __repr__(self):
-        return "..."
-
-
-MISSING: Any = _MissingSentinel()
 R = TypeVar("R")
 
 
