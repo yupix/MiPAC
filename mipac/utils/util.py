@@ -19,6 +19,20 @@ if HAS_ORJSON:
 else:
     _from_json = json.loads
 
+class Missing:
+    def __repr__(self) -> str:
+        return "MISSING"
+    
+    def __bool__(self) -> bool:
+        return False
+    
+    def __eq__(self, other: Any) -> bool:
+        return isinstance(other, Missing)
+    
+    def __ne__(self, other: Any) -> bool:
+        return not isinstance(other, Missing)
+
+MISSING: Any = Missing()
 
 def credentials_required(func):
     @functools.wraps(func)
