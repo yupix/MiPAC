@@ -76,6 +76,22 @@ def remove_dict_empty(
         ignore_keys = []
     _data = {k: v for k, v in data.items() if v is not None or k in ignore_keys}
     return _data
+
+
+def remove_dict_missing(data: dict[str, Any]) -> dict[str, Any]:
+    """
+    Parameters
+    ----------
+    data: dict
+        空のkeyを削除したいdict
+
+    Returns
+    -------
+    _data: dict
+        MISSINGのkeyがなくなったdict
+    """
+    _data = {}
+    _data = {k: v for k, v in data.items() if isinstance(v, Missing) is False}
     return _data
 
 
