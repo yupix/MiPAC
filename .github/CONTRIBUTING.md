@@ -38,3 +38,43 @@ This project uses `axblack` and `isort` formatting. The difference between `axbl
 
 - Ayuskey v5, 6
 - Misskey v13, 12, 11
+
+### 引数に関する例外について
+
+Misskey側に渡すBodyにおいて、例えば `limit` に渡せる最大数が100だと分かっていても、MiPAC側で特別なことはしないものとする。これはAPIを叩いた際に帰ってくるエラーをより直接的に見れるようにするためです
+
+### 引数のデフォルト値について
+
+少し複雑な話になる為例を出しつつの説明になります。
+例として `/api/channels/update` には `isSensitive` や `bannerId` といったキーを渡すことができます。では `update` メソッドを実際に作ってみましょう。
+
+```python
+    async def update(
+        self,
+        banner_id: str | None = None,
+        is_sensitive: bool | None = None,
+    ) -> :
+    ...
+```
+
+まず、 `is_sensitive` に `None` が選べてしまうのは何か気持ち悪い所があります。次に`banner_id` は エンドポイント側がnullを許容している為、既に `banner_id` が設定してあった場合、`is_sensitive` のみを更新しようとした場合にnullに設定されてしまいます。また、`request` メソッドが持つ `remove_none=True` でNoneを消すことができますが、これでは `banner_id` を nullにする方法がなくなってしまします。
+
+では、ここで`MISSING` を使って書き直します。
+
+```python
+    async def update(
+        self,
+        banner_id: str | None = MISSING,
+        is_sensitive: bool = MISSING,
+    ) -> :
+    data = remove_dict_missing({
+        "bannerId": banner_id,
+        "isSensitive": is_sensitive
+    })
+    self._session.request(Route("POST", "/api/channels/update"), auth=True, json=data, remove_none=False)
+    ...
+```
+
+`is_sensitive` のTypeHintsが `bool` のみにできるので気持ち悪さが解消されます。
+また、 `remove_dict_missing` を使用することで `MISSING` のみを削除出来るため、Noneに設定したい場合は `await update(banner_id=None)` とすることで `banner_id` を null に設定できるようになります。注意点として、 `request` メソッドの `remove_none=False` に設定しないと `None` が削除されてしまうため気を付けてください。基本的に `/api/channels/create` のように作成系等では既にサーバー上にあるデータに留意する必要が無いため、`MISSING` ではなく `None` を使用しても問題ないです
+
