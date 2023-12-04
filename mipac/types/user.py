@@ -149,7 +149,7 @@ class IUserDetailedNotMeOnlySchema(TypedDict):
     birthday: str | None
     lang: str | None
     fields: list[IUserField]
-    verified_linlks: list[str]
+    verified_links: list[str]
     followers_count: int
     following_count: int
     notes_count: int
