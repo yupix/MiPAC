@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, Generic, TypeVar
 from mipac.abstract.model import AbstractModel
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.user import IBadgeRole, IPartialUser, IUserOnlineStatus
+from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -45,6 +46,7 @@ class PartialUser(AbstractModel, Generic[PU]):
         """Returns the id of the user."""
         return self._raw_user["id"]
 
+    @deprecated
     @property
     def nickname(self) -> str | None:
         """Returns the nickname of the user."""
