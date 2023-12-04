@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Literal, NotRequired, TypedDict, TypeGuard
 
+from mipac.types.meta import IPolicies
 from mipac.types.roles import IPartialRole
 
 if TYPE_CHECKING:
@@ -13,6 +14,11 @@ if TYPE_CHECKING:
 IUserOnlineStatus = Literal["online", "active", "offline", "unknown"]
 IFfVisibility = Literal["public", "followers", "private"]
 IUserNotify = Literal["normal", "none"]
+ITwoFactoryBackupCodesStock = Literal["full", "partial", "none"]
+NotificationRecieveConfigOption = Literal[
+    "all", "following", "follower", "mutualFollow", "list", "never"
+]  # Misskey側が間違っている(Receiveのミススペル?)ので混乱を招かないようにこっちも統一してある
+EmailNotificationTypes = Literal["mention", "reply", "quote", "follow", "receiveFollowRequest"]
 
 
 class IUserField(TypedDict):
@@ -70,33 +76,69 @@ class IUserRequired(TypedDict):
     avatar_blurhash: str
 
 
+class IAvatarDecoration(TypedDict):
+    id: str
+    angle: NotRequired[int]
+    flip_h: NotRequired[bool]
+    url: str
+
+
+class NotificationRecieveConfigType(TypedDict):
+    type: NotificationRecieveConfigOption
+
+
+class NotificationRecieveConfig(TypedDict):
+    app: NotificationRecieveConfigType
+    quote: NotificationRecieveConfigType
+    reply: NotificationRecieveConfigType
+    follow: NotificationRecieveConfigType
+    renote: NotificationRecieveConfigType
+    mention: NotificationRecieveConfigType
+    reaction: NotificationRecieveConfigType
+    pollEnded: NotificationRecieveConfigType
+    achievementEarned: NotificationRecieveConfigType
+    receiveFollowRequest: NotificationRecieveConfigType
+    followRequestAccepted: NotificationRecieveConfigType
+
+
+class IUserSecurityKey(TypedDict):
+    id: str
+    name: str
+    last_used: str
+
+
 class IPartialUser(TypedDict):
+    """
+    Misskey Schema: `packedUserLiteSchema`
+    """
+
     id: str
     name: str | None
     username: str
     host: str | None
-    avatar_url: str
-    avatar_blurhash: str
-    is_bot: bool
-    is_cat: bool
+    avatar_url: str | None
+    avatar_blurhash: str | None
+    avatar_decorations: list[IAvatarDecoration]
+    is_bot: NotRequired[bool]
+    is_cat: NotRequired[bool]
     instance: NotRequired[IInstanceLite]  # ローカルユーザーの場合はキーが無い
     emojis: dict[str, str]
     online_status: IUserOnlineStatus
     badge_roles: NotRequired[list[IBadgeRole]]  # リモートユーザーの場合はキーが無い
 
 
-class IUserDetailedNotLogined(IPartialUser):
+class IUserDetailedNotMeOnlySchema(TypedDict):
     """
-    ログイン無し
+    Misskey Schema: `packedUserDetailedNotMeOnlySchema`
     """
 
-    url: str | None  # ローカルユーザーには無い
-    uri: str | None  # # ローカルユーザーには無い
-    moved_to: str | None  # ユーザーのID
+    url: str | None
+    uri: str | None
+    moved_to: str | None
     also_known_as: list[str] | None
     created_at: str
     updated_at: str | None
-    last_fetched_at: str | None  # ローカルユーザーには無い
+    last_fetched_at: str | None
     banner_url: str | None
     banner_blurhash: str | None
     is_locked: bool
@@ -107,7 +149,7 @@ class IUserDetailedNotLogined(IPartialUser):
     birthday: str | None
     lang: str | None
     fields: list[IUserField]
-    verified_links: list[str]
+    verified_linlks: list[str]
     followers_count: int
     following_count: int
     notes_count: int
@@ -122,39 +164,24 @@ class IUserDetailedNotLogined(IPartialUser):
     security_keys: bool
     roles: list[IPartialRole]
     memo: str | None
+    moderation_note: NotRequired[str]
+    is_following: NotRequired[bool]
+    is_followed: NotRequired[bool]
+    has_pending_follow_request_from_you: NotRequired[bool]
+    has_pending_follow_request_to_you: NotRequired[bool]
+    is_blocking: NotRequired[bool]
+    is_blocked: NotRequired[bool]
+    is_muted: NotRequired[bool]
+    is_renote_muted: NotRequired[bool]
+    notify: NotRequired[IUserNotify]
+    with_replies: NotRequired[bool]
 
 
-class IUserDetailed(IUserDetailedNotLogined):
-    """
-    主に自分から見た相手の情報が追加される
-    ログイン済み
-    モデレーターではない
-    """
-
-    is_following: bool
-    is_followed: bool
-    has_pending_follow_request_from_you: bool
-    has_pending_follow_request_to_you: bool
-    is_blocking: bool
-    is_blocked: bool
-    is_muted: bool
-    is_renote_muted: bool
-    notify: IUserNotify
-
-
-class IUserDetailedModerator(IUserDetailed):
-    """モデレーターから見たユーザー"""
-
-    moderation_note: str
-
-
-class IMeDetailed(IUserDetailed):
-    """自分自身"""
-
-    avatar_id: str
-    banner_id: None
-    is_moderator: bool
-    is_admin: bool
+class IMeDetailedOnlySchema(TypedDict):
+    avatar_id: str | None
+    banner_id: str | None
+    is_moderator: bool | None  # entities/UserEntityService.ts で roleServiceを用いて判断してるからNoneの場合がある?
+    is_admin: bool | None
     inject_featured_note: bool
     receive_announcement_email: bool
     always_mark_nsfw: bool
@@ -165,125 +192,77 @@ class IMeDetailed(IUserDetailed):
     prevent_ai_learning: bool
     is_explorable: bool
     is_deleted: bool
-    two_factor_backup_codes_stock: str
+    two_factory_backup_codes_stock: ITwoFactoryBackupCodesStock
     hide_online_status: bool
     has_unread_specified_notes: bool
     has_unread_mentions: bool
     has_unread_announcement: bool
-    unread_announcements: IAnnouncement
+    unread_announcements: list[IAnnouncement]
     has_unread_antenna: bool
     has_unread_channel: bool
     has_unread_notification: bool
     has_pending_received_follow_request: bool
-    muted_words: list[str]
-    muted_instances: dict
-    muting_notification_types: dict
-    notification_recieve_config: dict
-    email_notification_types: dict
-    achievements: dict
+    unread_notifications_count: bool
+    muted_words: list[list[str]]
+    hard_muted_words: list[list[str]]
+    muted_instances: list[str]
+    notification_recieve_config: NotificationRecieveConfig
+    email_notification_types: list[EmailNotificationTypes]
+    achievements: list[IAchievement]
     logged_in_days: int
-    policies: dict
+    policies: IPolicies
+    email: NotRequired[str | None]
+    email_verified: NotRequired[bool]
+    security_keys_list: NotRequired[list[IUserSecurityKey]]  # セキュリティー
 
 
-class IMeDetailedModerator(IMeDetailed):
-    """自分自身でモデレーター"""
-
-    moderation_note: str
+class IUserDetailedNotMeSchema(IPartialUser, IUserDetailedNotMeOnlySchema):
+    pass
 
 
-# 型が不明確になるため、基本的にはこの共用体は使わないでください。基本的にAPIなどのレスポンスに使うことを想定しています。
-IUser = (
-    IPartialUser
-    | IUserDetailedNotLogined
-    | IUserDetailed
-    | IUserDetailedModerator
-    | IMeDetailed
-    | IMeDetailedModerator
-)
+class IMeDetailedSchema(IUserDetailedNotMeSchema, IMeDetailedOnlySchema):
+    pass
 
 
-class IFollowRequest(TypedDict):
-    id: str
-    follower: IPartialUser
-    followee: IPartialUser
+IUserDetailed = IUserDetailedNotMeSchema | IMeDetailedSchema
+
+IUser = IPartialUser | IUserDetailed | IUserDetailedNotMeSchema | IMeDetailedSchema
 
 
 def is_partial_user(user: IUser) -> TypeGuard[IPartialUser]:
-    return user.get("created_at") is None
-
-
-def is_me_detailed(user: IUser, me_id: str) -> TypeGuard[IMeDetailed]:
-    return user.get("avatar_id") is not None and user.get("id") == me_id
-
-
-def is_user_detailed_not_logined(user: IUser) -> TypeGuard[IUserDetailedNotLogined]:
     """
-    渡されたユーザーがログイン無しで取得された情報か確認します。またこれは自分自身ではないです。
-
-    Parameters
-    ----------
-    user : IUser
-        user information
-
-    Returns
-    -------
-    TypeGuard[IUserDetailedNotLogined]
+    他のUser型は全て IUserDetailedNotMeSchema 経由で IUserDetailedNotMeOnlySchema を継承しているため
+    url が無いことを確認し区別する
     """
-    return (
-        user.get("is_following", "d3ee116d-1ee7-4a35-b277-0e22d541912e")
-        == "d3ee116d-1ee7-4a35-b277-0e22d541912e"
-    )
+    if "url" not in user:
+        return True
+    return False
+
+
+def is_user_detailed_not_me(user: IUser) -> TypeGuard[IUserDetailedNotMeSchema]:
+    """
+
+    IUserDetailedNotMeSchemaが持つ url が有ることを確認し
+    IMeDetailedOnlySchema が持つ avatar_id が無いことを確認する
+    こうすることで IMeDetailedSchema と区別する
+    """
+    if "avatar_id" not in user and "url" in user:
+        return True
+    return False
+
+
+def is_me_detailed(user: IUser) -> TypeGuard[IMeDetailedSchema]:
+    """
+    IMeDetailedOnlySchemaで avatar_id
+    IUserDetailedNotMeOnlySchemaで url
+    を持っているのでどちらともを満たしたものがIMeDetailedSchema
+    """
+    if "avatar_id" in user and "url" in user:
+        return True
+    return False
 
 
 def is_user_detailed(user: IUser) -> TypeGuard[IUserDetailed]:
-    """
-    渡されたユーザーがログイン済みで自分自身ではないかを判定します
-
-    Parameters
-    ----------
-    user : IUser
-        user information
-
-    Returns
-    -------
-    TypeGuard[IUserDetailed]
-    """
-
-    return (
-        user.get("avatar_id", "61a0dc68-bf6f-4947-9e9a-348db9c7de08")
-        == "61a0dc68-bf6f-4947-9e9a-348db9c7de08"
-    )
-
-
-def is_user_detailed_moderator(user: IUser) -> TypeGuard[IUserDetailedModerator]:
-    """
-    渡されたユーザーがモデレーターから見たユーザーかを判定します
-
-    Parameters
-    ----------
-    user : IUser
-        user information
-
-    Returns
-    -------
-    TypeGuard[IUserDetailedModerator]
-    """
-
-    return user.get("moderation_note") is not None
-
-
-def is_me_detailed_moderator(user: IUser, me_id: str) -> TypeGuard[IMeDetailedModerator]:
-    """
-    渡されたユーザーが自分自身克モデレーターかを判定します
-
-    Parameters
-    ----------
-    user : IUser
-        user information
-
-    Returns
-    -------
-    TypeGuard[IMeDetailedModerator]
-    """
-
-    return user.get("moderation_note") is not None and user.get("id") == me_id
+    if is_user_detailed_not_me(user) or is_me_detailed(user):
+        return True
+    return False
