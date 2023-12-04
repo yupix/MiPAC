@@ -29,6 +29,7 @@ from mipac.types.user import (
     is_user_detailed,
     is_user_detailed_moderator,
     is_user_detailed_not_logined,
+    IUserDetailedNotMeSchema,
 )
 from mipac.utils.format import str_to_datetime
 from mipac.utils.util import DeprecatedClass
@@ -84,6 +85,20 @@ class Achievement(AbstractModel):
         return self.__detail["unlocked_at"]
 
 
+class UserField:
+    def __init__(self, raw_user_field: IUserField, *, client: ClientManager) -> None:
+        self.__raw_user_field: IUserField = raw_user_field
+        self.__client: ClientManager = client
+
+    @property
+    def name(self) -> str:
+        return self.__raw_user_field["name"]
+
+    @property
+    def value(self) -> str:
+        return self.__raw_user_field["value"]
+
+
 @DeprecatedClass(remove_in_version="0.7.0")
 class UserRole(BadgeRole[IUserRole]):
     def __init__(self, data: IUserRole, *, client: ClientManager) -> None:
@@ -109,6 +124,188 @@ class UserRole(BadgeRole[IUserRole]):
     def is_administrator(self) -> bool:
         return self._data["is_administrator"]
 
+
+class UserDetailedNotMeOnly(PartialUser[IUserDetailedNotMeSchema]):
+    def __init__(self, raw_user: IUserDetailedNotMeSchema, *, client: ClientManager) -> None:
+        super().__init__(raw_user, client=client)
+
+    @property
+    def url(self) -> str | None:
+        return self._raw_user["url"]
+
+    @property
+    def uri(self) -> str | None:
+        return self._raw_user["uri"]
+
+    @property
+    def moved_to(self) -> str | None:
+        return self._raw_user["moved_to"]
+
+    @property
+    def also_known_as(self) -> list[str] | None:
+        return self._raw_user["also_known_as"]
+
+    @property
+    def created_at(self) -> datetime:
+        return str_to_datetime(self._raw_user["created_at"])
+
+    @property
+    def updated_at(self) -> datetime | None:
+        return (
+            str_to_datetime(self._raw_user["updated_at"]) if self._raw_user["updated_at"] else None
+        )
+
+    @property
+    def last_fetched_at(self) -> datetime | None:
+        return (
+            str_to_datetime(self._raw_user["last_fetched_at"])
+            if self._raw_user["last_fetched_at"]
+            else None
+        )
+
+    @property
+    def banner_url(self) -> str | None:
+        return self._raw_user["banner_url"]
+
+    @property
+    def banner_blurhash(self) -> str | None:
+        return self._raw_user["banner_blurhash"]
+
+    @property
+    def is_locked(self) -> bool:
+        return self._raw_user["is_locked"]
+
+    @property
+    def is_silenced(self) -> bool:
+        return self._raw_user["is_silenced"]
+
+    @property
+    def is_suspended(self) -> bool:
+        return self._raw_user["is_suspended"]
+
+    @property
+    def description(self) -> str | None:
+        return self._raw_user["description"]
+
+    @property
+    def location(self) -> str | None:
+        return self._raw_user["location"]
+
+    @property
+    def birthday(self) -> str | None:  # TODO: datetimeにする必要があるか確認する
+        return self._raw_user["birthday"]
+
+    @property
+    def lang(self) -> str | None:
+        return self._raw_user["lang"]
+
+    @property
+    def fields(self) -> list[UserField]:
+        return [UserField(i, client=self._client) for i in self._raw_user["fields"]]
+
+    @property
+    def verified_links(self) -> list[str]:
+        return self._raw_user["verified_links"]
+
+    @property
+    def followers_count(self) -> int:
+        return self._raw_user["followers_count"]
+
+    @property
+    def following_count(self) -> int:
+        return self._raw_user["following_count"]
+
+    @property
+    def notes_count(self) -> int:
+        return self._raw_user["notes_count"]
+
+    @property
+    def pinned_note_ids(self) -> list[str]:
+        return self._raw_user["pinned_note_ids"]
+
+    @property
+    def pinned_notes(self) -> list[Note]:
+        return [Note(raw_note, client=self._client) for raw_note in self._raw_user["pinned_notes"]]
+
+    @property
+    def pinned_page_id(self) -> str | None:
+        return self._raw_user["pinned_page_id"]
+
+    @property
+    def pinned_page(self) -> IPage | None:  # TODO: モデルに
+        return self._raw_user["pinned_page"]
+
+    @property
+    def public_reactions(self) -> bool:
+        return self._raw_user["public_reactions"]
+
+    @property
+    def ff_visibility(self) -> IFfVisibility:
+        return self._raw_user["ff_visibility"]
+
+    @property
+    def two_factor_enabled(self) -> bool:
+        return self._raw_user["two_factor_enabled"]
+
+    @property
+    def use_password_less_login(self) -> bool:
+        return self._raw_user["use_password_less_login"]
+
+    @property
+    def security_keys(self) -> bool:
+        return self._raw_user["security_keys"]
+
+    @property
+    def roles(self) -> list[PartialRole]:
+        return [PartialRole(i, client=self._client) for i in self._raw_user["roles"]]
+
+    @property
+    def memo(self) -> str | None:
+        return self._raw_user["memo"]
+
+    @property
+    def moderation_note(self) -> str | None:
+        return self._raw_user.get("moderation_note")
+
+    @property
+    def is_following(self) -> bool | None:
+        return self._raw_user.get("is_following")
+
+    @property
+    def is_followed(self) -> bool | None:
+        return self._raw_user.get("is_followed")
+    
+    @property
+    def has_pending_follow_request_from_you(self) -> bool | None:
+        return self._raw_user.get("has_pending_follow_request_from_you")
+    
+    @property
+    def has_pending_follow_request_to_you(self) -> bool | None:
+        return self._raw_user.get("has_pending_follow_request_to_you")
+    
+    @property
+    def is_blocking(self) -> bool | None:
+        return self._raw_user.get("is_blocking")
+    
+    @property
+    def is_blocked(self) -> bool | None:
+        return self._raw_user.get("is_blocked")
+    
+    @property
+    def is_muted(self) -> bool | None:
+        return self._raw_user.get("is_muted")
+    
+    @property
+    def is_renote_muted(self) -> bool | None:
+        return self._raw_user.get("is_renote_muted")
+    
+    @property
+    def notify(self) -> IUserNotify | None:
+        return self._raw_user.get("notify")
+    
+    @property
+    def with_replies(self) -> bool | None:
+        return self._raw_user.get("with_replies")
 
 class UserDetailedNotLogined(PartialUser[T], Generic[T]):
     def __init__(self, raw_user: T, *, client: ClientManager) -> None:
