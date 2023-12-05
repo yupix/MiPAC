@@ -33,6 +33,45 @@ class UserActions:
         self.__user: Optional[PartialUser] = user
         self.__client: ClientManager = client
 
+    async def get_notes(
+        self,
+        user_id: str | None = None,
+        with_replies: bool = False,
+        with_renotes: bool = True,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_data: int | None = None,
+        until_data: int | None = None,
+        include_my_renotes: bool = True,
+        with_files: bool = False,
+        file_type: list[str] | None = None,
+        exclude_nsfw: bool = False,
+    ) -> list[Note]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
+        if check_multi_arg(user_id, self.__user) is False:
+            raise ParameterError("missing required argument: user_id", user_id, self.__user)
+
+        user_id = user_id or self.__user and self.__user.id
+        data = {
+            "userId": user_id,
+            "withReplies": with_replies,
+            "withRenotes": with_renotes,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "sinceDate": since_data,
+            "untilDate": until_data,
+            "includeMyRenotes": include_my_renotes,
+            "withFiles": with_files,
+            "fileType": file_type,
+            "excludeNsfw": exclude_nsfw,
+        }
+
+        raw_note: list[INote] = await self.__session.request(
+            Route("POST", "/api/users/notes"), json=data
+        )
+
+        return [Note(raw_note=raw_note, client=self.__client) for raw_note in raw_note]
     async def get_me(self) -> MeDetailed:  # TODO: トークンが無い場合は例外返すようにする
         """
         ログインしているユーザーの情報を取得します
@@ -123,59 +162,6 @@ class UserActions:
         return await self.get(
             user_id=user_id, username=username, host=host, user_ids=user_ids, cache_override=True
         )
-
-    async def get_notes(
-        self,
-        user_id: str | None = None,
-        with_replies: bool = False,
-        with_renotes: bool = True,
-        limit: int = 10,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        since_data: int | None = None,
-        until_data: int | None = None,
-        include_my_renotes: bool = True,
-        with_files: bool = False,
-        file_type: list[str] | None = None,
-        exclude_nsfw: bool = False,
-        *,
-        get_all: bool = False,
-    ) -> AsyncGenerator[
-        Note, None
-    ]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
-        if check_multi_arg(user_id, self.__user) is False:
-            raise ParameterError("missing required argument: user_id", user_id, self.__user)
-
-        user_id = user_id or self.__user and self.__user.id
-        data = {
-            "userId": user_id,
-            "withReplies": with_replies,
-            "withRenotes": with_renotes,
-            "limit": limit,
-            "sinceId": since_id,
-            "untilId": until_id,
-            "sinceDate": since_data,
-            "untilDate": until_data,
-            "includeMyRenotes": include_my_renotes,
-            "withFiles": with_files,
-            "fileType": file_type,
-            "excludeNsfw": exclude_nsfw,
-        }
-
-        if get_all:
-            data["limit"] = 100
-            limit = 100
-
-        pagination = Pagination[INote](
-            self.__session, Route("POST", "/api/users/notes"), json=data, limit=limit
-        )
-
-        while True:
-            res_notes = await pagination.next()
-            for note in res_notes:
-                yield Note(note, client=self.__client)
-            if get_all is False or pagination.is_final:
-                break
 
     def get_mention(self, user: Optional[PartialUser] = None) -> str:  # TODO: モデルに移す
         """
