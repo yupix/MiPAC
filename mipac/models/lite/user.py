@@ -194,7 +194,7 @@ class PartialUser(Generic[PU]):
         """
         return [
             AvatarDecoration(data, client=self._client)
-            for data in self._raw_user["avatar_decoration"]
+            for data in self._raw_user["avatar_decorations"]
         ]
 
     @property
