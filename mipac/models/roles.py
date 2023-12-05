@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
 from mipac.models.lite.role import PartialRole
-from mipac.models.user import MeDetailed, UserDetailedNotMe, MeDetailed, packed_user
+from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.roles import IMeRole, IRole, IRolePolicies, IRolePolicieValue, IRoleUser
 from mipac.utils.format import str_to_datetime
 

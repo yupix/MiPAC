@@ -6,7 +6,7 @@ from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.instance import FederationInstance
-from mipac.models.user import UserDetailedNotMe, MeDetailed, packed_user
+from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.follow import IFederationFollower, IFederationFollowing
 from mipac.types.instance import IFederationInstance, IFederationInstanceStat
 from mipac.types.user import IUserDetailed

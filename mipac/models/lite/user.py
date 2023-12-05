@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Generic, TypeVar
 
 from mipac.models.lite.instance import LiteInstance
-from mipac.types.user import IBadgeRole, IPartialUser, IUserOnlineStatus, IAvatarDecoration
+from mipac.types.user import IAvatarDecoration, IBadgeRole, IPartialUser, IUserOnlineStatus
 from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:

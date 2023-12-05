@@ -1,32 +1,32 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, TypeVar, Generic
+from typing import TYPE_CHECKING, Generic, TypeVar
 
-from mipac.types.meta import IPolicies
 from mipac.abstract.model import AbstractModel
 from mipac.models.announcement import Announcement
 from mipac.models.lite.role import PartialRole
 from mipac.models.lite.user import BadgeRole, PartialUser
 from mipac.models.note import Note
+from mipac.types.meta import IPolicies
 from mipac.types.page import IPage
 from mipac.types.user import (
+    EmailNotificationTypes,
     IAchievement,
     IBlockingUser,
     IFfVisibility,
+    IMeDetailedOnlySchema,
+    IMeDetailedSchema,
+    ITwoFactorBackupCodesStock,
     IUser,
+    IUserDetailedNotMeOnlySchema,
+    IUserDetailedNotMeSchema,
     IUserField,
     IUserNotify,
     IUserRole,
-    is_me_detailed,
-    IUserDetailedNotMeSchema,
-    IMeDetailedOnlySchema,
-    ITwoFactorBackupCodesStock,
-    NotificationRecieveConfig,
-    EmailNotificationTypes,
     IUserSecurityKey,
-    IMeDetailedSchema,
-    IUserDetailedNotMeOnlySchema,
+    NotificationRecieveConfig,
+    is_me_detailed,
     is_user_detailed_not_me,
 )
 from mipac.utils.format import str_to_datetime

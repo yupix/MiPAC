@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.user import UserDetailedNotMe, MeDetailed, packed_user
+from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.admin import (
     IIndexStat,
     IModerationLog,

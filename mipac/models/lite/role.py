@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Generic, TypeVar
+
 from mipac.types.roles import IPartialRole
 
 if TYPE_CHECKING:

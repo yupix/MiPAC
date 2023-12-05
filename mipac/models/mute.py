@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.user import UserDetailedNotMe, MeDetailed, packed_user
+from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.mute import IMuteUser
 
 if TYPE_CHECKING:

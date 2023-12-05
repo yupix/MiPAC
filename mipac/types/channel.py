@@ -1,6 +1,5 @@
 from typing import NotRequired, TypedDict
 
-
 from mipac.types.note import INote
 
 

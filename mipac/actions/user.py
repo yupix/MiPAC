@@ -2,25 +2,15 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, overload
 
-from mipac.config import config
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
 from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
-from mipac.models.user import (
-    Achievement,
-    MeDetailed,
-    UserDetailedNotMe,
-    packed_user,
-)
+from mipac.models.user import Achievement, MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.clip import IClip
 from mipac.types.note import INote
-from mipac.types.user import (
-    IMeDetailedSchema,
-    IUser,
-    is_partial_user,
-)
+from mipac.types.user import IMeDetailedSchema, IUser, is_partial_user
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
