@@ -1985,7 +1985,7 @@
         "Announcement": {
             "name": "Announcement",
             "hash": "2cf968f3b8466df7c59f31dfca7a314929ed4cf6fc7cc074d4c1a8fd998c9994",
-            "status": "notSupported"
+            "status": "supported"
         },
         "App": {
             "name": "App",
