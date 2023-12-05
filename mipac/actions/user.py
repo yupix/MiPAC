@@ -72,6 +72,45 @@ class UserActions:
         )
 
         return [Note(raw_note=raw_note, client=self.__client) for raw_note in raw_note]
+
+    async def get_all_notes(
+        self,
+        user_id: str | None = None,
+        with_replies: bool = False,
+        with_renotes: bool = True,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_data: int | None = None,
+        until_data: int | None = None,
+        include_my_renotes: bool = True,
+        with_files: bool = False,
+        file_type: list[str] | None = None,
+        exclude_nsfw: bool = False,
+    ):
+        user_id = user_id or self.__user and self.__user.id
+        data = {
+            "userId": user_id,
+            "withReplies": with_replies,
+            "withRenotes": with_renotes,
+            "limit": 100,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "sinceDate": since_data,
+            "untilDate": until_data,
+            "includeMyRenotes": include_my_renotes,
+            "withFiles": with_files,
+            "fileType": file_type,
+            "excludeNsfw": exclude_nsfw,
+        }
+        pagination = Pagination[INote](
+            self.__session, Route("POST", "/api/users/notes"), json=data
+        )
+
+        while pagination.is_final is False:
+            res_notes = await pagination.next()
+            for note in res_notes:
+                yield Note(note, client=self.__client)
+
     async def get_me(self) -> MeDetailed:  # TODO: トークンが無い場合は例外返すようにする
         """
         ログインしているユーザーの情報を取得します
