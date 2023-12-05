@@ -70,26 +70,26 @@ class AvatarDecoration:
         return self.__raw_avatar_decoration["id"]
 
     @property
-    def angle(self) -> int:
+    def angle(self) -> int | None:
         """Returns the angle of the avatar decoration.
 
         Returns
         -------
-        int
+        int | None
             The angle of the avatar decoration.
         """
-        return self.__raw_avatar_decoration["angle"]
+        return self.__raw_avatar_decoration.get("angle")
 
     @property
-    def flip_h(self) -> bool:
+    def flip_h(self) -> bool | None:
         """Returns whether the avatar decoration is flipped horizontally.
 
         Returns
         -------
-        bool
+        bool | None
             Whether the avatar decoration is flipped horizontally.
         """
-        return self.__raw_avatar_decoration["flip_h"]
+        return self.__raw_avatar_decoration.get("flip_h")
 
     @property
     def url(self) -> str:
@@ -262,11 +262,11 @@ class PartialUser(Generic[PU]):
         list[BadgeRole] | None
             The badge roles of the user.
         """
-        return (
-            [BadgeRole(data, client=self._client) for data in self._raw_user["badge_roles"]]
-            if self._raw_user.get("badge_roles")
-            else None
-        )
+        badge_roles = self._raw_user.get("badge_roles")
+        if badge_roles is None:
+            return None
+        return [BadgeRole(data, client=self._client) for data in badge_roles]
+        
 
     @property
     def api(self) -> UserManager:
