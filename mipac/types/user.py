@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 IUserOnlineStatus = Literal["online", "active", "offline", "unknown"]
 IFfVisibility = Literal["public", "followers", "private"]
 IUserNotify = Literal["normal", "none"]
-ITwoFactoryBackupCodesStock = Literal["full", "partial", "none"]
+ITwoFactorBackupCodesStock = Literal["full", "partial", "none"]
 NotificationRecieveConfigOption = Literal[
     "all", "following", "follower", "mutualFollow", "list", "never"
 ]  # Misskey側が間違っている(Receiveのミススペル?)ので混乱を招かないようにこっちも統一してある
@@ -192,7 +192,7 @@ class IMeDetailedOnlySchema(TypedDict):
     prevent_ai_learning: bool
     is_explorable: bool
     is_deleted: bool
-    two_factory_backup_codes_stock: ITwoFactoryBackupCodesStock
+    two_factor_backup_codes_stock: ITwoFactorBackupCodesStock
     hide_online_status: bool
     has_unread_specified_notes: bool
     has_unread_mentions: bool
