@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, TypeVar, Union, overload
+from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, overload
 
 from mipac.config import config
 from mipac.errors.base import NotExistRequiredData, ParameterError
@@ -11,19 +11,15 @@ from mipac.models.note import Note
 from mipac.models.user import (
     Achievement,
     MeDetailed,
-    MeDetailedModerator,
-    UserDetailed,
-    UserDetailedModels,
-    UserModels,
-    create_user_model,
+    UserDetailedNotMe,
+    packed_user,
 )
 from mipac.types.clip import IClip
 from mipac.types.note import INote
 from mipac.types.user import (
-    IMeDetailed,
-    IMeDetailedModerator,
+    IMeDetailedSchema,
     IUser,
-    is_me_detailed_moderator,
+    is_partial_user,
 )
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
@@ -34,8 +30,6 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 __all__ = ["UserActions"]
-
-T = TypeVar("T", bound=Union[PartialUser, UserDetailed])
 
 
 class UserActions:
@@ -49,21 +43,17 @@ class UserActions:
         self.__user: Optional[PartialUser] = user
         self.__client: ClientManager = client
 
-    async def get_me(self) -> MeDetailed | MeDetailedModerator:  # TODO: トークンが無い場合は例外返すようにする
+    async def get_me(self) -> MeDetailed:  # TODO: トークンが無い場合は例外返すようにする
         """
         ログインしているユーザーの情報を取得します
         """
 
-        res: IMeDetailedModerator | IMeDetailed = await self.__session.request(
+        res: IMeDetailedSchema = await self.__session.request(
             Route("POST", "/api/i"),
             auth=True,
             lower=True,
         )
-        return (
-            MeDetailedModerator(res, client=self.__client)
-            if is_me_detailed_moderator(res, config.account_id)
-            else MeDetailed(res, client=self.__client)
-        )
+        return MeDetailed(res, client=self.__client)
 
     def get_profile_link(
         self,
@@ -90,7 +80,7 @@ class UserActions:
         username: str | None = None,
         host: str | None = None,
         **kwargs,
-    ) -> UserDetailedModels:
+    ) -> UserDetailedNotMe | MeDetailed:
         """
         Retrieve user information from the user ID using the cache.
         If there is no cache, `fetch` is automatically used.
@@ -114,7 +104,7 @@ class UserActions:
         data: IUser = await self.__session.request(
             Route("POST", "/api/users/show"), json=field, auth=True, lower=True
         )
-        return create_user_model(data, client=self.__client, use_partial_user=False)
+        return packed_user(data, client=self.__client)
 
     async def fetch(
         self,
@@ -122,7 +112,7 @@ class UserActions:
         user_ids: list[str] | None = None,
         username: str | None = None,
         host: str | None = None,
-    ) -> UserDetailedModels:
+    ) -> UserDetailedNotMe | MeDetailed:
         """
         Retrieve the latest user information using the target user ID or username.
         If you do not need the latest information, you should basically use the `get` method.
@@ -160,7 +150,9 @@ class UserActions:
         exclude_nsfw: bool = False,
         *,
         get_all: bool = False,
-    ) -> AsyncGenerator[Note, None]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
+    ) -> AsyncGenerator[
+        Note, None
+    ]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
         if check_multi_arg(user_id, self.__user) is False:
             raise ParameterError("missing required argument: user_id", user_id, self.__user)
 
@@ -239,7 +231,7 @@ class UserActions:
         detail: Literal[True] = True,
         *,
         get_all: bool = False,
-    ) -> AsyncGenerator[UserDetailedModels, None]:
+    ) -> AsyncGenerator[UserDetailedNotMe | MeDetailed, None]:
         ...
 
     async def search(
@@ -251,7 +243,7 @@ class UserActions:
         detail: Literal[True, False] = True,
         *,
         get_all: bool = False,
-    ) -> AsyncGenerator[UserModels, None]:
+    ) -> AsyncGenerator[UserDetailedNotMe | MeDetailed | PartialUser, None]:
         """
         Search users by keyword.
 
@@ -292,7 +284,11 @@ class UserActions:
         while True:
             users: list[IUser] = await pagination.next()
             for user in users:
-                yield create_user_model(user, client=self.__client)
+                yield (
+                    packed_user(user, client=self.__client)
+                    if is_partial_user(user) is False
+                    else PartialUser(user, client=self.__client)
+                )
             if get_all is False or pagination.is_final:
                 break
 
@@ -302,7 +298,7 @@ class UserActions:
         host: str,
         limit: int = 100,
         detail: bool = True,
-    ) -> list[UserDetailed | PartialUser]:  # TODO: 続き
+    ) -> list[UserDetailedNotMe | MeDetailed | PartialUser]:  # TODO: 続き
         """
         Search users by username and host.
 
@@ -319,7 +315,7 @@ class UserActions:
 
         Returns
         -------
-        list[UserDetailed | PartialUser]
+        list[UserDetailedNotMe | MeDetailed | PartialUser]
             A list of users.
         """
 
@@ -336,7 +332,7 @@ class UserActions:
             json=body,
         )
         return [
-            UserDetailed(user, client=self.__client)
+            packed_user(user, client=self.__client)
             if detail
             else PartialUser(user, client=self.__client)
             for user in res

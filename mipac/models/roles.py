@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
 from mipac.models.lite.role import PartialRole
-from mipac.models.user import MeDetailed, UserDetailed
+from mipac.models.user import MeDetailed, UserDetailedNotMe, MeDetailed, packed_user
 from mipac.types.roles import IMeRole, IRole, IRolePolicies, IRolePolicieValue, IRoleUser
 from mipac.utils.format import str_to_datetime
 
@@ -24,8 +24,8 @@ class RoleUser(AbstractModel):
         return self.__role_user["id"]
 
     @property
-    def user(self) -> UserDetailed:
-        return UserDetailed(self.__role_user["user"], client=self.__client)
+    def user(self) -> UserDetailedNotMe | MeDetailed:
+        return packed_user(self.__role_user["user"], client=self.__client)
 
     @property
     def expires_at(self) -> datetime | None:

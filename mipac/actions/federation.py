@@ -6,7 +6,7 @@ from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.instance import FederationInstance
-from mipac.models.user import UserDetailed
+from mipac.models.user import UserDetailedNotMe, MeDetailed, packed_user
 from mipac.types.follow import IFederationFollower, IFederationFollowing
 from mipac.types.instance import IFederationInstance, IFederationInstanceStat
 from mipac.types.user import IUserDetailed
@@ -155,7 +155,7 @@ class FederationActions(AbstractAction):
         until_id: str | None = None,
         limit: int = 10,
         get_all: bool = False,
-    ) -> AsyncGenerator[UserDetailed, None]:
+    ) -> AsyncGenerator[UserDetailedNotMe | MeDetailed, None]:
         if limit > 100:
             raise ParameterError("limitは100以下である必要があります")
 
@@ -171,7 +171,7 @@ class FederationActions(AbstractAction):
         while True:
             res_users: list[IUserDetailed] = await pagination.next()
             for user in res_users:
-                yield UserDetailed(user, client=self.__client)
+                yield packed_user(user, client=self.__client)
 
             if get_all is False or pagination.is_final:
                 break

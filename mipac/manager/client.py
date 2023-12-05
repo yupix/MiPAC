@@ -22,7 +22,7 @@ from mipac.manager.username import UsernameManager
 if TYPE_CHECKING:
     from mipac.config import Config
     from mipac.models.lite.user import PartialUser
-    from mipac.models.user import UserDetailed
+    from mipac.models.user import MeDetailed
 
 
 __all__ = ("ClientManager",)
@@ -80,5 +80,5 @@ class ClientManager:
     def _create_client_invite_manager(self, invite_id: str) -> ClientInviteManager:
         return ClientInviteManager(invite_id=invite_id, session=self.__session, client=self)
 
-    async def get_me(self) -> UserDetailed:
+    async def get_me(self) -> MeDetailed:
         return await self.user.action.get_me()
