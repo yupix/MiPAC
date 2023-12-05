@@ -16,7 +16,7 @@ from mipac.manager.invite import ClientInviteManager, InviteManager
 from mipac.manager.my import MyManager
 from mipac.manager.note import ClientNoteManager, NoteManager
 from mipac.manager.role import RoleManager
-from mipac.manager.user import UserManager
+from mipac.manager.user import ClientUserManager, UserManager
 from mipac.manager.username import UsernameManager
 
 if TYPE_CHECKING:
@@ -59,7 +59,7 @@ class ClientManager:
         return ClientActions(session=self.__session, client=self)
 
     def _create_user_instance(self, user: PartialUser) -> UserManager:
-        return UserManager(session=self.__session, client=self, user=user)
+        return UserManager(session=self.__session, client=self)
 
     def _create_note_instance(self, note_id: str) -> NoteManager:
         return NoteManager(note_id, session=self.__session, client=self)
@@ -79,6 +79,9 @@ class ClientManager:
 
     def _create_client_invite_manager(self, invite_id: str) -> ClientInviteManager:
         return ClientInviteManager(invite_id=invite_id, session=self.__session, client=self)
+
+    def _create_client_user_manager(self, user: PartialUser) -> ClientUserManager:
+        return ClientUserManager(user=user, session=self.__session, client=self)
 
     async def get_me(self) -> MeDetailed:
         return await self.user.action.get_me()
