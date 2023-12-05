@@ -233,8 +233,9 @@ def is_partial_user(user: IUser) -> TypeGuard[IPartialUser]:
     """
     他のUser型は全て IUserDetailedNotMeSchema 経由で IUserDetailedNotMeOnlySchema を継承しているため
     url が無いことを確認し区別する
+    念のために avatar_url があることも確認する
     """
-    if "url" not in user:
+    if "url" not in user and "avatar_url" in user:
         return True
     return False
 
