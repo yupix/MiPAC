@@ -8,6 +8,7 @@ from mipac.models.announcement import Announcement
 from mipac.models.lite.role import PartialRole
 from mipac.models.lite.user import BadgeRole, PartialUser
 from mipac.models.note import Note
+from mipac.types.follow import IFederationFollowCommon, IFederationFollower, IFederationFollowing
 from mipac.types.meta import IPolicies
 from mipac.types.page import IPage
 from mipac.types.user import (
@@ -38,6 +39,48 @@ if TYPE_CHECKING:
 __all__ = ("PartialUser", "Achievement", "BlockingUser", "MeDetailed")
 
 T = TypeVar("T", bound=IUserDetailedNotMeSchema)
+
+FFC = TypeVar("FFC", bound=IFederationFollowCommon)
+
+
+class FollowCommon(Generic[FFC]):
+    def __init__(self, raw_follow: FFC, *, client: ClientManager) -> None:
+        self._raw_follow: FFC = raw_follow
+        self._client: ClientManager = client
+
+    @property
+    def id(self) -> str:
+        return self._raw_follow["id"]
+
+    @property
+    def created_at(self) -> datetime:
+        return str_to_datetime(self._raw_follow["created_at"])
+
+    @property
+    def follower_id(self) -> str:
+        return self._raw_follow["follower_id"]
+
+    @property
+    def follower(self) -> UserDetailedNotMe | MeDetailed:
+        return packed_user(self._raw_follow["follower"], client=self._client)
+
+    @property
+    def followee_id(self) -> str:
+        return self._raw_follow["followee_id"]
+
+    @property
+    def followee(self) -> UserDetailedNotMe | MeDetailed:
+        return packed_user(self._raw_follow["followee"], client=self._client)
+
+
+class Follower(FollowCommon[IFederationFollower]):
+    def __init__(self, raw_follow: IFederationFollower, *, client: ClientManager) -> None:
+        super().__init__(raw_follow=raw_follow, client=client)
+
+
+class Following(FollowCommon[IFederationFollowing]):
+    def __init__(self, raw_following: IFederationFollowing, *, client: ClientManager) -> None:
+        super().__init__(raw_follow=raw_following, client=client)
 
 
 class BlockingUser(AbstractModel):
