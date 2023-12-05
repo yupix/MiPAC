@@ -1945,42 +1945,42 @@
         "UserLite": {
             "name": "UserLite",
             "hash": "f50fdfc4d2bb11ce160a64ba704c94e28e95f793f89472a24055df8d80a13dc6",
-            "status": "notSupported"
+            "status": "supported"
         },
         "UserDetailedNotMeOnly": {
             "name": "UserDetailedNotMeOnly",
             "hash": "806587783164384e710c2b19751d71842d1d91c739e7241b77e085c8a142510c",
-            "status": "notSupported"
+            "status": "supported"
         },
         "MeDetailedOnly": {
             "name": "MeDetailedOnly",
             "hash": "19e2bbc2d6fc538309b4a45f03ab0035c834de740dc9bf24e8371839a079f659",
-            "status": "notSupported"
+            "status": "supported"
         },
         "UserDetailedNotMe": {
             "name": "UserDetailedNotMe",
             "hash": "f236342d43bb422cbf08e94f0db544daa5a14c1ffe82176cc6a41644b27beb06",
-            "status": "notSupported"
+            "status": "supported"
         },
         "MeDetailed": {
             "name": "MeDetailed",
             "hash": "3a94159208d262393a0d5ab83b7672958142c0dece04e8486060416784f6d690",
-            "status": "notSupported"
+            "status": "supported"
         },
         "UserDetailed": {
             "name": "UserDetailed",
             "hash": "cb42db8862778d9d9b24d5e94eaae98162aae7864c087a9120ad1859285ce777",
-            "status": "notSupported"
+            "status": "supported"
         },
         "User": {
             "name": "User",
             "hash": "9bb15ce6a2a4f4c3b202bb03ad3af2a28c3d2fabe90f5b211641403f09c67732",
-            "status": "notSupported"
+            "status": "supported"
         },
         "UserList": {
             "name": "UserList",
             "hash": "181b17337d03f761525ad8958a132620303a42faeae3624f55fd75767acf73fd",
-            "status": "notSupported"
+            "status": "supported"
         },
         "Announcement": {
             "name": "Announcement",

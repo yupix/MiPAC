@@ -338,15 +338,15 @@
 ## SUPPORTED SCHEMAS
 
 - [ ] Error 
-- [ ] UserLite 
-- [ ] UserDetailedNotMeOnly 
-- [ ] MeDetailedOnly 
-- [ ] UserDetailedNotMe 
-- [ ] MeDetailed 
-- [ ] UserDetailed 
-- [ ] User 
-- [ ] UserList 
-- [ ] Announcement 
+- [x] UserLite 
+- [x] UserDetailedNotMeOnly 
+- [x] MeDetailedOnly 
+- [x] UserDetailedNotMe 
+- [x] MeDetailed 
+- [x] UserDetailed 
+- [x] User 
+- [x] UserList 
+- [x] Announcement 
 - [ ] App 
 - [x] Note 
 - [ ] NoteReaction 
