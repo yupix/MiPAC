@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
 from mipac.types.user import IPartialUser, IUserDetailed
 
@@ -7,9 +7,9 @@ class IFederationFollowCommon(TypedDict):
     id: str
     created_at: str
     followee_id: str
-    followee: IUserDetailed
+    followee: NotRequired[IUserDetailed]
     follower_id: str
-    follower: IUserDetailed
+    follower: NotRequired[IUserDetailed]
 
 
 class IFederationFollower(IFederationFollowCommon):
