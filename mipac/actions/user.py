@@ -1,16 +1,18 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, overload
-from typing_extensions import override
-from mipac.abstract.action import AbstractAction
 
+from typing_extensions import override
+
+from mipac.abstract.action import AbstractAction
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
 from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
-from mipac.models.user import Achievement, MeDetailed, UserDetailedNotMe, packed_user
+from mipac.models.user import Achievement, Follower, MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.clip import IClip
+from mipac.types.follow import IFederationFollower
 from mipac.types.note import INote
 from mipac.types.user import IMeDetailedSchema, IUser, is_partial_user
 from mipac.utils.cache import cache
@@ -48,10 +50,11 @@ class ClientUserActions(AbstractAction):
         *,
         user_id: str | None = None,
     ) -> list[Note]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
+        user_id = user_id or self._user and self._user.id
+
         if check_multi_arg(user_id, self._user) is False:
             raise ParameterError("missing required argument: user_id", user_id, self._user)
 
-        user_id = user_id or self._user and self._user.id
         data = {
             "userId": user_id,
             "withReplies": with_replies,
@@ -130,6 +133,7 @@ class ClientUserActions(AbstractAction):
         self,
         since_id: str | None = None,
         until_id: str | None = None,
+        limit: int = 10,
         *,
         user_id: str | None = None,
     ) -> AsyncGenerator[Clip, None]:
@@ -138,7 +142,7 @@ class ClientUserActions(AbstractAction):
         if user_id is None:
             raise ParameterError("user_id is required")
 
-        data = {"userId": user_id, "limit": 100, "sinceId": since_id, "untilId": until_id}
+        data = {"userId": user_id, "limit": limit, "sinceId": since_id, "untilId": until_id}
 
         pagination = Pagination[IClip](
             self._session, Route("POST", "/api/users/clips"), json=data, auth=True
@@ -149,11 +153,96 @@ class ClientUserActions(AbstractAction):
             for clip in clips:
                 yield Clip(raw_clip=clip, client=self._client)
 
+    async def get_followers(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> list[Follower]:
+        """
+        Get followers of user.
+
+        Endpoint: `/api/users/followers`
+
+        Parameters
+        ----------
+        since_id : str, default=None
+            Get followers after this id.
+        until_id : str, default=None
+            Get followers before this id.
+        limit : int, default=10
+            The maximum number of followers to return.
+        username : str, default=None
+            Get followers with this username.
+        host : str, default=None
+            Get followers with this host.
+        user_id : str, default=None
+            Get followers with this user id.
+
+        Returns
+        -------
+        list[Follower]
+            A list of followers.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+        data = {
+            "userId": user_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "username": username,
+            "host": host,
+        }
+        raw_followers: list[IFederationFollower] = await self._session.request(
+            Route("POST", "/api/users/followers"),
+            json=data,
+        )
+
+        return [Follower(raw_follower, client=self._client) for raw_follower in raw_followers]
+
+    async def get_all_followers(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> AsyncGenerator[Follower, None]:
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+        data = {
+            "userId": user_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "username": username,
+            "host": host,
+        }
+        pagination = Pagination[IFederationFollower](
+            self._session, Route("POST", "/api/users/followers"), json=data
+        )
+
+        while pagination.is_final is False:
+            raw_followers: list[IFederationFollower] = await pagination.next()
+            for raw_follower in raw_followers:
+                yield Follower(raw_follower, client=self._client)
+
     async def get_achievements(self, *, user_id: str | None = None) -> list[Achievement]:
         """Get achievements of user."""
         user_id = user_id or self._user and self._user.id
 
-        if not user_id:
+        if user_id is None:
             raise ParameterError("user_id is required")
 
         data = {
@@ -255,6 +344,35 @@ class UserActions(ClientUserActions):
     ) -> AsyncGenerator[Clip, None]:
         async for i in super().get_all_clips(
             user_id=user_id, since_id=since_id, until_id=until_id
+        ):
+            yield i
+
+    @override
+    async def get_followers(
+        self,
+        user_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+    ) -> list[Follower]:
+        return await super().get_followers(
+            since_id, until_id, limit, username, host, user_id=user_id
+        )
+
+    @override
+    async def get_all_followers(
+        self,
+        user_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+    ) -> AsyncGenerator[Follower, None]:
+        async for i in super().get_all_followers(
+            since_id, until_id, limit, username, host, user_id=user_id
         ):
             yield i
 
