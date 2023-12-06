@@ -24,7 +24,6 @@ class Pagination(Generic[T]):
         pagination_type: Literal["until", "count"] = "until",
         can_use_limit: bool = True,
         limit: int = 100,
-        max_limit: int = 100,
     ) -> None:
         self.http_client: HTTPClient = http_client
         self.route: Route = route
@@ -35,7 +34,6 @@ class Pagination(Generic[T]):
         self.pagination_type: Literal["until", "count"] = pagination_type
         self.can_use_limit: bool = can_use_limit
         self.limit: int = limit
-        self.max_limit: int = max_limit
         self.count = 0
         self.next_id: str = ""
         self.previous_id: str = ""
@@ -65,7 +63,6 @@ class Pagination(Generic[T]):
         if (
             self.pagination_type == "count"
             and self.latest_res_count == 0
-            or (self.latest_res_count and self.latest_res_count < self.max_limit)
         ):
             return True
         if self.pagination_type == "until" and self.latest_res_count is not None and self.latest_res_count == 0:
