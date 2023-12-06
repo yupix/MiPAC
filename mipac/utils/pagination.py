@@ -22,7 +22,6 @@ class Pagination(Generic[T]):
         remove_none: bool = True,
         lower: bool = True,
         pagination_type: Literal["until", "count"] = "until",
-        can_use_limit: bool = True,
         limit: int = 100,
     ) -> None:
         self.http_client: HTTPClient = http_client
@@ -32,11 +31,9 @@ class Pagination(Generic[T]):
         self.remove_none: bool = remove_none
         self.lower: bool = lower
         self.pagination_type: Literal["until", "count"] = pagination_type
-        self.can_use_limit: bool = can_use_limit
         self.limit: int = limit
         self.count = 0
         self.next_id: str = ""
-        self.previous_id: str = ""
         self.latest_res_count: int | None = None
 
     async def next(self) -> list[T]:
@@ -51,7 +48,6 @@ class Pagination(Generic[T]):
             json=self.json,
         )
         if self.pagination_type == "until":
-            self.previous_id = self.json.get("untilId", "")  # 前のIDを保存しておく
             if len(res) > 0:
                 self.next_id = res[-1]["id"]  # type: ignore
             self.json["untilId"] = self.next_id
@@ -60,14 +56,16 @@ class Pagination(Generic[T]):
 
     @property
     def is_final(self) -> bool:
-        if (
-            self.pagination_type == "count"
-            and self.latest_res_count == 0
-        ):
-            return True
-        if self.pagination_type == "until" and self.latest_res_count is not None and self.latest_res_count == 0:
-            return True
-        return False
+        if self.latest_res_count is None:
+            return False
+
+        match self.pagination_type:
+            case "count":
+                return self.latest_res_count == 0
+            case "until":
+                return self.latest_res_count == 0
+            case _:
+                raise ValueError("Invalid pagination type")
 
 
 async def pagination_iterator(
