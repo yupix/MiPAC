@@ -10,9 +10,16 @@ from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
 from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
-from mipac.models.user import Achievement, Follower, MeDetailed, UserDetailedNotMe, packed_user
+from mipac.models.user import (
+    Achievement,
+    Follower,
+    Following,
+    MeDetailed,
+    UserDetailedNotMe,
+    packed_user,
+)
 from mipac.types.clip import IClip
-from mipac.types.follow import IFederationFollower
+from mipac.types.follow import IFederationFollower, IFederationFollowing
 from mipac.types.note import INote
 from mipac.types.user import IMeDetailedSchema, IUser, is_partial_user
 from mipac.utils.cache import cache
@@ -238,6 +245,98 @@ class ClientUserActions(AbstractAction):
             for raw_follower in raw_followers:
                 yield Follower(raw_follower, client=self._client)
 
+    async def get_following(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        birthday: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> list[Following]:
+        """Get following of user.
+
+        Endpoint: `/api/users/following`
+
+        Parameters
+        ----------
+        since_id : str, default=None
+            Get following after this id.
+        until_id : str, default=None
+            Get following before this id.
+        limit : int, default=10
+            The maximum number of following to return.
+        username : str, default=None
+            Get following with this username.
+        host : str, default=None
+            Get following with this host.
+        user_id : str, default=None
+            Get following with this user id.
+
+        Returns
+        -------
+        list[Following]
+            A list of following.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "username": username,
+            "host": host,
+            "birthday": birthday,
+        }
+
+        raw_following: list[IFederationFollowing] = await self._session.request(
+            Route("POST", "/api/users/following"),
+            json=data,
+        )
+
+        return [Following(raw_following, client=self._client) for raw_following in raw_following]
+
+    async def get_all_following(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        birthday: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> AsyncGenerator[Following, None]:
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "username": username,
+            "host": host,
+            "birthday": birthday,
+        }
+
+        pagination = Pagination[IFederationFollowing](
+            self._session, Route("POST", "/api/users/following"), json=data
+        )
+
+        while pagination.is_final is False:
+            raw_followings: list[IFederationFollowing] = await pagination.next()
+            for raw_following in raw_followings:
+                yield Following(raw_following, client=self._client)
+
     async def get_achievements(self, *, user_id: str | None = None) -> list[Achievement]:
         """Get achievements of user."""
         user_id = user_id or self._user and self._user.id
@@ -373,6 +472,37 @@ class UserActions(ClientUserActions):
     ) -> AsyncGenerator[Follower, None]:
         async for i in super().get_all_followers(
             since_id, until_id, limit, username, host, user_id=user_id
+        ):
+            yield i
+
+    @override
+    async def get_following(
+        self,
+        user_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        birthday: str | None = None,
+    ) -> list[Following]:
+        return await super().get_following(
+            since_id, until_id, limit, username, host, birthday, user_id=user_id
+        )
+
+    @override
+    async def get_all_following(
+        self,
+        user_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        birthday: str | None = None,
+    ) -> AsyncGenerator[Following, None]:
+        async for i in super().get_all_following(
+            since_id, until_id, limit, username, host, birthday, user_id=user_id
         ):
             yield i
 
