@@ -8,7 +8,7 @@ from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
-    from mipac.manager.user import UserManager
+    from mipac.manager.user import ClientUserManager
 
 T = TypeVar("T", bound=IBadgeRole)
 PU = TypeVar("PU", bound=IPartialUser)
@@ -269,15 +269,15 @@ class PartialUser(Generic[PU]):
         
 
     @property
-    def api(self) -> UserManager:
+    def api(self) -> ClientUserManager:
         """Returns the user manager instance.
 
         Returns
         -------
-        UserManager
+        ClientUserManager
             The user manager instance
         """
-        return self._client._create_user_instance(self)
+        return self._client._create_client_user_manager(self)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, PartialUser) and self.id == __value.id
