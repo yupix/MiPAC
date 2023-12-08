@@ -1709,37 +1709,37 @@
                 "path": "/users/clips",
                 "request_body_hash": "cad2189dac5f55c4ad37729e636d22035fd68ed1e128394a5955eb2d699d8dab",
                 "response_body_hash": "a9d3c45cc98ff24501f513bdaeeaf8608fb7225a70652c292346e710343ff3a5",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/followers": {
                 "path": "/users/followers",
                 "request_body_hash": "6420ee8f9b38ef4c180e40f1837287cb61842d42238bf0b8302aca12cc271a31",
                 "response_body_hash": "c977179590399eb3c1482c3a1e113a1ac316a8cc7be29272e6a0858f28cfcd8b",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/following": {
                 "path": "/users/following",
                 "request_body_hash": "6420ee8f9b38ef4c180e40f1837287cb61842d42238bf0b8302aca12cc271a31",
                 "response_body_hash": "86646431998fde6feef87b324bdf30f650feb138aada9ef3947d28a00de3a60e",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/gallery/posts": {
                 "path": "/users/gallery/posts",
                 "request_body_hash": "cad2189dac5f55c4ad37729e636d22035fd68ed1e128394a5955eb2d699d8dab",
                 "response_body_hash": "1394aaf97fa4116161bdf247dd14b20331e3bc53325d6cc26a67d05be51f9c3e",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/get-frequently-replied-users": {
                 "path": "/users/get-frequently-replied-users",
                 "request_body_hash": "1111fbf480918f237cacdb52ee4bdfd41a412db6c1e40643a6f42b8516d4e965",
                 "response_body_hash": "e9c90751eb868a9511117cec52f1b096e390aab5e3f95e2e82151b82a9db6269",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/featured-notes": {
                 "path": "/users/featured-notes",
                 "request_body_hash": "81ef65ba143aafa11bd2c08ce5cc377fbf223a17a6e9aa180cbd0c39c4da3bc1",
                 "response_body_hash": "2f214ffebaad3c6060ac051fd3654e8d60d9b61202b9f815fa1f9e9b72cd7e01",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/create": {
                 "path": "/users/lists/create",
@@ -2085,7 +2085,7 @@
         "GalleryPost": {
             "name": "GalleryPost",
             "hash": "0030ccc5f020b8ec65d18141cc874ca537e4b4b69551211b3873b2ddca36b1b0",
-            "status": "notSupported"
+            "status": "supported"
         },
         "EmojiSimple": {
             "name": "EmojiSimple",

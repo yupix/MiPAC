@@ -1,4 +1,4 @@
-## SUPPORTED ENDPOINTS (78/322)
+## SUPPORTED ENDPOINTS (84/322)
 - [x] /admin/drive/clean-remote-files 
 - [x] /admin/drive/cleanup 
 - [x] /admin/drive/files 
@@ -70,6 +70,12 @@
 - [x] /roles/notes 
 - [x] /username/available 
 - [x] /users/notes 
+- [x] /users/clips 
+- [x] /users/followers 
+- [x] /users/following 
+- [x] /users/gallery/posts 
+- [x] /users/get-frequently-replied-users 
+- [x] /users/featured-notes 
 - [x] /users/search 
 - [x] /users/show 
 - [x] /admin/accounts/find-by-email 
@@ -294,12 +300,6 @@
 - [ ] /sw/register 
 - [ ] /sw/unregister 
 - [ ] /test 
-- [ ] /users/clips 
-- [ ] /users/followers 
-- [ ] /users/following 
-- [ ] /users/gallery/posts 
-- [ ] /users/get-frequently-replied-users 
-- [ ] /users/featured-notes 
 - [ ] /users/lists/create 
 - [ ] /users/lists/delete 
 - [ ] /users/lists/list 
@@ -366,7 +366,7 @@
 - [ ] Antenna 
 - [ ] Clip 
 - [ ] FederationInstance 
-- [ ] GalleryPost 
+- [x] GalleryPost 
 - [ ] EmojiSimple 
 - [ ] EmojiDetailed 
 - [ ] Flash 
