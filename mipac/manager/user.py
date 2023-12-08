@@ -28,6 +28,7 @@ class ClientUserManager(AbstractManager):
         # self.follow: FollowManager = FollowManager(session=session, client=client)  TODO: Client版のFollowManagerを作る
         # self.mute: MuteManager = MuteManager(session=session, client=client)  TODO: Client版のMuteManagerを作る
         # self.block = BlockingManager(session=session, client=client)  TODO: Client版のBlockingManagerを作る
+        self.list = ClientUserListManager(user_id=user.id, session=session, client=client)
 
     @property
     def action(self) -> ClientUserActions:
@@ -48,5 +49,9 @@ class UserManager(AbstractManager):
     def action(self) -> UserActions:
         return self.__actions
 
-    def _create_client_user_list_manager(self, list_id: str) -> ClientUserListManager:
-        return ClientUserListManager(list_id=list_id, session=self.__session, client=self.__client)
+    def _create_client_user_list_manager(
+        self, list_id: str, user_id: str | None = None
+    ) -> ClientUserListManager:
+        return ClientUserListManager(
+            list_id=list_id, user_id=user_id, session=self.__session, client=self.__client
+        )

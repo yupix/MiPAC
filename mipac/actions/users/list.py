@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 from typing_extensions import override
 
 from mipac.abstract.action import AbstractAction
+from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.user import UserList
 from mipac.types.user import IUserList
@@ -13,8 +14,16 @@ if TYPE_CHECKING:
 
 
 class ClientListActions(AbstractAction):
-    def __init__(self, list_id: str | None = None, *, session: HTTPClient, client: ClientManager):
+    def __init__(
+        self,
+        list_id: str | None = None,
+        *,
+        user_id: str | None = None,
+        session: HTTPClient,
+        client: ClientManager,
+    ):
         self.__list_id: str | None = list_id
+        self.__user_id: str | None = user_id
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
@@ -39,6 +48,33 @@ class ClientListActions(AbstractAction):
             Route("POST", "/api/users/lists/delete"), json={"listId": list_id}, auth=True
         )
         return res
+
+    async def get_list(self, *, user_id: str | None = None) -> list[UserList]:
+        """Get the user lists of a user
+
+        Endpoint `/api/users/lists/list`
+
+        Parameters
+        ----------
+        user_id : str
+            The id of the user to get the lists of
+
+        Returns
+        -------
+        list[UserList]
+            The user lists the user has
+        """
+
+        user_id = user_id or self.__user_id
+
+        if user_id is None:
+            raise ParameterError("required parameter user_id is missing")
+
+        raw_user_lists: list[IUserList] = await self._session.request(
+            Route("POST", "/api/users/lists/list"), json={"userId": user_id}, auth=True
+        )
+
+        return [UserList(raw_user_list, client=self._client) for raw_user_list in raw_user_lists]
 
 
 class UserListActions(ClientListActions):
@@ -69,23 +105,6 @@ class UserListActions(ClientListActions):
     async def delete(self, list_id: str) -> bool:
         return await super().delete(list_id=list_id)
 
+    @override
     async def get_list(self, user_id: str) -> list[UserList]:
-        """Get the user lists of a user
-
-        Endpoint `/api/users/lists/list`
-
-        Parameters
-        ----------
-        user_id : str
-            The id of the user to get the lists of
-        
-        Returns
-        -------
-        list[UserList]
-            The user lists the user has
-        """
-        raw_user_lists: list[IUserList] = await self._session.request(
-            Route("POST", "/api/users/lists/list"), json={"userId": user_id}, auth=True
-        )
-
-        return [UserList(raw_user_list, client=self._client) for raw_user_list in raw_user_lists]
+        return await super().get_list(user_id=user_id)
