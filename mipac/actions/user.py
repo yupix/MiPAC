@@ -8,6 +8,7 @@ from mipac.abstract.action import AbstractAction
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
+from mipac.models.gallery import GalleryPost
 from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
 from mipac.models.user import (
@@ -20,6 +21,7 @@ from mipac.models.user import (
 )
 from mipac.types.clip import IClip
 from mipac.types.follow import IFederationFollower, IFederationFollowing
+from mipac.types.gallery import IGalleryPost
 from mipac.types.note import INote
 from mipac.types.user import IMeDetailedSchema, IUser, is_partial_user
 from mipac.utils.cache import cache
@@ -337,6 +339,85 @@ class ClientUserActions(AbstractAction):
             for raw_following in raw_followings:
                 yield Following(raw_following, client=self._client)
 
+    async def get_gallery_posts(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> list[GalleryPost]:
+        """Get gallery posts of user.
+
+        Endpoint: `/api/users/gallery/posts`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            The maximum number of gallery posts to return.
+        since_id : str, default=None
+            Get gallery posts after this id.
+        until_id : str, default=None
+            Get gallery posts before this id.
+        user_id : str, default=None
+            Get gallery posts with this user id.
+
+        Returns
+        -------
+        list[GalleryPost]
+            A list of gallery posts.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+        }
+
+        raw_gallery_posts: list[IGalleryPost] = await self._session.request(
+            Route("POST", "/api/users/gallery/posts"),
+            json=data,
+        )
+
+        return [
+            GalleryPost(raw_gallery=raw_gallery, client=self._client)
+            for raw_gallery in raw_gallery_posts
+        ]
+
+    async def get_all_gallery_posts(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> AsyncGenerator[GalleryPost, None]:
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+        }
+
+        pagination = Pagination[IGalleryPost](
+            self._session, Route("POST", "/api/users/gallery/posts"), json=data
+        )
+
+        while pagination.is_final is False:
+            raw_gallery_posts: list[IGalleryPost] = await pagination.next()
+            for raw_gallery_post in raw_gallery_posts:
+                yield GalleryPost(raw_gallery=raw_gallery_post, client=self._client)
+
     async def get_achievements(self, *, user_id: str | None = None) -> list[Achievement]:
         """Get achievements of user."""
         user_id = user_id or self._user and self._user.id
@@ -504,6 +585,27 @@ class UserActions(ClientUserActions):
         async for i in super().get_all_following(
             since_id, until_id, limit, username, host, birthday, user_id=user_id
         ):
+            yield i
+
+    @override
+    async def get_gallery_posts(
+        self,
+        user_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> list[GalleryPost]:
+        return await super().get_gallery_posts(limit, since_id, until_id, user_id=user_id)
+
+    @override
+    async def get_all_gallery_posts(
+        self,
+        user_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> AsyncGenerator[GalleryPost, None]:
+        async for i in super().get_all_gallery_posts(limit, since_id, until_id, user_id=user_id):
             yield i
 
     @credentials_required
