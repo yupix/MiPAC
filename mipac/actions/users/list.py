@@ -192,6 +192,28 @@ class ClientUserListActions(ClientPartialUserListActions):
         )
         return UserList(raw_user_list=raw_user_list, client=self._client)
 
+    async def favorite(self, *, list_id: str | None = None) -> bool:
+        """Favorite a user list
+
+        Endpoint `/api/users/lists/favorite`
+
+        Parameters
+        ----------
+        list_id : str, optional
+            The id of the user list to favorite, by default None
+
+        Returns
+        -------
+        bool
+            True if the user list was favorited, False otherwise
+        """
+        list_id = list_id or self.__list_id
+
+        res: bool = await self._session.request(
+            Route("POST", "/api/users/lists/favorite"), json={"listId": list_id}, auth=True
+        )
+        return res
+
 
 class UserListActions(ClientUserListActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
@@ -232,3 +254,7 @@ class UserListActions(ClientUserListActions):
     @override
     async def show(self, list_id: str, for_public: bool = False) -> UserList:
         return await super().show(list_id=list_id, for_public=for_public)
+
+    @override
+    async def favorite(self, list_id: str) -> bool:
+        return await super().favorite(list_id=list_id)
