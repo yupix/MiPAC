@@ -68,3 +68,24 @@ class UserListActions(ClientListActions):
     @override
     async def delete(self, list_id: str) -> bool:
         return await super().delete(list_id=list_id)
+
+    async def get_list(self, user_id: str) -> list[UserList]:
+        """Get the user lists of a user
+
+        Endpoint `/api/users/lists/list`
+
+        Parameters
+        ----------
+        user_id : str
+            The id of the user to get the lists of
+        
+        Returns
+        -------
+        list[UserList]
+            The user lists the user has
+        """
+        raw_user_lists: list[IUserList] = await self._session.request(
+            Route("POST", "/api/users/lists/list"), json={"userId": user_id}, auth=True
+        )
+
+        return [UserList(raw_user_list, client=self._client) for raw_user_list in raw_user_lists]
