@@ -86,7 +86,7 @@ class ClientUserActions(AbstractAction):
         }
 
         raw_note: list[INote] = await self._session.request(
-            Route("POST", "/api/users/notes"), json=data
+            Route("POST", "/api/users/notes"), json=data, auth=True
         )
 
         return [Note(raw_note=raw_note, client=self._client) for raw_note in raw_note]
@@ -121,7 +121,9 @@ class ClientUserActions(AbstractAction):
             "fileType": file_type,
             "excludeNsfw": exclude_nsfw,
         }
-        pagination = Pagination[INote](self._session, Route("POST", "/api/users/notes"), json=data)
+        pagination = Pagination[INote](
+            self._session, Route("POST", "/api/users/notes"), json=data, auth=True
+        )
 
         while pagination.is_final is False:
             res_notes = await pagination.next()
@@ -216,8 +218,7 @@ class ClientUserActions(AbstractAction):
             "host": host,
         }
         raw_followers: list[IFederationFollower] = await self._session.request(
-            Route("POST", "/api/users/followers"),
-            json=data,
+            Route("POST", "/api/users/followers"), json=data, auth=True
         )
 
         return [Follower(raw_follower, client=self._client) for raw_follower in raw_followers]
@@ -245,7 +246,7 @@ class ClientUserActions(AbstractAction):
             "host": host,
         }
         pagination = Pagination[IFederationFollower](
-            self._session, Route("POST", "/api/users/followers"), json=data
+            self._session, Route("POST", "/api/users/followers"), json=data, auth=True
         )
 
         while pagination.is_final is False:
@@ -304,8 +305,7 @@ class ClientUserActions(AbstractAction):
         }
 
         raw_following: list[IFederationFollowing] = await self._session.request(
-            Route("POST", "/api/users/following"),
-            json=data,
+            Route("POST", "/api/users/following"), json=data, auth=True
         )
 
         return [Following(raw_following, client=self._client) for raw_following in raw_following]
@@ -337,7 +337,7 @@ class ClientUserActions(AbstractAction):
         }
 
         pagination = Pagination[IFederationFollowing](
-            self._session, Route("POST", "/api/users/following"), json=data
+            self._session, Route("POST", "/api/users/following"), json=data, auth=True
         )
 
         while pagination.is_final is False:
@@ -386,8 +386,7 @@ class ClientUserActions(AbstractAction):
         }
 
         raw_gallery_posts: list[IGalleryPost] = await self._session.request(
-            Route("POST", "/api/users/gallery/posts"),
-            json=data,
+            Route("POST", "/api/users/gallery/posts"), json=data, auth=True
         )
 
         return [
@@ -416,7 +415,7 @@ class ClientUserActions(AbstractAction):
         }
 
         pagination = Pagination[IGalleryPost](
-            self._session, Route("POST", "/api/users/gallery/posts"), json=data
+            self._session, Route("POST", "/api/users/gallery/posts"), json=data, auth=True
         )
 
         while pagination.is_final is False:
