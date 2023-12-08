@@ -15,6 +15,7 @@ if TYPE_CHECKING:
 
 class ClientPartialUserListActions(AbstractAction):
     """ユーザー向けのリストのアクションを提供します。"""
+
     def __init__(self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__user_id: str | None = user_id
         self._session: HTTPClient = session
@@ -76,6 +77,35 @@ class ClientPartialUserListActions(AbstractAction):
         )
         return res
 
+    async def push(self, list_id: str, *, user_id: str | None = None) -> bool:
+        """Push a user to a user list
+
+        Endpoint `/api/users/lists/push`
+
+        Parameters
+        ----------
+        list_id : str
+            The id of the user list to push to
+        user_id : str, optional
+            The id of the user to push, by default None
+
+        Returns
+        -------
+        bool
+            True if the user was pushed, False otherwise
+        """
+        user_id = user_id or self.__user_id
+
+        if user_id is None:
+            raise ParameterError("required parameter user_id is missing")
+
+        res: bool = await self._session.request(
+            Route("POST", "/api/users/lists/push"),
+            json={"listId": list_id, "userId": user_id},
+            auth=True,
+        )
+        return res
+
 
 class ClientUserListActions(ClientPartialUserListActions):
     def __init__(
@@ -124,6 +154,15 @@ class ClientUserListActions(ClientPartialUserListActions):
 
         return await super().pull(list_id=list_id, user_id=user_id)
 
+    @override
+    async def push(self, user_id: str, *, list_id: str | None = None) -> bool:
+        list_id = list_id or self.__list_id
+
+        if list_id is None:
+            raise ParameterError("required parameter list_id is missing")
+
+        return await super().push(list_id=list_id, user_id=user_id)
+
 
 class UserListActions(ClientUserListActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
@@ -156,3 +195,7 @@ class UserListActions(ClientUserListActions):
     @override
     async def pull(self, list_id: str, user_id: str) -> bool:
         return await super().pull(list_id=list_id, user_id=user_id)
+
+    @override
+    async def push(self, list_id: str, user_id: str) -> bool:
+        return await super().push(list_id=list_id, user_id=user_id)
