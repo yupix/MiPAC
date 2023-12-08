@@ -15,6 +15,7 @@ from mipac.models.user import (
     Achievement,
     Follower,
     Following,
+    FrequentlyRepliedUser,
     MeDetailed,
     UserDetailedNotMe,
     packed_user,
@@ -23,7 +24,12 @@ from mipac.types.clip import IClip
 from mipac.types.follow import IFederationFollower, IFederationFollowing
 from mipac.types.gallery import IGalleryPost
 from mipac.types.note import INote
-from mipac.types.user import IMeDetailedSchema, IUser, is_partial_user
+from mipac.types.user import (
+    GetFrequentlyRepliedUsersResponse,
+    IMeDetailedSchema,
+    IUser,
+    is_partial_user,
+)
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
@@ -418,6 +424,43 @@ class ClientUserActions(AbstractAction):
             for raw_gallery_post in raw_gallery_posts:
                 yield GalleryPost(raw_gallery=raw_gallery_post, client=self._client)
 
+    async def get_frequently_replied_users(
+        self, limit: int = 10, *, user_id: str | None = None
+    ) -> list[FrequentlyRepliedUser]:
+        """Get frequently replied users of user.
+
+        Endpoint: `/api/users/get-frequently-replied-users`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            The maximum number of frequently replied users to return.
+        user_id : str, default=None
+            Get frequently replied users with this user id.
+
+        Returns
+        -------
+        list[FrequentlyRepliedUser]
+            A list of frequently replied users.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "limit": limit,
+        }
+
+        res: list[GetFrequentlyRepliedUsersResponse] = await self._session.request(
+            Route("POST", "/api/users/get-frequently-replied-users"),
+            json=data,
+            auth=True,
+            lower=True,
+        )
+        return [FrequentlyRepliedUser(i, client=self._client) for i in res]
+
     async def get_achievements(self, *, user_id: str | None = None) -> list[Achievement]:
         """Get achievements of user."""
         user_id = user_id or self._user and self._user.id
@@ -607,6 +650,12 @@ class UserActions(ClientUserActions):
     ) -> AsyncGenerator[GalleryPost, None]:
         async for i in super().get_all_gallery_posts(limit, since_id, until_id, user_id=user_id):
             yield i
+
+    @override
+    async def get_frequently_replied_users(
+        self, user_id: str, limit: int = 10
+    ) -> list[FrequentlyRepliedUser]:
+        return await super().get_frequently_replied_users(limit, user_id=user_id)
 
     @credentials_required
     async def get_me(self) -> MeDetailed:  # TODO: トークンが無い場合は例外返すようにする
