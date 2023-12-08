@@ -8,7 +8,7 @@ from mipac.http import HTTPClient
 from mipac.manager.blocking import BlockingManager
 from mipac.manager.follow import FollowManager
 from mipac.manager.mute import MuteManager
-from mipac.manager.users.list import UserListManager
+from mipac.manager.users.list import ClientUserListManager, UserListManager
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -47,3 +47,6 @@ class UserManager(AbstractManager):
     @property
     def action(self) -> UserActions:
         return self.__actions
+
+    def _create_client_user_list_manager(self, list_id: str) -> ClientUserListManager:
+        return ClientUserListManager(list_id=list_id, session=self.__session, client=self.__client)

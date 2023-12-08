@@ -37,6 +37,8 @@ from mipac.utils.util import DeprecatedClass
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
+    from mipac.manager.users.list import ClientUserListManager
+
 
 __all__ = ("PartialUser", "Achievement", "BlockingUser", "MeDetailed")
 
@@ -525,6 +527,7 @@ def packed_user(user: IUser, client: ClientManager) -> UserDetailedNotMe | MeDet
 class UserList:
     def __init__(self, raw_user_list: IUserList, *, client: ClientManager) -> None:
         self._raw_user_list: IUserList = raw_user_list
+        self.__client: ClientManager = client
 
     @property
     def id(self) -> str:
@@ -545,6 +548,10 @@ class UserList:
     @property
     def is_public(self) -> bool:
         return self._raw_user_list["is_public"]
+
+    @property
+    def api(self) -> ClientUserListManager:
+        return self.__client.user._create_client_user_list_manager(self.id)
 
 
 class FrequentlyRepliedUser:
