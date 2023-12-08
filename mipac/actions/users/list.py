@@ -163,6 +163,35 @@ class ClientUserListActions(ClientPartialUserListActions):
 
         return await super().push(list_id=list_id, user_id=user_id)
 
+    async def show(self, for_public: bool = False, *, list_id: str | None = None) -> UserList:
+        """Show a user list
+
+        Endpoint `/api/users/lists/show`
+
+        Parameters
+        ----------
+        for_public : bool, optional
+            Whether to show the user list for the public, by default False
+        list_id : str, optional
+            The id of the user list to show, by default None
+
+        Returns
+        -------
+        UserList
+            The user list
+        """
+        list_id = list_id or self.__list_id
+
+        if list_id is None:
+            raise ParameterError("required parameter list_id is missing")
+
+        raw_user_list: IUserList = await self._session.request(
+            Route("POST", "/api/users/lists/show"),
+            json={"listId": list_id, "forPublic": for_public},
+            auth=True,
+        )
+        return UserList(raw_user_list=raw_user_list, client=self._client)
+
 
 class UserListActions(ClientUserListActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
@@ -199,3 +228,7 @@ class UserListActions(ClientUserListActions):
     @override
     async def push(self, list_id: str, user_id: str) -> bool:
         return await super().push(list_id=list_id, user_id=user_id)
+
+    @override
+    async def show(self, list_id: str, for_public: bool = False) -> UserList:
+        return await super().show(list_id=list_id, for_public=for_public)
