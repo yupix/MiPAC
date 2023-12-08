@@ -214,6 +214,28 @@ class ClientUserListActions(ClientPartialUserListActions):
         )
         return res
 
+    async def unfavorite(self, *, list_id: str | None = None) -> bool:
+        """Unfavorite a user list
+
+        Endpoint `/api/users/lists/unfavorite`
+
+        Parameters
+        ----------
+        list_id : str, optional
+            The id of the user list to unfavorite, by default None
+
+        Returns
+        -------
+        bool
+            True if the user list was unfavorited, False otherwise
+        """
+        list_id = list_id or self.__list_id
+
+        res: bool = await self._session.request(
+            Route("POST", "/api/users/lists/unfavorite"), json={"listId": list_id}, auth=True
+        )
+        return res
+
 
 class UserListActions(ClientUserListActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
@@ -258,3 +280,7 @@ class UserListActions(ClientUserListActions):
     @override
     async def favorite(self, list_id: str) -> bool:
         return await super().favorite(list_id=list_id)
+
+    @override
+    async def unfavorite(self, list_id: str) -> bool:
+        return await super().unfavorite(list_id=list_id)
