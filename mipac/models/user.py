@@ -24,6 +24,7 @@ from mipac.types.user import (
     IUserDetailedNotMeOnlySchema,
     IUserDetailedNotMeSchema,
     IUserField,
+    IUserList,
     IUserNotify,
     IUserRole,
     IUserSecurityKey,
@@ -519,6 +520,31 @@ def packed_user(user: IUser, client: ClientManager) -> UserDetailedNotMe | MeDet
     if is_me_detailed(user):
         return MeDetailed(user, client=client)
     raise ValueError("Invalid user model")
+
+
+class UserList:
+    def __init__(self, raw_user_list: IUserList, *, client: ClientManager) -> None:
+        self._raw_user_list: IUserList = raw_user_list
+
+    @property
+    def id(self) -> str:
+        return self._raw_user_list["id"]
+
+    @property
+    def created_at(self) -> datetime:
+        return str_to_datetime(self._raw_user_list["created_at"])
+
+    @property
+    def name(self) -> str:
+        return self._raw_user_list["name"]
+
+    @property
+    def user_ids(self) -> list[str]:
+        return self._raw_user_list["user_ids"]
+
+    @property
+    def is_public(self) -> bool:
+        return self._raw_user_list["is_public"]
 
 
 class FrequentlyRepliedUser:
