@@ -267,3 +267,15 @@ def is_user_detailed(user: IUser) -> TypeGuard[IUserDetailed]:
     if is_user_detailed_not_me(user) or is_me_detailed(user):
         return True
     return False
+
+
+####
+##  ここからモデルというよりレスポンス
+####
+
+
+class GetFrequentlyRepliedUsersResponse(TypedDict):
+    """`users/get-frequently-replied-users` のレスポンス"""
+
+    user: IUserDetailed
+    weight: int

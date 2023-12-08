@@ -13,6 +13,7 @@ from mipac.types.meta import IPolicies
 from mipac.types.page import IPage
 from mipac.types.user import (
     EmailNotificationTypes,
+    GetFrequentlyRepliedUsersResponse,
     IAchievement,
     IBlockingUser,
     IFfVisibility,
@@ -518,3 +519,24 @@ def packed_user(user: IUser, client: ClientManager) -> UserDetailedNotMe | MeDet
     if is_me_detailed(user):
         return MeDetailed(user, client=client)
     raise ValueError("Invalid user model")
+
+
+class FrequentlyRepliedUser:
+    def __init__(
+        self,
+        raw_frequently_replied_user: GetFrequentlyRepliedUsersResponse,
+        *,
+        client: ClientManager,
+    ):
+        self._raw_frequently_replied_user: GetFrequentlyRepliedUsersResponse = (
+            raw_frequently_replied_user
+        )
+        self.__client: ClientManager = client
+
+    @property
+    def user(self) -> UserDetailedNotMe | MeDetailed:
+        return packed_user(self._raw_frequently_replied_user["user"], client=self.__client)
+
+    @property
+    def weight(self) -> int:
+        return self._raw_frequently_replied_user["weight"]
