@@ -461,6 +461,87 @@ class ClientUserActions(AbstractAction):
         )
         return [FrequentlyRepliedUser(i, client=self._client) for i in res]
 
+    async def get_featured_notes(
+        self, limit: int = 10, until_id: str | None = None, *, user_id: str | None = None
+    ) -> list[Note]:
+        """Get featured notes of user.
+
+        Endpoint: `/api/users/featured-notes`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            The maximum number of featured notes to return.
+        until_id : str, default=None
+            Get featured notes before this id.
+        user_id : str, default=None
+            Get featured notes with this user id.
+
+        Returns
+        -------
+        list[Note]
+            A list of featured notes.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "limit": limit,
+            "untilId": until_id,
+        }
+
+        raw_notes: list[INote] = await self._session.request(
+            Route("POST", "/api/users/featured-notes"),
+            json=data,
+            auth=True,
+            lower=True,
+        )
+        return [Note(raw_note=raw_note, client=self._client) for raw_note in raw_notes]
+
+    async def get_all_featured_notes(
+        self, limit: int = 10, until_id: str | None = None, *, user_id: str | None = None
+    ) -> AsyncGenerator[Note, None]:
+        """Get all featured notes of user.
+
+        Endpoint: `/api/users/featured-notes`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            The maximum number of featured notes to return.
+        until_id : str, default=None
+            Get featured notes before this id.
+        user_id : str, default=None
+            Get featured notes with this user id.
+
+        Returns
+        -------
+        list[Note]
+            A list of featured notes.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "limit": limit,
+            "untilId": until_id,
+        }
+
+        pagination = Pagination[INote](
+            self._session, Route("POST", "/api/users/featured-notes"), json=data, auth=True
+        )
+
+        while pagination.is_final is False:
+            raw_notes: list[INote] = await pagination.next()
+            for raw_note in raw_notes:
+                yield Note(raw_note=raw_note, client=self._client)
+
     async def get_achievements(self, *, user_id: str | None = None) -> list[Achievement]:
         """Get achievements of user."""
         user_id = user_id or self._user and self._user.id
@@ -656,6 +737,19 @@ class UserActions(ClientUserActions):
         self, user_id: str, limit: int = 10
     ) -> list[FrequentlyRepliedUser]:
         return await super().get_frequently_replied_users(limit, user_id=user_id)
+
+    @override
+    async def get_featured_notes(
+        self, user_id: str, limit: int = 10, until_id: str | None = None
+    ) -> list[Note]:
+        return await super().get_featured_notes(limit, until_id, user_id=user_id)
+
+    @override
+    async def get_all_featured_notes(
+        self, user_id: str, limit: int = 10, until_id: str | None = None
+    ) -> AsyncGenerator[Note, None]:
+        async for i in super().get_all_featured_notes(limit, until_id, user_id=user_id):
+            yield i
 
     @credentials_required
     async def get_me(self) -> MeDetailed:  # TODO: トークンが無い場合は例外返すようにする
