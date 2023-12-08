@@ -3,30 +3,47 @@ from typing import TYPE_CHECKING
 
 from mipac.abstract.manager import AbstractManager
 from mipac.http import HTTPClient
-from mipac.actions.users.list import ClientListActions, UserListActions
+from mipac.actions.users.list import (
+    ClientPartialUserListActions,
+    ClientUserListActions,
+    UserListActions,
+)
 
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
+class ClientPartialUserListManager(AbstractManager):
+    def __init__(self, user_id: str, *, session: HTTPClient, client: ClientManager):
+        self.__user_id: str = user_id
+        self.__session: HTTPClient = session
+        self.__client: ClientManager = client
+        self.__action: ClientPartialUserListActions = ClientPartialUserListActions(
+            user_id=self.__user_id, session=self.__session, client=self.__client
+        )
+
+    @property
+    def action(self) -> ClientPartialUserListActions:
+        return self.__action
+
+
 class ClientUserListManager(AbstractManager):
     def __init__(
         self,
-        list_id: str | None = None,
-        user_id: str | None = None,
+        list_id: str,
         *,
         session: HTTPClient,
         client: ClientManager,
     ):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
-        self.__action: ClientListActions = ClientListActions(
-            list_id=list_id, user_id=user_id, session=self.__session, client=self.__client
+        self.__action: ClientUserListActions = ClientUserListActions(
+            list_id=list_id, session=self.__session, client=self.__client
         )
 
     @property
-    def action(self) -> ClientListActions:
+    def action(self) -> ClientUserListActions:
         return self.__action
 
 
