@@ -274,6 +274,19 @@ class ClientUserListActions(ClientPartialUserListActions):
         )
         return UserList(raw_user_list=res, client=self._client)
 
+    async def create_from_public(self, name: str, *, list_id: str | None = None):
+        list_id = list_id or self.__list_id
+
+        if list_id is None:
+            raise ParameterError("required parameter list_id is missing")
+
+        res: IUserList = await self._session.request(
+            Route("POST", "/api/users/lists/create-from-public"),
+            json={"listId": list_id, "name": name},
+            auth=True,
+        )
+        return UserList(raw_user_list=res, client=self._client)
+
     # ここからはusers/lists系じゃないが、ここにあってほしい物
     async def get_time_line(
         self,
@@ -390,8 +403,14 @@ class UserListActions(ClientUserListActions):
         return await super().unfavorite(list_id=list_id)
 
     @override
-    async def update(self, name: str = MISSING, is_public: bool = MISSING, *, list_id: str | None = None) -> UserList:
-        return await super().update(name, is_public, list_id=list_id)
+    async def update(
+        self, name: str = MISSING, is_public: bool = MISSING, *, list_id: str | None = None
+    ) -> UserList:
+        return await super().update(name=name, is_public=is_public, list_id=list_id)
+
+    @override
+    async def create_from_public(self, name: str, *, list_id: str | None = None):
+        return await super().create_from_public(name=name, list_id=list_id)
 
     @override
     async def get_time_line(
