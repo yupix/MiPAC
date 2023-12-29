@@ -109,6 +109,25 @@ class ClientPartialUserListActions(AbstractAction):
         )
         return res
 
+    async def update_member_ship(
+        self, list_id: str, with_replies: bool = MISSING, *, user_id: str | None = None
+    ):
+        user_id = user_id or self.__user_id
+
+        if user_id is None:
+            raise ParameterError("required parameter user_id is missing")
+
+        data = remove_dict_missing(
+            {"listId": list_id, "userId": user_id, "withReplies": with_replies}
+        )
+
+        res: bool = await self._session.request(
+            Route("POST", "/api/users/lists/update-membership"),
+            json=data,
+            auth=True,
+        )
+        return res
+
 
 class ClientUserListActions(ClientPartialUserListActions):
     def __init__(
@@ -287,6 +306,17 @@ class ClientUserListActions(ClientPartialUserListActions):
         )
         return UserList(raw_user_list=res, client=self._client)
 
+    async def update_member_ship(
+        self, user_id: str, with_replies: bool = MISSING, list_id: str | None = None
+    ):
+        list_id = list_id or self.__list_id
+
+        if list_id is None:
+            raise ParameterError("required parameter list_id is missing")
+        return await super().update_member_ship(
+            user_id=user_id, with_replies=with_replies, list_id=list_id
+        )
+
     # ここからはusers/lists系じゃないが、ここにあってほしい物
     async def get_time_line(
         self,
@@ -411,6 +441,12 @@ class UserListActions(ClientUserListActions):
     @override
     async def create_from_public(self, list_id: str, name: str):
         return await super().create_from_public(name=name, list_id=list_id)
+
+    @override
+    async def update_member_ship(self, list_id: str, user_id: str, with_replies: bool = MISSING):
+        return await super().update_member_ship(
+            list_id=list_id, user_id=user_id, with_replies=with_replies
+        )
 
     @override
     async def get_time_line(
