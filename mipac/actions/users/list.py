@@ -404,12 +404,12 @@ class UserListActions(ClientUserListActions):
 
     @override
     async def update(
-        self, name: str = MISSING, is_public: bool = MISSING, *, list_id: str | None = None
+        self, list_id: str, name: str = MISSING, is_public: bool = MISSING
     ) -> UserList:
         return await super().update(name=name, is_public=is_public, list_id=list_id)
 
     @override
-    async def create_from_public(self, name: str, *, list_id: str | None = None):
+    async def create_from_public(self, list_id: str, name: str):
         return await super().create_from_public(name=name, list_id=list_id)
 
     @override
