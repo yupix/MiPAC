@@ -9,6 +9,8 @@ from mipac.http import HTTPClient, Route
 from mipac.models.note import Note
 from mipac.models.user import UserList
 from mipac.types.user import IUserList
+from mipac.utils.format import remove_dict_missing
+from mipac.utils.util import MISSING
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
@@ -237,6 +239,42 @@ class ClientUserListActions(ClientPartialUserListActions):
         )
         return res
 
+    async def update(
+        self, name: str = MISSING, is_public: bool = MISSING, *, list_id: str | None = None
+    ) -> UserList:
+        """Update a user list
+
+        Endpoint `/api/users/lists/update`
+
+        Parameters
+        ----------
+        name : str, optional
+            The new name of the user list, by default MISSING
+        is_public : bool, optional
+            Whether the user list should be public, by default MISSING
+        list_id : str, optional
+            The id of the user list to update, by default None
+
+        Returns
+        -------
+        UserList
+            The updated user list
+        """
+        list_id = list_id or self.__list_id
+
+        if list_id is None:
+            raise ParameterError("required parameter list_id is missing")
+
+        data = remove_dict_missing({"listId": list_id, "name": name, "public": is_public})
+
+        res: IUserList = await self._session.request(
+            Route("POST", "/api/users/lists/update"),
+            json=data,
+            auth=True,
+        )
+        return UserList(raw_user_list=res, client=self._client)
+
+    # ここからはusers/lists系じゃないが、ここにあってほしい物
     async def get_time_line(
         self,
         limit: int = 10,
@@ -350,6 +388,10 @@ class UserListActions(ClientUserListActions):
     @override
     async def unfavorite(self, list_id: str) -> bool:
         return await super().unfavorite(list_id=list_id)
+
+    @override
+    async def update(self, name: str = MISSING, is_public: bool = MISSING, *, list_id: str | None = None) -> UserList:
+        return await super().update(name, is_public, list_id=list_id)
 
     @override
     async def get_time_line(
