@@ -6,6 +6,7 @@ from typing_extensions import override
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
+from mipac.models.note import Note
 from mipac.models.user import UserList
 from mipac.types.user import IUserList
 
@@ -236,6 +237,71 @@ class ClientUserListActions(ClientPartialUserListActions):
         )
         return res
 
+    async def get_time_line(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: int | None = None,
+        until_date: int | None = None,
+        include_renote_my_notes: bool = True,
+        include_local_renotes: bool = True,
+        with_renotes: bool = True,
+        with_files: bool = True,
+        *,
+        list_id: str | None = None,
+    ) -> list[Note]:
+        list_id = list_id or self.__list_id
+
+        if list_id is None:
+            raise ParameterError("required parameter list_id is missing")
+
+        return await self._client.note.action.get_time_line(
+            list_id=list_id,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+            since_date=since_date,
+            until_date=until_date,
+            include_renote_my_notes=include_renote_my_notes,
+            include_local_renotes=include_local_renotes,
+            with_renotes=with_renotes,
+            with_files=with_files,
+        )
+
+    async def get_all_time_line(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: int | None = None,
+        until_date: int | None = None,
+        include_renote_my_notes: bool = True,
+        include_local_renotes: bool = True,
+        with_renotes: bool = True,
+        with_files: bool = True,
+        *,
+        list_id: str | None = None,
+    ):
+        list_id = list_id or self.__list_id
+
+        if list_id is None:
+            raise ParameterError("required parameter list_id is missing")
+
+        async for i in self._client.note.action.get_all_time_line(
+            list_id=list_id,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+            since_date=since_date,
+            until_date=until_date,
+            include_renote_my_notes=include_renote_my_notes,
+            include_local_renotes=include_local_renotes,
+            with_renotes=with_renotes,
+            with_files=with_files,
+        ):
+            yield i
+
 
 class UserListActions(ClientUserListActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
@@ -284,3 +350,58 @@ class UserListActions(ClientUserListActions):
     @override
     async def unfavorite(self, list_id: str) -> bool:
         return await super().unfavorite(list_id=list_id)
+
+    @override
+    async def get_time_line(
+        self,
+        list_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: int | None = None,
+        until_date: int | None = None,
+        include_renote_my_notes: bool = True,
+        include_local_renotes: bool = True,
+        with_renotes: bool = True,
+        with_files: bool = True,
+    ) -> list[Note]:
+        return await self._client.note.action.get_time_line(
+            list_id=list_id,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+            since_date=since_date,
+            until_date=until_date,
+            include_renote_my_notes=include_renote_my_notes,
+            include_local_renotes=include_local_renotes,
+            with_renotes=with_renotes,
+            with_files=with_files,
+        )
+
+    @override
+    async def get_all_time_line(
+        self,
+        list_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: int | None = None,
+        until_date: int | None = None,
+        include_renote_my_notes: bool = True,
+        include_local_renotes: bool = True,
+        with_renotes: bool = True,
+        with_files: bool = True,
+    ):
+        async for i in self._client.note.action.get_all_time_line(
+            list_id=list_id,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+            since_date=since_date,
+            until_date=until_date,
+            include_renote_my_notes=include_renote_my_notes,
+            include_local_renotes=include_local_renotes,
+            with_renotes=with_renotes,
+            with_files=with_files,
+        ):
+            yield i

@@ -1008,3 +1008,103 @@ class NoteActions(ClientNoteActions):
         )
 
         return [Note(note, client=self._client) for note in res]
+
+    async def get_time_line(
+        self,
+        list_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: int | None = None,
+        until_date: int | None = None,
+        include_renote_my_notes: bool = True,
+        include_local_renotes: bool = True,
+        with_renotes: bool = True,
+        with_files: bool = True,
+    ) -> list[Note]:
+        """
+        Get the timeline of the specified list
+
+        Endpoint: `/api/notes/user-list-timeline`
+
+        Parameters
+        ----------
+        list_id : str
+            List ID
+        limit : int, default=10
+            limit
+        since_id : str | None, default=None
+            Since ID
+        until_id : str | None, default=None
+            Until ID
+        since_date : int | None, default=None
+            Since date
+        until_date : int | None, default=None
+            Until date
+        include_renote_my_notes : bool, default=True
+            Whether to include your own renote
+        include_local_renotes : bool, default=True
+            Whether to include local renote
+        with_renotes : bool, default=True
+            Whether to include renote
+        with_files : bool, default=True
+            Whether to include files
+
+        Returns
+        -------
+        list[Note]
+            Notes
+        """
+        data = {
+            "limit": limit,
+            "listId": list_id,
+            "includeRenoteMyNotes": include_renote_my_notes,
+            "includeLocalRenotes": include_local_renotes,
+            "withRenotes": with_renotes,
+            "withFiles": with_files,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "sinceDate": since_date,
+            "untilDate": until_date,
+        }
+
+        raw_notes: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/user-list-timeline"), json=data, auth=True
+        )
+
+        return [Note(raw_note, client=self._client) for raw_note in raw_notes]
+
+    async def get_all_time_line(
+        self,
+        list_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: int | None = None,
+        until_date: int | None = None,
+        include_renote_my_notes: bool = True,
+        include_local_renotes: bool = True,
+        with_renotes: bool = True,
+        with_files: bool = True,
+    ):
+        data = {
+            "limit": limit,
+            "listId": list_id,
+            "includeRenoteMyNotes": include_renote_my_notes,
+            "includeLocalRenotes": include_local_renotes,
+            "withRenotes": with_renotes,
+            "withFiles": with_files,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "sinceDate": since_date,
+            "untilDate": until_date,
+        }
+
+        pagination = Pagination[INote](
+            self._session, Route("POST", "/api/notes/user-list-timeline"), json=data, auth=True
+        )
+
+        while pagination.is_final is False:
+            raw_notes: list[INote] = await pagination.next()
+            for raw_note in raw_notes:
+                yield Note(raw_note, client=self._client)
