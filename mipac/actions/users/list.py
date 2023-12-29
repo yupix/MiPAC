@@ -109,7 +109,7 @@ class ClientPartialUserListActions(AbstractAction):
         )
         return res
 
-    async def update_member_ship(
+    async def update_membership(
         self, list_id: str, with_replies: bool = MISSING, *, user_id: str | None = None
     ):
         user_id = user_id or self.__user_id
@@ -306,14 +306,15 @@ class ClientUserListActions(ClientPartialUserListActions):
         )
         return UserList(raw_user_list=res, client=self._client)
 
-    async def update_member_ship(
+    @override
+    async def update_membership(
         self, user_id: str, with_replies: bool = MISSING, list_id: str | None = None
     ):
         list_id = list_id or self.__list_id
 
         if list_id is None:
             raise ParameterError("required parameter list_id is missing")
-        return await super().update_member_ship(
+        return await super().update_membership(
             user_id=user_id, with_replies=with_replies, list_id=list_id
         )
 
@@ -443,8 +444,8 @@ class UserListActions(ClientUserListActions):
         return await super().create_from_public(name=name, list_id=list_id)
 
     @override
-    async def update_member_ship(self, list_id: str, user_id: str, with_replies: bool = MISSING):
-        return await super().update_member_ship(
+    async def update_membership(self, list_id: str, user_id: str, with_replies: bool = MISSING):
+        return await super().update_membership(
             list_id=list_id, user_id=user_id, with_replies=with_replies
         )
 
