@@ -215,12 +215,22 @@ class IMeDetailedOnlySchema(TypedDict):
     email_verified: NotRequired[bool]
     security_keys_list: NotRequired[list[IUserSecurityKey]]  # セキュリティー
 
+
 class IUserList(TypedDict):
     id: str
     created_at: str
     name: str
     user_ids: list[str]
     is_public: bool
+
+
+class IUserListMembership(TypedDict):
+    id: str
+    created_at: str
+    user_id: str
+    user: IPartialUser
+    with_replies: bool
+
 
 class IUserDetailedNotMeSchema(IPartialUser, IUserDetailedNotMeOnlySchema):
     pass
