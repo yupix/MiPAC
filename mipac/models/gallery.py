@@ -1,10 +1,10 @@
 from __future__ import annotations
-from datetime import datetime
 
+from datetime import datetime
 from typing import TYPE_CHECKING
+
 from mipac.models.drive import File
 from mipac.models.lite.user import PartialUser
-
 from mipac.types.gallery import IGalleryPost
 from mipac.utils.format import str_to_datetime
 

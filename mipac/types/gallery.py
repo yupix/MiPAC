@@ -1,7 +1,7 @@
 from typing import NotRequired, TypedDict
 
-from mipac.types.user import IPartialUser
 from mipac.types.drive import IFile
+from mipac.types.user import IPartialUser
 
 
 class IGalleryPost(TypedDict):
