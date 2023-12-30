@@ -1475,7 +1475,7 @@
                 "path": "/notes/user-list-timeline",
                 "request_body_hash": "21946ba7ba25715e8811233aa442b48a2903dbe9ee714b08946f791ab82f4f7b",
                 "response_body_hash": "e328458ae9e4baf1715ec3ba638dbc621d6e5561bee4509626e07d44c583af05",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/notifications/create": {
                 "path": "/notifications/create",
@@ -1745,73 +1745,73 @@
                 "path": "/users/lists/create",
                 "request_body_hash": "966ffa9d5a65e1b056fdf50ef42b9569f594844fd34d9a11cb1b584333c18e71",
                 "response_body_hash": "6b47819c17f1ab2adb92e7dd5ca897ea9c8f9107f67e94902e8d33bd8c223499",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/delete": {
                 "path": "/users/lists/delete",
                 "request_body_hash": "229edae3d09f19d4c0282efd26c63d531a366743a9ef2f60d7f89c252712ae31",
                 "response_body_hash": "46c49578068c6bec4c314be68eda455f3f367bd13fe970580e95c87b2fad5c2b",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/list": {
                 "path": "/users/lists/list",
                 "request_body_hash": "260af4a996ad193957f8a2fd1dc8b9e4dbad1b063e977e0181f4694f9a57153a",
                 "response_body_hash": "ea6da2cf87dbbcbf04a123dd01ca2a1496a178d3b20aef5cf06e3ec99f0c2a18",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/pull": {
                 "path": "/users/lists/pull",
                 "request_body_hash": "ca1d808851576cc83e51f6c87fec44ee9a2afd57579a6bd4f333cda32fed7bad",
                 "response_body_hash": "dc2b3b48ed446f28f44e8468186af637318abc2ec2ac4893eed84a530efa62aa",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/push": {
                 "path": "/users/lists/push",
                 "request_body_hash": "ca1d808851576cc83e51f6c87fec44ee9a2afd57579a6bd4f333cda32fed7bad",
                 "response_body_hash": "0ad97deb5ccdfed655ea446d2e87e289d74f38c86dfc7719d6e51e795af4f774",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/show": {
                 "path": "/users/lists/show",
                 "request_body_hash": "6d186a14a1ad553c83bb6da0d6477109aba3ac174820a47da85c79334366c2c4",
                 "response_body_hash": "46fb75c879c12b3439224c84741ad84992d21b710de459ddb3a0253bc85b26cb",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/favorite": {
                 "path": "/users/lists/favorite",
                 "request_body_hash": "229edae3d09f19d4c0282efd26c63d531a366743a9ef2f60d7f89c252712ae31",
                 "response_body_hash": "0ba25e15910a449f52127f1e811a8293af2b0ffb57ecca6b09b5b4a407184431",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/unfavorite": {
                 "path": "/users/lists/unfavorite",
                 "request_body_hash": "229edae3d09f19d4c0282efd26c63d531a366743a9ef2f60d7f89c252712ae31",
                 "response_body_hash": "05d22dc105f55a1b2be89285d4973389415b5ba849112e6a58e1b7966d3127db",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/update": {
                 "path": "/users/lists/update",
                 "request_body_hash": "be5e0b160b43e94d6f30a721700ddfab458186371540348b858ef0f785446bf4",
                 "response_body_hash": "c6d76c00775311e35069d71af4990860f2f66c641f984f2a5b47da5b0bb5b9c8",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/create-from-public": {
                 "path": "/users/lists/create-from-public",
                 "request_body_hash": "0272d0508f063ffe526ff707a82df2c5b510ad7fa686f4d2c1482baf6a439350",
                 "response_body_hash": "1fc5d53771678f0f47bfd0297e010963cb1dc40a160c429c0b3529d9e3d5e543",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/update-membership": {
                 "path": "/users/lists/update-membership",
                 "request_body_hash": "3cb2711ea796480c5f0877b219c51e8468e1b6be403b3a6fcf693c99280c9bca",
                 "response_body_hash": "dc2b3b48ed446f28f44e8468186af637318abc2ec2ac4893eed84a530efa62aa",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/lists/get-memberships": {
                 "path": "/users/lists/get-memberships",
                 "request_body_hash": "479cb359a63d03e3a9adb6e3a497b1b3d460391559db59977a4935bacf514751",
                 "response_body_hash": "6a35d86ffa594a42d333bd97804792397943506f21545517702e5a6253537150",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/users/pages": {
                 "path": "/users/pages",
