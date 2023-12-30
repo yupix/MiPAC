@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.user import UserDetailed
+from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.admin import (
     IIndexStat,
     IModerationLog,
@@ -91,8 +91,8 @@ class ModerationLog(AbstractModel):
         return self.__moderation_log["user_id"]
 
     @property
-    def user(self) -> UserDetailed:
-        return UserDetailed(self.__moderation_log["user"], client=self.__client)
+    def user(self) -> UserDetailedNotMe | MeDetailed:
+        return packed_user(self.__moderation_log["user"], client=self.__client)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, ModerationLog) and self.id == __value.id

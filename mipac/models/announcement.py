@@ -1,22 +1,19 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Generic, TypeVar
+from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
-from mipac.types.announcement import IAnnouncement, IAnnouncementCommon, IAnnouncementSystem
+from mipac.types.announcement import IAnnouncement, IAnnouncementDetailed
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.actions.admins.announcement import AdminAnnouncementClientActions
     from mipac.manager.client import ClientManager
 
-T = TypeVar("T", bound=IAnnouncementCommon)
 
-
-class AnnouncementCommon(Generic[T], AbstractModel):
-    def __init__(self, announcement: T, *, client: ClientManager) -> None:
-        self.__announcement: T = announcement
+class Announcement:
+    def __init__(self, announcement: IAnnouncement, *, client: ClientManager) -> None:
+        self.__announcement: IAnnouncement = announcement
         self.__client: ClientManager = client
 
     @property
@@ -25,13 +22,13 @@ class AnnouncementCommon(Generic[T], AbstractModel):
 
     @property
     def created_at(self) -> datetime:
-        return str_to_datetime(self.__announcement["created_at"])
+        return str_to_datetime(self.__announcement["createdAt"])
 
     @property
     def updated_at(self) -> datetime | None:
         return (
-            str_to_datetime(self.__announcement["updated_at"])
-            if self.__announcement["updated_at"]
+            str_to_datetime(self.__announcement["updatedAt"])
+            if self.__announcement["updatedAt"]
             else None
         )
 
@@ -45,13 +42,31 @@ class AnnouncementCommon(Generic[T], AbstractModel):
 
     @property
     def image_url(self) -> str | None:
-        return self.__announcement["image_url"]
+        return self.__announcement["imageUrl"]
 
     @property
-    def action(self) -> AdminAnnouncementClientActions:
-        return self.__client.admin.announcement._create_client_announcement_instance(
-            announce_id=self.id
-        )
+    def icon(self) -> str | None:
+        return self.__announcement["icon"]
+
+    @property
+    def display(self) -> str:
+        return self.__announcement["display"]
+
+    @property
+    def need_confirmation_to_read(self) -> bool:
+        return self.__announcement["needConfirmationToRead"]
+
+    @property
+    def silence(self) -> bool:
+        return self.__announcement["silence"]
+
+    @property
+    def for_you(self) -> bool:
+        return self.__announcement["forYou"]
+
+    @property
+    def is_read(self) -> bool | None:
+        return self.__announcement["isRead"]
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, Announcement) and self.id == __value.id
@@ -59,22 +74,87 @@ class AnnouncementCommon(Generic[T], AbstractModel):
     def __ne__(self, __value: object) -> bool:
         return not self.__eq__(__value)
 
+    @property
+    def action(self) -> AdminAnnouncementClientActions:
+        return self.__client.admin.announcement._create_client_announcement_instance(
+            announce_id=self.id
+        )
 
-class Announcement(AnnouncementCommon):
-    def __init__(self, announcement: IAnnouncement, *, client: ClientManager) -> None:
-        super().__init__(announcement, client=client)
-        self.__announcement: IAnnouncement
+
+class AnnouncementDetailed:
+    def __init__(self, raw_announcement: IAnnouncementDetailed, *, client: ClientManager) -> None:
+        self.__raw_announcement: IAnnouncementDetailed = raw_announcement
+        self.__client: ClientManager = client
 
     @property
-    def is_read(self) -> bool:
-        return self.__announcement["is_read"]
+    def id(self) -> str:
+        return self.__raw_announcement["id"]
 
+    @property
+    def created_at(self) -> datetime:
+        return str_to_datetime(self.__raw_announcement["created_at"])
 
-class AnnouncementSystem(AnnouncementCommon):
-    def __init__(self, announcement: IAnnouncementSystem, *, client: ClientManager) -> None:
-        super().__init__(announcement, client=client)
-        self.__announcement: IAnnouncementSystem
+    @property
+    def updated_at(self) -> datetime | None:
+        return (
+            str_to_datetime(self.__raw_announcement["updated_at"])
+            if self.__raw_announcement["updated_at"]
+            else None
+        )
+
+    @property
+    def title(self) -> str:
+        return self.__raw_announcement["title"]
+
+    @property
+    def text(self) -> str:
+        return self.__raw_announcement["text"]
+
+    @property
+    def image_url(self) -> str | None:
+        return self.__raw_announcement["image_url"]
+
+    @property
+    def icon(self) -> str | None:
+        return self.__raw_announcement["icon"]
+
+    @property
+    def display(self) -> str:
+        return self.__raw_announcement["display"]
+
+    @property
+    def is_active(self) -> bool:
+        return self.__raw_announcement["is_active"]
+
+    @property
+    def for_existing_users(self) -> bool:
+        return self.__raw_announcement["for_existing_users"]
+
+    @property
+    def silence(self) -> bool:
+        return self.__raw_announcement["silence"]
+
+    @property
+    def need_confirmation_to_read(self) -> bool:
+        return self.__raw_announcement["need_confirmation_to_read"]
+
+    @property
+    def user_id(self) -> str | None:
+        return self.__raw_announcement["user_id"]
 
     @property
     def reads(self) -> int:
-        return self.__announcement["reads"]
+        """Returns the number of reads of the announcement."""
+        return self.__raw_announcement["reads"]
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, AnnouncementDetailed) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
+
+    @property
+    def action(self) -> AdminAnnouncementClientActions:
+        return self.__client.admin.announcement._create_client_announcement_instance(
+            announce_id=self.id
+        )

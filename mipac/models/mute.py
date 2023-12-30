@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
-from mipac.models.user import UserDetailed
+from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.mute import IMuteUser
 
 if TYPE_CHECKING:
@@ -28,8 +28,8 @@ class MuteUser(AbstractModel):
         return self.__data["mutee_id"]
 
     @property
-    def mutee(self) -> UserDetailed:
-        return UserDetailed(self.__data["mutee"], client=self.__client)
+    def mutee(self) -> UserDetailedNotMe | MeDetailed:
+        return packed_user(self.__data["mutee"], client=self.__client)
 
     def __eq__(self, __value: MuteUser) -> bool:
         return isinstance(__value, IMuteUser) and self.id == __value.id

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, AsyncGenerator, Literal
+
 from typing_extensions import override
 
 from mipac.abstract.action import AbstractAction
@@ -8,14 +9,14 @@ from mipac.file import MiFile
 from mipac.http import HTTPClient, Route
 from mipac.models.channel import Channel
 from mipac.models.drive import File
+from mipac.models.note import Note
 from mipac.models.poll import MiPoll
 from mipac.types.channel import IChannel
 from mipac.types.note import INote, INoteVisibility
 from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.format import remove_dict_missing
-from mipac.utils.util import MISSING, credentials_required
-from mipac.models.note import Note
 from mipac.utils.pagination import Pagination
+from mipac.utils.util import MISSING, credentials_required
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager

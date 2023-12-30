@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
-from mipac.models.user import UserDetailed
+from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -41,7 +41,7 @@ class AdminUserActions(AbstractAction):
         )
         return bool(res)
 
-    async def show_user(self, user_id: str | None = None) -> UserDetailed:
+    async def show_user(self, user_id: str | None = None) -> UserDetailedNotMe | MeDetailed:
         """
         Shows the user with the specified user ID.
 
@@ -52,7 +52,7 @@ class AdminUserActions(AbstractAction):
 
         Returns
         -------
-        UserDetailed
+        UserDetailedNotMe | MeDetailed
         """
 
         user_id = user_id or self.__user_id
@@ -63,7 +63,7 @@ class AdminUserActions(AbstractAction):
             auth=True,
             lower=True,
         )
-        return UserDetailed(res, client=self.__client)
+        return packed_user(res, client=self.__client)
 
     async def suspend(self, user_id: str | None = None) -> bool:
         """
