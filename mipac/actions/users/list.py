@@ -7,9 +7,10 @@ from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.note import Note
-from mipac.models.user import UserList
-from mipac.types.user import IUserList
+from mipac.models.user import UserList, UserListMembership
+from mipac.types.user import IUserList, IUserListMembership
 from mipac.utils.format import remove_dict_missing
+from mipac.utils.pagination import Pagination
 from mipac.utils.util import MISSING
 
 if TYPE_CHECKING:
@@ -318,6 +319,72 @@ class ClientUserListActions(ClientPartialUserListActions):
             user_id=user_id, with_replies=with_replies, list_id=list_id
         )
 
+    async def get_memberships(
+        self,
+        for_public: bool = False,
+        limit: int = 30,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        list_id: str | None = None,
+    ) -> list[UserListMembership]:
+        list_id = list_id or self.__list_id
+
+        if list_id is None:
+            raise ParameterError("required parameter list_id is missing")
+
+        data = {
+            "listId": list_id,
+            "forPublic": for_public,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+        }
+
+        raw_user_list_memberships: list[IUserListMembership] = await self._session.request(
+            Route("POST", "/api/users/lists/get-memberships"),
+            json=data,
+            auth=True,
+        )
+
+        return [
+            UserListMembership(raw_user_list_membership, client=self._client)
+            for raw_user_list_membership in raw_user_list_memberships
+        ]
+
+    async def get_all_memberships(
+        self,
+        for_public: bool = False,
+        limit: int = 30,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        list_id: str | None = None,
+    ):
+        list_id = list_id or self.__list_id
+
+        if list_id is None:
+            raise ParameterError("required parameter list_id is missing")
+
+        data = {
+            "listId": list_id,
+            "forPublic": for_public,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+        }
+        pagination = Pagination[IUserListMembership](
+            http_client=self._session,
+            route=Route("POST", "/api/users/lists/get-memberships"),
+            json=data,
+            auth=True,
+        )
+
+        while pagination.is_final is False:
+            raw_user_list_memberships = await pagination.next()
+            for raw_user_list_membership in raw_user_list_memberships:
+                yield UserListMembership(raw_user_list_membership, client=self._client)
+
     # ここからはusers/lists系じゃないが、ここにあってほしい物
     async def get_time_line(
         self,
@@ -448,6 +515,41 @@ class UserListActions(ClientUserListActions):
         return await super().update_membership(
             list_id=list_id, user_id=user_id, with_replies=with_replies
         )
+
+    @override
+    async def get_memberships(
+        self,
+        list_id: str,
+        for_public: bool = False,
+        limit: int = 30,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> list[UserListMembership]:
+        return await super().get_memberships(
+            list_id=list_id,
+            for_public=for_public,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+        )
+
+    @override
+    async def get_all_memberships(
+        self,
+        list_id: str,
+        for_public: bool = False,
+        limit: int = 30,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ):
+        async for i in super().get_all_memberships(
+            list_id=list_id,
+            for_public=for_public,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+        ):
+            yield i
 
     @override
     async def get_time_line(
