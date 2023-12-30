@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.manager import AbstractManager
-from mipac.actions.invite import InviteActions, ClientInviteActions
+from mipac.actions.invite import ClientInviteActions, InviteActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:

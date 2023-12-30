@@ -47,6 +47,7 @@ class Generator:
     def create_actions(self):
         import_path = self.get_import_path('actions')
         class_name = self.get_class_name('actions')
+        os.makedirs(f'{self.base_path}/actions/{self.path}', exist_ok=True)
         with open(
             f'{self.base_path}/actions/{self.path}{self.split_name[-1]}.py',
             mode='w',
@@ -59,6 +60,7 @@ class Generator:
     def create_manager(self):
         created_actions = self.create_actions()
         class_name = self.get_class_name('manager')
+        os.makedirs(f'{self.base_path}/manager/{self.path}', exist_ok=True)
         with open(
             f'{self.base_path}/manager/{self.path}{self.split_name[-1]}.py',
             mode='w',

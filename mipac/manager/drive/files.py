@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.manager import AbstractManager
-from mipac.actions.drive.files import FileActions, ClientFileActions
+from mipac.actions.drive.files import ClientFileActions, FileActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:

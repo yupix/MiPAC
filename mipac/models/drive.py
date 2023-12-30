@@ -9,8 +9,8 @@ from mipac.types.drive import IDriveStatus
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
     from mipac.manager.drive.files import ClientFileManager
-    from mipac.types import IFolder, IFile, IFileProperties
     from mipac.manager.drive.folders import ClientFolderManager
+    from mipac.types import IFile, IFileProperties, IFolder
 
 
 __all__ = ["FileProperties", "File", "Folder"]

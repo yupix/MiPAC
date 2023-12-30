@@ -1,86 +1,767 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, TypeVar, Union, overload
+from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, overload
 
-from mipac.config import config
+from typing_extensions import override
+
+from mipac.abstract.action import AbstractAction
 from mipac.errors.base import NotExistRequiredData, ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
+from mipac.models.gallery import GalleryPost
 from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
 from mipac.models.user import (
     Achievement,
+    Follower,
+    Following,
+    FrequentlyRepliedUser,
     MeDetailed,
-    MeDetailedModerator,
-    UserDetailed,
-    UserDetailedModels,
-    UserModels,
-    create_user_model,
+    UserDetailedNotMe,
+    packed_user,
 )
 from mipac.types.clip import IClip
+from mipac.types.follow import IFederationFollower, IFederationFollowing
+from mipac.types.gallery import IGalleryPost
 from mipac.types.note import INote
 from mipac.types.user import (
-    IMeDetailed,
-    IMeDetailedModerator,
+    GetFrequentlyRepliedUsersResponse,
+    IMeDetailedSchema,
     IUser,
-    is_me_detailed_moderator,
+    is_partial_user,
 )
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
-from mipac.utils.util import check_multi_arg
+from mipac.utils.util import check_multi_arg, credentials_required
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 __all__ = ["UserActions"]
 
-T = TypeVar("T", bound=Union[PartialUser, UserDetailed])
+
+class ClientUserActions(AbstractAction):
+    def __init__(
+        self, user: PartialUser | None = None, *, session: HTTPClient, client: ClientManager
+    ):
+        self._user: PartialUser | None = user
+        self._session: HTTPClient = session
+        self._client: ClientManager = client
+
+    async def get_notes(
+        self,
+        with_replies: bool = False,
+        with_renotes: bool = True,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_data: int | None = None,
+        until_data: int | None = None,
+        include_my_renotes: bool = True,
+        with_files: bool = False,
+        file_type: list[str] | None = None,
+        exclude_nsfw: bool = False,
+        *,
+        user_id: str | None = None,
+    ) -> list[Note]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
+        user_id = user_id or self._user and self._user.id
+
+        if check_multi_arg(user_id, self._user) is False:
+            raise ParameterError("missing required argument: user_id", user_id, self._user)
+
+        data = {
+            "userId": user_id,
+            "withReplies": with_replies,
+            "withRenotes": with_renotes,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "sinceDate": since_data,
+            "untilDate": until_data,
+            "includeMyRenotes": include_my_renotes,
+            "withFiles": with_files,
+            "fileType": file_type,
+            "excludeNsfw": exclude_nsfw,
+        }
+
+        raw_note: list[INote] = await self._session.request(
+            Route("POST", "/api/users/notes"), json=data, auth=True
+        )
+
+        return [Note(raw_note=raw_note, client=self._client) for raw_note in raw_note]
+
+    async def get_all_notes(
+        self,
+        with_replies: bool = False,
+        with_renotes: bool = True,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_data: int | None = None,
+        until_data: int | None = None,
+        include_my_renotes: bool = True,
+        with_files: bool = False,
+        file_type: list[str] | None = None,
+        exclude_nsfw: bool = False,
+        *,
+        user_id: str | None = None,
+    ) -> AsyncGenerator[Note, None]:
+        user_id = user_id or self._user and self._user.id
+        data = {
+            "userId": user_id,
+            "withReplies": with_replies,
+            "withRenotes": with_renotes,
+            "limit": 100,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "sinceDate": since_data,
+            "untilDate": until_data,
+            "includeMyRenotes": include_my_renotes,
+            "withFiles": with_files,
+            "fileType": file_type,
+            "excludeNsfw": exclude_nsfw,
+        }
+        pagination = Pagination[INote](
+            self._session, Route("POST", "/api/users/notes"), json=data, auth=True
+        )
+
+        while pagination.is_final is False:
+            res_notes = await pagination.next()
+            for note in res_notes:
+                yield Note(note, client=self._client)
+
+    async def get_clips(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> list[Clip]:
+        data = {"userId": user_id, "limit": limit, "sinceId": since_id, "untilId": until_id}
+
+        raw_clip: list[IClip] = await self._session.request(
+            Route("POST", "/api/users/clips"), json=data, auth=True
+        )
+
+        return [Clip(raw_clip=raw_clip, client=self._client) for raw_clip in raw_clip]
+
+    async def get_all_clips(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        *,
+        user_id: str | None = None,
+    ) -> AsyncGenerator[Clip, None]:
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {"userId": user_id, "limit": limit, "sinceId": since_id, "untilId": until_id}
+
+        pagination = Pagination[IClip](
+            self._session, Route("POST", "/api/users/clips"), json=data, auth=True
+        )
+
+        while pagination.is_final is False:
+            clips: list[IClip] = await pagination.next()
+            for clip in clips:
+                yield Clip(raw_clip=clip, client=self._client)
+
+    async def get_followers(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> list[Follower]:
+        """
+        Get followers of user.
+
+        Endpoint: `/api/users/followers`
+
+        Parameters
+        ----------
+        since_id : str, default=None
+            Get followers after this id.
+        until_id : str, default=None
+            Get followers before this id.
+        limit : int, default=10
+            The maximum number of followers to return.
+        username : str, default=None
+            Get followers with this username.
+        host : str, default=None
+            Get followers with this host.
+        user_id : str, default=None
+            Get followers with this user id.
+
+        Returns
+        -------
+        list[Follower]
+            A list of followers.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+        data = {
+            "userId": user_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "username": username,
+            "host": host,
+        }
+        raw_followers: list[IFederationFollower] = await self._session.request(
+            Route("POST", "/api/users/followers"), json=data, auth=True
+        )
+
+        return [Follower(raw_follower, client=self._client) for raw_follower in raw_followers]
+
+    async def get_all_followers(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> AsyncGenerator[Follower, None]:
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+        data = {
+            "userId": user_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "username": username,
+            "host": host,
+        }
+        pagination = Pagination[IFederationFollower](
+            self._session, Route("POST", "/api/users/followers"), json=data, auth=True
+        )
+
+        while pagination.is_final is False:
+            raw_followers: list[IFederationFollower] = await pagination.next()
+            for raw_follower in raw_followers:
+                yield Follower(raw_follower, client=self._client)
+
+    async def get_following(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        birthday: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> list[Following]:
+        """Get following of user.
+
+        Endpoint: `/api/users/following`
+
+        Parameters
+        ----------
+        since_id : str, default=None
+            Get following after this id.
+        until_id : str, default=None
+            Get following before this id.
+        limit : int, default=10
+            The maximum number of following to return.
+        username : str, default=None
+            Get following with this username.
+        host : str, default=None
+            Get following with this host.
+        user_id : str, default=None
+            Get following with this user id.
+
+        Returns
+        -------
+        list[Following]
+            A list of following.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "username": username,
+            "host": host,
+            "birthday": birthday,
+        }
+
+        raw_following: list[IFederationFollowing] = await self._session.request(
+            Route("POST", "/api/users/following"), json=data, auth=True
+        )
+
+        return [Following(raw_following, client=self._client) for raw_following in raw_following]
+
+    async def get_all_following(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        birthday: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> AsyncGenerator[Following, None]:
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "username": username,
+            "host": host,
+            "birthday": birthday,
+        }
+
+        pagination = Pagination[IFederationFollowing](
+            self._session, Route("POST", "/api/users/following"), json=data, auth=True
+        )
+
+        while pagination.is_final is False:
+            raw_followings: list[IFederationFollowing] = await pagination.next()
+            for raw_following in raw_followings:
+                yield Following(raw_following, client=self._client)
+
+    async def get_gallery_posts(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> list[GalleryPost]:
+        """Get gallery posts of user.
+
+        Endpoint: `/api/users/gallery/posts`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            The maximum number of gallery posts to return.
+        since_id : str, default=None
+            Get gallery posts after this id.
+        until_id : str, default=None
+            Get gallery posts before this id.
+        user_id : str, default=None
+            Get gallery posts with this user id.
+
+        Returns
+        -------
+        list[GalleryPost]
+            A list of gallery posts.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+        }
+
+        raw_gallery_posts: list[IGalleryPost] = await self._session.request(
+            Route("POST", "/api/users/gallery/posts"), json=data, auth=True
+        )
+
+        return [
+            GalleryPost(raw_gallery=raw_gallery, client=self._client)
+            for raw_gallery in raw_gallery_posts
+        ]
+
+    async def get_all_gallery_posts(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        user_id: str | None = None,
+    ) -> AsyncGenerator[GalleryPost, None]:
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+        }
+
+        pagination = Pagination[IGalleryPost](
+            self._session, Route("POST", "/api/users/gallery/posts"), json=data, auth=True
+        )
+
+        while pagination.is_final is False:
+            raw_gallery_posts: list[IGalleryPost] = await pagination.next()
+            for raw_gallery_post in raw_gallery_posts:
+                yield GalleryPost(raw_gallery=raw_gallery_post, client=self._client)
+
+    async def get_frequently_replied_users(
+        self, limit: int = 10, *, user_id: str | None = None
+    ) -> list[FrequentlyRepliedUser]:
+        """Get frequently replied users of user.
+
+        Endpoint: `/api/users/get-frequently-replied-users`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            The maximum number of frequently replied users to return.
+        user_id : str, default=None
+            Get frequently replied users with this user id.
+
+        Returns
+        -------
+        list[FrequentlyRepliedUser]
+            A list of frequently replied users.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "limit": limit,
+        }
+
+        res: list[GetFrequentlyRepliedUsersResponse] = await self._session.request(
+            Route("POST", "/api/users/get-frequently-replied-users"),
+            json=data,
+            auth=True,
+            lower=True,
+        )
+        return [FrequentlyRepliedUser(i, client=self._client) for i in res]
+
+    async def get_featured_notes(
+        self, limit: int = 10, until_id: str | None = None, *, user_id: str | None = None
+    ) -> list[Note]:
+        """Get featured notes of user.
+
+        Endpoint: `/api/users/featured-notes`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            The maximum number of featured notes to return.
+        until_id : str, default=None
+            Get featured notes before this id.
+        user_id : str, default=None
+            Get featured notes with this user id.
+
+        Returns
+        -------
+        list[Note]
+            A list of featured notes.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "limit": limit,
+            "untilId": until_id,
+        }
+
+        raw_notes: list[INote] = await self._session.request(
+            Route("POST", "/api/users/featured-notes"),
+            json=data,
+            auth=True,
+            lower=True,
+        )
+        return [Note(raw_note=raw_note, client=self._client) for raw_note in raw_notes]
+
+    async def get_all_featured_notes(
+        self, limit: int = 10, until_id: str | None = None, *, user_id: str | None = None
+    ) -> AsyncGenerator[Note, None]:
+        """Get all featured notes of user.
+
+        Endpoint: `/api/users/featured-notes`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            The maximum number of featured notes to return.
+        until_id : str, default=None
+            Get featured notes before this id.
+        user_id : str, default=None
+            Get featured notes with this user id.
+
+        Returns
+        -------
+        list[Note]
+            A list of featured notes.
+        """
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+            "limit": limit,
+            "untilId": until_id,
+        }
+
+        pagination = Pagination[INote](
+            self._session, Route("POST", "/api/users/featured-notes"), json=data, auth=True
+        )
+
+        while pagination.is_final is False:
+            raw_notes: list[INote] = await pagination.next()
+            for raw_note in raw_notes:
+                yield Note(raw_note=raw_note, client=self._client)
+
+    async def get_achievements(self, *, user_id: str | None = None) -> list[Achievement]:
+        """Get achievements of user."""
+        user_id = user_id or self._user and self._user.id
+
+        if user_id is None:
+            raise ParameterError("user_id is required")
+
+        data = {
+            "userId": user_id,
+        }
+        res = await self._session.request(
+            Route("POST", "/api/users/achievements"),
+            json=data,
+            auth=True,
+            lower=True,
+        )
+        return [Achievement(i) for i in res]
 
 
-class UserActions:
+class UserActions(ClientUserActions):
     def __init__(
         self,
         session: HTTPClient,
         client: ClientManager,
-        user: Optional[PartialUser] = None,
     ):
-        self.__session: HTTPClient = session
-        self.__user: Optional[PartialUser] = user
-        self.__client: ClientManager = client
+        super().__init__(session=session, client=client)
 
-    async def get_me(self) -> MeDetailed | MeDetailedModerator:  # TODO: トークンが無い場合は例外返すようにする
+    @override
+    async def get_notes(
+        self,
+        user_id: str,
+        with_replies: bool = False,
+        with_renotes: bool = True,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_data: int | None = None,
+        until_data: int | None = None,
+        include_my_renotes: bool = True,
+        with_files: bool = False,
+        file_type: list[str] | None = None,
+        exclude_nsfw: bool = False,
+    ) -> list[Note]:
+        return await super().get_notes(
+            with_replies=with_replies,
+            with_renotes=with_renotes,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+            since_data=since_data,
+            until_data=until_data,
+            include_my_renotes=include_my_renotes,
+            with_files=with_files,
+            file_type=file_type,
+            exclude_nsfw=exclude_nsfw,
+            user_id=user_id,
+        )
+
+    @override
+    async def get_all_notes(
+        self,
+        user_id: str,
+        with_replies: bool = False,
+        with_renotes: bool = True,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_data: int | None = None,
+        until_data: int | None = None,
+        include_my_renotes: bool = True,
+        with_files: bool = False,
+        file_type: list[str] | None = None,
+        exclude_nsfw: bool = False,
+    ) -> AsyncGenerator[Note, None]:
+        async for i in super().get_all_notes(
+            with_replies=with_replies,
+            with_renotes=with_renotes,
+            since_id=since_id,
+            until_id=until_id,
+            since_data=since_data,
+            until_data=until_data,
+            include_my_renotes=include_my_renotes,
+            with_files=with_files,
+            file_type=file_type,
+            exclude_nsfw=exclude_nsfw,
+            user_id=user_id,
+        ):
+            yield i
+
+    @override
+    async def get_clips(
+        self,
+        user_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> list[Clip]:
+        return await super().get_clips(
+            user_id=user_id, limit=limit, since_id=since_id, until_id=until_id
+        )
+
+    @override
+    async def get_all_clips(
+        self, user_id: str, since_id: str | None = None, until_id: str | None = None
+    ) -> AsyncGenerator[Clip, None]:
+        async for i in super().get_all_clips(
+            user_id=user_id, since_id=since_id, until_id=until_id
+        ):
+            yield i
+
+    @override
+    async def get_followers(
+        self,
+        user_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+    ) -> list[Follower]:
+        return await super().get_followers(
+            since_id, until_id, limit, username, host, user_id=user_id
+        )
+
+    @override
+    async def get_all_followers(
+        self,
+        user_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+    ) -> AsyncGenerator[Follower, None]:
+        async for i in super().get_all_followers(
+            since_id, until_id, limit, username, host, user_id=user_id
+        ):
+            yield i
+
+    @override
+    async def get_following(
+        self,
+        user_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        birthday: str | None = None,
+    ) -> list[Following]:
+        return await super().get_following(
+            since_id, until_id, limit, username, host, birthday, user_id=user_id
+        )
+
+    @override
+    async def get_all_following(
+        self,
+        user_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        username: str | None = None,
+        host: str | None = None,
+        birthday: str | None = None,
+    ) -> AsyncGenerator[Following, None]:
+        async for i in super().get_all_following(
+            since_id, until_id, limit, username, host, birthday, user_id=user_id
+        ):
+            yield i
+
+    @override
+    async def get_gallery_posts(
+        self,
+        user_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> list[GalleryPost]:
+        return await super().get_gallery_posts(limit, since_id, until_id, user_id=user_id)
+
+    @override
+    async def get_all_gallery_posts(
+        self,
+        user_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> AsyncGenerator[GalleryPost, None]:
+        async for i in super().get_all_gallery_posts(limit, since_id, until_id, user_id=user_id):
+            yield i
+
+    @override
+    async def get_frequently_replied_users(
+        self, user_id: str, limit: int = 10
+    ) -> list[FrequentlyRepliedUser]:
+        return await super().get_frequently_replied_users(limit, user_id=user_id)
+
+    @override
+    async def get_featured_notes(
+        self, user_id: str, limit: int = 10, until_id: str | None = None
+    ) -> list[Note]:
+        return await super().get_featured_notes(limit, until_id, user_id=user_id)
+
+    @override
+    async def get_all_featured_notes(
+        self, user_id: str, limit: int = 10, until_id: str | None = None
+    ) -> AsyncGenerator[Note, None]:
+        async for i in super().get_all_featured_notes(limit, until_id, user_id=user_id):
+            yield i
+
+    @credentials_required
+    async def get_me(self) -> MeDetailed:  # TODO: トークンが無い場合は例外返すようにする
         """
         ログインしているユーザーの情報を取得します
         """
 
-        res: IMeDetailedModerator | IMeDetailed = await self.__session.request(
+        res: IMeDetailedSchema = await self._session.request(
             Route("POST", "/api/i"),
             auth=True,
             lower=True,
         )
-        return (
-            MeDetailedModerator(res, client=self.__client)
-            if is_me_detailed_moderator(res, config.account_id)
-            else MeDetailed(res, client=self.__client)
-        )
-
-    def get_profile_link(
-        self,
-        external: bool = True,
-        protocol: Literal["http", "https"] = "https",
-    ):  # TODO: これモデルに移すべきな気がする
-        if not self.__user:
-            return None
-        host = (
-            f"{protocol}://{self.__user.host}"
-            if external and self.__user.host
-            else self.__session._url
-        )
-        path = (
-            f"/@{self.__user.username}" if external else f"/{self.__user.api.action.get_mention()}"
-        )
-        return host + path
+        return MeDetailed(res, client=self._client)
 
     @cache(group="get_user")
     async def get(
@@ -90,7 +771,7 @@ class UserActions:
         username: str | None = None,
         host: str | None = None,
         **kwargs,
-    ) -> UserDetailedModels:
+    ) -> UserDetailedNotMe | MeDetailed:
         """
         Retrieve user information from the user ID using the cache.
         If there is no cache, `fetch` is automatically used.
@@ -111,10 +792,10 @@ class UserActions:
         field = remove_dict_empty(
             {"userId": user_id, "username": username, "host": host, "userIds": user_ids}
         )
-        data: IUser = await self.__session.request(
+        data: IUser = await self._session.request(
             Route("POST", "/api/users/show"), json=field, auth=True, lower=True
         )
-        return create_user_model(data, client=self.__client, use_partial_user=False)
+        return packed_user(data, client=self._client)
 
     async def fetch(
         self,
@@ -122,7 +803,7 @@ class UserActions:
         user_ids: list[str] | None = None,
         username: str | None = None,
         host: str | None = None,
-    ) -> UserDetailedModels:
+    ) -> UserDetailedNotMe | MeDetailed:
         """
         Retrieve the latest user information using the target user ID or username.
         If you do not need the latest information, you should basically use the `get` method.
@@ -144,57 +825,6 @@ class UserActions:
             user_id=user_id, username=username, host=host, user_ids=user_ids, cache_override=True
         )
 
-    async def get_notes(
-        self,
-        user_id: str | None = None,
-        with_replies: bool = False,
-        with_renotes: bool = True,
-        limit: int = 10,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        since_data: int | None = None,
-        until_data: int | None = None,
-        include_my_renotes: bool = True,
-        with_files: bool = False,
-        file_type: list[str] | None = None,
-        exclude_nsfw: bool = False,
-        *,
-        get_all: bool = False,
-    ) -> AsyncGenerator[Note, None]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
-        if check_multi_arg(user_id, self.__user) is False:
-            raise ParameterError("missing required argument: user_id", user_id, self.__user)
-
-        user_id = user_id or self.__user and self.__user.id
-        data = {
-            "userId": user_id,
-            "withReplies": with_replies,
-            "withRenotes": with_renotes,
-            "limit": limit,
-            "sinceId": since_id,
-            "untilId": until_id,
-            "sinceDate": since_data,
-            "untilDate": until_data,
-            "includeMyRenotes": include_my_renotes,
-            "withFiles": with_files,
-            "fileType": file_type,
-            "excludeNsfw": exclude_nsfw,
-        }
-
-        if get_all:
-            data["limit"] = 100
-            limit = 100
-
-        pagination = Pagination[INote](
-            self.__session, Route("POST", "/api/users/notes"), json=data, limit=limit
-        )
-
-        while True:
-            res_notes = await pagination.next()
-            for note in res_notes:
-                yield Note(note, client=self.__client)
-            if get_all is False or pagination.is_final:
-                break
-
     def get_mention(self, user: Optional[PartialUser] = None) -> str:  # TODO: モデルに移す
         """
         Get mention name of user.
@@ -210,11 +840,57 @@ class UserActions:
             メンション
         """
 
-        user = user or self.__user
+        user = user or self._user
 
         if user is None:
             raise NotExistRequiredData("Required parameters: user")
         return f"@{user.username}@{user.host}" if user.instance else f"@{user.username}"
+
+    async def search_by_username_and_host(
+        self,
+        username: str,
+        host: str,
+        limit: int = 100,
+        detail: bool = True,
+    ) -> list[UserDetailedNotMe | MeDetailed | PartialUser]:  # TODO: 続き
+        """
+        Search users by username and host.
+
+        Parameters
+        ----------
+        username : str
+            Username of user.
+        host : str
+            Host of user.
+        limit : int, default=100
+            The maximum number of users to return.
+        detail : bool, default=True
+            Weather to get detailed user information.
+
+        Returns
+        -------
+        list[UserDetailedNotMe | MeDetailed | PartialUser]
+            A list of users.
+        """
+
+        if limit > 100:
+            raise ParameterError("limit は100以下である必要があります")
+
+        body = remove_dict_empty(
+            {"username": username, "host": host, "limit": limit, "detail": detail}
+        )
+        res = await self._session.request(
+            Route("POST", "/api/users/search-by-username-and-host"),
+            lower=True,
+            auth=True,
+            json=body,
+        )
+        return [
+            packed_user(user, client=self._client)
+            if detail
+            else PartialUser(user, client=self._client)
+            for user in res
+        ]
 
     @overload
     async def search(
@@ -239,7 +915,7 @@ class UserActions:
         detail: Literal[True] = True,
         *,
         get_all: bool = False,
-    ) -> AsyncGenerator[UserDetailedModels, None]:
+    ) -> AsyncGenerator[UserDetailedNotMe | MeDetailed, None]:
         ...
 
     async def search(
@@ -251,7 +927,7 @@ class UserActions:
         detail: Literal[True, False] = True,
         *,
         get_all: bool = False,
-    ) -> AsyncGenerator[UserModels, None]:
+    ) -> AsyncGenerator[UserDetailedNotMe | MeDetailed | PartialUser, None]:
         """
         Search users by keyword.
 
@@ -283,7 +959,7 @@ class UserActions:
         )
 
         pagination = Pagination[IUser](
-            self.__session,
+            self._session,
             Route("POST", "/api/users/search"),
             json=body,
             pagination_type="count",
@@ -292,102 +968,14 @@ class UserActions:
         while True:
             users: list[IUser] = await pagination.next()
             for user in users:
-                yield create_user_model(user, client=self.__client)
+                yield (
+                    packed_user(user, client=self._client)
+                    if is_partial_user(user) is False
+                    else PartialUser(user, client=self._client)
+                )
             if get_all is False or pagination.is_final:
                 break
 
-    async def search_by_username_and_host(
-        self,
-        username: str,
-        host: str,
-        limit: int = 100,
-        detail: bool = True,
-    ) -> list[UserDetailed | PartialUser]:  # TODO: 続き
-        """
-        Search users by username and host.
-
-        Parameters
-        ----------
-        username : str
-            Username of user.
-        host : str
-            Host of user.
-        limit : int, default=100
-            The maximum number of users to return.
-        detail : bool, default=True
-            Weather to get detailed user information.
-
-        Returns
-        -------
-        list[UserDetailed | PartialUser]
-            A list of users.
-        """
-
-        if limit > 100:
-            raise ParameterError("limit は100以下である必要があります")
-
-        body = remove_dict_empty(
-            {"username": username, "host": host, "limit": limit, "detail": detail}
-        )
-        res = await self.__session.request(
-            Route("POST", "/api/users/search-by-username-and-host"),
-            lower=True,
-            auth=True,
-            json=body,
-        )
-        return [
-            UserDetailed(user, client=self.__client)
-            if detail
-            else PartialUser(user, client=self.__client)
-            for user in res
-        ]
-
-    async def get_achievements(self, user_id: str | None = None) -> list[Achievement]:
-        """Get achievements of user."""
-        user_id = user_id or self.__user and self.__user.id
-
-        if not user_id:
-            raise ParameterError("user_id is required")
-
-        data = {
-            "userId": user_id,
-        }
-        res = await self.__session.request(
-            Route("POST", "/api/users/achievements"),
-            json=data,
-            auth=True,
-            lower=True,
-        )
-        return [Achievement(i) for i in res]
-
-    async def get_clips(
-        self,
-        user_id: str | None = None,
-        limit: int = 10,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        get_all: bool = False,
-    ):
-        user_id = user_id or self.__user and self.__user.id
-
-        if not user_id:
-            raise ParameterError("user_id is required")
-
-        if limit > 100:
-            raise ParameterError("limit must be less than 100")
-
-        if get_all:
-            limit = 100
-
-        body = {"userId": user_id, "limit": limit, "sinceId": since_id, "untilId": until_id}
-
-        pagination = Pagination[IClip](
-            self.__session, Route("POST", "/api/users/clips"), json=body, auth=True
-        )
-
-        while True:
-            clips: list[IClip] = await pagination.next()
-            for clip in clips:
-                yield Clip(clip, client=self.__client)
-            if get_all is False or pagination.is_final:
-                break
+    @override
+    async def get_achievements(self, user_id: str) -> list[Achievement]:
+        return await super().get_achievements(user_id=user_id)

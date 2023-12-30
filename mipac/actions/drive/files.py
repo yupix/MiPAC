@@ -6,7 +6,7 @@ from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
 from mipac.models.drive import File
 from mipac.models.note import Note
-from mipac.types.drive import IFile, IDriveSort
+from mipac.types.drive import IDriveSort, IFile
 from mipac.types.note import INote
 from mipac.utils.format import bool_to_string, remove_dict_missing
 from mipac.utils.util import MISSING, credentials_required

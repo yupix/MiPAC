@@ -1,6 +1,6 @@
 from __future__ import annotations
-from datetime import datetime
 
+from datetime import datetime
 from typing import TYPE_CHECKING
 
 from mipac.models.note import Note
@@ -8,8 +8,8 @@ from mipac.types.channel import IChannel
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
-    from mipac.manager.channel import ClientChannelManager
     from mipac.manager import ClientManager
+    from mipac.manager.channel import ClientChannelManager
 
 
 class Channel:

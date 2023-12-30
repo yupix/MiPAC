@@ -1,46 +1,93 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Generic, Literal, TypeVar, overload
+from typing import TYPE_CHECKING, Generic, TypeVar
 
 from mipac.abstract.model import AbstractModel
-from mipac.config import config
 from mipac.models.announcement import Announcement
 from mipac.models.lite.role import PartialRole
 from mipac.models.lite.user import BadgeRole, PartialUser
 from mipac.models.note import Note
+from mipac.types.follow import IFederationFollowCommon, IFederationFollower, IFederationFollowing
+from mipac.types.meta import IPolicies
 from mipac.types.page import IPage
 from mipac.types.user import (
+    EmailNotificationTypes,
+    GetFrequentlyRepliedUsersResponse,
     IAchievement,
     IBlockingUser,
     IFfVisibility,
-    IMeDetailed,
-    IMeDetailedModerator,
+    IMeDetailedOnlySchema,
+    IMeDetailedSchema,
+    ITwoFactorBackupCodesStock,
     IUser,
-    IUserDetailed,
-    IUserDetailedModerator,
-    IUserDetailedNotLogined,
+    IUserDetailedNotMeOnlySchema,
+    IUserDetailedNotMeSchema,
     IUserField,
+    IUserList,
+    IUserListMembership,
     IUserNotify,
     IUserRole,
+    IUserSecurityKey,
+    NotificationRecieveConfig,
     is_me_detailed,
-    is_me_detailed_moderator,
-    is_partial_user,
-    is_user_detailed,
-    is_user_detailed_moderator,
-    is_user_detailed_not_logined,
+    is_user_detailed_not_me,
 )
 from mipac.utils.format import str_to_datetime
 from mipac.utils.util import DeprecatedClass
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
+    from mipac.manager.users.list import ClientUserListManager
 
-__all__ = ("UserDetailed", "PartialUser", "Achievement", "BlockingUser", "MeDetailed")
 
-T = TypeVar("T", bound=IUserDetailedNotLogined)
-U = TypeVar("U", bound=IUserDetailed)
-M = TypeVar("M", bound=IMeDetailed)
+__all__ = ("PartialUser", "Achievement", "BlockingUser", "MeDetailed")
+
+T = TypeVar("T", bound=IUserDetailedNotMeSchema)
+
+FFC = TypeVar("FFC", bound=IFederationFollowCommon)
+
+
+class FollowCommon(Generic[FFC]):
+    def __init__(self, raw_follow: FFC, *, client: ClientManager) -> None:
+        self._raw_follow: FFC = raw_follow
+        self._client: ClientManager = client
+
+    @property
+    def id(self) -> str:
+        return self._raw_follow["id"]
+
+    @property
+    def created_at(self) -> datetime:
+        return str_to_datetime(self._raw_follow["created_at"])
+
+    @property
+    def follower_id(self) -> str:
+        return self._raw_follow["follower_id"]
+
+    @property
+    def follower(self) -> UserDetailedNotMe | MeDetailed | None:
+        raw_follower = self._raw_follow.get("follower")
+        return packed_user(raw_follower, client=self._client) if raw_follower else None
+
+    @property
+    def followee_id(self) -> str:
+        return self._raw_follow["followee_id"]
+
+    @property
+    def followee(self) -> UserDetailedNotMe | MeDetailed | None:
+        raw_followee = self._raw_follow.get("followee")
+        return packed_user(raw_followee, client=self._client) if raw_followee else None
+
+
+class Follower(FollowCommon[IFederationFollower]):
+    def __init__(self, raw_follow: IFederationFollower, *, client: ClientManager) -> None:
+        super().__init__(raw_follow=raw_follow, client=client)
+
+
+class Following(FollowCommon[IFederationFollowing]):
+    def __init__(self, raw_following: IFederationFollowing, *, client: ClientManager) -> None:
+        super().__init__(raw_follow=raw_following, client=client)
 
 
 class BlockingUser(AbstractModel):
@@ -61,8 +108,8 @@ class BlockingUser(AbstractModel):
         return self.__blocking_user_data["blockee_id"]
 
     @property
-    def blockee(self) -> UserDetailed:
-        return UserDetailed(self.__blocking_user_data["blockee"], client=self.__client)
+    def blockee(self) -> UserDetailedNotMe | MeDetailed:
+        return packed_user(self.__blocking_user_data["blockee"], client=self.__client)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, BlockingUser) and self.id == __value.id
@@ -82,6 +129,20 @@ class Achievement(AbstractModel):
     @property
     def unlocked_at(self) -> int:
         return self.__detail["unlocked_at"]
+
+
+class UserField:
+    def __init__(self, raw_user_field: IUserField, *, client: ClientManager) -> None:
+        self._raw_user_field: IUserField = raw_user_field
+        self.__client: ClientManager = client
+
+    @property
+    def name(self) -> str:
+        return self._raw_user_field["name"]
+
+    @property
+    def value(self) -> str:
+        return self._raw_user_field["value"]
 
 
 @DeprecatedClass(remove_in_version="0.7.0")
@@ -110,9 +171,10 @@ class UserRole(BadgeRole[IUserRole]):
         return self._data["is_administrator"]
 
 
-class UserDetailedNotLogined(PartialUser[T], Generic[T]):
-    def __init__(self, raw_user: T, *, client: ClientManager) -> None:
-        super().__init__(raw_user, client=client)
+class UserDetailedNotMeOnly:
+    def __init__(self, raw_user: IUserDetailedNotMeOnlySchema, *, client: ClientManager) -> None:
+        self._raw_user: IUserDetailedNotMeOnlySchema = raw_user
+        self._client: ClientManager = client
 
     @property
     def url(self) -> str | None:
@@ -177,7 +239,7 @@ class UserDetailedNotLogined(PartialUser[T], Generic[T]):
         return self._raw_user["location"]
 
     @property
-    def birthday(self) -> str | None:
+    def birthday(self) -> str | None:  # TODO: datetimeにする必要があるか確認する
         return self._raw_user["birthday"]
 
     @property
@@ -185,8 +247,8 @@ class UserDetailedNotLogined(PartialUser[T], Generic[T]):
         return self._raw_user["lang"]
 
     @property
-    def fields(self) -> list[IUserField]:  # TODO: モデル化
-        return self._raw_user["fields"]
+    def fields(self) -> list[UserField]:
+        return [UserField(i, client=self._client) for i in self._raw_user["fields"]]
 
     @property
     def verified_links(self) -> list[str]:
@@ -242,71 +304,64 @@ class UserDetailedNotLogined(PartialUser[T], Generic[T]):
 
     @property
     def roles(self) -> list[PartialRole]:
-        return [PartialRole(raw_role, client=self._client) for raw_role in self._raw_user["roles"]]
+        return [PartialRole(i, client=self._client) for i in self._raw_user["roles"]]
 
     @property
     def memo(self) -> str | None:
         return self._raw_user["memo"]
 
-    # TODO: 比較演算子が必要かちょっと後で確認する
-
-
-class UserDetailed(UserDetailedNotLogined[U], Generic[U]):
-    def __init__(self, raw_user: U, *, client: ClientManager) -> None:
-        super().__init__(raw_user, client=client)
+    @property
+    def moderation_note(self) -> str | None:
+        return self._raw_user.get("moderation_note")
 
     @property
-    def is_following(self) -> bool:
-        return self._raw_user["is_following"]
+    def is_following(self) -> bool | None:
+        return self._raw_user.get("is_following")
 
     @property
-    def is_followed(self) -> bool:
-        return self._raw_user["is_followed"]
+    def is_followed(self) -> bool | None:
+        return self._raw_user.get("is_followed")
 
     @property
-    def has_pending_follow_request_from_you(self) -> bool:
-        return self._raw_user["has_pending_follow_request_from_you"]
+    def has_pending_follow_request_from_you(self) -> bool | None:
+        return self._raw_user.get("has_pending_follow_request_from_you")
 
     @property
-    def has_pending_follow_request_to_you(self) -> bool:
-        return self._raw_user["has_pending_follow_request_to_you"]
+    def has_pending_follow_request_to_you(self) -> bool | None:
+        return self._raw_user.get("has_pending_follow_request_to_you")
 
     @property
-    def is_blocking(self) -> bool:
-        return self._raw_user["is_blocking"]
+    def is_blocking(self) -> bool | None:
+        return self._raw_user.get("is_blocking")
 
     @property
-    def is_blocked(self) -> bool:
-        return self._raw_user["is_blocked"]
+    def is_blocked(self) -> bool | None:
+        return self._raw_user.get("is_blocked")
 
     @property
-    def is_muted(self) -> bool:
-        return self._raw_user["is_muted"]
+    def is_muted(self) -> bool | None:
+        return self._raw_user.get("is_muted")
 
     @property
-    def is_renote_muted(self) -> bool:
-        return self._raw_user["is_renote_muted"]
+    def is_renote_muted(self) -> bool | None:
+        return self._raw_user.get("is_renote_muted")
 
     @property
-    def notify(self) -> IUserNotify:
-        return self._raw_user["notify"]
-
-
-class UserDetailedModerator(UserDetailed[IUserDetailedModerator]):
-    def __init__(self, raw_user: IUserDetailedModerator, *, client: ClientManager) -> None:
-        super().__init__(raw_user, client=client)
+    def notify(self) -> IUserNotify | None:
+        return self._raw_user.get("notify")
 
     @property
-    def moderation_note(self) -> str:
-        return self._raw_user["moderation_note"]
+    def with_replies(self) -> bool | None:
+        return self._raw_user.get("with_replies")
 
 
-class MeDetailed(UserDetailed[M], Generic[M]):
-    def __init__(self, raw_user: M, *, client: ClientManager) -> None:
-        super().__init__(raw_user, client=client)
+class MeDetailedOnly:
+    def __init__(self, raw_user: IMeDetailedOnlySchema, *, client: ClientManager) -> None:
+        self._raw_user: IMeDetailedOnlySchema = raw_user
+        self.__client: ClientManager = client
 
     @property
-    def avatar_id(self) -> str:
+    def avatar_id(self) -> str | None:
         return self._raw_user["avatar_id"]
 
     @property
@@ -314,11 +369,11 @@ class MeDetailed(UserDetailed[M], Generic[M]):
         return self._raw_user["banner_id"]
 
     @property
-    def is_moderator(self) -> bool:
+    def is_moderator(self) -> bool | None:
         return self._raw_user["is_moderator"]
 
     @property
-    def is_admin(self) -> bool:
+    def is_admin(self) -> bool | None:
         return self._raw_user["is_admin"]
 
     @property
@@ -362,7 +417,7 @@ class MeDetailed(UserDetailed[M], Generic[M]):
         return self._raw_user["is_deleted"]
 
     @property
-    def two_factor_backup_codes_stock(self) -> str:
+    def two_factor_backup_codes_stock(self) -> ITwoFactorBackupCodesStock:
         return self._raw_user["two_factor_backup_codes_stock"]
 
     @property
@@ -382,8 +437,10 @@ class MeDetailed(UserDetailed[M], Generic[M]):
         return self._raw_user["has_unread_announcement"]
 
     @property
-    def unread_announcements(self) -> Announcement:
-        return Announcement(self._raw_user["unread_announcements"], client=self._client)
+    def unread_announcements(self) -> list[Announcement]:
+        return [
+            Announcement(i, client=self.__client) for i in self._raw_user["unread_announcements"]
+        ]
 
     @property
     def has_unread_antenna(self) -> bool:
@@ -402,93 +459,142 @@ class MeDetailed(UserDetailed[M], Generic[M]):
         return self._raw_user["has_pending_received_follow_request"]
 
     @property
-    def muted_words(self) -> list[str]:
+    def unread_notifications_count(self) -> int:
+        return self._raw_user["unread_notifications_count"]
+
+    @property
+    def muted_words(self) -> list[list[str]]:
         return self._raw_user["muted_words"]
 
     @property
-    def muted_instances(self) -> dict:
+    def hard_muted_words(self) -> list[list[str]]:
+        return self._raw_user["hard_muted_words"]
+
+    @property
+    def muted_instances(self) -> list[str]:
         return self._raw_user["muted_instances"]
 
     @property
-    def muting_notification_types(self) -> dict:
-        return self._raw_user["muting_notification_types"]
-
-    @property
-    def notification_recieve_config(self) -> dict:
+    def notification_recieve_config(self) -> NotificationRecieveConfig:  # TODO: モデル化
         return self._raw_user["notification_recieve_config"]
 
     @property
-    def email_notification_types(self) -> dict:
+    def email_notification_types(self) -> list[EmailNotificationTypes]:  # TODO: モデル化
         return self._raw_user["email_notification_types"]
 
     @property
-    def achievements(self) -> dict:
-        return self._raw_user["achievements"]
+    def achievements(self) -> list[Achievement]:
+        return [Achievement(i) for i in self._raw_user["achievements"]]
 
     @property
     def logged_in_days(self) -> int:
         return self._raw_user["logged_in_days"]
 
     @property
-    def policies(self) -> dict:
+    def policies(self) -> IPolicies:  # TODO: モデル化
         return self._raw_user["policies"]
 
-
-class MeDetailedModerator(MeDetailed):
-    def __init__(self, raw_user: IMeDetailedModerator, *, client: ClientManager) -> None:
-        super().__init__(raw_user, client=client)
+    @property
+    def email(self) -> str | None:
+        return self._raw_user.get("email")
 
     @property
-    def moderation_note(self) -> str:
-        return self._raw_user["moderation_note"]
+    def email_verified(self) -> bool | None:
+        return self._raw_user.get("email_verified")
+
+    @property
+    def security_keys_list(self) -> list[IUserSecurityKey] | None:  # TODO: モデル化
+        return self._raw_user.get("security_keys_list")
 
 
-@overload
-def create_user_model(
-    user: IUser, client: ClientManager, *, use_partial_user: Literal[False]
-) -> UserDetailedModels:
-    pass
+class UserDetailedNotMe(PartialUser[T], UserDetailedNotMeOnly, Generic[T]):
+    def __init__(self, raw_user: T, *, client: ClientManager) -> None:
+        super().__init__(raw_user, client=client)
 
 
-@overload
-def create_user_model(
-    user: IUser, client: ClientManager, *, use_partial_user: Literal[True]
-) -> UserModels:
-    pass
+class MeDetailed(UserDetailedNotMe[IMeDetailedSchema], MeDetailedOnly):
+    def __init__(self, raw_user: IMeDetailedSchema, *, client: ClientManager):
+        super().__init__(raw_user, client=client)
 
 
-def create_user_model(
-    user: IUser, client: ClientManager, *, use_partial_user: Literal[True, False] = True
-) -> UserModels | UserDetailedModels:
-    if use_partial_user and is_partial_user(user):
-        return PartialUser(user, client=client)
-    if is_me_detailed_moderator(user, config.account_id):  # 自身でモデレーターが2
-        return MeDetailedModerator(user, client=client)
-    if is_me_detailed(user, config.account_id):  # 自身が3
+def packed_user(user: IUser, client: ClientManager) -> UserDetailedNotMe | MeDetailed:
+    if is_user_detailed_not_me(user):
+        return UserDetailedNotMe(user, client=client)
+    if is_me_detailed(user):
         return MeDetailed(user, client=client)
-    if is_user_detailed_not_logined(user):  # ログインしてないやつが4
-        return UserDetailedNotLogined(user, client=client)
-    if is_user_detailed_moderator(user):  # 他人でモデレーター視点が5
-        return UserDetailedModerator(user, client=client)
-    if is_user_detailed(user):  # 他人が6
-        return UserDetailed(user, client=client)
-
     raise ValueError("Invalid user model")
 
 
-UserModels = (
-    PartialUser
-    | MeDetailed[IMeDetailed]
-    | UserDetailedNotLogined[IUserDetailedNotLogined]
-    | UserDetailed[IUserDetailed]
-    | UserDetailedModerator
-    | MeDetailedModerator
-)
+class UserList:
+    def __init__(self, raw_user_list: IUserList, *, client: ClientManager) -> None:
+        self._raw_user_list: IUserList = raw_user_list
+        self.__client: ClientManager = client
 
-UserDetailedModels = (
-    MeDetailed[IMeDetailed]
-    | UserDetailedNotLogined[IUserDetailedNotLogined]
-    | UserDetailed[IUserDetailed]
-    | UserDetailedModerator
-    | MeDetailedModerator
-)
+    @property
+    def id(self) -> str:
+        return self._raw_user_list["id"]
+
+    @property
+    def created_at(self) -> datetime:
+        return str_to_datetime(self._raw_user_list["created_at"])
+
+    @property
+    def name(self) -> str:
+        return self._raw_user_list["name"]
+
+    @property
+    def user_ids(self) -> list[str]:
+        return self._raw_user_list["user_ids"]
+
+    @property
+    def is_public(self) -> bool:
+        return self._raw_user_list["is_public"]
+
+    @property
+    def api(self) -> ClientUserListManager:
+        return self.__client.user._create_client_user_list_manager(self.id)
+
+class UserListMembership:
+    def __init__(self, raw_user_list_membership: IUserListMembership,*, client:ClientManager) -> None:
+        self.__raw_user_list_membership: IUserListMembership = raw_user_list_membership
+        self.__client: ClientManager = client
+    
+    @property
+    def id(self) -> str:
+        return self.__raw_user_list_membership["id"]
+    
+    @property
+    def created_at(self) -> datetime:
+        return str_to_datetime(self.__raw_user_list_membership["created_at"])
+    
+    @property
+    def user_id(self) -> str:
+        return self.__raw_user_list_membership["user_id"]
+    
+    @property
+    def user(self) -> PartialUser:
+        return PartialUser(self.__raw_user_list_membership["user"], client=self.__client)
+    
+    @property
+    def with_replies(self) -> bool:
+        return self.__raw_user_list_membership["with_replies"]
+
+class FrequentlyRepliedUser:
+    def __init__(
+        self,
+        raw_frequently_replied_user: GetFrequentlyRepliedUsersResponse,
+        *,
+        client: ClientManager,
+    ):
+        self._raw_frequently_replied_user: GetFrequentlyRepliedUsersResponse = (
+            raw_frequently_replied_user
+        )
+        self.__client: ClientManager = client
+
+    @property
+    def user(self) -> UserDetailedNotMe | MeDetailed:
+        return packed_user(self._raw_frequently_replied_user["user"], client=self.__client)
+
+    @property
+    def weight(self) -> int:
+        return self._raw_frequently_replied_user["weight"]

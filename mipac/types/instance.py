@@ -41,9 +41,9 @@ class IFederationInstance(IFederationInstanceRequired, total=False):
 
 
 class IInstanceLite(TypedDict):
-    name: str
-    software_name: str
-    software_version: str
-    icon_url: str
-    favicon_url: str
-    theme_color: str
+    name: str | None
+    software_name: str | None
+    software_version: str | None
+    icon_url: str | None
+    favicon_url: str | None
+    theme_color: str | None

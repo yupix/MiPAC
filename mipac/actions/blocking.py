@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
-from mipac.models.user import BlockingUser, UserDetailed
+from mipac.models.user import BlockingUser, MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.user import IBlockingUser, IUserDetailed
 from mipac.utils.pagination import Pagination
 
@@ -18,19 +18,19 @@ class BlockingActions(AbstractAction):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
 
-    async def add(self, user_id: str | None = None) -> UserDetailed:
+    async def add(self, user_id: str | None = None) -> UserDetailedNotMe | MeDetailed:
         user_id = self.__user_id or user_id
         res: IUserDetailed = await self.__session.request(
             Route("POST", "/api/blocking/create"), auth=True, json={"userId": user_id}, lower=True
         )
-        return UserDetailed(res, client=self.__client)
+        return packed_user(res, client=self.__client)
 
-    async def remove(self, user_id: str | None = None) -> UserDetailed:
+    async def remove(self, user_id: str | None = None) -> UserDetailedNotMe | MeDetailed:
         user_id = self.__user_id or user_id
         res: IUserDetailed = await self.__session.request(
             Route("POST", "/api/blocking/delete"), auth=True, json={"userId": user_id}, lower=True
         )
-        return UserDetailed(res, client=self.__client)
+        return packed_user(res, client=self.__client)
 
     async def get_list(
         self,

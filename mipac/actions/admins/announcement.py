@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING, AsyncGenerator
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.announcement import Announcement, AnnouncementSystem
-from mipac.types.announcement import IAnnouncement, IAnnouncementSystem
+from mipac.models.announcement import Announcement, AnnouncementDetailed
+from mipac.types.announcement import IAnnouncement, IAnnouncementDetailed
 from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
@@ -85,7 +85,7 @@ class AdminAnnouncementActions(AdminAnnouncementClientActions):
         since_id: str | None = None,
         until_id: str | None = None,
         get_all: bool = False,
-    ) -> AsyncGenerator[AnnouncementSystem, None]:
+    ) -> AsyncGenerator[AnnouncementDetailed, None]:
         if limit > 100:
             raise ParameterError("limitは100以下である必要があります")
         if get_all:
@@ -97,14 +97,14 @@ class AdminAnnouncementActions(AdminAnnouncementClientActions):
             "untilId": until_id,
         }
 
-        pagination = Pagination[IAnnouncementSystem](
+        pagination = Pagination[IAnnouncementDetailed](
             self.__session, Route("POST", "/api/admin/announcements/list"), json=body
         )
 
         while True:
             res_annonuncement_systems = await pagination.next()
             for res_announcement_system in res_annonuncement_systems:
-                yield AnnouncementSystem(res_announcement_system, client=self.__client)
+                yield AnnouncementDetailed(res_announcement_system, client=self.__client)
 
             if get_all is False or pagination.is_final:
                 break

@@ -12,8 +12,8 @@ if TYPE_CHECKING:
 
 
 class Clip(AbstractModel):
-    def __init__(self, clip_data: IClip, *, client: ClientManager) -> None:
-        self.__clip: IClip = clip_data
+    def __init__(self, raw_clip: IClip, *, client: ClientManager) -> None:
+        self.__clip: IClip = raw_clip
         self.__client: ClientManager = client
 
     @property
@@ -57,14 +57,15 @@ class Clip(AbstractModel):
         return self.__clip["is_public"]
 
     @property
-    def is_favorited(self) -> bool:
-        """Whether the clip is favorited"""
-        return self.__clip["is_favorited"]
-
-    @property
     def favorited_count(self) -> int:
         """The number of times the clip has been favorited"""
         return self.__clip["favorited_count"]
+
+
+    @property
+    def is_favorited(self) -> bool:
+        """Whether the clip is favorited"""
+        return self.__clip["is_favorited"]
 
     @property
     def api(self) -> ClientClipManager:

@@ -12,7 +12,7 @@ from mipac import __version__
 from mipac.config import config
 from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
-from mipac.types.user import IMeDetailed
+from mipac.types.user import IMeDetailedSchema
 from mipac.utils.format import remove_dict_empty, upper_to_lower
 from mipac.utils.util import COLORS, MISSING, _from_json
 
@@ -118,7 +118,7 @@ REQUEST:{COLORS.reset}
     async def close_session(self) -> None:
         await self._session.close()
 
-    async def login(self) -> IMeDetailed | None:
+    async def login(self) -> IMeDetailedSchema | None:
         match_domain = re.search(r"https?:\/\/([^\/]+)", self._url)
         match_protocol = re.search(r"^(http|https)", self._url)
         if match_domain is None or match_protocol is None:
@@ -130,6 +130,6 @@ REQUEST:{COLORS.reset}
         )
         self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
         if self._token:
-            data: IMeDetailed = await self.request(Route("POST", "/api/i"), auth=True)
+            data: IMeDetailedSchema = await self.request(Route("POST", "/api/i"), auth=True)
             config.from_dict(account_id=data["id"])
             return data
