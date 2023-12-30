@@ -66,6 +66,10 @@ for path in api['paths']:
         # 既存のデータから削除することで残りはremovedにする
         del _endpoints["endpoints"]['support'][path]
 
+        # ハッシュが変更されている場合はneedToWorkにする、ハッシュの設定前にやらないとハッシュが変更されてるか分からない
+        if current_request_body_hash != old_data['request_body_hash'] or current_response_body_hash != old_data['response_body_hash']:
+            endpoints["endpoints"]['support'][path]['status'] = "needToWork"
+
         # ハッシュが変更されているかどうかを確認する
         if current_request_body_hash != old_data['request_body_hash']:
             print(f"{COLORS.green}[CHANGED: REQUEST] changed request body hash {COLORS.reset} {path} {COLORS.reset}")
@@ -74,9 +78,6 @@ for path in api['paths']:
             print(f"{COLORS.green}[CHANGED: RESPONSES] changed responses hash {COLORS.reset} {path} {COLORS.reset}")
             endpoints["endpoints"]['support'][path]['response_body_hash'] = current_response_body_hash
         
-        # ハッシュが変更されている場合はneedToWorkにする
-        if current_request_body_hash != old_data['request_body_hash'] or current_response_body_hash != old_data['response_body_hash']:
-            endpoints["endpoints"]['support'][path]['status'] = "needToWork"
 
 
 # Misskeyから削除されたエンドポイントをremovedに移動する
