@@ -125,7 +125,7 @@ def get_list(data: IData, section: SECTIONS, status: STATUS):
         path = data['endpoints'][section][path_name]
         if path['status'] == status:
             affix = "(Need to work)" if path['status'] == 'needToWork' else ""
-            result += f"- [{'x' if path['status'] == 'supported' else ' '}] {path['path']} {affix}\n"
+            result += f"- [{'x' if path['status'] == 'supported' else ' '}] {path['path']}{f' {affix}' if affix else ''}\n"
     return result
 
 with open('./datas/support_status.md', mode='w', encoding='utf-8') as f:
@@ -139,13 +139,13 @@ with open('./datas/support_status.md', mode='w', encoding='utf-8') as f:
     for schema_name in endpoints['schemas']:
         schema = endpoints['schemas'][schema_name]
         affix = "(Need to work)" if schema['status'] == 'needToWork' else ""
-        support_schemas += f"- [{'x' if schema['status'] == 'supported' else ' '}] {schema['name']} {affix}\n"
+        support_schemas += f"- [{'x' if schema['status'] == 'supported' else ' '}] {schema['name']}{f' {affix}' if affix else ''}\n"
     f.write(f"""## SUPPORTED ENDPOINTS ({supported_path_number}/{path_number})
 {supported_endpoints}
 
 ## Not supported endpoints
 
-{"💯" if len(not_supported_endpoints.strip()) == 0 else not_supported_endpoints}
+{"💯" if len(not_supported_endpoints.strip()) == 0 else not_supported_endpoints[:-1]}
 
 ## Changed request body or responses
 
@@ -157,7 +157,7 @@ with open('./datas/support_status.md', mode='w', encoding='utf-8') as f:
 
 ## SUPPORTED SCHEMAS
 
-{support_schemas}
+{support_schemas[:-1]}
 """)
 
 print("done")
