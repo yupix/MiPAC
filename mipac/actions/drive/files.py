@@ -341,7 +341,7 @@ class FileActions(ClientFileActions):
         )
         return [File(raw_file, client=self._client) for raw_file in raw_files]
 
-    async def find(self, name: str, folder_id:str|None=None) -> list[File]:
+    async def find(self, name: str, folder_id: str | None = None) -> list[File]:
         """Find a file by its name
 
         Endpoint: `/api/drive/files/find`

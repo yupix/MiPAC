@@ -25,7 +25,7 @@ class ReactionActions(AbstractAction):
         """Add reaction to note
 
         Endpoint: `/api/notes/reactions/create`
-        
+
         Parameters
         ----------
         reaction : str
@@ -48,14 +48,14 @@ class ReactionActions(AbstractAction):
 
     async def remove(self, note_id: str | None = None) -> bool:
         """Remove reaction from note
-        
+
         Endpoint: `/api/notes/reactions/delete`
 
         Parameters
         ----------
         note_id : str, optional
             note id, by default None
-        
+
         Returns
         -------
         bool

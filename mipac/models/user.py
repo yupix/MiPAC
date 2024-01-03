@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Generic, TypeVar
+from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
 from mipac.models.announcement import Announcement
@@ -43,12 +43,8 @@ if TYPE_CHECKING:
 
 __all__ = ("PartialUser", "Achievement", "BlockingUser", "MeDetailed")
 
-T = TypeVar("T", bound=IUserDetailedNotMeSchema)
 
-FFC = TypeVar("FFC", bound=IFederationFollowCommon)
-
-
-class FollowCommon(Generic[FFC]):
+class FollowCommon[FFC: IFederationFollowCommon]:
     def __init__(self, raw_follow: FFC, *, client: ClientManager) -> None:
         self._raw_follow: FFC = raw_follow
         self._client: ClientManager = client
@@ -507,7 +503,7 @@ class MeDetailedOnly:
         return self._raw_user.get("security_keys_list")
 
 
-class UserDetailedNotMe(PartialUser[T], UserDetailedNotMeOnly, Generic[T]):
+class UserDetailedNotMe[T: IUserDetailedNotMeSchema](PartialUser[T], UserDetailedNotMeOnly):
     def __init__(self, raw_user: T, *, client: ClientManager) -> None:
         super().__init__(raw_user, client=client)
 
@@ -554,30 +550,34 @@ class UserList:
     def api(self) -> ClientUserListManager:
         return self.__client.user._create_client_user_list_manager(self.id)
 
+
 class UserListMembership:
-    def __init__(self, raw_user_list_membership: IUserListMembership,*, client:ClientManager) -> None:
+    def __init__(
+        self, raw_user_list_membership: IUserListMembership, *, client: ClientManager
+    ) -> None:
         self.__raw_user_list_membership: IUserListMembership = raw_user_list_membership
         self.__client: ClientManager = client
-    
+
     @property
     def id(self) -> str:
         return self.__raw_user_list_membership["id"]
-    
+
     @property
     def created_at(self) -> datetime:
         return str_to_datetime(self.__raw_user_list_membership["created_at"])
-    
+
     @property
     def user_id(self) -> str:
         return self.__raw_user_list_membership["user_id"]
-    
+
     @property
     def user(self) -> PartialUser:
         return PartialUser(self.__raw_user_list_membership["user"], client=self.__client)
-    
+
     @property
     def with_replies(self) -> bool:
         return self.__raw_user_list_membership["with_replies"]
+
 
 class FrequentlyRepliedUser:
     def __init__(

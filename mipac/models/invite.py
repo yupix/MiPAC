@@ -73,11 +73,12 @@ class InviteCode:
     def api(self) -> ClientInviteManager:
         return self.__client._create_client_invite_manager(invite_id=self.id)
 
+
 class InviteLimit:
-    def __init__(self, raw_invite_limit: IInviteLimit, *, client:ClientManager) -> None:
+    def __init__(self, raw_invite_limit: IInviteLimit, *, client: ClientManager) -> None:
         self.__raw_invite_limit: IInviteLimit = raw_invite_limit
         self.__client = client
-    
+
     @property
     def remaining(self) -> int | None:
         return self.__raw_invite_limit["remaining"]

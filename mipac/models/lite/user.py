@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Generic, TypeVar
+from typing import TYPE_CHECKING
 
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.user import IAvatarDecoration, IBadgeRole, IPartialUser, IUserOnlineStatus
@@ -10,11 +10,8 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
     from mipac.manager.user import ClientUserManager
 
-T = TypeVar("T", bound=IBadgeRole)
-PU = TypeVar("PU", bound=IPartialUser)
 
-
-class BadgeRole(Generic[T]):
+class BadgeRole[T: IBadgeRole]:
     def __init__(self, data: T, *, client: ClientManager) -> None:
         self._data: T = data
         self._client = client
@@ -103,7 +100,7 @@ class AvatarDecoration:
         return self.__raw_avatar_decoration["url"]
 
 
-class PartialUser(Generic[PU]):
+class PartialUser[PU: IPartialUser]:
     def __init__(self, raw_user: PU, *, client: ClientManager) -> None:
         self._raw_user: PU = raw_user
         self._client: ClientManager = client
@@ -266,7 +263,6 @@ class PartialUser(Generic[PU]):
         if badge_roles is None:
             return None
         return [BadgeRole(data, client=self._client) for data in badge_roles]
-        
 
     @property
     def api(self) -> ClientUserManager:

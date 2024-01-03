@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Generic, TypeVar
+from typing import TYPE_CHECKING, TypeVar
 
-from mipac.abstract.model import AbstractModel
 from mipac.types.ads import IAdPlaces, IPartialAd
 
 if TYPE_CHECKING:
@@ -12,7 +11,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound=IPartialAd)
 
 
-class PartialAd(AbstractModel, Generic[T]):
+class PartialAd[T: IPartialAd]:
     def __init__(self, raw_ad: T, *, client: ClientManager) -> None:
         self._raw_ad: T = raw_ad
 

@@ -13,5 +13,6 @@ class IInviteCode(TypedDict):
     used_at: str | None
     used: bool
 
+
 class IInviteLimit(TypedDict):
     remaining: int | None

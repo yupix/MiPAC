@@ -3,17 +3,17 @@ from typing import NotRequired, TypedDict
 
 class IAnnouncement(TypedDict):
     id: str
-    createdAt: str
-    updatedAt: str | None
+    created_at: str
+    updated_at: str | None
     text: str
     title: str
-    imageUrl: str | None
-    icon: str | None
+    image_url: str | None
+    icon: str
     display: str
-    needConfirmationToRead: bool
+    need_confirmation_to_read: bool
     silence: bool
-    forYou: bool
-    isRead: NotRequired[bool]
+    for_you: bool
+    is_read: NotRequired[bool]
 
 
 class IAnnouncementDetailed(TypedDict):
@@ -22,14 +22,15 @@ class IAnnouncementDetailed(TypedDict):
     id: str
     created_at: str
     updated_at: str | None
-    title: str
     text: str
+    title: str
     image_url: str | None
-    icon: str | None
+    icon: str
     display: str
+    need_confirmation_to_read: bool
+    silence: bool
+
     is_active: bool
     for_existing_users: bool
-    silence: bool
-    need_confirmation_to_read: bool
     user_id: str | None
     reads: int

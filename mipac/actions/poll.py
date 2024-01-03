@@ -60,7 +60,7 @@ class PollActions(ClientPollActions):
             Route("POST", "/api/notes/polls/recommendation"),
             json=data,
             pagination_type="count",
-            auth=True
+            auth=True,
         )
 
         while True:

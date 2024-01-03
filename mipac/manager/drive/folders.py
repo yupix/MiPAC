@@ -15,7 +15,6 @@ if TYPE_CHECKING:
 
 
 class ClientFolderManager(AbstractManager):
-
     def __init__(self, folder_id: str, *, session: HTTPClient, client: ClientManager):
         self.__folder_id: str = folder_id
         self.__session: HTTPClient = session

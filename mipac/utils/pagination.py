@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, AsyncGenerator, Generic, Literal, Type, TypeVar
+from typing import TYPE_CHECKING, Any, AsyncGenerator, Literal, Type, TypeVar
 
 from mipac.abstract.model import AbstractModel
 from mipac.http import HTTPClient, Route
@@ -8,11 +8,10 @@ from mipac.http import HTTPClient, Route
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
-T = TypeVar("T")
 M = TypeVar("M", bound=AbstractModel)
 
 
-class Pagination(Generic[T]):
+class Pagination[T]:
     def __init__(
         self,
         http_client: HTTPClient,

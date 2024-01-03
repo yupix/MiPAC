@@ -297,7 +297,7 @@ class FolderActions(ClientFolderActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        folder_id: str|None=None,
+        folder_id: str | None = None,
     ) -> list[Folder]:
         """Get folders
 
@@ -411,7 +411,7 @@ class FolderActions(ClientFolderActions):
         return Folder(raw_folder=raw_folder, client=self._client)
 
     async def update(
-        self, folder_id: str |None=None, name: str | None = None, parent_id: str | None = None
+        self, folder_id: str | None = None, name: str | None = None, parent_id: str | None = None
     ) -> Folder:
         """Update a folder
 

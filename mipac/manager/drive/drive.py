@@ -28,4 +28,6 @@ class DriveManager(AbstractManager):
         return ClientFileManager(file_id=file_id, session=self.__session, client=self.__client)
 
     def _create_client_folder_manager(self, *, folder_id: str) -> ClientFolderManager:
-        return ClientFolderManager(folder_id=folder_id, session=self.__session, client=self.__client)
+        return ClientFolderManager(
+            folder_id=folder_id, session=self.__session, client=self.__client
+        )

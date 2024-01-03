@@ -61,7 +61,6 @@ class Clip(AbstractModel):
         """The number of times the clip has been favorited"""
         return self.__clip["favorited_count"]
 
-
     @property
     def is_favorited(self) -> bool:
         """Whether the clip is favorited"""

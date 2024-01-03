@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Generic, TypeVar
+from typing import TYPE_CHECKING
 
 from mipac.abstract.model import AbstractModel
 from mipac.models.lite.ad import PartialAd
@@ -8,8 +8,6 @@ from mipac.types.meta import IPartialMeta, IPolicies
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
-
-T = TypeVar("T", bound=IPartialMeta)
 
 
 class Policies(AbstractModel):
@@ -118,7 +116,7 @@ class Policies(AbstractModel):
         return self.__raw_policies["rate_limit_factor"]
 
 
-class PartialMeta(AbstractModel, Generic[T]):
+class PartialMeta[T: IPartialMeta]:
     def __init__(self, raw_meta: T, *, client: ClientManager) -> None:
         self._raw_meta: T = raw_meta
         self.__client: ClientManager = client

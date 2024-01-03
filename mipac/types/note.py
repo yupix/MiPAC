@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Generic, Literal, NotRequired, Optional, TypedDict, TypeVar
+from typing import Any, Literal, NotRequired, Optional, TypedDict, TypeVar
 
 from mipac.types.drive import IFile
 from mipac.types.emoji import ICustomEmojiLite
@@ -18,7 +18,7 @@ class INoteState(TypedDict):
     is_muted_thread: bool
 
 
-class INoteUpdated(TypedDict, Generic[T]):
+class INoteUpdated[T](TypedDict):
     type: Literal["noteUpdated"]
     body: T
 

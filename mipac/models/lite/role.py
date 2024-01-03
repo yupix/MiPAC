@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Generic, TypeVar
+from typing import TYPE_CHECKING
 
 from mipac.types.roles import IPartialRole
 
@@ -8,10 +8,8 @@ if TYPE_CHECKING:
     from mipac.manager.admins.roles import AdminRolesModelManager
     from mipac.manager.client import ClientManager
 
-T = TypeVar("T", bound=IPartialRole)
 
-
-class PartialRole(Generic[T]):
+class PartialRole[T: IPartialRole]:
     def __init__(self, role_data: T, *, client: ClientManager) -> None:
         self._raw_role: T = role_data
         self.__client = client

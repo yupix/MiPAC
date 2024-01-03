@@ -19,6 +19,6 @@ class UsernameActions(AbstractAction):
     async def available(self, username: str) -> UsernameAvailable:
         data = {"username": username}
         res: IUsernameAvailable = await self.__session.request(
-            Route('POST', "/api/username/available"), json=data, auth=True
+            Route("POST", "/api/username/available"), json=data, auth=True
         )
         return UsernameAvailable(res)
