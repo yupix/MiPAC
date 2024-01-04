@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Literal, NotRequired, TypedDict, TypeGuard
 
+
 if TYPE_CHECKING:
-    from mipac.types.user import IMeDetailed, IUserDetailed
+    from mipac.types.user import IUserDetailed, IMeDetailedSchema
 
 
 class IRoleUser(TypedDict):
@@ -14,7 +15,7 @@ class IRoleUser(TypedDict):
 
 class IMeRole(TypedDict):
     id: str
-    user: IMeDetailed
+    user: IMeDetailedSchema
     expires_at: str | None
 
 

@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, Literal
-
-from typing_extensions import override
+from typing import TYPE_CHECKING, AsyncGenerator, Literal, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.file import MiFile

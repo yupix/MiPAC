@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, overload
-
-from typing_extensions import override
+from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, overload, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import NotExistRequiredData, ParameterError
