@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.lite.ad import PartialAd
 from mipac.types.meta import IPartialMeta, IPolicies
 
@@ -10,7 +9,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class Policies(AbstractModel):
+class Policies:
     def __init__(self, raw_policies: IPolicies) -> None:
         self.__raw_policies: IPolicies = raw_policies
 

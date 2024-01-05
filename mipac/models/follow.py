@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.lite.user import PartialUser
 from mipac.types.follow import IFollowRequest
 
@@ -11,7 +10,7 @@ if TYPE_CHECKING:
     from mipac.manager.follow import FollowRequestManager
 
 
-class FollowRequest(AbstractModel):
+class FollowRequest:
     def __init__(self, follow_request: IFollowRequest, *, client: ClientManager) -> None:
         self.__follow_request = follow_request
         self.__client = client

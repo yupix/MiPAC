@@ -3,7 +3,6 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
 
@@ -20,7 +19,7 @@ if TYPE_CHECKING:
     )
 
 
-class Notification(AbstractModel):
+class Notification:
     def __init__(
         self,
         notification: INotification,

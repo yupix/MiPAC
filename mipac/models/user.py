@@ -3,7 +3,6 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.announcement import Announcement
 from mipac.models.lite.role import PartialRole
 from mipac.models.lite.user import BadgeRole, PartialUser
@@ -86,7 +85,7 @@ class Following(FollowCommon[IFederationFollowing]):
         super().__init__(raw_follow=raw_following, client=client)
 
 
-class BlockingUser(AbstractModel):
+class BlockingUser:
     def __init__(self, blocking_user_data: IBlockingUser, *, client: ClientManager) -> None:
         self.__blocking_user_data: IBlockingUser = blocking_user_data
         self.__client: ClientManager = client
@@ -114,7 +113,7 @@ class BlockingUser(AbstractModel):
         return not self.__eq__(__value)
 
 
-class Achievement(AbstractModel):
+class Achievement:
     def __init__(self, detail: IAchievement):
         self.__detail: IAchievement = detail
 

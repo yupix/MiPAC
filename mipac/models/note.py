@@ -3,7 +3,6 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.drive import File
 from mipac.models.lite.user import PartialUser
 from mipac.models.poll import Poll
@@ -36,7 +35,7 @@ __all__ = (
 )
 
 
-class NoteState(AbstractModel):
+class NoteState:
     def __init__(self, data: INoteState) -> None:
         self.__data: INoteState = data
 
@@ -49,7 +48,7 @@ class NoteState(AbstractModel):
         return self.__data["is_muted_thread"]
 
 
-class NoteDeleted(AbstractModel):
+class NoteDeleted:
     def __init__(self, data: INoteUpdated[INoteUpdatedDelete]) -> None:
         self.__data = data
 
@@ -74,7 +73,7 @@ class Header:
         self.type = data.get("type")
 
 
-class NoteReaction(AbstractModel):
+class NoteReaction:
     __slots__ = ("__reaction", "__client")
 
     def __init__(self, raw_reaction: INoteReaction, *, client: ClientManager):
@@ -631,7 +630,7 @@ class Note:
         return not self.__eq__(__value)
 
 
-class NoteTranslateResult(AbstractModel):
+class NoteTranslateResult:
     """
     NoteTranslateResult
 

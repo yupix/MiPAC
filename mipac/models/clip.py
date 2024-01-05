@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.lite.user import PartialUser
 from mipac.types.clip import IClip
 
@@ -11,7 +10,7 @@ if TYPE_CHECKING:
     from mipac.manager.clip import ClientClipManager
 
 
-class Clip(AbstractModel):
+class Clip:
     def __init__(self, raw_clip: IClip, *, client: ClientManager) -> None:
         self.__clip: IClip = raw_clip
         self.__client: ClientManager = client

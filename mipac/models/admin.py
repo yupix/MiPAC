@@ -3,7 +3,6 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.admin import (
     IIndexStat,
@@ -21,7 +20,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class UserIP(AbstractModel):
+class UserIP:
     def __init__(self, user_ip: IUserIP) -> None:
         self.__user_ip: IUserIP = user_ip
 
@@ -65,7 +64,7 @@ class IndexStat:
         return self.__index_stat["indexdef"]
 
 
-class ModerationLog(AbstractModel):
+class ModerationLog:
     def __init__(self, moderation_log: IModerationLog, *, client: ClientManager) -> None:
         self.__moderation_log: IModerationLog = moderation_log
         self.__client: ClientManager = client
@@ -101,7 +100,7 @@ class ModerationLog(AbstractModel):
         return not self.__eq__(__value)
 
 
-class ServerInfoCpu(AbstractModel):
+class ServerInfoCpu:
     def __init__(self, server_info_cpu: IServerInfoCpu) -> None:
         self.__server_info_cpu = server_info_cpu
 
@@ -114,7 +113,7 @@ class ServerInfoCpu(AbstractModel):
         return self.__server_info_cpu["cores"]
 
 
-class ServerInfoMem(AbstractModel):
+class ServerInfoMem:
     def __init__(self, server_info_mem: IServerInfoMem) -> None:
         self.__server_info_mem = server_info_mem
 
@@ -123,7 +122,7 @@ class ServerInfoMem(AbstractModel):
         return self.__server_info_mem["total"]
 
 
-class ServerInfoFs(AbstractModel):
+class ServerInfoFs:
     def __init__(self, server_info_fs: IServerInfoFs) -> None:
         self.__server_info_fs = server_info_fs
 
@@ -136,7 +135,7 @@ class ServerInfoFs(AbstractModel):
         return self.__server_info_fs["used"]
 
 
-class ServerInfoNet(AbstractModel):
+class ServerInfoNet:
     def __init__(self, server_info_net: IServerInfoNet) -> None:
         self.__server_info_net = server_info_net
 
@@ -145,7 +144,7 @@ class ServerInfoNet(AbstractModel):
         return self.__server_info_net["interface"]
 
 
-class ServerInfo(AbstractModel):
+class ServerInfo:
     def __init__(self, server_info: IServerInfo) -> None:
         self.__server_info = server_info
 

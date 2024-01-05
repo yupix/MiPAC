@@ -1,5 +1,5 @@
-MANAGER_CLASS_NAME_TEMPLATE = '{0}Manager'
-MANAGER_TEMPLATE = '''
+MANAGER_CLASS_NAME_TEMPLATE = "{0}Manager"
+MANAGER_TEMPLATE = """
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
@@ -19,10 +19,10 @@ class {0}(AbstractManager):
     @property
     def action(self) -> {2}:
         return {2}(session=self.__session, client=self.__client)
-'''
+"""
 
-ACTIONS_CLASS_NAME_TEMPLATE = '{0}Actions'
-ACTIONS_TEMPLATE = '''
+ACTIONS_CLASS_NAME_TEMPLATE = "{0}Actions"
+ACTIONS_TEMPLATE = """
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -38,5 +38,4 @@ class {0}(AbstractAction):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client\n
-'''
-
+"""

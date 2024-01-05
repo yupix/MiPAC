@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.lite.meta import PartialMeta
 from mipac.types.meta import (
     IAdminMeta,
@@ -16,7 +15,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class Features(AbstractModel):
+class Features:
     def __init__(self, raw_features: IFeatures) -> None:
         self.__raw_features = raw_features
 
@@ -78,7 +77,7 @@ class Meta(PartialMeta[IMeta]):
         return self._raw_meta["proxy_account_name"]
 
 
-class AdminMeta(AbstractModel):
+class AdminMeta:
     def __init__(self, raw_meta: IAdminMeta, *, client: ClientManager) -> None:
         self.__raw_meta: IAdminMeta = raw_meta
         self.__client: ClientManager = client

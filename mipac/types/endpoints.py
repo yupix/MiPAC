@@ -330,5 +330,5 @@ ENDPOINTS = Literal[
     "/api/users/update-memo",
     "/api/fetch-rss",
     "/api/fetch-external-resources",
-    "/api/retention"
+    "/api/retention",
 ]

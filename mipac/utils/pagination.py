@@ -1,12 +1,8 @@
 from __future__ import annotations
 
-from typing import Any, Literal, TypeVar
+from typing import Any, Literal
 
-from mipac.abstract.model import AbstractModel
 from mipac.http import HTTPClient, Route
-
-
-M = TypeVar("M", bound=AbstractModel)
 
 
 class Pagination[T]:

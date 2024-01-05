@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.mute import IMuteUser
 
@@ -10,7 +9,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class MuteUser(AbstractModel):
+class MuteUser:
     def __init__(self, data: IMuteUser, *, client: ClientManager) -> None:
         self.__data: IMuteUser = data
         self.__client: ClientManager = client

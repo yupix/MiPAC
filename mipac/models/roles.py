@@ -3,7 +3,6 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.lite.role import PartialRole
 from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.roles import IMeRole, IRole, IRolePolicies, IRolePolicieValue, IRoleUser
@@ -14,7 +13,7 @@ if TYPE_CHECKING:
     from mipac.manager.user import UserManager
 
 
-class RoleUser(AbstractModel):
+class RoleUser:
     def __init__(self, role_user: IRoleUser, *, client: ClientManager) -> None:
         self.__role_user = role_user
         self.__client = client
@@ -46,7 +45,7 @@ class RoleUser(AbstractModel):
         return not self.__eq__(__value)
 
 
-class MeRole(AbstractModel):
+class MeRole:
     def __init__(self, data: IMeRole, *, client: ClientManager) -> None:
         self.__role_user = data
         self.__client = client
@@ -78,7 +77,7 @@ class MeRole(AbstractModel):
         return not self.__eq__(__value)
 
 
-class RolePolicyValue(AbstractModel):
+class RolePolicyValue:
     def __init__(self, policiy_value_data: IRolePolicieValue) -> None:
         self.__policy_value_data = policiy_value_data
 
@@ -95,7 +94,7 @@ class RolePolicyValue(AbstractModel):
         return self.__policy_value_data.get("priority")
 
 
-class RolePolicies(AbstractModel):
+class RolePolicies:
     def __init__(self, role_policies_data: IRolePolicies) -> None:
         self.__role_policies_data = role_policies_data
 

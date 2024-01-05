@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.lite.emoji import PartialCustomEmoji
 from mipac.types.note import INoteUpdated, INoteUpdatedReaction
 
@@ -10,7 +9,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class PartialReaction(AbstractModel):
+class PartialReaction:
     def __init__(
         self, reaction: INoteUpdated[INoteUpdatedReaction], *, client: ClientManager
     ) -> None:

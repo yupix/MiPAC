@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mipac.abstract.model import AbstractModel
 from mipac.models.lite.user import PartialUser
 from mipac.types.drive import IDriveStatus
 
@@ -44,7 +43,7 @@ class DriveStatus:
         return self.__raw_drive_status["usage"]
 
 
-class FileProperties(AbstractModel):
+class FileProperties:
     def __init__(self, raw_properties: IFileProperties) -> None:
         self.__raw_properties: IFileProperties = raw_properties
 
@@ -65,7 +64,7 @@ class FileProperties(AbstractModel):
         return self.__raw_properties.get("avg_color")
 
 
-class Folder(AbstractModel):
+class Folder:
     def __init__(self, raw_folder: IFolder, client: ClientManager):
         self.__raw_folder: IFolder = raw_folder
         self.__client: ClientManager = client
@@ -113,7 +112,7 @@ class Folder(AbstractModel):
         return not self.__eq__(__value)
 
 
-class File(AbstractModel):
+class File:
     def __init__(self, raw_file: IFile, *, client: ClientManager):
         self.__raw_file: IFile = raw_file
         self.__client: ClientManager = client
