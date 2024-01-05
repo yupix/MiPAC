@@ -3717,15 +3717,6 @@ AbstractAction
     :members:
 
 
-AbstractModel
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.abstract.model.AbstractModel
-
-.. autoclass:: mipac.abstract.model.AbstractModel
-    :members:
-
-
 AbstractManager
 ~~~~~~~~~~~~~~~
 
