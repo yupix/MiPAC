@@ -65,28 +65,30 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
     async def create(
         self,
         url: str,
+        memo: str,
         place: Literal["square", "horizontal", "horizontal-big"],
         priority: Literal["high", "middle", "low"],
         ratio: int,
+        expires_at: str,
+        starts_at: str,
         image_url: str,
-        starts_at: int = 0,
-        expires_at: int = 0,
-        memo: str | None = None,
-    ) -> bool:
+        day_or_week: int,
+    ) -> Ad:
         data = {
             "url": url,
             "memo": memo or "",
             "place": place,
             "priority": priority,
             "ratio": ratio,
-            "startsAt": starts_at,
             "expiresAt": expires_at,
+            "startsAt": starts_at,
             "imageUrl": image_url,
+            "dayOfWeek": day_or_week
         }
-        res: bool = await self._session.request(
+        raw_ad: IAd = await self._session.request(
             Route("POST", "/api/admin/ad/create"), json=data, auth=True, lower=True
         )
-        return res
+        return Ad(ad_data=raw_ad, client=self._client)
 
     async def get_list(
         self,
