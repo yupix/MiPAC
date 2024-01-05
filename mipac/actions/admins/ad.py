@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, Literal
+from typing import TYPE_CHECKING, AsyncGenerator, Literal, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
@@ -18,6 +18,16 @@ class AdminAdvertisingModelActions(AbstractAction):
         self._ad_id: str | None = ad_id
         self._session: HTTPClient = session
         self._client: ClientManager = client
+
+    async def delete(self, *, id: str | None = None) -> bool:
+        ad_id = self._ad_id or id
+        
+        if ad_id is None:
+            raise ParameterError('ad id is required')
+        res: bool = await self._session.request(
+            Route("POST", "/api/admin/ad/delete"), json={"id": ad_id}, auth=True, lower=True
+        )
+        return res
 
     async def update(
         self,
@@ -47,13 +57,6 @@ class AdminAdvertisingModelActions(AbstractAction):
         }
         res: bool = await self._session.request(
             Route("POST", "/api/admin/ad/update"), json=data, auth=True, lower=True
-        )
-        return res
-
-    async def delete(self, id: str | None = None) -> bool:
-        ad_id = self._ad_id or id
-        res: bool = await self._session.request(
-            Route("POST", "/api/admin/ad/delete"), json={"id": ad_id}, auth=True, lower=True
         )
         return res
 
@@ -89,6 +92,10 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
             Route("POST", "/api/admin/ad/create"), json=data, auth=True, lower=True
         )
         return Ad(ad_data=raw_ad, client=self._client)
+
+    @override
+    async def delete(self, id: str) -> bool:
+        return await super().delete(id=id)
 
     async def get_list(
         self,
