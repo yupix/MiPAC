@@ -830,6 +830,15 @@ ClipManager
     :members:
 
 
+ClientFavoriteManager
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.favorite.ClientFavoriteManager
+
+.. autoclass:: mipac.manager.favorite.ClientFavoriteManager
+    :members:
+
+
 FavoriteManager
 ~~~~~~~~~~~~~~~
 
@@ -1257,6 +1266,15 @@ ClipActions
 .. attributetable:: mipac.actions.clip.ClipActions
 
 .. autoclass:: mipac.actions.clip.ClipActions
+    :members:
+
+
+ClientFavoriteActions
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.favorite.ClientFavoriteActions
+
+.. autoclass:: mipac.actions.favorite.ClientFavoriteActions
     :members:
 
 
