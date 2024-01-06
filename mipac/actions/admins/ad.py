@@ -135,7 +135,7 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
             http_client=self._session, route=Route("POST", "/api/admin/ad/list"), json=data
         )
 
-        while pagination.is_final:
+        while pagination.is_final is False:
             raw_ads = await pagination.next()
 
             for raw_ad in raw_ads:
