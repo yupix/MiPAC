@@ -3016,6 +3016,10 @@ async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_conversation">get_conversation</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_featured">get_featured</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_global_time_line">get_global_time_line</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_mentions">get_mentions</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_time_line">get_time_line</a></li><li class="py-attribute-table-entry">
@@ -3158,6 +3162,54 @@ update the cache of the <code class="xref py py-meth docutils literal notranslat
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>Notes of the conversation</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.note.NoteActions.get_featured">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_featured</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.note.NoteActions.get_featured" title="Link to this definition">#</a></dt>
+<dd><p>Get featured notes</p>
+<p>Endpoint: <cite>/api/notes/featured</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>default=10</em>) -- limit</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- Until ID</p></li>
+<li><p><strong>channel_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- channel id</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>featured notes</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.note.NoteActions.get_global_time_line">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_global_time_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">with_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_renotes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.note.NoteActions.get_global_time_line" title="Link to this definition">#</a></dt>
+<dd><p>Get global timeline</p>
+<p>Endpoint: <cite>/api/notes/global-timeline</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>with_files</strong> (<em>bool</em><em>, </em><em>default=False</em>) -- Whether to include files</p></li>
+<li><p><strong>with_renotes</strong> (<em>bool</em><em>, </em><em>default=True</em>) -- Whether to include renote</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>default=10</em>) -- limit</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- Since ID</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- Until ID</p></li>
+<li><p><strong>since_date</strong> (<em>int</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- Since date</p></li>
+<li><p><strong>until_date</strong> (<em>int</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- Until date</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>global timeline</p>
 </dd>
 <dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>]</p>
@@ -9709,6 +9761,8 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_all_children"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_all_children()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_clips"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_clips()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_conversation"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_conversation()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_featured"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_featured()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_global_time_line"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_global_time_line()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_mentions"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_mentions()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_time_line"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_time_line()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.send"><code class="docutils literal notranslate"><span class="pre">NoteActions.send()</span></code></a></li>
