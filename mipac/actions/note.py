@@ -910,6 +910,32 @@ class NoteActions(ClientNoteActions):
     async def delete(self, note_id: str) -> bool:
         return await super().delete(note_id=note_id)
 
+    async def get_featured(self, limit: int = 10, until_id: str | None = None, channel_id: str | None = None):
+        """Get featured notes
+
+        Endpoint: `/api/notes/featured`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            limit
+        until_id : str | None, default=None
+            Until ID
+        channel_id : str | None, default=None
+            channel id
+
+        Returns
+        -------
+        list[Note]
+            featured notes
+        """
+        data = {"limit": limit, "untilId": until_id, "channelId": channel_id}
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/featured"), json=data
+        )
+        return [Note(note, client=self._client) for note in res]
+
+
     @deprecated
     async def send(
         self,
