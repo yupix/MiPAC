@@ -16,7 +16,7 @@ from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
-from mipac.utils.util import check_multi_arg
+from mipac.utils.util import check_multi_arg, deprecated
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
@@ -38,6 +38,7 @@ def create_note_body(
     renote_id: str | None = None,
     channel_id: str | None = None,
     files: list[MiFile | File | str] | None = None,
+    media_ids: list[str] | None = None,
     poll: MiPoll | None = None,
 ):
     text = text or None
@@ -45,6 +46,7 @@ def create_note_body(
         "visibility": visibility,
         "visibleUserIds": visible_user_ids,
         "text": text,
+        "mediaIds": media_ids,
         "cw": cw,
         "localOnly": local_only,
         "reactionAcceptance": reaction_acceptance,
@@ -790,6 +792,51 @@ class NoteActions(ClientNoteActions):
     ):
         super().__init__(note_id=note_id, session=session, client=client)
 
+    async def create(
+        self,
+        visibility: INoteVisibility = "public",
+        visible_user_ids: list[str] | None = None,
+        cw: str | None = None,
+        local_only: bool = False,
+        reaction_acceptance: IReactionAcceptance | None = None,
+        no_extrace_mentions: bool = False,
+        no_extract_hashtags: bool = False,
+        no_extract_emojis: bool = False,
+        reply_id: str | None = None,
+        renote_id: str | None = None,
+        channel_id: str | None = None,
+        text: str | None = None,
+        file_ids: list[MiFile | File | str] | None = None,
+        media_ids: list[str] | None = None,
+        poll: MiPoll | None = None,
+    ) -> Note:
+        data = create_note_body(
+            text=text,
+            visibility=visibility,
+            visible_user_ids=visible_user_ids,
+            cw=cw,
+            local_only=local_only,
+            reaction_acceptance=reaction_acceptance,
+            extract_mentions=not no_extrace_mentions,
+            extract_hashtags=not no_extract_hashtags,
+            extract_emojis=not no_extract_emojis,
+            reply_id=reply_id,
+            renote_id=renote_id,
+            channel_id=channel_id,
+            files=file_ids,
+            media_ids=media_ids,
+            poll=poll,
+        )
+
+        raw_created_note: ICreatedNote = await self._session.request(
+            Route("POST", "/api/notes/create"),
+            auth=True,
+            json=data,
+        )
+
+        return Note(raw_note=raw_created_note["created_note"], client=self._client)
+
+    @deprecated
     async def send(
         self,
         text: str | None = None,
