@@ -910,7 +910,9 @@ class NoteActions(ClientNoteActions):
     async def delete(self, note_id: str) -> bool:
         return await super().delete(note_id=note_id)
 
-    async def get_featured(self, limit: int = 10, until_id: str | None = None, channel_id: str | None = None):
+    async def get_featured(
+        self, limit: int = 10, until_id: str | None = None, channel_id: str | None = None
+    ):
         """Get featured notes
 
         Endpoint: `/api/notes/featured`
@@ -935,6 +937,87 @@ class NoteActions(ClientNoteActions):
         )
         return [Note(note, client=self._client) for note in res]
 
+    async def get_global_time_line(
+        self,
+        with_files: bool = False,
+        with_renotes: bool = True,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: int | None = None,
+        until_date: int | None = None,
+    ):
+        """Get global timeline
+
+        Endpoint: `/api/notes/global-timeline`
+
+        Parameters
+        ----------
+        with_files : bool, default=False
+            Whether to include files
+        with_renotes : bool, default=True
+            Whether to include renote
+        limit : int, default=10
+            limit
+        since_id : str | None, default=None
+            Since ID
+        until_id : str | None, default=None
+            Until ID
+        since_date : int | None, default=None
+            Since date
+        until_date : int | None, default=None
+            Until date
+
+        Returns
+        -------
+        list[Note]
+            global timeline
+        """
+        data = {
+            "withFiles": with_files,
+            "withRenotes": with_renotes,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "sinceDate": since_date,
+            "untilDate": until_date,
+        }
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/global-timeline"), json=data
+        )
+        return [Note(note, client=self._client) for note in res]
+
+    async def get_hybird_time_line(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        allow_partial: bool = False,
+        include_my_rnotes: bool = True,
+        include_renoted_my_notes: bool = True,
+        include_local_renotes: bool = True,
+        with_files: bool = False,
+        with_renotes: bool = True,
+        with_replies: bool = False,
+    ):
+        data = {
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "allowPartial": allow_partial,
+            "includeMyRenotes": include_my_rnotes,
+            "includeRenotedMyNotes": include_renoted_my_notes,
+            "includeLocalRenotes": include_local_renotes,
+            "withFiles": with_files,
+            "withRenotes": with_renotes,
+            "withReplies": with_replies,
+        }
+
+        res = await self._session.request(
+            Route("POST", "/api/notes/hybrid-timeline"), json=data, auth=True
+        )
+
+        return [Note(note, client=self._client) for note in res]
 
     @deprecated
     async def send(
