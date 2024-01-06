@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from mipac.types.ads import IAdPlaces, IPartialAd
 
 if TYPE_CHECKING:
+    from mipac.manager.admins.ad import AdminAdvertisingModelManager
     from mipac.manager.client import ClientManager
 
 
@@ -14,6 +15,7 @@ T = TypeVar("T", bound=IPartialAd)
 class PartialAd[T: IPartialAd]:
     def __init__(self, raw_ad: T, *, client: ClientManager) -> None:
         self._raw_ad: T = raw_ad
+        self._client = client
 
     @property
     def id(self) -> str:
@@ -38,3 +40,24 @@ class PartialAd[T: IPartialAd]:
     @property
     def day_of_week(self) -> int:
         return self._raw_ad["day_of_week"]
+
+    def _get(self, key: str) -> Any | None:
+        """You can access the raw response data directly by specifying the key
+
+
+        Returns
+        -------
+        Any | None
+            raw response data        
+        """
+        return self._raw_ad.get(key)
+
+    @property
+    def api(self) -> AdminAdvertisingModelManager:
+        return self._client.admin.create_ad_model_manager(ad_id=self.id)
+
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, PartialAd) and self.id == __value.id
+
+    def __ne__(self, __value: object) -> bool:
+        return not self.__eq__(__value)
