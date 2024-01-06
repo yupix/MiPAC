@@ -102,22 +102,41 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        get_all: bool = False,
+        publishing: bool | None = None,
+    ):
+        data = {
+            "limit": limit,
+            "sinceId": since_id,
+            "until_id": until_id,
+            "publishing": publishing,
+        }
+
+        raw_ads: list[IAd] = await self._session.request(
+            Route("POST", "/api/admin/ad/list"), auth=True, json=data
+        )
+
+        return [Ad(raw_ad, client=self._client) for raw_ad in raw_ads]
+
+    async def get_all_list(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        publishing: bool | None = None,
     ) -> AsyncGenerator[Ad, None]:
-        if limit > 100:
-            raise ParameterError("limitは100以下である必要があります")
+        data = {
+            "limit": limit,
+            "sinceId": since_id,
+            "until_id": until_id,
+            "publishing": publishing,
+        }
 
-        if get_all:
-            limit = 100
+        pagination = Pagination[IAd](
+            http_client=self._session, route=Route("POST", "/api/admin/ad/list"), json=data
+        )
 
-        data = {"limit": limit, "sinceId": since_id, "untilId": until_id}
-
-        pagination = Pagination[IAd](self._session, Route("POST", "/api/admin/ad/list"), json=data)
-
-        while True:
+        while pagination.is_final:
             raw_ads = await pagination.next()
-            for raw_ad in raw_ads:
-                yield Ad(raw_ad, client=self._client)
 
-            if get_all is False or pagination.is_final:
-                break
+            for raw_ad in raw_ads:
+                yield Ad(ad_data=raw_ad, client=self._client)
