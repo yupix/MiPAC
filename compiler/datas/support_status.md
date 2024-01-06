@@ -1,4 +1,8 @@
-## SUPPORTED ENDPOINTS (133/357)
+## SUPPORTED ENDPOINTS (135/357)
+- [x] /admin/ad/create
+- [x] /admin/ad/delete
+- [x] /admin/ad/list
+- [x] /admin/ad/update
 - [x] /admin/drive/clean-remote-files
 - [x] /admin/drive/cleanup
 - [x] /admin/drive/files
@@ -90,8 +94,6 @@
 - [ ] /admin/abuse-user-reports
 - [ ] /admin/accounts/create
 - [ ] /admin/accounts/delete
-- [ ] /admin/ad/delete
-- [ ] /admin/ad/update
 - [ ] /admin/announcements/create
 - [ ] /admin/announcements/delete
 - [ ] /admin/announcements/list
@@ -314,8 +316,6 @@
 
 ## Changed request body or responses
 
-- [ ] /admin/ad/create (Need to work)
-- [ ] /admin/ad/list (Need to work)
 - [ ] /admin/emoji/copy (Need to work)
 - [ ] /admin/get-index-stats (Need to work)
 - [ ] /admin/get-user-ips (Need to work)

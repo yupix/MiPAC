@@ -23,25 +23,25 @@
                 "path": "/admin/ad/create",
                 "request_body_hash": "4d22f18a3e08dac47da6a65986d887fec39078111c373ddd4b4e960c783a8f2b",
                 "response_body_hash": "94fa1560dc9ea302483afe3d3f400945cc63e9549745aedaea799989beea5628",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/ad/delete": {
                 "path": "/admin/ad/delete",
                 "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
                 "response_body_hash": "8a4c5615e979ae63fc8f52e891b84bc4a51104b72d0534a4e42da0b830e66f6c",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/ad/list": {
                 "path": "/admin/ad/list",
                 "request_body_hash": "57981b951d44bbbaee0c2551943306c48ce5c848b98d99e97608e3a4c97d4910",
                 "response_body_hash": "85b6b42413fa8940927e1a56e92c2b6301bba0f9e78d8518c77566ecbd1e81b1",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/ad/update": {
                 "path": "/admin/ad/update",
                 "request_body_hash": "dfb711cee3e9a3ed83e16f5aa69cfbdd62c37c4dc4eefbc3ce3583ff830b6097",
                 "response_body_hash": "bf3dcbf5d0f19fa1102b7efc8947170c2292180d72b1188152338f42706edeb9",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/announcements/create": {
                 "path": "/admin/announcements/create",
