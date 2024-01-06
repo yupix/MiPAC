@@ -1319,13 +1319,13 @@
                 "path": "/notes/clips",
                 "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
                 "response_body_hash": "eebc9917ef7b9563506a4c92a65ec5b80d502168c77c1efaf63af042c5afd2db",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/notes/conversation": {
                 "path": "/notes/conversation",
                 "request_body_hash": "5fdcf6d27743db052316f5d25d973688227b2fb6be6e5f8bab7ae1869dab0a1e",
                 "response_body_hash": "9ab840ebb6d5b47556a41c3ff22e212a348c3b34499583951a8d08cb6892c10b",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/notes/delete": {
                 "path": "/notes/delete",
@@ -1349,25 +1349,25 @@
                 "path": "/notes/featured",
                 "request_body_hash": "406b7ed03c820a35a6fd6209bd8a6b7557ea8fdfec098267a798d7264b00df5e",
                 "response_body_hash": "2f214ffebaad3c6060ac051fd3654e8d60d9b61202b9f815fa1f9e9b72cd7e01",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/notes/global-timeline": {
                 "path": "/notes/global-timeline",
                 "request_body_hash": "e850860f9b0a558db0c88a01567e322e94141606f6982891c3ad8cb4604a4b8e",
                 "response_body_hash": "974f614262608727d3028d5859ea976cf494693834239b0ac367eb545d656395",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/notes/hybrid-timeline": {
                 "path": "/notes/hybrid-timeline",
                 "request_body_hash": "299aa4e0901e4667f9a6edcca3447c2f4e55ec2e97e810d47a609e8669ba808d",
                 "response_body_hash": "aba4e2293fa8d4a7e1e8d7062758099b38ac07c413079aa14b7d373a7c893af8",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/notes/local-timeline": {
                 "path": "/notes/local-timeline",
                 "request_body_hash": "9d18ebd1828ed207930cb9f0ae8dccd9fe2d4df37bb6466dd9e98d3033aa4bad",
                 "response_body_hash": "d3360c00660ecfb4e90c1701e239e0c2714f6335341e7e0ab59356aef04b9c90",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/notes/mentions": {
                 "path": "/notes/mentions",

@@ -1,4 +1,4 @@
-## SUPPORTED ENDPOINTS (135/357)
+## SUPPORTED ENDPOINTS (139/357)
 - [x] /admin/ad/create
 - [x] /admin/ad/delete
 - [x] /admin/ad/list
@@ -49,9 +49,15 @@
 - [x] /invite/limit
 - [x] /notes/create
 - [x] /notes/children
+- [x] /notes/clips
+- [x] /notes/conversation
 - [x] /notes/delete
 - [x] /notes/favorites/create
 - [x] /notes/favorites/delete
+- [x] /notes/featured
+- [x] /notes/global-timeline
+- [x] /notes/hybrid-timeline
+- [x] /notes/local-timeline
 - [x] /notes/mentions
 - [x] /notes/polls/recommendation
 - [x] /notes/polls/vote
@@ -232,10 +238,6 @@
 - [ ] /renote-mute/delete
 - [ ] /renote-mute/list
 - [ ] /my/apps
-- [ ] /notes/clips
-- [ ] /notes/conversation
-- [ ] /notes/featured
-- [ ] /notes/global-timeline
 - [ ] /notes/search-by-tag
 - [ ] /notes/search
 - [ ] /notes/thread-muting/create
@@ -344,8 +346,6 @@
 - [ ] /invite/create (Need to work)
 - [ ] /invite/list (Need to work)
 - [ ] /meta (Need to work)
-- [ ] /notes/hybrid-timeline (Need to work)
-- [ ] /notes/local-timeline (Need to work)
 - [ ] /notes/timeline (Need to work)
 - [ ] /notes/translate (Need to work)
 - [ ] /notes/user-list-timeline (Need to work)
