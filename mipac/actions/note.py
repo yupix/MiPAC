@@ -1019,6 +1019,36 @@ class NoteActions(ClientNoteActions):
 
         return [Note(note, client=self._client) for note in res]
 
+    async def get_local_timeline(
+        self,
+        with_files: bool = False,
+        with_renotes: bool = True,
+        with_replies: bool = False,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        allow_partial: bool = False,
+        since_date: int | None = None,
+        until_date: int | None = None,
+    ):
+        data = {
+            "withFiles": with_files,
+            "withRenotes": with_renotes,
+            "withReplies": with_replies,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "allowPartial": allow_partial,
+            "sinceDate": since_date,
+            "untilDate": until_date,
+        }
+        
+        res = await self._session.request(
+            Route("POST", "/api/notes/local-timeline"), json=data, auth=True
+        )
+        
+        return [Note(note, client=self._client) for note in res]
+
     @deprecated
     async def send(
         self,
