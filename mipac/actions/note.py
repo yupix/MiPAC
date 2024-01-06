@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator
+from typing import TYPE_CHECKING, AsyncGenerator, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import APIError, ParameterError
@@ -100,30 +100,6 @@ class ClientNoteActions(AbstractAction):
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
-    async def un_renote(self, note_id: str | None = None) -> bool:
-        """Releases the note renote for the specified Id
-
-        Parameters
-        ----------
-        note_id : str | None, optional
-            Target note Id., by default None
-
-        Returns
-        -------
-        bool
-            Whether the release was successful
-        """
-        note_id = note_id or self._note_id
-
-        if note_id is None:
-            raise ParameterError("note_id is required")
-
-        body = {"noteId": note_id}
-        res: bool = await self._session.request(
-            Route("POST", "/api/notes/unrenote"), auth=True, json=body
-        )
-        return res
-
     @cache(group="get_note_children")
     async def get_children(
         self,
@@ -191,7 +167,7 @@ class ClientNoteActions(AbstractAction):
         since_id: str | None = None,
         untilId: str | None = None,
         note_id: str | None = None,
-    ) -> AsyncGenerator[Note, None] | list[Note]:
+    ) -> AsyncGenerator[Note, None]:
         """Get all children of the note
 
         Endpoint: `/api/notes/children`
@@ -207,7 +183,7 @@ class ClientNoteActions(AbstractAction):
 
         Returns
         -------
-        AsyncGenerator[Note, None] | list[Note]
+        AsyncGenerator[Note, None]
             Children of the note
         """
         limit = 100
@@ -228,13 +204,37 @@ class ClientNoteActions(AbstractAction):
             self._session, Route("POST", "/api/notes/children"), json=data
         )
 
-        while True:
+        while pagination.is_final is False:
             res_notes = await pagination.next()
             for note in res_notes:
                 yield Note(note, self._client)
 
-            if pagination.is_final:
-                break
+    async def get_clips(self, note_id: str | None = None) -> list[Clip]:
+        """Get the clips of the note
+
+        Endpoint: `/api/notes/clips`
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Clip]
+            Clips of the note
+        """
+
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        data = {"noteId": note_id}
+        res: list[IClip] = await self._session.request(
+            Route("POST", "/api/notes/clips"), json=data, auth=True
+        )
+        return [Clip(clip, client=self._client) for clip in res]
 
     @cache(group="get_note_state")
     async def get_state(self, note_id: str | None = None) -> NoteState:
@@ -311,33 +311,6 @@ class ClientNoteActions(AbstractAction):
         return bool(
             await self._session.request(Route("POST", "/api/clips/add-note"), json=data, auth=True)
         )
-
-    async def get_clips(self, note_id: str | None = None) -> list[Clip]:
-        """Get the clips of the note
-
-        Endpoint: `/api/notes/clips`
-
-        Parameters
-        ----------
-        note_id : str | None, default=None
-            note id
-
-        Returns
-        -------
-        list[Clip]
-            Clips of the note
-        """
-
-        note_id = note_id or self._note_id
-
-        if note_id is None:
-            raise ParameterError("note_id is required")
-
-        data = {"noteId": note_id}
-        res: list[IClip] = await self._session.request(
-            Route("POST", "/api/notes/clips"), json=data, auth=True
-        )
-        return [Clip(clip, client=self._client) for clip in res]
 
     async def delete(self, note_id: str | None = None) -> bool:
         """Delete a note
@@ -781,6 +754,30 @@ class ClientNoteActions(AbstractAction):
             if pagination.is_final:
                 break
 
+    async def un_renote(self, note_id: str | None = None) -> bool:
+        """Releases the note renote for the specified Id
+
+        Parameters
+        ----------
+        note_id : str | None, optional
+            Target note Id., by default None
+
+        Returns
+        -------
+        bool
+            Whether the release was successful
+        """
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        body = {"noteId": note_id}
+        res: bool = await self._session.request(
+            Route("POST", "/api/notes/unrenote"), auth=True, json=body
+        )
+        return res
+
 
 class NoteActions(ClientNoteActions):
     def __init__(
@@ -835,6 +832,43 @@ class NoteActions(ClientNoteActions):
         )
 
         return Note(raw_note=raw_created_note["created_note"], client=self._client)
+
+    @override
+    async def get_children(
+        self,
+        note_id: str,
+        limit: int = 100,
+        since_id: str | None = None,
+        untilId: str | None = None,
+    ) -> list[Note]:
+        return await super().get_children(
+            note_id=note_id, limit=limit, since_id=since_id, untilId=untilId
+        )
+
+    @override
+    async def fetch_children(
+        self,
+        note_id: str,
+        limit: int = 100,
+        since_id: str | None = None,
+        untilId: str | None = None,
+    ) -> list[Note]:
+        return await super().fetch_children(
+            note_id=note_id, limit=limit, since_id=since_id, untilId=untilId
+        )
+
+    @override
+    async def get_all_children(
+        self, note_id: str, since_id: str | None = None, untilId: str | None = None
+    ) -> AsyncGenerator[Note, None] | list[Note]:
+        async for i in super().get_all_children(
+            note_id=note_id, since_id=since_id, untilId=untilId
+        ):
+            yield i
+
+    @override
+    async def get_clips(self, note_id: str) -> list[Clip]:
+        return await super().get_clips(note_id=note_id)
 
     @deprecated
     async def send(
