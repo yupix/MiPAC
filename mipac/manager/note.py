@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.note import ClientNoteActions, NoteActions
 from mipac.http import HTTPClient
-from mipac.manager.favorite import FavoriteManager
+from mipac.manager.favorite import ClientFavoriteManager, FavoriteManager
 from mipac.manager.poll import ClientPollManager, PollManager
 from mipac.manager.reaction import ReactionManager
 
@@ -14,14 +14,14 @@ if TYPE_CHECKING:
 
 
 class ClientNoteManager(AbstractManager):
-    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
+    def __init__(self, note_id: str, *, session: HTTPClient, client: ClientManager):
         self.__note_id = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
         self.reaction: ReactionManager = ReactionManager(
             note_id=note_id, session=session, client=client
         )
-        self.favorite = FavoriteManager(note_id=note_id, session=session, client=client)
+        self.favorite = ClientFavoriteManager(note_id=note_id, session=session, client=client)
         self.poll: ClientPollManager = ClientPollManager(
             note_id=note_id, session=session, client=client
         )
@@ -46,9 +46,6 @@ class NoteManager(AbstractManager):
             note_id=note_id, session=session, client=client
         )
         self.favorite = FavoriteManager(note_id=note_id, session=session, client=client)
-        self._client: ClientNoteManager = ClientNoteManager(
-            note_id=note_id, session=session, client=client
-        )
         self.poll: PollManager = PollManager(note_id=note_id, session=session, client=client)
         self.__action: NoteActions = NoteActions(
             note_id=self.__note_id,

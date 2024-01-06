@@ -268,6 +268,31 @@ class ClientNoteActions(AbstractAction):
         )
         return [Note(note, client=self._client) for note in res]
 
+    async def delete(self, *, note_id: str | None = None) -> bool:
+        """Delete a note
+
+        Endpoint: `/api/notes/delete`
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        bool
+            success or not
+        """
+
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        data = {"noteId": note_id}
+        res = await self._session.request(Route("POST", "/api/notes/delete"), json=data, auth=True)
+        return bool(res)
+
     @cache(group="get_note_state")
     async def get_state(self, note_id: str | None = None) -> NoteState:
         """Get the state of the note
@@ -343,31 +368,6 @@ class ClientNoteActions(AbstractAction):
         return bool(
             await self._session.request(Route("POST", "/api/clips/add-note"), json=data, auth=True)
         )
-
-    async def delete(self, note_id: str | None = None) -> bool:
-        """Delete a note
-
-        Endpoint: `/api/notes/delete`
-
-        Parameters
-        ----------
-        note_id : str | None, default=None
-            note id
-
-        Returns
-        -------
-        bool
-            success or not
-        """
-
-        note_id = note_id or self._note_id
-
-        if note_id is None:
-            raise ParameterError("note_id is required")
-
-        data = {"noteId": note_id}
-        res = await self._session.request(Route("POST", "/api/notes/delete"), json=data, auth=True)
-        return bool(res)
 
     async def create_renote(self, note_id: str | None = None) -> Note:
         """Renote a note
@@ -905,6 +905,10 @@ class NoteActions(ClientNoteActions):
     @override
     async def get_conversation(self, note_id: str, limit: int = 10, offset: int = 0) -> list[Note]:
         return await super().get_conversation(note_id=note_id, limit=limit, offset=offset)
+
+    @override
+    async def delete(self, note_id: str) -> bool:
+        return await super().delete(note_id=note_id)
 
     @deprecated
     async def send(
