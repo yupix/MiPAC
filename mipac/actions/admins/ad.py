@@ -21,9 +21,9 @@ class AdminAdvertisingModelActions(AbstractAction):
 
     async def delete(self, *, id: str | None = None) -> bool:
         ad_id = self._ad_id or id
-        
+
         if ad_id is None:
-            raise ParameterError('ad id is required')
+            raise ParameterError("ad id is required")
         res: bool = await self._session.request(
             Route("POST", "/api/admin/ad/delete"), json={"id": ad_id}, auth=True, lower=True
         )
@@ -86,7 +86,7 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
             "expiresAt": expires_at,
             "startsAt": starts_at,
             "imageUrl": image_url,
-            "dayOfWeek": day_or_week
+            "dayOfWeek": day_or_week,
         }
         raw_ad: IAd = await self._session.request(
             Route("POST", "/api/admin/ad/create"), json=data, auth=True, lower=True
