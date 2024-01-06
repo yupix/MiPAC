@@ -75,7 +75,7 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
         expires_at: str,
         starts_at: str,
         image_url: str,
-        day_or_week: int,
+        day_of_week: int,
     ) -> Ad:
         data = {
             "url": url,
@@ -86,7 +86,7 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
             "expiresAt": expires_at,
             "startsAt": starts_at,
             "imageUrl": image_url,
-            "dayOfWeek": day_or_week,
+            "dayOfWeek": day_of_week,
         }
         raw_ad: IAd = await self._session.request(
             Route("POST", "/api/admin/ad/create"), json=data, auth=True, lower=True
