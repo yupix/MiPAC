@@ -31,29 +31,32 @@ class AdminAdvertisingModelActions(AbstractAction):
 
     async def update(
         self,
+        memo: str,
         url: str,
+        image_url: str,
         place: Literal["square", "horizontal", "horizontal-big"],
         priority: Literal["high", "middle", "low"],
         ratio: int,
-        image_url: str,
-        id: str | None = None,
-        starts_at: int = 0,
-        expires_at: int = 0,
-        memo: str | None = None,
+        expires_at: int,
+        starts_at: int,
+        day_of_week: int,
+        *,
+        ad_id: str | None = None,
     ) -> bool:
-        ad_id = self._ad_id or id
+        ad_id = self._ad_id or ad_id
         if ad_id is None:
-            raise ParameterError("ad_idは必須です")
+            raise ParameterError("ad id is required")
         data = {
             "id": ad_id,
-            "url": url,
             "memo": memo or "",
+            "url": url,
+            "imageUrl": image_url,
             "place": place,
             "priority": priority,
             "ratio": ratio,
-            "startsAt": starts_at,
             "expiresAt": expires_at,
-            "imageUrl": image_url,
+            "startsAt": starts_at,
+            "dayOfWeek": day_of_week,
         }
         res: bool = await self._session.request(
             Route("POST", "/api/admin/ad/update"), json=data, auth=True, lower=True
@@ -140,3 +143,30 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
 
             for raw_ad in raw_ads:
                 yield Ad(ad_data=raw_ad, client=self._client)
+
+    @override
+    async def update(
+        self,
+        ad_id: str,
+        memo: str,
+        url: str,
+        image_url: str,
+        place: Literal["square", "horizontal", "horizontal-big"],
+        priority: Literal["high", "middle", "low"],
+        ratio: int,
+        expires_at: int,
+        starts_at: int,
+        day_of_week: int,
+    ) -> bool:
+        return await super().update(
+            ad_id=ad_id,
+            memo=memo,
+            url=url,
+            image_url=image_url,
+            place=place,
+            priority=priority,
+            ratio=ratio,
+            expires_at=expires_at,
+            starts_at=starts_at,
+            day_of_week=day_of_week,
+        )
