@@ -236,6 +236,38 @@ class ClientNoteActions(AbstractAction):
         )
         return [Clip(clip, client=self._client) for clip in res]
 
+    async def get_conversation(
+        self, limit: int = 10, offset: int = 0, *, note_id: str | None = None
+    ) -> list[Note]:
+        """Get the conversation of the note
+
+        Endpoint: `/api/notes/conversation`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            limit
+        offset : int, default=0
+            offset
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Note]
+            Notes of the conversation
+        """
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        data = {"noteId": note_id, "limit": limit, "offset": offset}
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/conversation"), json=data, auth=True
+        )
+        return [Note(note, client=self._client) for note in res]
+
     @cache(group="get_note_state")
     async def get_state(self, note_id: str | None = None) -> NoteState:
         """Get the state of the note
@@ -869,6 +901,10 @@ class NoteActions(ClientNoteActions):
     @override
     async def get_clips(self, note_id: str) -> list[Clip]:
         return await super().get_clips(note_id=note_id)
+
+    @override
+    async def get_conversation(self, note_id: str, limit: int = 10, offset: int = 0) -> list[Note]:
+        return await super().get_conversation(note_id=note_id, limit=limit, offset=offset)
 
     @deprecated
     async def send(
