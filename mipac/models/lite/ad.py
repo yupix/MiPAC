@@ -48,7 +48,7 @@ class PartialAd[T: IPartialAd]:
         Returns
         -------
         Any | None
-            raw response data        
+            raw response data
         """
         return self._raw_ad.get(key)
 
