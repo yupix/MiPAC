@@ -1162,6 +1162,35 @@ class NoteActions(ClientNoteActions):
         ):
             yield i
 
+    async def search_by_tag(
+        self,
+        tag: str,
+        reply: bool | None = None,
+        renote: bool | None = None,
+        with_files: bool | None = None,
+        poll: bool | None = None,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        query: list[str] | None = None,
+    ):
+        data = {
+            "tag": tag,
+            "reply": reply,
+            "renote": renote,
+            "withFiles": with_files,
+            "poll": poll,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "query": query,
+        }
+
+        raw_notes: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/search-by-tag"), json=data, auth=True
+        )
+        return [Note(raw_note, client=self._client) for raw_note in raw_notes]
+
     @deprecated
     async def send(
         self,
