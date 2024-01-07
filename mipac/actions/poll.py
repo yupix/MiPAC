@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
@@ -69,3 +69,7 @@ class PollActions(ClientPollActions):
                 yield Note(note, client=self._client)
             if pagination.is_final:
                 break
+
+    @override
+    async def vote(self, note_id: str, choice: int) -> bool:
+        return await super().vote(note_id=note_id, choice=choice)
