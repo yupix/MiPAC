@@ -929,6 +929,15 @@ InviteManager
     :members:
 
 
+ClientReactionManager
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.reaction.ClientReactionManager
+
+.. autoclass:: mipac.manager.reaction.ClientReactionManager
+    :members:
+
+
 ReactionManager
 ~~~~~~~~~~~~~~~
 
@@ -1356,6 +1365,15 @@ InviteActions
 .. attributetable:: mipac.actions.invite.InviteActions
 
 .. autoclass:: mipac.actions.invite.InviteActions
+    :members:
+
+
+ClientReactionActions
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.reaction.ClientReactionActions
+
+.. autoclass:: mipac.actions.reaction.ClientReactionActions
     :members:
 
 

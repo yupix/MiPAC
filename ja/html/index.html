@@ -2262,6 +2262,33 @@ Attributes</span><ul>
 <dd></dd></dl>
 
 </section>
+<section id="clientreactionmanager">
+<h3>ClientReactionManager<a class="headerlink" href="#clientreactionmanager" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.manager.reaction.ClientReactionManager"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.manager.reaction.ClientReactionManager.action">action</a></li></ul>
+</div></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.manager.reaction.ClientReactionManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.reaction.</span></span><span class="sig-name descname"><span class="pre">ClientReactionManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.reaction.ClientReactionManager" title="Link to this definition">#</a></dt>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mipac.manager.reaction.ClientReactionManager.action">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">action</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.actions.reaction.ClientReactionActions" title="mipac.actions.reaction.ClientReactionActions"><span class="pre">ClientReactionActions</span></a></em><a class="headerlink" href="#mipac.manager.reaction.ClientReactionManager.action" title="Link to this definition">#</a></dt>
+<dd><p>リアクションに関するアクション</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Reactionに対するアクションを行うクラス</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mipac.actions.reaction.ClientReactionActions" title="mipac.actions.reaction.ClientReactionActions">ClientReactionActions</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="reactionmanager">
 <h3>ReactionManager<a class="headerlink" href="#reactionmanager" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.manager.reaction.ReactionManager"><div class="py-attribute-table-column">
@@ -2805,7 +2832,7 @@ update the cache of the <code class="xref py py-meth docutils literal notranslat
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.note.ClientNoteActions.get_all_replies">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_replies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.note.ClientNoteActions.get_all_replies" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_replies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.note.ClientNoteActions.get_all_replies" title="Link to this definition">#</a></dt>
 <dd><p>Get replies to the note</p>
 <p>Endpoint: <cite>/api/notes/replies</cite></p>
 <dl class="field-list simple">
@@ -3011,6 +3038,8 @@ async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get">get</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="メソッド">
 def</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_all_children">get_all_children</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="メソッド">
+def</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_all_replies">get_all_replies</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_clips">get_clips</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
@@ -3021,6 +3050,10 @@ async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_global_time_line">get_global_time_line</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_mentions">get_mentions</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_renotes">get_renotes</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_replies">get_replies</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_time_line">get_time_line</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="メソッド">
@@ -3130,6 +3163,28 @@ update the cache of the <code class="xref py py-meth docutils literal notranslat
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.note.NoteActions.get_all_replies">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_replies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.note.NoteActions.get_all_replies" title="Link to this definition">#</a></dt>
+<dd><p>Get replies to the note</p>
+<p>Endpoint: <cite>/api/notes/replies</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- since id</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- until id</p></li>
+<li><p><strong>note_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- note id</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>replies</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AsyncGenerator[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>, None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.note.NoteActions.get_clips">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_clips</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.clip.Clip" title="mipac.models.clip.Clip"><span class="pre">Clip</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.note.NoteActions.get_clips" title="Link to this definition">#</a></dt>
 <dd><p>Get the clips of the note</p>
@@ -3231,6 +3286,52 @@ update the cache of the <code class="xref py py-meth docutils literal notranslat
 <li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- Until ID</p></li>
 <li><p><strong>visibility</strong> (<em>INoteVisibility</em><em>, </em><em>default='public'</em>) -- Disclosure range</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.note.NoteActions.get_renotes">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_renotes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.note.NoteActions.get_renotes" title="Link to this definition">#</a></dt>
+<dd><p>Get renote of the note</p>
+<p>Endpoint: <cite>/api/notes/renotes</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>default=10</em>) -- limit</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- Since ID</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- Until ID</p></li>
+<li><p><strong>note_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- note id</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>Renotes of the note</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.note.NoteActions.get_replies">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_replies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.note.NoteActions.get_replies" title="Link to this definition">#</a></dt>
+<dd><p>Get replies to the note</p>
+<p>Endpoint: <cite>/api/notes/replies</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- since id</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- until id</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>default=10</em>) -- limit</p></li>
+<li><p><strong>note_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- note id</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>replies</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4599,6 +4700,61 @@ async</span><a class="reference internal" href="#mipac.actions.invite.InviteActi
 </dd></dl>
 
 </section>
+<section id="clientreactionactions">
+<h3>ClientReactionActions<a class="headerlink" href="#clientreactionactions" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.actions.reaction.ClientReactionActions"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.reaction.ClientReactionActions.add">add</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.reaction.ClientReactionActions.remove">remove</a></li></ul>
+</div></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.actions.reaction.ClientReactionActions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.reaction.</span></span><span class="sig-name descname"><span class="pre">ClientReactionActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.reaction.ClientReactionActions" title="Link to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.reaction.ClientReactionActions.add">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.reaction.ClientReactionActions.add" title="Link to this definition">#</a></dt>
+<dd><p>Add reaction to note</p>
+<p>Endpoint: <cite>/api/notes/reactions/create</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reaction</strong> (<em>str</em>) -- reaction</p></li>
+<li><p><strong>note_id</strong> (<em>str</em><em>, </em><em>optional</em>) -- note id, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>success or not</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.reaction.ClientReactionActions.remove">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.reaction.ClientReactionActions.remove" title="Link to this definition">#</a></dt>
+<dd><p>Remove reaction from note</p>
+<p>Endpoint: <cite>/api/notes/reactions/delete</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>note_id</strong> (<em>str</em><em>, </em><em>optional</em>) -- note id, by default None</p>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>success or not</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="reactionactions">
 <h3>ReactionActions<a class="headerlink" href="#reactionactions" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.actions.reaction.ReactionActions"><div class="py-attribute-table-column">
@@ -4611,10 +4767,10 @@ async</span><a class="reference internal" href="#mipac.actions.reaction.Reaction
 async</span><a class="reference internal" href="#mipac.actions.reaction.ReactionActions.remove">remove</a></li></ul>
 </div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.reaction.ReactionActions">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.reaction.</span></span><span class="sig-name descname"><span class="pre">ReactionActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.reaction.ReactionActions" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.reaction.</span></span><span class="sig-name descname"><span class="pre">ReactionActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.reaction.ReactionActions" title="Link to this definition">#</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.reaction.ReactionActions.add">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.reaction.ReactionActions.add" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.reaction.ReactionActions.add" title="Link to this definition">#</a></dt>
 <dd><p>Add reaction to note</p>
 <p>Endpoint: <cite>/api/notes/reactions/create</cite></p>
 <dl class="field-list simple">
@@ -4635,7 +4791,7 @@ async</span><a class="reference internal" href="#mipac.actions.reaction.Reaction
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.reaction.ReactionActions.remove">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.reaction.ReactionActions.remove" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.reaction.ReactionActions.remove" title="Link to this definition">#</a></dt>
 <dd><p>Remove reaction from note</p>
 <p>Endpoint: <cite>/api/notes/reactions/delete</cite></p>
 <dl class="field-list simple">
@@ -9603,6 +9759,13 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.manager.invite.InviteManager"><code class="docutils literal notranslate"><span class="pre">InviteManager</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#clientreactionmanager">ClientReactionManager</a><ul>
+<li><a class="reference internal" href="#mipac.manager.reaction.ClientReactionManager"><code class="docutils literal notranslate"><span class="pre">ClientReactionManager</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.manager.reaction.ClientReactionManager.action"><code class="docutils literal notranslate"><span class="pre">ClientReactionManager.action</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#reactionmanager">ReactionManager</a><ul>
 <li><a class="reference internal" href="#mipac.manager.reaction.ReactionManager"><code class="docutils literal notranslate"><span class="pre">ReactionManager</span></code></a><ul>
 <li><a class="reference internal" href="#mipac.manager.reaction.ReactionManager.action"><code class="docutils literal notranslate"><span class="pre">ReactionManager.action</span></code></a></li>
@@ -9759,11 +9922,14 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.fetch_children"><code class="docutils literal notranslate"><span class="pre">NoteActions.fetch_children()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get"><code class="docutils literal notranslate"><span class="pre">NoteActions.get()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_all_children"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_all_children()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_all_replies"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_all_replies()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_clips"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_clips()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_conversation"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_conversation()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_featured"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_featured()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_global_time_line"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_global_time_line()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_mentions"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_mentions()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_renotes"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_renotes()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_replies"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_replies()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_time_line"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_time_line()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.send"><code class="docutils literal notranslate"><span class="pre">NoteActions.send()</span></code></a></li>
 </ul>
@@ -9913,6 +10079,14 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.actions.invite.InviteActions.get_all_list"><code class="docutils literal notranslate"><span class="pre">InviteActions.get_all_list()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.invite.InviteActions.get_limit"><code class="docutils literal notranslate"><span class="pre">InviteActions.get_limit()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.invite.InviteActions.get_list"><code class="docutils literal notranslate"><span class="pre">InviteActions.get_list()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clientreactionactions">ClientReactionActions</a><ul>
+<li><a class="reference internal" href="#mipac.actions.reaction.ClientReactionActions"><code class="docutils literal notranslate"><span class="pre">ClientReactionActions</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.reaction.ClientReactionActions.add"><code class="docutils literal notranslate"><span class="pre">ClientReactionActions.add()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.reaction.ClientReactionActions.remove"><code class="docutils literal notranslate"><span class="pre">ClientReactionActions.remove()</span></code></a></li>
 </ul>
 </li>
 </ul>
