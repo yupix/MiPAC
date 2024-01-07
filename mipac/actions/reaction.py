@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -15,13 +15,13 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class ReactionActions(AbstractAction):
+class ClientReactionActions(AbstractAction):
     def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
 
-    async def add(self, reaction: str, note_id: str | None = None) -> bool:
+    async def add(self, reaction: str, *, note_id: str | None = None) -> bool:
         """Add reaction to note
 
         Endpoint: `/api/notes/reactions/create`
@@ -46,7 +46,7 @@ class ReactionActions(AbstractAction):
         res: bool = await self.__session.request(route, json=data, auth=True, lower=True)
         return bool(res)
 
-    async def remove(self, note_id: str | None = None) -> bool:
+    async def remove(self, *, note_id: str | None = None) -> bool:
         """Remove reaction from note
 
         Endpoint: `/api/notes/reactions/delete`
@@ -71,12 +71,12 @@ class ReactionActions(AbstractAction):
     @cache(group="get_note_reaction")
     async def get_reactions(
         self,
-        note_id: str | None = None,
-        reaction: str | None = None,
-        *,
+        type: str | None = None,
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
+        *,
+        note_id: str | None = None,
     ) -> list[NoteReaction]:
         note_id = note_id or self.__note_id
 
@@ -87,7 +87,7 @@ class ReactionActions(AbstractAction):
             {
                 "noteId": note_id,
                 "limit": limit,
-                "type": reaction,
+                "type": type,
                 "sinceId": since_id,
                 "untilId": until_id,
             }
@@ -103,15 +103,54 @@ class ReactionActions(AbstractAction):
     @cache(group="get_note_reaction", override=True)
     async def fetch_reactions(
         self,
-        reaction: str | None = None,
-        note_id: str | None = None,
-        *,
+        type: str | None = None,
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
+        *,
+        note_id: str | None = None,
     ) -> list[NoteReaction]:
         return await self.get_reactions(
-            reaction, note_id, limit=limit, since_id=since_id, until_id=until_id
+            type=type, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
+        )
+
+
+class ReactionActions(ClientReactionActions):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
+        super().__init__(session=session, client=client)
+
+    @override
+    async def add(self, note_id: str, reaction: str):
+        return await super().add(reaction=reaction, note_id=note_id)
+
+    @override
+    async def remove(self, note_id: str):
+        return await super().remove(note_id=note_id)
+
+    @override
+    async def get_reactions(
+        self,
+        note_id: str,
+        type: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ):
+        return await super().get_reactions(
+            type=type, limit=limit, since_id=since_id, until_id=until_id, note_id=note_id
+        )
+
+    @override
+    async def fetch_reactions(
+        self,
+        note_id: str,
+        type: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ):
+        return await super().fetch_reactions(
+            type=type, limit=limit, since_id=since_id, until_id=until_id, note_id=note_id
         )
 
     async def get_emoji_list(self) -> list[CustomEmoji]:

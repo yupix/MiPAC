@@ -7,7 +7,7 @@ from mipac.actions.note import ClientNoteActions, NoteActions
 from mipac.http import HTTPClient
 from mipac.manager.favorite import ClientFavoriteManager, FavoriteManager
 from mipac.manager.poll import ClientPollManager, PollManager
-from mipac.manager.reaction import ReactionManager
+from mipac.manager.reaction import ClientReactionManager, ReactionManager
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -18,7 +18,7 @@ class ClientNoteManager(AbstractManager):
         self.__note_id = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
-        self.reaction: ReactionManager = ReactionManager(
+        self.reaction: ClientReactionManager = ClientReactionManager(
             note_id=note_id, session=session, client=client
         )
         self.favorite = ClientFavoriteManager(note_id=note_id, session=session, client=client)
@@ -42,9 +42,7 @@ class NoteManager(AbstractManager):
         self.__note_id: str | None = note_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
-        self.reaction: ReactionManager = ReactionManager(
-            note_id=note_id, session=session, client=client
-        )
+        self.reaction: ReactionManager = ReactionManager(session=session, client=client)
         self.favorite = FavoriteManager(note_id=note_id, session=session, client=client)
         self.poll: PollManager = PollManager(note_id=note_id, session=session, client=client)
         self.__action: NoteActions = NoteActions(
