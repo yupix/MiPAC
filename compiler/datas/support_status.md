@@ -1,4 +1,4 @@
-## SUPPORTED ENDPOINTS (139/357)
+## SUPPORTED ENDPOINTS (140/357)
 - [x] /admin/ad/create
 - [x] /admin/ad/delete
 - [x] /admin/ad/list
@@ -66,6 +66,7 @@
 - [x] /notes/reactions/delete
 - [x] /notes/renotes
 - [x] /notes/replies
+- [x] /notes/search-by-tag
 - [x] /notes/show
 - [x] /notes/state
 - [x] /notes/unrenote
@@ -238,7 +239,6 @@
 - [ ] /renote-mute/delete
 - [ ] /renote-mute/list
 - [ ] /my/apps
-- [ ] /notes/search-by-tag
 - [ ] /notes/search
 - [ ] /notes/thread-muting/create
 - [ ] /notes/thread-muting/delete

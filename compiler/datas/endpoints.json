@@ -1421,7 +1421,7 @@
                 "path": "/notes/search-by-tag",
                 "request_body_hash": "3204f7840bb331c47f240590858f38e21bd5018003115952e63f9e1b659ed399",
                 "response_body_hash": "2f214ffebaad3c6060ac051fd3654e8d60d9b61202b9f815fa1f9e9b72cd7e01",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/notes/search": {
                 "path": "/notes/search",
