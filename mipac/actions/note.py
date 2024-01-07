@@ -11,7 +11,13 @@ from mipac.models.drive import File
 from mipac.models.note import Note, NoteReaction, NoteState, NoteTranslateResult
 from mipac.models.poll import MiPoll, Poll
 from mipac.types.clip import IClip
-from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult, INoteVisibility
+from mipac.types.note import (
+    ICreatedNote,
+    INote,
+    INoteState,
+    INoteTranslateResult,
+    INoteVisibility,
+)
 from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
@@ -293,6 +299,175 @@ class ClientNoteActions(AbstractAction):
         res = await self._session.request(Route("POST", "/api/notes/delete"), json=data, auth=True)
         return bool(res)
 
+    async def get_reactions(
+        self,
+        type: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        note_id: str | None = None,
+    ) -> list[NoteReaction]:
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        return await self._client.note.reaction.action.get_reactions(
+            type=type, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
+        )
+
+    async def fetch_reactions(
+        self,
+        type: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        note_id: str | None = None,
+    ) -> list[NoteReaction]:
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        return await self._client.note.reaction.action.fetch_reactions(
+            note_id=note_id, type=type, limit=limit, since_id=since_id, until_id=until_id
+        )
+
+    async def get_renotes(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        note_id: str | None = None,
+    ) -> list[Note]:
+        """Get renote of the note
+
+        Endpoint: `/api/notes/renotes`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            limit
+        since_id : str | None, default=None
+            Since ID
+        until_id : str | None, default=None
+            Until ID
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Note]
+            Renotes of the note
+        """
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        data = {
+            "noteId": note_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+        }
+
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/renotes"), json=data, auth=True
+        )
+        return [Note(note, client=self._client) for note in res]
+
+    async def get_replies(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        *,
+        note_id: str | None = None,
+    ) -> list[Note]:
+        """Get replies to the note
+
+        Endpoint: `/api/notes/replies`
+
+        Parameters
+        ---------
+        since_id : str | None, default=None
+            since id
+        until_id : str | None, default=None
+            until id
+        limit : int, default=10
+            limit
+        note_id: str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Note]
+            replies
+        """
+        note_id = note_id or self._note_id
+
+        data = {
+            "noteId": note_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+        }
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/replies"), json=data, auth=True
+        )
+        return [Note(note, client=self._client) for note in res]
+
+    async def get_all_replies(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        note_id: str | None = None,
+    ) -> AsyncGenerator[Note, None]:
+        """Get replies to the note
+
+        Endpoint: `/api/notes/replies`
+
+        Parameters
+        ---------
+        since_id : str | None, default=None
+            since id
+        until_id : str | None, default=None
+            until id
+        note_id: str | None, default=None
+            note id
+
+        Returns
+        -------
+        AsyncGenerator[Note, None]
+            replies
+        """
+
+        limit = 100
+
+        note_id = note_id or self._note_id
+
+        if note_id is None:
+            raise ParameterError("note_id is required")
+
+        body = {"noteId": note_id, "sinceId": since_id, "untilId": until_id, "limit": limit}
+
+        pagination = Pagination[INote](
+            self._session, Route("POST", "/api/notes/replies"), json=body
+        )
+
+        while True:
+            res_notes = await pagination.next()
+            for res_note in res_notes:
+                yield Note(res_note, client=self._client)
+
+            if pagination.is_final:
+                break
+
     @cache(group="get_note_state")
     async def get_state(self, note_id: str | None = None) -> NoteState:
         """Get the state of the note
@@ -398,37 +573,6 @@ class ClientNoteActions(AbstractAction):
             lower=True,
         )
         return Note(res["created_note"], client=self._client)
-
-    async def get_reactions(
-        self,
-        reaction: str | None = None,
-        limit: int = 10,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        *,
-        note_id: str | None = None,
-    ) -> list[NoteReaction]:
-        note_id = note_id or self._note_id
-
-        if note_id is None:
-            raise ParameterError("note_id is required")
-
-        return await self._client.note.reaction.action.get_reactions(
-            reaction=reaction, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
-        )
-
-    async def fetch_reactions(
-        self,
-        note_id: str | None = None,
-        reaction: str | None = None,
-        *,
-        limit: int = 10,
-        since_id: str | None = None,
-        until_id: str | None = None,
-    ) -> list[NoteReaction]:
-        return await self._client.note.reaction.action.fetch_reactions(
-            note_id=note_id, reaction=reaction, limit=limit, since_id=since_id, until_id=until_id
-        )
 
     async def renote(
         self,
@@ -653,138 +797,6 @@ class ClientNoteActions(AbstractAction):
         if isinstance(res, dict):
             return NoteTranslateResult(res)
         APIError(f"Translate Error: {res}", res if isinstance(res, int) else 204).raise_error()
-
-    async def get_renotes(
-        self,
-        limit: int = 10,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        *,
-        note_id: str | None = None,
-    ) -> list[Note]:
-        """Get renote of the note
-
-        Endpoint: `/api/notes/renotes`
-
-        Parameters
-        ----------
-        limit : int, default=10
-            limit
-        since_id : str | None, default=None
-            Since ID
-        until_id : str | None, default=None
-            Until ID
-        note_id : str | None, default=None
-            note id
-
-        Returns
-        -------
-        list[Note]
-            Renotes of the note
-        """
-        note_id = note_id or self._note_id
-
-        if note_id is None:
-            raise ParameterError("note_id is required")
-
-        data = {
-            "noteId": note_id,
-            "limit": limit,
-            "sinceId": since_id,
-            "untilId": until_id,
-        }
-
-        res: list[INote] = await self._session.request(
-            Route("POST", "/api/notes/renotes"), json=data, auth=True
-        )
-        return [Note(note, client=self._client) for note in res]
-
-    async def get_replies(
-        self,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        limit: int = 10,
-        *,
-        note_id: str | None = None,
-    ) -> list[Note]:
-        """Get replies to the note
-
-        Endpoint: `/api/notes/replies`
-
-        Parameters
-        ---------
-        since_id : str | None, default=None
-            since id
-        until_id : str | None, default=None
-            until id
-        limit : int, default=10
-            limit
-        note_id: str | None, default=None
-            note id
-
-        Returns
-        -------
-        list[Note]
-            replies
-        """
-        note_id = note_id or self._note_id
-
-        data = {
-            "noteId": note_id,
-            "sinceId": since_id,
-            "untilId": until_id,
-            "limit": limit,
-        }
-        res: list[INote] = await self._session.request(
-            Route("POST", "/api/notes/replies"), json=data, auth=True
-        )
-        return [Note(note, client=self._client) for note in res]
-
-    async def get_all_replies(
-        self,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        note_id: str | None = None,
-    ) -> AsyncGenerator[Note, None]:
-        """Get replies to the note
-
-        Endpoint: `/api/notes/replies`
-
-        Parameters
-        ---------
-        since_id : str | None, default=None
-            since id
-        until_id : str | None, default=None
-            until id
-        note_id: str | None, default=None
-            note id
-
-        Returns
-        -------
-        AsyncGenerator[Note, None]
-            replies
-        """
-
-        limit = 100
-
-        note_id = note_id or self._note_id
-
-        if note_id is None:
-            raise ParameterError("note_id is required")
-
-        body = {"noteId": note_id, "sinceId": since_id, "untilId": until_id, "limit": limit}
-
-        pagination = Pagination[INote](
-            self._session, Route("POST", "/api/notes/replies"), json=body
-        )
-
-        while True:
-            res_notes = await pagination.next()
-            for res_note in res_notes:
-                yield Note(res_note, client=self._client)
-
-            if pagination.is_final:
-                break
 
     async def un_renote(self, note_id: str | None = None) -> bool:
         """Releases the note renote for the specified Id
@@ -1087,6 +1099,68 @@ class NoteActions(ClientNoteActions):
         )
 
         return [Note(note, client=self._client) for note in res]
+
+    @override
+    async def get_reactions(
+        self,
+        note_id: str,
+        type: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> list[NoteReaction]:
+        return await super().get_reactions(
+            note_id=note_id, type=type, limit=limit, since_id=since_id, until_id=until_id
+        )
+
+    @override
+    async def fetch_reactions(
+        self,
+        note_id: str,
+        type: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> list[NoteReaction]:
+        return await super().fetch_reactions(
+            note_id=note_id, type=type, limit=limit, since_id=since_id, until_id=until_id
+        )
+
+    @override
+    async def get_renotes(
+        self,
+        note_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> list[Note]:
+        return await super().get_renotes(
+            note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
+        )
+
+    @override
+    async def get_replies(
+        self,
+        note_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+    ) -> list[Note]:
+        return await super().get_replies(
+            note_id=note_id, since_id=since_id, until_id=until_id, limit=limit
+        )
+
+    @override
+    async def get_all_replies(
+        self,
+        note_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+    ) -> AsyncGenerator[Note, None]:
+        async for i in super().get_all_replies(
+            note_id=note_id, since_id=since_id, until_id=until_id
+        ):
+            yield i
 
     @deprecated
     async def send(
