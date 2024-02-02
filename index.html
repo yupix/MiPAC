@@ -919,7 +919,8 @@ Attributes</span><ul>
 <a class="reference internal" href="#mipac.models.note.NoteChannel.color">color</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.NoteChannel.id">id</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.NoteChannel.is_sensitive">is_sensitive</a></li><li class="py-attribute-table-entry">
-<a class="reference internal" href="#mipac.models.note.NoteChannel.name">name</a></li></ul>
+<a class="reference internal" href="#mipac.models.note.NoteChannel.name">name</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.note.NoteChannel.user_id">user_id</a></li></ul>
 </div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.note.NoteChannel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.note.</span></span><span class="sig-name descname"><span class="pre">NoteChannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_note_channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.note.INoteChannel" title="mipac.types.note.INoteChannel"><span class="pre">INoteChannel</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.note.NoteChannel" title="Link to this definition">#</a></dt>
@@ -989,6 +990,20 @@ Attributes</span><ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.note.NoteChannel.user_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.note.NoteChannel.user_id" title="Link to this definition">#</a></dt>
+<dd><p>note channelUserId</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>note channelUserId</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str | None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -9363,6 +9378,7 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.models.note.NoteChannel.id"><code class="docutils literal notranslate"><span class="pre">NoteChannel.id</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.NoteChannel.is_sensitive"><code class="docutils literal notranslate"><span class="pre">NoteChannel.is_sensitive</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.NoteChannel.name"><code class="docutils literal notranslate"><span class="pre">NoteChannel.name</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.note.NoteChannel.user_id"><code class="docutils literal notranslate"><span class="pre">NoteChannel.user_id</span></code></a></li>
 </ul>
 </li>
 </ul>
