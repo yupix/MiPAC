@@ -5,6 +5,8 @@ import sys
 from type import OpenAPI
 from typing import Any, Literal, TypedDict
 
+import tqdm
+
 sys.path.append("../")
 
 from mipac.utils.util import COLORS  # noqa: E402
@@ -51,7 +53,7 @@ with open('./datas/endpoints.json', mode='r', encoding='utf-8') as f:
     _endpoints: IData = copy.deepcopy(endpoints)
 
 # パスに関する情報を更新する
-for path in api['paths']:
+for path in tqdm.tqdm(api['paths']):
     old_data = endpoints["endpoints"]['support'].get(path, None)
     current_request_body_hash = get_sha256_hash(api['paths'][path]['post'].get('requestBody', {}))
     current_response_body_hash = get_sha256_hash(api['paths'][path]['post'].get('responses', {}))
@@ -82,20 +84,20 @@ for path in api['paths']:
 
 
 # Misskeyから削除されたエンドポイントをremovedに移動する
-for path in _endpoints["endpoints"]['support']:
+for path in tqdm.tqdm(_endpoints["endpoints"]['support']):
     endpoints["endpoints"]['removed'][path] = _endpoints["endpoints"]['support'][path]
     # Misskeyから削除された場合はRemovedFromMisskeyにする
     endpoints["endpoints"]['removed'][path]['status'] = "RemovedFromMisskey"
     del endpoints["endpoints"]['support'][path]
 
 # MiPACからの削除が完了した場合はremovedから削除する
-for path in _endpoints["endpoints"]['removed']:
+for path in tqdm.tqdm(_endpoints["endpoints"]['removed']):
     if endpoints["endpoints"]['removed'][path]['status'] == "Removed":
         del endpoints["endpoints"]['removed'][path]
         continue
 
 # スキーマに関する情報を更新する
-for schema in api['components']['schemas']:
+for schema in tqdm.tqdm(api['components']['schemas']):
     try:
         del _endpoints["schemas"][schema]
     except KeyError:
