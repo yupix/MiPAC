@@ -2340,7 +2340,7 @@
         "Antenna": {
             "name": "Antenna",
             "hash": "14ad7ea1c5a1ac52e744b4cff951e0dfe7a6710497d191f2756eec7436e2d8f5",
-            "status": "needToWork"
+            "status": "supported"
         },
         "Clip": {
             "name": "Clip",

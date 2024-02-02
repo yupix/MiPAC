@@ -407,7 +407,7 @@
 - [ ] Page (Need to work)
 - [ ] Channel (Need to work)
 - [ ] QueueCount (Need to work)
-- [ ] Antenna (Need to work)
+- [x] Antenna
 - [ ] Clip (Need to work)
 - [ ] FederationInstance (Need to work)
 - [ ] GalleryPost (Need to work)
