@@ -9,6 +9,9 @@ ref=badge_shield" alt="FOSSA Status">
 <img src="https://app.fossa.com/api/projects/
 git%2Bgithub.com%2Fyupix%2FMiPAC.svg?type=shield"/></a>
 
+![Alt](https://repobeats.axiom.co/api/embed/b7734178610a63a16de4b789aa9b43d22686e390.svg "Repobeats analytics image")
+
+
 ## 概要
 
 MiPAのCoreとなるライブラリです。
