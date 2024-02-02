@@ -56,6 +56,7 @@ class INoteChannel(TypedDict):
     color: str
     is_sensitive: bool
     allow_renote_to_external: bool
+    user_id: str | None
 
 
 class INote(TypedDict):
