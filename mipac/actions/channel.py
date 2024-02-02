@@ -436,11 +436,11 @@ class ChannelActions(ClientChannelActions):
     async def create(
         self,
         name: str,
-        color: str,
-        description: str | None = None,
-        banner_id: str | None = None,
-        is_sensitive: bool | None = None,
-        allow_renote_to_external: bool | None = None,
+        color: str = MISSING,
+        description: str = MISSING,
+        banner_id: str = MISSING,
+        is_sensitive: bool = MISSING,
+        allow_renote_to_external: bool = MISSING,
     ) -> Channel:
         """Create a channel
 
@@ -450,30 +450,32 @@ class ChannelActions(ClientChannelActions):
         ----------
         name : str
             Name of the channel
-        color : str
-            Color of the channel
+        color : str, optional
+            Color of the channel, by default MISSING
         description : str, optional
-            Description of the channel, by default None
+            Description of the channel, by default MISSING
         banner_id : str, optional
-            Banner ID of the channel, by default None
+            Banner ID of the channel, by default MISSING
         is_sensitive : bool, optional
-            Whether the channel is sensitive, by default None
+            Whether the channel is sensitive, by default MISSING
         allow_renote_to_external : bool, optional
-            Whether the channel allows renote to external, by default None
+            Whether the channel allows renote to external, by default MISSING
 
         Returns
         -------
         Channel
             Created channel
         """
-        data = {
-            "name": name,
-            "color": color,
-            "description": description,
-            "banner_id": banner_id,
-            "is_sensitive": is_sensitive,
-            "allow_renote_to_external": allow_renote_to_external,
-        }
+        data = remove_dict_missing(
+            {
+                "name": name,
+                "color": color,
+                "description": description,
+                "banner_id": banner_id,
+                "is_sensitive": is_sensitive,
+                "allow_renote_to_external": allow_renote_to_external,
+            }
+        )
         raw_channel: IChannel = await self._session.request(
             Route("POST", "/api/channels/create"),
             json=data,
