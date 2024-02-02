@@ -112,10 +112,12 @@ for schema in api['components']['schemas']:
         }
     else:
         current_hash = get_sha256_hash(api['components']['schemas'][schema])
-        if current_hash != old_data['hash'] and endpoints['schemas'][schema]['status'] == "supported":
+        if current_hash != old_data['hash']:
             print(f"{COLORS.green}[CHANGED: SCHEMA] changed schema hash {COLORS.reset} {schema} {COLORS.reset}")
             endpoints['schemas'][schema]['hash'] = current_hash
-            endpoints['schemas'][schema]['status'] = "needToWork"
+
+            if endpoints['schemas'][schema]['status'] == "supported":  # サポート済みの場合のみステータスを変更する
+                endpoints['schemas'][schema]['status'] = "needToWork"
 
 
 with open('./datas/endpoints.json', mode='w', encoding='utf-8') as f:
