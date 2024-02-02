@@ -34,20 +34,46 @@ class AdminInviteActions(AbstractAction):
         offset: int = 0,
         type: Literal["unused", "used", "expired", "all"] = "all",
         sort: Literal["+createdAt", "-createdAt", "+usedAt", "-usedAt"] = "+createdAt",
-        *,
-        get_all: bool = False,
-    ) -> AsyncGenerator[InviteCode, None]:
+    ) -> list[InviteCode]:
+        body = remove_dict_empty(
+            {
+                "limit": limit,
+                "offset": offset,
+                "type": type,
+                "sort": sort,
+            }
+        )
+
+        res: list[IInviteCode] = await self._session.request(
+            Route("POST", "/api/admin/invite/list"), json=body, auth=True
+        )
+
+        return [InviteCode(raw_invite_code, client=self.__client) for raw_invite_code in res]
+
+    async def get_all_invite_list(
+        self,
+        limit: int = 30,
+        offset: int = 0,
+        type: Literal["unused", "used", "expired", "all"] = "all",
+        sort: Literal["+createdAt", "-createdAt", "+usedAt", "-usedAt"] = "+createdAt",
+    ):
+        body = remove_dict_empty(
+            {
+                "limit": limit,
+                "offset": offset,
+                "type": type,
+                "sort": sort,
+            }
+        )
+
         pagination = Pagination[IInviteCode](
             http_client=self.__session,
             route=Route("POST", "/api/admin/invite/list"),
-            json=remove_dict_empty({"limit": limit, "offset": offset, "type": type, "sort": sort}),
+            json=body,
             pagination_type="count",
             auth=True,
         )
-        while True:
+        while pagination.is_final is False:
             raw_invite_codes = await pagination.next()
             for raw_invite_code in raw_invite_codes:
                 yield InviteCode(raw_invite_code, client=self.__client)
-
-            if pagination.is_final or get_all is False:
-                break
