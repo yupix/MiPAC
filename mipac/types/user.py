@@ -81,6 +81,8 @@ class IAvatarDecoration(TypedDict):
     angle: NotRequired[int]
     flip_h: NotRequired[bool]
     url: str
+    offset_x: NotRequired[int]
+    offset_y: NotRequired[int]
 
 
 class NotificationRecieveConfigType(TypedDict):
