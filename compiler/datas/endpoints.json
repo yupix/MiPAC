@@ -23,7 +23,7 @@
                 "path": "/admin/ad/create",
                 "request_body_hash": "4d22f18a3e08dac47da6a65986d887fec39078111c373ddd4b4e960c783a8f2b",
                 "response_body_hash": "1dfbf2512ea09c7c850948c3122d596054723ecf10ca46b3e4e6d8f9d0e31ad9",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/ad/delete": {
                 "path": "/admin/ad/delete",
@@ -35,7 +35,7 @@
                 "path": "/admin/ad/list",
                 "request_body_hash": "6b9fe0d49f97df216cbdccd365e7a57acf65e38c6bf08d0cedae7a80217ded1d",
                 "response_body_hash": "a59532fabd97a3c0faf5ef29d7be14c889ecc9294592de34565a991615a8c4f2",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/ad/update": {
                 "path": "/admin/ad/update",
@@ -113,13 +113,13 @@
                 "path": "/admin/drive/files",
                 "request_body_hash": "751e858ba48d04d2e94f1605465961858328a351ecc035ab4965a4ab0b5ee414",
                 "response_body_hash": "f34c75e26e857fadd415d1e4a3bd80f224779a84be6a3e142e4ed7896e888c1b",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/drive/show-file": {
                 "path": "/admin/drive/show-file",
                 "request_body_hash": "469dab9342135333df7936e6dd1a691a975e6b5c205b5ab3040be3bf31a18a17",
                 "response_body_hash": "f45d00ac657a7054e3c94628e5ebb8b0e17aa5d0c01b1927761ba7756421ea80",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/emoji/add-aliases-bulk": {
                 "path": "/admin/emoji/add-aliases-bulk",
@@ -137,7 +137,7 @@
                 "path": "/admin/emoji/copy",
                 "request_body_hash": "b03a21f019432ea214bc9dbc491c2dc403bb077f27488d27de723ed28f9682b7",
                 "response_body_hash": "3065a44868be7b719c8cbaeda3a7601fd89f80ba3416c57eb157c1fbd66bc2c5",
-                "status": "needToWork"
+                "status": "notSupported"
             },
             "/admin/emoji/delete-bulk": {
                 "path": "/admin/emoji/delete-bulk",
@@ -233,19 +233,19 @@
                 "path": "/admin/get-user-ips",
                 "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
                 "response_body_hash": "fec10f3947e5e7cd19284ab9db845b0ce02711720cacddd519f151455518033f",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/invite/create": {
                 "path": "/admin/invite/create",
                 "request_body_hash": "e20a3cea35c6931f3497b77483a916558b88efd78d72822c2c7a00f52b59341f",
                 "response_body_hash": "ae560e69de75b18a3bf4412510d9dea8b3527831832349858bf7823152b3c044",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/invite/list": {
                 "path": "/admin/invite/list",
                 "request_body_hash": "89eb514c7f6cd1c5aae218c9e8d4102f26a63d22d36e5ada8c11a6959d74f6a8",
                 "response_body_hash": "719dddaac9f63e5b9b48bb92355f267b0229a7e0e41f144c6b79759a4da8181d",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/promo/create": {
                 "path": "/admin/promo/create",
@@ -305,7 +305,7 @@
                 "path": "/admin/reset-password",
                 "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
                 "response_body_hash": "0b157f80cf23cd0d52f933fca25f17cb7cdfc166388b2eecad373eaefadb76a1",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/resolve-abuse-user-report": {
                 "path": "/admin/resolve-abuse-user-report",
@@ -329,7 +329,7 @@
                 "path": "/admin/show-moderation-logs",
                 "request_body_hash": "a6203df42cecfa3c3c1eaed8307f59b8aa039f6c25debef3d8c8958d78500c08",
                 "response_body_hash": "b4c44cb679836e4cedb24811c90fbfd87728cecfed9cf3e84b2c62ad54143862",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/show-user": {
                 "path": "/admin/show-user",
@@ -377,7 +377,7 @@
                 "path": "/admin/roles/create",
                 "request_body_hash": "0aa7e24050e82ccf83500724eba4ec57bf16252a049778b33d65784ef25a93e3",
                 "response_body_hash": "352c7db3e7a1ca57658d6ae7adb66b2d19884c1207709ed43287906064590fd9",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/roles/delete": {
                 "path": "/admin/roles/delete",
@@ -533,7 +533,7 @@
                 "path": "/channels/create",
                 "request_body_hash": "0821f58e8ddbac903c7f62d7d5ea25d430e37232628de49143cfa1fde5e45a86",
                 "response_body_hash": "608eb6e443017aa25b21384cfd527ed6e78eb918bf21ec9acc80ee73e5eeafc5",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/channels/featured": {
                 "path": "/channels/featured",

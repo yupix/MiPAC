@@ -1,10 +1,21 @@
-## SUPPORTED ENDPOINTS (133/367)
+## SUPPORTED ENDPOINTS (132/367)
+- [x] /admin/ad/create
+- [x] /admin/ad/list
 - [x] /admin/drive/clean-remote-files
 - [x] /admin/drive/cleanup
+- [x] /admin/drive/files
+- [x] /admin/drive/show-file
+- [x] /admin/get-user-ips
+- [x] /admin/invite/create
+- [x] /admin/invite/list
+- [x] /admin/reset-password
 - [x] /admin/resolve-abuse-user-report
 - [x] /admin/send-email
+- [x] /admin/show-moderation-logs
 - [x] /admin/unsuspend-user
 - [x] /admin/update-user-note
+- [x] /admin/roles/create
+- [x] /channels/create
 - [x] /channels/follow
 - [x] /channels/unfollow
 - [x] /channels/favorite
@@ -47,6 +58,7 @@
 - [ ] /admin/delete-all-files-of-a-user
 - [ ] /admin/emoji/add-aliases-bulk
 - [ ] /admin/emoji/add
+- [ ] /admin/emoji/copy
 - [ ] /admin/emoji/delete-bulk
 - [ ] /admin/emoji/delete
 - [ ] /admin/emoji/list-remote
@@ -268,24 +280,12 @@
 
 ## Changed request body or responses
 
-- [ ] /admin/ad/create (Need to work)
-- [ ] /admin/ad/list (Need to work)
-- [ ] /admin/drive/files (Need to work)
-- [ ] /admin/drive/show-file (Need to work)
-- [ ] /admin/emoji/copy (Need to work)
 - [ ] /admin/get-index-stats (Need to work)
 - [ ] /admin/get-table-stats (Need to work)
-- [ ] /admin/get-user-ips (Need to work)
-- [ ] /admin/invite/create (Need to work)
-- [ ] /admin/invite/list (Need to work)
-- [ ] /admin/reset-password (Need to work)
-- [ ] /admin/show-moderation-logs (Need to work)
 - [ ] /admin/update-meta (Need to work)
-- [ ] /admin/roles/create (Need to work)
 - [ ] /admin/roles/list (Need to work)
 - [ ] /admin/roles/show (Need to work)
 - [ ] /admin/roles/users (Need to work)
-- [ ] /channels/create (Need to work)
 - [ ] /channels/featured (Need to work)
 - [ ] /channels/followed (Need to work)
 - [ ] /channels/owned (Need to work)
