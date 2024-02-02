@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, Literal
+from typing import TYPE_CHECKING, Literal
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route

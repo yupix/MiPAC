@@ -11,13 +11,7 @@ from mipac.models.drive import File
 from mipac.models.note import Note, NoteReaction, NoteState, NoteTranslateResult
 from mipac.models.poll import MiPoll, Poll
 from mipac.types.clip import IClip
-from mipac.types.note import (
-    ICreatedNote,
-    INote,
-    INoteState,
-    INoteTranslateResult,
-    INoteVisibility,
-)
+from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult, INoteVisibility
 from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty

@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Literal, NotRequired, TypedDict, TypeGuard
 
-
 if TYPE_CHECKING:
-    from mipac.types.user import IUserDetailed, IMeDetailedSchema
+    from mipac.types.user import IMeDetailedSchema, IUserDetailed
 
 
 class IRoleUser(TypedDict):

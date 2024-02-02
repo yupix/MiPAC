@@ -272,19 +272,21 @@ class AntennaActions(ClientAntennaActions):
             is False
         ):
             raise ParameterError("Required parameters are missing")
-        body = remove_dict_missing({
-            "name": name,
-            "src": src,
-            "userListId": user_list_id,
-            "keywords": keywords,
-            "excludeKeywords": exclude_keywords,
-            "users": users,
-            "caseSensitive": case_sensitive,
-            "localOnly": local_only,
-            "withReplies": with_replies,
-            "withFile": with_file,
-            "notify": notify,
-        })
+        body = remove_dict_missing(
+            {
+                "name": name,
+                "src": src,
+                "userListId": user_list_id,
+                "keywords": keywords,
+                "excludeKeywords": exclude_keywords,
+                "users": users,
+                "caseSensitive": case_sensitive,
+                "localOnly": local_only,
+                "withReplies": with_replies,
+                "withFile": with_file,
+                "notify": notify,
+            }
+        )
 
         res_antenna: IAntenna = await self._session.request(
             Route("POST", "/api/antennas/create"), auth=True, json=body, remove_none=False
