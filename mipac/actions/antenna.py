@@ -9,8 +9,9 @@ from mipac.models.antenna import Antenna
 from mipac.models.note import Note
 from mipac.types.antenna import IAntenna, IAntennaReceiveSource
 from mipac.types.note import INote
-from mipac.utils.format import remove_dict_empty
+from mipac.utils.format import remove_dict_empty, remove_dict_missing
 from mipac.utils.pagination import Pagination
+from mipac.utils.util import MISSING
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
@@ -216,6 +217,7 @@ class AntennaActions(ClientAntennaActions):
         exclude_keywords: list[list[str]] | None = None,
         users: list[str] | None = None,
         case_sensitive: bool = False,
+        local_only: bool = MISSING,
         with_replies: bool = False,
         with_file: bool = False,
         notify: bool = False,
@@ -233,6 +235,8 @@ class AntennaActions(ClientAntennaActions):
             Receive keywords.
         exclude_keywords : list[list[str]] | None, default None
             Excluded keywords.
+        local_only : bool, default MISSING
+            Whether to limit to local notes.
         users : list[str] | None, default None
             List of target user ID. Required when selecting 'users' as the receive source.
         case_sensitive : bool, default False
@@ -268,7 +272,7 @@ class AntennaActions(ClientAntennaActions):
             is False
         ):
             raise ParameterError("Required parameters are missing")
-        body = {
+        body = remove_dict_missing({
             "name": name,
             "src": src,
             "userListId": user_list_id,
@@ -276,10 +280,11 @@ class AntennaActions(ClientAntennaActions):
             "excludeKeywords": exclude_keywords,
             "users": users,
             "caseSensitive": case_sensitive,
+            "localOnly": local_only,
             "withReplies": with_replies,
             "withFile": with_file,
             "notify": notify,
-        }
+        })
 
         res_antenna: IAntenna = await self._session.request(
             Route("POST", "/api/antennas/create"), auth=True, json=body, remove_none=False
