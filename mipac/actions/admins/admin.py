@@ -122,21 +122,44 @@ class AdminActions(AbstractAction):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        get_all: bool = False,
-    ) -> AsyncGenerator[ModerationLog, None]:  # TODO: モデルを作り直すべき、あと型も
-        if limit > 100:
-            raise ParameterError("limit must be less than 100")
+        type: str | None = None,
+        user_id: str | None = None,
+    ) -> list[ModerationLog]:
+        body = {
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "type": type,
+            "userId": user_id,
+        }
 
-        if get_all:
-            limit = 100
+        res_moderation_logs: list[IModerationLog] = await self.__session.request(
+            Route("POST", "/api/admin/show-moderation-logs"), json=body, auth=True
+        )
+        return [ModerationLog(res, client=self.__client) for res in res_moderation_logs]
 
-        body = {"limit": limit, "sinceId": since_id, "untilId": until_id}
+    async def get_all_moderation_logs(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        type: str | None = None,
+        user_id: str | None = None,
+    ):
+        body = {
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "type": type,
+            "userId": user_id,
+        }
+
         pagination = Pagination[IModerationLog](
             self.__session, Route("POST", "/api/admin/show-moderation-logs"), json=body
         )
 
-        while True:
-            res_moderation_logs = await pagination.next()
+        while pagination.is_final is False:
+            res_moderation_logs: list[IModerationLog] = await pagination.next()
             for res_moderation_log in res_moderation_logs:
                 yield ModerationLog(res_moderation_log, client=self.__client)
 
