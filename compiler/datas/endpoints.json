@@ -2214,18 +2214,18 @@
         },
         "UserLite": {
             "name": "UserLite",
-            "hash": "9a8acb5c28ef52140a68337d34aad3bdfac2b6aa7172fd6ccea142d9e18204a7",
-            "status": "needToWork"
+            "hash": "a8477da1fb750f7e0ebbedc95bbda436ce5be396d688063fa64541e8ae5a5262",
+            "status": "supported"
         },
         "UserDetailedNotMeOnly": {
             "name": "UserDetailedNotMeOnly",
-            "hash": "81bcea56d07b07cf5f4f432e4bcdd6a7d76d508867ab1852ed183776cc6b4762",
-            "status": "needToWork"
+            "hash": "b5de616e11dc1686d7f22cf4e1323bffbbd55a6a9fd983f2742c8a08126c07e5",
+            "status": "supported"
         },
         "MeDetailedOnly": {
             "name": "MeDetailedOnly",
-            "hash": "99a6d231fbc1e2a8dc7d18c735d58bcfbf790c4ef47903e4d90834a3fb6e64fe",
-            "status": "needToWork"
+            "hash": "0cc55ace5d412f1063b9223b4fe899a6d5058e024730332eda967a8ceb1250a5",
+            "status": "supported"
         },
         "UserDetailedNotMe": {
             "name": "UserDetailedNotMe",
@@ -2250,146 +2250,146 @@
         "UserList": {
             "name": "UserList",
             "hash": "5259c1402c1fb77e67dfd6eaedfe3383a75837538a224ce15f2d733793c77ac3",
-            "status": "needToWork"
+            "status": "supported"
         },
         "Announcement": {
             "name": "Announcement",
             "hash": "c6a99c3f08a0072491961ac4be88ea5789838d47fe2afa56650e60e1fbf0376b",
-            "status": "needToWork"
+            "status": "supported"
         },
         "App": {
             "name": "App",
-            "hash": "a069950a9512755fd8dae25e0b85da9b1509a9d7db9ad3a3b8ce561fc93fe9aa",
+            "hash": "1c8addc6c7efdc356e3be846d48e6c8b2f53293d8268e737895da9ab8fae0cac",
             "status": "notSupported"
         },
         "Note": {
             "name": "Note",
-            "hash": "91cec5f71dfbc1af9a16a52ac1877c99f481c14924a8e54c3be15c76bbeaee01",
-            "status": "needToWork"
+            "hash": "7e8de387c79b1db582ba2ebeba73aae80a899393042b89325027cab3bf1e0b0c",
+            "status": "supported"
         },
         "NoteReaction": {
             "name": "NoteReaction",
-            "hash": "f9a1ee48b2a450fb8676ad131dcdd74955dfbd458240634350e16ac6b9b895df",
+            "hash": "4ef6fd672338dbe470c9adb15b57f44b2e6a63e7da53c4714c3b1c0aca2b2e3a",
             "status": "notSupported"
         },
         "NoteFavorite": {
             "name": "NoteFavorite",
-            "hash": "e20b461a93061c8eecb9912e8c0c0a46bef466ecd7d7d0901f5ad7b6a04d4f28",
+            "hash": "63038b4094cb5d6667f5f57b1788f4bf4a040cd41bcaba09c64e2ecf9aec086b",
             "status": "notSupported"
         },
         "Notification": {
             "name": "Notification",
-            "hash": "8010cec82b967275b2a1c1706bfc125b41d6082a01dcd26a6e8402d2ab27e49c",
-            "status": "needToWork"
+            "hash": "47afc80f19a4537ede5e8fc5bb5688d56eedfce1d4c0255656765d25819fe47f",
+            "status": "notSupported"
         },
         "DriveFile": {
             "name": "DriveFile",
-            "hash": "d26dd99237dab9a0fd70fd260701e15531a662c69f3a78b616b84373ada38b5d",
+            "hash": "9853a428bab9745b8e17a9c2a83231761fcda7cff883f2200e11c11b6342ce71",
             "status": "notSupported"
         },
         "DriveFolder": {
             "name": "DriveFolder",
-            "hash": "ade5427946265ee1877eeb0f49633f1c8c84ddbf97842b9c73d300f4cc5c2395",
+            "hash": "2ee1d9098539300d5e0e5d9a367a196a8f246b323d86201ef5109b06c5ace611",
             "status": "notSupported"
         },
         "Following": {
             "name": "Following",
-            "hash": "71526114e5dd4988756370e85b02a0353e66480bfb71f91ece5b93715148eb92",
+            "hash": "7abec68b15d8f0f431abc0022b489dd81b67d5caf48df1121763559bcdff909c",
             "status": "notSupported"
         },
         "Muting": {
             "name": "Muting",
-            "hash": "b21e77b8e301e66b29a6c9db503377d42486fa8240e2d7536bb84e53980ef78d",
+            "hash": "33400bcbcb4c0cb3be9a235f18c22456d8afed04d66597e591dca3cdb4777a6d",
             "status": "notSupported"
         },
         "RenoteMuting": {
             "name": "RenoteMuting",
-            "hash": "9c4fb29966a73423cac2d3f3d43cd1b06e83f99826b89af3e2f05ca854c43cf4",
+            "hash": "b0162338ef404018678df4d531ead93cb9d2e9d5552495882121d533934c76ad",
             "status": "notSupported"
         },
         "Blocking": {
             "name": "Blocking",
-            "hash": "e4910909bb9ae2acda2c9b50161c751df30dbef5ee1275a61120509dc055e688",
+            "hash": "2b0438f1ef5156868501093ea7bb9352e8b9329373f822713627fad742069945",
             "status": "notSupported"
         },
         "Hashtag": {
             "name": "Hashtag",
-            "hash": "e2dce16e5baef86438f0e7b200103bd2551edd126be39650de60e0fd0daefa56",
+            "hash": "619643560ecb9b56a12db881efff441954be264ba1f41a9d9d20ae46ad2d1dfd",
             "status": "notSupported"
         },
         "InviteCode": {
             "name": "InviteCode",
             "hash": "3d629e41cf0ab2c1021805142bdf400f4e117a2a4d0e4b66ceace2f478e11036",
-            "status": "needToWork"
+            "status": "supported"
         },
         "Page": {
             "name": "Page",
-            "hash": "5ebf46e4ea7608e46bc0a37e477a44032cb1068f137d225c336165bcbc3c13bf",
+            "hash": "0f0c362ee298381088c12969e15cbd10a8183ff37301a76a772e917eaabc47ba",
             "status": "notSupported"
         },
         "Channel": {
             "name": "Channel",
-            "hash": "a4b4a462e5fc430c14a3d8f710492f134184155148d2afb8493c9bb6ab9d3513",
+            "hash": "65ac71d7cb329a9c3d0f4002198f6df7f525852013f84f277b447e4cde8386fd",
             "status": "notSupported"
         },
         "QueueCount": {
             "name": "QueueCount",
-            "hash": "f796020bb91dc59a6dd681bec2c13181ad73aaf7aa9f520635af0d5452835688",
+            "hash": "356d80b1581805f4a2d6b4bce9cb469ed9cad7bbdaef6d60c16d7786715acf22",
             "status": "notSupported"
         },
         "Antenna": {
             "name": "Antenna",
-            "hash": "88fe800ce5d77a949b64b8cfe494d5864f2c2570159b9054ec7ea71127309a3a",
+            "hash": "14ad7ea1c5a1ac52e744b4cff951e0dfe7a6710497d191f2756eec7436e2d8f5",
             "status": "notSupported"
         },
         "Clip": {
             "name": "Clip",
-            "hash": "19759f4dba5f72d3c4a2114e514aa698adf7ac2e7dcf2793129b58f6d5053f8f",
+            "hash": "03bd8f3b6e536386a6ee9639a90e71f4afc5c8933aeda594ca5c2ef1fa178e77",
             "status": "notSupported"
         },
         "FederationInstance": {
             "name": "FederationInstance",
-            "hash": "6c3ddf14b935a581028230ba2099186b22fbc4e7a24ce90a965af4fa2eb808ba",
+            "hash": "5c701ab845196c5fe00591568d9b4c9c00874a9e067a8f970bd9e92be8aa410f",
             "status": "notSupported"
         },
         "GalleryPost": {
             "name": "GalleryPost",
             "hash": "945e43cf955886bbdb19ddbf4abb0b7b5d07f2435be2ec97129f61677a8a042c",
-            "status": "needToWork"
+            "status": "supported"
         },
         "EmojiSimple": {
             "name": "EmojiSimple",
-            "hash": "579075a3e3e1e036f9155c79257ef14a9e6a5c41c9dc5706305e7964fa328d07",
+            "hash": "45a03e8c334edf32ba0acb9781d3909f9d4bb2b6190a4a202758a064363428e1",
             "status": "notSupported"
         },
         "EmojiDetailed": {
             "name": "EmojiDetailed",
-            "hash": "2df4c7a0b368dc44c3bb097cb0505c166e6318f7dbae5bb42de9215830457bf9",
+            "hash": "66db6b418d8eb98d651a47fc1984230967499a660d8938d1482f844063b06c83",
             "status": "notSupported"
         },
         "Flash": {
             "name": "Flash",
-            "hash": "effb2c8beba35c97c36a45cb4ddf25d2c4cc226c8c235d73b936750168764c67",
+            "hash": "817d50ddeca96c6f0fc5ef18d48ce674c874a9b9793e5efecb325371031ab4bf",
             "status": "notSupported"
         },
         "Ad": {
             "name": "Ad",
-            "hash": "d4ef0f732d52e42d1dffc7107ae4adf995858bce0fc844e7f4886e6b4e70c6ae",
+            "hash": "8bc56ae134b3fe66a8ab20ff421b7f46a1427bd128eed1424d57b0af249a27a3",
             "status": "notSupported"
         },
         "Signin": {
             "name": "Signin",
-            "hash": "1231df1319ed5bc8027a8c2b739fa4c87ed1c1f036391901eba2d4fd0e228a9e",
+            "hash": "24e2ae88903e9eae9eef9d99f09b6ba2dfae36eb5a17d4445ad7af816efbe446",
             "status": "notSupported"
         },
         "RoleLite": {
             "name": "RoleLite",
-            "hash": "ef84b8c4eb61ab814c34b8a6b28b08538701e72f61700696c2075527a94a18aa",
+            "hash": "f5be0c3e464930c1736d4663bc2629000c4797dedbc4ee02d1be233194e33ca9",
             "status": "notSupported"
         },
         "Role": {
             "name": "Role",
-            "hash": "c44af7e81c31167be5aba0ce84720711d00b86eb3cb632046f50f6752c8c6f08",
+            "hash": "2a7a5cbd50fb0c67b30ea999c504adab13cda04b15a9b0dfeb7ca2d86a57a6b9",
             "status": "notSupported"
         },
         "ReversiGameLite": {

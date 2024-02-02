@@ -382,20 +382,20 @@
 ## SUPPORTED SCHEMAS
 
 - [ ] Error
-- [ ] UserLite (Need to work)
-- [ ] UserDetailedNotMeOnly (Need to work)
-- [ ] MeDetailedOnly (Need to work)
+- [x] UserLite
+- [x] UserDetailedNotMeOnly
+- [x] MeDetailedOnly
 - [x] UserDetailedNotMe
 - [x] MeDetailed
 - [x] UserDetailed
 - [x] User
-- [ ] UserList (Need to work)
-- [ ] Announcement (Need to work)
+- [x] UserList
+- [x] Announcement
 - [ ] App
-- [ ] Note (Need to work)
+- [x] Note
 - [ ] NoteReaction
 - [ ] NoteFavorite
-- [ ] Notification (Need to work)
+- [ ] Notification
 - [ ] DriveFile
 - [ ] DriveFolder
 - [ ] Following
@@ -403,14 +403,14 @@
 - [ ] RenoteMuting
 - [ ] Blocking
 - [ ] Hashtag
-- [ ] InviteCode (Need to work)
+- [x] InviteCode
 - [ ] Page
 - [ ] Channel
 - [ ] QueueCount
 - [ ] Antenna
 - [ ] Clip
 - [ ] FederationInstance
-- [ ] GalleryPost (Need to work)
+- [x] GalleryPost
 - [ ] EmojiSimple
 - [ ] EmojiDetailed
 - [ ] Flash
