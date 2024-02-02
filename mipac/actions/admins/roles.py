@@ -189,10 +189,11 @@ class AdminRoleActions(AdminRoleModelActions):
         is_public: bool = False,
         is_moderator: bool = False,
         is_administrator: bool = False,
+        is_explorable: bool = False,
         as_badge: bool = False,
         can_edit_members_by_moderator: bool = False,
+        display_order: int = 0,
         policies: dict[Any, Any] | None = None,
-        is_explorable: bool = False,
     ) -> Role:
         body = {
             "name": name,
@@ -204,10 +205,11 @@ class AdminRoleActions(AdminRoleModelActions):
             "isPublic": is_public,
             "isModerator": is_moderator,
             "isAdministrator": is_administrator,
+            "isExplorable": is_explorable,
             "asBadge": as_badge,
             "canEditMembersByModerator": can_edit_members_by_moderator,
+            "displayOrder": display_order,
             "policies": policies or {},
-            "isExplorable": is_explorable,
         }
         res: IRole = await self._session.request(
             Route("POST", "/api/admin/roles/create"),
