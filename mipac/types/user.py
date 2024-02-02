@@ -160,7 +160,8 @@ class IUserDetailedNotMeOnlySchema(TypedDict):
     pinned_page_id: str | None
     pinned_page: IPage | None  # TODO: IPageが正しいか確認する
     public_reactions: bool
-    ff_visibility: IFfVisibility
+    following_visibility: IFfVisibility
+    followers_visibility: IFfVisibility
     two_factor_enabled: bool
     use_password_less_login: bool
     security_keys: bool

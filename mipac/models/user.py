@@ -282,8 +282,12 @@ class UserDetailedNotMeOnly:
         return self._raw_user["public_reactions"]
 
     @property
-    def ff_visibility(self) -> IFfVisibility:
-        return self._raw_user["ff_visibility"]
+    def following_visibility(self) -> IFfVisibility:
+        return self._raw_user["following_visibility"]
+
+    @property
+    def followers_visibility(self) -> IFfVisibility:
+        return self._raw_user["followers_visibility"]
 
     @property
     def two_factor_enabled(self) -> bool:
