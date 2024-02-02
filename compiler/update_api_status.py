@@ -66,9 +66,10 @@ for path in api['paths']:
         # 既存のデータから削除することで残りはremovedにする
         del _endpoints["endpoints"]['support'][path]
 
-        # ハッシュが変更されている場合はneedToWorkにする、ハッシュの設定前にやらないとハッシュが変更されてるか分からない
-        if current_request_body_hash != old_data['request_body_hash'] or current_response_body_hash != old_data['response_body_hash']:
-            endpoints["endpoints"]['support'][path]['status'] = "needToWork"
+        if endpoints["endpoints"]['support'][path]['status'] == "supported":
+            # ハッシュが変更されている場合はneedToWorkにする、ハッシュの設定前にやらないとハッシュが変更されてるか分からない
+            if current_request_body_hash != old_data['request_body_hash'] or current_response_body_hash != old_data['response_body_hash']:
+                endpoints["endpoints"]['support'][path]['status'] = "needToWork"
 
         # ハッシュが変更されているかどうかを確認する
         if current_request_body_hash != old_data['request_body_hash']:
@@ -111,7 +112,7 @@ for schema in api['components']['schemas']:
         }
     else:
         current_hash = get_sha256_hash(api['components']['schemas'][schema])
-        if current_hash != old_data['hash']:
+        if current_hash != old_data['hash'] and endpoints['schemas'][schema]['status'] == "supported":
             print(f"{COLORS.green}[CHANGED: SCHEMA] changed schema hash {COLORS.reset} {schema} {COLORS.reset}")
             endpoints['schemas'][schema]['hash'] = current_hash
             endpoints['schemas'][schema]['status'] = "needToWork"
