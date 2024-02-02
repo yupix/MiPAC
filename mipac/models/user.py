@@ -61,7 +61,7 @@ class FollowCommon[FFC: IFederationFollowCommon]:
         return self._raw_follow["follower_id"]
 
     @property
-    def follower(self) -> UserDetailedNotMe | MeDetailed | None:
+    def follower(self) -> UserDetailedNotMe | None:
         raw_follower = self._raw_follow.get("follower")
         return packed_user(raw_follower, client=self._client) if raw_follower else None
 
@@ -70,7 +70,7 @@ class FollowCommon[FFC: IFederationFollowCommon]:
         return self._raw_follow["followee_id"]
 
     @property
-    def followee(self) -> UserDetailedNotMe | MeDetailed | None:
+    def followee(self) -> UserDetailedNotMe | None:
         raw_followee = self._raw_follow.get("followee")
         return packed_user(raw_followee, client=self._client) if raw_followee else None
 
