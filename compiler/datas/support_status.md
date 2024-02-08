@@ -393,12 +393,12 @@
 - [x] Announcement
 - [ ] App
 - [x] Note
-- [ ] NoteReaction
+- [x] NoteReaction
 - [ ] NoteFavorite
 - [ ] Notification
 - [ ] DriveFile
 - [ ] DriveFolder
-- [ ] Following
+- [x] Following
 - [ ] Muting
 - [ ] RenoteMuting
 - [ ] Blocking
@@ -411,8 +411,8 @@
 - [ ] Clip
 - [ ] FederationInstance
 - [x] GalleryPost
-- [ ] EmojiSimple
-- [ ] EmojiDetailed
+- [x] EmojiSimple
+- [x] EmojiDetailed
 - [ ] Flash
 - [ ] Ad
 - [ ] Signin

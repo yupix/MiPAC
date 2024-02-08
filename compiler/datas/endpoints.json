@@ -2270,7 +2270,7 @@
         "NoteReaction": {
             "name": "NoteReaction",
             "hash": "4ef6fd672338dbe470c9adb15b57f44b2e6a63e7da53c4714c3b1c0aca2b2e3a",
-            "status": "notSupported"
+            "status": "supported"
         },
         "NoteFavorite": {
             "name": "NoteFavorite",
@@ -2295,7 +2295,7 @@
         "Following": {
             "name": "Following",
             "hash": "7abec68b15d8f0f431abc0022b489dd81b67d5caf48df1121763559bcdff909c",
-            "status": "notSupported"
+            "status": "supported"
         },
         "Muting": {
             "name": "Muting",
@@ -2360,12 +2360,12 @@
         "EmojiSimple": {
             "name": "EmojiSimple",
             "hash": "45a03e8c334edf32ba0acb9781d3909f9d4bb2b6190a4a202758a064363428e1",
-            "status": "notSupported"
+            "status": "supported"
         },
         "EmojiDetailed": {
             "name": "EmojiDetailed",
             "hash": "66db6b418d8eb98d651a47fc1984230967499a660d8938d1482f844063b06c83",
-            "status": "notSupported"
+            "status": "supported"
         },
         "Flash": {
             "name": "Flash",
