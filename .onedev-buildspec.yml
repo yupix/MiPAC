@@ -26,7 +26,7 @@ jobs:
       - '  onedev'
       - ''
       - '[onedev]'
-      - repository=https://onedev.akarinext.org/yupix/MiPAC/~pypi
+      - repository=https://onedev.akarinext.org/yupix/mipac-sync/MiPAC/~pypi
       - username=@job_token@
       - password=@secret:access-token@
       - EOF
