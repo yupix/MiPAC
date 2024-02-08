@@ -38,7 +38,7 @@ class IFolder(TypedDict):
     parent_id: str | None
     folders_count: NotRequired[int]
     files_count: NotRequired[int]
-    parent: NotRequired[IFolder | None]
+    parent: NotRequired[IFolder]
 
 
 class IFile(TypedDict):
