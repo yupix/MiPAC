@@ -52,7 +52,7 @@ jobs:
     remoteUrl: https://lab.teamblackcrystal.com/yupix/MiPAC
     userName: yupix
     passwordSecret: gitlab-access-token
-    force: false
+    force: true
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   triggers:
   - !BranchUpdateTrigger {}
