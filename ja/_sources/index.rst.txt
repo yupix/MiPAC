@@ -451,6 +451,24 @@ CustomEmoji
     :members:
 
 
+EmojiDetailed
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.emoji.EmojiDetailed
+
+.. autoclass:: mipac.models.emoji.EmojiDetailed
+    :members:
+
+
+EmojiSimple
+~~~~~~~~~~~
+
+.. attributetable:: mipac.models.emoji.EmojiSimple
+
+.. autoclass:: mipac.models.emoji.EmojiSimple
+    :members:
+
+
 UsernameAvailable
 ~~~~~~~~~~~~~~~~~
 
@@ -2341,6 +2359,24 @@ ICustomEmojiLiteRequired
 .. attributetable:: mipac.types.emoji.ICustomEmojiLiteRequired
 
 .. autoclass:: mipac.types.emoji.ICustomEmojiLiteRequired
+    :members:
+
+
+IEmojiDetailed
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.emoji.IEmojiDetailed
+
+.. autoclass:: mipac.types.emoji.IEmojiDetailed
+    :members:
+
+
+IEmojiSimple
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.emoji.IEmojiSimple
+
+.. autoclass:: mipac.types.emoji.IEmojiSimple
     :members:
 
 
