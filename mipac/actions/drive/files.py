@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -9,6 +9,7 @@ from mipac.models.note import Note
 from mipac.types.drive import IDriveSort, IFile
 from mipac.types.note import INote
 from mipac.utils.format import bool_to_string, remove_dict_missing
+from mipac.utils.pagination import Pagination
 from mipac.utils.util import MISSING, credentials_required
 
 if TYPE_CHECKING:
@@ -191,6 +192,32 @@ class FileActions(ClientFileActions):
             Route("POST", "/api/drive/files"), json=data, auth=True
         )
         return [File(raw_file, client=self._client) for raw_file in raw_files]
+
+    async def get_all_files(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        folder_id: str | None = None,
+        type: str | None = None,
+        sort: IDriveSort | None = None,
+    ) -> AsyncGenerator[File, None]:
+        body = {
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "folderId": folder_id,
+            "type": type,
+            "sort": sort,
+        }
+
+        pagination = Pagination[IFile](
+            self._session, Route("POST", "/api/drive/files"), json=body, auth=True
+        )
+
+        while pagination.is_final is False:
+            for raw_file in await pagination.next():
+                yield File(raw_file, client=self._client)
 
     async def get_attached_notes(
         self,
