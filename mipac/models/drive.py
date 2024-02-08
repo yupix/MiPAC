@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.user import PartialUser
 from mipac.types.drive import IDriveStatus
@@ -42,6 +42,17 @@ class DriveStatus:
         """
         return self.__raw_drive_status["usage"]
 
+    def _get(self, key: str) -> Any | None:
+        """You can access the raw response data directly by specifying the key
+
+
+        Returns
+        -------
+        Any | None
+            raw response data
+        """
+        return self.__raw_drive_status.get(key)
+
 
 class FileProperties:
     def __init__(self, raw_properties: IFileProperties) -> None:
@@ -63,6 +74,16 @@ class FileProperties:
     def avg_color(self) -> str | None:
         return self.__raw_properties.get("avg_color")
 
+    def _get(self, key: str) -> Any | None:
+        """You can access the raw response data directly by specifying the key
+
+
+        Returns
+        -------
+        Any | None
+            raw response data
+        """
+        return self.__raw_properties.get(key)
 
 class Folder:
     def __init__(self, raw_folder: IFolder, client: ClientManager):
@@ -100,6 +121,17 @@ class Folder:
             if "parent" in self.__raw_folder and self.__raw_folder["parent"]
             else None
         )
+
+    def _get(self, key: str) -> Any | None:
+        """You can access the raw response data directly by specifying the key
+
+
+        Returns
+        -------
+        Any | None
+            raw response data
+        """
+        return self.__raw_folder.get(key)
 
     @property
     def api(self) -> ClientFolderManager:
@@ -188,6 +220,17 @@ class File:
             if "user" in self.__raw_file and self.__raw_file["user"]
             else None
         )
+
+    def _get(self, key: str) -> Any | None:
+        """You can access the raw response data directly by specifying the key
+
+
+        Returns
+        -------
+        Any | None
+            raw response data
+        """
+        return self.__raw_file.get(key)
 
     @property
     def api(self) -> ClientFileManager:
