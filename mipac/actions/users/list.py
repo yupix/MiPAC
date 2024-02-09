@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.note import Note
 from mipac.models.user import UserList, UserListMembership
@@ -43,7 +42,7 @@ class ClientPartialUserListActions(AbstractAction):
         user_id = user_id or self.__user_id
 
         if user_id is None:
-            raise ParameterError("required parameter user_id is missing")
+            raise ValueError("required parameter user_id is missing")
 
         raw_user_lists: list[IUserList] = await self._session.request(
             Route("POST", "/api/users/lists/list"), json={"userId": user_id}, auth=True
@@ -71,7 +70,7 @@ class ClientPartialUserListActions(AbstractAction):
         user_id = user_id or self.__user_id
 
         if user_id is None:
-            raise ParameterError("required parameter user_id is missing")
+            raise ValueError("required parameter user_id is missing")
 
         res: bool = await self._session.request(
             Route("POST", "/api/users/lists/pull"),
@@ -100,7 +99,7 @@ class ClientPartialUserListActions(AbstractAction):
         user_id = user_id or self.__user_id
 
         if user_id is None:
-            raise ParameterError("required parameter user_id is missing")
+            raise ValueError("required parameter user_id is missing")
 
         res: bool = await self._session.request(
             Route("POST", "/api/users/lists/push"),
@@ -115,7 +114,7 @@ class ClientPartialUserListActions(AbstractAction):
         user_id = user_id or self.__user_id
 
         if user_id is None:
-            raise ParameterError("required parameter user_id is missing")
+            raise ValueError("required parameter user_id is missing")
 
         data = remove_dict_missing(
             {"listId": list_id, "userId": user_id, "withReplies": with_replies}
@@ -172,7 +171,7 @@ class ClientUserListActions(ClientPartialUserListActions):
         list_id = list_id or self.__list_id
 
         if list_id is None:
-            raise ParameterError("required parameter list_id is missing")
+            raise ValueError("required parameter list_id is missing")
 
         return await super().pull(list_id=list_id, user_id=user_id)
 
@@ -181,7 +180,7 @@ class ClientUserListActions(ClientPartialUserListActions):
         list_id = list_id or self.__list_id
 
         if list_id is None:
-            raise ParameterError("required parameter list_id is missing")
+            raise ValueError("required parameter list_id is missing")
 
         return await super().push(list_id=list_id, user_id=user_id)
 
@@ -205,7 +204,7 @@ class ClientUserListActions(ClientPartialUserListActions):
         list_id = list_id or self.__list_id
 
         if list_id is None:
-            raise ParameterError("required parameter list_id is missing")
+            raise ValueError("required parameter list_id is missing")
 
         raw_user_list: IUserList = await self._session.request(
             Route("POST", "/api/users/lists/show"),
@@ -282,7 +281,7 @@ class ClientUserListActions(ClientPartialUserListActions):
         list_id = list_id or self.__list_id
 
         if list_id is None:
-            raise ParameterError("required parameter list_id is missing")
+            raise ValueError("required parameter list_id is missing")
 
         data = remove_dict_missing({"listId": list_id, "name": name, "public": is_public})
 
@@ -297,7 +296,7 @@ class ClientUserListActions(ClientPartialUserListActions):
         list_id = list_id or self.__list_id
 
         if list_id is None:
-            raise ParameterError("required parameter list_id is missing")
+            raise ValueError("required parameter list_id is missing")
 
         res: IUserList = await self._session.request(
             Route("POST", "/api/users/lists/create-from-public"),
@@ -313,7 +312,7 @@ class ClientUserListActions(ClientPartialUserListActions):
         list_id = list_id or self.__list_id
 
         if list_id is None:
-            raise ParameterError("required parameter list_id is missing")
+            raise ValueError("required parameter list_id is missing")
         return await super().update_membership(
             user_id=user_id, with_replies=with_replies, list_id=list_id
         )
@@ -330,7 +329,7 @@ class ClientUserListActions(ClientPartialUserListActions):
         list_id = list_id or self.__list_id
 
         if list_id is None:
-            raise ParameterError("required parameter list_id is missing")
+            raise ValueError("required parameter list_id is missing")
 
         data = {
             "listId": list_id,
@@ -363,7 +362,7 @@ class ClientUserListActions(ClientPartialUserListActions):
         list_id = list_id or self.__list_id
 
         if list_id is None:
-            raise ParameterError("required parameter list_id is missing")
+            raise ValueError("required parameter list_id is missing")
 
         data = {
             "listId": list_id,
@@ -402,7 +401,7 @@ class ClientUserListActions(ClientPartialUserListActions):
         list_id = list_id or self.__list_id
 
         if list_id is None:
-            raise ParameterError("required parameter list_id is missing")
+            raise ValueError("required parameter list_id is missing")
 
         return await self._client.note.action.get_time_line(
             list_id=list_id,
@@ -434,7 +433,7 @@ class ClientUserListActions(ClientPartialUserListActions):
         list_id = list_id or self.__list_id
 
         if list_id is None:
-            raise ParameterError("required parameter list_id is missing")
+            raise ValueError("required parameter list_id is missing")
 
         async for i in self._client.note.action.get_all_time_line(
             list_id=list_id,

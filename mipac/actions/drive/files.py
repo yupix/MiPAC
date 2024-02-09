@@ -5,7 +5,6 @@ import os
 from typing import TYPE_CHECKING, Any, AsyncGenerator, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.drive import File
 from mipac.models.note import Note
@@ -57,7 +56,7 @@ class ClientFileActions(AbstractAction):
         file_id = file_id or self.__file_ids
 
         if file_id is None:
-            raise ParameterError("file_id is required")
+            raise ValueError("file_id is required")
 
         body = {
             "sinceId": since_id,
@@ -82,7 +81,7 @@ class ClientFileActions(AbstractAction):
         file_id = file_id or self.__file_ids
 
         if file_id is None:
-            raise ParameterError("file_id is required")
+            raise ValueError("file_id is required")
 
         body = {
             "sinceId": since_id,

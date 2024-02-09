@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator, Literal, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.file import MiFile
 from mipac.http import HTTPClient, Route
 from mipac.models.channel import Channel
@@ -149,7 +148,7 @@ class ClientChannelActions(AbstractAction):
         channel_id = channel_id or self._channel_id
 
         if channel_id is None:
-            raise ParameterError("channel_id is required")
+            raise ValueError("channel_id is required")
 
         data = {"channelId": channel_id}
 
@@ -204,7 +203,7 @@ class ClientChannelActions(AbstractAction):
         channel_id = channel_id or self._channel_id
 
         if channel_id is None:
-            raise ParameterError("channel_id is required")
+            raise ValueError("channel_id is required")
 
         data = remove_dict_missing(
             {
@@ -261,7 +260,7 @@ class ClientChannelActions(AbstractAction):
         channel_id = channel_id or self._channel_id
 
         if channel_id is None:
-            raise ParameterError("channel_id is required")
+            raise ValueError("channel_id is required")
 
         data = {
             "channelId": channel_id,
@@ -313,7 +312,7 @@ class ClientChannelActions(AbstractAction):
         channel_id = channel_id or self._channel_id
 
         if channel_id is None:
-            raise ParameterError("channel_id is required")
+            raise ValueError("channel_id is required")
 
         data = {
             "channelId": channel_id,
@@ -374,7 +373,7 @@ class ClientChannelActions(AbstractAction):
         channel_id = channel_id or self._channel_id
 
         if channel_id is None:
-            raise ParameterError("channel_id is required")
+            raise ValueError("channel_id is required")
 
         data = {"channelId": channel_id}
 

@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.instance import FederationInstance
 from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
@@ -48,7 +47,7 @@ class FederationActions(AbstractAction):
         get_all: bool = False,
     ):
         if limit > 100:
-            raise ParameterError("limitは100以下である必要があります")
+            raise ValueError("limitは100以下である必要があります")
 
         if get_all:
             limit = 100
@@ -76,7 +75,7 @@ class FederationActions(AbstractAction):
         get_all: bool = False,
     ):
         if limit > 100:
-            raise ParameterError("limitは100以下である必要があります")
+            raise ValueError("limitは100以下である必要があります")
 
         if get_all:
             limit = 100
@@ -109,7 +108,7 @@ class FederationActions(AbstractAction):
         sort: str | None = None,
     ) -> list[FederationInstance]:
         if limit > 100:
-            raise ParameterError("limitは100以下である必要があります")
+            raise ValueError("limitは100以下である必要があります")
         body = {
             "host": host,
             "blocked": blocked,
@@ -157,7 +156,7 @@ class FederationActions(AbstractAction):
         get_all: bool = False,
     ) -> AsyncGenerator[UserDetailedNotMe | MeDetailed, None]:
         if limit > 100:
-            raise ParameterError("limitは100以下である必要があります")
+            raise ValueError("limitは100以下である必要があります")
 
         if get_all:
             limit = 100
@@ -178,7 +177,7 @@ class FederationActions(AbstractAction):
 
     async def get_stats(self, limit: int = 10) -> IFederationInstanceStat:
         if limit > 100:
-            raise ParameterError("limitは100以下である必要があります")
+            raise ValueError("limitは100以下である必要があります")
         res: IFederationInstanceStat = await self.__session.request(
             Route("POST", "/api/federation/stats"), auth=True, body={"limit": limit}, lower=True
         )

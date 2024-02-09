@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator, Literal, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.ad import Ad
 from mipac.types.ads import IAd
@@ -23,7 +22,7 @@ class AdminAdvertisingModelActions(AbstractAction):
         ad_id = self._ad_id or id
 
         if ad_id is None:
-            raise ParameterError("ad id is required")
+            raise ValueError("ad id is required")
         res: bool = await self._session.request(
             Route("POST", "/api/admin/ad/delete"), json={"id": ad_id}, auth=True, lower=True
         )
@@ -45,7 +44,7 @@ class AdminAdvertisingModelActions(AbstractAction):
     ) -> bool:
         ad_id = self._ad_id or ad_id
         if ad_id is None:
-            raise ParameterError("ad id is required")
+            raise ValueError("ad id is required")
         data = {
             "id": ad_id,
             "memo": memo or "",

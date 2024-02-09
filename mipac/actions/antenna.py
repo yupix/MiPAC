@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.antenna import Antenna
 from mipac.models.note import Note
@@ -45,7 +44,7 @@ class ClientAntennaActions(AbstractAction):
         """
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError("antenna id is required")
+            raise ValueError("antenna id is required")
 
         body = {"antennaId": antenna_id}
         res: bool = await self._session.request(
@@ -73,7 +72,7 @@ class ClientAntennaActions(AbstractAction):
         """
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError("antenna id is required")
+            raise ValueError("antenna id is required")
 
         body = {"antennaId": antenna_id}
         res_antenna: IAntenna = await self._session.request(
@@ -93,10 +92,10 @@ class ClientAntennaActions(AbstractAction):
     ) -> AsyncGenerator[Note, None]:
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError("antenna id is required")
+            raise ValueError("antenna id is required")
 
         if limit > 100:
-            raise ParameterError("limit must be less than 100")
+            raise ValueError("limit must be less than 100")
 
         if get_all:
             limit = 100
@@ -171,7 +170,7 @@ class ClientAntennaActions(AbstractAction):
 
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError("antenna id is required")
+            raise ValueError("antenna id is required")
 
         if (
             all(
@@ -183,7 +182,7 @@ class ClientAntennaActions(AbstractAction):
             )
             is False
         ):
-            raise ParameterError("Required parameters are missing")
+            raise ValueError("Required parameters are missing")
         body = {
             "antennaId": antenna_id,
             "name": name,
@@ -271,7 +270,7 @@ class AntennaActions(ClientAntennaActions):
             )
             is False
         ):
-            raise ParameterError("Required parameters are missing")
+            raise ValueError("Required parameters are missing")
         body = remove_dict_missing(
             {
                 "name": name,

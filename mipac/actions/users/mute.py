@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.mute import MutedUser
 from mipac.types.mute import IMutedUser
@@ -36,7 +35,7 @@ class ClientMuteActions(AbstractAction):
         """
 
         if user_id or self.__user_id:
-            raise ParameterError("Parameter 'user_id' is required.")
+            raise ValueError("Parameter 'user_id' is required.")
 
         body = {"userId": user_id, "expiresAt": expires_at}
 
@@ -59,7 +58,7 @@ class ClientMuteActions(AbstractAction):
         """
 
         if user_id or self.__user_id:
-            raise ParameterError("Parameter 'user_id' is required.")
+            raise ValueError("Parameter 'user_id' is required.")
 
         res: bool = await self._session.request(
             route=Route("POST", "/api/mute/delete"), json={"userId": user_id}

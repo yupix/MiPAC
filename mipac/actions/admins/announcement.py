@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.announcement import Announcement, AnnouncementDetailed
 from mipac.types.announcement import IAnnouncement, IAnnouncementDetailed
@@ -87,7 +86,7 @@ class AdminAnnouncementActions(AdminAnnouncementClientActions):
         get_all: bool = False,
     ) -> AsyncGenerator[AnnouncementDetailed, None]:
         if limit > 100:
-            raise ParameterError("limitは100以下である必要があります")
+            raise ValueError("limitは100以下である必要があります")
         if get_all:
             limit = 100
 

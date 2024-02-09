@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.utils.util import deprecated
 
@@ -21,7 +20,7 @@ class ClientFavoriteActions(AbstractAction):
         note_id = note_id or self.__note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {"noteId": note_id}
         return bool(
@@ -40,7 +39,7 @@ class ClientFavoriteActions(AbstractAction):
         note_id = note_id or self.__note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {"noteId": note_id}
         return bool(
