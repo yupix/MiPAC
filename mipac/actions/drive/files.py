@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator
+from typing import TYPE_CHECKING, AsyncGenerator, override
 
 from mipac.abstract.action import AbstractAction
+from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.drive import File
 from mipac.models.note import Note
@@ -53,7 +54,10 @@ class ClientFileActions(AbstractAction):
 
         file_id = file_id or self.__file_ids
 
-        data = {
+        if file_id is None:
+            raise ParameterError("file_id is required")
+
+        body = {
             "sinceId": since_id,
             "untilId": until_id,
             "limit": limit,
@@ -61,9 +65,40 @@ class ClientFileActions(AbstractAction):
         }
 
         raw_notes: list[INote] = await self._session.request(
-            Route("POST", "/api/drive/files/attached-notes"), json=data, auth=True
+            Route("POST", "/api/drive/files/attached-notes"), json=body, auth=True
         )
         return [Note(raw_note, client=self._client) for raw_note in raw_notes]
+
+    async def get_all_attached_notes(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        *,
+        file_id: str | None = None,
+    ) -> AsyncGenerator[Note, None]:
+        file_id = file_id or self.__file_ids
+
+        if file_id is None:
+            raise ParameterError("file_id is required")
+
+        body = {
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "fileId": file_id,
+        }
+
+        pagination = Pagination[INote](
+            self._session,
+            Route("POST", "/api/drive/files/attached-notes"),
+            json=body,
+            auth=True,
+        )
+
+        while pagination.is_final is False:
+            for raw_note in await pagination.next():
+                yield Note(raw_note, client=self._client)
 
     async def delete(self, *, file_id: str | None = None) -> bool:
         """Delete a file
@@ -219,6 +254,7 @@ class FileActions(ClientFileActions):
             for raw_file in await pagination.next():
                 yield File(raw_file, client=self._client)
 
+    @override
     async def get_attached_notes(
         self,
         file_id: str,
@@ -250,6 +286,17 @@ class FileActions(ClientFileActions):
         return await super().get_attached_notes(
             since_id=since_id, until_id=until_id, limit=limit, file_id=file_id
         )
+
+    @override
+    async def get_all_attached_notes(
+        self,
+        file_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+    ) -> AsyncGenerator[Note, None]:
+        async for i in super().get_all_attached_notes(since_id, until_id, limit, file_id=file_id):
+            yield i
 
     @credentials_required
     async def check_existence(self, md5: str) -> bool:
