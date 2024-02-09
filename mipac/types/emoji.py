@@ -28,6 +28,7 @@ class EmojiPayload(TypedDict):
     url: str | None
     license: str | None  # v13 only
 
+
 class IEmojiSimple(TypedDict):
     aliaces: list[str]
     name: str
@@ -35,6 +36,7 @@ class IEmojiSimple(TypedDict):
     url: str
     is_sensitive: NotRequired[bool]
     role_ids_that_can_be_used_this_emoji_as_reaction: NotRequired[list[str]]
+
 
 class IEmojiDetailed(TypedDict):
     id: str

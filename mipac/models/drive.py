@@ -85,6 +85,7 @@ class FileProperties:
         """
         return self.__raw_properties.get(key)
 
+
 class Folder:
     def __init__(self, raw_folder: IFolder, client: ClientManager):
         self.__raw_folder: IFolder = raw_folder

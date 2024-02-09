@@ -366,7 +366,7 @@ class FileActions(ClientFileActions):
             ファイルがセンシティブかどうか, default=False
         force: bool
             ファイルが既に存在する場合でも強制的にアップロードするかどうか, default=False
-            
+
 
         Returns
         -------
@@ -381,7 +381,7 @@ class FileActions(ClientFileActions):
         elif isinstance(file, bytes):
             file_byte = io.BytesIO(file)
         else:
-            file_byte = open(file, 'rb')
+            file_byte = open(file, "rb")
 
         data = {
             "folderId": folder_id,
