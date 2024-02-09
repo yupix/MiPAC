@@ -262,25 +262,23 @@ class FileActions(ClientFileActions):
         until_id: str | None = None,
         limit: int = 10,
     ) -> list[Note]:
-        """Get the attached notes of a file
-
-        Endpoint: `/api/drive/files/attached-notes`
+        """指定したファイルを含む全てのノートを取得します
 
         Parameters
         ----------
         file_id: str
-            The id of the file to get notes from
+            ノートを取得するファイルID
         since_id: str | None
-            The id of the note to start from, defaults to None
+            指定するとそのノートIDよりも後のノートを返します, default=None
         until_id: str | None
-            The id of the note to end at, defaults to None
+            指定するとそのノートIDよりも前のノートを返します, default=None
         limit: int
-            The amount of notes to get, defaults to 10
+            一度に取得するノート数, default=10
 
         Returns
         -------
         list[Note]
-            The attached notes of the file
+            取得したノート
         """
 
         return await super().get_attached_notes(
@@ -295,24 +293,42 @@ class FileActions(ClientFileActions):
         until_id: str | None = None,
         limit: int = 10,
     ) -> AsyncGenerator[Note, None]:
+        """指定したファイルを含む全てのノートを取得します
+
+        Parameters
+        ----------
+        file_id: str
+            ノートを取得するファイルID
+        since_id: str | None
+            指定するとそのノートIDよりも後のノートを返します, default=None
+        until_id: str | None
+            指定するとそのノートIDよりも前のノートを返します, default=None
+        limit: int
+            一度に取得するノート数, default=10
+
+        Returns
+        -------
+        AsyncGenerator[Note, None]
+            取得したノート
+        """
         async for i in super().get_all_attached_notes(since_id, until_id, limit, file_id=file_id):
             yield i
 
     @credentials_required
     async def check_existence(self, md5: str) -> bool:
-        """Check if a file exists in the drive
+        """指定したmd5のファイルが既に存在するか確認します
 
         Endpoint: `/api/drive/files/check-existence`
 
         Parameters
         ----------
         md5: str
-            The md5 of the file to check
+            確認したいmd5
 
         Returns
         -------
         bool
-            Whether the file exists or not
+            存在するかしないか
         """
 
         data = {"md5": md5}
