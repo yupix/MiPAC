@@ -1253,31 +1253,31 @@
                 "path": "/emojis",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "04bc0ac51f6c991c67c1b8cd716b0743c2b96f8339d6eaa7a22f0159d51e36a4",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/emoji": {
                 "path": "/emoji",
                 "request_body_hash": "618bf1d63c5924aae1eaf27433e465e02f004a837e5e1f407a338413f3fc151f",
                 "response_body_hash": "1a135cf1b102697cf2a475fadd2683cc443b8d232d684885b38942430316f473",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/mute/create": {
                 "path": "/mute/create",
                 "request_body_hash": "77b507275380a024941566a1376b1f8ba69a8a6d4a8095f6ca93aa27f04312f8",
                 "response_body_hash": "c1c4d7b547212366f3581bad00c63f70f731f78bc5f861e6e2da7f125c087cba",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/mute/delete": {
                 "path": "/mute/delete",
                 "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
                 "response_body_hash": "b9f152b2bf1a9c9b2c6364e7c204faca66f25b84111090a06233ff5b231275b0",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/mute/list": {
                 "path": "/mute/list",
                 "request_body_hash": "d392bfbe478ea28a41fcb4b1cfd5b120fb85cc71ad890eea4e0abb19916c7fe1",
                 "response_body_hash": "141e7fba4ba993a6299ae29bde28361e12c11d3f48186cd3819a106c5aaca7b3",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/renote-mute/create": {
                 "path": "/renote-mute/create",

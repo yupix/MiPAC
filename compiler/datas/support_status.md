@@ -1,4 +1,4 @@
-## SUPPORTED ENDPOINTS (132/367)
+## SUPPORTED ENDPOINTS (137/367)
 - [x] /admin/ad/create
 - [x] /admin/ad/list
 - [x] /admin/drive/clean-remote-files
@@ -40,6 +40,11 @@
 - [x] /drive/files/upload-from-url
 - [x] /drive/folders/delete
 - [x] /invite/delete
+- [x] /emojis
+- [x] /emoji
+- [x] /mute/create
+- [x] /mute/delete
+- [x] /mute/list
 - [x] /notes/delete
 - [x] /notes/favorites/create
 - [x] /notes/favorites/delete
@@ -194,11 +199,6 @@
 - [ ] /i/unpin
 - [ ] /i/webhooks/update
 - [ ] /i/webhooks/delete
-- [ ] /emojis
-- [ ] /emoji
-- [ ] /mute/create
-- [ ] /mute/delete
-- [ ] /mute/list
 - [ ] /renote-mute/create
 - [ ] /renote-mute/delete
 - [ ] /renote-mute/list
