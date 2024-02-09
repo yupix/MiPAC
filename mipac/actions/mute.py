@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING, AsyncGenerator
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.mute import MuteUser
-from mipac.types.mute import IMuteUser
+from mipac.models.mute import MutedUser
+from mipac.types.mute import IMutedUser
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
 
@@ -70,7 +70,7 @@ class MuteActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         get_all: bool = True,
-    ) -> AsyncGenerator[MuteUser, None]:
+    ) -> AsyncGenerator[MutedUser, None]:
         if limit > 100:
             raise ParameterError("limit は100以下である必要があります")
 
@@ -79,14 +79,14 @@ class MuteActions(AbstractAction):
 
         body = remove_dict_empty({"limit": limit, "sinceId": since_id, "untilId": until_id})
 
-        pagination = Pagination[IMuteUser](
+        pagination = Pagination[IMutedUser](
             self._session, Route("POST", "/api/mute/list"), json=body
         )
 
         while True:
             raw_mute_users = await pagination.next()
             for raw_mute_user in raw_mute_users:
-                yield MuteUser(raw_mute_user, client=self._client)
+                yield MutedUser(raw_mute_user, client=self._client)
 
             if get_all is False or pagination.is_final:
                 break
