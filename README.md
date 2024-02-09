@@ -45,6 +45,19 @@ If you are using a non-official Fork and it is not working properly, please send
 
 ## Usage
 
+MiPAC has two repositories, PyPi and its own repository, PyPi is released after it is relatively stable, while the own repository is built and released with each commit.
+
+We hope you will use whichever you prefer.
+https://onedev.akarinext.org/yupix/mipac-sync/MiPAC/~packages
+
+```
+#stable build(recommended)
+pip install mipac
+
+#latest build
+pip install --extra-index-url https://onedev.akarinext.org/yupix/mipac-sync/MiPAC/~pypi/simple/ mipac
+```
+
 ```python
 import asyncio
 
@@ -62,17 +75,6 @@ if __name__ == '__main__':
 ```
 
 ### Notes
-
-### Python 3.12.0 final will be released and the minimum version will be changed to 3.12.0 after 3 months
-
-This is mainly to improve the pace of development of MiPAC by using new syntax and other features to improve DX.
-Users will also benefit from faster Python and the use of new syntax.
-
-The current release of Python 3.12.0 is listed as follows, so the change will be implemented as early as **January 02, 2024**.
-
- > `3.12.0 final: Monday, 2023-10-02`
-
-If you have an opinion on this, you can create a Discussion.
 
 ### Some server (instance) versions may not work properly.
 

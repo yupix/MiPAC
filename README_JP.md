@@ -43,6 +43,21 @@ MiPACはMisskey v11, 12, 13をサポートしているApi Wrapperです。
 
 ## 使い方
 
+MiPACにはPyPiと独自のリポジトリの2つがあります、PyPiは比較的安定してからのリリースになりますが、独自のリポジトリはコミットごとにビルドが行われ公開されるようになっています。
+
+お好きなほうをご利用いただけると幸いです。
+
+https://onedev.akarinext.org/yupix/mipac-sync/MiPAC/~packages
+
+```
+#安定したビルド(推奨)
+pip install mipac
+
+#最新の成果物
+pip install --extra-index-url https://onedev.akarinext.org/yupix/mipac-sync/MiPAC/~pypi/simple/ mipac
+```
+
+
 ```python
 import asyncio
 
@@ -60,17 +75,6 @@ if __name__ == '__main__':
 ```
 
 ### 注意事項
-
-### Python3.12.0 final がリリースされ、3カ月経過後に最低バージョンを 3.12.0 に変更します
-
-これは主にMiPACの開発を行う上で、新規構文の使用などによってDXがより良くなり開発ペースが向上する為です。
-また、使用者の皆様においてはPythonの高速化や新規構文の使用などが使用できるといった恩恵を得ることができます。
-
-現在Python3.12.0のリリースは以下のように記載されているため、早くて **2024年01月02日** に変更を実施する予定です。
-
- > `3.12.0 final: Monday, 2023-10-02`
-
- これについて意見がある場合はDiscussionを作成することができます。
 
 ### 一部サーバー(インスタンス)のバージョンによっては正常に動作しない可能性があります
 
