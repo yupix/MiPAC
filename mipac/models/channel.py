@@ -20,7 +20,7 @@ class Channel:
     @property
     def id(self) -> str:
         """チャンネルID
-        
+
         Returns
         -------
         str
@@ -30,7 +30,7 @@ class Channel:
     @property
     def created_at(self) -> datetime:
         """チャンネルが作成された日時
-        
+
         Returns
         -------
         datetime
@@ -40,7 +40,7 @@ class Channel:
     @property
     def last_noted_at(self) -> datetime | None:
         """チャンネルに最後にノートが投稿された日時
-        
+
         Returns
         -------
         datetime | None
@@ -51,7 +51,7 @@ class Channel:
     @property
     def name(self) -> str:
         """チャンネル名
-        
+
         Returns
         -------
         str
@@ -61,7 +61,7 @@ class Channel:
     @property
     def description(self) -> str | None:
         """チャンネルの説明
-        
+
         Returns
         -------
         str | None
@@ -71,7 +71,7 @@ class Channel:
     @property
     def user_id(self) -> str | None:
         """チャンネルを作成したユーザーのID
-        
+
         Returns
         -------
         str | None
@@ -81,7 +81,7 @@ class Channel:
     @property
     def banner_url(self) -> str | None:
         """チャンネルのバナー画像URL
-        
+
         Returns
         -------
         str | None
@@ -91,7 +91,7 @@ class Channel:
     @property
     def pinned_note_ids(self) -> list[str]:
         """ピン留めされているノートのIDのリスト
-        
+
         Returns
         -------
         list[str]
@@ -101,7 +101,7 @@ class Channel:
     @property
     def color(self) -> str:
         """チャンネルの色
-        
+
         Returns
         -------
         str
@@ -111,7 +111,7 @@ class Channel:
     @property
     def is_archived(self) -> bool:
         """チャンネルがアーカイブされているかどうか
-        
+
         Returns
         -------
         bool
@@ -121,7 +121,7 @@ class Channel:
     @property
     def users_count(self) -> int:
         """チャンネルに参加しているユーザー数
-        
+
         Returns
         -------
         int
@@ -151,7 +151,7 @@ class Channel:
     @property
     def allow_renote_to_external(self) -> bool:
         """外部へのリノートを許可するかどうか
-        
+
         Returns
         -------
         bool
@@ -161,7 +161,7 @@ class Channel:
     @property
     def is_following(self) -> bool | None:
         """自身がフォローしているかどうか
-        
+
         Returns
         -------
         bool
@@ -171,7 +171,7 @@ class Channel:
     @property
     def is_favorited(self) -> bool | None:
         """自身がお気に入り登録しているかどうか
-        
+
         Returns
         -------
         bool
@@ -181,7 +181,7 @@ class Channel:
     @property
     def pinned_notes(self) -> list[Note]:
         """ピン留めされているノートのリスト
-        
+
         Returns
         -------
         list[Note]
@@ -193,7 +193,7 @@ class Channel:
     @property
     def api(self) -> ClientChannelManager:
         """チャンネルに関するAPIを利用するためのクライアント
-        
+
         Returns
         -------
         ClientChannelManager
