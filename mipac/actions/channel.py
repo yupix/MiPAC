@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator, Literal, override
 
 from mipac.abstract.action import AbstractAction
+from mipac.errors.base import ParameterError
 from mipac.file import MiFile
 from mipac.http import HTTPClient, Route
 from mipac.models.channel import Channel
@@ -131,21 +132,25 @@ class ClientChannelActions(AbstractAction):
 
     @credentials_required
     async def unfollow(self, *, channel_id: str | None = None) -> bool:
-        """Unfollow a channel
+        """指定したIDのチャンネルのフォローを解除します
 
         Endpoint: `/api/channels/unfollow`
 
         Parameters
         ----------
-        channel_id : str, optional
-            ID of the channel, by default None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         bool
-            Whether the channel is unfollowed
+            フォロー解除に成功したかどうか
         """
         channel_id = channel_id or self._channel_id
+        
+        if channel_id is None:
+            raise ParameterError("channel_id is required")
+        
         data = {"channelId": channel_id}
 
         res: bool = await self._session.request(
@@ -649,19 +654,19 @@ class ChannelActions(ClientChannelActions):
                 yield Channel(raw_channel=raw_channel, client=self._client)
 
     async def show(self, channel_id: str) -> Channel:
-        """Show a channel
+        """指定したIDのチャンネルを取得します
 
         Endpoint: `/api/channels/show`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
+            対象のチャンネルID
 
         Returns
         -------
         Channel
-            Channel
+            取得したチャンネル
         """
         raw_channel: IChannel = await self._session.request(
             Route("POST", "/api/channels/show"), auth=True, json={"channelId": channel_id}
@@ -671,19 +676,19 @@ class ChannelActions(ClientChannelActions):
     @credentials_required
     @override
     async def unfollow(self, channel_id: str) -> bool:
-        """Unfollow a channel
+        """指定したIDのチャンネルのフォローを解除します
 
         Endpoint: `/api/channels/unfollow`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
+            対象のチャンネルID
 
         Returns
         -------
         bool
-            Whether the channel is unfollowed
+            フォロー解除に成功したかどうか
         """
         return await super().unfollow(channel_id=channel_id)
 
