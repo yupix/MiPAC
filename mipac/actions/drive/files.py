@@ -1,6 +1,8 @@
 from __future__ import annotations
+import io
+import os
 
-from typing import TYPE_CHECKING, AsyncGenerator, override
+from typing import TYPE_CHECKING, Any, AsyncGenerator, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import ParameterError
@@ -340,7 +342,7 @@ class FileActions(ClientFileActions):
 
     async def create(
         self,
-        file,
+        file: str | bytes | os.PathLike[Any] | io.BufferedIOBase,
         folder_id: str | None = None,
         name: str | None = None,
         comment: str | None = None,
@@ -353,26 +355,34 @@ class FileActions(ClientFileActions):
 
         Parameters
         ----------
-        file: str
-            The file to upload
+        file: str | bytes | os.PathLike[Any] | io.BufferedIOBase
+            アップロードするファイル
         folder_id: str | None
-            The id of the folder to upload the file to, defaults to None
+            アップロード先のフォルダID, default=None
         name: str | None
-            The name of the file, defaults to None
+            ファイルの名前, default=None
         comment: str | None
-            The comment of the file, defaults to None
+            ファイルのコメント, default=None
         is_sensitive: bool
-            Whether the file is sensitive or not, defaults to False
+            ファイルがセンシティブかどうか, default=False
         force: bool
-            Whether to force upload the file or not, defaults to False
+            ファイルが既に存在する場合でも強制的にアップロードするかどうか, default=False
+            
 
         Returns
         -------
         File
-            The uploaded file
+            アップロードしたファイル
         """
 
-        file_byte = open(file, "rb") if file else None
+        if isinstance(file, io.IOBase):
+            if (file.seekable() and file.readable()) is False:  # 書き込み/読み込みができるか確認
+                raise ValueError(f"File buffer {file!r} must be seekable and readable")
+            file_byte = file
+        elif isinstance(file, bytes):
+            file_byte = io.BytesIO(file)
+        else:
+            file_byte = open(file, 'rb')
 
         data = {
             "folderId": folder_id,
