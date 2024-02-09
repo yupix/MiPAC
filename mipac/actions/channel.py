@@ -147,16 +147,82 @@ class ClientChannelActions(AbstractAction):
             フォロー解除に成功したかどうか
         """
         channel_id = channel_id or self._channel_id
-        
+
         if channel_id is None:
             raise ParameterError("channel_id is required")
-        
+
         data = {"channelId": channel_id}
 
         res: bool = await self._session.request(
             Route("POST", "/api/channels/unfollow"), json=data, auth=True, lower=True
         )
         return res
+
+    async def update(
+        self,
+        name: str | None = MISSING,
+        description: str | None = MISSING,
+        banner_id: str | None = MISSING,
+        is_archived: bool | None = MISSING,
+        pinned_note_ids: list[str] | None = MISSING,
+        color: str | None = MISSING,
+        is_sensitive: bool | None = MISSING,
+        allow_renote_to_external: bool | None = MISSING,
+        *,
+        channel_id: str | None = None,
+    ) -> Channel:
+        """チャンネルの情報を更新します
+
+        Endpoint: `/api/channels/update`
+
+        Parameters
+        ----------
+        name : str | None
+            チャンネル名, default=MISSING
+        description : str | None
+            チャンネルの説明, default=MISSING
+        banner_id : str | None
+            バナー画像のID, default=MISSING
+        is_archived : bool | None
+            チャンネルがアーカイブされているかどうか, default=MISSING
+        pinned_note_ids : list[str] | None
+            ピン留めするノートのIDリスト, default=MISSING
+        color : str | None
+            チャンネルの色, default=MISSING
+        is_sensitive : bool | None
+            チャンネルがセンシティブかどうか, default=MISSING
+        allow_renote_to_external : bool | None
+            外部へのリノートを許可するかどうか, default=MISSING
+        channel_id : str | None
+            対象のチャンネルID, default=None
+
+        Returns
+        -------
+        Channel
+            更新後のチャンネル
+        """
+        channel_id = channel_id or self._channel_id
+
+        if channel_id is None:
+            raise ParameterError("channel_id is required")
+
+        data = remove_dict_missing(
+            {
+                "channelId": channel_id,
+                "name": name,
+                "description": description,
+                "bannerId": banner_id,
+                "isArchived": is_archived,
+                "pinnedNoteIds": pinned_note_ids,
+                "color": color,
+                "isSensitive": is_sensitive,
+                "allowRenoteToExternal": allow_renote_to_external,
+            }
+        )
+        raw_channel: IChannel = await self._session.request(
+            Route("POST", "/api/channels/update"), json=data, auth=True, remove_none=False
+        )
+        return Channel(raw_channel=raw_channel, client=self._client)
 
     async def timeline(
         self,
@@ -248,63 +314,6 @@ class ClientChannelActions(AbstractAction):
             raw_notes: list[INote] = await pagination.next()
             for raw_note in raw_notes:
                 yield Note(raw_note=raw_note, client=self._client)
-
-    async def update(
-        self,
-        name: str | None = MISSING,
-        description: str | None = MISSING,
-        banner_id: str | None = MISSING,
-        is_archived: bool | None = MISSING,
-        pinned_note_ids: list[str] | None = MISSING,
-        color: str | None = MISSING,
-        is_sensitive: bool | None = MISSING,
-        allow_renote_to_external: bool | None = MISSING,
-        *,
-        channel_id: str | None = None,
-    ) -> Channel:
-        """Update a channel
-
-        Endpoint: `/api/channels/update`
-
-        Parameters
-        ----------
-        name : str, optional
-            Name of the channel, by default MISSING
-        description : str, optional
-            Description of the channel, by default MISSING
-        banner_id : str, optional
-            Banner ID of the channel, by default MISSING
-        is_archived : bool, optional
-            Whether the channel is archived, by default MISSING
-        pinned_note_ids : list[str], optional
-            Pinned note IDs, by default MISSING
-        color : str, optional
-            Color of the channel, by default MISSING
-        is_sensitive : bool, optional
-            Whether the channel is sensitive, by default MISSING
-        allow_renote_to_external : bool, optional
-            Whether the channel allows renote to external, by default MISSING
-        channel_id : str, optional
-            ID of the channel, by default None
-        """
-        channel_id = channel_id or self._channel_id
-        data = remove_dict_missing(
-            {
-                "channelId": channel_id,
-                "name": name,
-                "description": description,
-                "bannerId": banner_id,
-                "isArchived": is_archived,
-                "pinnedNoteIds": pinned_note_ids,
-                "color": color,
-                "isSensitive": is_sensitive,
-                "allowRenoteToExternal": allow_renote_to_external,
-            }
-        )
-        raw_channel: IChannel = await self._session.request(
-            Route("POST", "/api/channels/update"), json=data, auth=True, remove_none=False
-        )
-        return Channel(raw_channel=raw_channel, client=self._client)
 
     @credentials_required
     async def favorite(self, *, channel_id: str | None = None) -> bool:
@@ -744,38 +753,39 @@ class ChannelActions(ClientChannelActions):
         is_sensitive: bool | None = MISSING,
         allow_renote_to_external: bool | None = MISSING,
     ) -> Channel:
-        """Update a channel
+        """チャンネルの情報を更新します
 
         Endpoint: `/api/channels/update`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
-        name : str, optional
-            Name of the channel, by default MISSING
-        description : str, optional
-            Description of the channel, by default MISSING
-        banner_id : str, optional
-            Banner ID of the channel, by default MISSING
-        is_archived : bool, optional
-            Whether the channel is archived, by default MISSING
-        pinned_note_ids : list[str], optional
-            Pinned note IDs, by default MISSING
-        color : str, optional
-            Color of the channel, by default MISSING
-        is_sensitive : bool, optional
-            Whether the channel is sensitive, by default MISSING
-        allow_renote_to_external : bool, optional
-            Whether the channel allows renote to external, by default MISSING
+            対象のチャンネルID
+        name : str | None
+            チャンネル名, default=MISSING
+        description : str | None
+            チャンネルの説明, default=MISSING
+        banner_id : str | None
+            バナー画像のID, default=MISSING
+        is_archived : bool | None
+            チャンネルがアーカイブされているかどうか, default=MISSING
+        pinned_note_ids : list[str] | None
+            ピン留めするノートのIDリスト, default=MISSING
+        color : str | None
+            チャンネルの色, default=MISSING
+        is_sensitive : bool | None
+            チャンネルがセンシティブかどうか, default=MISSING
+        allow_renote_to_external : bool | None
+            外部へのリノートを許可するかどうか, default=MISSING
 
         Returns
         -------
         Channel
-            Updated channel
+            更新後のチャンネル
         """
 
         return await super().update(
+            channel_id=channel_id,
             name=name,
             description=description,
             banner_id=banner_id,
@@ -784,7 +794,6 @@ class ChannelActions(ClientChannelActions):
             color=color,
             is_sensitive=is_sensitive,
             allow_renote_to_external=allow_renote_to_external,
-            channel_id=channel_id,
         )
 
     @credentials_required
