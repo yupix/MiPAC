@@ -405,7 +405,7 @@
 - [ ] Hashtag
 - [x] InviteCode
 - [ ] Page
-- [ ] Channel
+- [x] Channel
 - [ ] QueueCount
 - [ ] Antenna
 - [ ] Clip

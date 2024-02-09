@@ -2330,7 +2330,7 @@
         "Channel": {
             "name": "Channel",
             "hash": "65ac71d7cb329a9c3d0f4002198f6df7f525852013f84f277b447e4cde8386fd",
-            "status": "notSupported"
+            "status": "supported"
         },
         "QueueCount": {
             "name": "QueueCount",
