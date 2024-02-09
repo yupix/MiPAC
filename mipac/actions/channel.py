@@ -234,29 +234,35 @@ class ClientChannelActions(AbstractAction):
         *,
         channel_id: str | None = None,
     ) -> list[Note]:
-        """Get the timeline of a channel
+        """チャンネルのタイムラインを取得します
 
         Endpoint: `/api/channels/timeline`
 
         Parameters
         ----------
-        limit : int, optional
-            Limit, by default 10
-        since_id : str, optional
-            Since ID, by default None
-        until_id : str, optional
-            Until ID, by default None
-        since_date : int, optional
-            Since date, by default None
-        until_date : int, optional
-            Until date, by default None
+        limit : int
+            一度に取得する件数, default=10
+        since_id : str | None
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : int | None
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : int | None
+            指定した日付のノートより前のノートを取得します, default=None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         list[Note]
-            List of notes
+            取得したノートのリスト
         """
         channel_id = channel_id or self._channel_id
+
+        if channel_id is None:
+            raise ParameterError("channel_id is required")
+
         data = {
             "channelId": channel_id,
             "limit": limit,
@@ -280,25 +286,35 @@ class ClientChannelActions(AbstractAction):
         *,
         channel_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
-        """Get all notes in the timeline of a channel
+        """チャンネルのタイムラインを全て取得します
+
+        Endpoint: `/api/channels/timeline`
 
         Parameters
         ----------
-        since_id : str, optional
-            Since ID, by default None
-        until_id : str, optional
-            Until ID, by default None
-        since_date : int, optional
-            Since date, by default None
-        until_date : int, optional
-            Until date, by default None
+        limit : int
+            一度に取得する件数, default=10
+        since_id : str | None
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : int | None
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : int | None
+            指定した日付のノートより前のノートを取得します, default=None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         AsyncGenerator[Note, None]
-            Async generator of notes
+            取得したノートのリスト
         """
         channel_id = channel_id or self._channel_id
+
+        if channel_id is None:
+            raise ParameterError("channel_id is required")
+
         data = {
             "channelId": channel_id,
             "sinceId": since_id,
@@ -317,19 +333,19 @@ class ClientChannelActions(AbstractAction):
 
     @credentials_required
     async def favorite(self, *, channel_id: str | None = None) -> bool:
-        """Favorite a channel
+        """指定したIDのチャンネルをお気に入りにします
 
         Endpoint: `/api/channels/favorite`
 
         Parameters
         ----------
-        channel_id : str, optional
-            ID of the channel, by default None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         bool
-            Whether the channel is favorited
+            お気に入りに追加できたかどうか
         """
         channel_id = channel_id or self._channel_id
         data = {"channelId": channel_id}
@@ -341,21 +357,25 @@ class ClientChannelActions(AbstractAction):
 
     @credentials_required
     async def unfavorite(self, *, channel_id: str | None = None) -> bool:
-        """Unfavorite a channel
+        """指定したIDのチャンネルをお気に入りから外します
 
         Endpoint: `/api/channels/unfavorite`
 
         Parameters
         ----------
-        channel_id : str, optional
-            ID of the channel, by default None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         bool
-            Whether the channel is unfavorited
+            お気に入りから外せたかどうか
         """
         channel_id = channel_id or self._channel_id
+
+        if channel_id is None:
+            raise ParameterError("channel_id is required")
+
         data = {"channelId": channel_id}
 
         res: bool = await self._session.request(
@@ -702,6 +722,45 @@ class ChannelActions(ClientChannelActions):
         return await super().unfollow(channel_id=channel_id)
 
     @override
+    async def timeline(
+        self,
+        channel_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: int | None = None,
+        until_date: int | None = None,
+    ) -> list[Note]:
+        """チャンネルのタイムラインを取得します
+
+        Endpoint: `/api/channels/timeline`
+
+        Parameters
+        ----------
+        channel_id : str
+            対象のチャンネルID
+        limit : int
+            一度に取得する件数, default=10
+        since_id : str | None
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : int | None
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : int | None
+            指定した日付のノートより前のノートを取得します, default=None
+
+        Returns
+        -------
+        list[Note]
+            取得したノートのリスト
+        """
+
+        return await super().timeline(
+             channel_id=channel_id, limit=limit, since_id=since_id, until_id=until_id, since_date=since_date, until_date=until_date
+        )
+
+    @override
     async def get_all_timeline(
         self,
         channel_id: str,
@@ -710,25 +769,29 @@ class ChannelActions(ClientChannelActions):
         since_date: int | None = None,
         until_date: int | None = None,
     ) -> AsyncGenerator[Note, None]:
-        """Get all notes in the timeline of a channel
+        """チャンネルのタイムラインを全て取得します
+
+        Endpoint: `/api/channels/timeline`
 
         Parameters
         ----------
-        channel_id : str
-            ID of the channel
-        since_id : str, optional
-            Since ID, by default None
-        until_id : str, optional
-            Until ID, by default None
-        since_date : int, optional
-            Since date, by default None
-        until_date : int, optional
-            Until date, by default None
+        limit : int
+            一度に取得する件数, default=10
+        since_id : str | None
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : int | None
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : int | None
+            指定した日付のノートより前のノートを取得します, default=None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         AsyncGenerator[Note, None]
-            Async generator of notes
+            取得したノートのリスト
         """
         async for i in super().get_all_timeline(
             since_id=since_id,
@@ -799,51 +862,51 @@ class ChannelActions(ClientChannelActions):
     @credentials_required
     @override
     async def favorite(self, channel_id: str) -> bool:
-        """Favorite a channel
+        """指定したIDのチャンネルをお気に入りにします
 
         Endpoint: `/api/channels/favorite`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
+            対象のチャンネルID
 
         Returns
         -------
         bool
-            Whether the channel is favorited
+            お気に入りに追加できたかどうか
         """
         return await super().favorite(channel_id=channel_id)
 
     @credentials_required
     @override
     async def unfavorite(self, channel_id: str) -> bool:
-        """Unfavorite a channel
+        """指定したIDのチャンネルをお気に入りから外します
 
         Endpoint: `/api/channels/unfavorite`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
+            対象のチャンネルID
 
         Returns
         -------
         bool
-            Whether the channel is unfavorited
+            お気に入りから外せたかどうか
         """
         return await super().unfavorite(channel_id=channel_id)
 
     @credentials_required
     async def my_favorites(self) -> list[Channel]:
-        """Get my favorite channels
+        """自分がお気に入りにしているチャンネルを取得します
 
         Endpoint: `/api/channels/myFavorites`
 
         Returns
         -------
         list[Channel]
-            List of my favorite channels
+            取得したチャンネルのリスト
         """
         raw_channels: list[IChannel] = await self._session.request(
             Route("POST", "/api/channels/my-favorites"), auth=True, lower=True
@@ -861,27 +924,27 @@ class ChannelActions(ClientChannelActions):
         until_id: str | None = None,
         limit: int = 5,
     ) -> list[Channel]:
-        """Search channels
+        """チャンネルを検索します
 
         Endpoint: `/api/channels/search`
 
         Parameters
         ----------
         query : str
-            Query
-        type : Literal["nameAndDescription","nameOnly"], optional
-            Type of the search, by default "nameAndDescription"
-        since_id : str, optional
-            Since ID, by default None
+            検索するキーワード
+        type : Literal["nameAndDescription","nameOnly"]
+            検索に用いる形式, default="nameAndDescription"
+        since_id : str | None
+            指定したIDのチャンネルより後のチャンネルを取得します, default=None
         until_id : str, optional
-            Until ID, by default None
+            指定したIDのチャンネルより前のチャンネルを取得します, default=None
         limit : int, optional
-            Limit, by default 5
+            一度に取得するチャンネルの数, default=5
 
         Returns
         -------
         list[Channel]
-            List of channels
+            見つかったチャンネルのリスト
         """
 
         data = {
