@@ -20,6 +20,9 @@
 - [x] /channels/unfollow
 - [x] /channels/favorite
 - [x] /channels/unfavorite
+- [x] /drive/files
+- [x] /drive/files/attached-notes
+- [x] /drive/files/check-existence
 - [x] /drive/files/delete
 - [x] /drive/folders/delete
 - [x] /invite/delete
@@ -295,9 +298,6 @@
 - [ ] /channels/my-favorites (Need to work)
 - [ ] /channels/search (Need to work)
 - [ ] /drive (Need to work)
-- [ ] /drive/files (Need to work)
-- [ ] /drive/files/attached-notes (Need to work)
-- [ ] /drive/files/check-existence (Need to work)
 - [ ] /drive/files/create (Need to work)
 - [ ] /drive/files/find-by-hash (Need to work)
 - [ ] /drive/files/find (Need to work)
@@ -396,8 +396,8 @@
 - [x] NoteReaction
 - [ ] NoteFavorite
 - [ ] Notification
-- [ ] DriveFile
-- [ ] DriveFolder
+- [x] DriveFile
+- [x] DriveFolder
 - [x] Following
 - [ ] Muting
 - [ ] RenoteMuting

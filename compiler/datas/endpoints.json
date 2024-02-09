@@ -755,19 +755,19 @@
                 "path": "/drive/files",
                 "request_body_hash": "de170aba65c766eae921b10a16b99d9a5793ac39cb15e05c1a9453d0645427aa",
                 "response_body_hash": "f34c75e26e857fadd415d1e4a3bd80f224779a84be6a3e142e4ed7896e888c1b",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/files/attached-notes": {
                 "path": "/drive/files/attached-notes",
                 "request_body_hash": "483cf6378fc3db55c9c3acfb484f77012c0e9ab2abf81bef519089ad0ae27a03",
                 "response_body_hash": "59ed123a9e73d1c69b6b839ad265088fba9bb182cf8bf01a8d8740f56ecbc26c",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/files/check-existence": {
                 "path": "/drive/files/check-existence",
                 "request_body_hash": "ea75dd1736f53c4238eada5abf871fea88c144b71f03fdaf9f7e56024322a2f3",
                 "response_body_hash": "a30e415134454e401e525679afbcbf54a5332e3c7d0b7a6c23ef7c136449ccc1",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/files/create": {
                 "path": "/drive/files/create",
@@ -2285,12 +2285,12 @@
         "DriveFile": {
             "name": "DriveFile",
             "hash": "9853a428bab9745b8e17a9c2a83231761fcda7cff883f2200e11c11b6342ce71",
-            "status": "notSupported"
+            "status": "supported"
         },
         "DriveFolder": {
             "name": "DriveFolder",
             "hash": "2ee1d9098539300d5e0e5d9a367a196a8f246b323d86201ef5109b06c5ace611",
-            "status": "notSupported"
+            "status": "supported"
         },
         "Following": {
             "name": "Following",
