@@ -1513,10 +1513,230 @@ Attributes</span><ul>
 </section>
 <section id="channel">
 <h3>Channel<a class="headerlink" href="#channel" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.models.channel.Channel"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.models.channel.Channel"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.allow_renote_to_external">allow_renote_to_external</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.api">api</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.banner_url">banner_url</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.color">color</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.created_at">created_at</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.description">description</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.id">id</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.is_archived">is_archived</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.is_favorited">is_favorited</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.is_following">is_following</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.is_sensitive">is_sensitive</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.last_noted_at">last_noted_at</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.name">name</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.notes_count">notes_count</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.pinned_note_ids">pinned_note_ids</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.pinned_notes">pinned_notes</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.user_id">user_id</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.channel.Channel.users_count">users_count</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.channel.Channel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.channel.</span></span><span class="sig-name descname"><span class="pre">Channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.channel.IChannel" title="mipac.types.channel.IChannel"><span class="pre">IChannel</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.channel.Channel" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.allow_renote_to_external">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow_renote_to_external</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.channel.Channel.allow_renote_to_external" title="Link to this definition">#</a></dt>
+<dd><p>外部へのリノートを許可するかどうか</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.api">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">api</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.manager.channel.ClientChannelManager" title="mipac.manager.channel.ClientChannelManager"><span class="pre">ClientChannelManager</span></a></em><a class="headerlink" href="#mipac.models.channel.Channel.api" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルに関するAPIを利用するためのクライアント</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mipac.manager.channel.ClientChannelManager" title="mipac.manager.channel.ClientChannelManager">ClientChannelManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.banner_url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">banner_url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.channel.Channel.banner_url" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルのバナー画像URL</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.color">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.channel.Channel.color" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルの色</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.created_at">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">created_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#mipac.models.channel.Channel.created_at" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルが作成された日時</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.channel.Channel.description" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルの説明</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.channel.Channel.id" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルID</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.is_archived">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_archived</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.channel.Channel.is_archived" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルがアーカイブされているかどうか</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.is_favorited">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_favorited</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.channel.Channel.is_favorited" title="Link to this definition">#</a></dt>
+<dd><p>自身がお気に入り登録しているかどうか</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.is_following">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_following</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.channel.Channel.is_following" title="Link to this definition">#</a></dt>
+<dd><p>自身がフォローしているかどうか</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.is_sensitive">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_sensitive</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.channel.Channel.is_sensitive" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルがセンシティブかどうか</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.last_noted_at">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_noted_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.channel.Channel.last_noted_at" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルに最後にノートが投稿された日時</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.channel.Channel.name" title="Link to this definition">#</a></dt>
+<dd><p>チャンネル名</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.notes_count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">notes_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mipac.models.channel.Channel.notes_count" title="Link to this definition">#</a></dt>
+<dd><p>チャンネル内のノート数</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.pinned_note_ids">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pinned_note_ids</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.channel.Channel.pinned_note_ids" title="Link to this definition">#</a></dt>
+<dd><p>ピン留めされているノートのIDのリスト</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.pinned_notes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pinned_notes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.channel.Channel.pinned_notes" title="Link to this definition">#</a></dt>
+<dd><p>ピン留めされているノートのリスト</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.user_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.channel.Channel.user_id" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルを作成したユーザーのID</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.channel.Channel.users_count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">users_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mipac.models.channel.Channel.users_count" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルに参加しているユーザー数</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="ad">
@@ -9650,7 +9870,27 @@ when the function is used.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#channel">Channel</a><ul>
-<li><a class="reference internal" href="#mipac.models.channel.Channel"><code class="docutils literal notranslate"><span class="pre">Channel</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel"><code class="docutils literal notranslate"><span class="pre">Channel</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.allow_renote_to_external"><code class="docutils literal notranslate"><span class="pre">Channel.allow_renote_to_external</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.api"><code class="docutils literal notranslate"><span class="pre">Channel.api</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.banner_url"><code class="docutils literal notranslate"><span class="pre">Channel.banner_url</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.color"><code class="docutils literal notranslate"><span class="pre">Channel.color</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.created_at"><code class="docutils literal notranslate"><span class="pre">Channel.created_at</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.description"><code class="docutils literal notranslate"><span class="pre">Channel.description</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.id"><code class="docutils literal notranslate"><span class="pre">Channel.id</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.is_archived"><code class="docutils literal notranslate"><span class="pre">Channel.is_archived</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.is_favorited"><code class="docutils literal notranslate"><span class="pre">Channel.is_favorited</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.is_following"><code class="docutils literal notranslate"><span class="pre">Channel.is_following</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.is_sensitive"><code class="docutils literal notranslate"><span class="pre">Channel.is_sensitive</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.last_noted_at"><code class="docutils literal notranslate"><span class="pre">Channel.last_noted_at</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.name"><code class="docutils literal notranslate"><span class="pre">Channel.name</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.notes_count"><code class="docutils literal notranslate"><span class="pre">Channel.notes_count</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.pinned_note_ids"><code class="docutils literal notranslate"><span class="pre">Channel.pinned_note_ids</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.pinned_notes"><code class="docutils literal notranslate"><span class="pre">Channel.pinned_notes</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.user_id"><code class="docutils literal notranslate"><span class="pre">Channel.user_id</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.channel.Channel.users_count"><code class="docutils literal notranslate"><span class="pre">Channel.users_count</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ad">Ad</a><ul>
