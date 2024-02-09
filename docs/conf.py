@@ -31,7 +31,7 @@ extensions = [
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
-language = "en"
+language = "ja"
 gettext_compact = False
 locale_dirs = ["locale/"]
 

@@ -4,7 +4,7 @@ make html
 
 shopt -s dotglob
 
-support_language=('ja')
+support_language=('en')
 for language in ${support_language[@]}
 do
     make -e SPHINXOPTS="-D language='${language}'" -e BUILDDIR="./_build/html/${language}" html
