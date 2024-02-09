@@ -577,12 +577,12 @@ Meta
     :members:
 
 
-MuteUser
-~~~~~~~~
+MutedUser
+~~~~~~~~~
 
-.. attributetable:: mipac.models.mute.MuteUser
+.. attributetable:: mipac.models.mute.MutedUser
 
-.. autoclass:: mipac.models.mute.MuteUser
+.. autoclass:: mipac.models.mute.MutedUser
     :members:
 
 
@@ -920,15 +920,6 @@ ClipManager
     :members:
 
 
-MuteManager
-~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.mute.MuteManager
-
-.. autoclass:: mipac.manager.mute.MuteManager
-    :members:
-
-
 ChannelManager
 ~~~~~~~~~~~~~~
 
@@ -1025,6 +1016,24 @@ UserListManager
 .. attributetable:: mipac.manager.users.list.UserListManager
 
 .. autoclass:: mipac.manager.users.list.UserListManager
+    :members:
+
+
+ClientMuteManager
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.users.mute.ClientMuteManager
+
+.. autoclass:: mipac.manager.users.mute.ClientMuteManager
+    :members:
+
+
+MuteManager
+~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.users.mute.MuteManager
+
+.. autoclass:: mipac.manager.users.mute.MuteManager
     :members:
 
 
@@ -1359,15 +1368,6 @@ ClipActions
     :members:
 
 
-MuteActions
-~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.mute.MuteActions
-
-.. autoclass:: mipac.actions.mute.MuteActions
-    :members:
-
-
 ChannelActions
 ~~~~~~~~~~~~~~
 
@@ -1464,6 +1464,24 @@ UserListActions
 .. attributetable:: mipac.actions.users.list.UserListActions
 
 .. autoclass:: mipac.actions.users.list.UserListActions
+    :members:
+
+
+ClientMuteActions
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.users.mute.ClientMuteActions
+
+.. autoclass:: mipac.actions.users.mute.ClientMuteActions
+    :members:
+
+
+MuteActions
+~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.users.mute.MuteActions
+
+.. autoclass:: mipac.actions.users.mute.MuteActions
     :members:
 
 
@@ -2506,12 +2524,12 @@ IUpdateMetaBody
     :members:
 
 
-IMuteUser
-~~~~~~~~~
+IMutedUser
+~~~~~~~~~~
 
-.. attributetable:: mipac.types.mute.IMuteUser
+.. attributetable:: mipac.types.mute.IMutedUser
 
-.. autoclass:: mipac.types.mute.IMuteUser
+.. autoclass:: mipac.types.mute.IMutedUser
     :members:
 
 

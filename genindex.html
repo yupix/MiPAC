@@ -224,8 +224,6 @@
         <ul>
           <li><a href="index.html#mipac.actions.follow.FollowActions.add">(mipac.actions.follow.FollowActions のメソッド)</a>
 </li>
-          <li><a href="index.html#mipac.actions.mute.MuteActions.add">(mipac.actions.mute.MuteActions のメソッド)</a>
-</li>
           <li><a href="index.html#mipac.actions.reaction.ClientReactionActions.add">(mipac.actions.reaction.ClientReactionActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.reaction.ReactionActions.add">(mipac.actions.reaction.ReactionActions のメソッド)</a>
@@ -273,10 +271,10 @@
 </li>
         <li><a href="index.html#mipac.actions.admins.roles.AdminRoleActions">AdminRoleActions (mipac.actions.admins.roles のクラス)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.actions.admins.roles.AdminRoleModelActions">AdminRoleModelActions (mipac.actions.admins.roles のクラス)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.manager.admins.roles.AdminRolesManager">AdminRolesManager (mipac.manager.admins.roles のクラス)</a>
 </li>
         <li><a href="index.html#mipac.manager.admins.roles.AdminRolesModelManager">AdminRolesModelManager (mipac.manager.admins.roles のクラス)</a>
@@ -487,11 +485,15 @@
 </li>
         <li><a href="index.html#mipac.actions.invite.ClientInviteActions">ClientInviteActions (mipac.actions.invite のクラス)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.manager.invite.ClientInviteManager">ClientInviteManager (mipac.manager.invite のクラス)</a>
 </li>
         <li><a href="index.html#mipac.manager.client.ClientManager">ClientManager (mipac.manager.client のクラス)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="index.html#mipac.actions.users.mute.ClientMuteActions">ClientMuteActions (mipac.actions.users.mute のクラス)</a>
+</li>
+        <li><a href="index.html#mipac.manager.users.mute.ClientMuteManager">ClientMuteManager (mipac.manager.users.mute のクラス)</a>
 </li>
         <li><a href="index.html#mipac.actions.note.ClientNoteActions">ClientNoteActions (mipac.actions.note のクラス)</a>
 </li>
@@ -560,6 +562,10 @@
 </li>
           <li><a href="index.html#mipac.actions.users.list.UserListActions.create">(mipac.actions.users.list.UserListActions のメソッド)</a>
 </li>
+          <li><a href="index.html#mipac.actions.users.mute.ClientMuteActions.create">(mipac.actions.users.mute.ClientMuteActions のメソッド)</a>
+</li>
+          <li><a href="index.html#mipac.actions.users.mute.MuteActions.create">(mipac.actions.users.mute.MuteActions のメソッド)</a>
+</li>
         </ul></li>
         <li><a href="index.html#mipac.actions.note.create_note_body">create_note_body() (mipac.actions.note モジュール)</a>
 </li>
@@ -612,8 +618,6 @@
 </li>
           <li><a href="index.html#mipac.actions.invite.InviteActions.delete">(mipac.actions.invite.InviteActions のメソッド)</a>
 </li>
-          <li><a href="index.html#mipac.actions.mute.MuteActions.delete">(mipac.actions.mute.MuteActions のメソッド)</a>
-</li>
           <li><a href="index.html#mipac.actions.note.ClientNoteActions.delete">(mipac.actions.note.ClientNoteActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.note.NoteActions.delete">(mipac.actions.note.NoteActions のメソッド)</a>
@@ -621,6 +625,10 @@
           <li><a href="index.html#mipac.actions.users.list.ClientUserListActions.delete">(mipac.actions.users.list.ClientUserListActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.users.list.UserListActions.delete">(mipac.actions.users.list.UserListActions のメソッド)</a>
+</li>
+          <li><a href="index.html#mipac.actions.users.mute.ClientMuteActions.delete">(mipac.actions.users.mute.ClientMuteActions のメソッド)</a>
+</li>
+          <li><a href="index.html#mipac.actions.users.mute.MuteActions.delete">(mipac.actions.users.mute.MuteActions のメソッド)</a>
 </li>
         </ul></li>
     </ul></td>
@@ -842,7 +850,11 @@
         <li><a href="index.html#mipac.actions.channel.ChannelActions.get_all_followed">get_all_followed() (mipac.actions.channel.ChannelActions のメソッド)</a>
 </li>
         <li><a href="index.html#mipac.actions.invite.InviteActions.get_all_list">get_all_list() (mipac.actions.invite.InviteActions のメソッド)</a>
+
+        <ul>
+          <li><a href="index.html#mipac.actions.users.mute.MuteActions.get_all_list">(mipac.actions.users.mute.MuteActions のメソッド)</a>
 </li>
+        </ul></li>
         <li><a href="index.html#mipac.actions.channel.ChannelActions.get_all_owned">get_all_owned() (mipac.actions.channel.ChannelActions のメソッド)</a>
 </li>
         <li><a href="index.html#mipac.actions.note.ClientNoteActions.get_all_replies">get_all_replies() (mipac.actions.note.ClientNoteActions のメソッド)</a>
@@ -935,6 +947,8 @@
           <li><a href="index.html#mipac.actions.users.list.ClientPartialUserListActions.get_list">(mipac.actions.users.list.ClientPartialUserListActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.users.list.ClientUserListActions.get_list">(mipac.actions.users.list.ClientUserListActions のメソッド)</a>
+</li>
+          <li><a href="index.html#mipac.actions.users.mute.MuteActions.get_list">(mipac.actions.users.mute.MuteActions のメソッド)</a>
 </li>
         </ul></li>
         <li><a href="index.html#mipac.actions.user.UserActions.get_me">get_me() (mipac.actions.user.UserActions のメソッド)</a>
@@ -1129,7 +1143,7 @@
 </li>
         <li><a href="index.html#mipac.types.admin.IModerationLog">IModerationLog (mipac.types.admin のクラス)</a>
 </li>
-        <li><a href="index.html#mipac.types.mute.IMuteUser">IMuteUser (mipac.types.mute のクラス)</a>
+        <li><a href="index.html#mipac.types.mute.IMutedUser">IMutedUser (mipac.types.mute のクラス)</a>
 </li>
         <li><a href="index.html#mipac.errors.errors.InappropriateError">InappropriateError (mipac.errors.errors のクラス)</a>
 </li>
@@ -1357,13 +1371,13 @@
 </li>
         <li><a href="index.html#mipac.errors.errors.MoSuchFileError">MoSuchFileError (mipac.errors.errors のクラス)</a>
 </li>
-        <li><a href="index.html#mipac.actions.mute.MuteActions">MuteActions (mipac.actions.mute のクラス)</a>
+        <li><a href="index.html#mipac.actions.users.mute.MuteActions">MuteActions (mipac.actions.users.mute のクラス)</a>
+</li>
+        <li><a href="index.html#mipac.models.mute.MutedUser">MutedUser (mipac.models.mute のクラス)</a>
 </li>
         <li><a href="index.html#mipac.errors.errors.MuteeIsYourselfError">MuteeIsYourselfError (mipac.errors.errors のクラス)</a>
 </li>
-        <li><a href="index.html#mipac.manager.mute.MuteManager">MuteManager (mipac.manager.mute のクラス)</a>
-</li>
-        <li><a href="index.html#mipac.models.mute.MuteUser">MuteUser (mipac.models.mute のクラス)</a>
+        <li><a href="index.html#mipac.manager.users.mute.MuteManager">MuteManager (mipac.manager.users.mute のクラス)</a>
 </li>
         <li><a href="index.html#mipac.actions.channel.ChannelActions.my_favorites">my_favorites() (mipac.actions.channel.ChannelActions のメソッド)</a>
 </li>
