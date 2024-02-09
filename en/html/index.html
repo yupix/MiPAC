@@ -4657,6 +4657,10 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.channel.ChannelActions.followed">followed</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="method">
+def</span><a class="reference internal" href="#mipac.actions.channel.ChannelActions.get_all_followed">get_all_followed</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="method">
+def</span><a class="reference internal" href="#mipac.actions.channel.ChannelActions.get_all_owned">get_all_owned</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="method">
 def</span><a class="reference internal" href="#mipac.actions.channel.ChannelActions.get_all_timeline">get_all_timeline</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.channel.ChannelActions.my_favorites">my_favorites</a></li><li class="py-attribute-table-entry">
@@ -4669,6 +4673,8 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.channel.ChannelActions.show">show</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.channel.ChannelActions.timeline">timeline</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.channel.ChannelActions.unfavorite">unfavorite</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.channel.ChannelActions.unfollow">unfollow</a></li><li class="py-attribute-table-entry">
@@ -4680,21 +4686,21 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.create">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">banner_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_renote_to_external</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.create" title="Link to this definition">#</a></dt>
-<dd><p>Create a channel</p>
+<dd><p>チャンネルを作成します</p>
 <p>Endpoint: <cite>/api/channels/create</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – Name of the channel</p></li>
-<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the channel, by default MISSING</p></li>
-<li><p><strong>description</strong> (<em>str</em><em>, </em><em>optional</em>) – Description of the channel, by default MISSING</p></li>
-<li><p><strong>banner_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Banner ID of the channel, by default MISSING</p></li>
-<li><p><strong>is_sensitive</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the channel is sensitive, by default MISSING</p></li>
-<li><p><strong>allow_renote_to_external</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the channel allows renote to external, by default MISSING</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – チャンネル名</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – チャンネルの色, default=MISSING</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – チャンネルの説明, default=MISSING</p></li>
+<li><p><strong>banner_id</strong> (<em>str</em>) – チャンネルのバナーに使用するファイルのID, default=MISSING</p></li>
+<li><p><strong>is_sensitive</strong> (<em>bool</em>) – チャンネルがセンシティブかどうか, default=MISSING</p></li>
+<li><p><strong>allow_renote_to_external</strong> (<em>bool</em><em>, </em><em>optional</em>) – 外部へのリノートを許可するかどうか, default=MISSING</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Created channel</p>
+<dd class="field-even"><p>作成したチャンネル</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a></p>
@@ -4705,14 +4711,14 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.favorite">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">favorite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.favorite" title="Link to this definition">#</a></dt>
-<dd><p>Favorite a channel</p>
+<dd><p>指定したIDのチャンネルをお気に入りにします</p>
 <p>Endpoint: <cite>/api/channels/favorite</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em>) – ID of the channel</p>
+<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em>) – 対象のチャンネルID</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether the channel is favorited</p>
+<dd class="field-even"><p>お気に入りに追加できたかどうか</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -4723,11 +4729,11 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.featured">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">featured</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.featured" title="Link to this definition">#</a></dt>
-<dd><p>Get featured channels</p>
+<dd><p>トレンドのチャンネルを取得します</p>
 <p>Endpoint: <cite>/api/channels/featured</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List of featured channels</p>
+<dd class="field-odd"><p>取得したチャンネルのリスト</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[<a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a>]</p>
@@ -4738,14 +4744,14 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.follow">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">follow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.follow" title="Link to this definition">#</a></dt>
-<dd><p>Follow a channel</p>
+<dd><p>指定したIDのチャンネルをフォローします</p>
 <p>Endpoint: <cite>/api/channels/follow</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em>) – ID of the channel</p>
+<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em>) – 対象のチャンネルID</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether the channel is followed</p>
+<dd class="field-even"><p>フォローに成功したかどうか</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -4756,18 +4762,18 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.followed">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">followed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.followed" title="Link to this definition">#</a></dt>
-<dd><p>Get followed channels</p>
+<dd><p>フォロー中のチャンネル一覧を取得します</p>
 <p>Endpoint: <cite>/api/channels/followed</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Since ID, by default None</p></li>
-<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Until ID, by default None</p></li>
-<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – Limit, by default 5</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したチャンネルIDよりも後のチャンネルを取得します, default=None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したチャンネルIDよりも前のチャンネルを取得します, default=None</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – 一度に取得するチャンネルの数, default=5</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of followed channels</p>
+<dd class="field-even"><p>取得したフォロー中のチャンネルのリスト</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a>]</p>
@@ -4776,21 +4782,67 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.get_all_timeline">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_timeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.get_all_timeline" title="Link to this definition">#</a></dt>
-<dd><p>Get all notes in the timeline of a channel</p>
+<dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.get_all_followed">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_followed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.get_all_followed" title="Link to this definition">#</a></dt>
+<dd><p>フォロー中のすべてのチャンネルを取得します</p>
+<p>Endpoint: <cite>/api/channels/followed</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel_id</strong> (<em>str</em>) – ID of the channel</p></li>
-<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Since ID, by default None</p></li>
-<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Until ID, by default None</p></li>
-<li><p><strong>since_date</strong> (<em>int</em><em>, </em><em>optional</em>) – Since date, by default None</p></li>
-<li><p><strong>until_date</strong> (<em>int</em><em>, </em><em>optional</em>) – Until date, by default None</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したチャンネルIDよりも後のチャンネルを取得します, default=None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したチャンネルIDよりも前のチャンネルを取得します, default=None</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – 一度に取得するチャンネルの数, default=5</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Async generator of notes</p>
+<dd class="field-even"><p>取得したフォロー中のチャンネル</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AsyncGenerator[<a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a>, None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.get_all_owned">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_owned</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.get_all_owned" title="Link to this definition">#</a></dt>
+<dd><p>自分が所有しているすべてのチャンネルを取得します</p>
+<p>Endpoint: <cite>/api/channels/owned</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – 指定したチャンネルIDよりも後のチャンネルを取得します, default=None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – 指定したチャンネルIDよりも前のチャンネルを取得します, default=None</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – 一度に取得するチャンネルの数, default=5</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>取得した自分が所有しているチャンネル</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AsyncGenerator[<a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a>, None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.get_all_timeline">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_timeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.get_all_timeline" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルのタイムラインを全て取得します</p>
+<p>Endpoint: <cite>/api/channels/timeline</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>limit</strong> (<em>int</em>) – 一度に取得する件数, default=10</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したIDのノートより後のノートを取得します, default=None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したIDのノートより前のノートを取得します, default=None</p></li>
+<li><p><strong>since_date</strong> (<em>int</em><em> | </em><em>None</em>) – 指定した日付のノートより後のノートを取得します, default=None</p></li>
+<li><p><strong>until_date</strong> (<em>int</em><em> | </em><em>None</em>) – 指定した日付のノートより前のノートを取得します, default=None</p></li>
+<li><p><strong>channel_id</strong> (<em>str</em><em> | </em><em>None</em>) – 対象のチャンネルID, default=None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>取得したノートのリスト</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>AsyncGenerator[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>, None]</p>
@@ -4801,11 +4853,11 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.my_favorites">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">my_favorites</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.my_favorites" title="Link to this definition">#</a></dt>
-<dd><p>Get my favorite channels</p>
+<dd><p>自分がお気に入りにしているチャンネルを取得します</p>
 <p>Endpoint: <cite>/api/channels/myFavorites</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List of my favorite channels</p>
+<dd class="field-odd"><p>取得したチャンネルのリスト</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[<a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a>]</p>
@@ -4816,18 +4868,18 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.owned">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">owned</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.owned" title="Link to this definition">#</a></dt>
-<dd><p>Get owned channels</p>
+<dd><p>自分が所有しているチャンネル一覧を取得します</p>
 <p>Endpoint: <cite>/api/channels/owned</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Since ID, by default None</p></li>
-<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Until ID, by default None</p></li>
-<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – Limit, by default 5</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – 指定したチャンネルIDよりも後のチャンネルを取得します, default=None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – 指定したチャンネルIDよりも前のチャンネルを取得します, default=None</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – 一度に取得するチャンネルの数, default=5</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of owned channels</p>
+<dd class="field-even"><p>取得した自分が所有しているチャンネルのリスト</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a>]</p>
@@ -4838,20 +4890,20 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.search">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'nameAndDescription'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'nameOnly'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'nameAndDescription'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.search" title="Link to this definition">#</a></dt>
-<dd><p>Search channels</p>
+<dd><p>チャンネルを検索します</p>
 <p>Endpoint: <cite>/api/channels/search</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>query</strong> (<em>str</em>) – Query</p></li>
-<li><p><strong>type</strong> (<em>Literal</em><em>[</em><em>&quot;nameAndDescription&quot;</em><em>,</em><em>&quot;nameOnly&quot;</em><em>]</em><em>, </em><em>optional</em>) – Type of the search, by default “nameAndDescription”</p></li>
-<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Since ID, by default None</p></li>
-<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Until ID, by default None</p></li>
-<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – Limit, by default 5</p></li>
+<li><p><strong>query</strong> (<em>str</em>) – 検索するキーワード</p></li>
+<li><p><strong>type</strong> (<em>Literal</em><em>[</em><em>&quot;nameAndDescription&quot;</em><em>,</em><em>&quot;nameOnly&quot;</em><em>]</em>) – 検索に用いる形式, default=”nameAndDescription”</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したIDのチャンネルより後のチャンネルを取得します, default=None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – 指定したIDのチャンネルより前のチャンネルを取得します, default=None</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – 一度に取得するチャンネルの数, default=5</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of channels</p>
+<dd class="field-even"><p>見つかったチャンネルのリスト</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a>]</p>
@@ -4895,14 +4947,14 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.show">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.show" title="Link to this definition">#</a></dt>
-<dd><p>Show a channel</p>
+<dd><p>指定したIDのチャンネルを取得します</p>
 <p>Endpoint: <cite>/api/channels/show</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em>) – ID of the channel</p>
+<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em>) – 対象のチャンネルID</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Channel</p>
+<dd class="field-even"><p>取得したチャンネル</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a></p>
@@ -4911,16 +4963,41 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.timeline">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.timeline" title="Link to this definition">#</a></dt>
+<dd><p>チャンネルのタイムラインを取得します</p>
+<p>Endpoint: <cite>/api/channels/timeline</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel_id</strong> (<em>str</em>) – 対象のチャンネルID</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – 一度に取得する件数, default=10</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したIDのノートより後のノートを取得します, default=None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したIDのノートより前のノートを取得します, default=None</p></li>
+<li><p><strong>since_date</strong> (<em>int</em><em> | </em><em>None</em>) – 指定した日付のノートより後のノートを取得します, default=None</p></li>
+<li><p><strong>until_date</strong> (<em>int</em><em> | </em><em>None</em>) – 指定した日付のノートより前のノートを取得します, default=None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>取得したノートのリスト</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.unfavorite">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unfavorite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.unfavorite" title="Link to this definition">#</a></dt>
-<dd><p>Unfavorite a channel</p>
+<dd><p>指定したIDのチャンネルをお気に入りから外します</p>
 <p>Endpoint: <cite>/api/channels/unfavorite</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em>) – ID of the channel</p>
+<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em>) – 対象のチャンネルID</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether the channel is unfavorited</p>
+<dd class="field-even"><p>お気に入りから外せたかどうか</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -4931,14 +5008,14 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.unfollow">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unfollow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.unfollow" title="Link to this definition">#</a></dt>
-<dd><p>Unfollow a channel</p>
+<dd><p>指定したIDのチャンネルのフォローを解除します</p>
 <p>Endpoint: <cite>/api/channels/unfollow</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em>) – ID of the channel</p>
+<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em>) – 対象のチャンネルID</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether the channel is unfollowed</p>
+<dd class="field-even"><p>フォロー解除に成功したかどうか</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -4949,24 +5026,24 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ChannelAc
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ChannelActions.update">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">banner_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_archived</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pinned_note_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_renote_to_external</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a></span></span><a class="headerlink" href="#mipac.actions.channel.ChannelActions.update" title="Link to this definition">#</a></dt>
-<dd><p>Update a channel</p>
+<dd><p>チャンネルの情報を更新します</p>
 <p>Endpoint: <cite>/api/channels/update</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel_id</strong> (<em>str</em>) – ID of the channel</p></li>
-<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the channel, by default MISSING</p></li>
-<li><p><strong>description</strong> (<em>str</em><em>, </em><em>optional</em>) – Description of the channel, by default MISSING</p></li>
-<li><p><strong>banner_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Banner ID of the channel, by default MISSING</p></li>
-<li><p><strong>is_archived</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the channel is archived, by default MISSING</p></li>
-<li><p><strong>pinned_note_ids</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Pinned note IDs, by default MISSING</p></li>
-<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the channel, by default MISSING</p></li>
-<li><p><strong>is_sensitive</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the channel is sensitive, by default MISSING</p></li>
-<li><p><strong>allow_renote_to_external</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the channel allows renote to external, by default MISSING</p></li>
+<li><p><strong>channel_id</strong> (<em>str</em>) – 対象のチャンネルID</p></li>
+<li><p><strong>name</strong> (<em>str</em><em> | </em><em>None</em>) – チャンネル名, default=MISSING</p></li>
+<li><p><strong>description</strong> (<em>str</em><em> | </em><em>None</em>) – チャンネルの説明, default=MISSING</p></li>
+<li><p><strong>banner_id</strong> (<em>str</em><em> | </em><em>None</em>) – バナー画像のID, default=MISSING</p></li>
+<li><p><strong>is_archived</strong> (<em>bool</em><em> | </em><em>None</em>) – チャンネルがアーカイブされているかどうか, default=MISSING</p></li>
+<li><p><strong>pinned_note_ids</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – ピン留めするノートのIDリスト, default=MISSING</p></li>
+<li><p><strong>color</strong> (<em>str</em><em> | </em><em>None</em>) – チャンネルの色, default=MISSING</p></li>
+<li><p><strong>is_sensitive</strong> (<em>bool</em><em> | </em><em>None</em>) – チャンネルがセンシティブかどうか, default=MISSING</p></li>
+<li><p><strong>allow_renote_to_external</strong> (<em>bool</em><em> | </em><em>None</em>) – 外部へのリノートを許可するかどうか, default=MISSING</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Updated channel</p>
+<dd class="field-even"><p>更新後のチャンネル</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a></p>
@@ -5005,14 +5082,14 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ClientCha
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ClientChannelActions.favorite">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">favorite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.channel.ClientChannelActions.favorite" title="Link to this definition">#</a></dt>
-<dd><p>Favorite a channel</p>
+<dd><p>指定したIDのチャンネルをお気に入りにします</p>
 <p>Endpoint: <cite>/api/channels/favorite</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em><em>, </em><em>optional</em>) – ID of the channel, by default None</p>
+<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em><em> | </em><em>None</em>) – 対象のチャンネルID, default=None</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether the channel is favorited</p>
+<dd class="field-even"><p>お気に入りに追加できたかどうか</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -5041,18 +5118,21 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ClientCha
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ClientChannelActions.get_all_timeline">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_timeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ClientChannelActions.get_all_timeline" title="Link to this definition">#</a></dt>
-<dd><p>Get all notes in the timeline of a channel</p>
+<dd><p>チャンネルのタイムラインを全て取得します</p>
+<p>Endpoint: <cite>/api/channels/timeline</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Since ID, by default None</p></li>
-<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Until ID, by default None</p></li>
-<li><p><strong>since_date</strong> (<em>int</em><em>, </em><em>optional</em>) – Since date, by default None</p></li>
-<li><p><strong>until_date</strong> (<em>int</em><em>, </em><em>optional</em>) – Until date, by default None</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – 一度に取得する件数, default=10</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したIDのノートより後のノートを取得します, default=None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したIDのノートより前のノートを取得します, default=None</p></li>
+<li><p><strong>since_date</strong> (<em>int</em><em> | </em><em>None</em>) – 指定した日付のノートより後のノートを取得します, default=None</p></li>
+<li><p><strong>until_date</strong> (<em>int</em><em> | </em><em>None</em>) – 指定した日付のノートより前のノートを取得します, default=None</p></li>
+<li><p><strong>channel_id</strong> (<em>str</em><em> | </em><em>None</em>) – 対象のチャンネルID, default=None</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Async generator of notes</p>
+<dd class="field-even"><p>取得したノートのリスト</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>AsyncGenerator[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>, None]</p>
@@ -5096,20 +5176,21 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ClientCha
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ClientChannelActions.timeline">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.channel.ClientChannelActions.timeline" title="Link to this definition">#</a></dt>
-<dd><p>Get the timeline of a channel</p>
+<dd><p>チャンネルのタイムラインを取得します</p>
 <p>Endpoint: <cite>/api/channels/timeline</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – Limit, by default 10</p></li>
-<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Since ID, by default None</p></li>
-<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Until ID, by default None</p></li>
-<li><p><strong>since_date</strong> (<em>int</em><em>, </em><em>optional</em>) – Since date, by default None</p></li>
-<li><p><strong>until_date</strong> (<em>int</em><em>, </em><em>optional</em>) – Until date, by default None</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – 一度に取得する件数, default=10</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したIDのノートより後のノートを取得します, default=None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em>) – 指定したIDのノートより前のノートを取得します, default=None</p></li>
+<li><p><strong>since_date</strong> (<em>int</em><em> | </em><em>None</em>) – 指定した日付のノートより後のノートを取得します, default=None</p></li>
+<li><p><strong>until_date</strong> (<em>int</em><em> | </em><em>None</em>) – 指定した日付のノートより前のノートを取得します, default=None</p></li>
+<li><p><strong>channel_id</strong> (<em>str</em><em> | </em><em>None</em>) – 対象のチャンネルID, default=None</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of notes</p>
+<dd class="field-even"><p>取得したノートのリスト</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>]</p>
@@ -5120,14 +5201,14 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ClientCha
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ClientChannelActions.unfavorite">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unfavorite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.channel.ClientChannelActions.unfavorite" title="Link to this definition">#</a></dt>
-<dd><p>Unfavorite a channel</p>
+<dd><p>指定したIDのチャンネルをお気に入りから外します</p>
 <p>Endpoint: <cite>/api/channels/unfavorite</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em><em>, </em><em>optional</em>) – ID of the channel, by default None</p>
+<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em><em> | </em><em>None</em>) – 対象のチャンネルID, default=None</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether the channel is unfavorited</p>
+<dd class="field-even"><p>お気に入りから外せたかどうか</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -5138,14 +5219,14 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ClientCha
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ClientChannelActions.unfollow">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unfollow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.channel.ClientChannelActions.unfollow" title="Link to this definition">#</a></dt>
-<dd><p>Unfollow a channel</p>
+<dd><p>指定したIDのチャンネルのフォローを解除します</p>
 <p>Endpoint: <cite>/api/channels/unfollow</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em><em>, </em><em>optional</em>) – ID of the channel, by default None</p>
+<dd class="field-odd"><p><strong>channel_id</strong> (<em>str</em><em> | </em><em>None</em>) – 対象のチャンネルID, default=None</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether the channel is unfollowed</p>
+<dd class="field-even"><p>フォロー解除に成功したかどうか</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -5156,21 +5237,27 @@ async</span><a class="reference internal" href="#mipac.actions.channel.ClientCha
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.channel.ClientChannelActions.update">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">banner_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_archived</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pinned_note_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_renote_to_external</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel"><span class="pre">Channel</span></a></span></span><a class="headerlink" href="#mipac.actions.channel.ClientChannelActions.update" title="Link to this definition">#</a></dt>
-<dd><p>Update a channel</p>
+<dd><p>チャンネルの情報を更新します</p>
 <p>Endpoint: <cite>/api/channels/update</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the channel, by default MISSING</p></li>
-<li><p><strong>description</strong> (<em>str</em><em>, </em><em>optional</em>) – Description of the channel, by default MISSING</p></li>
-<li><p><strong>banner_id</strong> (<em>str</em><em>, </em><em>optional</em>) – Banner ID of the channel, by default MISSING</p></li>
-<li><p><strong>is_archived</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the channel is archived, by default MISSING</p></li>
-<li><p><strong>pinned_note_ids</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Pinned note IDs, by default MISSING</p></li>
-<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the channel, by default MISSING</p></li>
-<li><p><strong>is_sensitive</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the channel is sensitive, by default MISSING</p></li>
-<li><p><strong>allow_renote_to_external</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the channel allows renote to external, by default MISSING</p></li>
-<li><p><strong>channel_id</strong> (<em>str</em><em>, </em><em>optional</em>) – ID of the channel, by default None</p></li>
+<li><p><strong>name</strong> (<em>str</em><em> | </em><em>None</em>) – チャンネル名, default=MISSING</p></li>
+<li><p><strong>description</strong> (<em>str</em><em> | </em><em>None</em>) – チャンネルの説明, default=MISSING</p></li>
+<li><p><strong>banner_id</strong> (<em>str</em><em> | </em><em>None</em>) – バナー画像のID, default=MISSING</p></li>
+<li><p><strong>is_archived</strong> (<em>bool</em><em> | </em><em>None</em>) – チャンネルがアーカイブされているかどうか, default=MISSING</p></li>
+<li><p><strong>pinned_note_ids</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – ピン留めするノートのIDリスト, default=MISSING</p></li>
+<li><p><strong>color</strong> (<em>str</em><em> | </em><em>None</em>) – チャンネルの色, default=MISSING</p></li>
+<li><p><strong>is_sensitive</strong> (<em>bool</em><em> | </em><em>None</em>) – チャンネルがセンシティブかどうか, default=MISSING</p></li>
+<li><p><strong>allow_renote_to_external</strong> (<em>bool</em><em> | </em><em>None</em>) – 外部へのリノートを許可するかどうか, default=MISSING</p></li>
+<li><p><strong>channel_id</strong> (<em>str</em><em> | </em><em>None</em>) – 対象のチャンネルID, default=None</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>更新後のチャンネル</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mipac.models.channel.Channel" title="mipac.models.channel.Channel">Channel</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -10404,12 +10491,15 @@ when the function is used.</p>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.featured"><code class="docutils literal notranslate"><span class="pre">ChannelActions.featured()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.follow"><code class="docutils literal notranslate"><span class="pre">ChannelActions.follow()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.followed"><code class="docutils literal notranslate"><span class="pre">ChannelActions.followed()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.get_all_followed"><code class="docutils literal notranslate"><span class="pre">ChannelActions.get_all_followed()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.get_all_owned"><code class="docutils literal notranslate"><span class="pre">ChannelActions.get_all_owned()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.get_all_timeline"><code class="docutils literal notranslate"><span class="pre">ChannelActions.get_all_timeline()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.my_favorites"><code class="docutils literal notranslate"><span class="pre">ChannelActions.my_favorites()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.owned"><code class="docutils literal notranslate"><span class="pre">ChannelActions.owned()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.search"><code class="docutils literal notranslate"><span class="pre">ChannelActions.search()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.send"><code class="docutils literal notranslate"><span class="pre">ChannelActions.send()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.show"><code class="docutils literal notranslate"><span class="pre">ChannelActions.show()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.timeline"><code class="docutils literal notranslate"><span class="pre">ChannelActions.timeline()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.unfavorite"><code class="docutils literal notranslate"><span class="pre">ChannelActions.unfavorite()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.unfollow"><code class="docutils literal notranslate"><span class="pre">ChannelActions.unfollow()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.channel.ChannelActions.update"><code class="docutils literal notranslate"><span class="pre">ChannelActions.update()</span></code></a></li>
