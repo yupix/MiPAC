@@ -103,19 +103,19 @@ class ClientFileActions(AbstractAction):
                 yield Note(raw_note, client=self._client)
 
     async def delete(self, *, file_id: str | None = None) -> bool:
-        """Delete a file
+        """指定したファイルIDのファイルを削除します
 
         Endpoint: `/api/drive/files/delete`
 
         Parameters
         ----------
         file_id: str | None
-            The id of the file to delete, defaults to None
+            対象のファイルID, default=None
 
         Returns
         -------
         bool
-            Whether the file was deleted or not
+            削除に成功したかどうか
         """
 
         file_id = file_id or self.__file_ids
@@ -135,30 +135,29 @@ class ClientFileActions(AbstractAction):
         comment: str | None = MISSING,
         *,
         file_id: str | None = None,
-    ):
-        """Update a file
+    ) -> File:
+        """指定したIDのファイル情報を更新します
 
         Endpoint: `/api/drive/files/update`
 
         Parameters
         ----------
         folder_id: str | None
-            The id of the folder to update the file to, defaults to MISSING
+            ファイルを置くフォルダID, default=MISSING
         name: str | None
-            The name of the file, defaults to MISSING
+            ファイル名, default=MISSING
         is_sensitive: bool
-            Whether the file is sensitive or not, defaults to MISSING
+            ファイルがセンシティブかどうか, default=MISSING
         comment: str | None
-            The comment of the file, defaults to MISSING
+            ファイルのコメント, default=MISSING
         file_id: str | None
-            The id of the file to update, defaults to None
+            対象のファイルID, default=None
 
         Returns
         -------
         File
-            The updated file
+            更新後のファイル
         """
-
         file_id = file_id or self.__file_ids
 
         data = remove_dict_missing(
@@ -401,37 +400,37 @@ class FileActions(ClientFileActions):
         return File(res, client=self._client)
 
     async def delete(self, file_id: str) -> bool:
-        """Delete a file
+        """指定したファイルIDのファイルを削除します
 
         Endpoint: `/api/drive/files/delete`
 
         Parameters
         ----------
         file_id: str
-            The id of the file to delete
+            対象のファイルID
 
         Returns
         -------
         bool
-            Whether the file was deleted or not
+            削除に成功したかどうか
         """
 
         return await super().delete(file_id=file_id)
 
     async def find_by_hash(self, md5: str) -> list[File]:
-        """Find a file by its hash
+        """指定したハッシュのファイルを検索します
 
         Endpoint: `/api/drive/files/find-by-hash`
 
         Parameters
         ----------
         md5: str
-            The md5 of the file to find
+            検索したいファイルのハッシュ
 
         Returns
         -------
         list[File]
-            The found files
+            見つかったファイル
         """
 
         data = {"md5": md5}
@@ -442,16 +441,16 @@ class FileActions(ClientFileActions):
         return [File(raw_file, client=self._client) for raw_file in raw_files]
 
     async def find(self, name: str, folder_id: str | None = None) -> list[File]:
-        """Find a file by its name
+        """指定した名前のファイルを検索します
 
         Endpoint: `/api/drive/files/find`
 
         Parameters
         ----------
         name: str
-            The name of the file to find
+            検索したいファイルの名前
         folder_id: str | None
-            The id of the folder to find the file in, defaults to None
+            ファイルを検索するフォルダID, default=None
 
         Returns
         -------
@@ -467,21 +466,21 @@ class FileActions(ClientFileActions):
         return [File(raw_file, client=self._client) for raw_file in res]
 
     async def show(self, file_id: str, url: str | None = None) -> File:
-        """Show a file
+        """指定したIDのファイル情報を取得します
 
         Endpoint: `/api/drive/files/show`
 
         Parameters
         ----------
         file_id: str
-            The id of the file to show
+            対象のファイルID
         url: str | None
-            The url of the file to show, defaults to None
+            取得したいファイルのURL, default=None
 
         Returns
         -------
         File
-            The shown file
+            取得したファイル
         """
 
         data = {"fileId": file_id, "url": url}
@@ -494,32 +493,32 @@ class FileActions(ClientFileActions):
     async def update(
         self,
         file_id: str,
-        folder_id: str | None = None,
-        name: str | None = None,
-        is_sensitive: bool = False,
-        comment: str | None = None,
+        folder_id: str | None = MISSING,
+        name: str | None = MISSING,
+        is_sensitive: bool = MISSING,
+        comment: str | None = MISSING,
     ) -> File:
-        """Update a file
+        """指定したIDのファイル情報を更新します
 
         Endpoint: `/api/drive/files/update`
 
         Parameters
         ----------
         file_id: str
-            The id of the file to update
+            対象のファイルID
         folder_id: str | None
-            The id of the folder to update the file to, defaults to None
+            ファイルを置くフォルダID, default=MISSING
         name: str | None
-            The name of the file, defaults to None
+            ファイル名, default=MISSING
         is_sensitive: bool
-            Whether the file is sensitive or not, defaults to False
+            ファイルがセンシティブかどうか, default=MISSING
         comment: str | None
-            The comment of the file, defaults to None
+            ファイルのコメント, default=MISSING
 
         Returns
         -------
         File
-            The updated file
+            更新後のファイル
         """
 
         return await super().update(
