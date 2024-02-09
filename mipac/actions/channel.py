@@ -589,23 +589,23 @@ class ChannelActions(ClientChannelActions):
     async def owned(
         self, since_id: str | None = None, until_id: str | None = None, limit: int = 5
     ) -> list[Channel]:
-        """Get owned channels
+        """自分が所有しているチャンネル一覧を取得します
 
         Endpoint: `/api/channels/owned`
 
         Parameters
         ----------
         since_id : str, optional
-            Since ID, by default None
+            指定したチャンネルIDよりも後のチャンネルを取得します, default=None
         until_id : str, optional
-            Until ID, by default None
+            指定したチャンネルIDよりも前のチャンネルを取得します, default=None
         limit : int, optional
-            Limit, by default 5
+            一度に取得するチャンネルの数, default=5
 
         Returns
         -------
         list[Channel]
-            List of owned channels
+            取得した自分が所有しているチャンネルのリスト
         """
         data = {"sinceId": since_id, "untilId": until_id, "limit": limit}
 
@@ -615,6 +615,38 @@ class ChannelActions(ClientChannelActions):
         return [
             Channel(raw_channel=raw_channel, client=self._client) for raw_channel in raw_channels
         ]
+
+    async def get_all_owned(
+        self, since_id: str | None = None, until_id: str | None = None, limit: int = 5
+    ) -> AsyncGenerator[Channel, None]:
+        """自分が所有しているすべてのチャンネルを取得します
+
+        Endpoint: `/api/channels/owned`
+
+        Parameters
+        ----------
+        since_id : str, optional
+            指定したチャンネルIDよりも後のチャンネルを取得します, default=None
+        until_id : str, optional
+            指定したチャンネルIDよりも前のチャンネルを取得します, default=None
+        limit : int, optional
+            一度に取得するチャンネルの数, default=5
+
+        Returns
+        -------
+        AsyncGenerator[Channel, None]
+            取得した自分が所有しているチャンネル
+        """
+
+        body = {"sinceId": since_id, "untilId": until_id, "limit": limit}
+
+        pagination = Pagination[IChannel](
+            self._session, Route("POST", "/api/channels/owned"), json=body, auth=True
+        )
+
+        while pagination.is_final is False:
+            for raw_channel in await pagination.next():
+                yield Channel(raw_channel=raw_channel, client=self._client)
 
     async def show(self, channel_id: str) -> Channel:
         """Show a channel
