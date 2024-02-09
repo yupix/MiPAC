@@ -539,7 +539,7 @@
                 "path": "/channels/featured",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "fbb9041d5545cb5780f43ff68016616c5fe9bebfba80f90eda6178f5deebd1cb",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/channels/follow": {
                 "path": "/channels/follow",
@@ -551,25 +551,25 @@
                 "path": "/channels/followed",
                 "request_body_hash": "874fe7a09828d52b1e209c103e7d8808af6b0af79213965be746d011906df3d3",
                 "response_body_hash": "fbb9041d5545cb5780f43ff68016616c5fe9bebfba80f90eda6178f5deebd1cb",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/channels/owned": {
                 "path": "/channels/owned",
                 "request_body_hash": "874fe7a09828d52b1e209c103e7d8808af6b0af79213965be746d011906df3d3",
                 "response_body_hash": "fbb9041d5545cb5780f43ff68016616c5fe9bebfba80f90eda6178f5deebd1cb",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/channels/show": {
                 "path": "/channels/show",
                 "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
                 "response_body_hash": "d0d74a1473e306b569f31d8f672ca9c2428e1302a13f19fe3ef7cdf01a42f3ab",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/channels/timeline": {
                 "path": "/channels/timeline",
                 "request_body_hash": "f84bc86cda77ab3229f1aa0836d6f511617b52f6ac7d5c762758ad1497a3df22",
                 "response_body_hash": "714749ed97123df2377e503859138f94944f1a45f21df5300e02b250f0a817df",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/channels/unfollow": {
                 "path": "/channels/unfollow",
@@ -581,7 +581,7 @@
                 "path": "/channels/update",
                 "request_body_hash": "cd6cd79b9399329dcbe59cf945c94a4d00a3d8ad813c0265680cd21371020741",
                 "response_body_hash": "df6853d35700a2daac21cca9d083f01471da7336f995c3ec27dd6f9e6ca376af",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/channels/favorite": {
                 "path": "/channels/favorite",
@@ -599,13 +599,13 @@
                 "path": "/channels/my-favorites",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "fbb9041d5545cb5780f43ff68016616c5fe9bebfba80f90eda6178f5deebd1cb",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/channels/search": {
                 "path": "/channels/search",
                 "request_body_hash": "99efb621a25e5e80a19df58b6cbdccf5d64f8e11f33a4aeedfc3bd6ab9a17b99",
                 "response_body_hash": "fbb9041d5545cb5780f43ff68016616c5fe9bebfba80f90eda6178f5deebd1cb",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/charts/active-users": {
                 "path": "/charts/active-users",

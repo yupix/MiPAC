@@ -16,10 +16,18 @@
 - [x] /admin/update-user-note
 - [x] /admin/roles/create
 - [x] /channels/create
+- [x] /channels/featured
 - [x] /channels/follow
+- [x] /channels/followed
+- [x] /channels/owned
+- [x] /channels/show
+- [x] /channels/timeline
 - [x] /channels/unfollow
+- [x] /channels/update
 - [x] /channels/favorite
 - [x] /channels/unfavorite
+- [x] /channels/my-favorites
+- [x] /channels/search
 - [x] /drive/files
 - [x] /drive/files/attached-notes
 - [x] /drive/files/check-existence
@@ -295,14 +303,6 @@
 - [ ] /admin/roles/list (Need to work)
 - [ ] /admin/roles/show (Need to work)
 - [ ] /admin/roles/users (Need to work)
-- [ ] /channels/featured (Need to work)
-- [ ] /channels/followed (Need to work)
-- [ ] /channels/owned (Need to work)
-- [ ] /channels/show (Need to work)
-- [ ] /channels/timeline (Need to work)
-- [ ] /channels/update (Need to work)
-- [ ] /channels/my-favorites (Need to work)
-- [ ] /channels/search (Need to work)
 - [ ] /drive (Need to work)
 - [ ] /drive/folders (Need to work)
 - [ ] /drive/folders/create (Need to work)
