@@ -442,29 +442,29 @@ class ChannelActions(ClientChannelActions):
         is_sensitive: bool = MISSING,
         allow_renote_to_external: bool = MISSING,
     ) -> Channel:
-        """Create a channel
+        """チャンネルを作成します
 
         Endpoint: `/api/channels/create`
 
         Parameters
         ----------
         name : str
-            Name of the channel
-        color : str, optional
-            Color of the channel, by default MISSING
-        description : str, optional
-            Description of the channel, by default MISSING
-        banner_id : str, optional
-            Banner ID of the channel, by default MISSING
-        is_sensitive : bool, optional
-            Whether the channel is sensitive, by default MISSING
+            チャンネル名
+        color : str
+            チャンネルの色, default=MISSING
+        description : str
+            チャンネルの説明, default=MISSING
+        banner_id : str
+            チャンネルのバナーに使用するファイルのID, default=MISSING
+        is_sensitive : bool
+            チャンネルがセンシティブかどうか, default=MISSING
         allow_renote_to_external : bool, optional
-            Whether the channel allows renote to external, by default MISSING
+            外部へのリノートを許可するかどうか, default=MISSING
 
         Returns
         -------
         Channel
-            Created channel
+            作成したチャンネル
         """
         data = remove_dict_missing(
             {
@@ -486,14 +486,14 @@ class ChannelActions(ClientChannelActions):
         return Channel(raw_channel=raw_channel, client=self._client)
 
     async def featured(self) -> list[Channel]:
-        """Get featured channels
+        """トレンドのチャンネルを取得します
 
         Endpoint: `/api/channels/featured`
 
         Returns
         -------
         list[Channel]
-            List of featured channels
+            取得したチャンネルのリスト
         """
 
         raw_channels: list[IChannel] = await self._session.request(
@@ -506,19 +506,19 @@ class ChannelActions(ClientChannelActions):
     @credentials_required
     @override
     async def follow(self, channel_id: str) -> bool:
-        """Follow a channel
+        """指定したIDのチャンネルをフォローします
 
         Endpoint: `/api/channels/follow`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
+            対象のチャンネルID
 
         Returns
         -------
         bool
-            Whether the channel is followed
+            フォローに成功したかどうか
         """
         return await super().follow(channel_id=channel_id)
 
@@ -526,23 +526,23 @@ class ChannelActions(ClientChannelActions):
     async def followed(
         self, since_id: str | None = None, until_id: str | None = None, limit: int = 5
     ) -> list[Channel]:
-        """Get followed channels
+        """フォロー中のチャンネル一覧を取得します
 
         Endpoint: `/api/channels/followed`
 
         Parameters
         ----------
-        since_id : str, optional
-            Since ID, by default None
-        until_id : str, optional
-            Until ID, by default None
+        since_id : str | None
+            指定したチャンネルIDよりも後のチャンネルを取得します, default=None
+        until_id : str | None
+            指定したチャンネルIDよりも前のチャンネルを取得します, default=None
         limit : int, optional
-            Limit, by default 5
+            一度に取得するチャンネルの数, default=5
 
         Returns
         -------
         list[Channel]
-            List of followed channels
+            取得したフォロー中のチャンネルのリスト
         """
         data = {"sinceId": since_id, "untilId": until_id, "limit": limit}
 
@@ -552,6 +552,38 @@ class ChannelActions(ClientChannelActions):
         return [
             Channel(raw_channel=raw_channel, client=self._client) for raw_channel in raw_channels
         ]
+
+    async def get_all_followed(
+        self, since_id: str | None = None, until_id: str | None = None, limit: int = 5
+    ) -> AsyncGenerator[Channel, None]:
+        """フォロー中のすべてのチャンネルを取得します
+
+        Endpoint: `/api/channels/followed`
+
+        Parameters
+        ----------
+        since_id : str | None
+            指定したチャンネルIDよりも後のチャンネルを取得します, default=None
+        until_id : str | None
+            指定したチャンネルIDよりも前のチャンネルを取得します, default=None
+        limit : int, optional
+            一度に取得するチャンネルの数, default=5
+
+        Returns
+        -------
+        AsyncGenerator[Channel, None]
+            取得したフォロー中のチャンネル
+        """
+
+        body = {"sinceId": since_id, "untilId": until_id, "limit": limit}
+
+        pagination = Pagination[IChannel](
+            self._session, Route("POST", "/api/channels/followed"), json=body, auth=True
+        )
+
+        while pagination.is_final is False:
+            for raw_channel in await pagination.next():
+                yield Channel(raw_channel=raw_channel, client=self._client)
 
     @credentials_required
     async def owned(
