@@ -7,7 +7,7 @@ from mipac.actions.user import ClientUserActions, UserActions
 from mipac.http import HTTPClient
 from mipac.manager.blocking import BlockingManager
 from mipac.manager.follow import FollowManager
-from mipac.manager.mute import MuteManager
+from mipac.manager.users.mute import MuteManager
 from mipac.manager.users.list import (
     ClientPartialUserListManager,
     ClientUserListManager,
