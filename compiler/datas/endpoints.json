@@ -773,7 +773,7 @@
                 "path": "/drive/files/create",
                 "request_body_hash": "4daf046c7caee68e160edf1397dfcbb2ddfce5d88feeabbcecc5f55e0aef6b41",
                 "response_body_hash": "3d48931274764784925e437c048e319e3f3bedc61389bc41a24fdec4e2d7db8e",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/files/delete": {
                 "path": "/drive/files/delete",
@@ -785,31 +785,31 @@
                 "path": "/drive/files/find-by-hash",
                 "request_body_hash": "ea75dd1736f53c4238eada5abf871fea88c144b71f03fdaf9f7e56024322a2f3",
                 "response_body_hash": "f34c75e26e857fadd415d1e4a3bd80f224779a84be6a3e142e4ed7896e888c1b",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/files/find": {
                 "path": "/drive/files/find",
                 "request_body_hash": "7dee493b1ba72068bda7b172d6b2ca2ae4bb8cecde349c91df64169762208af6",
                 "response_body_hash": "f34c75e26e857fadd415d1e4a3bd80f224779a84be6a3e142e4ed7896e888c1b",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/files/show": {
                 "path": "/drive/files/show",
                 "request_body_hash": "469dab9342135333df7936e6dd1a691a975e6b5c205b5ab3040be3bf31a18a17",
                 "response_body_hash": "aa4ce4ad0294514e3ab4d69b359a6de15072d14ab3cd3548e53df145ebcdeafe",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/files/update": {
                 "path": "/drive/files/update",
                 "request_body_hash": "aabe195bd23689ffb4bd5689d2ae0adfa829f6e9ad5a762a5328712e36c9c792",
                 "response_body_hash": "77f59d7531292397a241c2b821a0a9cbd333a55f6f3153a11d95694829b5144d",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/files/upload-from-url": {
                 "path": "/drive/files/upload-from-url",
                 "request_body_hash": "dcd283b9998e8d418129a1a5352d489d4f7cdbba4c644c1ee8d834d7ddebb357",
                 "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/folders": {
                 "path": "/drive/folders",

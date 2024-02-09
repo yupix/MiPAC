@@ -23,7 +23,13 @@
 - [x] /drive/files
 - [x] /drive/files/attached-notes
 - [x] /drive/files/check-existence
+- [x] /drive/files/create
 - [x] /drive/files/delete
+- [x] /drive/files/find-by-hash
+- [x] /drive/files/find
+- [x] /drive/files/show
+- [x] /drive/files/update
+- [x] /drive/files/upload-from-url
 - [x] /drive/folders/delete
 - [x] /invite/delete
 - [x] /notes/delete
@@ -298,12 +304,6 @@
 - [ ] /channels/my-favorites (Need to work)
 - [ ] /channels/search (Need to work)
 - [ ] /drive (Need to work)
-- [ ] /drive/files/create (Need to work)
-- [ ] /drive/files/find-by-hash (Need to work)
-- [ ] /drive/files/find (Need to work)
-- [ ] /drive/files/show (Need to work)
-- [ ] /drive/files/update (Need to work)
-- [ ] /drive/files/upload-from-url (Need to work)
 - [ ] /drive/folders (Need to work)
 - [ ] /drive/folders/create (Need to work)
 - [ ] /drive/folders/find (Need to work)
