@@ -545,22 +545,22 @@ class FileActions(ClientFileActions):
         Parameters
         ----------
         url: str
-            The url of the file to upload
+            アップロードするファイルのURL
         folder_id: str | None
-            The id of the folder to upload the file to, defaults to None
+            アップロード先のフォルダID, default=None
         is_sensitive: bool
-            Whether the file is sensitive or not, defaults to False
+            ファイルがセンシティブかどうか, default=False
         comment: str | None
-            The comment of the file, defaults to None
+            ファイルのコメント, default=None
         marker: str | None
-            The marker of the file, defaults to None
+            ストリーミング通信でアップロード完了後に区別するためのマーカー, default=None
         force: bool
-            Whether to force upload the file or not, defaults to False
+            同様のファイルが既に存在する場合でも強制的にアップロードするかどうか, default=False
 
         Returns
         -------
         bool
-            Whether the file was uploaded or not
+            アップロードのリクエストに成功したかどうか
         """
 
         data = {
