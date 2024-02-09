@@ -757,7 +757,12 @@ class ChannelActions(ClientChannelActions):
         """
 
         return await super().timeline(
-             channel_id=channel_id, limit=limit, since_id=since_id, until_id=until_id, since_date=since_date, until_date=until_date
+            channel_id=channel_id,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+            since_date=since_date,
+            until_date=until_date,
         )
 
     @override
