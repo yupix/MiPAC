@@ -9,5 +9,6 @@ if TYPE_CHECKING:
 class IMuteUser(TypedDict):
     id: str
     created_at: str
+    expires_at: str | None
     mutee_id: str
     mutee: IUserDetailed
