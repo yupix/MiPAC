@@ -12,13 +12,12 @@ if TYPE_CHECKING:
     from mipac.client import ClientManager
 
 
-class ClientMuteActions(AbstractAction):
-    def __init__(self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager):
-        self.__user_id: str | None = user_id
+class SharedMuteActions(AbstractAction):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
-    async def create(self, expires_at: int | None = None, *, user_id: str | None = None) -> bool:
+    async def create(self, expires_at: int | None = None, *, user_id: str) -> bool:
         """指定したユーザーをミュートします
 
         Parameters
@@ -33,17 +32,13 @@ class ClientMuteActions(AbstractAction):
         bool
             ミュートに成功したかどうか
         """
-
-        if user_id or self.__user_id:
-            raise ValueError("Parameter 'user_id' is required.")
-
         body = {"userId": user_id, "expiresAt": expires_at}
 
         res: bool = await self._session.request(route=Route("POST", "/api/mute/create"), json=body)
 
         return res
 
-    async def delete(self, *, user_id: str | None = None) -> bool:
+    async def delete(self, *, user_id: str) -> bool:
         """指定したユーザーのミュートを解除します
 
         Parameters
@@ -56,10 +51,6 @@ class ClientMuteActions(AbstractAction):
         bool
             ミュート解除に成功したかどうか
         """
-
-        if user_id or self.__user_id:
-            raise ValueError("Parameter 'user_id' is required.")
-
         res: bool = await self._session.request(
             route=Route("POST", "/api/mute/delete"), json={"userId": user_id}
         )
@@ -67,7 +58,51 @@ class ClientMuteActions(AbstractAction):
         return res
 
 
-class MuteActions(ClientMuteActions):
+class ClientMuteActions(SharedMuteActions):
+    def __init__(self, user_id: str, *, session: HTTPClient, client: ClientManager):
+        super().__init__(session=session, client=client)
+        self.__user_id: str = user_id
+
+    @override
+    async def create(self, expires_at: int | None = None, *, user_id: str | None = None) -> bool:
+        """指定したユーザーをミュートします
+
+        Parameters
+        ----------
+        user_id : str
+            対象のユーザーID
+        expires_at : int | None
+            ミュートする期間(秒)、無期限でミュートする場合はNoneを指定します
+
+        Returns
+        -------
+        bool
+            ミュートに成功したかどうか
+        """
+        user_id = user_id or self.__user_id
+
+        return await super().create(expires_at=expires_at, user_id=user_id or self.__user_id)
+
+    @override
+    async def delete(self, *, user_id: str | None = None) -> bool:
+        """指定したユーザーのミュートを解除します
+
+        Parameters
+        ----------
+        user_id : str
+            対象のユーザーID
+
+        Returns
+        -------
+        bool
+            ミュート解除に成功したかどうか
+        """
+        user_id = user_id or self.__user_id
+
+        return await super().delete(user_id=user_id or self.__user_id)
+
+
+class MuteActions(SharedMuteActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
 
@@ -118,41 +153,3 @@ class MuteActions(ClientMuteActions):
         while pagination.is_final is False:
             for raw_muted_user in await pagination.next():
                 yield MutedUser(raw_mute_user=raw_muted_user, client=self._client)
-
-    @override
-    async def create(
-        self,
-        user_id: str,
-        expires_at: int | None = None,
-    ) -> bool:
-        """指定したユーザーをミュートします
-
-        Parameters
-        ----------
-        user_id : str
-            対象のユーザーID
-        expires_at : int | None
-            ミュートする期間(秒)、無期限でミュートする場合はNoneを指定します
-
-        Returns
-        -------
-        bool
-            ミュートに成功したかどうか
-        """
-        return await super().create(user_id=user_id, expires_at=expires_at)
-
-    @override
-    async def delete(self, user_id: str) -> bool:
-        """指定したユーザーのミュートを解除します
-
-        Parameters
-        ----------
-        user_id : str
-            対象のユーザーID
-
-        Returns
-        -------
-        bool
-            ミュート解除に成功したかどうか
-        """
-        return await super().delete(user_id=user_id)

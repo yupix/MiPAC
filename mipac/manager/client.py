@@ -8,7 +8,7 @@ from mipac.manager.admins.admin import AdminManager
 from mipac.manager.antenna import AntennaManager
 from mipac.manager.channel import ChannelManager, ClientChannelManager
 from mipac.manager.chart import ChartManager
-from mipac.manager.clip import ClipManager
+from mipac.manager.clip import ClientClipManager, ClipManager
 from mipac.manager.drive.drive import DriveManager
 from mipac.manager.emoji import EmojiManager
 from mipac.manager.follow import FollowManager, FollowRequestManager
@@ -82,6 +82,9 @@ class ClientManager:
 
     def _create_client_user_manager(self, user: PartialUser) -> ClientUserManager:
         return ClientUserManager(user=user, session=self.__session, client=self)
+
+    def _get_client_clip_instance(self, *, clip_id: str) -> ClientClipManager:
+        return ClientClipManager(clip_id=clip_id, session=self.__session, client=self)
 
     async def get_me(self) -> MeDetailed:
         return await self.user.action.get_me()
