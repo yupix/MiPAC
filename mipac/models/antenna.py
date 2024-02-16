@@ -17,40 +17,24 @@ class Antenna:
         self.__client: ClientManager = client
 
     @property
-    def case_sensitive(self) -> bool:
-        return self.__antenna["case_sensitive"]
+    def id(self) -> str:
+        return self.__antenna["id"]
 
     @property
     def created_at(self) -> datetime:
         return str_to_datetime(self.__antenna["created_at"])
 
     @property
-    def exclude_keywords(self) -> list[str]:
-        return self.__antenna["exclude_keywords"]
-
-    @property
-    def has_unread_note(self) -> bool:
-        return self.__antenna["has_unread_note"]
-
-    @property
-    def id(self) -> str:
-        return self.__antenna["id"]
-
-    @property
-    def is_actor(self) -> bool:
-        return self.__antenna["is_actor"]
+    def name(self) -> str:
+        return self.__antenna["name"]
 
     @property
     def keywords(self) -> list[str]:
         return self.__antenna["keywords"]
 
     @property
-    def name(self) -> str:
-        return self.__antenna["name"]
-
-    @property
-    def notify(self) -> bool:
-        return self.__antenna["notify"]
+    def exclude_keywords(self) -> list[str]:
+        return self.__antenna["exclude_keywords"]
 
     @property
     def src(self) -> IAntennaReceiveSource:
@@ -65,12 +49,32 @@ class Antenna:
         return self.__antenna["users"]
 
     @property
+    def case_sensitive(self) -> bool:
+        return self.__antenna["case_sensitive"]
+
+    @property
+    def local_only(self) -> bool:
+        return self.__antenna["local_only"]
+
+    @property
+    def notify(self) -> bool:
+        return self.__antenna["notify"]
+
+    @property
+    def has_unread_note(self) -> bool:
+        return self.__antenna["has_unread_note"]
+
+    @property
     def with_file(self) -> bool:
         return self.__antenna["with_file"]
 
     @property
     def with_replies(self) -> bool:
         return self.__antenna["with_replies"]
+
+    @property
+    def is_active(self) -> bool:
+        return self.__antenna["is_active"]
 
     @property
     def api(self) -> ClientAntennaManager:

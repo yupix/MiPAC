@@ -3,14 +3,14 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.antenna import Antenna
 from mipac.models.note import Note
 from mipac.types.antenna import IAntenna, IAntennaReceiveSource
 from mipac.types.note import INote
-from mipac.utils.format import remove_dict_empty
+from mipac.utils.format import remove_dict_empty, remove_dict_missing
 from mipac.utils.pagination import Pagination
+from mipac.utils.util import MISSING
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
@@ -44,7 +44,7 @@ class ClientAntennaActions(AbstractAction):
         """
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError("antenna id is required")
+            raise ValueError("antenna id is required")
 
         body = {"antennaId": antenna_id}
         res: bool = await self._session.request(
@@ -72,7 +72,7 @@ class ClientAntennaActions(AbstractAction):
         """
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError("antenna id is required")
+            raise ValueError("antenna id is required")
 
         body = {"antennaId": antenna_id}
         res_antenna: IAntenna = await self._session.request(
@@ -92,10 +92,10 @@ class ClientAntennaActions(AbstractAction):
     ) -> AsyncGenerator[Note, None]:
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError("antenna id is required")
+            raise ValueError("antenna id is required")
 
         if limit > 100:
-            raise ParameterError("limit must be less than 100")
+            raise ValueError("limit must be less than 100")
 
         if get_all:
             limit = 100
@@ -170,7 +170,7 @@ class ClientAntennaActions(AbstractAction):
 
         antenna_id = antenna_id or self._antenna_id
         if antenna_id is None:
-            raise ParameterError("antenna id is required")
+            raise ValueError("antenna id is required")
 
         if (
             all(
@@ -182,7 +182,7 @@ class ClientAntennaActions(AbstractAction):
             )
             is False
         ):
-            raise ParameterError("Required parameters are missing")
+            raise ValueError("Required parameters are missing")
         body = {
             "antennaId": antenna_id,
             "name": name,
@@ -216,6 +216,7 @@ class AntennaActions(ClientAntennaActions):
         exclude_keywords: list[list[str]] | None = None,
         users: list[str] | None = None,
         case_sensitive: bool = False,
+        local_only: bool = MISSING,
         with_replies: bool = False,
         with_file: bool = False,
         notify: bool = False,
@@ -233,6 +234,8 @@ class AntennaActions(ClientAntennaActions):
             Receive keywords.
         exclude_keywords : list[list[str]] | None, default None
             Excluded keywords.
+        local_only : bool, default MISSING
+            Whether to limit to local notes.
         users : list[str] | None, default None
             List of target user ID. Required when selecting 'users' as the receive source.
         case_sensitive : bool, default False
@@ -267,19 +270,22 @@ class AntennaActions(ClientAntennaActions):
             )
             is False
         ):
-            raise ParameterError("Required parameters are missing")
-        body = {
-            "name": name,
-            "src": src,
-            "userListId": user_list_id,
-            "keywords": keywords,
-            "excludeKeywords": exclude_keywords,
-            "users": users,
-            "caseSensitive": case_sensitive,
-            "withReplies": with_replies,
-            "withFile": with_file,
-            "notify": notify,
-        }
+            raise ValueError("Required parameters are missing")
+        body = remove_dict_missing(
+            {
+                "name": name,
+                "src": src,
+                "userListId": user_list_id,
+                "keywords": keywords,
+                "excludeKeywords": exclude_keywords,
+                "users": users,
+                "caseSensitive": case_sensitive,
+                "localOnly": local_only,
+                "withReplies": with_replies,
+                "withFile": with_file,
+                "notify": notify,
+            }
+        )
 
         res_antenna: IAntenna = await self._session.request(
             Route("POST", "/api/antennas/create"), auth=True, json=body, remove_none=False

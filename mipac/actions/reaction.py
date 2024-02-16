@@ -153,7 +153,9 @@ class ReactionActions(ClientReactionActions):
             type=type, limit=limit, since_id=since_id, until_id=until_id, note_id=note_id
         )
 
-    async def get_emoji_list(self) -> list[CustomEmoji]:
+    async def get_emoji_list(
+        self,
+    ) -> list[CustomEmoji]:  # TODO: metaからemojisは削除されてるので別の方法に切り替える
         data: IPartialMeta = await self.__session.request(
             Route("GET", "/api/meta"),
             json={"detail": False},

@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, AsyncGenerator, Literal
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import Route
 from mipac.models.roles import Role, RoleUser
 from mipac.types.meta import IPolicies
@@ -39,7 +38,7 @@ class AdminRoleModelActions(AbstractAction):
     ) -> bool:
         role_id = self._role_id or role_id
         if role_id is None:
-            raise ParameterError("role_idは必須です")
+            raise ValueError("role_idは必須です")
         body = {
             "roleId": role_id,
             "name": name,
@@ -67,7 +66,7 @@ class AdminRoleModelActions(AbstractAction):
     async def delete(self, role_id: str | None = None) -> bool:
         role_id = self._role_id or role_id
         if role_id is None:
-            raise ParameterError("role_idは必須です")
+            raise ValueError("role_idは必須です")
         res: bool = await self._session.request(
             Route("POST", "/api/admin/roles/delete"),
             auth=True,
@@ -96,7 +95,7 @@ class AdminRoleModelActions(AbstractAction):
             成功したか否か
         """
         if role_id is None:
-            raise ParameterError("role_idは必須です")
+            raise ValueError("role_idは必須です")
         body = {"roleId": role_id, "userId": user_id, "expiresAt": expires_at}
         res: bool = await self._session.request(
             Route("POST", "/api/admin/roles/assign"), auth=True, json=body
@@ -122,7 +121,7 @@ class AdminRoleModelActions(AbstractAction):
         """
         role_id = self._role_id or role_id
         if role_id is None:
-            raise ParameterError("role_idは必須です")
+            raise ValueError("role_idは必須です")
         body = {"roleId": role_id, "userId": user_id}
         res: bool = await self._session.request(
             Route("POST", "/api/admin/roles/unassign"), auth=True, json=body
@@ -132,7 +131,7 @@ class AdminRoleModelActions(AbstractAction):
     async def show(self, role_id: str | None = None) -> Role:
         role_id = self._role_id or role_id
         if role_id is None:
-            raise ParameterError("role_idは必須です")
+            raise ValueError("role_idは必須です")
         res: IRole = await self._session.request(
             Route("POST", "/api/admin/roles/show"),
             json={"roleId": role_id},
@@ -151,10 +150,10 @@ class AdminRoleModelActions(AbstractAction):
     ) -> AsyncGenerator[RoleUser, None]:
         role_id = self._role_id or role_id
         if role_id is None:
-            raise ParameterError("role_idは必須です")
+            raise ValueError("role_idは必須です")
 
         if limit > 100:
-            raise ParameterError("limitは100以下である必要があります")
+            raise ValueError("limitは100以下である必要があります")
 
         if get_all:
             limit = 100
@@ -189,10 +188,11 @@ class AdminRoleActions(AdminRoleModelActions):
         is_public: bool = False,
         is_moderator: bool = False,
         is_administrator: bool = False,
+        is_explorable: bool = False,
         as_badge: bool = False,
         can_edit_members_by_moderator: bool = False,
+        display_order: int = 0,
         policies: dict[Any, Any] | None = None,
-        is_explorable: bool = False,
     ) -> Role:
         body = {
             "name": name,
@@ -204,10 +204,11 @@ class AdminRoleActions(AdminRoleModelActions):
             "isPublic": is_public,
             "isModerator": is_moderator,
             "isAdministrator": is_administrator,
+            "isExplorable": is_explorable,
             "asBadge": as_badge,
             "canEditMembersByModerator": can_edit_members_by_moderator,
+            "displayOrder": display_order,
             "policies": policies or {},
-            "isExplorable": is_explorable,
         }
         res: IRole = await self._session.request(
             Route("POST", "/api/admin/roles/create"),

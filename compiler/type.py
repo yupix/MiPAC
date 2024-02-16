@@ -1,4 +1,4 @@
-from typing import Any, Literal, TypedDict
+from typing import Any, Literal, NotRequired, TypedDict
 
 
 class OpenAPIInfo(TypedDict):
@@ -24,9 +24,17 @@ class OpenAPIPath(TypedDict):
     security: list[dict[str, list[Any]]]
     requestBody: OpenAPIRequestBody
 
+class OpenAPIComponentProperty(TypedDict):
+    type: str | None
+    format: NotRequired[str]
+    items: NotRequired["OpenAPIComponentSchema"]
+
+class OpenAPIComponentSchema(TypedDict):
+    type: Literal["object"] 
+    properties: dict[str,  OpenAPIComponentProperty]
 
 class OpenAPIComponents(TypedDict):
-    schemas: dict[str, dict[str, Any]]
+    schemas: dict[str, OpenAPIComponentSchema]
 
 class OpenAPI(TypedDict):
     openapi: str

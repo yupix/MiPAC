@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator, Literal, Optional, overload, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import NotExistRequiredData, ParameterError
+from mipac.errors.base import NotExistRequiredData
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
 from mipac.models.gallery import GalleryPost
@@ -66,7 +66,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if check_multi_arg(user_id, self._user) is False:
-            raise ParameterError("missing required argument: user_id", user_id, self._user)
+            raise ValueError("missing required argument: user_id", user_id, self._user)
 
         data = {
             "userId": user_id,
@@ -155,7 +155,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
 
         data = {"userId": user_id, "limit": limit, "sinceId": since_id, "untilId": until_id}
 
@@ -206,7 +206,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
         data = {
             "userId": user_id,
             "sinceId": since_id,
@@ -234,7 +234,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
         data = {
             "userId": user_id,
             "sinceId": since_id,
@@ -290,7 +290,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
 
         data = {
             "userId": user_id,
@@ -322,7 +322,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
 
         data = {
             "userId": user_id,
@@ -374,7 +374,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
 
         data = {
             "userId": user_id,
@@ -403,7 +403,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
 
         data = {
             "userId": user_id,
@@ -443,7 +443,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
 
         data = {
             "userId": user_id,
@@ -482,7 +482,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
 
         data = {
             "userId": user_id,
@@ -522,7 +522,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
 
         data = {
             "userId": user_id,
@@ -544,7 +544,7 @@ class ClientUserActions(AbstractAction):
         user_id = user_id or self._user and self._user.id
 
         if user_id is None:
-            raise ParameterError("user_id is required")
+            raise ValueError("user_id is required")
 
         data = {
             "userId": user_id,
@@ -872,7 +872,7 @@ class UserActions(ClientUserActions):
         """
 
         if limit > 100:
-            raise ParameterError("limit は100以下である必要があります")
+            raise ValueError("limit は100以下である必要があります")
 
         body = remove_dict_empty(
             {"username": username, "host": host, "limit": limit, "detail": detail}
@@ -947,7 +947,7 @@ class UserActions(ClientUserActions):
         """
 
         if limit > 100:
-            raise ParameterError("limit は100以下である必要があります")
+            raise ValueError("limit は100以下である必要があります")
 
         if get_all:
             limit = 100

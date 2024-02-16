@@ -32,9 +32,11 @@ class Generator:
                 f.close()
 
     def get_path(self, module_type: ModuleTypes):
-        return f"{self.base_path}/{module_type}{self.path}{self.split_name[-1]}"
+        path = self.path[1:] if self.path[0] == "/" else self.path
+        return f"{self.base_path}/{module_type}/{path}{self.split_name[-1]}"
 
     def get_import_path(self, module_type: ModuleTypes):
+        print(module_type, self.get_path(module_type))
         return self.get_path(module_type).replace("../", "").replace("/", ".")
 
     def get_class_name(self, module_type: ModuleTypes):

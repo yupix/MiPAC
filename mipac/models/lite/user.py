@@ -99,6 +99,28 @@ class AvatarDecoration:
         """
         return self.__raw_avatar_decoration["url"]
 
+    @property
+    def offset_x(self) -> int | None:
+        """Returns the x offset of the avatar decoration.
+
+        Returns
+        -------
+        int | None
+            The x offset of the avatar decoration.
+        """
+        return self.__raw_avatar_decoration.get("offset_x")
+
+    @property
+    def offset_y(self) -> int | None:
+        """Returns the y offset of the avatar decoration.
+
+        Returns
+        -------
+        int | None
+            The y offset of the avatar decoration.
+        """
+        return self.__raw_avatar_decoration.get("offset_y")
+
 
 class PartialUser[PU: IPartialUser]:
     def __init__(self, raw_user: PU, *, client: ClientManager) -> None:

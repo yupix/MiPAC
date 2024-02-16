@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.note import Note
 from mipac.types.note import INote
@@ -24,7 +23,7 @@ class ClientPollActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {"noteId": note_id, "choice": choice}
         res: bool = await self._session.request(
@@ -40,7 +39,7 @@ class PollActions(ClientPollActions):
     @credentials_required
     async def recommendation(self, limit: int = 100, offset: int = 0):
         if limit > 100:
-            raise ParameterError("limit must be less than 100")
+            raise ValueError("limit must be less than 100")
 
         data = {"limit": limit, "offset": offset}
 

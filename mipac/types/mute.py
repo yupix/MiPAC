@@ -6,8 +6,9 @@ if TYPE_CHECKING:
     from mipac.types.user import IUserDetailed
 
 
-class IMuteUser(TypedDict):
+class IMutedUser(TypedDict):
     id: str
     created_at: str
+    expires_at: str | None
     mutee_id: str
     mutee: IUserDetailed

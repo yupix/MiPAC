@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import APIError, ParameterError
+from mipac.errors.base import APIError
 from mipac.file import MiFile
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
@@ -11,13 +11,7 @@ from mipac.models.drive import File
 from mipac.models.note import Note, NoteReaction, NoteState, NoteTranslateResult
 from mipac.models.poll import MiPoll, Poll
 from mipac.types.clip import IClip
-from mipac.types.note import (
-    ICreatedNote,
-    INote,
-    INoteState,
-    INoteTranslateResult,
-    INoteVisibility,
-)
+from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult, INoteVisibility
 from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
@@ -64,9 +58,7 @@ def create_note_body(
         "channelId": channel_id,
     }
     if not check_multi_arg(text, files, renote_id, poll):
-        raise ParameterError(
-            "To send a note, one of content, file_ids, renote_id or poll is required"
-        )
+        raise ValueError("To send a note, one of content, file_ids, renote_id or poll is required")
 
     if poll and type(Poll):
         poll_data = remove_dict_empty(
@@ -88,7 +80,7 @@ def create_note_body(
             elif isinstance(file, str):
                 file_ids.append(file)
             else:
-                raise ParameterError("files must be MiFile or str or File")
+                raise ValueError("files must be MiFile or str or File")
         body["fileIds"] = file_ids
 
     return remove_dict_empty(body)
@@ -115,12 +107,12 @@ class ClientNoteActions(AbstractAction):
         note_id: str | None = None,
     ) -> list[Note]:
         if limit > 100:
-            raise ParameterError("limit は100以下である必要があります")
+            raise ValueError("limit は100以下である必要があります")
 
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {
             "noteId": note_id,
@@ -197,7 +189,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {
             "noteId": note_id,
@@ -234,7 +226,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {"noteId": note_id}
         res: list[IClip] = await self._session.request(
@@ -266,7 +258,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {"noteId": note_id, "limit": limit, "offset": offset}
         res: list[INote] = await self._session.request(
@@ -293,7 +285,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {"noteId": note_id}
         res = await self._session.request(Route("POST", "/api/notes/delete"), json=data, auth=True)
@@ -311,7 +303,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         return await self._client.note.reaction.action.get_reactions(
             type=type, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
@@ -329,7 +321,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         return await self._client.note.reaction.action.fetch_reactions(
             note_id=note_id, type=type, limit=limit, since_id=since_id, until_id=until_id
@@ -366,7 +358,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {
             "noteId": note_id,
@@ -452,7 +444,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         body = {"noteId": note_id, "sinceId": since_id, "untilId": until_id, "limit": limit}
 
@@ -487,7 +479,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {"noteId": note_id}
         res: INoteState = await self._session.request(
@@ -537,7 +529,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {"noteId": note_id, "clipId": clip_id}
         return bool(
@@ -563,7 +555,7 @@ class ClientNoteActions(AbstractAction):
         note_id = self._note_id or note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         body = create_note_body(renote_id=note_id)
         res: ICreatedNote = await self._session.request(
@@ -666,7 +658,7 @@ class ClientNoteActions(AbstractAction):
         reply_id = reply_id or self._note_id
 
         if reply_id is None:
-            raise ParameterError("reply_id is required")
+            raise ValueError("reply_id is required")
 
         body = create_note_body(
             text=text,
@@ -738,7 +730,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         body = create_note_body(
             text=content,
@@ -788,7 +780,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         data = {"noteId": note_id, "targetLang": target_lang}
         res: INoteTranslateResult = await self._session.request(
@@ -814,7 +806,7 @@ class ClientNoteActions(AbstractAction):
         note_id = note_id or self._note_id
 
         if note_id is None:
-            raise ParameterError("note_id is required")
+            raise ValueError("note_id is required")
 
         body = {"noteId": note_id}
         res: bool = await self._session.request(
@@ -1343,7 +1335,7 @@ class NoteActions(ClientNoteActions):
         get_all: bool = False,
     ) -> AsyncGenerator[Note, None]:
         if limit > 100:
-            raise ParameterError("limit は100以下である必要があります")
+            raise ValueError("limit は100以下である必要があります")
 
         if get_all:
             limit = 100

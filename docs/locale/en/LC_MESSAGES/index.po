@@ -1,0 +1,5995 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, yupix
+# This file is distributed under the same license as the mipac package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mipac \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-09 09:55+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+#: ../../index.rst:2
+msgid "API Reference"
+msgstr ""
+
+#: ../../index.rst:5
+msgid "Misskey Models"
+msgstr ""
+
+#: ../../index.rst:8
+msgid "Ad"
+msgstr ""
+
+#: ../../index.rst:17
+msgid "IndexStat"
+msgstr ""
+
+#: ../../index.rst:26
+msgid "ModerationLog"
+msgstr ""
+
+#: ../../index.rst:35
+msgid "ServerInfo"
+msgstr ""
+
+#: ../../index.rst:44
+msgid "ServerInfoCpu"
+msgstr ""
+
+#: ../../index.rst:53
+msgid "ServerInfoFs"
+msgstr ""
+
+#: ../../index.rst:62
+msgid "ServerInfoMem"
+msgstr ""
+
+#: ../../index.rst:71
+msgid "ServerInfoNet"
+msgstr ""
+
+#: ../../index.rst:80
+msgid "UserIP"
+msgstr ""
+
+#: ../../index.rst:89
+msgid "Announcement"
+msgstr ""
+
+#: ../../index.rst:98
+msgid "AnnouncementDetailed"
+msgstr ""
+
+#: mipac.models.announcement.AnnouncementDetailed.reads:1 of
+msgid "Returns the number of reads of the announcement."
+msgstr ""
+
+#: ../../index.rst:107
+msgid "Antenna"
+msgstr ""
+
+#: ../../index.rst:116 mipac.actions.channel.ChannelActions.show:8 of
+msgid "Channel"
+msgstr ""
+
+#: ../../index.rst:125
+msgid "ActiveUsersChart"
+msgstr ""
+
+#: ../../index.rst:134
+msgid "DriveChart"
+msgstr ""
+
+#: ../../index.rst:143
+msgid "DriveLocalChart"
+msgstr ""
+
+#: ../../index.rst:152
+msgid "DriveRemoteChart"
+msgstr ""
+
+#: ../../index.rst:161
+msgid "Clip"
+msgstr ""
+
+#: mipac.models.clip.Clip.created_at:1 of
+msgid "The time the clip was created"
+msgstr ""
+
+#: mipac.models.clip.Clip.description:1 of
+msgid "The clip description"
+msgstr ""
+
+#: mipac.models.clip.Clip.favorited_count:1 of
+msgid "The number of times the clip has been favorited"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.add_note:3
+#: mipac.actions.clip.ClientClipActions.delete:3
+#: mipac.actions.clip.ClientClipActions.remove_note:3
+#: mipac.actions.clip.ClientClipActions.update:3
+#: mipac.actions.clip.ClipActions.get:3 mipac.models.clip.Clip.id:1 of
+msgid "The clip id"
+msgstr ""
+
+#: mipac.models.clip.Clip.is_favorited:1 of
+msgid "Whether the clip is favorited"
+msgstr ""
+
+#: mipac.models.clip.Clip.is_public:1 of
+msgid "Whether the clip is public"
+msgstr ""
+
+#: mipac.models.clip.Clip.last_clipped_at:1 of
+msgid "The last time the clip was clipped"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.update:5
+#: mipac.actions.clip.ClipActions.create:3 mipac.models.clip.Clip.name:1 of
+msgid "The clip name"
+msgstr ""
+
+#: mipac.models.clip.Clip.user:1 of
+msgid "The user who created the clip"
+msgstr ""
+
+#: mipac.models.clip.Clip.user_id:1 of
+msgid "The user id who created the clip"
+msgstr ""
+
+#: ../../index.rst:170
+msgid "DriveStatus"
+msgstr ""
+
+#: mipac.models.drive.DriveStatus.capacity:1
+#: mipac.models.drive.DriveStatus.capacity:3 of
+msgid "Total capacity of the drive in bytes"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.reset_password
+#: mipac.actions.admins.admin.AdminActions.suspend_user
+#: mipac.actions.admins.admin.AdminActions.unsuspend_user
+#: mipac.actions.admins.drive.AdminDriveActions.clean_remote_files
+#: mipac.actions.admins.drive.AdminDriveActions.cleanup
+#: mipac.actions.admins.drive.AdminDriveActions.get_files
+#: mipac.actions.admins.drive.AdminDriveActions.show_file
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove
+#: mipac.actions.admins.moderator.AdminModeratorActions.add
+#: mipac.actions.admins.moderator.AdminModeratorActions.remove
+#: mipac.actions.admins.roles.AdminRoleModelActions.assign
+#: mipac.actions.admins.roles.AdminRoleModelActions.unassign
+#: mipac.actions.admins.user.AdminUserActions.delete_account
+#: mipac.actions.admins.user.AdminUserActions.suspend
+#: mipac.actions.admins.user.AdminUserActions.unsuspend
+#: mipac.actions.antenna.AntennaActions.create
+#: mipac.actions.antenna.ClientAntennaActions.delete
+#: mipac.actions.antenna.ClientAntennaActions.show
+#: mipac.actions.antenna.ClientAntennaActions.update
+#: mipac.actions.channel.ChannelActions.create
+#: mipac.actions.channel.ChannelActions.favorite
+#: mipac.actions.channel.ChannelActions.featured
+#: mipac.actions.channel.ChannelActions.follow
+#: mipac.actions.channel.ChannelActions.followed
+#: mipac.actions.channel.ChannelActions.get_all_timeline
+#: mipac.actions.channel.ChannelActions.my_favorites
+#: mipac.actions.channel.ChannelActions.owned
+#: mipac.actions.channel.ChannelActions.search
+#: mipac.actions.channel.ChannelActions.send
+#: mipac.actions.channel.ChannelActions.show
+#: mipac.actions.channel.ChannelActions.unfavorite
+#: mipac.actions.channel.ChannelActions.unfollow
+#: mipac.actions.channel.ChannelActions.update
+#: mipac.actions.channel.ClientChannelActions.favorite
+#: mipac.actions.channel.ClientChannelActions.follow
+#: mipac.actions.channel.ClientChannelActions.get_all_timeline
+#: mipac.actions.channel.ClientChannelActions.send
+#: mipac.actions.channel.ClientChannelActions.timeline
+#: mipac.actions.channel.ClientChannelActions.unfavorite
+#: mipac.actions.channel.ClientChannelActions.unfollow
+#: mipac.actions.clip.ClientClipActions.add_note
+#: mipac.actions.clip.ClientClipActions.delete
+#: mipac.actions.clip.ClientClipActions.remove_note
+#: mipac.actions.clip.ClientClipActions.update
+#: mipac.actions.clip.ClipActions.create mipac.actions.clip.ClipActions.get
+#: mipac.actions.clip.ClipActions.get_list
+#: mipac.actions.clip.ClipActions.get_my_favorites
+#: mipac.actions.drive.drive.DriveActions.get_status
+#: mipac.actions.drive.drive.DriveActions.stream
+#: mipac.actions.drive.files.ClientFileActions.delete
+#: mipac.actions.drive.files.ClientFileActions.get_attached_notes
+#: mipac.actions.drive.files.ClientFileActions.update
+#: mipac.actions.drive.files.FileActions.check_existence
+#: mipac.actions.drive.files.FileActions.create
+#: mipac.actions.drive.files.FileActions.delete
+#: mipac.actions.drive.files.FileActions.find
+#: mipac.actions.drive.files.FileActions.find_by_hash
+#: mipac.actions.drive.files.FileActions.get_all_attached_notes
+#: mipac.actions.drive.files.FileActions.get_attached_notes
+#: mipac.actions.drive.files.FileActions.get_files
+#: mipac.actions.drive.files.FileActions.show
+#: mipac.actions.drive.files.FileActions.update
+#: mipac.actions.drive.files.FileActions.upload_from_url
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.find
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.update
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url
+#: mipac.actions.drive.folders.ClientFolderActions.create
+#: mipac.actions.drive.folders.ClientFolderActions.delete
+#: mipac.actions.drive.folders.ClientFolderActions.gets
+#: mipac.actions.drive.folders.ClientFolderActions.update
+#: mipac.actions.drive.folders.FolderActions.create
+#: mipac.actions.drive.folders.FolderActions.delete
+#: mipac.actions.drive.folders.FolderActions.find
+#: mipac.actions.drive.folders.FolderActions.gets
+#: mipac.actions.drive.folders.FolderActions.show
+#: mipac.actions.drive.folders.FolderActions.update
+#: mipac.actions.follow.FollowActions.add
+#: mipac.actions.follow.FollowActions.invalidate
+#: mipac.actions.follow.FollowActions.remove
+#: mipac.actions.follow.FollowRequestActions.accept
+#: mipac.actions.follow.FollowRequestActions.cancel
+#: mipac.actions.follow.FollowRequestActions.get_all
+#: mipac.actions.follow.FollowRequestActions.reject
+#: mipac.actions.invite.ClientInviteActions.delete
+#: mipac.actions.invite.InviteActions.create
+#: mipac.actions.invite.InviteActions.delete
+#: mipac.actions.invite.InviteActions.get_all_list
+#: mipac.actions.invite.InviteActions.get_limit
+#: mipac.actions.invite.InviteActions.get_list
+#: mipac.actions.mute.MuteActions.add mipac.actions.mute.MuteActions.delete
+#: mipac.actions.my.MyActions.get_claim_achievement
+#: mipac.actions.note.ClientNoteActions.add_clips
+#: mipac.actions.note.ClientNoteActions.create_renote
+#: mipac.actions.note.ClientNoteActions.delete
+#: mipac.actions.note.ClientNoteActions.fetch_children
+#: mipac.actions.note.ClientNoteActions.fetch_state
+#: mipac.actions.note.ClientNoteActions.get_all_children
+#: mipac.actions.note.ClientNoteActions.get_all_replies
+#: mipac.actions.note.ClientNoteActions.get_clips
+#: mipac.actions.note.ClientNoteActions.get_conversation
+#: mipac.actions.note.ClientNoteActions.get_renotes
+#: mipac.actions.note.ClientNoteActions.get_replies
+#: mipac.actions.note.ClientNoteActions.get_state
+#: mipac.actions.note.ClientNoteActions.translate
+#: mipac.actions.note.ClientNoteActions.un_renote
+#: mipac.actions.note.NoteActions.delete mipac.actions.note.NoteActions.fetch
+#: mipac.actions.note.NoteActions.fetch_children
+#: mipac.actions.note.NoteActions.get
+#: mipac.actions.note.NoteActions.get_all_children
+#: mipac.actions.note.NoteActions.get_all_replies
+#: mipac.actions.note.NoteActions.get_clips
+#: mipac.actions.note.NoteActions.get_conversation
+#: mipac.actions.note.NoteActions.get_featured
+#: mipac.actions.note.NoteActions.get_global_time_line
+#: mipac.actions.note.NoteActions.get_renotes
+#: mipac.actions.note.NoteActions.get_replies
+#: mipac.actions.note.NoteActions.get_time_line
+#: mipac.actions.note.NoteActions.send
+#: mipac.actions.reaction.ClientReactionActions.add
+#: mipac.actions.reaction.ClientReactionActions.remove
+#: mipac.actions.reaction.ReactionActions.add
+#: mipac.actions.reaction.ReactionActions.remove
+#: mipac.actions.role.RoleActions.get mipac.actions.role.RoleActions.get_list
+#: mipac.actions.user.ClientUserActions.get_all_featured_notes
+#: mipac.actions.user.ClientUserActions.get_featured_notes
+#: mipac.actions.user.ClientUserActions.get_followers
+#: mipac.actions.user.ClientUserActions.get_following
+#: mipac.actions.user.ClientUserActions.get_frequently_replied_users
+#: mipac.actions.user.ClientUserActions.get_gallery_posts
+#: mipac.actions.user.UserActions.get_all_featured_notes
+#: mipac.actions.user.UserActions.get_featured_notes
+#: mipac.actions.user.UserActions.get_followers
+#: mipac.actions.user.UserActions.get_following
+#: mipac.actions.user.UserActions.get_frequently_replied_users
+#: mipac.actions.user.UserActions.get_gallery_posts
+#: mipac.actions.user.UserActions.get_mention
+#: mipac.actions.user.UserActions.search_by_username_and_host
+#: mipac.actions.users.list.ClientPartialUserListActions.get_list
+#: mipac.actions.users.list.ClientPartialUserListActions.pull
+#: mipac.actions.users.list.ClientPartialUserListActions.push
+#: mipac.actions.users.list.ClientUserListActions.delete
+#: mipac.actions.users.list.ClientUserListActions.favorite
+#: mipac.actions.users.list.ClientUserListActions.get_list
+#: mipac.actions.users.list.ClientUserListActions.pull
+#: mipac.actions.users.list.ClientUserListActions.push
+#: mipac.actions.users.list.ClientUserListActions.show
+#: mipac.actions.users.list.ClientUserListActions.unfavorite
+#: mipac.actions.users.list.ClientUserListActions.update
+#: mipac.actions.users.list.UserListActions.create
+#: mipac.actions.users.list.UserListActions.delete
+#: mipac.actions.users.list.UserListActions.favorite
+#: mipac.actions.users.list.UserListActions.pull
+#: mipac.actions.users.list.UserListActions.push
+#: mipac.actions.users.list.UserListActions.show
+#: mipac.actions.users.list.UserListActions.unfavorite
+#: mipac.actions.users.list.UserListActions.update
+#: mipac.manager.admins.moderator.AdminModeratorManager.action
+#: mipac.manager.favorite.ClientFavoriteManager.action
+#: mipac.manager.favorite.FavoriteManager.action
+#: mipac.manager.reaction.ClientReactionManager.action
+#: mipac.manager.reaction.ReactionManager.action
+#: mipac.models.drive.DriveStatus.capacity mipac.models.drive.DriveStatus.usage
+#: mipac.models.lite.user.AvatarDecoration.angle
+#: mipac.models.lite.user.AvatarDecoration.flip_h
+#: mipac.models.lite.user.AvatarDecoration.id
+#: mipac.models.lite.user.AvatarDecoration.offset_x
+#: mipac.models.lite.user.AvatarDecoration.offset_y
+#: mipac.models.lite.user.AvatarDecoration.url
+#: mipac.models.lite.user.BadgeRole.display_order
+#: mipac.models.lite.user.BadgeRole.icon_url
+#: mipac.models.lite.user.BadgeRole.name mipac.models.lite.user.PartialUser.api
+#: mipac.models.lite.user.PartialUser.avatar_blurhash
+#: mipac.models.lite.user.PartialUser.avatar_decoration
+#: mipac.models.lite.user.PartialUser.avatar_url
+#: mipac.models.lite.user.PartialUser.badge_roles
+#: mipac.models.lite.user.PartialUser.emojis
+#: mipac.models.lite.user.PartialUser.host
+#: mipac.models.lite.user.PartialUser.instance
+#: mipac.models.lite.user.PartialUser.is_bot
+#: mipac.models.lite.user.PartialUser.is_cat
+#: mipac.models.lite.user.PartialUser.name
+#: mipac.models.lite.user.PartialUser.online_status
+#: mipac.models.lite.user.PartialUser.username mipac.models.note.Note.api
+#: mipac.models.note.Note.author mipac.models.note.Note.channel
+#: mipac.models.note.Note.channel_id mipac.models.note.Note.clipped_count
+#: mipac.models.note.Note.content mipac.models.note.Note.created_at
+#: mipac.models.note.Note.cw mipac.models.note.Note.deleted_at
+#: mipac.models.note.Note.file_ids mipac.models.note.Note.files
+#: mipac.models.note.Note.id mipac.models.note.Note.is_hidden
+#: mipac.models.note.Note.local_only mipac.models.note.Note.mentions
+#: mipac.models.note.Note.my_reaction mipac.models.note.Note.poll
+#: mipac.models.note.Note.reaction_acceptance
+#: mipac.models.note.Note.reaction_and_user_pair_cache
+#: mipac.models.note.Note.reactions mipac.models.note.Note.renote
+#: mipac.models.note.Note.renote_count mipac.models.note.Note.renote_id
+#: mipac.models.note.Note.replies_count mipac.models.note.Note.reply
+#: mipac.models.note.Note.reply_id mipac.models.note.Note.tags
+#: mipac.models.note.Note.text mipac.models.note.Note.uri
+#: mipac.models.note.Note.url mipac.models.note.Note.user
+#: mipac.models.note.Note.user_id mipac.models.note.Note.visibility
+#: mipac.models.note.Note.visible_user_ids
+#: mipac.models.note.NoteChannel.allow_renote_to_external
+#: mipac.models.note.NoteChannel.color mipac.models.note.NoteChannel.id
+#: mipac.models.note.NoteChannel.is_sensitive
+#: mipac.models.note.NoteChannel.name mipac.models.note.NoteChannel.user_id
+#: mipac.models.note.NoteReaction.created_at mipac.models.note.NoteReaction.id
+#: mipac.models.note.NoteReaction.type mipac.models.note.NoteReaction.user
+#: mipac.utils.auth.AuthClient.check_auth
+#: mipac.utils.auth.AuthClient.get_auth_url mipac.utils.format.bool_to_string
+#: mipac.utils.format.remove_dict_empty mipac.utils.format.remove_dict_missing
+#: mipac.utils.format.remove_list_empty mipac.utils.format.str_to_datetime
+#: mipac.utils.format.upper_to_lower mipac.utils.util.check_multi_arg
+#: mipac.utils.util.deprecated.<locals>.new_func of
+msgid "戻り値"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.reset_password
+#: mipac.actions.admins.admin.AdminActions.suspend_user
+#: mipac.actions.admins.admin.AdminActions.unsuspend_user
+#: mipac.actions.admins.drive.AdminDriveActions.clean_remote_files
+#: mipac.actions.admins.drive.AdminDriveActions.cleanup
+#: mipac.actions.admins.drive.AdminDriveActions.get_files
+#: mipac.actions.admins.drive.AdminDriveActions.show_file
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove
+#: mipac.actions.admins.moderator.AdminModeratorActions.add
+#: mipac.actions.admins.moderator.AdminModeratorActions.remove
+#: mipac.actions.admins.roles.AdminRoleModelActions.assign
+#: mipac.actions.admins.roles.AdminRoleModelActions.unassign
+#: mipac.actions.admins.user.AdminUserActions.delete_account
+#: mipac.actions.admins.user.AdminUserActions.show_user
+#: mipac.actions.admins.user.AdminUserActions.suspend
+#: mipac.actions.admins.user.AdminUserActions.unsuspend
+#: mipac.actions.antenna.AntennaActions.create
+#: mipac.actions.antenna.ClientAntennaActions.delete
+#: mipac.actions.antenna.ClientAntennaActions.show
+#: mipac.actions.antenna.ClientAntennaActions.update
+#: mipac.actions.channel.ChannelActions.create
+#: mipac.actions.channel.ChannelActions.favorite
+#: mipac.actions.channel.ChannelActions.featured
+#: mipac.actions.channel.ChannelActions.follow
+#: mipac.actions.channel.ChannelActions.followed
+#: mipac.actions.channel.ChannelActions.get_all_timeline
+#: mipac.actions.channel.ChannelActions.my_favorites
+#: mipac.actions.channel.ChannelActions.owned
+#: mipac.actions.channel.ChannelActions.search
+#: mipac.actions.channel.ChannelActions.send
+#: mipac.actions.channel.ChannelActions.show
+#: mipac.actions.channel.ChannelActions.unfavorite
+#: mipac.actions.channel.ChannelActions.unfollow
+#: mipac.actions.channel.ChannelActions.update
+#: mipac.actions.channel.ClientChannelActions.favorite
+#: mipac.actions.channel.ClientChannelActions.follow
+#: mipac.actions.channel.ClientChannelActions.get_all_timeline
+#: mipac.actions.channel.ClientChannelActions.send
+#: mipac.actions.channel.ClientChannelActions.timeline
+#: mipac.actions.channel.ClientChannelActions.unfavorite
+#: mipac.actions.channel.ClientChannelActions.unfollow
+#: mipac.actions.clip.ClientClipActions.add_note
+#: mipac.actions.clip.ClientClipActions.delete
+#: mipac.actions.clip.ClientClipActions.remove_note
+#: mipac.actions.clip.ClientClipActions.update
+#: mipac.actions.clip.ClipActions.create mipac.actions.clip.ClipActions.get
+#: mipac.actions.clip.ClipActions.get_list
+#: mipac.actions.clip.ClipActions.get_my_favorites
+#: mipac.actions.drive.drive.DriveActions.get_status
+#: mipac.actions.drive.drive.DriveActions.stream
+#: mipac.actions.drive.files.ClientFileActions.delete
+#: mipac.actions.drive.files.ClientFileActions.get_attached_notes
+#: mipac.actions.drive.files.ClientFileActions.update
+#: mipac.actions.drive.files.FileActions.check_existence
+#: mipac.actions.drive.files.FileActions.create
+#: mipac.actions.drive.files.FileActions.delete
+#: mipac.actions.drive.files.FileActions.find
+#: mipac.actions.drive.files.FileActions.find_by_hash
+#: mipac.actions.drive.files.FileActions.get_all_attached_notes
+#: mipac.actions.drive.files.FileActions.get_attached_notes
+#: mipac.actions.drive.files.FileActions.get_files
+#: mipac.actions.drive.files.FileActions.show
+#: mipac.actions.drive.files.FileActions.update
+#: mipac.actions.drive.files.FileActions.upload_from_url
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.find
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.update
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url
+#: mipac.actions.drive.folders.ClientFolderActions.create
+#: mipac.actions.drive.folders.ClientFolderActions.delete
+#: mipac.actions.drive.folders.ClientFolderActions.gets
+#: mipac.actions.drive.folders.ClientFolderActions.update
+#: mipac.actions.drive.folders.FolderActions.create
+#: mipac.actions.drive.folders.FolderActions.delete
+#: mipac.actions.drive.folders.FolderActions.find
+#: mipac.actions.drive.folders.FolderActions.gets
+#: mipac.actions.drive.folders.FolderActions.show
+#: mipac.actions.drive.folders.FolderActions.update
+#: mipac.actions.follow.FollowActions.add
+#: mipac.actions.follow.FollowActions.invalidate
+#: mipac.actions.follow.FollowActions.remove
+#: mipac.actions.follow.FollowRequestActions.accept
+#: mipac.actions.follow.FollowRequestActions.cancel
+#: mipac.actions.follow.FollowRequestActions.get_all
+#: mipac.actions.follow.FollowRequestActions.reject
+#: mipac.actions.invite.ClientInviteActions.delete
+#: mipac.actions.invite.InviteActions.create
+#: mipac.actions.invite.InviteActions.delete
+#: mipac.actions.invite.InviteActions.get_all_list
+#: mipac.actions.invite.InviteActions.get_limit
+#: mipac.actions.invite.InviteActions.get_list
+#: mipac.actions.mute.MuteActions.add mipac.actions.mute.MuteActions.delete
+#: mipac.actions.my.MyActions.get_claim_achievement
+#: mipac.actions.note.ClientNoteActions.add_clips
+#: mipac.actions.note.ClientNoteActions.create_renote
+#: mipac.actions.note.ClientNoteActions.delete
+#: mipac.actions.note.ClientNoteActions.fetch_children
+#: mipac.actions.note.ClientNoteActions.fetch_state
+#: mipac.actions.note.ClientNoteActions.get_all_children
+#: mipac.actions.note.ClientNoteActions.get_all_replies
+#: mipac.actions.note.ClientNoteActions.get_clips
+#: mipac.actions.note.ClientNoteActions.get_conversation
+#: mipac.actions.note.ClientNoteActions.get_renotes
+#: mipac.actions.note.ClientNoteActions.get_replies
+#: mipac.actions.note.ClientNoteActions.get_state
+#: mipac.actions.note.ClientNoteActions.translate
+#: mipac.actions.note.ClientNoteActions.un_renote
+#: mipac.actions.note.NoteActions.delete mipac.actions.note.NoteActions.fetch
+#: mipac.actions.note.NoteActions.fetch_children
+#: mipac.actions.note.NoteActions.get
+#: mipac.actions.note.NoteActions.get_all_children
+#: mipac.actions.note.NoteActions.get_all_replies
+#: mipac.actions.note.NoteActions.get_clips
+#: mipac.actions.note.NoteActions.get_conversation
+#: mipac.actions.note.NoteActions.get_featured
+#: mipac.actions.note.NoteActions.get_global_time_line
+#: mipac.actions.note.NoteActions.get_renotes
+#: mipac.actions.note.NoteActions.get_replies
+#: mipac.actions.note.NoteActions.get_time_line
+#: mipac.actions.note.NoteActions.send
+#: mipac.actions.reaction.ClientReactionActions.add
+#: mipac.actions.reaction.ClientReactionActions.remove
+#: mipac.actions.reaction.ReactionActions.add
+#: mipac.actions.reaction.ReactionActions.remove
+#: mipac.actions.role.RoleActions.get mipac.actions.role.RoleActions.get_list
+#: mipac.actions.user.ClientUserActions.get_all_featured_notes
+#: mipac.actions.user.ClientUserActions.get_featured_notes
+#: mipac.actions.user.ClientUserActions.get_followers
+#: mipac.actions.user.ClientUserActions.get_following
+#: mipac.actions.user.ClientUserActions.get_frequently_replied_users
+#: mipac.actions.user.ClientUserActions.get_gallery_posts
+#: mipac.actions.user.UserActions.get_all_featured_notes
+#: mipac.actions.user.UserActions.get_featured_notes
+#: mipac.actions.user.UserActions.get_followers
+#: mipac.actions.user.UserActions.get_following
+#: mipac.actions.user.UserActions.get_frequently_replied_users
+#: mipac.actions.user.UserActions.get_gallery_posts
+#: mipac.actions.user.UserActions.get_mention
+#: mipac.actions.user.UserActions.search_by_username_and_host
+#: mipac.actions.users.list.ClientPartialUserListActions.get_list
+#: mipac.actions.users.list.ClientPartialUserListActions.pull
+#: mipac.actions.users.list.ClientPartialUserListActions.push
+#: mipac.actions.users.list.ClientUserListActions.delete
+#: mipac.actions.users.list.ClientUserListActions.favorite
+#: mipac.actions.users.list.ClientUserListActions.get_list
+#: mipac.actions.users.list.ClientUserListActions.pull
+#: mipac.actions.users.list.ClientUserListActions.push
+#: mipac.actions.users.list.ClientUserListActions.show
+#: mipac.actions.users.list.ClientUserListActions.unfavorite
+#: mipac.actions.users.list.ClientUserListActions.update
+#: mipac.actions.users.list.UserListActions.create
+#: mipac.actions.users.list.UserListActions.delete
+#: mipac.actions.users.list.UserListActions.favorite
+#: mipac.actions.users.list.UserListActions.pull
+#: mipac.actions.users.list.UserListActions.push
+#: mipac.actions.users.list.UserListActions.show
+#: mipac.actions.users.list.UserListActions.unfavorite
+#: mipac.actions.users.list.UserListActions.update
+#: mipac.manager.admins.moderator.AdminModeratorManager.action
+#: mipac.manager.favorite.ClientFavoriteManager.action
+#: mipac.manager.favorite.FavoriteManager.action
+#: mipac.manager.reaction.ClientReactionManager.action
+#: mipac.manager.reaction.ReactionManager.action
+#: mipac.models.drive.DriveStatus.capacity mipac.models.drive.DriveStatus.usage
+#: mipac.models.lite.user.AvatarDecoration.angle
+#: mipac.models.lite.user.AvatarDecoration.flip_h
+#: mipac.models.lite.user.AvatarDecoration.id
+#: mipac.models.lite.user.AvatarDecoration.offset_x
+#: mipac.models.lite.user.AvatarDecoration.offset_y
+#: mipac.models.lite.user.AvatarDecoration.url
+#: mipac.models.lite.user.BadgeRole.display_order
+#: mipac.models.lite.user.BadgeRole.icon_url
+#: mipac.models.lite.user.BadgeRole.name mipac.models.lite.user.PartialUser.api
+#: mipac.models.lite.user.PartialUser.avatar_blurhash
+#: mipac.models.lite.user.PartialUser.avatar_decoration
+#: mipac.models.lite.user.PartialUser.avatar_url
+#: mipac.models.lite.user.PartialUser.badge_roles
+#: mipac.models.lite.user.PartialUser.emojis
+#: mipac.models.lite.user.PartialUser.host
+#: mipac.models.lite.user.PartialUser.instance
+#: mipac.models.lite.user.PartialUser.is_bot
+#: mipac.models.lite.user.PartialUser.is_cat
+#: mipac.models.lite.user.PartialUser.name
+#: mipac.models.lite.user.PartialUser.online_status
+#: mipac.models.lite.user.PartialUser.username mipac.models.note.Note.api
+#: mipac.models.note.Note.author mipac.models.note.Note.channel
+#: mipac.models.note.Note.channel_id mipac.models.note.Note.clipped_count
+#: mipac.models.note.Note.content mipac.models.note.Note.created_at
+#: mipac.models.note.Note.cw mipac.models.note.Note.deleted_at
+#: mipac.models.note.Note.file_ids mipac.models.note.Note.files
+#: mipac.models.note.Note.id mipac.models.note.Note.is_hidden
+#: mipac.models.note.Note.local_only mipac.models.note.Note.mentions
+#: mipac.models.note.Note.my_reaction mipac.models.note.Note.poll
+#: mipac.models.note.Note.reaction_acceptance
+#: mipac.models.note.Note.reaction_and_user_pair_cache
+#: mipac.models.note.Note.reactions mipac.models.note.Note.renote
+#: mipac.models.note.Note.renote_count mipac.models.note.Note.renote_id
+#: mipac.models.note.Note.replies_count mipac.models.note.Note.reply
+#: mipac.models.note.Note.reply_id mipac.models.note.Note.tags
+#: mipac.models.note.Note.text mipac.models.note.Note.uri
+#: mipac.models.note.Note.url mipac.models.note.Note.user
+#: mipac.models.note.Note.user_id mipac.models.note.Note.visibility
+#: mipac.models.note.Note.visible_user_ids
+#: mipac.models.note.NoteChannel.allow_renote_to_external
+#: mipac.models.note.NoteChannel.color mipac.models.note.NoteChannel.id
+#: mipac.models.note.NoteChannel.is_sensitive
+#: mipac.models.note.NoteChannel.name mipac.models.note.NoteChannel.user_id
+#: mipac.models.note.NoteReaction.created_at mipac.models.note.NoteReaction.id
+#: mipac.models.note.NoteReaction.type mipac.models.note.NoteReaction.user
+#: mipac.utils.auth.AuthClient.check_auth
+#: mipac.utils.auth.AuthClient.get_auth_url mipac.utils.format.bool_to_string
+#: mipac.utils.format.remove_dict_empty mipac.utils.format.remove_dict_missing
+#: mipac.utils.format.remove_list_empty mipac.utils.format.str_to_datetime
+#: mipac.utils.format.upper_to_lower mipac.utils.util.check_multi_arg
+#: mipac.utils.util.deprecated.<locals>.new_func of
+msgid "戻り値の型"
+msgstr ""
+
+#: mipac.models.drive.DriveStatus.usage:1
+#: mipac.models.drive.DriveStatus.usage:3 of
+msgid "Total usage of the drive in bytes"
+msgstr ""
+
+#: ../../index.rst:179
+msgid "File"
+msgstr ""
+
+#: ../../index.rst:188
+msgid "FileProperties"
+msgstr ""
+
+#: ../../index.rst:197
+msgid "Folder"
+msgstr ""
+
+#: ../../index.rst:206
+msgid "CustomEmoji"
+msgstr ""
+
+#: ../../index.rst:215
+msgid "EmojiDetailed"
+msgstr ""
+
+#: ../../index.rst:224
+msgid "EmojiSimple"
+msgstr ""
+
+#: ../../index.rst:233
+msgid "FollowRequest"
+msgstr ""
+
+#: ../../index.rst:242
+msgid "GalleryPost"
+msgstr ""
+
+#: ../../index.rst:251
+msgid "FederationInstance"
+msgstr ""
+
+#: ../../index.rst:260
+msgid "InviteCode"
+msgstr ""
+
+#: ../../index.rst:269
+msgid "InviteLimit"
+msgstr ""
+
+#: ../../index.rst:278
+msgid "AdminMeta"
+msgstr ""
+
+#: ../../index.rst:287 ../../index.rst:3547
+msgid "Features"
+msgstr ""
+
+#: ../../index.rst:296
+msgid "Meta"
+msgstr ""
+
+#: ../../index.rst:305
+msgid "MuteUser"
+msgstr ""
+
+#: ../../index.rst:314
+msgid "Header"
+msgstr ""
+
+#: ../../index.rst:323
+msgid "Note"
+msgstr ""
+
+#: mipac.models.note.Note:1 of
+msgid "Noteモデル"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.get_meta
+#: mipac.actions.admins.admin.AdminActions.reset_password
+#: mipac.actions.admins.admin.AdminActions.resolve_abuse_user_report
+#: mipac.actions.admins.admin.AdminActions.send_email
+#: mipac.actions.admins.admin.AdminActions.suspend_user
+#: mipac.actions.admins.admin.AdminActions.unsuspend_user
+#: mipac.actions.admins.admin.AdminActions.update_user_note
+#: mipac.actions.admins.drive.AdminDriveActions.get_files
+#: mipac.actions.admins.drive.AdminDriveActions.show_file
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove
+#: mipac.actions.admins.moderator.AdminModeratorActions.add
+#: mipac.actions.admins.moderator.AdminModeratorActions.remove
+#: mipac.actions.admins.roles.AdminRoleModelActions.assign
+#: mipac.actions.admins.roles.AdminRoleModelActions.unassign
+#: mipac.actions.admins.user.AdminUserActions.delete_account
+#: mipac.actions.admins.user.AdminUserActions.show_user
+#: mipac.actions.admins.user.AdminUserActions.suspend
+#: mipac.actions.admins.user.AdminUserActions.unsuspend
+#: mipac.actions.antenna.AntennaActions.create
+#: mipac.actions.antenna.ClientAntennaActions.delete
+#: mipac.actions.antenna.ClientAntennaActions.show
+#: mipac.actions.antenna.ClientAntennaActions.update
+#: mipac.actions.channel.ChannelActions.create
+#: mipac.actions.channel.ChannelActions.favorite
+#: mipac.actions.channel.ChannelActions.follow
+#: mipac.actions.channel.ChannelActions.followed
+#: mipac.actions.channel.ChannelActions.get_all_timeline
+#: mipac.actions.channel.ChannelActions.owned
+#: mipac.actions.channel.ChannelActions.search
+#: mipac.actions.channel.ChannelActions.send
+#: mipac.actions.channel.ChannelActions.show
+#: mipac.actions.channel.ChannelActions.unfavorite
+#: mipac.actions.channel.ChannelActions.unfollow
+#: mipac.actions.channel.ChannelActions.update
+#: mipac.actions.channel.ClientChannelActions.favorite
+#: mipac.actions.channel.ClientChannelActions.follow
+#: mipac.actions.channel.ClientChannelActions.get_all_timeline
+#: mipac.actions.channel.ClientChannelActions.send
+#: mipac.actions.channel.ClientChannelActions.timeline
+#: mipac.actions.channel.ClientChannelActions.unfavorite
+#: mipac.actions.channel.ClientChannelActions.unfollow
+#: mipac.actions.channel.ClientChannelActions.update
+#: mipac.actions.clip.ClientClipActions.add_note
+#: mipac.actions.clip.ClientClipActions.delete
+#: mipac.actions.clip.ClientClipActions.remove_note
+#: mipac.actions.clip.ClientClipActions.update
+#: mipac.actions.clip.ClipActions.create mipac.actions.clip.ClipActions.get
+#: mipac.actions.drive.drive.DriveActions.stream
+#: mipac.actions.drive.files.ClientFileActions.delete
+#: mipac.actions.drive.files.ClientFileActions.get_attached_notes
+#: mipac.actions.drive.files.ClientFileActions.update
+#: mipac.actions.drive.files.FileActions.check_existence
+#: mipac.actions.drive.files.FileActions.create
+#: mipac.actions.drive.files.FileActions.delete
+#: mipac.actions.drive.files.FileActions.find
+#: mipac.actions.drive.files.FileActions.find_by_hash
+#: mipac.actions.drive.files.FileActions.get_all_attached_notes
+#: mipac.actions.drive.files.FileActions.get_attached_notes
+#: mipac.actions.drive.files.FileActions.get_files
+#: mipac.actions.drive.files.FileActions.show
+#: mipac.actions.drive.files.FileActions.update
+#: mipac.actions.drive.files.FileActions.upload_from_url
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.find
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.update
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url
+#: mipac.actions.drive.folders.ClientFolderActions.create
+#: mipac.actions.drive.folders.ClientFolderActions.delete
+#: mipac.actions.drive.folders.ClientFolderActions.gets
+#: mipac.actions.drive.folders.ClientFolderActions.update
+#: mipac.actions.drive.folders.FolderActions.create
+#: mipac.actions.drive.folders.FolderActions.delete
+#: mipac.actions.drive.folders.FolderActions.find
+#: mipac.actions.drive.folders.FolderActions.gets
+#: mipac.actions.drive.folders.FolderActions.show
+#: mipac.actions.drive.folders.FolderActions.update
+#: mipac.actions.follow.FollowRequestActions.accept
+#: mipac.actions.follow.FollowRequestActions.cancel
+#: mipac.actions.follow.FollowRequestActions.reject
+#: mipac.actions.invite.ClientInviteActions.delete
+#: mipac.actions.invite.InviteActions.delete
+#: mipac.actions.invite.InviteActions.get_all_list
+#: mipac.actions.invite.InviteActions.get_list
+#: mipac.actions.mute.MuteActions.add mipac.actions.mute.MuteActions.delete
+#: mipac.actions.my.MyActions.get_claim_achievement
+#: mipac.actions.note.ClientNoteActions.add_clips
+#: mipac.actions.note.ClientNoteActions.create_quote
+#: mipac.actions.note.ClientNoteActions.create_renote
+#: mipac.actions.note.ClientNoteActions.delete
+#: mipac.actions.note.ClientNoteActions.fetch_children
+#: mipac.actions.note.ClientNoteActions.fetch_state
+#: mipac.actions.note.ClientNoteActions.get_all_children
+#: mipac.actions.note.ClientNoteActions.get_all_replies
+#: mipac.actions.note.ClientNoteActions.get_clips
+#: mipac.actions.note.ClientNoteActions.get_conversation
+#: mipac.actions.note.ClientNoteActions.get_renotes
+#: mipac.actions.note.ClientNoteActions.get_replies
+#: mipac.actions.note.ClientNoteActions.get_state
+#: mipac.actions.note.ClientNoteActions.renote
+#: mipac.actions.note.ClientNoteActions.translate
+#: mipac.actions.note.ClientNoteActions.un_renote
+#: mipac.actions.note.NoteActions.delete mipac.actions.note.NoteActions.fetch
+#: mipac.actions.note.NoteActions.fetch_children
+#: mipac.actions.note.NoteActions.get
+#: mipac.actions.note.NoteActions.get_all_children
+#: mipac.actions.note.NoteActions.get_all_replies
+#: mipac.actions.note.NoteActions.get_clips
+#: mipac.actions.note.NoteActions.get_conversation
+#: mipac.actions.note.NoteActions.get_featured
+#: mipac.actions.note.NoteActions.get_global_time_line
+#: mipac.actions.note.NoteActions.get_mentions
+#: mipac.actions.note.NoteActions.get_renotes
+#: mipac.actions.note.NoteActions.get_replies
+#: mipac.actions.note.NoteActions.get_time_line
+#: mipac.actions.note.NoteActions.send
+#: mipac.actions.reaction.ClientReactionActions.add
+#: mipac.actions.reaction.ClientReactionActions.remove
+#: mipac.actions.reaction.ReactionActions.add
+#: mipac.actions.reaction.ReactionActions.remove
+#: mipac.actions.role.RoleActions.get mipac.actions.role.RoleActions.get_notes
+#: mipac.actions.role.RoleActions.get_users
+#: mipac.actions.user.ClientUserActions.get_all_featured_notes
+#: mipac.actions.user.ClientUserActions.get_featured_notes
+#: mipac.actions.user.ClientUserActions.get_followers
+#: mipac.actions.user.ClientUserActions.get_following
+#: mipac.actions.user.ClientUserActions.get_frequently_replied_users
+#: mipac.actions.user.ClientUserActions.get_gallery_posts
+#: mipac.actions.user.UserActions.fetch mipac.actions.user.UserActions.get
+#: mipac.actions.user.UserActions.get_all_featured_notes
+#: mipac.actions.user.UserActions.get_featured_notes
+#: mipac.actions.user.UserActions.get_followers
+#: mipac.actions.user.UserActions.get_following
+#: mipac.actions.user.UserActions.get_frequently_replied_users
+#: mipac.actions.user.UserActions.get_gallery_posts
+#: mipac.actions.user.UserActions.get_mention
+#: mipac.actions.user.UserActions.search
+#: mipac.actions.user.UserActions.search_by_username_and_host
+#: mipac.actions.users.list.ClientPartialUserListActions.get_list
+#: mipac.actions.users.list.ClientPartialUserListActions.pull
+#: mipac.actions.users.list.ClientPartialUserListActions.push
+#: mipac.actions.users.list.ClientUserListActions.delete
+#: mipac.actions.users.list.ClientUserListActions.favorite
+#: mipac.actions.users.list.ClientUserListActions.get_list
+#: mipac.actions.users.list.ClientUserListActions.pull
+#: mipac.actions.users.list.ClientUserListActions.push
+#: mipac.actions.users.list.ClientUserListActions.show
+#: mipac.actions.users.list.ClientUserListActions.unfavorite
+#: mipac.actions.users.list.ClientUserListActions.update
+#: mipac.actions.users.list.UserListActions.create
+#: mipac.actions.users.list.UserListActions.delete
+#: mipac.actions.users.list.UserListActions.favorite
+#: mipac.actions.users.list.UserListActions.pull
+#: mipac.actions.users.list.UserListActions.push
+#: mipac.actions.users.list.UserListActions.show
+#: mipac.actions.users.list.UserListActions.unfavorite
+#: mipac.actions.users.list.UserListActions.update mipac.models.note.Note
+#: mipac.models.note.NoteTranslateResult mipac.utils.format.bool_to_string
+#: mipac.utils.format.remove_dict_empty mipac.utils.format.remove_dict_missing
+#: mipac.utils.format.remove_list_empty mipac.utils.format.str_to_datetime
+#: mipac.utils.format.upper_to_lower mipac.utils.util.check_multi_arg of
+msgid "パラメータ"
+msgstr ""
+
+#: mipac.models.note.Note:3 of
+msgid "The raw data of the note"
+msgstr ""
+
+#: mipac.models.note.Note.api:1 mipac.models.note.Note.api:3 of
+msgid "note api"
+msgstr ""
+
+#: mipac.models.note.Note.author:1 mipac.models.note.Note.author:7
+#: mipac.models.note.Note.user:1 of
+msgid "note author"
+msgstr ""
+
+#: mipac.models.note.Note.author:3 of
+msgid "Use :meth:`mipac.models.note.Note.user` instead."
+msgstr ""
+
+#: mipac.models.note.Note.channel:1 mipac.models.note.Note.channel:3 of
+msgid "note channel"
+msgstr ""
+
+#: mipac.models.note.Note.channel_id:1 mipac.models.note.Note.channel_id:3
+#: mipac.models.note.NoteChannel.id:1 mipac.models.note.NoteChannel.id:3 of
+msgid "note channelId"
+msgstr ""
+
+#: mipac.models.note.Note.clipped_count:1
+#: mipac.models.note.Note.clipped_count:3 of
+msgid "note clippedCount"
+msgstr ""
+
+#: mipac.models.note.Note.content:1 mipac.models.note.Note.content:6 of
+msgid "note content"
+msgstr ""
+
+#: mipac.models.note.Note.content:3 of
+msgid "Use :meth:`mipac.models.note.Note.text` instead."
+msgstr ""
+
+#: mipac.models.note.Note.created_at:1 mipac.models.note.Note.created_at:3
+#: mipac.models.note.NoteReaction.created_at:1
+#: mipac.models.note.NoteReaction.created_at:3 of
+msgid "note createdAt"
+msgstr ""
+
+#: mipac.models.note.Note.cw:1 mipac.models.note.Note.cw:3 of
+msgid "note cw"
+msgstr ""
+
+#: mipac.models.note.Note.deleted_at:1 mipac.models.note.Note.deleted_at:3 of
+msgid "note deletedAt"
+msgstr ""
+
+#: mipac.models.note.Note.file_ids:1 mipac.models.note.Note.file_ids:3 of
+msgid "note fileIds"
+msgstr ""
+
+#: mipac.models.note.Note.files:1 mipac.models.note.Note.files:3 of
+msgid "note files"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.add_clips:5
+#: mipac.actions.note.ClientNoteActions.create_renote:5
+#: mipac.actions.note.ClientNoteActions.delete:5
+#: mipac.actions.note.ClientNoteActions.fetch_children:12
+#: mipac.actions.note.ClientNoteActions.fetch_state:7
+#: mipac.actions.note.ClientNoteActions.get_all_children:9
+#: mipac.actions.note.ClientNoteActions.get_all_replies:9
+#: mipac.actions.note.ClientNoteActions.get_clips:5
+#: mipac.actions.note.ClientNoteActions.get_conversation:9
+#: mipac.actions.note.ClientNoteActions.get_renotes:11
+#: mipac.actions.note.ClientNoteActions.get_replies:11
+#: mipac.actions.note.ClientNoteActions.get_state:5
+#: mipac.actions.note.NoteActions.delete:5
+#: mipac.actions.note.NoteActions.fetch:7
+#: mipac.actions.note.NoteActions.fetch_children:12
+#: mipac.actions.note.NoteActions.get_all_children:9
+#: mipac.actions.note.NoteActions.get_all_replies:9
+#: mipac.actions.note.NoteActions.get_clips:5
+#: mipac.actions.note.NoteActions.get_conversation:9
+#: mipac.actions.note.NoteActions.get_renotes:11
+#: mipac.actions.note.NoteActions.get_replies:11 mipac.models.note.Note.id:1
+#: mipac.models.note.Note.id:3 of
+msgid "note id"
+msgstr ""
+
+#: mipac.models.note.Note.is_hidden:1 mipac.models.note.Note.is_hidden:3 of
+msgid "note isHidden"
+msgstr ""
+
+#: mipac.models.note.Note.local_only:1 mipac.models.note.Note.local_only:3 of
+msgid "note localOnly"
+msgstr ""
+
+#: mipac.models.note.Note.mentions:1 mipac.models.note.Note.mentions:3 of
+msgid "note mentions"
+msgstr ""
+
+#: mipac.models.note.Note.my_reaction:1 mipac.models.note.Note.my_reaction:3 of
+msgid "note myReaction"
+msgstr ""
+
+#: mipac.models.note.Note.poll:1 mipac.models.note.Note.poll:3 of
+msgid "note poll"
+msgstr ""
+
+#: mipac.models.note.Note.reaction_acceptance:1
+#: mipac.models.note.Note.reaction_acceptance:3 of
+msgid "note reactionAcceptance"
+msgstr ""
+
+#: mipac.models.note.Note.reaction_and_user_pair_cache:1
+#: mipac.models.note.Note.reaction_and_user_pair_cache:3 of
+msgid "note reactionAndUserPairCache"
+msgstr ""
+
+#: mipac.models.note.Note.reactions:1 mipac.models.note.Note.reactions:3 of
+msgid "note reactions"
+msgstr ""
+
+#: mipac.models.note.Note.renote:1 mipac.models.note.Note.renote:3 of
+msgid "note renote"
+msgstr ""
+
+#: mipac.models.note.Note.renote_count:1 mipac.models.note.Note.renote_count:3
+#: of
+msgid "note renoteCount"
+msgstr ""
+
+#: mipac.models.note.Note.renote_id:1 mipac.models.note.Note.renote_id:3 of
+msgid "note renoteId"
+msgstr ""
+
+#: mipac.models.note.Note.replies_count:1
+#: mipac.models.note.Note.replies_count:3 of
+msgid "note repliesCount"
+msgstr ""
+
+#: mipac.models.note.Note.reply:1 mipac.models.note.Note.reply:3 of
+msgid "note reply"
+msgstr ""
+
+#: mipac.models.note.Note.reply_id:1 mipac.models.note.Note.reply_id:3 of
+msgid "note replyId"
+msgstr ""
+
+#: mipac.models.note.Note.tags:1 mipac.models.note.Note.tags:3 of
+msgid "note tags"
+msgstr ""
+
+#: mipac.models.note.Note.text:1 mipac.models.note.Note.text:3 of
+msgid "note text"
+msgstr ""
+
+#: mipac.models.note.Note.uri:1 mipac.models.note.Note.uri:3 of
+msgid "note uri"
+msgstr ""
+
+#: mipac.models.note.Note.url:1 mipac.models.note.Note.url:3 of
+msgid "note url"
+msgstr ""
+
+#: mipac.models.note.Note.user:3 mipac.models.note.NoteReaction.user:1
+#: mipac.models.note.NoteReaction.user:3 of
+msgid "note user"
+msgstr ""
+
+#: mipac.models.note.Note.user_id:1 mipac.models.note.Note.user_id:3 of
+msgid "note userId"
+msgstr ""
+
+#: mipac.models.note.Note.visibility:1 mipac.models.note.Note.visibility:3 of
+msgid "note visibility"
+msgstr ""
+
+#: mipac.models.note.Note.visible_user_ids:1
+#: mipac.models.note.Note.visible_user_ids:3 of
+msgid "note visibleUserIds"
+msgstr ""
+
+#: ../../index.rst:332
+msgid "NoteChannel"
+msgstr ""
+
+#: mipac.models.note.NoteChannel.allow_renote_to_external:1
+#: mipac.models.note.NoteChannel.allow_renote_to_external:3 of
+msgid "note channelAllowRenoteToExternal"
+msgstr ""
+
+#: mipac.models.note.NoteChannel.color:1 mipac.models.note.NoteChannel.color:3
+#: of
+msgid "note channelColor"
+msgstr ""
+
+#: mipac.models.note.NoteChannel.is_sensitive:1
+#: mipac.models.note.NoteChannel.is_sensitive:3 of
+msgid "note channelIsSensitive"
+msgstr ""
+
+#: mipac.models.note.NoteChannel.name:1 mipac.models.note.NoteChannel.name:3 of
+msgid "note channelName"
+msgstr ""
+
+#: mipac.models.note.NoteChannel.user_id:1
+#: mipac.models.note.NoteChannel.user_id:3 of
+msgid "note channelUserId"
+msgstr ""
+
+#: ../../index.rst:341
+msgid "NoteDeleted"
+msgstr ""
+
+#: ../../index.rst:350
+msgid "NoteReaction"
+msgstr ""
+
+#: mipac.models.note.NoteReaction.id:1 mipac.models.note.NoteReaction.id:3 of
+msgid "note reactionId"
+msgstr ""
+
+#: mipac.models.note.NoteReaction.type:1 mipac.models.note.NoteReaction.type:3
+#: of
+msgid "reaction type"
+msgstr ""
+
+#: ../../index.rst:359
+msgid "NoteState"
+msgstr ""
+
+#: ../../index.rst:368
+msgid "NoteTranslateResult"
+msgstr ""
+
+#: mipac.models.note.NoteTranslateResult:1 of
+msgid "The raw data of the note translate result"
+msgstr ""
+
+#: ../../index.rst:377
+msgid "Notification"
+msgstr ""
+
+#: ../../index.rst:386
+msgid "NotificationAchievement"
+msgstr ""
+
+#: ../../index.rst:395
+msgid "NotificationFollow"
+msgstr ""
+
+#: ../../index.rst:404
+msgid "NotificationFollowRequest"
+msgstr ""
+
+#: ../../index.rst:413
+msgid "NotificationNote"
+msgstr ""
+
+#: ../../index.rst:422
+msgid "NotificationPollEnd"
+msgstr ""
+
+#: ../../index.rst:431
+msgid "NotificationReaction"
+msgstr ""
+
+#: ../../index.rst:440
+msgid "MiPoll"
+msgstr ""
+
+#: ../../index.rst:449
+msgid "Poll"
+msgstr ""
+
+#: ../../index.rst:458
+msgid "PollChoice"
+msgstr ""
+
+#: ../../index.rst:467
+msgid "PartialReaction"
+msgstr ""
+
+#: ../../index.rst:476
+msgid "MeRole"
+msgstr ""
+
+#: ../../index.rst:485
+msgid "Role"
+msgstr ""
+
+#: ../../index.rst:494
+msgid "RolePolicies"
+msgstr ""
+
+#: ../../index.rst:503
+msgid "RolePolicyValue"
+msgstr ""
+
+#: ../../index.rst:512
+msgid "RoleUser"
+msgstr ""
+
+#: ../../index.rst:521
+msgid "packed_user"
+msgstr ""
+
+#: ../../index.rst:527
+msgid "Achievement"
+msgstr ""
+
+#: ../../index.rst:536
+msgid "BlockingUser"
+msgstr ""
+
+#: ../../index.rst:545
+msgid "FollowCommon"
+msgstr ""
+
+#: ../../index.rst:554
+msgid "Follower"
+msgstr ""
+
+#: ../../index.rst:563
+msgid "Following"
+msgstr ""
+
+#: ../../index.rst:572
+msgid "FrequentlyRepliedUser"
+msgstr ""
+
+#: ../../index.rst:581
+msgid "MeDetailed"
+msgstr ""
+
+#: ../../index.rst:590
+msgid "MeDetailedOnly"
+msgstr ""
+
+#: ../../index.rst:599
+msgid "UserDetailedNotMe"
+msgstr ""
+
+#: ../../index.rst:608
+msgid "UserDetailedNotMeOnly"
+msgstr ""
+
+#: ../../index.rst:617
+msgid "UserField"
+msgstr ""
+
+#: ../../index.rst:626
+msgid "UserList"
+msgstr ""
+
+#: ../../index.rst:635
+msgid "UserListMembership"
+msgstr ""
+
+#: ../../index.rst:644
+msgid "UsernameAvailable"
+msgstr ""
+
+#: ../../index.rst:653
+msgid "PartialAd"
+msgstr ""
+
+#: ../../index.rst:662
+msgid "PartialCustomEmoji"
+msgstr ""
+
+#: ../../index.rst:671
+msgid "LiteInstance"
+msgstr ""
+
+#: ../../index.rst:680
+msgid "PartialMeta"
+msgstr ""
+
+#: ../../index.rst:689
+msgid "Policies"
+msgstr ""
+
+#: mipac.models.lite.meta.Policies.can_edit_note:1 of
+msgid "Whether you can edit a note"
+msgstr ""
+
+#: mipac.models.lite.meta.Policies.can_hide_ads:1 of
+msgid "Whether you can hide ads"
+msgstr ""
+
+#: mipac.models.lite.meta.Policies.can_invite:1 of
+msgid "Whether you can invite"
+msgstr ""
+
+#: mipac.models.lite.meta.Policies.can_manage_custom_emojis:1 of
+msgid "Whether you can manage custom emojis"
+msgstr ""
+
+#: mipac.models.lite.meta.Policies.can_public_note:1 of
+msgid "Whether you can post a public note"
+msgstr ""
+
+#: mipac.models.lite.meta.Policies.can_search_notes:1 of
+msgid "Whether you can search note"
+msgstr ""
+
+#: mipac.models.lite.meta.Policies.can_use_translator:1 of
+msgid "Whether you can use translator"
+msgstr ""
+
+#: mipac.models.lite.meta.Policies.gtl_available:1 of
+msgid "Whether GTL is effective"
+msgstr ""
+
+#: mipac.models.lite.meta.Policies.ltl_available:1 of
+msgid "Whether LTL is effective"
+msgstr ""
+
+#: ../../index.rst:698
+msgid "PartialRole"
+msgstr ""
+
+#: ../../index.rst:707
+msgid "AvatarDecoration"
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.angle:1 of
+msgid "Returns the angle of the avatar decoration."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.angle:3 of
+msgid "The angle of the avatar decoration."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.flip_h:1 of
+msgid "Returns whether the avatar decoration is flipped horizontally."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.flip_h:3 of
+msgid "Whether the avatar decoration is flipped horizontally."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.id:1 of
+msgid "Returns the id of the avatar decoration."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.id:3 of
+msgid "The id of the avatar decoration."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.offset_x:1 of
+msgid "Returns the x offset of the avatar decoration."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.offset_x:3 of
+msgid "The x offset of the avatar decoration."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.offset_y:1 of
+msgid "Returns the y offset of the avatar decoration."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.offset_y:3 of
+msgid "The y offset of the avatar decoration."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.url:1 of
+msgid "Returns the url of the avatar decoration."
+msgstr ""
+
+#: mipac.models.lite.user.AvatarDecoration.url:3 of
+msgid "The url of the avatar decoration."
+msgstr ""
+
+#: ../../index.rst:716
+msgid "BadgeRole"
+msgstr ""
+
+#: mipac.models.lite.user.BadgeRole.display_order:1 of
+msgid "Returns the display order of the badge role."
+msgstr ""
+
+#: mipac.models.lite.user.BadgeRole.display_order:3 of
+msgid "The display order of the badge role."
+msgstr ""
+
+#: mipac.models.lite.user.BadgeRole.icon_url:1 of
+msgid "Returns the icon url of the badge role."
+msgstr ""
+
+#: mipac.models.lite.user.BadgeRole.icon_url:3 of
+msgid "The icon url of the badge role."
+msgstr ""
+
+#: mipac.models.lite.user.BadgeRole.name:1 of
+msgid "Returns the name of the badge role."
+msgstr ""
+
+#: mipac.models.lite.user.BadgeRole.name:3 of
+msgid "The name of the badge role."
+msgstr ""
+
+#: ../../index.rst:725
+msgid "PartialUser"
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.api:1 of
+msgid "Returns the user manager instance."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.api:3 of
+msgid "The user manager instance"
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.avatar_blurhash:1 of
+msgid "Returns the avatar blurhash of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.avatar_blurhash:3 of
+msgid "The avatar blurhash of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.avatar_decoration:1 of
+msgid "Returns the avatar decoration of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.avatar_decoration:3 of
+msgid "The avatar decoration of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.avatar_url:1 of
+msgid "Returns the avatar url of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.avatar_url:3 of
+msgid "The avatar url of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.badge_roles:1 of
+msgid "Returns the badge roles of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.badge_roles:3 of
+msgid "The badge roles of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.emojis:1 of
+msgid "Returns the emojis of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.emojis:3 of
+msgid "The emojis of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.host:1 of
+msgid "Returns the host of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.host:3 of
+msgid "The host of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.id:1 of
+msgid "Returns the id of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.instance:1 of
+msgid "Returns the instance of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.instance:3 of
+msgid "The instance of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.is_bot:1 of
+msgid "Returns whether the user is a bot."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.is_bot:3 of
+msgid "Whether the user is a bot."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.is_cat:1 of
+msgid "Returns whether the user is a cat."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.is_cat:3 of
+msgid "Whether the user is a cat."
+msgstr ""
+
+#: ../../docstring mipac.models.lite.user.PartialUser.name:1
+#: mipac.utils.util.deprecated.<locals>.new_func:1 of
+msgid "Returns the nickname of the user."
+msgstr ""
+
+#: ../../docstring mipac.models.lite.user.PartialUser.name:3
+#: mipac.utils.util.deprecated.<locals>.new_func:6 of
+msgid "The nickname of the user."
+msgstr ""
+
+#: ../../docstring mipac.utils.util.deprecated.<locals>.new_func:3 of
+msgid "Use :meth:`mipac.models.lite.user.PartialUser.name` instead."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.online_status:1 of
+msgid "Returns the online status of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.online_status:3 of
+msgid "The online status of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.username:1 of
+msgid "Returns the username of the user."
+msgstr ""
+
+#: mipac.models.lite.user.PartialUser.username:3 of
+msgid "The username of the user."
+msgstr ""
+
+#: ../../index.rst:732
+msgid "Managers"
+msgstr ""
+
+#: ../../index.rst:735
+msgid "AntennaManager"
+msgstr ""
+
+#: ../../index.rst:744
+msgid "ClientAntennaManager"
+msgstr ""
+
+#: ../../index.rst:753
+msgid "BlockingManager"
+msgstr ""
+
+#: ../../index.rst:762
+msgid "ChannelManager"
+msgstr ""
+
+#: ../../index.rst:771
+msgid "ClientChannelManager"
+msgstr ""
+
+#: ../../index.rst:780
+msgid "ChartManager"
+msgstr ""
+
+#: ../../index.rst:789
+msgid "ClientManager"
+msgstr ""
+
+#: ../../index.rst:798
+msgid "ClientClipManager"
+msgstr ""
+
+#: ../../index.rst:807
+msgid "ClipManager"
+msgstr ""
+
+#: ../../index.rst:816
+msgid "EmojiManager"
+msgstr ""
+
+#: ../../index.rst:825
+msgid "ClientFavoriteManager"
+msgstr ""
+
+#: mipac.manager.favorite.ClientFavoriteManager.action:1
+#: mipac.manager.favorite.FavoriteManager.action:1 of
+msgid "お気に入りに関するアクション"
+msgstr ""
+
+#: mipac.manager.favorite.ClientFavoriteManager.action:3
+#: mipac.manager.favorite.FavoriteManager.action:3 of
+msgid "お気に入りに対するアクションを行うクラス"
+msgstr ""
+
+#: ../../index.rst:834
+msgid "FavoriteManager"
+msgstr ""
+
+#: ../../index.rst:843
+msgid "FederationManager"
+msgstr ""
+
+#: ../../index.rst:852
+msgid "FollowManager"
+msgstr ""
+
+#: ../../index.rst:861
+msgid "FollowRequestManager"
+msgstr ""
+
+#: ../../index.rst:870
+msgid "ClientInviteManager"
+msgstr ""
+
+#: ../../index.rst:879
+msgid "InviteManager"
+msgstr ""
+
+#: ../../index.rst:888
+msgid "MuteManager"
+msgstr ""
+
+#: ../../index.rst:897
+msgid "MyManager"
+msgstr ""
+
+#: ../../index.rst:906
+msgid "ClientNoteManager"
+msgstr ""
+
+#: ../../index.rst:915
+msgid "NoteManager"
+msgstr ""
+
+#: mipac.manager.note.NoteManager:1 of
+msgid "User behavior for notes"
+msgstr ""
+
+#: ../../index.rst:924
+msgid "PagesManager"
+msgstr ""
+
+#: ../../index.rst:933
+msgid "ClientPollManager"
+msgstr ""
+
+#: ../../index.rst:942
+msgid "PollManager"
+msgstr ""
+
+#: ../../index.rst:951
+msgid "ClientReactionManager"
+msgstr ""
+
+#: mipac.manager.reaction.ClientReactionManager.action:1
+#: mipac.manager.reaction.ReactionManager.action:1 of
+msgid "リアクションに関するアクション"
+msgstr ""
+
+#: mipac.manager.reaction.ClientReactionManager.action:3
+#: mipac.manager.reaction.ReactionManager.action:3 of
+msgid "Reactionに対するアクションを行うクラス"
+msgstr ""
+
+#: ../../index.rst:960
+msgid "ReactionManager"
+msgstr ""
+
+#: ../../index.rst:969
+msgid "RoleManager"
+msgstr ""
+
+#: ../../index.rst:978
+msgid "ClientUserManager"
+msgstr ""
+
+#: ../../index.rst:987
+msgid "UserManager"
+msgstr ""
+
+#: ../../index.rst:996
+msgid "UsernameManager"
+msgstr ""
+
+#: ../../index.rst:1005
+msgid "AdminAdvertisingManager"
+msgstr ""
+
+#: ../../index.rst:1014
+msgid "AdminAdvertisingModelManager"
+msgstr ""
+
+#: ../../index.rst:1023
+msgid "AdminManager"
+msgstr ""
+
+#: ../../index.rst:1032
+msgid "AdminAnnouncementManager"
+msgstr ""
+
+#: ../../index.rst:1041
+msgid "AdminDriveManager"
+msgstr ""
+
+#: ../../index.rst:1050
+msgid "AdminEmojiManager"
+msgstr ""
+
+#: ../../index.rst:1059
+msgid "AdminInviteManager"
+msgstr ""
+
+#: ../../index.rst:1068
+msgid "AdminModeratorManager"
+msgstr ""
+
+#: mipac.manager.admins.moderator.AdminModeratorManager.action:1 of
+msgid "Moderatorに関するアクション"
+msgstr ""
+
+#: mipac.manager.admins.moderator.AdminModeratorManager.action:3 of
+msgid "Moderatorに対するアクションを行うクラス"
+msgstr ""
+
+#: ../../index.rst:1077
+msgid "AdminRolesManager"
+msgstr ""
+
+#: ../../index.rst:1086
+msgid "AdminRolesModelManager"
+msgstr ""
+
+#: ../../index.rst:1095
+msgid "AdminUserManager"
+msgstr ""
+
+#: ../../index.rst:1104
+msgid "DriveManager"
+msgstr ""
+
+#: ../../index.rst:1113
+msgid "ClientFileManager"
+msgstr ""
+
+#: ../../index.rst:1122
+msgid "DriveFileManager"
+msgstr ""
+
+#: ../../index.rst:1131
+msgid "ClientFolderManager"
+msgstr ""
+
+#: ../../index.rst:1140
+msgid "FolderManager"
+msgstr ""
+
+#: ../../index.rst:1149
+msgid "ClientPartialUserListManager"
+msgstr ""
+
+#: ../../index.rst:1158
+msgid "ClientUserListManager"
+msgstr ""
+
+#: ../../index.rst:1167
+msgid "UserListManager"
+msgstr ""
+
+#: ../../index.rst:1174
+msgid "Actions"
+msgstr ""
+
+#: ../../index.rst:1177
+msgid "AntennaActions"
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:1 of
+msgid "Create an antenna."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:3
+#: mipac.actions.antenna.ClientAntennaActions.update:3 of
+msgid "Name of the antenna."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:5
+#: mipac.actions.antenna.ClientAntennaActions.update:5 of
+msgid "Receive source of the antenna."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:7
+#: mipac.actions.antenna.ClientAntennaActions.update:7 of
+msgid "Receive keywords."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:9
+#: mipac.actions.antenna.ClientAntennaActions.update:9 of
+msgid "Excluded keywords."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:11 of
+msgid "Whether to limit to local notes."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:13
+#: mipac.actions.antenna.ClientAntennaActions.update:11 of
+msgid ""
+"List of target user ID. Required when selecting 'users' as the receive "
+"source."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:15
+#: mipac.actions.antenna.ClientAntennaActions.update:13 of
+msgid "Whether to differentiate between uppercase and lowercase letters."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:17
+#: mipac.actions.antenna.ClientAntennaActions.update:15 of
+msgid "Whether to include replies."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:19
+#: mipac.actions.antenna.ClientAntennaActions.update:17 of
+msgid "Whether to limit to notes with attached files."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:21
+#: mipac.actions.antenna.ClientAntennaActions.update:19 of
+msgid "Whether to notify for new notes."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:23
+#: mipac.actions.antenna.ClientAntennaActions.update:21 of
+msgid ""
+"List of user IDs when selecting 'users' as the receive source for the "
+"antenna."
+msgstr ""
+
+#: mipac.actions.antenna.AntennaActions.create:26
+#: mipac.actions.antenna.ClientAntennaActions.update:24 of
+msgid "The created antenna."
+msgstr ""
+
+#: ../../index.rst:1186
+msgid "ClientAntennaActions"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:1 of
+msgid "Delete antenna from identifier"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:3 of
+msgid "target identifier"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove
+#: mipac.actions.antenna.ClientAntennaActions.delete
+#: mipac.actions.antenna.ClientAntennaActions.show
+#: mipac.actions.my.MyActions.get_claim_achievement
+#: mipac.actions.note.NoteActions.send of
+msgid "例外"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:6
+#: mipac.actions.antenna.ClientAntennaActions.show:9 of
+msgid "antenna id is required"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.delete:8 of
+msgid "success or failure"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.show:1 of
+msgid "Show antenna from identifier"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.show:3 of
+msgid "target identifier, by default None"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.show:6 of
+msgid "antenna object"
+msgstr ""
+
+#: mipac.actions.antenna.ClientAntennaActions.update:1 of
+msgid "Update an antenna."
+msgstr ""
+
+#: ../../index.rst:1195
+msgid "BlockingActions"
+msgstr ""
+
+#: ../../index.rst:1204
+msgid "ChannelActions"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.create:1 of
+msgid "Create a channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.create:3 of
+msgid "Endpoint: `/api/channels/create`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.create:5 of
+msgid "Name of the channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.create:7
+#: mipac.actions.channel.ChannelActions.update:17
+#: mipac.actions.channel.ClientChannelActions.update:15 of
+msgid "Color of the channel, by default MISSING"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.create:9
+#: mipac.actions.channel.ChannelActions.update:9
+#: mipac.actions.channel.ClientChannelActions.update:7 of
+msgid "Description of the channel, by default MISSING"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.create:11
+#: mipac.actions.channel.ChannelActions.update:11
+#: mipac.actions.channel.ClientChannelActions.update:9 of
+msgid "Banner ID of the channel, by default MISSING"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.create:13
+#: mipac.actions.channel.ChannelActions.update:19
+#: mipac.actions.channel.ClientChannelActions.update:17 of
+msgid "Whether the channel is sensitive, by default MISSING"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.create:15
+#: mipac.actions.channel.ChannelActions.update:21
+#: mipac.actions.channel.ClientChannelActions.update:19 of
+msgid "Whether the channel allows renote to external, by default MISSING"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.create:18 of
+msgid "Created channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.favorite:1
+#: mipac.actions.channel.ClientChannelActions.favorite:1 of
+msgid "Favorite a channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.favorite:3
+#: mipac.actions.channel.ClientChannelActions.favorite:3 of
+msgid "Endpoint: `/api/channels/favorite`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.favorite:5
+#: mipac.actions.channel.ChannelActions.follow:5
+#: mipac.actions.channel.ChannelActions.get_all_timeline:3
+#: mipac.actions.channel.ChannelActions.show:5
+#: mipac.actions.channel.ChannelActions.unfavorite:5
+#: mipac.actions.channel.ChannelActions.unfollow:5
+#: mipac.actions.channel.ChannelActions.update:5 of
+msgid "ID of the channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.favorite:8
+#: mipac.actions.channel.ClientChannelActions.favorite:8 of
+msgid "Whether the channel is favorited"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.featured:1 of
+msgid "Get featured channels"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.featured:3 of
+msgid "Endpoint: `/api/channels/featured`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.featured:5 of
+msgid "List of featured channels"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.follow:1
+#: mipac.actions.channel.ClientChannelActions.follow:1 of
+msgid "Follow a channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.follow:3
+#: mipac.actions.channel.ClientChannelActions.follow:3 of
+msgid "Endpoint: `/api/channels/follow`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.follow:8
+#: mipac.actions.channel.ClientChannelActions.follow:8 of
+msgid "Whether the channel is followed"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.followed:1 of
+msgid "Get followed channels"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.followed:3 of
+msgid "Endpoint: `/api/channels/followed`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.followed:5
+#: mipac.actions.channel.ChannelActions.get_all_timeline:5
+#: mipac.actions.channel.ChannelActions.owned:5
+#: mipac.actions.channel.ChannelActions.search:9
+#: mipac.actions.channel.ClientChannelActions.get_all_timeline:3
+#: mipac.actions.channel.ClientChannelActions.timeline:7 of
+msgid "Since ID, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.followed:7
+#: mipac.actions.channel.ChannelActions.get_all_timeline:7
+#: mipac.actions.channel.ChannelActions.owned:7
+#: mipac.actions.channel.ChannelActions.search:11
+#: mipac.actions.channel.ClientChannelActions.get_all_timeline:5
+#: mipac.actions.channel.ClientChannelActions.timeline:9 of
+msgid "Until ID, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.followed:9
+#: mipac.actions.channel.ChannelActions.owned:9
+#: mipac.actions.channel.ChannelActions.search:13 of
+msgid "Limit, by default 5"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.followed:12 of
+msgid "List of followed channels"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.get_all_timeline:1
+#: mipac.actions.channel.ClientChannelActions.get_all_timeline:1 of
+msgid "Get all notes in the timeline of a channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.get_all_timeline:9
+#: mipac.actions.channel.ClientChannelActions.get_all_timeline:7
+#: mipac.actions.channel.ClientChannelActions.timeline:11 of
+msgid "Since date, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.get_all_timeline:11
+#: mipac.actions.channel.ClientChannelActions.get_all_timeline:9
+#: mipac.actions.channel.ClientChannelActions.timeline:13 of
+msgid "Until date, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.get_all_timeline:14
+#: mipac.actions.channel.ClientChannelActions.get_all_timeline:12 of
+msgid "Async generator of notes"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.my_favorites:1 of
+msgid "Get my favorite channels"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.my_favorites:3 of
+msgid "Endpoint: `/api/channels/myFavorites`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.my_favorites:5 of
+msgid "List of my favorite channels"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.owned:1 of
+msgid "Get owned channels"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.owned:3 of
+msgid "Endpoint: `/api/channels/owned`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.owned:12 of
+msgid "List of owned channels"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.search:1 of
+msgid "Search channels"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.search:3 of
+msgid "Endpoint: `/api/channels/search`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.search:5 of
+msgid "Query"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.search:7 of
+msgid "Type of the search, by default \"nameAndDescription\""
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.search:16 of
+msgid "List of channels"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:1
+#: mipac.actions.channel.ClientChannelActions.send:1
+#: mipac.actions.note.NoteActions.send:1 of
+msgid "Send a note"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:3
+#: mipac.actions.channel.ClientChannelActions.send:3
+#: mipac.actions.note.ClientNoteActions.create_quote:3
+#: mipac.actions.note.ClientNoteActions.create_renote:3
+#: mipac.actions.note.ClientNoteActions.renote:3
+#: mipac.actions.note.NoteActions.send:3 of
+msgid "Endpoint: `/api/notes/create`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:5
+#: mipac.actions.channel.ClientChannelActions.send:5 of
+msgid "Text of the note, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:7
+#: mipac.actions.channel.ClientChannelActions.send:7 of
+msgid "Visibility of the note, by default \"public\""
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:9
+#: mipac.actions.channel.ClientChannelActions.send:9 of
+msgid "Visible user IDs, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:11
+#: mipac.actions.channel.ClientChannelActions.send:11 of
+msgid "CW of the note, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:13
+#: mipac.actions.channel.ClientChannelActions.send:13 of
+msgid "Whether the note is local only, by default False"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:15
+#: mipac.actions.channel.ClientChannelActions.send:15 of
+msgid "Reaction acceptance of the note, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:17
+#: mipac.actions.channel.ClientChannelActions.send:17 of
+msgid "Whether to extract mentions, by default True"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:19
+#: mipac.actions.channel.ClientChannelActions.send:19 of
+msgid "Whether to extract hashtags, by default True"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:21
+#: mipac.actions.channel.ClientChannelActions.send:21 of
+msgid "Whether to extract emojis, by default True"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:23
+#: mipac.actions.channel.ClientChannelActions.send:23 of
+msgid "Reply ID, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:25
+#: mipac.actions.channel.ClientChannelActions.send:25 of
+msgid "Renote ID, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:27
+#: mipac.actions.channel.ClientChannelActions.send:27 of
+msgid "Files, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:29
+#: mipac.actions.channel.ClientChannelActions.send:29 of
+msgid "Poll, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:31
+#: mipac.actions.channel.ClientChannelActions.favorite:5
+#: mipac.actions.channel.ClientChannelActions.follow:5
+#: mipac.actions.channel.ClientChannelActions.send:31
+#: mipac.actions.channel.ClientChannelActions.unfavorite:5
+#: mipac.actions.channel.ClientChannelActions.unfollow:5
+#: mipac.actions.channel.ClientChannelActions.update:21 of
+msgid "ID of the channel, by default None"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.send:34
+#: mipac.actions.channel.ClientChannelActions.send:34 of
+msgid "Created note"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.show:1 of
+msgid "Show a channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.show:3 of
+msgid "Endpoint: `/api/channels/show`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.unfavorite:1
+#: mipac.actions.channel.ClientChannelActions.unfavorite:1 of
+msgid "Unfavorite a channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.unfavorite:3
+#: mipac.actions.channel.ClientChannelActions.unfavorite:3 of
+msgid "Endpoint: `/api/channels/unfavorite`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.unfavorite:8
+#: mipac.actions.channel.ClientChannelActions.unfavorite:8 of
+msgid "Whether the channel is unfavorited"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.unfollow:1
+#: mipac.actions.channel.ClientChannelActions.unfollow:1 of
+msgid "Unfollow a channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.unfollow:3
+#: mipac.actions.channel.ClientChannelActions.unfollow:3 of
+msgid "Endpoint: `/api/channels/unfollow`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.unfollow:8
+#: mipac.actions.channel.ClientChannelActions.unfollow:8 of
+msgid "Whether the channel is unfollowed"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.update:1
+#: mipac.actions.channel.ClientChannelActions.update:1 of
+msgid "Update a channel"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.update:3
+#: mipac.actions.channel.ClientChannelActions.update:3 of
+msgid "Endpoint: `/api/channels/update`"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.update:7
+#: mipac.actions.channel.ClientChannelActions.update:5 of
+msgid "Name of the channel, by default MISSING"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.update:13
+#: mipac.actions.channel.ClientChannelActions.update:11 of
+msgid "Whether the channel is archived, by default MISSING"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.update:15
+#: mipac.actions.channel.ClientChannelActions.update:13 of
+msgid "Pinned note IDs, by default MISSING"
+msgstr ""
+
+#: mipac.actions.channel.ChannelActions.update:24 of
+msgid "Updated channel"
+msgstr ""
+
+#: ../../index.rst:1213
+msgid "ClientChannelActions"
+msgstr ""
+
+#: mipac.actions.channel.ClientChannelActions.timeline:1 of
+msgid "Get the timeline of a channel"
+msgstr ""
+
+#: mipac.actions.channel.ClientChannelActions.timeline:3 of
+msgid "Endpoint: `/api/channels/timeline`"
+msgstr ""
+
+#: mipac.actions.channel.ClientChannelActions.timeline:5 of
+msgid "Limit, by default 10"
+msgstr ""
+
+#: mipac.actions.channel.ClientChannelActions.timeline:16 of
+msgid "List of notes"
+msgstr ""
+
+#: ../../index.rst:1222
+msgid "ChartActions"
+msgstr ""
+
+#: ../../index.rst:1231
+msgid "ClientActions"
+msgstr ""
+
+#: ../../index.rst:1240
+msgid "ClientClipActions"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.add_note:1 of
+msgid "Add a note to a clip"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.add_note:5
+#: mipac.actions.clip.ClientClipActions.remove_note:5 of
+msgid "The note id"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.add_note:8 of
+msgid "True if the note was added to the clip, False otherwise"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.delete:1 of
+msgid "Delete a clip"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.delete:6 of
+msgid "True if the clip was deleted, False otherwise"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.get_notes:1 of
+msgid ""
+"Get notes from a clip :param clip_id: The clip id :type clip_id: str | "
+"None, optional, by default None :param limit: The number of notes to get "
+":type limit: int, optional, by default 10 :param since_id: The note id to"
+" get notes after :type since_id: str | None, optional, by default None "
+":param until_id: The note id to get notes before :type until_id: str | "
+"None, optional, by default None :param get_all: Whether to get all notes "
+":type get_all: bool, optional, by default False"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.get_notes
+#: mipac.actions.role.RoleActions.get_notes
+#: mipac.actions.role.RoleActions.get_users of
+msgid "列挙"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.get_notes:13 of
+msgid "*AsyncGenerator[Note, None]* -- The notes"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.remove_note:1 of
+msgid "Remove a note from a clip"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.remove_note:8 of
+msgid "True if the note was removed from the clip, False otherwise"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.update:1 of
+msgid "Update a clip"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.update:7 of
+msgid "Whether the clip is public, by default None"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.update:9
+#: mipac.actions.clip.ClipActions.create:7 of
+msgid "The clip description, by default None"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.update:12 of
+msgid "True if the clip was updated, False otherwise"
+msgstr ""
+
+#: ../../index.rst:1249
+msgid "ClipActions"
+msgstr ""
+
+#: mipac.actions.clip.ClipActions.create:1 of
+msgid "Create a clip"
+msgstr ""
+
+#: mipac.actions.clip.ClipActions.create:5 of
+msgid "Whether the clip is public, by default False"
+msgstr ""
+
+#: mipac.actions.clip.ClipActions.create:10 of
+msgid "The created clip"
+msgstr ""
+
+#: mipac.actions.clip.ClipActions.get:1 of
+msgid "Get a clip"
+msgstr ""
+
+#: mipac.actions.clip.ClipActions.get:6 of
+msgid "The clip"
+msgstr ""
+
+#: mipac.actions.clip.ClipActions.get_list:1 of
+msgid "Get my clips"
+msgstr ""
+
+#: mipac.actions.clip.ClipActions.get_list:3 of
+msgid "The clips"
+msgstr ""
+
+#: mipac.actions.clip.ClipActions.get_my_favorites:1 of
+msgid "Get my favorite clips"
+msgstr ""
+
+#: mipac.actions.clip.ClipActions.get_my_favorites:3 of
+msgid "The favorite clips"
+msgstr ""
+
+#: ../../index.rst:1258
+msgid "EmojiActions"
+msgstr ""
+
+#: ../../index.rst:1267
+msgid "ClientFavoriteActions"
+msgstr ""
+
+#: ../../index.rst:1276
+msgid "FavoriteActions"
+msgstr ""
+
+#: ../../index.rst:1285
+msgid "FederationActions"
+msgstr ""
+
+#: ../../index.rst:1294
+msgid "FollowActions"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.add:1 of
+msgid "Follow a user"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.add:3 of
+msgid "The user that you followed"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.invalidate:1 of
+msgid "Make the user unfollows you"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.invalidate:3 of
+msgid "The user that followed you"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.remove:1 of
+msgid "Unfollow a user"
+msgstr ""
+
+#: mipac.actions.follow.FollowActions.remove:3 of
+msgid "The user that you unfollowed"
+msgstr ""
+
+#: ../../index.rst:1303
+msgid "FollowRequestActions"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.accept:1 of
+msgid "Accept a follow request"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.accept:3 of
+msgid "The user ID to accept"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.accept:6 of
+msgid "Whether the request was accepted"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.cancel:1 of
+msgid "Cancel a follow request"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.cancel:3 of
+msgid "The user ID to cancel"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.cancel:6 of
+msgid "The user that you canceled to follow"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.get_all:1 of
+msgid "Get all follow requests"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.get_all:3 of
+msgid "List of follow requests"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.reject:1 of
+msgid "Reject a follow request"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.reject:3 of
+msgid "The user ID to reject"
+msgstr ""
+
+#: mipac.actions.follow.FollowRequestActions.reject:6 of
+msgid "Whether the request was rejected"
+msgstr ""
+
+#: ../../index.rst:1312
+msgid "ClientInviteActions"
+msgstr ""
+
+#: mipac.actions.invite.ClientInviteActions.delete:1
+#: mipac.actions.invite.InviteActions.delete:1 of
+msgid "Delete an invite code."
+msgstr ""
+
+#: mipac.actions.invite.ClientInviteActions.delete:3 of
+msgid "The invite code to delete, by default None"
+msgstr ""
+
+#: mipac.actions.invite.ClientInviteActions.delete:6
+#: mipac.actions.invite.InviteActions.delete:8 of
+msgid "Whether the invite code was deleted."
+msgstr ""
+
+#: ../../index.rst:1321
+msgid "InviteActions"
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.create:1 of
+msgid "Create a new invite code."
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.create:3 of
+msgid "Endpoint: `/api/invite/create`"
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.create:5 of
+msgid "The invite code created."
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.delete:3 of
+msgid "Endpoint: `/api/invite/delete`"
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.delete:5 of
+msgid "The invite code to delete"
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.get_all_list:1 of
+msgid "Get all invite codes created by you."
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.get_all_list:3
+#: mipac.actions.invite.InviteActions.get_list:3 of
+msgid "Endpoint: `/api/invite/list`"
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.get_all_list:5
+#: mipac.actions.invite.InviteActions.get_list:7 of
+msgid "The id of the invite code to get since, by default None"
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.get_all_list:7
+#: mipac.actions.invite.InviteActions.get_list:9 of
+msgid "The id of the invite code to get until, by default None"
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.get_all_list:10
+#: mipac.actions.invite.InviteActions.get_list:12 of
+msgid "The list of invite codes."
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.get_limit:1 of
+msgid "Get the number of invite codes you can create."
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.get_limit:3 of
+msgid "Endpoint: `/api/invite/limit`"
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.get_limit:5 of
+msgid "The number of invite codes you can create."
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.get_list:1 of
+msgid "Get a list of invitation codes created by you."
+msgstr ""
+
+#: mipac.actions.invite.InviteActions.get_list:5 of
+msgid "The number of invite codes to get, by default 30"
+msgstr ""
+
+#: ../../index.rst:1330
+msgid "MuteActions"
+msgstr ""
+
+#: mipac.actions.mute.MuteActions.add:1 of
+msgid "Adds the specified user as a mute target"
+msgstr ""
+
+#: mipac.actions.mute.MuteActions.add:3 of
+msgid "Mute target user Id, by default None"
+msgstr ""
+
+#: mipac.actions.mute.MuteActions.add:6 of
+msgid "Whether the mute was successful or not"
+msgstr ""
+
+#: mipac.actions.mute.MuteActions.delete:1 of
+msgid "Unmute the specified user"
+msgstr ""
+
+#: mipac.actions.mute.MuteActions.delete:3 of
+msgid "Unmute target user Id, by default None"
+msgstr ""
+
+#: mipac.actions.mute.MuteActions.delete:6 of
+msgid "Whether the unmute was successful or not."
+msgstr ""
+
+#: ../../index.rst:1339
+msgid "MyActions"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:1 of
+msgid "指定した名前の実績を解除します"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:3 of
+msgid "解除したい実績の名前"
+msgstr ""
+
+#: mipac.actions.admins.moderator.AdminModeratorActions.add:6
+#: mipac.actions.admins.moderator.AdminModeratorActions.remove:6
+#: mipac.actions.admins.roles.AdminRoleModelActions.assign:10
+#: mipac.actions.admins.roles.AdminRoleModelActions.unassign:10
+#: mipac.actions.my.MyActions.get_claim_achievement:6 of
+msgid "成功したか否か"
+msgstr ""
+
+#: mipac.actions.my.MyActions.get_claim_achievement:9 of
+msgid "実績機能が存在しないサーバーを使用している"
+msgstr ""
+
+#: ../../index.rst:1348
+msgid "create_note_body"
+msgstr ""
+
+#: ../../index.rst:1354
+msgid "ClientNoteActions"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.add_clips:1 of
+msgid "Add a note to the clip"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.add_clips:3 of
+msgid "Endpoint: `/api/clips/add-note`"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.add_clips:7 of
+msgid "clip id"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.add_clips:10
+#: mipac.actions.note.ClientNoteActions.delete:8
+#: mipac.actions.note.NoteActions.delete:8
+#: mipac.actions.reaction.ClientReactionActions.add:10
+#: mipac.actions.reaction.ClientReactionActions.remove:8
+#: mipac.actions.reaction.ReactionActions.add:10
+#: mipac.actions.reaction.ReactionActions.remove:8 of
+msgid "success or not"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:1 of
+msgid "Create a note quote."
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:5
+#: mipac.actions.note.ClientNoteActions.renote:5 of
+msgid "text"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:7
+#: mipac.actions.note.ClientNoteActions.renote:7
+#: mipac.actions.note.NoteActions.get_mentions:13 of
+msgid "Disclosure range"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:9
+#: mipac.actions.note.ClientNoteActions.renote:9 of
+msgid "List of users to be published"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:11
+#: mipac.actions.note.ClientNoteActions.renote:11 of
+msgid "Text to be displayed when warning is given"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:13
+#: mipac.actions.note.ClientNoteActions.renote:13 of
+msgid "Whether to show only locally or not"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:15
+#: mipac.actions.note.ClientNoteActions.renote:17 of
+msgid "Whether to expand the mention"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:17
+#: mipac.actions.note.ClientNoteActions.renote:19 of
+msgid "Whether to expand the hashtag"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:19
+#: mipac.actions.note.ClientNoteActions.renote:21 of
+msgid "Whether to expand the emojis"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:21
+#: mipac.actions.note.ClientNoteActions.renote:25 of
+msgid "The ID list of files to be attached"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:23 of
+msgid "Questionnaire to be created"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_quote:25 of
+msgid "Note IDs to target for renote and citations"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_renote:1
+#: mipac.actions.note.ClientNoteActions.renote:1 of
+msgid "Renote a note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.create_renote:8 of
+msgid "Renoted note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.delete:1
+#: mipac.actions.note.NoteActions.delete:1 of
+msgid "Delete a note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.delete:3
+#: mipac.actions.note.NoteActions.delete:3 of
+msgid "Endpoint: `/api/notes/delete`"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.fetch_children:1
+#: mipac.actions.note.NoteActions.fetch_children:1 of
+msgid ""
+"Get children of the note. update the cache of the "
+":py:meth:`mipac.actions.note.ClientNoteActions.get_children` method"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.fetch_children:4
+#: mipac.actions.note.ClientNoteActions.get_all_children:3
+#: mipac.actions.note.NoteActions.fetch_children:4
+#: mipac.actions.note.NoteActions.get_all_children:3 of
+msgid "Endpoint: `/api/notes/children`"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.fetch_children:6
+#: mipac.actions.note.ClientNoteActions.get_conversation:5
+#: mipac.actions.note.ClientNoteActions.get_renotes:5
+#: mipac.actions.note.ClientNoteActions.get_replies:9
+#: mipac.actions.note.NoteActions.fetch_children:6
+#: mipac.actions.note.NoteActions.get_conversation:5
+#: mipac.actions.note.NoteActions.get_featured:5
+#: mipac.actions.note.NoteActions.get_global_time_line:9
+#: mipac.actions.note.NoteActions.get_mentions:7
+#: mipac.actions.note.NoteActions.get_renotes:5
+#: mipac.actions.note.NoteActions.get_replies:9
+#: mipac.actions.note.NoteActions.get_time_line:7 of
+msgid "limit"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.fetch_children:8
+#: mipac.actions.note.ClientNoteActions.get_all_children:5
+#: mipac.actions.note.ClientNoteActions.get_renotes:7
+#: mipac.actions.note.NoteActions.fetch_children:8
+#: mipac.actions.note.NoteActions.get_all_children:5
+#: mipac.actions.note.NoteActions.get_global_time_line:11
+#: mipac.actions.note.NoteActions.get_mentions:9
+#: mipac.actions.note.NoteActions.get_renotes:7
+#: mipac.actions.note.NoteActions.get_time_line:9 of
+msgid "Since ID"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.fetch_children:10
+#: mipac.actions.note.ClientNoteActions.get_all_children:7
+#: mipac.actions.note.ClientNoteActions.get_renotes:9
+#: mipac.actions.note.NoteActions.fetch_children:10
+#: mipac.actions.note.NoteActions.get_all_children:7
+#: mipac.actions.note.NoteActions.get_featured:7
+#: mipac.actions.note.NoteActions.get_global_time_line:13
+#: mipac.actions.note.NoteActions.get_mentions:11
+#: mipac.actions.note.NoteActions.get_renotes:9
+#: mipac.actions.note.NoteActions.get_time_line:11 of
+msgid "Until ID"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.fetch_children:15
+#: mipac.actions.note.ClientNoteActions.get_all_children:12
+#: mipac.actions.note.NoteActions.fetch_children:15
+#: mipac.actions.note.NoteActions.get_all_children:12 of
+msgid "Children of the note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.fetch_state:1 of
+msgid "Get the state of the note."
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.fetch_state:3 of
+msgid ""
+"update the cache of the "
+":py:meth:`mipac.actions.note.ClientNoteActions.get_state` method"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.fetch_state:5
+#: mipac.actions.note.ClientNoteActions.get_state:3 of
+msgid "Endpoint: `/api/notes/state`"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.fetch_state:10
+#: mipac.actions.note.ClientNoteActions.get_state:8 of
+msgid "Note state"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_all_children:1
+#: mipac.actions.note.NoteActions.get_all_children:1 of
+msgid "Get all children of the note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_all_replies:1
+#: mipac.actions.note.ClientNoteActions.get_replies:1
+#: mipac.actions.note.NoteActions.get_all_replies:1
+#: mipac.actions.note.NoteActions.get_replies:1 of
+msgid "Get replies to the note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_all_replies:3
+#: mipac.actions.note.ClientNoteActions.get_replies:3
+#: mipac.actions.note.NoteActions.get_all_replies:3
+#: mipac.actions.note.NoteActions.get_replies:3 of
+msgid "Endpoint: `/api/notes/replies`"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_all_replies:5
+#: mipac.actions.note.ClientNoteActions.get_replies:5
+#: mipac.actions.note.NoteActions.get_all_replies:5
+#: mipac.actions.note.NoteActions.get_replies:5 of
+msgid "since id"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_all_replies:7
+#: mipac.actions.note.ClientNoteActions.get_replies:7
+#: mipac.actions.note.NoteActions.get_all_replies:7
+#: mipac.actions.note.NoteActions.get_replies:7 of
+msgid "until id"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_all_replies:12
+#: mipac.actions.note.ClientNoteActions.get_replies:14
+#: mipac.actions.note.NoteActions.get_all_replies:12
+#: mipac.actions.note.NoteActions.get_replies:14 of
+msgid "replies"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_clips:1
+#: mipac.actions.note.NoteActions.get_clips:1 of
+msgid "Get the clips of the note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_clips:3
+#: mipac.actions.note.NoteActions.get_clips:3 of
+msgid "Endpoint: `/api/notes/clips`"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_clips:8
+#: mipac.actions.note.NoteActions.get_clips:8 of
+msgid "Clips of the note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_conversation:1
+#: mipac.actions.note.NoteActions.get_conversation:1 of
+msgid "Get the conversation of the note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_conversation:3
+#: mipac.actions.note.NoteActions.get_conversation:3 of
+msgid "Endpoint: `/api/notes/conversation`"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_conversation:7
+#: mipac.actions.note.NoteActions.get_conversation:7 of
+msgid "offset"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_conversation:12
+#: mipac.actions.note.NoteActions.get_conversation:12 of
+msgid "Notes of the conversation"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_renotes:1
+#: mipac.actions.note.NoteActions.get_renotes:1 of
+msgid "Get renote of the note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_renotes:3
+#: mipac.actions.note.NoteActions.get_renotes:3 of
+msgid "Endpoint: `/api/notes/renotes`"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_renotes:14
+#: mipac.actions.note.NoteActions.get_renotes:14 of
+msgid "Renotes of the note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.get_state:1 of
+msgid "Get the state of the note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.renote:15 of
+msgid "Reaction acceptance setting"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.renote:23 of
+msgid "Channel ID"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.translate:1 of
+msgid "Translate a note"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.translate:3 of
+msgid "Endpoint: `/api/notes/translate`"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.translate:5 of
+msgid "Note ID to target for translation"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.translate:7 of
+msgid "Target language"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.translate:10 of
+msgid "Translated result"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.un_renote:1 of
+msgid "Releases the note renote for the specified Id"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.un_renote:3 of
+msgid "Target note Id., by default None"
+msgstr ""
+
+#: mipac.actions.note.ClientNoteActions.un_renote:6 of
+msgid "Whether the release was successful"
+msgstr ""
+
+#: ../../index.rst:1363
+msgid "NoteActions"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.fetch:1 of
+msgid "Get a note."
+msgstr ""
+
+#: mipac.actions.note.NoteActions.fetch:3 of
+msgid ""
+"update the cache of the :py:meth:`mipac.actions.note.NoteActions.get` "
+"method"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.fetch:5 mipac.actions.note.NoteActions.get:3
+#: of
+msgid "Endpoint: `/api/notes/show`"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.fetch:10 of
+msgid "note"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get:1 of
+msgid "Get a note"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get:5 of
+msgid "ノートのID"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get:8 of
+msgid "取得したノートID"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_featured:1 of
+msgid "Get featured notes"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_featured:3 of
+msgid "Endpoint: `/api/notes/featured`"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_featured:9 of
+msgid "channel id"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_featured:12 of
+msgid "featured notes"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_global_time_line:1 of
+msgid "Get global timeline"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_global_time_line:3 of
+msgid "Endpoint: `/api/notes/global-timeline`"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_global_time_line:5
+#: mipac.actions.note.NoteActions.get_time_line:23 of
+msgid "Whether to include files"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_global_time_line:7
+#: mipac.actions.note.NoteActions.get_time_line:21 of
+msgid "Whether to include renote"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_global_time_line:15
+#: mipac.actions.note.NoteActions.get_time_line:13 of
+msgid "Since date"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_global_time_line:17
+#: mipac.actions.note.NoteActions.get_time_line:15 of
+msgid "Until date"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_global_time_line:20 of
+msgid "global timeline"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_mentions:1 of
+msgid "Get notes with mentions addressed to you"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_mentions:3 of
+msgid "Endpoint: `/api/notes/mentions`"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_mentions:5 of
+msgid "Whether to include only users you follow"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_time_line:1 of
+msgid "Get the timeline of the specified list"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_time_line:3 of
+msgid "Endpoint: `/api/notes/user-list-timeline`"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_time_line:5 of
+msgid "List ID"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_time_line:17 of
+msgid "Whether to include your own renote"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_time_line:19 of
+msgid "Whether to include local renote"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.get_time_line:26 of
+msgid "Notes"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:5 of
+msgid "投稿する内容"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:7 of
+msgid ""
+"公開範囲, by default \"public\" Enum: \"public\" \"home\" \"followers\" "
+"\"specified\""
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:10 of
+msgid "公開するユーザー, by default None"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:12 of
+msgid "閲覧注意の文字, by default None"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:14 of
+msgid "ローカルにのみ表示するか, by default False"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:16 of
+msgid "リアクションの受け入れ設定, by default None"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:18 of
+msgid "メンションを展開するか, by default True"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:20 of
+msgid "ハッシュタグを展開するか, by default True"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:22 of
+msgid "絵文字を展開するか, by default True"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:24 of
+msgid "リプライ先のid, by default None"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:26 of
+msgid "リノート先のid, by default None"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:28 of
+msgid "チャンネルid, by default None"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:30 of
+msgid "添付するファイルのリスト, by default None"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:32 of
+msgid "アンケート, by default None"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:35 of
+msgid "投稿したノート"
+msgstr ""
+
+#: mipac.actions.note.NoteActions.send:38 of
+msgid "[description]"
+msgstr ""
+
+#: ../../index.rst:1372
+msgid "ClientPollActions"
+msgstr ""
+
+#: ../../index.rst:1381
+msgid "PollActions"
+msgstr ""
+
+#: ../../index.rst:1390
+msgid "ClientReactionActions"
+msgstr ""
+
+#: mipac.actions.reaction.ClientReactionActions.add:1
+#: mipac.actions.reaction.ReactionActions.add:1 of
+msgid "Add reaction to note"
+msgstr ""
+
+#: mipac.actions.reaction.ClientReactionActions.add:3
+#: mipac.actions.reaction.ReactionActions.add:3 of
+msgid "Endpoint: `/api/notes/reactions/create`"
+msgstr ""
+
+#: mipac.actions.reaction.ClientReactionActions.add:5
+#: mipac.actions.reaction.ReactionActions.add:5 of
+msgid "reaction"
+msgstr ""
+
+#: mipac.actions.reaction.ClientReactionActions.add:7
+#: mipac.actions.reaction.ClientReactionActions.remove:5
+#: mipac.actions.reaction.ReactionActions.add:7
+#: mipac.actions.reaction.ReactionActions.remove:5 of
+msgid "note id, by default None"
+msgstr ""
+
+#: mipac.actions.reaction.ClientReactionActions.remove:1
+#: mipac.actions.reaction.ReactionActions.remove:1 of
+msgid "Remove reaction from note"
+msgstr ""
+
+#: mipac.actions.reaction.ClientReactionActions.remove:3
+#: mipac.actions.reaction.ReactionActions.remove:3 of
+msgid "Endpoint: `/api/notes/reactions/delete`"
+msgstr ""
+
+#: ../../index.rst:1399
+msgid "ReactionActions"
+msgstr ""
+
+#: ../../index.rst:1408
+msgid "RoleActions"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get:1 of
+msgid "Get a role from the API. Endpoint: `/api/roles/show`"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get:4 of
+msgid "The ID of the role to get."
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get:7
+#: mipac.actions.role.RoleActions.get_list:4 of
+msgid "The role data."
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_list:1 of
+msgid "Get a list of roles from the API. Endpoint: `/api/roles/list`"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_notes:1 of
+msgid "Get notes in a role. Endpoint: `/api/roles/notes`"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_notes:4 of
+msgid "The ID of the role to get notes."
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_notes:6 of
+msgid "The number of notes to get, by default 10"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_notes:8 of
+msgid "The ID of the note to get notes after, by default None"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_notes:10 of
+msgid "The ID of the note to get notes before, by default None"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_notes:12 of
+msgid "The timestamp of the note to get notes after, by default None"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_notes:14 of
+msgid "The timestamp of the note to get notes before, by default None"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_notes:16 of
+msgid "Whether to get all notes, by default False"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_notes:19 of
+msgid "*AsyncGenerator[Note, None]* -- The note data."
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_users:1 of
+msgid "Get users in a role. Endpoint: `/api/roles/users`"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_users:4 of
+msgid "The ID of the role to get users."
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_users:6 of
+msgid "The ID of the user to get users after, by default None"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_users:8 of
+msgid "The ID of the user to get users before, by default None"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_users:10 of
+msgid "The number of users to get, by default 10"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_users:12 of
+msgid "Whether to get all users, by default False"
+msgstr ""
+
+#: mipac.actions.role.RoleActions.get_users:15 of
+msgid "*AsyncGenerator[MeRole | RoleUser, None]* -- The role user data."
+msgstr ""
+
+#: ../../index.rst:1417
+msgid "ClientUserActions"
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_achievements:1
+#: mipac.actions.user.UserActions.get_achievements:1 of
+msgid "Get achievements of user."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_all_featured_notes:1
+#: mipac.actions.user.UserActions.get_all_featured_notes:1 of
+msgid "Get all featured notes of user."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_all_featured_notes:3
+#: mipac.actions.user.ClientUserActions.get_featured_notes:3
+#: mipac.actions.user.UserActions.get_all_featured_notes:3
+#: mipac.actions.user.UserActions.get_featured_notes:3 of
+msgid "Endpoint: `/api/users/featured-notes`"
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_all_featured_notes:5
+#: mipac.actions.user.ClientUserActions.get_featured_notes:5
+#: mipac.actions.user.UserActions.get_all_featured_notes:5
+#: mipac.actions.user.UserActions.get_featured_notes:5 of
+msgid "The maximum number of featured notes to return."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_all_featured_notes:7
+#: mipac.actions.user.ClientUserActions.get_featured_notes:7
+#: mipac.actions.user.UserActions.get_all_featured_notes:7
+#: mipac.actions.user.UserActions.get_featured_notes:7 of
+msgid "Get featured notes before this id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_all_featured_notes:9
+#: mipac.actions.user.ClientUserActions.get_featured_notes:9
+#: mipac.actions.user.UserActions.get_all_featured_notes:9
+#: mipac.actions.user.UserActions.get_featured_notes:9 of
+msgid "Get featured notes with this user id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_all_featured_notes:12
+#: mipac.actions.user.ClientUserActions.get_featured_notes:12
+#: mipac.actions.user.UserActions.get_all_featured_notes:12
+#: mipac.actions.user.UserActions.get_featured_notes:12 of
+msgid "A list of featured notes."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_featured_notes:1
+#: mipac.actions.user.UserActions.get_featured_notes:1 of
+msgid "Get featured notes of user."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_followers:1
+#: mipac.actions.user.UserActions.get_followers:1 of
+msgid "Get followers of user."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_followers:3
+#: mipac.actions.user.UserActions.get_followers:3 of
+msgid "Endpoint: `/api/users/followers`"
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_followers:5
+#: mipac.actions.user.UserActions.get_followers:5 of
+msgid "Get followers after this id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_followers:7
+#: mipac.actions.user.UserActions.get_followers:7 of
+msgid "Get followers before this id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_followers:9
+#: mipac.actions.user.UserActions.get_followers:9 of
+msgid "The maximum number of followers to return."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_followers:11
+#: mipac.actions.user.UserActions.get_followers:11 of
+msgid "Get followers with this username."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_followers:13
+#: mipac.actions.user.UserActions.get_followers:13 of
+msgid "Get followers with this host."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_followers:15
+#: mipac.actions.user.UserActions.get_followers:15 of
+msgid "Get followers with this user id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_followers:18
+#: mipac.actions.user.UserActions.get_followers:18 of
+msgid "A list of followers."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_following:1
+#: mipac.actions.user.UserActions.get_following:1 of
+msgid "Get following of user."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_following:3
+#: mipac.actions.user.UserActions.get_following:3 of
+msgid "Endpoint: `/api/users/following`"
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_following:5
+#: mipac.actions.user.UserActions.get_following:5 of
+msgid "Get following after this id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_following:7
+#: mipac.actions.user.UserActions.get_following:7 of
+msgid "Get following before this id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_following:9
+#: mipac.actions.user.UserActions.get_following:9 of
+msgid "The maximum number of following to return."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_following:11
+#: mipac.actions.user.UserActions.get_following:11 of
+msgid "Get following with this username."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_following:13
+#: mipac.actions.user.UserActions.get_following:13 of
+msgid "Get following with this host."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_following:15
+#: mipac.actions.user.UserActions.get_following:15 of
+msgid "Get following with this user id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_following:18
+#: mipac.actions.user.UserActions.get_following:18 of
+msgid "A list of following."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_frequently_replied_users:1
+#: mipac.actions.user.UserActions.get_frequently_replied_users:1 of
+msgid "Get frequently replied users of user."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_frequently_replied_users:3
+#: mipac.actions.user.UserActions.get_frequently_replied_users:3 of
+msgid "Endpoint: `/api/users/get-frequently-replied-users`"
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_frequently_replied_users:5
+#: mipac.actions.user.UserActions.get_frequently_replied_users:5 of
+msgid "The maximum number of frequently replied users to return."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_frequently_replied_users:7
+#: mipac.actions.user.UserActions.get_frequently_replied_users:7 of
+msgid "Get frequently replied users with this user id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_frequently_replied_users:10
+#: mipac.actions.user.UserActions.get_frequently_replied_users:10 of
+msgid "A list of frequently replied users."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_gallery_posts:1
+#: mipac.actions.user.UserActions.get_gallery_posts:1 of
+msgid "Get gallery posts of user."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_gallery_posts:3
+#: mipac.actions.user.UserActions.get_gallery_posts:3 of
+msgid "Endpoint: `/api/users/gallery/posts`"
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_gallery_posts:5
+#: mipac.actions.user.UserActions.get_gallery_posts:5 of
+msgid "The maximum number of gallery posts to return."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_gallery_posts:7
+#: mipac.actions.user.UserActions.get_gallery_posts:7 of
+msgid "Get gallery posts after this id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_gallery_posts:9
+#: mipac.actions.user.UserActions.get_gallery_posts:9 of
+msgid "Get gallery posts before this id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_gallery_posts:11
+#: mipac.actions.user.UserActions.get_gallery_posts:11 of
+msgid "Get gallery posts with this user id."
+msgstr ""
+
+#: mipac.actions.user.ClientUserActions.get_gallery_posts:14
+#: mipac.actions.user.UserActions.get_gallery_posts:14 of
+msgid "A list of gallery posts."
+msgstr ""
+
+#: ../../index.rst:1426
+msgid "UserActions"
+msgstr ""
+
+#: mipac.actions.user.UserActions.fetch:1 of
+msgid ""
+"Retrieve the latest user information using the target user ID or "
+"username. If you do not need the latest information, you should basically"
+" use the `get` method. This method accesses the server each time, which "
+"may increase the number of server accesses."
+msgstr ""
+
+#: mipac.actions.user.UserActions.fetch:6 mipac.actions.user.UserActions.get:5
+#: of
+msgid "target user id"
+msgstr ""
+
+#: mipac.actions.user.UserActions.fetch:8
+#: mipac.actions.user.UserActions.fetch:10 mipac.actions.user.UserActions.get:9
+#: of
+msgid "target username"
+msgstr ""
+
+#: mipac.actions.user.UserActions.fetch:12
+#: mipac.actions.user.UserActions.get:11 of
+msgid "Hosts with target users"
+msgstr ""
+
+#: mipac.actions.user.UserActions.get:1 of
+msgid ""
+"Retrieve user information from the user ID using the cache. If there is "
+"no cache, `fetch` is automatically used. The `fetch` method is "
+"recommended if you want up-to-date user information."
+msgstr ""
+
+#: mipac.actions.user.UserActions.get:7 of
+msgid "target user ids"
+msgstr ""
+
+#: mipac.actions.user.UserActions.get_me:1 of
+msgid "ログインしているユーザーの情報を取得します"
+msgstr ""
+
+#: mipac.actions.user.UserActions.get_mention:1 of
+msgid "Get mention name of user."
+msgstr ""
+
+#: mipac.actions.user.UserActions.get_mention:3 of
+msgid "The object of the user whose mentions you want to retrieve"
+msgstr ""
+
+#: mipac.actions.user.UserActions.get_mention:6 of
+msgid "メンション"
+msgstr ""
+
+#: mipac.actions.user.UserActions.search:1 of
+msgid "Search users by keyword."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search:3 of
+msgid "Keyword to search."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search:5
+#: mipac.actions.user.UserActions.search_by_username_and_host:7 of
+msgid "The maximum number of users to return."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search:7 of
+msgid "The number of users to skip."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search:9 of
+msgid "The origin of users to search."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search:11 of
+msgid "Whether to return detailed user information."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search:13 of
+msgid "Whether to return all users."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search_by_username_and_host:1 of
+msgid "Search users by username and host."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search_by_username_and_host:3 of
+msgid "Username of user."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search_by_username_and_host:5 of
+msgid "Host of user."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search_by_username_and_host:9 of
+msgid "Weather to get detailed user information."
+msgstr ""
+
+#: mipac.actions.user.UserActions.search_by_username_and_host:12 of
+msgid "A list of users."
+msgstr ""
+
+#: ../../index.rst:1435
+msgid "UsernameActions"
+msgstr ""
+
+#: ../../index.rst:1444
+msgid "AdminAdvertisingActions"
+msgstr ""
+
+#: ../../index.rst:1453
+msgid "AdminAdvertisingModelActions"
+msgstr ""
+
+#: ../../index.rst:1462
+msgid "AdminActions"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.get_meta:1 of
+msgid "Get admin meta Endpoint: `/api/admin/meta`"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.get_meta:4 of
+msgid "flag of detail, by default False"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.reset_password:1 of
+msgid "target user's password reset Endpoint: `/api/admin/reset-password`"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.reset_password:4
+#: mipac.actions.admins.admin.AdminActions.update_user_note:4 of
+msgid "target user's id"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.reset_password:7 of
+msgid "new password"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.resolve_abuse_user_report:1 of
+msgid "Resolve abuse user report Endpoint: `/api/admin/resolve-abuse-user-report`"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.resolve_abuse_user_report:4 of
+msgid "report id"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.resolve_abuse_user_report:6 of
+msgid "Whether to forward the report to a remote server"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.send_email:1 of
+msgid "Send email to specified address Endpoint: `/api/admin/send-email`"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.send_email:4 of
+msgid "email address to send"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.send_email:6 of
+msgid "email subject"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.send_email:8 of
+msgid "email body"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.suspend_user:1 of
+msgid "Suspends the user for the specified Id Endpoint: `/api/admin/suspend-user`"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.suspend_user:4 of
+msgid "Id of user to suspend"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.suspend_user:7
+#: mipac.actions.admins.admin.AdminActions.unsuspend_user:7 of
+msgid "success or failed"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.unsuspend_user:1 of
+msgid "Unsuspend user with specified Id Endpoint: `/api/admin/unsuspend-user`"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.unsuspend_user:4 of
+msgid "Id of user to unsuspend"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.update_user_note:1 of
+msgid "Update user note Endpoint: `/api/admin/update-user-note`"
+msgstr ""
+
+#: mipac.actions.admins.admin.AdminActions.update_user_note:6 of
+msgid "new note"
+msgstr ""
+
+#: ../../index.rst:1471
+msgid "AdminAnnouncementActions"
+msgstr ""
+
+#: ../../index.rst:1480
+msgid "AdminAnnouncementClientActions"
+msgstr ""
+
+#: ../../index.rst:1489
+msgid "AdminDriveActions"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.clean_remote_files:1 of
+msgid "Clean remote files"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.clean_remote_files:3 of
+msgid "Endpoint: `/api/admin/drive/clean-remote-files`"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.clean_remote_files:5 of
+msgid "Whether the remote files were cleaned"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.cleanup:1 of
+msgid "Clean up the drive"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.cleanup:3 of
+msgid "Endpoint: `/api/admin/drive/cleanup`"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.cleanup:5 of
+msgid "Whether the drive was cleaned up"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.get_files:1 of
+msgid "Get all files"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.get_files:3 of
+msgid "Endpoint: `/api/admin/drive/files`"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.get_files:5
+#: mipac.actions.drive.drive.DriveActions.stream:5 of
+msgid "The number of files to get"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.get_files:7
+#: mipac.actions.drive.drive.DriveActions.stream:7 of
+msgid "The id of the file to start from"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.get_files:9
+#: mipac.actions.drive.drive.DriveActions.stream:9 of
+msgid "The id of the file to end at"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.get_files:11
+#: mipac.actions.drive.drive.DriveActions.stream:11 of
+msgid "The type of file to get"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.get_files:13 of
+msgid "The id of the user to get files from"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.get_files:15 of
+msgid "The origin of the files"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.get_files:17 of
+msgid "The hostname of the files"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.get_files:20
+#: mipac.actions.drive.drive.DriveActions.stream:14 of
+msgid "A list of files"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.show_file:1
+#: mipac.actions.drive.files.FileActions.show:1 of
+msgid "Show a file"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.show_file:3 of
+msgid "Endpoint: `/api/admin/drive/files/show`"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.show_file:5
+#: mipac.actions.drive.files.FileActions.show:5 of
+msgid "The id of the file to show"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.show_file:7 of
+msgid "The url of the file to show"
+msgstr ""
+
+#: mipac.actions.admins.drive.AdminDriveActions.show_file:10 of
+msgid "The file"
+msgstr ""
+
+#: ../../index.rst:1498
+msgid "AdminEmojiActions"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:1 of
+msgid "指定したIdの絵文字を削除します"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:3 of
+msgid "削除する絵文字のId, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:6 of
+msgid "成功したかどうか"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove:9 of
+msgid "Idが不足している"
+msgstr ""
+
+#: ../../index.rst:1507
+msgid "AdminInviteActions"
+msgstr ""
+
+#: ../../index.rst:1516
+msgid "AdminModeratorActions"
+msgstr ""
+
+#: mipac.actions.admins.moderator.AdminModeratorActions.add:1 of
+msgid "Add a user as a moderator"
+msgstr ""
+
+#: mipac.actions.admins.moderator.AdminModeratorActions.add:3
+#: mipac.actions.admins.moderator.AdminModeratorActions.remove:3 of
+msgid "ユーザーのID"
+msgstr ""
+
+#: mipac.actions.admins.moderator.AdminModeratorActions.remove:1 of
+msgid "Unmoderate a user"
+msgstr ""
+
+#: ../../index.rst:1525
+msgid "AdminRoleActions"
+msgstr ""
+
+#: ../../index.rst:1534
+msgid "AdminRoleModelActions"
+msgstr ""
+
+#: mipac.actions.admins.roles.AdminRoleModelActions.assign:1
+#: mipac.actions.admins.roles.AdminRoleModelActions.unassign:1 of
+msgid "指定したユーザーに指定したロールを付与します"
+msgstr ""
+
+#: mipac.actions.admins.roles.AdminRoleModelActions.assign:3
+#: mipac.actions.admins.roles.AdminRoleModelActions.unassign:3 of
+msgid "ロールのID"
+msgstr ""
+
+#: mipac.actions.admins.roles.AdminRoleModelActions.assign:5
+#: mipac.actions.admins.roles.AdminRoleModelActions.unassign:5 of
+msgid "ロールを付与する対象のユーザーID"
+msgstr ""
+
+#: mipac.actions.admins.roles.AdminRoleModelActions.assign:7
+#: mipac.actions.admins.roles.AdminRoleModelActions.unassign:7 of
+msgid "いつまでロールを付与するか, by default None"
+msgstr ""
+
+#: ../../index.rst:1543
+msgid "AdminUserActions"
+msgstr ""
+
+#: mipac.actions.admins.user.AdminUserActions.delete_account:1 of
+msgid "Deletes the user with the specified user ID."
+msgstr ""
+
+#: mipac.actions.admins.user.AdminUserActions.delete_account:3 of
+msgid "ID of the user to be deleted"
+msgstr ""
+
+#: mipac.actions.admins.user.AdminUserActions.delete_account:6
+#: mipac.actions.admins.user.AdminUserActions.suspend:6
+#: mipac.actions.admins.user.AdminUserActions.unsuspend:6 of
+msgid "Success or failure"
+msgstr ""
+
+#: mipac.actions.admins.user.AdminUserActions.show_user:1 of
+msgid "Shows the user with the specified user ID."
+msgstr ""
+
+#: mipac.actions.admins.user.AdminUserActions.show_user:3 of
+msgid "ID of the user to be shown"
+msgstr ""
+
+#: mipac.actions.admins.user.AdminUserActions.suspend:1 of
+msgid "Suspends the user with the specified user ID."
+msgstr ""
+
+#: mipac.actions.admins.user.AdminUserActions.suspend:3 of
+msgid "ID of the user to be suspended"
+msgstr ""
+
+#: mipac.actions.admins.user.AdminUserActions.unsuspend:1 of
+msgid "Unsuspends the user with the specified user ID."
+msgstr ""
+
+#: mipac.actions.admins.user.AdminUserActions.unsuspend:3 of
+msgid "ID of the user to be unsuspended"
+msgstr ""
+
+#: ../../index.rst:1552
+msgid "DriveActions"
+msgstr ""
+
+#: mipac.actions.drive.drive.DriveActions.get_status:1 of
+msgid "Get the status of the drive"
+msgstr ""
+
+#: mipac.actions.drive.drive.DriveActions.get_status:3 of
+msgid "Endpoint: `/api/drive`"
+msgstr ""
+
+#: mipac.actions.drive.drive.DriveActions.get_status:5 of
+msgid "The status of the drive"
+msgstr ""
+
+#: mipac.actions.drive.drive.DriveActions.stream:1 of
+msgid "Stream files from the drive"
+msgstr ""
+
+#: mipac.actions.drive.drive.DriveActions.stream:3 of
+msgid "Endpoint: `/api/drive/stream`"
+msgstr ""
+
+#: ../../index.rst:1561
+msgid "ClientFileActions"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.delete:1
+#: mipac.actions.drive.files.FileActions.delete:1 of
+msgid "指定したファイルIDのファイルを削除します"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.delete:3
+#: mipac.actions.drive.files.FileActions.delete:3 of
+msgid "Endpoint: `/api/drive/files/delete`"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.delete:5 of
+msgid "対象のファイルID, default=None"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.delete:8
+#: mipac.actions.drive.files.FileActions.delete:8 of
+msgid "削除に成功したかどうか"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.get_attached_notes:1 of
+msgid "Get the attached notes of a file"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.get_attached_notes:3 of
+msgid "Endpoint: `/api/drive/files/attached-notes`"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.get_attached_notes:5 of
+msgid "The id of the note to start from, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.get_attached_notes:7 of
+msgid "The id of the note to end at, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.get_attached_notes:9 of
+msgid "The amount of notes to get, defaults to 10"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.get_attached_notes:11 of
+msgid "The id of the file to get notes from, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.get_attached_notes:14 of
+msgid "The attached notes of the file"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.update:1
+#: mipac.actions.drive.files.FileActions.update:1
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.update:1 of
+msgid "Update a file"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.update:3
+#: mipac.actions.drive.files.FileActions.update:3
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.update:3 of
+msgid "Endpoint: `/api/drive/files/update`"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.update:5 of
+msgid "The id of the folder to update the file to, defaults to MISSING"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.update:7
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.update:7 of
+msgid "The name of the file, defaults to MISSING"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.update:9
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.update:9 of
+msgid "Whether the file is sensitive or not, defaults to MISSING"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.update:11
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.update:11 of
+msgid "The comment of the file, defaults to MISSING"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.update:13
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.update:5 of
+msgid "The id of the file to update, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.ClientFileActions.update:16
+#: mipac.actions.drive.files.FileActions.update:16
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.update:14 of
+msgid "The updated file"
+msgstr ""
+
+#: ../../index.rst:1570
+msgid "FileActions"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.check_existence:1 of
+msgid "指定したmd5のファイルが既に存在するか確認します"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.check_existence:3 of
+msgid "Endpoint: `/api/drive/files/check-existence`"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.check_existence:5 of
+msgid "確認したいmd5"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.check_existence:8 of
+msgid "存在するかしないか"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.create:1
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create:1 of
+msgid "Upload a file to the drive"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.create:3
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create:3 of
+msgid "Endpoint: `/api/drive/files/create`"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.create:5 of
+msgid "アップロードするファイル"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.create:7 of
+msgid "アップロード先のフォルダID, default=None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.create:9 of
+msgid "ファイルの名前, default=None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.create:11 of
+msgid "ファイルのコメント, default=None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.create:13 of
+msgid "ファイルがセンシティブかどうか, default=False"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.create:15 of
+msgid "ファイルが既に存在する場合でも強制的にアップロードするかどうか, default=False"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.create:18 of
+msgid "アップロードしたファイル"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.delete:5 of
+msgid "対象のファイルID"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.find:1
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.find:1 of
+msgid "Find a file by its name"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.find:3
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.find:3 of
+msgid "Endpoint: `/api/drive/files/find`"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.find:5
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.find:5 of
+msgid "The name of the file to find"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.find:7 of
+msgid "The id of the folder to find the file in, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.find:10
+#: mipac.actions.drive.files.FileActions.find_by_hash:8
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.find:8 of
+msgid "The found files"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.find_by_hash:1 of
+msgid "Find a file by its hash"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.find_by_hash:3 of
+msgid "Endpoint: `/api/drive/files/find-by-hash`"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.find_by_hash:5 of
+msgid "The md5 of the file to find"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_all_attached_notes:1
+#: mipac.actions.drive.files.FileActions.get_attached_notes:1 of
+msgid "指定したファイルを含む全てのノートを取得します"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_all_attached_notes:3
+#: mipac.actions.drive.files.FileActions.get_attached_notes:3 of
+msgid "ノートを取得するファイルID"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_all_attached_notes:5
+#: mipac.actions.drive.files.FileActions.get_attached_notes:5 of
+msgid "指定するとそのノートIDよりも後のノートを返します, default=None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_all_attached_notes:7
+#: mipac.actions.drive.files.FileActions.get_attached_notes:7 of
+msgid "指定するとそのノートIDよりも前のノートを返します, default=None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_all_attached_notes:9
+#: mipac.actions.drive.files.FileActions.get_attached_notes:9 of
+msgid "一度に取得するノート数, default=10"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_all_attached_notes:12
+#: mipac.actions.drive.files.FileActions.get_attached_notes:12 of
+msgid "取得したノート"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_files:1 of
+msgid "Get the files of the drive"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_files:3 of
+msgid "Endpoint: `/api/drive/files`"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_files:5 of
+msgid "The amount of files to get, defaults to 10"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_files:7 of
+msgid "The id of the file to start from, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_files:9 of
+msgid "The id of the file to end at, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_files:11 of
+msgid "The id of the folder to get files from, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_files:13 of
+msgid "The type of file to get, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_files:15 of
+msgid "The way to sort the files, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.get_files:18 of
+msgid "The files of the drive"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.show:3 of
+msgid "Endpoint: `/api/drive/files/show`"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.show:7 of
+msgid "The url of the file to show, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.show:10 of
+msgid "The shown file"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.update:5 of
+msgid "The id of the file to update"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.update:7 of
+msgid "The id of the folder to update the file to, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.update:9
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create:9 of
+msgid "The name of the file, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.update:11
+#: mipac.actions.drive.files.FileActions.upload_from_url:9
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create:13
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url:7 of
+msgid "Whether the file is sensitive or not, defaults to False"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.update:13
+#: mipac.actions.drive.files.FileActions.upload_from_url:11
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create:11
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url:9 of
+msgid "The comment of the file, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.upload_from_url:1
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url:1 of
+msgid "Upload a file to the drive from a url"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.upload_from_url:3
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url:3 of
+msgid "Endpoint: `/api/drive/files/upload-from-url`"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.upload_from_url:5
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url:5 of
+msgid "The url of the file to upload"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.upload_from_url:7
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create:7 of
+msgid "The id of the folder to upload the file to, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.upload_from_url:13
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url:11 of
+msgid "The marker of the file, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.upload_from_url:15
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create:15
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url:13 of
+msgid "Whether to force upload the file or not, defaults to False"
+msgstr ""
+
+#: mipac.actions.drive.files.FileActions.upload_from_url:18
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url:16 of
+msgid "Whether the file was uploaded or not"
+msgstr ""
+
+#: ../../index.rst:1579
+msgid "ClientFileActionsInFolder"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFileActionsInFolder:1 of
+msgid "File actions in a folder"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create:5 of
+msgid "The file to upload"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFileActionsInFolder.create:18 of
+msgid "The uploaded file"
+msgstr ""
+
+#: ../../index.rst:1588
+msgid "ClientFolderActions"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.create:1
+#: mipac.actions.drive.folders.FolderActions.create:1 of
+msgid "Create a new folder"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.create:3
+#: mipac.actions.drive.folders.FolderActions.create:3 of
+msgid "Endpoint: `/api/drive/folders/create`"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.create:5
+#: mipac.actions.drive.folders.FolderActions.create:5
+#: mipac.actions.drive.folders.FolderActions.update:7 of
+msgid "The name of the folder, by default None"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.create:7
+#: mipac.actions.drive.folders.FolderActions.create:7
+#: mipac.actions.drive.folders.FolderActions.find:7
+#: mipac.actions.drive.folders.FolderActions.update:9 of
+msgid "The parent ID of the folder, by default None"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.create:10
+#: mipac.actions.drive.folders.FolderActions.create:10 of
+msgid "The created folder"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.delete:1
+#: mipac.actions.drive.folders.FolderActions.delete:1 of
+msgid "Delete a folder"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.delete:3
+#: mipac.actions.drive.folders.FolderActions.delete:3 of
+msgid "Endpoint: `/api/drive/folders/delete`"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.delete:5
+#: mipac.actions.drive.folders.ClientFolderActions.update:9 of
+msgid "The ID of the folder, by default None"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.delete:8
+#: mipac.actions.drive.folders.FolderActions.delete:8 of
+msgid "Whether the folder was deleted or not"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.gets:1
+#: mipac.actions.drive.folders.FolderActions.gets:1 of
+msgid "Get folders"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.gets:3
+#: mipac.actions.drive.folders.FolderActions.gets:3 of
+msgid "Endpoint: `/api/drive/folders`"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.gets:5
+#: mipac.actions.drive.folders.FolderActions.gets:7 of
+msgid "The limit of folders to get, defaults to 10"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.gets:7
+#: mipac.actions.drive.folders.FolderActions.gets:9 of
+msgid "The ID of the folder to get since, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.gets:9
+#: mipac.actions.drive.folders.FolderActions.gets:11 of
+msgid "The ID of the folder to get until, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.gets:11
+#: mipac.actions.drive.folders.FolderActions.gets:5 of
+msgid "The ID of the folder to get, defaults to None"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.gets:14
+#: mipac.actions.drive.folders.FolderActions.find:10
+#: mipac.actions.drive.folders.FolderActions.gets:14 of
+msgid "The found folders"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.update:1
+#: mipac.actions.drive.folders.FolderActions.update:1 of
+msgid "Update a folder"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.update:3
+#: mipac.actions.drive.folders.FolderActions.update:3 of
+msgid "Endpoint: `/api/drive/folders/update`"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.update:5 of
+msgid "The name of the folder, by default MISSING"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.update:7 of
+msgid "The parent ID of the folder, by default MISSING"
+msgstr ""
+
+#: mipac.actions.drive.folders.ClientFolderActions.update:12
+#: mipac.actions.drive.folders.FolderActions.update:12 of
+msgid "The updated folder"
+msgstr ""
+
+#: ../../index.rst:1597
+msgid "FolderActions"
+msgstr ""
+
+#: mipac.actions.drive.folders.FolderActions.delete:5
+#: mipac.actions.drive.folders.FolderActions.show:5
+#: mipac.actions.drive.folders.FolderActions.update:5 of
+msgid "The ID of the folder"
+msgstr ""
+
+#: mipac.actions.drive.folders.FolderActions.find:1 of
+msgid "Find folders"
+msgstr ""
+
+#: mipac.actions.drive.folders.FolderActions.find:3 of
+msgid "Endpoint: `/api/drive/folders/find`"
+msgstr ""
+
+#: mipac.actions.drive.folders.FolderActions.find:5 of
+msgid "The name of the folder"
+msgstr ""
+
+#: mipac.actions.drive.folders.FolderActions.show:1 of
+msgid "Show a folder"
+msgstr ""
+
+#: mipac.actions.drive.folders.FolderActions.show:3 of
+msgid "Endpoint: `/api/drive/folders/show`"
+msgstr ""
+
+#: mipac.actions.drive.folders.FolderActions.show:8 of
+msgid "The found folder"
+msgstr ""
+
+#: ../../index.rst:1606
+msgid "ClientPartialUserListActions"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions:1 of
+msgid "ユーザー向けのリストのアクションを提供します。"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.get_list:1
+#: mipac.actions.users.list.ClientUserListActions.get_list:1 of
+msgid "Get the user lists of a user"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.get_list:3
+#: mipac.actions.users.list.ClientUserListActions.get_list:3 of
+msgid "Endpoint `/api/users/lists/list`"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.get_list:5
+#: mipac.actions.users.list.ClientUserListActions.get_list:5 of
+msgid "The id of the user to get the lists of"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.get_list:8
+#: mipac.actions.users.list.ClientUserListActions.get_list:8 of
+msgid "The user lists the user has"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.pull:1
+#: mipac.actions.users.list.ClientUserListActions.pull:1
+#: mipac.actions.users.list.UserListActions.pull:1 of
+msgid "Pull a user from a user list"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.pull:3
+#: mipac.actions.users.list.ClientUserListActions.pull:3
+#: mipac.actions.users.list.UserListActions.pull:3 of
+msgid "Endpoint `/api/users/lists/pull`"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.pull:5
+#: mipac.actions.users.list.ClientUserListActions.pull:5
+#: mipac.actions.users.list.UserListActions.pull:5 of
+msgid "The id of the user list to pull from"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.pull:7
+#: mipac.actions.users.list.ClientUserListActions.pull:7
+#: mipac.actions.users.list.UserListActions.pull:7 of
+msgid "The id of the user to pull, by default None"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.pull:10
+#: mipac.actions.users.list.ClientUserListActions.pull:10
+#: mipac.actions.users.list.UserListActions.pull:10 of
+msgid "True if the user was pulled, False otherwise"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.push:1
+#: mipac.actions.users.list.ClientUserListActions.push:1
+#: mipac.actions.users.list.UserListActions.push:1 of
+msgid "Push a user to a user list"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.push:3
+#: mipac.actions.users.list.ClientUserListActions.push:3
+#: mipac.actions.users.list.UserListActions.push:3 of
+msgid "Endpoint `/api/users/lists/push`"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.push:5
+#: mipac.actions.users.list.ClientUserListActions.push:5
+#: mipac.actions.users.list.UserListActions.push:5 of
+msgid "The id of the user list to push to"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.push:7
+#: mipac.actions.users.list.ClientUserListActions.push:7
+#: mipac.actions.users.list.UserListActions.push:7 of
+msgid "The id of the user to push, by default None"
+msgstr ""
+
+#: mipac.actions.users.list.ClientPartialUserListActions.push:10
+#: mipac.actions.users.list.ClientUserListActions.push:10
+#: mipac.actions.users.list.UserListActions.push:10 of
+msgid "True if the user was pushed, False otherwise"
+msgstr ""
+
+#: ../../index.rst:1615
+msgid "ClientUserListActions"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.delete:1
+#: mipac.actions.users.list.UserListActions.delete:1 of
+msgid "Delete a user list"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.delete:3
+#: mipac.actions.users.list.UserListActions.delete:3 of
+msgid "Endpoint `/api/users/lists/delete`"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.delete:5
+#: mipac.actions.users.list.UserListActions.delete:5 of
+msgid "The id of the user list to delete, by default None"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.delete:8
+#: mipac.actions.users.list.UserListActions.delete:8 of
+msgid "True if the user list was deleted, False otherwise"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.favorite:1
+#: mipac.actions.users.list.UserListActions.favorite:1 of
+msgid "Favorite a user list"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.favorite:3
+#: mipac.actions.users.list.UserListActions.favorite:3 of
+msgid "Endpoint `/api/users/lists/favorite`"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.favorite:5
+#: mipac.actions.users.list.UserListActions.favorite:5 of
+msgid "The id of the user list to favorite, by default None"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.favorite:8
+#: mipac.actions.users.list.UserListActions.favorite:8 of
+msgid "True if the user list was favorited, False otherwise"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.show:1
+#: mipac.actions.users.list.UserListActions.show:1 of
+msgid "Show a user list"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.show:3
+#: mipac.actions.users.list.UserListActions.show:3 of
+msgid "Endpoint `/api/users/lists/show`"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.show:5
+#: mipac.actions.users.list.UserListActions.show:5 of
+msgid "Whether to show the user list for the public, by default False"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.show:7
+#: mipac.actions.users.list.UserListActions.show:7 of
+msgid "The id of the user list to show, by default None"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.show:10
+#: mipac.actions.users.list.UserListActions.show:10 of
+msgid "The user list"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.unfavorite:1
+#: mipac.actions.users.list.UserListActions.unfavorite:1 of
+msgid "Unfavorite a user list"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.unfavorite:3
+#: mipac.actions.users.list.UserListActions.unfavorite:3 of
+msgid "Endpoint `/api/users/lists/unfavorite`"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.unfavorite:5
+#: mipac.actions.users.list.UserListActions.unfavorite:5 of
+msgid "The id of the user list to unfavorite, by default None"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.unfavorite:8
+#: mipac.actions.users.list.UserListActions.unfavorite:8 of
+msgid "True if the user list was unfavorited, False otherwise"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.update:1
+#: mipac.actions.users.list.UserListActions.update:1 of
+msgid "Update a user list"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.update:3
+#: mipac.actions.users.list.UserListActions.update:3 of
+msgid "Endpoint `/api/users/lists/update`"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.update:5
+#: mipac.actions.users.list.UserListActions.update:5 of
+msgid "The new name of the user list, by default MISSING"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.update:7
+#: mipac.actions.users.list.UserListActions.update:7 of
+msgid "Whether the user list should be public, by default MISSING"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.update:9
+#: mipac.actions.users.list.UserListActions.update:9 of
+msgid "The id of the user list to update, by default None"
+msgstr ""
+
+#: mipac.actions.users.list.ClientUserListActions.update:12
+#: mipac.actions.users.list.UserListActions.update:12 of
+msgid "The updated user list"
+msgstr ""
+
+#: ../../index.rst:1624
+msgid "UserListActions"
+msgstr ""
+
+#: mipac.actions.users.list.UserListActions.create:1 of
+msgid "Create a new user list"
+msgstr ""
+
+#: mipac.actions.users.list.UserListActions.create:3 of
+msgid "Endpoint `/api/users/lists/create`"
+msgstr ""
+
+#: mipac.actions.users.list.UserListActions.create:5 of
+msgid "The name of the new user list"
+msgstr ""
+
+#: mipac.actions.users.list.UserListActions.create:8 of
+msgid "The created user list"
+msgstr ""
+
+#: ../../index.rst:1631
+msgid "Type class"
+msgstr ""
+
+#: ../../index.rst:1634
+msgid "IIndexStat"
+msgstr ""
+
+#: ../../index.rst:1643
+msgid "IModerationLog"
+msgstr ""
+
+#: ../../index.rst:1652
+msgid "IServerInfo"
+msgstr ""
+
+#: ../../index.rst:1661
+msgid "IServerInfoCpu"
+msgstr ""
+
+#: ../../index.rst:1670
+msgid "IServerInfoFs"
+msgstr ""
+
+#: ../../index.rst:1679
+msgid "IServerInfoMem"
+msgstr ""
+
+#: ../../index.rst:1688
+msgid "IServerInfoNet"
+msgstr ""
+
+#: ../../index.rst:1697
+msgid "ITableStats"
+msgstr ""
+
+#: ../../index.rst:1706
+msgid "IUserIP"
+msgstr ""
+
+#: ../../index.rst:1715
+msgid "IAd"
+msgstr ""
+
+#: ../../index.rst:1724
+msgid "IPartialAd"
+msgstr ""
+
+#: ../../index.rst:1733
+msgid "IAnnouncement"
+msgstr ""
+
+#: ../../index.rst:1742
+msgid "IAnnouncementDetailed"
+msgstr ""
+
+#: mipac.types.announcement.IAnnouncementDetailed:1 of
+msgid "管理者から見たアナウンス"
+msgstr ""
+
+#: ../../index.rst:1751
+msgid "IAntenna"
+msgstr ""
+
+#: ../../index.rst:1760
+msgid "IChannel"
+msgstr ""
+
+#: ../../index.rst:1769
+msgid "IActiveUsersChart"
+msgstr ""
+
+#: ../../index.rst:1778
+msgid "IDriveChart"
+msgstr ""
+
+#: ../../index.rst:1787
+msgid "IDriveLocalChart"
+msgstr ""
+
+#: ../../index.rst:1796
+msgid "IDriveRemoteChart"
+msgstr ""
+
+#: ../../index.rst:1805
+msgid "IClip"
+msgstr ""
+
+#: ../../index.rst:1814
+msgid "IDriveStatus"
+msgstr ""
+
+#: ../../index.rst:1823
+msgid "IFile"
+msgstr ""
+
+#: mipac.types.drive.IFile:1 of
+msgid "ファイル情報"
+msgstr ""
+
+#: ../../index.rst:1832
+msgid "IFileProperties"
+msgstr ""
+
+#: mipac.types.drive.IFileProperties:1 of
+msgid "プロパティー情報"
+msgstr ""
+
+#: ../../index.rst:1841
+msgid "IFolder"
+msgstr ""
+
+#: mipac.types.drive.IFolder:1 of
+msgid "フォルダーの情報"
+msgstr ""
+
+#: ../../index.rst:1850
+msgid "EmojiPayload"
+msgstr ""
+
+#: ../../index.rst:1859
+msgid "ICustomEmoji"
+msgstr ""
+
+#: ../../index.rst:1868
+msgid "ICustomEmojiLite"
+msgstr ""
+
+#: ../../index.rst:1877
+msgid "ICustomEmojiLiteRequired"
+msgstr ""
+
+#: ../../index.rst:1886
+msgid "IEmojiDetailed"
+msgstr ""
+
+#: ../../index.rst:1895
+msgid "IEmojiSimple"
+msgstr ""
+
+#: ../../index.rst:1904
+msgid "IFederationFollowCommon"
+msgstr ""
+
+#: ../../index.rst:1913
+msgid "IFederationFollower"
+msgstr ""
+
+#: ../../index.rst:1922
+msgid "IFederationFollowing"
+msgstr ""
+
+#: ../../index.rst:1931
+msgid "IFollowRequest"
+msgstr ""
+
+#: ../../index.rst:1940
+msgid "IGalleryPost"
+msgstr ""
+
+#: ../../index.rst:1949
+msgid "IFederationInstance"
+msgstr ""
+
+#: ../../index.rst:1958
+msgid "IFederationInstanceRequired"
+msgstr ""
+
+#: ../../index.rst:1967
+msgid "IFederationInstanceStat"
+msgstr ""
+
+#: ../../index.rst:1976
+msgid "IInstanceLite"
+msgstr ""
+
+#: ../../index.rst:1985
+msgid "IInviteCode"
+msgstr ""
+
+#: ../../index.rst:1994
+msgid "IInviteLimit"
+msgstr ""
+
+#: ../../index.rst:2003
+msgid "IAdminMeta"
+msgstr ""
+
+#: ../../index.rst:2012 ../../index.rst:3556
+msgid "IFeatures"
+msgstr ""
+
+#: ../../index.rst:2021
+msgid "IMeta"
+msgstr ""
+
+#: ../../index.rst:2030
+msgid "IPartialMeta"
+msgstr ""
+
+#: ../../index.rst:2039
+msgid "IPolicies"
+msgstr ""
+
+#: ../../index.rst:2048
+msgid "IUpdateMetaBody"
+msgstr ""
+
+#: ../../index.rst:2057
+msgid "IMuteUser"
+msgstr ""
+
+#: ../../index.rst:2066
+msgid "ICreatedNote"
+msgstr ""
+
+#: mipac.types.note.ICreatedNote:1 of
+msgid "created note"
+msgstr ""
+
+#: ../../index.rst:2075
+msgid "INote"
+msgstr ""
+
+#: mipac.types.note.INote:1 of
+msgid "Misskey Raw Model: Note"
+msgstr ""
+
+#: ../../index.rst:2084
+msgid "INoteChannel"
+msgstr ""
+
+#: mipac.types.note.INoteChannel:1 of
+msgid "ノート内にあるチャンネルの情報"
+msgstr ""
+
+#: mipac.types.note.INoteChannel:3 of
+msgid "ログインしていてもis_following等は存在しない"
+msgstr ""
+
+#: ../../index.rst:2093
+msgid "INoteReaction"
+msgstr ""
+
+#: ../../index.rst:2102
+msgid "INoteState"
+msgstr ""
+
+#: ../../index.rst:2111
+msgid "INoteTranslateResult"
+msgstr ""
+
+#: ../../index.rst:2120
+msgid "INoteUpdated"
+msgstr ""
+
+#: ../../index.rst:2129
+msgid "INoteUpdatedDelete"
+msgstr ""
+
+#: ../../index.rst:2138
+msgid "INoteUpdatedDeleteBody"
+msgstr ""
+
+#: ../../index.rst:2147
+msgid "INoteUpdatedReaction"
+msgstr ""
+
+#: ../../index.rst:2156
+msgid "INoteUpdatedReactionBody"
+msgstr ""
+
+#: ../../index.rst:2165
+msgid "IAchievementNf"
+msgstr ""
+
+#: ../../index.rst:2174
+msgid "INoteNf"
+msgstr ""
+
+#: ../../index.rst:2183
+msgid "INotification"
+msgstr ""
+
+#: ../../index.rst:2192
+msgid "IPollEndNf"
+msgstr ""
+
+#: ../../index.rst:2201
+msgid "IReactionNf"
+msgstr ""
+
+#: ../../index.rst:2210
+msgid "IUserNf"
+msgstr ""
+
+#: ../../index.rst:2219
+msgid "AttachedFilePayload"
+msgstr ""
+
+#: ../../index.rst:2228
+msgid "EyeCatchingImagePayload"
+msgstr ""
+
+#: ../../index.rst:2237
+msgid "IPage"
+msgstr ""
+
+#: ../../index.rst:2246
+msgid "IPageRequired"
+msgstr ""
+
+#: ../../index.rst:2255
+msgid "PageContentPayload"
+msgstr ""
+
+#: ../../index.rst:2264
+msgid "PageFilePayload"
+msgstr ""
+
+#: ../../index.rst:2273
+msgid "PagePayload"
+msgstr ""
+
+#: ../../index.rst:2282
+msgid "VariablePayload"
+msgstr ""
+
+#: ../../index.rst:2291
+msgid "IBasePoll"
+msgstr ""
+
+#: ../../index.rst:2300
+msgid "ICreatePoll"
+msgstr ""
+
+#: ../../index.rst:2309
+msgid "IPoll"
+msgstr ""
+
+#: mipac.types.poll.IPoll:1 of
+msgid "Questionnaire object"
+msgstr ""
+
+#: ../../index.rst:2318
+msgid "IPollChoice"
+msgstr ""
+
+#: ../../index.rst:2327
+msgid "NoteReactionPayload"
+msgstr ""
+
+#: ../../index.rst:2336
+msgid "is_me_role"
+msgstr ""
+
+#: ../../index.rst:2342
+msgid "IMeRole"
+msgstr ""
+
+#: ../../index.rst:2351
+msgid "IPartialRole"
+msgstr ""
+
+#: ../../index.rst:2360
+msgid "IRole"
+msgstr ""
+
+#: ../../index.rst:2369
+msgid "IRolePolicieValue"
+msgstr ""
+
+#: ../../index.rst:2378
+msgid "IRolePolicies"
+msgstr ""
+
+#: ../../index.rst:2387
+msgid "IRoleUser"
+msgstr ""
+
+#: ../../index.rst:2396
+msgid "is_me_detailed"
+msgstr ""
+
+#: mipac.types.user.is_me_detailed:1 of
+msgid ""
+"IMeDetailedOnlySchemaで avatar_id IUserDetailedNotMeOnlySchemaで url "
+"を持っているのでどちらともを満たしたものがIMeDetailedSchema"
+msgstr ""
+
+#: ../../index.rst:2402
+msgid "is_partial_user"
+msgstr ""
+
+#: mipac.types.user.is_partial_user:1 of
+msgid ""
+"他のUser型は全て IUserDetailedNotMeSchema 経由で IUserDetailedNotMeOnlySchema "
+"を継承しているため url が無いことを確認し区別する 念のために avatar_url があることも確認する"
+msgstr ""
+
+#: ../../index.rst:2408
+msgid "is_user_detailed"
+msgstr ""
+
+#: ../../index.rst:2414
+msgid "is_user_detailed_not_me"
+msgstr ""
+
+#: mipac.types.user.is_user_detailed_not_me:1 of
+msgid ""
+"IUserDetailedNotMeSchemaが持つ url が有ることを確認し IMeDetailedOnlySchema が持つ "
+"avatar_id が無いことを確認する こうすることで IMeDetailedSchema と区別する"
+msgstr ""
+
+#: ../../index.rst:2420
+msgid "GetFrequentlyRepliedUsersResponse"
+msgstr ""
+
+#: mipac.types.user.GetFrequentlyRepliedUsersResponse:1 of
+msgid "`users/get-frequently-replied-users` のレスポンス"
+msgstr ""
+
+#: ../../index.rst:2429
+msgid "IAchievement"
+msgstr ""
+
+#: ../../index.rst:2438
+msgid "IAvatarDecoration"
+msgstr ""
+
+#: ../../index.rst:2447
+msgid "IBadgeRole"
+msgstr ""
+
+#: ../../index.rst:2456
+msgid "IBlockingUser"
+msgstr ""
+
+#: ../../index.rst:2465
+msgid "IMeDetailedOnlySchema"
+msgstr ""
+
+#: ../../index.rst:2474
+msgid "IMeDetailedSchema"
+msgstr ""
+
+#: ../../index.rst:2483
+msgid "IPartialUser"
+msgstr ""
+
+#: mipac.types.user.IPartialUser:1 of
+msgid "Misskey Schema: `packedUserLiteSchema`"
+msgstr ""
+
+#: ../../index.rst:2492
+msgid "ISignin"
+msgstr ""
+
+#: ../../index.rst:2501
+msgid "IUserDetailedNotMeOnlySchema"
+msgstr ""
+
+#: mipac.types.user.IUserDetailedNotMeOnlySchema:1 of
+msgid "Misskey Schema: `packedUserDetailedNotMeOnlySchema`"
+msgstr ""
+
+#: ../../index.rst:2510
+msgid "IUserDetailedNotMeSchema"
+msgstr ""
+
+#: ../../index.rst:2519
+msgid "IUserField"
+msgstr ""
+
+#: ../../index.rst:2528
+msgid "IUserList"
+msgstr ""
+
+#: ../../index.rst:2537
+msgid "IUserListMembership"
+msgstr ""
+
+#: ../../index.rst:2546
+msgid "IUserRequired"
+msgstr ""
+
+#: ../../index.rst:2555
+msgid "IUserRole"
+msgstr ""
+
+#: mipac.types.user.IUserRole:1 of
+msgid "Deprecated"
+msgstr ""
+
+#: mipac.types.user.IUserRole:3 of
+msgid "Will be removed in v0.7.0"
+msgstr ""
+
+#: ../../index.rst:2564
+msgid "IUserSecurityKey"
+msgstr ""
+
+#: ../../index.rst:2573
+msgid "NotificationRecieveConfig"
+msgstr ""
+
+#: ../../index.rst:2582
+msgid "NotificationRecieveConfigType"
+msgstr ""
+
+#: ../../index.rst:2591
+msgid "IUsernameAvailable"
+msgstr ""
+
+#: ../../index.rst:2598
+msgid "Errors"
+msgstr ""
+
+#: ../../index.rst:2601
+msgid "APIError"
+msgstr ""
+
+#: mipac.errors.base.APIError:1 of
+msgid "APIのエラー"
+msgstr ""
+
+#: ../../index.rst:2610
+msgid "CredentialsError"
+msgstr ""
+
+#: mipac.errors.base.CredentialsError:1 of
+msgid "認証情報に関するエラー"
+msgstr ""
+
+#: ../../index.rst:2619
+msgid "NotExistRequiredData"
+msgstr ""
+
+#: mipac.errors.base.NotExistRequiredData:1 of
+msgid "クラスの中に必要なデータが不足している"
+msgstr ""
+
+#: ../../index.rst:2628
+msgid "ParameterError"
+msgstr ""
+
+#: mipac.errors.base.ParameterError:1 of
+msgid "引数に関するエラー"
+msgstr ""
+
+#: ../../index.rst:2637
+msgid "AccessDeniedError"
+msgstr ""
+
+#: mipac.errors.errors.AccessDeniedError:1 of
+msgid "アクセス権限がありません。"
+msgstr ""
+
+#: ../../index.rst:2646
+msgid "AlreadyAddedError"
+msgstr ""
+
+#: ../../index.rst:2655
+msgid "AlreadyBlockingError"
+msgstr ""
+
+#: mipac.errors.errors.AlreadyBlockingError:1 of
+msgid "すでにブロックしています。"
+msgstr ""
+
+#: ../../index.rst:2664
+msgid "AlreadyClippedError"
+msgstr ""
+
+#: ../../index.rst:2673
+msgid "AlreadyExpiredError"
+msgstr ""
+
+#: ../../index.rst:2682
+msgid "AlreadyFavoritedError"
+msgstr ""
+
+#: mipac.errors.errors.AlreadyFavoritedError:1 of
+msgid "既にお気に入り登録されています。"
+msgstr ""
+
+#: ../../index.rst:2691
+msgid "AlreadyFollowingError"
+msgstr ""
+
+#: mipac.errors.errors.AlreadyFollowingError:1 of
+msgid "すでにフォローしています。"
+msgstr ""
+
+#: ../../index.rst:2700
+msgid "AlreadyInvitedError"
+msgstr ""
+
+#: ../../index.rst:2709
+msgid "AlreadyLikedError"
+msgstr ""
+
+#: mipac.errors.errors.AlreadyLikedError:1 of
+msgid "すでにいいねをつけています。"
+msgstr ""
+
+#: ../../index.rst:2718
+msgid "AlreadyMutingError"
+msgstr ""
+
+#: mipac.errors.errors.AlreadyMutingError:1 of
+msgid "すでにそのユーザーをミュートしています。"
+msgstr ""
+
+#: ../../index.rst:2727
+msgid "AlreadyPinnedError"
+msgstr ""
+
+#: mipac.errors.errors.AlreadyPinnedError:1 of
+msgid "指定されたノートは既にピン留めされています。"
+msgstr ""
+
+#: ../../index.rst:2736
+msgid "AlreadyPromotedError"
+msgstr ""
+
+#: ../../index.rst:2745
+msgid "AlreadyReactedError"
+msgstr ""
+
+#: mipac.errors.errors.AlreadyReactedError:1 of
+msgid "既にリアクションしています。"
+msgstr ""
+
+#: ../../index.rst:2754
+msgid "AlreadyVotedError"
+msgstr ""
+
+#: ../../index.rst:2763
+msgid "AvatarNotAnImageError"
+msgstr ""
+
+#: mipac.errors.errors.AvatarNotAnImageError:1 of
+msgid "アバター画像に、画像ではないファイルが指定されました。"
+msgstr ""
+
+#: ../../index.rst:2772
+msgid "BannerNotAnImageError"
+msgstr ""
+
+#: mipac.errors.errors.BannerNotAnImageError:1 of
+msgid "バナー画像に、画像ではないファイルが指定されました。"
+msgstr ""
+
+#: ../../index.rst:2781
+msgid "BlockedError"
+msgstr ""
+
+#: mipac.errors.errors.BlockedError:1 of
+msgid "ユーザーにブロックされています。"
+msgstr ""
+
+#: ../../index.rst:2790
+msgid "BlockeeIsYourselfError"
+msgstr ""
+
+#: mipac.errors.errors.BlockeeIsYourselfError:1 of
+msgid "自分のブロックを解除しようとしました。"
+msgstr ""
+
+#: ../../index.rst:2799
+msgid "BlockingError"
+msgstr ""
+
+#: mipac.errors.errors.BlockingError:1 of
+msgid "ユーザーをブロックしています。"
+msgstr ""
+
+#: ../../index.rst:2808
+msgid "CannotCreateAlreadyExpiredPollError"
+msgstr ""
+
+#: mipac.errors.errors.CannotCreateAlreadyExpiredPollError:1 of
+msgid "アンケートの期限の指定が誤っています。"
+msgstr ""
+
+#: ../../index.rst:2817
+msgid "CannotRenoteToAPureRenoteError"
+msgstr ""
+
+#: mipac.errors.errors.CannotRenoteToAPureRenoteError:1 of
+msgid "単純なRenoteを再度Renoteすることはできません。"
+msgstr ""
+
+#: ../../index.rst:2826
+msgid "CannotReplyToAPureRenoteError"
+msgstr ""
+
+#: mipac.errors.errors.CannotReplyToAPureRenoteError:1 of
+msgid "単純なRenoteに返信することはできません。"
+msgstr ""
+
+#: ../../index.rst:2835
+msgid "CannotReportTheAdminError"
+msgstr ""
+
+#: mipac.errors.errors.CannotReportTheAdminError:1 of
+msgid "管理者を通報しようとしました。"
+msgstr ""
+
+#: ../../index.rst:2844
+msgid "CannotReportYourselfError"
+msgstr ""
+
+#: mipac.errors.errors.CannotReportYourselfError:1 of
+msgid "自身を通報しようとしました。"
+msgstr ""
+
+#: ../../index.rst:2853
+msgid "ContentRequiredError"
+msgstr ""
+
+#: ../../index.rst:2862
+msgid "CredentialRequiredError"
+msgstr ""
+
+#: mipac.errors.errors.CredentialRequiredError:1 of
+msgid "クレデンシャル必須のエンドポイントにクレデンシャル無しでリクエストされました。"
+msgstr ""
+
+#: ../../index.rst:2871
+msgid "FailedToResolveRemoteUserError"
+msgstr ""
+
+#: mipac.errors.errors.FailedToResolveRemoteUserError:1 of
+msgid "リモートユーザーの検索に失敗しました。"
+msgstr ""
+
+#: ../../index.rst:2880
+msgid "FollowRequestNotFoundError"
+msgstr ""
+
+#: mipac.errors.errors.FollowRequestNotFoundError:1 of
+msgid "フォローリクエストがありません。"
+msgstr ""
+
+#: ../../index.rst:2889
+msgid "FolloweeIsYourselfError"
+msgstr ""
+
+#: mipac.errors.errors.FolloweeIsYourselfError:1 of
+msgid "自分のフォローを解除しようとしました。"
+msgstr ""
+
+#: ../../index.rst:2898
+msgid "FollowerIsYourselfError"
+msgstr ""
+
+#: mipac.errors.errors.FollowerIsYourselfError:1 of
+msgid "自分をフォロワー解除しようとしました。"
+msgstr ""
+
+#: ../../index.rst:2907
+msgid "ForbiddenError"
+msgstr ""
+
+#: ../../index.rst:2916
+msgid "GroupAccessDeniedError"
+msgstr ""
+
+#: ../../index.rst:2925
+msgid "GtlDisabledError"
+msgstr ""
+
+#: mipac.errors.errors.GtlDisabledError:1 of
+msgid "グローバルタイムラインが無効になっています。"
+msgstr ""
+
+#: ../../index.rst:2934
+msgid "HasChildFilesOrFoldersError"
+msgstr ""
+
+#: mipac.errors.errors.HasChildFilesOrFoldersError:1 of
+msgid "フォルダーが空ではありません。"
+msgstr ""
+
+#: ../../index.rst:2943
+msgid "InappropriateError"
+msgstr ""
+
+#: mipac.errors.errors.InappropriateError:1 of
+msgid "不適切なコンテンツを含んでいる可能性があると判定されました。"
+msgstr ""
+
+#: ../../index.rst:2952
+msgid "InternalErrorError"
+msgstr ""
+
+#: mipac.errors.errors.InternalErrorError:1 of
+msgid "サーバー内部で問題が発生しました。引き続き問題が発生する場合は管理者にお問い合わせください。"
+msgstr ""
+
+#: ../../index.rst:2961
+msgid "InvalidChoiceError"
+msgstr ""
+
+#: ../../index.rst:2970
+msgid "InvalidFileNameError"
+msgstr ""
+
+#: mipac.errors.errors.InvalidFileNameError:1 of
+msgid "ファイル名が不正です。"
+msgstr ""
+
+#: ../../index.rst:2979
+msgid "InvalidParamError"
+msgstr ""
+
+#: mipac.errors.errors.InvalidParamError:1 of
+msgid "リクエストパラメータに誤りがあります。"
+msgstr ""
+
+#: ../../index.rst:2988
+msgid "InvalidRegexpError"
+msgstr ""
+
+#: mipac.errors.errors.InvalidRegexpError:1 of
+msgid "正規表現が不正です。"
+msgstr ""
+
+#: ../../index.rst:2997
+msgid "InvalidUrlError"
+msgstr ""
+
+#: ../../index.rst:3006
+msgid "IsOwnerError"
+msgstr ""
+
+#: ../../index.rst:3015
+msgid "LtlDisabledError"
+msgstr ""
+
+#: mipac.errors.errors.LtlDisabledError:1 of
+msgid "ローカルタイムラインが無効になっています。"
+msgstr ""
+
+#: ../../index.rst:3024
+msgid "MoSuchFileError"
+msgstr ""
+
+#: ../../index.rst:3033
+msgid "MuteeIsYourselfError"
+msgstr ""
+
+#: mipac.errors.errors.MuteeIsYourselfError:1 of
+msgid "自分に対してミュートを解除しようとしました。"
+msgstr ""
+
+#: ../../index.rst:3042
+msgid "NameAlreadyExistsError"
+msgstr ""
+
+#: mipac.errors.errors.NameAlreadyExistsError:1 of
+msgid "同じURLにページがすでに存在します。"
+msgstr ""
+
+#: ../../index.rst:3051
+msgid "NoFollowRequestError"
+msgstr ""
+
+#: mipac.errors.errors.NoFollowRequestError:1 of
+msgid "ユーザーからのフォローリクエストがありません。"
+msgstr ""
+
+#: ../../index.rst:3060
+msgid "NoFreeSpaceError"
+msgstr ""
+
+#: mipac.errors.errors.NoFreeSpaceError:1 of
+msgid "ドライブに空き容量がありません。"
+msgstr ""
+
+#: ../../index.rst:3069
+msgid "NoPollError"
+msgstr ""
+
+#: ../../index.rst:3078
+msgid "NoSuchAdError"
+msgstr ""
+
+#: ../../index.rst:3087
+msgid "NoSuchAnnouncementError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchAnnouncementError:1 of
+msgid "お知らせが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3096
+msgid "NoSuchAntennaError"
+msgstr ""
+
+#: ../../index.rst:3105
+msgid "NoSuchAppError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchAppError:1 of
+msgid "アプリが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3114
+msgid "NoSuchAvatarError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchAvatarError:1 of
+msgid "アバター画像のファイルが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3123
+msgid "NoSuchBannerError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchBannerError:1 of
+msgid "バナー画像のファイルが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3132
+msgid "NoSuchChannelError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchChannelError:1 of
+msgid "指定されたチャンネルが存在しないか、アクセスが許可されていません。"
+msgstr ""
+
+#: ../../index.rst:3141
+msgid "NoSuchClipError"
+msgstr ""
+
+#: ../../index.rst:3150
+msgid "NoSuchEmojiError"
+msgstr ""
+
+#: ../../index.rst:3159
+msgid "NoSuchFileError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchFileError:1 of
+msgid "ファイルが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3168
+msgid "NoSuchFolderError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchFolderError:1 of
+msgid "フォルダーが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3177
+msgid "NoSuchGroupError"
+msgstr ""
+
+#: ../../index.rst:3186
+msgid "NoSuchGroupMemberError"
+msgstr ""
+
+#: ../../index.rst:3195
+msgid "NoSuchHashtagError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchHashtagError:1 of
+msgid "ハッシュタグが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3204
+msgid "NoSuchInvitationError"
+msgstr ""
+
+#: ../../index.rst:3213
+msgid "NoSuchListError"
+msgstr ""
+
+#: ../../index.rst:3222
+msgid "NoSuchMessageError"
+msgstr ""
+
+#: ../../index.rst:3231
+msgid "NoSuchNoteError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchNoteError:1 of
+msgid "指定されたノートが存在しないか、アクセスが許可されていません。"
+msgstr ""
+
+#: ../../index.rst:3240
+msgid "NoSuchNotificationError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchNotificationError:1 of
+msgid "通知が存在しません。"
+msgstr ""
+
+#: ../../index.rst:3249
+msgid "NoSuchObjectError"
+msgstr ""
+
+#: ../../index.rst:3258
+msgid "NoSuchPageError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchPageError:1 of
+msgid "ページが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3267
+msgid "NoSuchParentFolderError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchParentFolderError:1 of
+msgid "親フォルダーが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3276
+msgid "NoSuchPostError"
+msgstr ""
+
+#: ../../index.rst:3285
+msgid "NoSuchRenoteTargetError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchRenoteTargetError:1 of
+msgid "Renoteに指定されたノートが存在しないか、アクセスが許可されていません。"
+msgstr ""
+
+#: ../../index.rst:3294
+msgid "NoSuchReplyTargetError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchReplyTargetError:1 of
+msgid "返信先に指定されたノートが存在しないか、アクセスが許可されていません。"
+msgstr ""
+
+#: ../../index.rst:3303
+msgid "NoSuchSessionError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchSessionError:1 of
+msgid "セッションが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3312
+msgid "NoSuchUserError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchUserError:1 of
+msgid "ユーザーが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3321
+msgid "NoSuchUserGroupError"
+msgstr ""
+
+#: ../../index.rst:3330
+msgid "NoSuchUserListError"
+msgstr ""
+
+#: ../../index.rst:3339
+msgid "NoSuchWebhookError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchWebhookError:1 of
+msgid "Webhookが存在しません。"
+msgstr ""
+
+#: ../../index.rst:3348
+msgid "NotBlockingError"
+msgstr ""
+
+#: mipac.errors.errors.NotBlockingError:1 of
+msgid "ブロックしていないユーザーです。"
+msgstr ""
+
+#: ../../index.rst:3357
+msgid "NotFavoritedError"
+msgstr ""
+
+#: mipac.errors.errors.NotFavoritedError:1 of
+msgid "お気に入り登録されていません。"
+msgstr ""
+
+#: ../../index.rst:3366
+msgid "NotFollowingError"
+msgstr ""
+
+#: mipac.errors.errors.NotFollowingError:1 of
+msgid "ユーザーにフォローされていません。"
+msgstr ""
+
+#: ../../index.rst:3375
+msgid "NotLikedError"
+msgstr ""
+
+#: mipac.errors.errors.NotLikedError:1 of
+msgid "いいねをつけていないページです。"
+msgstr ""
+
+#: ../../index.rst:3384
+msgid "NotMutingError"
+msgstr ""
+
+#: mipac.errors.errors.NotMutingError:1 of
+msgid "対象となるユーザーをそもそもミュートしていません。"
+msgstr ""
+
+#: ../../index.rst:3393
+msgid "NotReactedError"
+msgstr ""
+
+#: mipac.errors.errors.NotReactedError:1 of
+msgid "リアクションしていません。"
+msgstr ""
+
+#: ../../index.rst:3402
+msgid "PendingSessionError"
+msgstr ""
+
+#: ../../index.rst:3411
+msgid "PermissionDeniedError"
+msgstr ""
+
+#: mipac.errors.errors.PermissionDeniedError:1 of
+msgid "与えられたクレデンシャルには必要なパーミッションがありません。"
+msgstr ""
+
+#: ../../index.rst:3420
+msgid "PinLimitExceededError"
+msgstr ""
+
+#: mipac.errors.errors.PinLimitExceededError:1 of
+msgid "これ以上ピン留めできません。"
+msgstr ""
+
+#: ../../index.rst:3429
+msgid "RateLimitExceededError"
+msgstr ""
+
+#: mipac.errors.errors.RateLimitExceededError:1 of
+msgid "レートリミットによる制限のため一時的に利用できません。"
+msgstr ""
+
+#: ../../index.rst:3438
+msgid "ReactionsNotPublicError"
+msgstr ""
+
+#: mipac.errors.errors.ReactionsNotPublicError:1 of
+msgid "リアクションが公開されていません。"
+msgstr ""
+
+#: ../../index.rst:3447
+msgid "RecipientIsYourselfError"
+msgstr ""
+
+#: ../../index.rst:3456
+msgid "StlDisabledError"
+msgstr ""
+
+#: mipac.errors.errors.StlDisabledError:1 of
+msgid "ソーシャルタイムラインが無効になっています。"
+msgstr ""
+
+#: ../../index.rst:3465
+msgid "YouAreOwnerError"
+msgstr ""
+
+#: ../../index.rst:3474
+msgid "YouHaveBeenBlockedError"
+msgstr ""
+
+#: mipac.errors.errors.YouHaveBeenBlockedError:1 of
+msgid "ブロックされているユーザーのノートにリアクションは行えません。"
+msgstr ""
+
+#: ../../index.rst:3483
+msgid "YourAccountSuspendedError"
+msgstr ""
+
+#: mipac.errors.errors.YourAccountSuspendedError:1 of
+msgid "アカウントが凍結されているため利用できません。"
+msgstr ""
+
+#: ../../index.rst:3492
+msgid "YourPageError"
+msgstr ""
+
+#: mipac.errors.errors.YourPageError:1 of
+msgid "自身のページにいいねをつけようとしました。"
+msgstr ""
+
+#: ../../index.rst:3501
+msgid "YourPostError"
+msgstr ""
+
+#: ../../index.rst:3508
+msgid "__OTHER"
+msgstr ""
+
+#: ../../index.rst:3511
+msgid "Client"
+msgstr ""
+
+#: ../../index.rst:3520
+msgid "CacheConfig"
+msgstr ""
+
+#: ../../index.rst:3529
+msgid "CacheConfigData"
+msgstr ""
+
+#: ../../index.rst:3538
+msgid "Config"
+msgstr ""
+
+#: ../../index.rst:3565
+msgid "ILimits"
+msgstr ""
+
+#: ../../index.rst:3574
+msgid "Limits"
+msgstr ""
+
+#: ../../index.rst:3583
+msgid "MiFile"
+msgstr ""
+
+#: ../../index.rst:3592
+msgid "json_or_text"
+msgstr ""
+
+#: ../../index.rst:3598
+msgid "HTTPClient"
+msgstr ""
+
+#: ../../index.rst:3607
+msgid "MisskeyClientWebSocketResponse"
+msgstr ""
+
+#: ../../index.rst:3616
+msgid "Route"
+msgstr ""
+
+#: ../../index.rst:3625
+msgid "AbstractAction"
+msgstr ""
+
+#: ../../index.rst:3634
+msgid "AbstractManager"
+msgstr ""
+
+#: ../../index.rst:3643
+msgid "AuthClient"
+msgstr ""
+
+#: mipac.utils.auth.AuthClient:1 of
+msgid "Tokenの取得を手助けするクラス"
+msgstr ""
+
+#: mipac.utils.auth.AuthClient.check_auth:1 of
+msgid "認証が完了するまで待機し、完了した場合はTokenを返します"
+msgstr ""
+
+#: mipac.utils.auth.AuthClient.check_auth:3 of
+msgid "Token"
+msgstr ""
+
+#: mipac.utils.auth.AuthClient.get_auth_url:1 of
+msgid "認証に使用するURLを取得します"
+msgstr ""
+
+#: mipac.utils.auth.AuthClient.get_auth_url:3 of
+msgid "認証に使用するURL"
+msgstr ""
+
+#: ../../index.rst:3652
+msgid "cache"
+msgstr ""
+
+#: ../../index.rst:3658
+msgid "get_cache_key"
+msgstr ""
+
+#: ../../index.rst:3664
+msgid "set_cache"
+msgstr ""
+
+#: ../../index.rst:3670
+msgid "bool_to_string"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:1 of
+msgid "boolを小文字にして文字列として返します"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:3 of
+msgid "変更したいbool値"
+msgstr ""
+
+#: mipac.utils.format.bool_to_string:6 of
+msgid "**true or false** -- 小文字になったbool文字列"
+msgstr ""
+
+#: ../../index.rst:3676
+msgid "convert_dict_keys_to_camel"
+msgstr ""
+
+#: ../../index.rst:3682
+msgid "remove_dict_empty"
+msgstr ""
+
+#: mipac.utils.format.remove_dict_empty:1
+#: mipac.utils.format.remove_dict_missing:1
+#: mipac.utils.format.remove_list_empty:1 of
+msgid "空のkeyを削除したいdict"
+msgstr ""
+
+#: mipac.utils.format.remove_dict_empty:3 of
+msgid "削除したくないkeyのリスト"
+msgstr ""
+
+#: mipac.utils.format.remove_dict_empty:6 of
+msgid "**_data** -- 空のkeyがなくなったdict"
+msgstr ""
+
+#: ../../index.rst:3688
+msgid "remove_dict_missing"
+msgstr ""
+
+#: mipac.utils.format.remove_dict_missing:4 of
+msgid "**_data** -- MISSINGのkeyがなくなったdict"
+msgstr ""
+
+#: ../../index.rst:3694
+msgid "remove_list_empty"
+msgstr ""
+
+#: mipac.utils.format.remove_list_empty:4 of
+msgid "空のkeyがなくなったdict"
+msgstr ""
+
+#: ../../index.rst:3700
+msgid "snake_to_camel"
+msgstr ""
+
+#: ../../index.rst:3706
+msgid "str_lower"
+msgstr ""
+
+#: ../../index.rst:3712
+msgid "str_to_datetime"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:1 of
+msgid "datetimeに変更したい文字列"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:3 of
+msgid "dataのフォーマット"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:6 of
+msgid "変換後のデータ"
+msgstr ""
+
+#: ../../index.rst:3718
+msgid "upper_to_lower"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:1 of
+msgid "小文字にしたいkeyがあるdict"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:3 of
+msgid "謎"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:5 of
+msgid "ネストされたdictのkeyも小文字にするか否か"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:7 of
+msgid "dictのkey名を特定の物に置き換える"
+msgstr ""
+
+#: mipac.utils.format.upper_to_lower:10 of
+msgid "**field** -- 小文字になった, key名が変更されたdict"
+msgstr ""
+
+#: ../../index.rst:3724
+msgid "setup_logging"
+msgstr ""
+
+#: ../../index.rst:3730
+msgid "Pagination"
+msgstr ""
+
+#: ../../index.rst:3739
+msgid "check_multi_arg"
+msgstr ""
+
+#: mipac.utils.util.check_multi_arg:1 of
+msgid "複数の値を受け取り値が存在するかをboolで返します"
+msgstr ""
+
+#: mipac.utils.util.check_multi_arg:3 of
+msgid "確認したい変数のリスト"
+msgstr ""
+
+#: mipac.utils.util.check_multi_arg:6 of
+msgid "存在する場合はTrue, 存在しない場合はFalse"
+msgstr ""
+
+#: ../../index.rst:3745
+msgid "credentials_required"
+msgstr ""
+
+#: ../../index.rst:3751
+msgid "deprecated"
+msgstr ""
+
+#: mipac.utils.util.deprecated:1 of
+msgid ""
+"This is a decorator which can be used to mark functions as deprecated. It"
+" will result in a warning being emitted when the function is used."
+msgstr ""
+
+#: ../../index.rst:3757
+msgid "Colors"
+msgstr ""
+
+#: ../../index.rst:3766
+msgid "DeprecatedClass"
+msgstr ""
+
+#: ../../index.rst:3775
+msgid "MiTime"
+msgstr ""
+
+#: ../../index.rst:3784
+msgid "Missing"
+msgstr ""
+

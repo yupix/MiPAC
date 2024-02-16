@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Literal, NotRequired, Optional, TypedDict, TypeVar
+from typing import Literal, NotRequired, TypedDict, TypeVar
 
 from mipac.types.drive import IFile
 from mipac.types.emoji import ICustomEmojiLite
@@ -45,19 +45,6 @@ class INoteUpdatedReaction(TypedDict):
     body: INoteUpdatedReactionBody
 
 
-class GeoPayload(TypedDict):
-    """
-    衛星情報
-    """
-
-    coordinates: Optional[list[Any]]
-    altitude: int | None
-    accuracy: int | None
-    altitude_accuracy: int | None
-    heading: int | None
-    speed: int | None
-
-
 class INoteChannel(TypedDict):
     """ノート内にあるチャンネルの情報
 
@@ -69,6 +56,7 @@ class INoteChannel(TypedDict):
     color: str
     is_sensitive: bool
     allow_renote_to_external: bool
+    user_id: str | None
 
 
 class INote(TypedDict):

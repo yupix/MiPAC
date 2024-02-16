@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.clip import Clip
 from mipac.models.note import Note
@@ -52,10 +51,10 @@ class ClientClipActions(AbstractAction):
         clip_id = self._clip_id or clip_id
 
         if clip_id is None:
-            raise ParameterError("clip_id is required")
+            raise ValueError("clip_id is required")
 
         if limit > 100:
-            raise ParameterError("limit must be less than 100")
+            raise ValueError("limit must be less than 100")
 
         if get_all:
             limit = 100
@@ -92,7 +91,7 @@ class ClientClipActions(AbstractAction):
         clip_id = self._clip_id or clip_id
 
         if clip_id is None:
-            raise ParameterError("clip_id is required")
+            raise ValueError("clip_id is required")
 
         body = {"clipId": clip_id, "noteId": note_id}
         result: bool = await self._session.request(
@@ -118,7 +117,7 @@ class ClientClipActions(AbstractAction):
         clip_id = self._clip_id or clip_id
 
         if clip_id is None:
-            raise ParameterError("clip_id is required")
+            raise ValueError("clip_id is required")
 
         body = {"clipId": clip_id, "noteId": note_id}
         result: bool = await self._session.request(
@@ -142,7 +141,7 @@ class ClientClipActions(AbstractAction):
         clip_id = self._clip_id or clip_id
 
         if clip_id is None:
-            raise ParameterError("clip_id is required")
+            raise ValueError("clip_id is required")
 
         body = {"clipId": clip_id}
         result: bool = await self._session.request(
@@ -179,7 +178,7 @@ class ClientClipActions(AbstractAction):
         clip_id = self._clip_id or clip_id
 
         if clip_id is None:
-            raise ParameterError("clip_id is required")
+            raise ValueError("clip_id is required")
 
         body = {"clipId": clip_id, "name": name, "isPublic": is_public, "description": description}
         result: IClip = await self._session.request(

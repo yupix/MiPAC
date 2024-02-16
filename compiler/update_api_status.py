@@ -5,6 +5,8 @@ import sys
 from type import OpenAPI
 from typing import Any, Literal, TypedDict
 
+import tqdm
+
 sys.path.append("../")
 
 from mipac.utils.util import COLORS  # noqa: E402
@@ -51,7 +53,7 @@ with open('./datas/endpoints.json', mode='r', encoding='utf-8') as f:
     _endpoints: IData = copy.deepcopy(endpoints)
 
 # パスに関する情報を更新する
-for path in api['paths']:
+for path in tqdm.tqdm(api['paths']):
     old_data = endpoints["endpoints"]['support'].get(path, None)
     current_request_body_hash = get_sha256_hash(api['paths'][path]['post'].get('requestBody', {}))
     current_response_body_hash = get_sha256_hash(api['paths'][path]['post'].get('responses', {}))
@@ -66,9 +68,10 @@ for path in api['paths']:
         # 既存のデータから削除することで残りはremovedにする
         del _endpoints["endpoints"]['support'][path]
 
-        # ハッシュが変更されている場合はneedToWorkにする、ハッシュの設定前にやらないとハッシュが変更されてるか分からない
-        if current_request_body_hash != old_data['request_body_hash'] or current_response_body_hash != old_data['response_body_hash']:
-            endpoints["endpoints"]['support'][path]['status'] = "needToWork"
+        if endpoints["endpoints"]['support'][path]['status'] == "supported":
+            # ハッシュが変更されている場合はneedToWorkにする、ハッシュの設定前にやらないとハッシュが変更されてるか分からない
+            if current_request_body_hash != old_data['request_body_hash'] or current_response_body_hash != old_data['response_body_hash']:
+                endpoints["endpoints"]['support'][path]['status'] = "needToWork"
 
         # ハッシュが変更されているかどうかを確認する
         if current_request_body_hash != old_data['request_body_hash']:
@@ -81,20 +84,20 @@ for path in api['paths']:
 
 
 # Misskeyから削除されたエンドポイントをremovedに移動する
-for path in _endpoints["endpoints"]['support']:
+for path in tqdm.tqdm(_endpoints["endpoints"]['support']):
     endpoints["endpoints"]['removed'][path] = _endpoints["endpoints"]['support'][path]
     # Misskeyから削除された場合はRemovedFromMisskeyにする
     endpoints["endpoints"]['removed'][path]['status'] = "RemovedFromMisskey"
     del endpoints["endpoints"]['support'][path]
 
 # MiPACからの削除が完了した場合はremovedから削除する
-for path in _endpoints["endpoints"]['removed']:
+for path in tqdm.tqdm(_endpoints["endpoints"]['removed']):
     if endpoints["endpoints"]['removed'][path]['status'] == "Removed":
         del endpoints["endpoints"]['removed'][path]
         continue
 
 # スキーマに関する情報を更新する
-for schema in api['components']['schemas']:
+for schema in tqdm.tqdm(api['components']['schemas']):
     try:
         del _endpoints["schemas"][schema]
     except KeyError:
@@ -114,7 +117,9 @@ for schema in api['components']['schemas']:
         if current_hash != old_data['hash']:
             print(f"{COLORS.green}[CHANGED: SCHEMA] changed schema hash {COLORS.reset} {schema} {COLORS.reset}")
             endpoints['schemas'][schema]['hash'] = current_hash
-            endpoints['schemas'][schema]['status'] = "needToWork"
+
+            if endpoints['schemas'][schema]['status'] == "supported":  # サポート済みの場合のみステータスを変更する
+                endpoints['schemas'][schema]['status'] = "needToWork"
 
 
 with open('./datas/endpoints.json', mode='w', encoding='utf-8') as f:

@@ -1,6 +1,8 @@
 from __future__ import annotations
+import io
+import os
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, AsyncGenerator, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -9,6 +11,7 @@ from mipac.models.note import Note
 from mipac.types.drive import IDriveSort, IFile
 from mipac.types.note import INote
 from mipac.utils.format import bool_to_string, remove_dict_missing
+from mipac.utils.pagination import Pagination
 from mipac.utils.util import MISSING, credentials_required
 
 if TYPE_CHECKING:
@@ -52,7 +55,10 @@ class ClientFileActions(AbstractAction):
 
         file_id = file_id or self.__file_ids
 
-        data = {
+        if file_id is None:
+            raise ValueError("file_id is required")
+
+        body = {
             "sinceId": since_id,
             "untilId": until_id,
             "limit": limit,
@@ -60,24 +66,55 @@ class ClientFileActions(AbstractAction):
         }
 
         raw_notes: list[INote] = await self._session.request(
-            Route("POST", "/api/drive/files/attached-notes"), json=data, auth=True
+            Route("POST", "/api/drive/files/attached-notes"), json=body, auth=True
         )
         return [Note(raw_note, client=self._client) for raw_note in raw_notes]
 
+    async def get_all_attached_notes(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        *,
+        file_id: str | None = None,
+    ) -> AsyncGenerator[Note, None]:
+        file_id = file_id or self.__file_ids
+
+        if file_id is None:
+            raise ValueError("file_id is required")
+
+        body = {
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "fileId": file_id,
+        }
+
+        pagination = Pagination[INote](
+            self._session,
+            Route("POST", "/api/drive/files/attached-notes"),
+            json=body,
+            auth=True,
+        )
+
+        while pagination.is_final is False:
+            for raw_note in await pagination.next():
+                yield Note(raw_note, client=self._client)
+
     async def delete(self, *, file_id: str | None = None) -> bool:
-        """Delete a file
+        """指定したファイルIDのファイルを削除します
 
         Endpoint: `/api/drive/files/delete`
 
         Parameters
         ----------
         file_id: str | None
-            The id of the file to delete, defaults to None
+            対象のファイルID, default=None
 
         Returns
         -------
         bool
-            Whether the file was deleted or not
+            削除に成功したかどうか
         """
 
         file_id = file_id or self.__file_ids
@@ -97,30 +134,29 @@ class ClientFileActions(AbstractAction):
         comment: str | None = MISSING,
         *,
         file_id: str | None = None,
-    ):
-        """Update a file
+    ) -> File:
+        """指定したIDのファイル情報を更新します
 
         Endpoint: `/api/drive/files/update`
 
         Parameters
         ----------
         folder_id: str | None
-            The id of the folder to update the file to, defaults to MISSING
+            ファイルを置くフォルダID, default=MISSING
         name: str | None
-            The name of the file, defaults to MISSING
+            ファイル名, default=MISSING
         is_sensitive: bool
-            Whether the file is sensitive or not, defaults to MISSING
+            ファイルがセンシティブかどうか, default=MISSING
         comment: str | None
-            The comment of the file, defaults to MISSING
+            ファイルのコメント, default=MISSING
         file_id: str | None
-            The id of the file to update, defaults to None
+            対象のファイルID, default=None
 
         Returns
         -------
         File
-            The updated file
+            更新後のファイル
         """
-
         file_id = file_id or self.__file_ids
 
         data = remove_dict_missing(
@@ -192,6 +228,33 @@ class FileActions(ClientFileActions):
         )
         return [File(raw_file, client=self._client) for raw_file in raw_files]
 
+    async def get_all_files(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        folder_id: str | None = None,
+        type: str | None = None,
+        sort: IDriveSort | None = None,
+    ) -> AsyncGenerator[File, None]:
+        body = {
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "folderId": folder_id,
+            "type": type,
+            "sort": sort,
+        }
+
+        pagination = Pagination[IFile](
+            self._session, Route("POST", "/api/drive/files"), json=body, auth=True
+        )
+
+        while pagination.is_final is False:
+            for raw_file in await pagination.next():
+                yield File(raw_file, client=self._client)
+
+    @override
     async def get_attached_notes(
         self,
         file_id: str,
@@ -199,46 +262,73 @@ class FileActions(ClientFileActions):
         until_id: str | None = None,
         limit: int = 10,
     ) -> list[Note]:
-        """Get the attached notes of a file
-
-        Endpoint: `/api/drive/files/attached-notes`
+        """指定したファイルを含む全てのノートを取得します
 
         Parameters
         ----------
         file_id: str
-            The id of the file to get notes from
+            ノートを取得するファイルID
         since_id: str | None
-            The id of the note to start from, defaults to None
+            指定するとそのノートIDよりも後のノートを返します, default=None
         until_id: str | None
-            The id of the note to end at, defaults to None
+            指定するとそのノートIDよりも前のノートを返します, default=None
         limit: int
-            The amount of notes to get, defaults to 10
+            一度に取得するノート数, default=10
 
         Returns
         -------
         list[Note]
-            The attached notes of the file
+            取得したノート
         """
 
         return await super().get_attached_notes(
             since_id=since_id, until_id=until_id, limit=limit, file_id=file_id
         )
 
+    @override
+    async def get_all_attached_notes(
+        self,
+        file_id: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+    ) -> AsyncGenerator[Note, None]:
+        """指定したファイルを含む全てのノートを取得します
+
+        Parameters
+        ----------
+        file_id: str
+            ノートを取得するファイルID
+        since_id: str | None
+            指定するとそのノートIDよりも後のノートを返します, default=None
+        until_id: str | None
+            指定するとそのノートIDよりも前のノートを返します, default=None
+        limit: int
+            一度に取得するノート数, default=10
+
+        Returns
+        -------
+        AsyncGenerator[Note, None]
+            取得したノート
+        """
+        async for i in super().get_all_attached_notes(since_id, until_id, limit, file_id=file_id):
+            yield i
+
     @credentials_required
     async def check_existence(self, md5: str) -> bool:
-        """Check if a file exists in the drive
+        """指定したmd5のファイルが既に存在するか確認します
 
         Endpoint: `/api/drive/files/check-existence`
 
         Parameters
         ----------
         md5: str
-            The md5 of the file to check
+            確認したいmd5
 
         Returns
         -------
         bool
-            Whether the file exists or not
+            存在するかしないか
         """
 
         data = {"md5": md5}
@@ -250,7 +340,7 @@ class FileActions(ClientFileActions):
 
     async def create(
         self,
-        file,
+        file: str | bytes | os.PathLike[Any] | io.BufferedIOBase,
         folder_id: str | None = None,
         name: str | None = None,
         comment: str | None = None,
@@ -263,26 +353,34 @@ class FileActions(ClientFileActions):
 
         Parameters
         ----------
-        file: str
-            The file to upload
+        file: str | bytes | os.PathLike[Any] | io.BufferedIOBase
+            アップロードするファイル
         folder_id: str | None
-            The id of the folder to upload the file to, defaults to None
+            アップロード先のフォルダID, default=None
         name: str | None
-            The name of the file, defaults to None
+            ファイルの名前, default=None
         comment: str | None
-            The comment of the file, defaults to None
+            ファイルのコメント, default=None
         is_sensitive: bool
-            Whether the file is sensitive or not, defaults to False
+            ファイルがセンシティブかどうか, default=False
         force: bool
-            Whether to force upload the file or not, defaults to False
+            ファイルが既に存在する場合でも強制的にアップロードするかどうか, default=False
+
 
         Returns
         -------
         File
-            The uploaded file
+            アップロードしたファイル
         """
 
-        file_byte = open(file, "rb") if file else None
+        if isinstance(file, io.IOBase):
+            if (file.seekable() and file.readable()) is False:  # 書き込み/読み込みができるか確認
+                raise ValueError(f"File buffer {file!r} must be seekable and readable")
+            file_byte = file
+        elif isinstance(file, bytes):
+            file_byte = io.BytesIO(file)
+        else:
+            file_byte = open(file, "rb")
 
         data = {
             "folderId": folder_id,
@@ -301,37 +399,37 @@ class FileActions(ClientFileActions):
         return File(res, client=self._client)
 
     async def delete(self, file_id: str) -> bool:
-        """Delete a file
+        """指定したファイルIDのファイルを削除します
 
         Endpoint: `/api/drive/files/delete`
 
         Parameters
         ----------
         file_id: str
-            The id of the file to delete
+            対象のファイルID
 
         Returns
         -------
         bool
-            Whether the file was deleted or not
+            削除に成功したかどうか
         """
 
         return await super().delete(file_id=file_id)
 
     async def find_by_hash(self, md5: str) -> list[File]:
-        """Find a file by its hash
+        """指定したハッシュのファイルを検索します
 
         Endpoint: `/api/drive/files/find-by-hash`
 
         Parameters
         ----------
         md5: str
-            The md5 of the file to find
+            検索したいファイルのハッシュ
 
         Returns
         -------
         list[File]
-            The found files
+            見つかったファイル
         """
 
         data = {"md5": md5}
@@ -342,16 +440,16 @@ class FileActions(ClientFileActions):
         return [File(raw_file, client=self._client) for raw_file in raw_files]
 
     async def find(self, name: str, folder_id: str | None = None) -> list[File]:
-        """Find a file by its name
+        """指定した名前のファイルを検索します
 
         Endpoint: `/api/drive/files/find`
 
         Parameters
         ----------
         name: str
-            The name of the file to find
+            検索したいファイルの名前
         folder_id: str | None
-            The id of the folder to find the file in, defaults to None
+            ファイルを検索するフォルダID, default=None
 
         Returns
         -------
@@ -367,21 +465,21 @@ class FileActions(ClientFileActions):
         return [File(raw_file, client=self._client) for raw_file in res]
 
     async def show(self, file_id: str, url: str | None = None) -> File:
-        """Show a file
+        """指定したIDのファイル情報を取得します
 
         Endpoint: `/api/drive/files/show`
 
         Parameters
         ----------
         file_id: str
-            The id of the file to show
+            対象のファイルID
         url: str | None
-            The url of the file to show, defaults to None
+            取得したいファイルのURL, default=None
 
         Returns
         -------
         File
-            The shown file
+            取得したファイル
         """
 
         data = {"fileId": file_id, "url": url}
@@ -394,32 +492,32 @@ class FileActions(ClientFileActions):
     async def update(
         self,
         file_id: str,
-        folder_id: str | None = None,
-        name: str | None = None,
-        is_sensitive: bool = False,
-        comment: str | None = None,
+        folder_id: str | None = MISSING,
+        name: str | None = MISSING,
+        is_sensitive: bool = MISSING,
+        comment: str | None = MISSING,
     ) -> File:
-        """Update a file
+        """指定したIDのファイル情報を更新します
 
         Endpoint: `/api/drive/files/update`
 
         Parameters
         ----------
         file_id: str
-            The id of the file to update
+            対象のファイルID
         folder_id: str | None
-            The id of the folder to update the file to, defaults to None
+            ファイルを置くフォルダID, default=MISSING
         name: str | None
-            The name of the file, defaults to None
+            ファイル名, default=MISSING
         is_sensitive: bool
-            Whether the file is sensitive or not, defaults to False
+            ファイルがセンシティブかどうか, default=MISSING
         comment: str | None
-            The comment of the file, defaults to None
+            ファイルのコメント, default=MISSING
 
         Returns
         -------
         File
-            The updated file
+            更新後のファイル
         """
 
         return await super().update(
@@ -446,22 +544,22 @@ class FileActions(ClientFileActions):
         Parameters
         ----------
         url: str
-            The url of the file to upload
+            アップロードするファイルのURL
         folder_id: str | None
-            The id of the folder to upload the file to, defaults to None
+            アップロード先のフォルダID, default=None
         is_sensitive: bool
-            Whether the file is sensitive or not, defaults to False
+            ファイルがセンシティブかどうか, default=False
         comment: str | None
-            The comment of the file, defaults to None
+            ファイルのコメント, default=None
         marker: str | None
-            The marker of the file, defaults to None
+            ストリーミング通信でアップロード完了後に区別するためのマーカー, default=None
         force: bool
-            Whether to force upload the file or not, defaults to False
+            同様のファイルが既に存在する場合でも強制的にアップロードするかどうか, default=False
 
         Returns
         -------
         bool
-            Whether the file was uploaded or not
+            アップロードのリクエストに成功したかどうか
         """
 
         data = {

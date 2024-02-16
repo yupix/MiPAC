@@ -131,27 +131,97 @@ class ClientChannelActions(AbstractAction):
 
     @credentials_required
     async def unfollow(self, *, channel_id: str | None = None) -> bool:
-        """Unfollow a channel
+        """指定したIDのチャンネルのフォローを解除します
 
         Endpoint: `/api/channels/unfollow`
 
         Parameters
         ----------
-        channel_id : str, optional
-            ID of the channel, by default None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         bool
-            Whether the channel is unfollowed
+            フォロー解除に成功したかどうか
         """
         channel_id = channel_id or self._channel_id
+
+        if channel_id is None:
+            raise ValueError("channel_id is required")
+
         data = {"channelId": channel_id}
 
         res: bool = await self._session.request(
             Route("POST", "/api/channels/unfollow"), json=data, auth=True, lower=True
         )
         return res
+
+    async def update(
+        self,
+        name: str | None = MISSING,
+        description: str | None = MISSING,
+        banner_id: str | None = MISSING,
+        is_archived: bool | None = MISSING,
+        pinned_note_ids: list[str] | None = MISSING,
+        color: str | None = MISSING,
+        is_sensitive: bool | None = MISSING,
+        allow_renote_to_external: bool | None = MISSING,
+        *,
+        channel_id: str | None = None,
+    ) -> Channel:
+        """チャンネルの情報を更新します
+
+        Endpoint: `/api/channels/update`
+
+        Parameters
+        ----------
+        name : str | None
+            チャンネル名, default=MISSING
+        description : str | None
+            チャンネルの説明, default=MISSING
+        banner_id : str | None
+            バナー画像のID, default=MISSING
+        is_archived : bool | None
+            チャンネルがアーカイブされているかどうか, default=MISSING
+        pinned_note_ids : list[str] | None
+            ピン留めするノートのIDリスト, default=MISSING
+        color : str | None
+            チャンネルの色, default=MISSING
+        is_sensitive : bool | None
+            チャンネルがセンシティブかどうか, default=MISSING
+        allow_renote_to_external : bool | None
+            外部へのリノートを許可するかどうか, default=MISSING
+        channel_id : str | None
+            対象のチャンネルID, default=None
+
+        Returns
+        -------
+        Channel
+            更新後のチャンネル
+        """
+        channel_id = channel_id or self._channel_id
+
+        if channel_id is None:
+            raise ValueError("channel_id is required")
+
+        data = remove_dict_missing(
+            {
+                "channelId": channel_id,
+                "name": name,
+                "description": description,
+                "bannerId": banner_id,
+                "isArchived": is_archived,
+                "pinnedNoteIds": pinned_note_ids,
+                "color": color,
+                "isSensitive": is_sensitive,
+                "allowRenoteToExternal": allow_renote_to_external,
+            }
+        )
+        raw_channel: IChannel = await self._session.request(
+            Route("POST", "/api/channels/update"), json=data, auth=True, remove_none=False
+        )
+        return Channel(raw_channel=raw_channel, client=self._client)
 
     async def timeline(
         self,
@@ -163,29 +233,35 @@ class ClientChannelActions(AbstractAction):
         *,
         channel_id: str | None = None,
     ) -> list[Note]:
-        """Get the timeline of a channel
+        """チャンネルのタイムラインを取得します
 
         Endpoint: `/api/channels/timeline`
 
         Parameters
         ----------
-        limit : int, optional
-            Limit, by default 10
-        since_id : str, optional
-            Since ID, by default None
-        until_id : str, optional
-            Until ID, by default None
-        since_date : int, optional
-            Since date, by default None
-        until_date : int, optional
-            Until date, by default None
+        limit : int
+            一度に取得する件数, default=10
+        since_id : str | None
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : int | None
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : int | None
+            指定した日付のノートより前のノートを取得します, default=None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         list[Note]
-            List of notes
+            取得したノートのリスト
         """
         channel_id = channel_id or self._channel_id
+
+        if channel_id is None:
+            raise ValueError("channel_id is required")
+
         data = {
             "channelId": channel_id,
             "limit": limit,
@@ -209,25 +285,35 @@ class ClientChannelActions(AbstractAction):
         *,
         channel_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
-        """Get all notes in the timeline of a channel
+        """チャンネルのタイムラインを全て取得します
+
+        Endpoint: `/api/channels/timeline`
 
         Parameters
         ----------
-        since_id : str, optional
-            Since ID, by default None
-        until_id : str, optional
-            Until ID, by default None
-        since_date : int, optional
-            Since date, by default None
-        until_date : int, optional
-            Until date, by default None
+        limit : int
+            一度に取得する件数, default=10
+        since_id : str | None
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : int | None
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : int | None
+            指定した日付のノートより前のノートを取得します, default=None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         AsyncGenerator[Note, None]
-            Async generator of notes
+            取得したノートのリスト
         """
         channel_id = channel_id or self._channel_id
+
+        if channel_id is None:
+            raise ValueError("channel_id is required")
+
         data = {
             "channelId": channel_id,
             "sinceId": since_id,
@@ -244,78 +330,21 @@ class ClientChannelActions(AbstractAction):
             for raw_note in raw_notes:
                 yield Note(raw_note=raw_note, client=self._client)
 
-    async def update(
-        self,
-        name: str | None = MISSING,
-        description: str | None = MISSING,
-        banner_id: str | None = MISSING,
-        is_archived: bool | None = MISSING,
-        pinned_note_ids: list[str] | None = MISSING,
-        color: str | None = MISSING,
-        is_sensitive: bool | None = MISSING,
-        allow_renote_to_external: bool | None = MISSING,
-        *,
-        channel_id: str | None = None,
-    ) -> Channel:
-        """Update a channel
-
-        Endpoint: `/api/channels/update`
-
-        Parameters
-        ----------
-        name : str, optional
-            Name of the channel, by default MISSING
-        description : str, optional
-            Description of the channel, by default MISSING
-        banner_id : str, optional
-            Banner ID of the channel, by default MISSING
-        is_archived : bool, optional
-            Whether the channel is archived, by default MISSING
-        pinned_note_ids : list[str], optional
-            Pinned note IDs, by default MISSING
-        color : str, optional
-            Color of the channel, by default MISSING
-        is_sensitive : bool, optional
-            Whether the channel is sensitive, by default MISSING
-        allow_renote_to_external : bool, optional
-            Whether the channel allows renote to external, by default MISSING
-        channel_id : str, optional
-            ID of the channel, by default None
-        """
-        channel_id = channel_id or self._channel_id
-        data = remove_dict_missing(
-            {
-                "channelId": channel_id,
-                "name": name,
-                "description": description,
-                "bannerId": banner_id,
-                "isArchived": is_archived,
-                "pinnedNoteIds": pinned_note_ids,
-                "color": color,
-                "isSensitive": is_sensitive,
-                "allowRenoteToExternal": allow_renote_to_external,
-            }
-        )
-        raw_channel: IChannel = await self._session.request(
-            Route("POST", "/api/channels/update"), json=data, auth=True, remove_none=False
-        )
-        return Channel(raw_channel=raw_channel, client=self._client)
-
     @credentials_required
     async def favorite(self, *, channel_id: str | None = None) -> bool:
-        """Favorite a channel
+        """指定したIDのチャンネルをお気に入りにします
 
         Endpoint: `/api/channels/favorite`
 
         Parameters
         ----------
-        channel_id : str, optional
-            ID of the channel, by default None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         bool
-            Whether the channel is favorited
+            お気に入りに追加できたかどうか
         """
         channel_id = channel_id or self._channel_id
         data = {"channelId": channel_id}
@@ -327,21 +356,25 @@ class ClientChannelActions(AbstractAction):
 
     @credentials_required
     async def unfavorite(self, *, channel_id: str | None = None) -> bool:
-        """Unfavorite a channel
+        """指定したIDのチャンネルをお気に入りから外します
 
         Endpoint: `/api/channels/unfavorite`
 
         Parameters
         ----------
-        channel_id : str, optional
-            ID of the channel, by default None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         bool
-            Whether the channel is unfavorited
+            お気に入りから外せたかどうか
         """
         channel_id = channel_id or self._channel_id
+
+        if channel_id is None:
+            raise ValueError("channel_id is required")
+
         data = {"channelId": channel_id}
 
         res: bool = await self._session.request(
@@ -436,44 +469,46 @@ class ChannelActions(ClientChannelActions):
     async def create(
         self,
         name: str,
-        color: str,
-        description: str | None = None,
-        banner_id: str | None = None,
-        is_sensitive: bool | None = None,
-        allow_renote_to_external: bool | None = None,
+        color: str = MISSING,
+        description: str = MISSING,
+        banner_id: str = MISSING,
+        is_sensitive: bool = MISSING,
+        allow_renote_to_external: bool = MISSING,
     ) -> Channel:
-        """Create a channel
+        """チャンネルを作成します
 
         Endpoint: `/api/channels/create`
 
         Parameters
         ----------
         name : str
-            Name of the channel
+            チャンネル名
         color : str
-            Color of the channel
-        description : str, optional
-            Description of the channel, by default None
-        banner_id : str, optional
-            Banner ID of the channel, by default None
-        is_sensitive : bool, optional
-            Whether the channel is sensitive, by default None
+            チャンネルの色, default=MISSING
+        description : str
+            チャンネルの説明, default=MISSING
+        banner_id : str
+            チャンネルのバナーに使用するファイルのID, default=MISSING
+        is_sensitive : bool
+            チャンネルがセンシティブかどうか, default=MISSING
         allow_renote_to_external : bool, optional
-            Whether the channel allows renote to external, by default None
+            外部へのリノートを許可するかどうか, default=MISSING
 
         Returns
         -------
         Channel
-            Created channel
+            作成したチャンネル
         """
-        data = {
-            "name": name,
-            "color": color,
-            "description": description,
-            "banner_id": banner_id,
-            "is_sensitive": is_sensitive,
-            "allow_renote_to_external": allow_renote_to_external,
-        }
+        data = remove_dict_missing(
+            {
+                "name": name,
+                "color": color,
+                "description": description,
+                "banner_id": banner_id,
+                "is_sensitive": is_sensitive,
+                "allow_renote_to_external": allow_renote_to_external,
+            }
+        )
         raw_channel: IChannel = await self._session.request(
             Route("POST", "/api/channels/create"),
             json=data,
@@ -484,14 +519,14 @@ class ChannelActions(ClientChannelActions):
         return Channel(raw_channel=raw_channel, client=self._client)
 
     async def featured(self) -> list[Channel]:
-        """Get featured channels
+        """トレンドのチャンネルを取得します
 
         Endpoint: `/api/channels/featured`
 
         Returns
         -------
         list[Channel]
-            List of featured channels
+            取得したチャンネルのリスト
         """
 
         raw_channels: list[IChannel] = await self._session.request(
@@ -504,19 +539,19 @@ class ChannelActions(ClientChannelActions):
     @credentials_required
     @override
     async def follow(self, channel_id: str) -> bool:
-        """Follow a channel
+        """指定したIDのチャンネルをフォローします
 
         Endpoint: `/api/channels/follow`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
+            対象のチャンネルID
 
         Returns
         -------
         bool
-            Whether the channel is followed
+            フォローに成功したかどうか
         """
         return await super().follow(channel_id=channel_id)
 
@@ -524,23 +559,23 @@ class ChannelActions(ClientChannelActions):
     async def followed(
         self, since_id: str | None = None, until_id: str | None = None, limit: int = 5
     ) -> list[Channel]:
-        """Get followed channels
+        """フォロー中のチャンネル一覧を取得します
 
         Endpoint: `/api/channels/followed`
 
         Parameters
         ----------
-        since_id : str, optional
-            Since ID, by default None
-        until_id : str, optional
-            Until ID, by default None
+        since_id : str | None
+            指定したチャンネルIDよりも後のチャンネルを取得します, default=None
+        until_id : str | None
+            指定したチャンネルIDよりも前のチャンネルを取得します, default=None
         limit : int, optional
-            Limit, by default 5
+            一度に取得するチャンネルの数, default=5
 
         Returns
         -------
         list[Channel]
-            List of followed channels
+            取得したフォロー中のチャンネルのリスト
         """
         data = {"sinceId": since_id, "untilId": until_id, "limit": limit}
 
@@ -551,27 +586,59 @@ class ChannelActions(ClientChannelActions):
             Channel(raw_channel=raw_channel, client=self._client) for raw_channel in raw_channels
         ]
 
+    async def get_all_followed(
+        self, since_id: str | None = None, until_id: str | None = None, limit: int = 5
+    ) -> AsyncGenerator[Channel, None]:
+        """フォロー中のすべてのチャンネルを取得します
+
+        Endpoint: `/api/channels/followed`
+
+        Parameters
+        ----------
+        since_id : str | None
+            指定したチャンネルIDよりも後のチャンネルを取得します, default=None
+        until_id : str | None
+            指定したチャンネルIDよりも前のチャンネルを取得します, default=None
+        limit : int, optional
+            一度に取得するチャンネルの数, default=5
+
+        Returns
+        -------
+        AsyncGenerator[Channel, None]
+            取得したフォロー中のチャンネル
+        """
+
+        body = {"sinceId": since_id, "untilId": until_id, "limit": limit}
+
+        pagination = Pagination[IChannel](
+            self._session, Route("POST", "/api/channels/followed"), json=body, auth=True
+        )
+
+        while pagination.is_final is False:
+            for raw_channel in await pagination.next():
+                yield Channel(raw_channel=raw_channel, client=self._client)
+
     @credentials_required
     async def owned(
         self, since_id: str | None = None, until_id: str | None = None, limit: int = 5
     ) -> list[Channel]:
-        """Get owned channels
+        """自分が所有しているチャンネル一覧を取得します
 
         Endpoint: `/api/channels/owned`
 
         Parameters
         ----------
         since_id : str, optional
-            Since ID, by default None
+            指定したチャンネルIDよりも後のチャンネルを取得します, default=None
         until_id : str, optional
-            Until ID, by default None
+            指定したチャンネルIDよりも前のチャンネルを取得します, default=None
         limit : int, optional
-            Limit, by default 5
+            一度に取得するチャンネルの数, default=5
 
         Returns
         -------
         list[Channel]
-            List of owned channels
+            取得した自分が所有しているチャンネルのリスト
         """
         data = {"sinceId": since_id, "untilId": until_id, "limit": limit}
 
@@ -582,20 +649,52 @@ class ChannelActions(ClientChannelActions):
             Channel(raw_channel=raw_channel, client=self._client) for raw_channel in raw_channels
         ]
 
+    async def get_all_owned(
+        self, since_id: str | None = None, until_id: str | None = None, limit: int = 5
+    ) -> AsyncGenerator[Channel, None]:
+        """自分が所有しているすべてのチャンネルを取得します
+
+        Endpoint: `/api/channels/owned`
+
+        Parameters
+        ----------
+        since_id : str, optional
+            指定したチャンネルIDよりも後のチャンネルを取得します, default=None
+        until_id : str, optional
+            指定したチャンネルIDよりも前のチャンネルを取得します, default=None
+        limit : int, optional
+            一度に取得するチャンネルの数, default=5
+
+        Returns
+        -------
+        AsyncGenerator[Channel, None]
+            取得した自分が所有しているチャンネル
+        """
+
+        body = {"sinceId": since_id, "untilId": until_id, "limit": limit}
+
+        pagination = Pagination[IChannel](
+            self._session, Route("POST", "/api/channels/owned"), json=body, auth=True
+        )
+
+        while pagination.is_final is False:
+            for raw_channel in await pagination.next():
+                yield Channel(raw_channel=raw_channel, client=self._client)
+
     async def show(self, channel_id: str) -> Channel:
-        """Show a channel
+        """指定したIDのチャンネルを取得します
 
         Endpoint: `/api/channels/show`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
+            対象のチャンネルID
 
         Returns
         -------
         Channel
-            Channel
+            取得したチャンネル
         """
         raw_channel: IChannel = await self._session.request(
             Route("POST", "/api/channels/show"), auth=True, json={"channelId": channel_id}
@@ -605,21 +704,65 @@ class ChannelActions(ClientChannelActions):
     @credentials_required
     @override
     async def unfollow(self, channel_id: str) -> bool:
-        """Unfollow a channel
+        """指定したIDのチャンネルのフォローを解除します
 
         Endpoint: `/api/channels/unfollow`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
+            対象のチャンネルID
 
         Returns
         -------
         bool
-            Whether the channel is unfollowed
+            フォロー解除に成功したかどうか
         """
         return await super().unfollow(channel_id=channel_id)
+
+    @override
+    async def timeline(
+        self,
+        channel_id: str,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: int | None = None,
+        until_date: int | None = None,
+    ) -> list[Note]:
+        """チャンネルのタイムラインを取得します
+
+        Endpoint: `/api/channels/timeline`
+
+        Parameters
+        ----------
+        channel_id : str
+            対象のチャンネルID
+        limit : int
+            一度に取得する件数, default=10
+        since_id : str | None
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : int | None
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : int | None
+            指定した日付のノートより前のノートを取得します, default=None
+
+        Returns
+        -------
+        list[Note]
+            取得したノートのリスト
+        """
+
+        return await super().timeline(
+            channel_id=channel_id,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+            since_date=since_date,
+            until_date=until_date,
+        )
 
     @override
     async def get_all_timeline(
@@ -630,25 +773,29 @@ class ChannelActions(ClientChannelActions):
         since_date: int | None = None,
         until_date: int | None = None,
     ) -> AsyncGenerator[Note, None]:
-        """Get all notes in the timeline of a channel
+        """チャンネルのタイムラインを全て取得します
+
+        Endpoint: `/api/channels/timeline`
 
         Parameters
         ----------
-        channel_id : str
-            ID of the channel
-        since_id : str, optional
-            Since ID, by default None
-        until_id : str, optional
-            Until ID, by default None
-        since_date : int, optional
-            Since date, by default None
-        until_date : int, optional
-            Until date, by default None
+        limit : int
+            一度に取得する件数, default=10
+        since_id : str | None
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : int | None
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : int | None
+            指定した日付のノートより前のノートを取得します, default=None
+        channel_id : str | None
+            対象のチャンネルID, default=None
 
         Returns
         -------
         AsyncGenerator[Note, None]
-            Async generator of notes
+            取得したノートのリスト
         """
         async for i in super().get_all_timeline(
             since_id=since_id,
@@ -673,38 +820,39 @@ class ChannelActions(ClientChannelActions):
         is_sensitive: bool | None = MISSING,
         allow_renote_to_external: bool | None = MISSING,
     ) -> Channel:
-        """Update a channel
+        """チャンネルの情報を更新します
 
         Endpoint: `/api/channels/update`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
-        name : str, optional
-            Name of the channel, by default MISSING
-        description : str, optional
-            Description of the channel, by default MISSING
-        banner_id : str, optional
-            Banner ID of the channel, by default MISSING
-        is_archived : bool, optional
-            Whether the channel is archived, by default MISSING
-        pinned_note_ids : list[str], optional
-            Pinned note IDs, by default MISSING
-        color : str, optional
-            Color of the channel, by default MISSING
-        is_sensitive : bool, optional
-            Whether the channel is sensitive, by default MISSING
-        allow_renote_to_external : bool, optional
-            Whether the channel allows renote to external, by default MISSING
+            対象のチャンネルID
+        name : str | None
+            チャンネル名, default=MISSING
+        description : str | None
+            チャンネルの説明, default=MISSING
+        banner_id : str | None
+            バナー画像のID, default=MISSING
+        is_archived : bool | None
+            チャンネルがアーカイブされているかどうか, default=MISSING
+        pinned_note_ids : list[str] | None
+            ピン留めするノートのIDリスト, default=MISSING
+        color : str | None
+            チャンネルの色, default=MISSING
+        is_sensitive : bool | None
+            チャンネルがセンシティブかどうか, default=MISSING
+        allow_renote_to_external : bool | None
+            外部へのリノートを許可するかどうか, default=MISSING
 
         Returns
         -------
         Channel
-            Updated channel
+            更新後のチャンネル
         """
 
         return await super().update(
+            channel_id=channel_id,
             name=name,
             description=description,
             banner_id=banner_id,
@@ -713,57 +861,56 @@ class ChannelActions(ClientChannelActions):
             color=color,
             is_sensitive=is_sensitive,
             allow_renote_to_external=allow_renote_to_external,
-            channel_id=channel_id,
         )
 
     @credentials_required
     @override
     async def favorite(self, channel_id: str) -> bool:
-        """Favorite a channel
+        """指定したIDのチャンネルをお気に入りにします
 
         Endpoint: `/api/channels/favorite`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
+            対象のチャンネルID
 
         Returns
         -------
         bool
-            Whether the channel is favorited
+            お気に入りに追加できたかどうか
         """
         return await super().favorite(channel_id=channel_id)
 
     @credentials_required
     @override
     async def unfavorite(self, channel_id: str) -> bool:
-        """Unfavorite a channel
+        """指定したIDのチャンネルをお気に入りから外します
 
         Endpoint: `/api/channels/unfavorite`
 
         Parameters
         ----------
         channel_id : str
-            ID of the channel
+            対象のチャンネルID
 
         Returns
         -------
         bool
-            Whether the channel is unfavorited
+            お気に入りから外せたかどうか
         """
         return await super().unfavorite(channel_id=channel_id)
 
     @credentials_required
     async def my_favorites(self) -> list[Channel]:
-        """Get my favorite channels
+        """自分がお気に入りにしているチャンネルを取得します
 
         Endpoint: `/api/channels/myFavorites`
 
         Returns
         -------
         list[Channel]
-            List of my favorite channels
+            取得したチャンネルのリスト
         """
         raw_channels: list[IChannel] = await self._session.request(
             Route("POST", "/api/channels/my-favorites"), auth=True, lower=True
@@ -781,27 +928,27 @@ class ChannelActions(ClientChannelActions):
         until_id: str | None = None,
         limit: int = 5,
     ) -> list[Channel]:
-        """Search channels
+        """チャンネルを検索します
 
         Endpoint: `/api/channels/search`
 
         Parameters
         ----------
         query : str
-            Query
-        type : Literal["nameAndDescription","nameOnly"], optional
-            Type of the search, by default "nameAndDescription"
-        since_id : str, optional
-            Since ID, by default None
+            検索するキーワード
+        type : Literal["nameAndDescription","nameOnly"]
+            検索に用いる形式, default="nameAndDescription"
+        since_id : str | None
+            指定したIDのチャンネルより後のチャンネルを取得します, default=None
         until_id : str, optional
-            Until ID, by default None
+            指定したIDのチャンネルより前のチャンネルを取得します, default=None
         limit : int, optional
-            Limit, by default 5
+            一度に取得するチャンネルの数, default=5
 
         Returns
         -------
         list[Channel]
-            List of channels
+            見つかったチャンネルのリスト
         """
 
         data = {

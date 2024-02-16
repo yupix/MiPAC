@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from datetime import datetime
 from typing import TYPE_CHECKING, Literal
-from mipac.models.lite.ad import PartialAd
 
+from mipac.models.lite.ad import PartialAd
 from mipac.types.ads import IAd
 from mipac.utils.format import str_to_datetime
 

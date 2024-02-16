@@ -195,6 +195,17 @@ class NoteChannel:
         """
         return self.__raw_note_channel["allow_renote_to_external"]
 
+    @property
+    def user_id(self) -> str | None:
+        """note channelUserId
+
+        Returns
+        -------
+        str | None
+            note channelUserId
+        """
+        return self.__raw_note_channel["user_id"]
+
 
 class Note:
     """Noteモデル
