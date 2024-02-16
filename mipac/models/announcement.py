@@ -22,13 +22,13 @@ class Announcement:
 
     @property
     def created_at(self) -> datetime:
-        return str_to_datetime(self.__announcement["createdAt"])
+        return str_to_datetime(self.__announcement["created_at"])
 
     @property
     def updated_at(self) -> datetime | None:
         return (
-            str_to_datetime(self.__announcement["updatedAt"])
-            if self.__announcement["updatedAt"]
+            str_to_datetime(self.__announcement["updated_at"])
+            if self.__announcement["updated_at"]
             else None
         )
 
@@ -42,7 +42,7 @@ class Announcement:
 
     @property
     def image_url(self) -> str | None:
-        return self.__announcement["imageUrl"]
+        return self.__announcement["image_url"]
 
     @property
     def icon(self) -> str | None:
@@ -54,7 +54,7 @@ class Announcement:
 
     @property
     def need_confirmation_to_read(self) -> bool:
-        return self.__announcement["needConfirmationToRead"]
+        return self.__announcement["need_confirmation_to_read"]
 
     @property
     def silence(self) -> bool:
@@ -62,11 +62,11 @@ class Announcement:
 
     @property
     def for_you(self) -> bool:
-        return self.__announcement["forYou"]
+        return self.__announcement["for_you"]
 
     @property
     def is_read(self) -> bool | None:
-        return self.__announcement["isRead"]
+        return self.__announcement.get("is_read")
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, Announcement) and self.id == __value.id
