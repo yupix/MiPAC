@@ -3,36 +3,36 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Literal
 
 from mipac.abstract.manager import AbstractManager
-from mipac.actions.admins.ad import AdminAdvertisingActions, AdminAdvertisingModelActions
+from mipac.actions.admins.ad import AdminAdActions, ClientAdminAdActions
 from mipac.http import HTTPClient, Route
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
 
-__all__ = ("AdminAdvertisingManager", "AdminAdvertisingModelManager")
+__all__ = ("AdminAdManager", "ClientAdminAdManager")
 
 
-class AdminAdvertisingModelManager(AbstractManager):
-    def __init__(self, ad_id: str | None = None, *, session: HTTPClient, client: ClientManager):
-        self.__ad_id: str | None = ad_id
+class ClientAdminAdManager(AbstractManager):
+    def __init__(self, ad_id: str, *, session: HTTPClient, client: ClientManager):
+        self.__ad_id: str = ad_id
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
 
     @property
-    def action(self) -> AdminAdvertisingModelActions:
-        return AdminAdvertisingModelActions(
+    def action(self) -> ClientAdminAdActions:
+        return ClientAdminAdActions(
             ad_id=self.__ad_id, session=self.__session, client=self.__client
         )
 
 
-class AdminAdvertisingManager(AbstractManager):
+class AdminAdManager(AbstractManager):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
 
     @property
-    def action(self) -> AdminAdvertisingActions:
-        return AdminAdvertisingActions(session=self.__session, client=self.__client)
+    def action(self) -> AdminAdActions:
+        return AdminAdActions(session=self.__session, client=self.__client)
 
     async def create(
         self,
