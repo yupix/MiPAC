@@ -8,20 +8,25 @@ class LiteInstance:
         self.__instance: IInstanceLite = instance
 
     @property
-    def name(self) -> str:
+    def name(self) -> str | None:
         return self.__instance["name"]
 
-    def software_name(self) -> str:
+    @property
+    def software_name(self) -> str | None:
         return self.__instance["software_name"]
 
-    def software_version(self) -> str:
+    @property
+    def software_version(self) -> str | None:
         return self.__instance["software_version"]
 
-    def icon_url(self) -> str:
+    @property
+    def icon_url(self) -> str | None:
         return self.__instance["icon_url"]
 
-    def favicon_url(self) -> str:
+    @property
+    def favicon_url(self) -> str | None:
         return self.__instance["favicon_url"]
 
-    def theme_color(self) -> str:
+    @property
+    def theme_color(self) -> str | None:
         return self.__instance["theme_color"]
