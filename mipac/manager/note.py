@@ -43,7 +43,7 @@ class NoteManager(AbstractManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
         self.reaction: ReactionManager = ReactionManager(session=session, client=client)
-        self.favorite = FavoriteManager(note_id=note_id, session=session, client=client)
+        self.favorite = FavoriteManager(session=session, client=client)
         self.poll: PollManager = PollManager(note_id=note_id, session=session, client=client)
         self.__action: NoteActions = NoteActions(
             note_id=self.__note_id,
