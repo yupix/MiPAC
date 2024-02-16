@@ -54,10 +54,10 @@ class FollowActions(AbstractAction):
         user_id = user_id or self.__user_id
 
         data = {"userId": user_id}
-        res = await self.__session.request(
+        raw_user: IPartialUser = await self.__session.request(
             Route("POST", "/api/following/delete"), json=data, auth=True
         )
-        return PartialUser(res, client=self.__client)
+        return PartialUser(raw_user=raw_user, client=self.__client)
 
     async def invalidate(self, user_id: str | None = None) -> PartialUser:
         """

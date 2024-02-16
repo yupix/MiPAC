@@ -1287,13 +1287,13 @@ class NoteActions(ClientNoteActions):
         Note
             取得したノートID
         """
-        res = await self._session.request(
+        raw_note: INote = await self._session.request(
             Route("POST", "/api/notes/show"),
             json={"noteId": note_id},
             auth=True,
             lower=True,
         )
-        return Note(res, client=self._client)
+        return Note(raw_note=raw_note, client=self._client)
 
     @cache(group="get_note", override=True)
     async def fetch(self, note_id: str) -> Note:
@@ -1313,13 +1313,13 @@ class NoteActions(ClientNoteActions):
         Note
             note
         """
-        res = await self._session.request(
+        raw_note: INote = await self._session.request(
             Route("POST", "/api/notes/show"),
             json={"noteId": note_id},
             auth=True,
             lower=True,
         )
-        return Note(res, client=self._client)
+        return Note(raw_note=raw_note, client=self._client)
 
     async def gets(
         self,

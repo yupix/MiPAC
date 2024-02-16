@@ -100,67 +100,67 @@ class RolePolicies:
 
     @property
     def antenna_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("antenna_limit"))
+        return RolePolicyValue(self.__role_policies_data["antenna_limit"])
 
     @property
     def gtl_available(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("gtl_available"))
+        return RolePolicyValue(self.__role_policies_data["gtl_available"])
 
     @property
     def ltl_available(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("ltl_available"))
+        return RolePolicyValue(self.__role_policies_data["ltl_available"])
 
     @property
     def can_public_note(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("can_public_note"))
+        return RolePolicyValue(self.__role_policies_data["can_public_note"])
 
     @property
     def drive_capacity_mb(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("drive_capacity_mb"))
+        return RolePolicyValue(self.__role_policies_data["drive_capacity_mb"])
 
     @property
     def can_invite(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("can_invite"))
+        return RolePolicyValue(self.__role_policies_data["can_invite"])
 
     @property
     def can_manage_custom_emojis(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("can_manage_custom_emojis"))
+        return RolePolicyValue(self.__role_policies_data["can_manage_custom_emojis"])
 
     @property
     def can_hide_ads(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("can_hide_ads"))
+        return RolePolicyValue(self.__role_policies_data["can_hide_ads"])
 
     @property
     def pin_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("pin_limit"))
+        return RolePolicyValue(self.__role_policies_data["pin_limit"])
 
     @property
     def word_mute_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("word_mute_limit"))
+        return RolePolicyValue(self.__role_policies_data["word_mute_limit"])
 
     @property
     def webhook_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("webhook_limit"))
+        return RolePolicyValue(self.__role_policies_data["webhook_limit"])
 
     @property
     def clip_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("clip_limit"))
+        return RolePolicyValue(self.__role_policies_data["clip_limit"])
 
     @property
     def note_each_clips_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("note_each_clips_limit"))
+        return RolePolicyValue(self.__role_policies_data["note_each_clips_limit"])
 
     @property
     def user_list_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("user_list_limit"))
+        return RolePolicyValue(self.__role_policies_data["user_list_limit"])
 
     @property
     def user_each_user_lists_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("user_each_user_lists_limit"))
+        return RolePolicyValue(self.__role_policies_data["user_each_user_lists_limit"])
 
     @property
     def rate_limit_factor(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get("rate_limit_factor"))
+        return RolePolicyValue(self.__role_policies_data["rate_limit_factor"])
 
 
 class Role(PartialRole[IRole]):
