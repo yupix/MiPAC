@@ -2,6 +2,43 @@
 
 ## [Unreleased]
 
+### Breaking changes 💔
+
+
+#### 以下のクラスを削除しました
+
+この変更はMisskeyのSchemaに似せた形で再実装するにあたり、MisskeyのSchemaよりも細かくモデルを作成していたため、そういったものを削除した形となります。
+
+- `UserDetailed` -> `UserDetailedNotMe | MeDetailed`
+- `MeDetailedModerator` -> `MeDetailed`
+- `UserDetailedModerator` -> `UserDetailedNotMe | MeDetailed`
+- `UserDetailedNotLogined` -> `UserDetailedNotMe | MeDetailed`
+- `AdminAnnouncementClientActions` -> `ClientAdminAnnouncementActions`
+- `AnnouncementSystem` -> `AnnoucementDetailed`
+
+#### クラス名の変更
+
+- `AdminAdvertisingModelActions` -> `ClientAdminAdActions`
+- `AdminAdvertisingActions` -> `AdminAdActions`
+- `AdminAdvertisingModelManager` -> `ClientAdminAdManager`
+- `AdminAdvertisingManager` -> `AdminAdManager`
+
+#### 引数に関する変更
+
+`*Actions` 系にて `*_id` のような引数はすべてキーワード引数に変更されました。これはリスコフの置換法則に則るうえで必要な作業であり、今後のコード変更に対する耐性を上げるためでもあります。ご迷惑をお掛けしますがご理解のほどよろしくお願いいたします。
+
+#### 戻り値の変更
+
+- `Announcement.action -> ClientAdminAnnouncementActions` -> `Announcement.action -> ClientAdminAnnouncementManager`
+- `AnnouncementDetailed.action -> ClientAdminAnnouncementActions` -> `AnnouncementDetailed.action -> ClientAdminAnnouncementManager`
+
+#### `get_all` 引数を廃止
+
+今まで多くの配列を返すメソッドをジェネレータとして作成していましたが、少ししかデータは要らないのに `async for` を書くのは大変ということで `get_all` 引数を廃止します。
+
+これにより今まで `get_all` 引数があった ジェネレータは全て通常の list等を返すメソッドに変更されます。
+今まで通りのジェネレータとしての機能が必要な場合は `get_all_*` というメソッドが新しく増えているためそちらをご利用ください。
+
 ## [0.5.99] 2023-12-03
 
 このリリースは最新の Misskey 向けに最適化された `develop` ブランチの物となります。インスタンスで `v11` や `v12` を利用している場合は更新しないことをおすすめします。

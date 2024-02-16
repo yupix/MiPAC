@@ -10,18 +10,12 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class ClientFavoriteActions(AbstractAction):
-    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
-        self.__note_id: str | None = note_id
+class SharedFavoriteActions(AbstractAction):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
-    async def create(self, *, note_id: str | None = None) -> bool:
-        note_id = note_id or self.__note_id
-
-        if note_id is None:
-            raise ValueError("note_id is required")
-
+    async def create(self, *, note_id: str) -> bool:
         data = {"noteId": note_id}
         return bool(
             await self._session.request(
@@ -32,15 +26,10 @@ class ClientFavoriteActions(AbstractAction):
         )
 
     @deprecated
-    async def add(self, *, note_id: str | None = None) -> bool:
+    async def add(self, *, note_id: str) -> bool:
         return await self.create(note_id=note_id)
 
-    async def delete(self, *, note_id: str | None = None) -> bool:
-        note_id = note_id or self.__note_id
-
-        if note_id is None:
-            raise ValueError("note_id is required")
-
+    async def delete(self, *, note_id: str) -> bool:
         data = {"noteId": note_id}
         return bool(
             await self._session.request(
@@ -51,26 +40,42 @@ class ClientFavoriteActions(AbstractAction):
         )
 
     @deprecated
-    async def remove(self, *, note_id: str | None = None) -> bool:
+    async def remove(self, *, note_id: str) -> bool:
         return await self.delete(note_id=note_id)
 
 
-class FavoriteActions(ClientFavoriteActions):
-    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
-        super().__init__(note_id, session=session, client=client)
+class ClientFavoriteActions(SharedFavoriteActions):
+    def __init__(self, note_id: str, *, session: HTTPClient, client: ClientManager):
+        super().__init__(session=session, client=client)
+        self.__note_id: str = note_id
 
     @override
-    async def create(self, note_id: str) -> bool:
+    async def create(self, *, note_id: str | None = None) -> bool:
+        note_id = note_id or self.__note_id
+
+        return await super().create(note_id=note_id)
+
+    @deprecated
+    @override
+    async def add(self, *, note_id: str | None = None) -> bool:
+        note_id = note_id or self.__note_id
+
         return await super().create(note_id=note_id)
 
     @override
-    async def add(self, note_id: str) -> bool:
-        return await super().add(note_id=note_id)
+    async def delete(self, *, note_id: str | None = None) -> bool:
+        note_id = note_id or self.__note_id
 
-    @override
-    async def delete(self, note_id: str) -> bool:
         return await super().delete(note_id=note_id)
 
+    @deprecated
     @override
-    async def remove(self, note_id: str) -> bool:
-        return await super().remove(note_id=note_id)
+    async def remove(self, *, note_id: str | None = None) -> bool:
+        note_id = note_id or self.__note_id
+
+        return await super().delete(note_id=note_id)
+
+
+class FavoriteActions(SharedFavoriteActions):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
+        super().__init__(session=session, client=client)

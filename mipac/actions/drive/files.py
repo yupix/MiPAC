@@ -18,12 +18,152 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class ClientFileActions(AbstractAction):
-    def __init__(self, file_ids: str | None = None, *, session: HTTPClient, client: ClientManager):
-        self.__file_ids: str | None = file_ids
+class SharedFileActions(AbstractAction):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
+    async def get_attached_notes(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        *,
+        file_id: str,
+    ) -> list[Note]:
+        """Get the attached notes of a file
+
+        Endpoint: `/api/drive/files/attached-notes`
+
+        Parameters
+        ----------
+        since_id: str | None
+            The id of the note to start from, defaults to None
+        until_id: str | None
+            The id of the note to end at, defaults to None
+        limit: int
+            The amount of notes to get, defaults to 10
+        file_id: str | None
+            The id of the file to get notes from, defaults to None
+
+        Returns
+        -------
+        list[Note]
+            The attached notes of the file
+        """
+        body = {
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "fileId": file_id,
+        }
+
+        raw_notes: list[INote] = await self._session.request(
+            Route("POST", "/api/drive/files/attached-notes"), json=body, auth=True
+        )
+        return [Note(raw_note, client=self._client) for raw_note in raw_notes]
+
+    async def get_all_attached_notes(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        *,
+        file_id: str,
+    ) -> AsyncGenerator[Note, None]:
+        body = {
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "fileId": file_id,
+        }
+
+        pagination = Pagination[INote](
+            self._session,
+            Route("POST", "/api/drive/files/attached-notes"),
+            json=body,
+            auth=True,
+        )
+
+        while pagination.is_final is False:
+            for raw_note in await pagination.next():
+                yield Note(raw_note, client=self._client)
+
+    async def delete(self, *, file_id: str) -> bool:
+        """指定したファイルIDのファイルを削除します
+
+        Endpoint: `/api/drive/files/delete`
+
+        Parameters
+        ----------
+        file_id: str | None
+            対象のファイルID, default=None
+
+        Returns
+        -------
+        bool
+            削除に成功したかどうか
+        """
+        data = {"fileId": file_id}
+
+        res: bool = await self._session.request(
+            Route("POST", "/api/drive/files/delete"), json=data, auth=True
+        )
+        return res
+
+    async def update(
+        self,
+        folder_id: str | None = MISSING,
+        name: str | None = MISSING,
+        is_sensitive: bool = MISSING,
+        comment: str | None = MISSING,
+        *,
+        file_id: str,
+    ) -> File:
+        """指定したIDのファイル情報を更新します
+
+        Endpoint: `/api/drive/files/update`
+
+        Parameters
+        ----------
+        folder_id: str | None
+            ファイルを置くフォルダID, default=MISSING
+        name: str | None
+            ファイル名, default=MISSING
+        is_sensitive: bool
+            ファイルがセンシティブかどうか, default=MISSING
+        comment: str | None
+            ファイルのコメント, default=MISSING
+        file_id: str | None
+            対象のファイルID, default=None
+
+        Returns
+        -------
+        File
+            更新後のファイル
+        """
+        data = remove_dict_missing(
+            {
+                "fileId": file_id,
+                "folderId": folder_id,
+                "name": name,
+                "isSensitive": is_sensitive,
+                "comment": comment,
+            }
+        )
+
+        res: IFile = await self._session.request(
+            Route("POST", "/api/drive/files/update"), json=data, auth=True
+        )
+        return File(res, client=self._client)
+
+
+class ClientFileActions(SharedFileActions):
+    def __init__(self, file_ids: str, *, session: HTTPClient, client: ClientManager):
+        super().__init__(session=session, client=client)
+        self.__file_ids: str = file_ids
+
+    @override
     async def get_attached_notes(
         self,
         since_id: str | None = None,
@@ -55,21 +195,11 @@ class ClientFileActions(AbstractAction):
 
         file_id = file_id or self.__file_ids
 
-        if file_id is None:
-            raise ValueError("file_id is required")
-
-        body = {
-            "sinceId": since_id,
-            "untilId": until_id,
-            "limit": limit,
-            "fileId": file_id,
-        }
-
-        raw_notes: list[INote] = await self._session.request(
-            Route("POST", "/api/drive/files/attached-notes"), json=body, auth=True
+        return await super().get_attached_notes(
+            since_id=since_id, until_id=until_id, limit=limit, file_id=file_id
         )
-        return [Note(raw_note, client=self._client) for raw_note in raw_notes]
 
+    @override
     async def get_all_attached_notes(
         self,
         since_id: str | None = None,
@@ -80,27 +210,12 @@ class ClientFileActions(AbstractAction):
     ) -> AsyncGenerator[Note, None]:
         file_id = file_id or self.__file_ids
 
-        if file_id is None:
-            raise ValueError("file_id is required")
+        async for note in super().get_all_attached_notes(
+            since_id=since_id, until_id=until_id, limit=limit, file_id=file_id
+        ):
+            yield note
 
-        body = {
-            "sinceId": since_id,
-            "untilId": until_id,
-            "limit": limit,
-            "fileId": file_id,
-        }
-
-        pagination = Pagination[INote](
-            self._session,
-            Route("POST", "/api/drive/files/attached-notes"),
-            json=body,
-            auth=True,
-        )
-
-        while pagination.is_final is False:
-            for raw_note in await pagination.next():
-                yield Note(raw_note, client=self._client)
-
+    @override
     async def delete(self, *, file_id: str | None = None) -> bool:
         """指定したファイルIDのファイルを削除します
 
@@ -119,13 +234,9 @@ class ClientFileActions(AbstractAction):
 
         file_id = file_id or self.__file_ids
 
-        data = {"fileId": file_id}
+        return await super().delete(file_id=file_id)
 
-        res: bool = await self._session.request(
-            Route("POST", "/api/drive/files/delete"), json=data, auth=True
-        )
-        return res
-
+    @override
     async def update(
         self,
         folder_id: str | None = MISSING,
@@ -159,23 +270,16 @@ class ClientFileActions(AbstractAction):
         """
         file_id = file_id or self.__file_ids
 
-        data = remove_dict_missing(
-            {
-                "fileId": file_id,
-                "folderId": folder_id,
-                "name": name,
-                "isSensitive": is_sensitive,
-                "comment": comment,
-            }
+        return await super().update(
+            folder_id=folder_id,
+            name=name,
+            is_sensitive=is_sensitive,
+            comment=comment,
+            file_id=file_id,
         )
 
-        res: IFile = await self._session.request(
-            Route("POST", "/api/drive/files/update"), json=data, auth=True
-        )
-        return File(res, client=self._client)
 
-
-class FileActions(ClientFileActions):
+class FileActions(SharedFileActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
 
@@ -253,66 +357,6 @@ class FileActions(ClientFileActions):
         while pagination.is_final is False:
             for raw_file in await pagination.next():
                 yield File(raw_file, client=self._client)
-
-    @override
-    async def get_attached_notes(
-        self,
-        file_id: str,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        limit: int = 10,
-    ) -> list[Note]:
-        """指定したファイルを含む全てのノートを取得します
-
-        Parameters
-        ----------
-        file_id: str
-            ノートを取得するファイルID
-        since_id: str | None
-            指定するとそのノートIDよりも後のノートを返します, default=None
-        until_id: str | None
-            指定するとそのノートIDよりも前のノートを返します, default=None
-        limit: int
-            一度に取得するノート数, default=10
-
-        Returns
-        -------
-        list[Note]
-            取得したノート
-        """
-
-        return await super().get_attached_notes(
-            since_id=since_id, until_id=until_id, limit=limit, file_id=file_id
-        )
-
-    @override
-    async def get_all_attached_notes(
-        self,
-        file_id: str,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        limit: int = 10,
-    ) -> AsyncGenerator[Note, None]:
-        """指定したファイルを含む全てのノートを取得します
-
-        Parameters
-        ----------
-        file_id: str
-            ノートを取得するファイルID
-        since_id: str | None
-            指定するとそのノートIDよりも後のノートを返します, default=None
-        until_id: str | None
-            指定するとそのノートIDよりも前のノートを返します, default=None
-        limit: int
-            一度に取得するノート数, default=10
-
-        Returns
-        -------
-        AsyncGenerator[Note, None]
-            取得したノート
-        """
-        async for i in super().get_all_attached_notes(since_id, until_id, limit, file_id=file_id):
-            yield i
 
     @credentials_required
     async def check_existence(self, md5: str) -> bool:
@@ -398,24 +442,6 @@ class FileActions(ClientFileActions):
         )
         return File(res, client=self._client)
 
-    async def delete(self, file_id: str) -> bool:
-        """指定したファイルIDのファイルを削除します
-
-        Endpoint: `/api/drive/files/delete`
-
-        Parameters
-        ----------
-        file_id: str
-            対象のファイルID
-
-        Returns
-        -------
-        bool
-            削除に成功したかどうか
-        """
-
-        return await super().delete(file_id=file_id)
-
     async def find_by_hash(self, md5: str) -> list[File]:
         """指定したハッシュのファイルを検索します
 
@@ -488,45 +514,6 @@ class FileActions(ClientFileActions):
             Route("POST", "/api/drive/files/show"), json=data, auth=True
         )
         return File(res, client=self._client)
-
-    async def update(
-        self,
-        file_id: str,
-        folder_id: str | None = MISSING,
-        name: str | None = MISSING,
-        is_sensitive: bool = MISSING,
-        comment: str | None = MISSING,
-    ) -> File:
-        """指定したIDのファイル情報を更新します
-
-        Endpoint: `/api/drive/files/update`
-
-        Parameters
-        ----------
-        file_id: str
-            対象のファイルID
-        folder_id: str | None
-            ファイルを置くフォルダID, default=MISSING
-        name: str | None
-            ファイル名, default=MISSING
-        is_sensitive: bool
-            ファイルがセンシティブかどうか, default=MISSING
-        comment: str | None
-            ファイルのコメント, default=MISSING
-
-        Returns
-        -------
-        File
-            更新後のファイル
-        """
-
-        return await super().update(
-            file_id=file_id,
-            folder_id=folder_id,
-            name=name,
-            is_sensitive=is_sensitive,
-            comment=comment,
-        )
 
     async def upload_from_url(
         self,
