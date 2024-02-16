@@ -13,18 +13,17 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class ClientPollActions(AbstractAction):
-    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
-        self._note_id: str | None = note_id
+class SharedPollActions(AbstractAction):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
-    async def vote(self, choice: int, *, note_id: str | None = None) -> bool:
-        note_id = note_id or self._note_id
-
-        if note_id is None:
-            raise ValueError("note_id is required")
-
+    async def vote(
+        self,
+        choice: int,
+        *,
+        note_id: str,
+    ) -> bool:
         data = {"noteId": note_id, "choice": choice}
         res: bool = await self._session.request(
             Route("POST", "/api/notes/polls/vote"), auth=True, json=data
@@ -32,9 +31,21 @@ class ClientPollActions(AbstractAction):
         return res
 
 
-class PollActions(ClientPollActions):
-    def __init__(self, note_id: str | None = None, *, session: HTTPClient, client: ClientManager):
-        super().__init__(note_id=note_id, session=session, client=client)
+class ClientPollActions(SharedPollActions):
+    def __init__(self, note_id: str, *, session: HTTPClient, client: ClientManager):
+        super().__init__(session=session, client=client)
+        self._note_id: str = note_id
+
+    @override
+    async def vote(self, choice: int, *, note_id: str | None = None) -> bool:
+        note_id = note_id or self._note_id
+
+        return await super().vote(choice=choice, note_id=note_id)
+
+
+class PollActions(SharedPollActions):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
+        super().__init__(session=session, client=client)
 
     @credentials_required
     async def recommendation(self, limit: int = 100, offset: int = 0):
@@ -68,7 +79,3 @@ class PollActions(ClientPollActions):
                 yield Note(note, client=self._client)
             if pagination.is_final:
                 break
-
-    @override
-    async def vote(self, note_id: str, choice: int) -> bool:
-        return await super().vote(note_id=note_id, choice=choice)
