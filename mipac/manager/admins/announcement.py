@@ -12,6 +12,7 @@ from mipac.http import HTTPClient
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
+
 class ClientAdminAnnouncementManager(AbstractManager):
     def __init__(self, announce_id: str, *, session: HTTPClient, client: ClientManager):
         self.__announce_id: str = announce_id
@@ -24,11 +25,14 @@ class ClientAdminAnnouncementManager(AbstractManager):
             announce_id=self.__announce_id, session=self.__session, client=self.__client
         )
 
+
 class AdminAnnouncementManager(AbstractManager):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
-        self.__action: AdminAnnouncementActions = AdminAnnouncementActions(session=self.__session, client=self.__client)
+        self.__action: AdminAnnouncementActions = AdminAnnouncementActions(
+            session=self.__session, client=self.__client
+        )
 
     @property
     def action(self) -> AdminAnnouncementActions:
