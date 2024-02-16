@@ -67,4 +67,4 @@ class Clip:
 
     @property
     def api(self) -> ClientClipManager:
-        return self.__client.clip._get_client_clip_instance(clip_id=self.id)
+        return self.__client._get_client_clip_instance(clip_id=self.id)

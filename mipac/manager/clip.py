@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.manager import AbstractManager
-from mipac.actions.clip import ClipActions
+from mipac.actions.clip import ClientClipActions, ClipActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 class ClientClipManager(AbstractManager):
     def __init__(
         self,
-        clip_id: str | None = None,
+        clip_id: str,
         *,
         session: HTTPClient,
         client: ClientManager,
@@ -23,8 +23,8 @@ class ClientClipManager(AbstractManager):
         self.__client = client
 
     @property
-    def action(self) -> ClipActions:
-        return ClipActions(
+    def action(self) -> ClientClipActions:
+        return ClientClipActions(
             clip_id=self.__clip_id,
             session=self.__session,
             client=self.__client,
@@ -39,6 +39,3 @@ class ClipManager(AbstractManager):
     @property
     def action(self) -> ClipActions:
         return ClipActions(session=self.__session, client=self.__client)
-
-    def _get_client_clip_instance(self, *, clip_id: str | None = None) -> ClientClipManager:
-        return ClientClipManager(clip_id=clip_id, session=self.__session, client=self.__client)
