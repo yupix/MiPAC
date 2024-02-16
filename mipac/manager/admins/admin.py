@@ -13,7 +13,6 @@ from mipac.manager.admins.announcement import (
 from mipac.manager.admins.drive import AdminDriveManager
 from mipac.manager.admins.emoji import AdminEmojiManager
 from mipac.manager.admins.invite import AdminInviteManager
-from mipac.manager.admins.moderator import AdminModeratorManager
 from mipac.manager.admins.roles import AdminRolesManager, AdminRolesModelManager
 from mipac.manager.admins.user import AdminUserManager
 
@@ -28,9 +27,6 @@ class AdminManager(AbstractManager):
         self.emoji: AdminEmojiManager = AdminEmojiManager(session=session, client=client)
         self.user: AdminUserManager = AdminUserManager(session=session, client=client)
         self.ad: AdminAdManager = AdminAdManager(session=session, client=client)
-        self.moderator: AdminModeratorManager = AdminModeratorManager(
-            session=session, client=client
-        )
         self.announcement: AdminAnnouncementManager = AdminAnnouncementManager(
             session=session, client=client
         )
