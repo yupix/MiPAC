@@ -2701,33 +2701,6 @@ Attributes</span><ul>
 <dd></dd></dl>
 
 </section>
-<section id="adminmoderatormanager">
-<h3>AdminModeratorManager<a class="headerlink" href="#adminmoderatormanager" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.manager.admins.moderator.AdminModeratorManager"><div class="py-attribute-table-column">
-<span>
-Attributes</span><ul>
-<li class="py-attribute-table-entry">
-<a class="reference internal" href="#mipac.manager.admins.moderator.AdminModeratorManager.action">action</a></li></ul>
-</div></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.manager.admins.moderator.AdminModeratorManager">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.admins.moderator.</span></span><span class="sig-name descname"><span class="pre">AdminModeratorManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.admins.moderator.AdminModeratorManager" title="Link to this definition">#</a></dt>
-<dd><dl class="py property">
-<dt class="sig sig-object py" id="mipac.manager.admins.moderator.AdminModeratorManager.action">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">action</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.actions.admins.moderator.AdminModeratorActions" title="mipac.actions.admins.moderator.AdminModeratorActions"><span class="pre">AdminModeratorActions</span></a></em><a class="headerlink" href="#mipac.manager.admins.moderator.AdminModeratorManager.action" title="Link to this definition">#</a></dt>
-<dd><p>Moderatorに関するアクション</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Moderatorに対するアクションを行うクラス</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.actions.admins.moderator.AdminModeratorActions" title="mipac.actions.admins.moderator.AdminModeratorActions">AdminModeratorActions</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
 <section id="admindrivemanager">
 <h3>AdminDriveManager<a class="headerlink" href="#admindrivemanager" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.manager.admins.drive.AdminDriveManager"></div><dl class="py class">
@@ -6668,56 +6641,6 @@ Endpoint: <cite>/api/admin/update-user-note</cite></p>
 </dd></dl>
 
 </section>
-<section id="adminmoderatoractions">
-<h3>AdminModeratorActions<a class="headerlink" href="#adminmoderatoractions" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.moderator.AdminModeratorActions"><div class="py-attribute-table-column">
-<span>
-Methods</span><ul>
-<li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.moderator.AdminModeratorActions.add">add</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.moderator.AdminModeratorActions.remove">remove</a></li></ul>
-</div></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.actions.admins.moderator.AdminModeratorActions">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.moderator.</span></span><span class="sig-name descname"><span class="pre">AdminModeratorActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.moderator.AdminModeratorActions" title="Link to this definition">#</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.moderator.AdminModeratorActions.add">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.moderator.AdminModeratorActions.add" title="Link to this definition">#</a></dt>
-<dd><p>Add a user as a moderator</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – ユーザーのID</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>成功したか否か</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.moderator.AdminModeratorActions.remove">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.moderator.AdminModeratorActions.remove" title="Link to this definition">#</a></dt>
-<dd><p>Unmoderate a user</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – ユーザーのID</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>成功したか否か</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
 <section id="admindriveactions">
 <h3>AdminDriveActions<a class="headerlink" href="#admindriveactions" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.actions.admins.drive.AdminDriveActions"><div class="py-attribute-table-column">
@@ -10638,13 +10561,6 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.manager.admins.admin.AdminManager"><code class="docutils literal notranslate"><span class="pre">AdminManager</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#adminmoderatormanager">AdminModeratorManager</a><ul>
-<li><a class="reference internal" href="#mipac.manager.admins.moderator.AdminModeratorManager"><code class="docutils literal notranslate"><span class="pre">AdminModeratorManager</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.manager.admins.moderator.AdminModeratorManager.action"><code class="docutils literal notranslate"><span class="pre">AdminModeratorManager.action</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li><a class="reference internal" href="#admindrivemanager">AdminDriveManager</a><ul>
 <li><a class="reference internal" href="#mipac.manager.admins.drive.AdminDriveManager"><code class="docutils literal notranslate"><span class="pre">AdminDriveManager</span></code></a></li>
 </ul>
@@ -11086,14 +11002,6 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.suspend_user"><code class="docutils literal notranslate"><span class="pre">AdminActions.suspend_user()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.unsuspend_user"><code class="docutils literal notranslate"><span class="pre">AdminActions.unsuspend_user()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.update_user_note"><code class="docutils literal notranslate"><span class="pre">AdminActions.update_user_note()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#adminmoderatoractions">AdminModeratorActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.moderator.AdminModeratorActions"><code class="docutils literal notranslate"><span class="pre">AdminModeratorActions</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.moderator.AdminModeratorActions.add"><code class="docutils literal notranslate"><span class="pre">AdminModeratorActions.add()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.admins.moderator.AdminModeratorActions.remove"><code class="docutils literal notranslate"><span class="pre">AdminModeratorActions.remove()</span></code></a></li>
 </ul>
 </li>
 </ul>

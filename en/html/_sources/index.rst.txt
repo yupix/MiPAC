@@ -1082,15 +1082,6 @@ AdminManager
     :members:
 
 
-AdminModeratorManager
-~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.manager.admins.moderator.AdminModeratorManager
-
-.. autoclass:: mipac.manager.admins.moderator.AdminModeratorManager
-    :members:
-
-
 AdminDriveManager
 ~~~~~~~~~~~~~~~~~
 
@@ -1608,15 +1599,6 @@ AdminActions
 .. attributetable:: mipac.actions.admins.admin.AdminActions
 
 .. autoclass:: mipac.actions.admins.admin.AdminActions
-    :members:
-
-
-AdminModeratorActions
-~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.actions.admins.moderator.AdminModeratorActions
-
-.. autoclass:: mipac.actions.admins.moderator.AdminModeratorActions
     :members:
 
 
