@@ -6,7 +6,10 @@ from mipac.abstract.manager import AbstractManager
 from mipac.actions.admins.admin import AdminActions
 from mipac.http import HTTPClient
 from mipac.manager.admins.ad import AdminAdManager, ClientAdminAdManager
-from mipac.manager.admins.announcement import AdminAnnouncementManager
+from mipac.manager.admins.announcement import (
+    AdminAnnouncementManager,
+    ClientAdminAnnouncementManager,
+)
 from mipac.manager.admins.drive import AdminDriveManager
 from mipac.manager.admins.emoji import AdminEmojiManager
 from mipac.manager.admins.invite import AdminInviteManager
@@ -45,6 +48,13 @@ class AdminManager(AbstractManager):
         )
 
     def _create_client_ad_manager(self, ad_id: str) -> ClientAdminAdManager:
-        return ClientAdminAdManager(
-            ad_id=ad_id, session=self.__session, client=self.__client
+        return ClientAdminAdManager(ad_id=ad_id, session=self.__session, client=self.__client)
+
+    def _create_client_announcement_manager(
+        self, announce_id: str
+    ) -> ClientAdminAnnouncementManager:
+        return ClientAdminAnnouncementManager(
+            announce_id=announce_id,
+            session=self.__session,
+            client=self.__client,
         )

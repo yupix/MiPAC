@@ -7,7 +7,7 @@ from mipac.types.announcement import IAnnouncement, IAnnouncementDetailed
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
-    from mipac.actions.admins.announcement import AdminAnnouncementClientActions
+    from mipac.manager.admins.announcement import ClientAdminAnnouncementManager
     from mipac.manager.client import ClientManager
 
 
@@ -75,10 +75,8 @@ class Announcement:
         return not self.__eq__(__value)
 
     @property
-    def action(self) -> AdminAnnouncementClientActions:
-        return self.__client.admin.announcement._create_client_announcement_instance(
-            announce_id=self.id
-        )
+    def action(self) -> ClientAdminAnnouncementManager:
+        return self.__client.admin._create_client_announcement_manager(announce_id=self.id)
 
 
 class AnnouncementDetailed:
@@ -154,7 +152,5 @@ class AnnouncementDetailed:
         return not self.__eq__(__value)
 
     @property
-    def action(self) -> AdminAnnouncementClientActions:
-        return self.__client.admin.announcement._create_client_announcement_instance(
-            announce_id=self.id
-        )
+    def action(self) -> ClientAdminAnnouncementManager:
+        return self.__client.admin._create_client_announcement_manager(announce_id=self.id)
