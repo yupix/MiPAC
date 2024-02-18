@@ -2,388 +2,524 @@ from .base import APIError
 
 
 class AccessDeniedError(APIError):
-    """アクセス権限がありません。"""
+    """Access denied."""
 
 
 class AlreadyAddedError(APIError):
-    """ """
+    """That user has already been added to that list."""
 
 
 class AlreadyBlockingError(APIError):
-    """すでにブロックしています。"""
+    """You are already blocking that user."""
 
 
 class AlreadyClippedError(APIError):
-    """ """
+    """The note has already been clipped."""
+
+
+class AlreadyEndedError(APIError):
+    """That game has already ended."""
 
 
 class AlreadyExpiredError(APIError):
-    """ """
+    """The poll is already expired."""
 
 
 class AlreadyFavoritedError(APIError):
-    """既にお気に入り登録されています。"""
+    """You have not favorited the list."""
 
 
 class AlreadyFollowingError(APIError):
-    """すでにフォローしています。"""
-
-
-class AlreadyInvitedError(APIError):
-    """ """
+    """You are already following that user."""
 
 
 class AlreadyLikedError(APIError):
-    """すでにいいねをつけています。"""
+    """The flash has already been liked."""
+
+
+class AlreadyMovedError(APIError):
+    """Account was already moved to another account."""
 
 
 class AlreadyMutingError(APIError):
-    """すでにそのユーザーをミュートしています。"""
+    """You are already muting that user."""
 
 
 class AlreadyPinnedError(APIError):
-    """指定されたノートは既にピン留めされています。"""
+    """That note has already been pinned."""
 
 
 class AlreadyPromotedError(APIError):
-    """ """
+    """The note has already promoted."""
 
 
 class AlreadyReactedError(APIError):
-    """既にリアクションしています。"""
+    """You are already reacting to that note."""
 
 
 class AlreadyVotedError(APIError):
-    """ """
+    """You have already voted."""
+
+
+class AuthenticationFailedError(APIError):
+    """Authentication failed. Please ensure your token is correct."""
 
 
 class AvatarNotAnImageError(APIError):
-    """アバター画像に、画像ではないファイルが指定されました。"""
+    """The file specified as an avatar is not an image."""
 
 
 class BannerNotAnImageError(APIError):
-    """バナー画像に、画像ではないファイルが指定されました。"""
+    """The file specified as a banner is not an image."""
+
+
+class BirthdayDateFormatInvalidError(APIError):
+    """Birthday date format is invalid."""
 
 
 class BlockedError(APIError):
-    """ユーザーにブロックされています。"""
+    """You are blocked by that user."""
 
 
 class BlockeeIsYourselfError(APIError):
-    """自分のブロックを解除しようとしました。"""
+    """Blockee is yourself."""
 
 
 class BlockingError(APIError):
-    """ユーザーをブロックしています。"""
+    """You are blocking that user."""
+
+
+class BothWithRepliesAndWithFilesError(APIError):
+    """Specifying both withReplies and withFiles is not supported"""
 
 
 class CannotCreateAlreadyExpiredPollError(APIError):
-    """アンケートの期限の指定が誤っています。"""
+    """Poll is already expired."""
+
+
+class CannotRenoteDueToVisibilityError(APIError):
+    """You can not Renote due to target visibility."""
+
+
+class CannotRenoteOutsideOfChannelError(APIError):
+    """Cannot renote outside of channel."""
 
 
 class CannotRenoteToAPureRenoteError(APIError):
-    """単純なRenoteを再度Renoteすることはできません。"""
+    """You can not Renote a pure Renote."""
+
+
+class CannotReplyToAnInvisibleNoteError(APIError):
+    """You cannot reply to an invisible Note."""
 
 
 class CannotReplyToAPureRenoteError(APIError):
-    """単純なRenoteに返信することはできません。"""
+    """You can not reply to a pure Renote."""
 
 
 class CannotReportTheAdminError(APIError):
-    """管理者を通報しようとしました。"""
+    """Cannot report the admin."""
 
 
 class CannotReportYourselfError(APIError):
-    """自身を通報しようとしました。"""
+    """Cannot report yourself."""
 
 
-class ContentRequiredError(APIError):
-    """ """
+class CanNotDeleteInviteCodeError(APIError):
+    """You can't delete this invite code."""
 
 
 class CredentialRequiredError(APIError):
-    """クレデンシャル必須のエンドポイントにクレデンシャル無しでリクエストされました。"""
+    """Credential required."""
+
+
+class DestinationAccountForbidsError(APIError):
+    """Destination account doesn't have proper 'Known As' alias, or has already moved."""
+
+
+class DuplicateNameError(APIError):
+    """Duplicate name."""
+
+
+class EmptyFileError(APIError):
+    """That file is empty."""
+
+
+class ExceededLimitOfCreateInviteCodeError(APIError):
+    """You have exceeded the limit for creating an invitation code."""
+
+
+class ExtResourceHashDidntMatchError(APIError):
+    """Hash did not match."""
+
+
+class ExtResourceReturnedInvalidSchemaError(APIError):
+    """External resource returned invalid schema."""
 
 
 class FailedToResolveRemoteUserError(APIError):
-    """リモートユーザーの検索に失敗しました。"""
+    """Failed to resolve remote user."""
 
 
 class FolloweeIsYourselfError(APIError):
-    """自分のフォローを解除しようとしました。"""
+    """Followee is yourself."""
 
 
 class FollowerIsYourselfError(APIError):
-    """自分をフォロワー解除しようとしました。"""
+    """Follower is yourself."""
 
 
 class FollowRequestNotFoundError(APIError):
-    """フォローリクエストがありません。"""
+    """Follow request not found."""
 
 
 class ForbiddenError(APIError):
-    """ """
+    """Forbidden."""
 
 
-class GroupAccessDeniedError(APIError):
-    """ """
+class ForbiddenToSetYourselfError(APIError):
+    """You can't set yourself as your own alias."""
 
 
 class GtlDisabledError(APIError):
-    """グローバルタイムラインが無効になっています。"""
+    """Global timeline has been disabled."""
 
 
 class HasChildFilesOrFoldersError(APIError):
-    """フォルダーが空ではありません。"""
+    """This folder has child files or folders."""
 
 
 class InappropriateError(APIError):
-    """不適切なコンテンツを含んでいる可能性があると判定されました。"""
+    """Cannot upload the file because it has been determined that it possibly contains inappropriate content."""
+
+
+class IncorrectPasswordError(APIError):
+    """Incorrect password."""
 
 
 class InternalErrorError(APIError):
-    """サーバー内部で問題が発生しました。引き続き問題が発生する場合は管理者にお問い合わせください。"""
+    """Internal error occurred. Please contact us if the error persists."""
 
 
 class InvalidChoiceError(APIError):
-    """ """
+    """Choice ID is invalid."""
+
+
+class InvalidDateTimeError(APIError):
+    """Invalid date-time format"""
 
 
 class InvalidFileNameError(APIError):
-    """ファイル名が不正です。"""
+    """Invalid file name."""
 
 
 class InvalidParamError(APIError):
-    """リクエストパラメータに誤りがあります。"""
+    """Invalid param."""
 
 
 class InvalidRegexpError(APIError):
-    """正規表現が不正です。"""
+    """Invalid Regular Expression."""
+
+
+class InvalidSeedError(APIError):
+    """Provided seed is invalid."""
 
 
 class InvalidUrlError(APIError):
-    """ """
+    """Invalid URL"""
 
 
-class IsOwnerError(APIError):
-    """ """
+class IAmAiError(APIError):
+    """You sent a request to Ai-chan, Misskey's showgirl, instead of the server."""
 
 
 class LtlDisabledError(APIError):
-    """ローカルタイムラインが無効になっています。"""
-
-
-class MoSuchFileError(APIError):
-    """ """
+    """Local timeline has been disabled."""
 
 
 class MuteeIsYourselfError(APIError):
-    """自分に対してミュートを解除しようとしました。"""
+    """Mutee is yourself."""
 
 
 class NameAlreadyExistsError(APIError):
-    """同じURLにページがすでに存在します。"""
+    """Specified name already exists."""
+
+
+class NotAssignedError(APIError):
+    """Not assigned."""
 
 
 class NotBlockingError(APIError):
-    """ブロックしていないユーザーです。"""
+    """You are not blocking that user."""
 
 
 class NotFavoritedError(APIError):
-    """お気に入り登録されていません。"""
+    """You have not marked that note a favorite."""
 
 
 class NotFollowingError(APIError):
-    """ユーザーにフォローされていません。"""
+    """The other use is not following you."""
 
 
 class NotLikedError(APIError):
-    """いいねをつけていないページです。"""
+    """You have not liked that flash."""
 
 
 class NotMutingError(APIError):
-    """対象となるユーザーをそもそもミュートしていません。"""
+    """You are not muting that user."""
 
 
 class NotReactedError(APIError):
-    """リアクションしていません。"""
+    """You are not reacting to that note."""
+
+
+class NotRootForbiddenError(APIError):
+    """The root can't migrate."""
 
 
 class NoFollowRequestError(APIError):
-    """ユーザーからのフォローリクエストがありません。"""
+    """No follow request."""
 
 
 class NoFreeSpaceError(APIError):
-    """ドライブに空き容量がありません。"""
+    """Cannot upload the file because you have no free space of drive."""
 
 
 class NoPollError(APIError):
-    """ """
+    """The note does not attach a poll."""
+
+
+class NoSecurityKeyError(APIError):
+    """No security key."""
 
 
 class NoSuchAdError(APIError):
-    """ """
+    """No such ad."""
 
 
 class NoSuchAnnouncementError(APIError):
-    """お知らせが存在しません。"""
+    """No such announcement."""
 
 
 class NoSuchAntennaError(APIError):
-    """ """
+    """No such antenna."""
 
 
 class NoSuchAppError(APIError):
-    """アプリが存在しません。"""
+    """No such app."""
 
 
 class NoSuchAvatarError(APIError):
-    """アバター画像のファイルが存在しません。"""
+    """No such avatar file."""
 
 
 class NoSuchBannerError(APIError):
-    """バナー画像のファイルが存在しません。"""
+    """No such banner file."""
 
 
 class NoSuchChannelError(APIError):
-    """指定されたチャンネルが存在しないか、アクセスが許可されていません。"""
+    """No such channel."""
 
 
 class NoSuchClipError(APIError):
-    """ """
+    """No such clip."""
 
 
 class NoSuchEmojiError(APIError):
-    """ """
+    """No such emoji."""
 
 
 class NoSuchFileError(APIError):
-    """ファイルが存在しません。"""
+    """No such file."""
+
+
+class NoSuchFlashError(APIError):
+    """No such flash."""
 
 
 class NoSuchFolderError(APIError):
-    """フォルダーが存在しません。"""
+    """No such folder."""
 
 
-class NoSuchGroupError(APIError):
-    """ """
-
-
-class NoSuchGroupMemberError(APIError):
-    """ """
+class NoSuchGameError(APIError):
+    """No such game."""
 
 
 class NoSuchHashtagError(APIError):
-    """ハッシュタグが存在しません。"""
+    """No such hashtag."""
 
 
-class NoSuchInvitationError(APIError):
-    """ """
+class NoSuchInviteCodeError(APIError):
+    """No such invite code."""
+
+
+class NoSuchKeyError(APIError):
+    """No such key."""
 
 
 class NoSuchListError(APIError):
-    """ """
-
-
-class NoSuchMessageError(APIError):
-    """ """
+    """No such list."""
 
 
 class NoSuchNoteError(APIError):
-    """指定されたノートが存在しないか、アクセスが許可されていません。"""
-
-
-class NoSuchNotificationError(APIError):
-    """通知が存在しません。"""
+    """No such note."""
 
 
 class NoSuchObjectError(APIError):
-    """ """
+    """No such object."""
 
 
 class NoSuchPageError(APIError):
-    """ページが存在しません。"""
+    """No such page."""
 
 
 class NoSuchParentFolderError(APIError):
-    """親フォルダーが存在しません。"""
+    """No such parent folder."""
 
 
 class NoSuchPostError(APIError):
-    """ """
+    """No such post."""
+
+
+class NoSuchRegistrationError(APIError):
+    """No such registration."""
 
 
 class NoSuchRenoteTargetError(APIError):
-    """Renoteに指定されたノートが存在しないか、アクセスが許可されていません。"""
+    """No such renote target."""
 
 
 class NoSuchReplyTargetError(APIError):
-    """返信先に指定されたノートが存在しないか、アクセスが許可されていません。"""
+    """No such reply target."""
+
+
+class NoSuchRoleError(APIError):
+    """No such role."""
 
 
 class NoSuchSessionError(APIError):
-    """セッションが存在しません。"""
+    """No such session."""
 
 
 class NoSuchUserError(APIError):
-    """ユーザーが存在しません。"""
-
-
-class NoSuchUserGroupError(APIError):
-    """ """
+    """No such user."""
 
 
 class NoSuchUserListError(APIError):
-    """ """
+    """No such user list."""
 
 
 class NoSuchWebhookError(APIError):
-    """Webhookが存在しません。"""
+    """No such webhook."""
 
 
 class PendingSessionError(APIError):
-    """ """
-
-
-class PermissionDeniedError(APIError):
-    """与えられたクレデンシャルには必要なパーミッションがありません。"""
+    """This session is not completed yet."""
 
 
 class PinLimitExceededError(APIError):
-    """これ以上ピン留めできません。"""
+    """You can not pin notes any more."""
 
 
 class RateLimitExceededError(APIError):
-    """レートリミットによる制限のため一時的に利用できません。"""
+    """Rate limit exceeded. Please try again later."""
 
 
 class ReactionsNotPublicError(APIError):
-    """リアクションが公開されていません。"""
+    """Reactions of the user is not public."""
 
 
-class RecipientIsYourselfError(APIError):
-    """ """
+class RecursiveNestingError(APIError):
+    """It can not be structured like nesting folders recursively."""
+
+
+class RemoteUserNotAllowedError(APIError):
+    """Not allowed to load the remote user's list"""
+
+
+class RestrictedByRoleError(APIError):
+    """This feature is restricted by your role."""
+
+
+class SameNameEmojiExistsError(APIError):
+    """Emoji that have same name already exists."""
 
 
 class StlDisabledError(APIError):
-    """ソーシャルタイムラインが無効になっています。"""
+    """Hybrid timeline has been disabled."""
 
 
-class YourAccountSuspendedError(APIError):
-    """アカウントが凍結されているため利用できません。"""
+class TargetIsYourselfError(APIError):
+    """Target user is yourself."""
+
+
+class TooBigFileError(APIError):
+    """That file is too big."""
+
+
+class TooManyAntennasError(APIError):
+    """You cannot create antenna any more."""
+
+
+class TooManyClipsError(APIError):
+    """You cannot create clip any more."""
+
+
+class TooManyClipNotesError(APIError):
+    """You cannot add notes to the clip any more."""
+
+
+class TooManyMutedWordsError(APIError):
+    """Too many muted words."""
+
+
+class TooManyUserlistsError(APIError):
+    """You cannot create user list any more."""
+
+
+class TooManyUsersError(APIError):
+    """You can not push users any more."""
+
+
+class TooManyWebhooksError(APIError):
+    """You cannot create webhook any more."""
+
+
+class TwoFactorNotEnabledError(APIError):
+    """2fa not enabled."""
+
+
+class UnavailableError(APIError):
+    """Translate of notes unavailable."""
+
+
+class UnexpectedFileTypeError(APIError):
+    """We need csv file."""
+
+
+class UriNullError(APIError):
+    """Local User ActivityPup URI is null."""
+
+
+class UserIsDeletedError(APIError):
+    """User is deleted."""
+
+
+class UserNotFoundError(APIError):
+    """User not found."""
+
+
+class YourFlashError(APIError):
+    """You cannot like your flash."""
 
 
 class YourPageError(APIError):
-    """自身のページにいいねをつけようとしました。"""
+    """You cannot like your page."""
 
 
 class YourPostError(APIError):
-    """ """
-
-
-class YouAreOwnerError(APIError):
-    """ """
+    """You cannot like your post."""
 
 
 class YouHaveBeenBlockedError(APIError):
-    """ブロックされているユーザーのノートにリアクションは行えません。"""
+    """You cannot push this user because you have been blocked by this user."""

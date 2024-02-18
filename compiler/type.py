@@ -23,6 +23,7 @@ class OpenAPIPath(TypedDict):
     tags: list[str]
     security: list[dict[str, list[Any]]]
     requestBody: OpenAPIRequestBody
+    responses: dict[str, Any]
 
 
 class OpenAPIComponentProperty(TypedDict):
@@ -44,5 +45,5 @@ class OpenAPI(TypedDict):
     openapi: str
     info: OpenAPIInfo
     externalDocs: OpenAPIExternalDocs
-    paths: dict[str, dict[Literal['post', 'get'], OpenAPIPath]]
+    paths: dict[str, dict[Literal["post", "get"], OpenAPIPath]]
     components: OpenAPIComponents

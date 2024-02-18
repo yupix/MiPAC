@@ -1,0 +1,132 @@
+code,message
+ACCESS_DENIED,Access denied.
+ALREADY_ADDED,That user has already been added to that list.
+ALREADY_BLOCKING,You are already blocking that user.
+ALREADY_CLIPPED,The note has already been clipped.
+ALREADY_ENDED,That game has already ended.
+ALREADY_EXPIRED,The poll is already expired.
+ALREADY_FAVORITED,You have not favorited the list.
+ALREADY_FOLLOWING,You are already following that user.
+ALREADY_LIKED,The flash has already been liked.
+ALREADY_MOVED,Account was already moved to another account.
+ALREADY_MUTING,You are already muting that user.
+ALREADY_PINNED,That note has already been pinned.
+ALREADY_PROMOTED,The note has already promoted.
+ALREADY_REACTED,You are already reacting to that note.
+ALREADY_VOTED,You have already voted.
+AUTHENTICATION_FAILED,Authentication failed. Please ensure your token is correct.
+AVATAR_NOT_AN_IMAGE,The file specified as an avatar is not an image.
+BANNER_NOT_AN_IMAGE,The file specified as a banner is not an image.
+BIRTHDAY_DATE_FORMAT_INVALID,Birthday date format is invalid.
+BLOCKED,You are blocked by that user.
+BLOCKEE_IS_YOURSELF,Blockee is yourself.
+BLOCKING,You are blocking that user.
+BOTH_WITH_REPLIES_AND_WITH_FILES,Specifying both withReplies and withFiles is not supported
+CANNOT_CREATE_ALREADY_EXPIRED_POLL,Poll is already expired.
+CANNOT_RENOTE_DUE_TO_VISIBILITY,You can not Renote due to target visibility.
+CANNOT_RENOTE_OUTSIDE_OF_CHANNEL,Cannot renote outside of channel.
+CANNOT_RENOTE_TO_A_PURE_RENOTE,You can not Renote a pure Renote.
+CANNOT_REPLY_TO_AN_INVISIBLE_NOTE,You cannot reply to an invisible Note.
+CANNOT_REPLY_TO_A_PURE_RENOTE,You can not reply to a pure Renote.
+CANNOT_REPORT_THE_ADMIN,Cannot report the admin.
+CANNOT_REPORT_YOURSELF,Cannot report yourself.
+CAN_NOT_DELETE_INVITE_CODE,You can't delete this invite code.
+CREDENTIAL_REQUIRED,Credential required.
+DESTINATION_ACCOUNT_FORBIDS,"Destination account doesn't have proper 'Known As' alias, or has already moved."
+DUPLICATE_NAME,Duplicate name.
+EMPTY_FILE,That file is empty.
+EXCEEDED_LIMIT_OF_CREATE_INVITE_CODE,You have exceeded the limit for creating an invitation code.
+EXT_RESOURCE_HASH_DIDNT_MATCH,Hash did not match.
+EXT_RESOURCE_RETURNED_INVALID_SCHEMA,External resource returned invalid schema.
+FAILED_TO_RESOLVE_REMOTE_USER,Failed to resolve remote user.
+FOLLOWEE_IS_YOURSELF,Followee is yourself.
+FOLLOWER_IS_YOURSELF,Follower is yourself.
+FOLLOW_REQUEST_NOT_FOUND,Follow request not found.
+FORBIDDEN,Forbidden.
+FORBIDDEN_TO_SET_YOURSELF,You can't set yourself as your own alias.
+GTL_DISABLED,Global timeline has been disabled.
+HAS_CHILD_FILES_OR_FOLDERS,This folder has child files or folders.
+INAPPROPRIATE,Cannot upload the file because it has been determined that it possibly contains inappropriate content.
+INCORRECT_PASSWORD,Incorrect password.
+INTERNAL_ERROR,Internal error occurred. Please contact us if the error persists.
+INVALID_CHOICE,Choice ID is invalid.
+INVALID_DATE_TIME,Invalid date-time format
+INVALID_FILE_NAME,Invalid file name.
+INVALID_PARAM,Invalid param.
+INVALID_REGEXP,Invalid Regular Expression.
+INVALID_SEED,Provided seed is invalid.
+INVALID_URL,Invalid URL
+I_AM_AI,"You sent a request to Ai-chan, Misskey's showgirl, instead of the server."
+LTL_DISABLED,Local timeline has been disabled.
+MUTEE_IS_YOURSELF,Mutee is yourself.
+NAME_ALREADY_EXISTS,Specified name already exists.
+NOT_ASSIGNED,Not assigned.
+NOT_BLOCKING,You are not blocking that user.
+NOT_FAVORITED,You have not marked that note a favorite.
+NOT_FOLLOWING,The other use is not following you.
+NOT_LIKED,You have not liked that flash.
+NOT_MUTING,You are not muting that user.
+NOT_REACTED,You are not reacting to that note.
+NOT_ROOT_FORBIDDEN,The root can't migrate.
+NO_FOLLOW_REQUEST,No follow request.
+NO_FREE_SPACE,Cannot upload the file because you have no free space of drive.
+NO_POLL,The note does not attach a poll.
+NO_SECURITY_KEY,No security key.
+NO_SUCH_AD,No such ad.
+NO_SUCH_ANNOUNCEMENT,No such announcement.
+NO_SUCH_ANTENNA,No such antenna.
+NO_SUCH_APP,No such app.
+NO_SUCH_AVATAR,No such avatar file.
+NO_SUCH_BANNER,No such banner file.
+NO_SUCH_CHANNEL,No such channel.
+NO_SUCH_CLIP,No such clip.
+NO_SUCH_EMOJI,No such emoji.
+NO_SUCH_FILE,No such file.
+NO_SUCH_FLASH,No such flash.
+NO_SUCH_FOLDER,No such folder.
+NO_SUCH_GAME,No such game.
+NO_SUCH_HASHTAG,No such hashtag.
+NO_SUCH_INVITE_CODE,No such invite code.
+NO_SUCH_KEY,No such key.
+NO_SUCH_LIST,No such list.
+NO_SUCH_NOTE,No such note.
+NO_SUCH_OBJECT,No such object.
+NO_SUCH_PAGE,No such page.
+NO_SUCH_PARENT_FOLDER,No such parent folder.
+NO_SUCH_POST,No such post.
+NO_SUCH_REGISTRATION,No such registration.
+NO_SUCH_RENOTE_TARGET,No such renote target.
+NO_SUCH_REPLY_TARGET,No such reply target.
+NO_SUCH_ROLE,No such role.
+NO_SUCH_SESSION,No such session.
+NO_SUCH_USER,No such user.
+NO_SUCH_USER_LIST,No such user list.
+NO_SUCH_WEBHOOK,No such webhook.
+PENDING_SESSION,This session is not completed yet.
+PIN_LIMIT_EXCEEDED,You can not pin notes any more.
+RATE_LIMIT_EXCEEDED,Rate limit exceeded. Please try again later.
+REACTIONS_NOT_PUBLIC,Reactions of the user is not public.
+RECURSIVE_NESTING,It can not be structured like nesting folders recursively.
+REMOTE_USER_NOT_ALLOWED,Not allowed to load the remote user's list
+RESTRICTED_BY_ROLE,This feature is restricted by your role.
+SAME_NAME_EMOJI_EXISTS,Emoji that have same name already exists.
+STL_DISABLED,Hybrid timeline has been disabled.
+TARGET_IS_YOURSELF,Target user is yourself.
+TOO_BIG_FILE,That file is too big.
+TOO_MANY_ANTENNAS,You cannot create antenna any more.
+TOO_MANY_CLIPS,You cannot create clip any more.
+TOO_MANY_CLIP_NOTES,You cannot add notes to the clip any more.
+TOO_MANY_MUTED_WORDS,Too many muted words.
+TOO_MANY_USERLISTS,You cannot create user list any more.
+TOO_MANY_USERS,You can not push users any more.
+TOO_MANY_WEBHOOKS,You cannot create webhook any more.
+TWO_FACTOR_NOT_ENABLED,2fa not enabled.
+UNAVAILABLE,Translate of notes unavailable.
+UNEXPECTED_FILE_TYPE,We need csv file.
+URI_NULL,Local User ActivityPup URI is null.
+USER_IS_DELETED,User is deleted.
+USER_NOT_FOUND,User not found.
+YOUR_FLASH,You cannot like your flash.
+YOUR_PAGE,You cannot like your page.
+YOUR_POST,You cannot like your post.
+YOU_HAVE_BEEN_BLOCKED,You cannot push this user because you have been blocked by this user.
