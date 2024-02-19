@@ -1,7 +1,7 @@
 from __future__ import annotations
+
 import io
 import os
-
 from typing import TYPE_CHECKING, Any, AsyncGenerator, override
 
 from mipac.abstract.action import AbstractAction

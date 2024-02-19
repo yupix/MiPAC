@@ -2,6 +2,8 @@ import copy
 import hashlib
 import json
 import sys
+from enum import Enum
+
 from type import OpenAPI
 from typing import Any, Literal, TypedDict
 
@@ -18,7 +20,12 @@ needToWork: サポートされているが、作業が必要
 RemovedFromMisskey: Misskeyから削除された
 Removed: MiPACから削除された（これに変更するとremovedから自動で削除されます）
 """
-STATUS = Literal["notSupported", "supported", "needToWork", 'RemovedFromMisskey', "Removed"]
+
+class STATUS(Enum):
+    notSupported = "notSupported"
+    supported = "supported"
+    needToWork = "needToWork"
+    RemovedFromMisskey = "Removed"
 
 class IEndpoint(TypedDict):
     path: str

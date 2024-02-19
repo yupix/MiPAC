@@ -7,12 +7,12 @@ from mipac.actions.user import ClientUserActions, UserActions
 from mipac.http import HTTPClient
 from mipac.manager.blocking import BlockingManager
 from mipac.manager.follow import FollowManager
-from mipac.manager.users.mute import ClientMuteManager, MuteManager
 from mipac.manager.users.list import (
     ClientPartialUserListManager,
     ClientUserListManager,
     UserListManager,
 )
+from mipac.manager.users.mute import ClientMuteManager, MuteManager
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
