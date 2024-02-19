@@ -25,15 +25,13 @@ class ClientChannelManager(AbstractManager):
 
 
 class ChannelManager(AbstractManager):
-    def __init__(
-        self, channel_id: str | None = None, *, session: HTTPClient, client: ClientManager
-    ):
-        self.__channel_id: str | None = channel_id
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
+        self.__action: ChannelActions = ChannelActions(
+            session=self.__session, client=self.__client
+        )
 
     @property
     def action(self) -> ChannelActions:
-        return ChannelActions(
-            channel_id=self.__channel_id, session=self.__session, client=self.__client
-        )
+        return self.__action
