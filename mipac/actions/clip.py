@@ -204,7 +204,8 @@ class ClientClipActions(SharedClipActions):  # TODO: 使うようにする
         ):
             yield note
 
-    async def add_note(self, note_id: str, clip_id: str | None = None) -> bool:
+    @override
+    async def add_note(self, note_id: str, *, clip_id: str | None = None) -> bool:
         """Add a note to a clip
 
         Parameters
@@ -223,7 +224,8 @@ class ClientClipActions(SharedClipActions):  # TODO: 使うようにする
 
         return await super().add_note(note_id=note_id, clip_id=clip_id)
 
-    async def remove_note(self, note_id: str, clip_id: str | None) -> bool:
+    @override
+    async def remove_note(self, note_id: str, *, clip_id: str | None) -> bool:
         """Remove a note from a clip
 
         Parameters
@@ -242,7 +244,8 @@ class ClientClipActions(SharedClipActions):  # TODO: 使うようにする
 
         return await super().remove_note(note_id=note_id, clip_id=clip_id)
 
-    async def delete(self, clip_id: str | None = None) -> bool:
+    @override
+    async def delete(self, *, clip_id: str | None = None) -> bool:
         """Delete a clip
 
         Parameters
@@ -259,11 +262,13 @@ class ClientClipActions(SharedClipActions):  # TODO: 使うようにする
 
         return await super().delete(clip_id=clip_id)
 
+    @override
     async def update(
         self,
         name: str,
         is_public: bool | None = None,
         description: str | None = None,
+        *,
         clip_id: str | None = None,
     ) -> Clip:
         """Update a clip
