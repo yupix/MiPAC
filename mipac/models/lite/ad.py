@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from mipac.types.ads import IAdPlaces, IPartialAd
 
 if TYPE_CHECKING:
-    from mipac.manager.admins.ad import AdminAdvertisingModelManager
+    from mipac.manager.admins.ad import ClientAdminAdManager
     from mipac.manager.client import ClientManager
 
 
@@ -53,8 +53,8 @@ class PartialAd[T: IPartialAd]:
         return self._raw_ad.get(key)
 
     @property
-    def api(self) -> AdminAdvertisingModelManager:
-        return self._client.admin.create_ad_model_manager(ad_id=self.id)
+    def api(self) -> ClientAdminAdManager:
+        return self._client.admin._create_client_ad_manager(ad_id=self.id)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, PartialAd) and self.id == __value.id

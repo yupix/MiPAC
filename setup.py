@@ -25,12 +25,15 @@ packages = [
     "mipac.actions",
     "mipac.actions.admins",
     "mipac.actions.drive",
+    "mipac.actions.users",
     "mipac.errors",
     "mipac.manager",
     "mipac.manager.admins",
+    "mipac.manager.drive",
+    "mipac.manager.users",
     "mipac.models",
-    "mipac.types",
     "mipac.models.lite",
+    "mipac.types",
     "mipac.utils",
 ]
 

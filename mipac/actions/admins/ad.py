@@ -12,17 +12,12 @@ if TYPE_CHECKING:
     from mipac.client import ClientManager
 
 
-class AdminAdvertisingModelActions(AbstractAction):
-    def __init__(self, ad_id: str | None = None, *, session: HTTPClient, client: ClientManager):
-        self._ad_id: str | None = ad_id
+class SharedAdminAdActions(AbstractAction):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
-    async def delete(self, *, id: str | None = None) -> bool:
-        ad_id = self._ad_id or id
-
-        if ad_id is None:
-            raise ValueError("ad id is required")
+    async def delete(self, *, ad_id: str) -> bool:
         res: bool = await self._session.request(
             Route("POST", "/api/admin/ad/delete"), json={"id": ad_id}, auth=True, lower=True
         )
@@ -40,11 +35,8 @@ class AdminAdvertisingModelActions(AbstractAction):
         starts_at: int,
         day_of_week: int,
         *,
-        ad_id: str | None = None,
+        ad_id: str,
     ) -> bool:
-        ad_id = self._ad_id or ad_id
-        if ad_id is None:
-            raise ValueError("ad id is required")
         data = {
             "id": ad_id,
             "memo": memo or "",
@@ -63,7 +55,49 @@ class AdminAdvertisingModelActions(AbstractAction):
         return res
 
 
-class AdminAdvertisingActions(AdminAdvertisingModelActions):
+class ClientAdminAdActions(SharedAdminAdActions):
+    def __init__(self, ad_id: str, *, session: HTTPClient, client: ClientManager):
+        super().__init__(session=session, client=client)
+        self._ad_id: str = ad_id
+
+    @override
+    async def delete(self, *, ad_id: str | None = None) -> bool:
+        ad_id = ad_id or self._ad_id
+
+        return await super().delete(ad_id=ad_id)
+
+    @override
+    async def update(
+        self,
+        memo: str,
+        url: str,
+        image_url: str,
+        place: Literal["square", "horizontal", "horizontal-big"],
+        priority: Literal["high", "middle", "low"],
+        ratio: int,
+        expires_at: int,
+        starts_at: int,
+        day_of_week: int,
+        *,
+        ad_id: str | None = None,
+    ) -> bool:
+        ad_id = ad_id or self._ad_id
+
+        return await super().update(
+            memo=memo,
+            url=url,
+            image_url=image_url,
+            place=place,
+            priority=priority,
+            ratio=ratio,
+            expires_at=expires_at,
+            starts_at=starts_at,
+            day_of_week=day_of_week,
+            ad_id=ad_id,
+        )
+
+
+class AdminAdActions(SharedAdminAdActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
 
@@ -94,10 +128,6 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
             Route("POST", "/api/admin/ad/create"), json=data, auth=True, lower=True
         )
         return Ad(ad_data=raw_ad, client=self._client)
-
-    @override
-    async def delete(self, id: str) -> bool:
-        return await super().delete(id=id)
 
     async def get_list(
         self,
@@ -142,30 +172,3 @@ class AdminAdvertisingActions(AdminAdvertisingModelActions):
 
             for raw_ad in raw_ads:
                 yield Ad(ad_data=raw_ad, client=self._client)
-
-    @override
-    async def update(
-        self,
-        ad_id: str,
-        memo: str,
-        url: str,
-        image_url: str,
-        place: Literal["square", "horizontal", "horizontal-big"],
-        priority: Literal["high", "middle", "low"],
-        ratio: int,
-        expires_at: int,
-        starts_at: int,
-        day_of_week: int,
-    ) -> bool:
-        return await super().update(
-            ad_id=ad_id,
-            memo=memo,
-            url=url,
-            image_url=image_url,
-            place=place,
-            priority=priority,
-            ratio=ratio,
-            expires_at=expires_at,
-            starts_at=starts_at,
-            day_of_week=day_of_week,
-        )

@@ -14,9 +14,9 @@ class APIError(Exception):
         if isinstance(data, dict):
             error = data.get("error", {})
             if isinstance(error, dict):
-                self.code: str | None = error.get("code", "")
-                self.id: str | None = error.get("id")
-                self.message: str | None = error.get("message", "")
+                self.code = error.get("code", "")
+                self.id = error.get("id")
+                self.message = error.get("message", "")
         super().__init__(f"{self.message}\nRaw error: {self.raw} " if self.message else self.raw)
 
     def raise_error(self):
