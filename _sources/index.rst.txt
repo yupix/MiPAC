@@ -1350,6 +1350,15 @@ ClientChannelActions
     :members:
 
 
+SharedChannelActions
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.channel.SharedChannelActions
+
+.. autoclass:: mipac.actions.channel.SharedChannelActions
+    :members:
+
+
 RoleActions
 ~~~~~~~~~~~
 
