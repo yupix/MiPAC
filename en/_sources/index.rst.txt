@@ -1260,6 +1260,15 @@ NoteActions
     :members:
 
 
+SharedNoteActions
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.note.SharedNoteActions
+
+.. autoclass:: mipac.actions.note.SharedNoteActions
+    :members:
+
+
 EmojiActions
 ~~~~~~~~~~~~
 
