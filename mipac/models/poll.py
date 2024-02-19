@@ -40,16 +40,16 @@ class Poll:
         self.__client: ClientManager = client
 
     @property
-    def multiple(self) -> bool:
-        return self.__poll["multiple"]
+    def multiple(self) -> bool | None:
+        return self.__poll.get("multiple")
 
     @property
-    def expires_at(self) -> int:
-        return self.__poll["expires_at"]
+    def expires_at(self) -> int | None:
+        return self.__poll.get("expired_at")
 
     @property
-    def expired_after(self) -> int:
-        return self.__poll["expired_after"]
+    def expired_after(self) -> int | None:
+        return self.__poll.get("expired_after")
 
     @property
     def choices(self) -> list[PollChoice]:
