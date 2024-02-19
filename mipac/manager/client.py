@@ -61,9 +61,6 @@ class ClientManager:
     def _create_user_instance(self, user: PartialUser) -> UserManager:
         return UserManager(session=self.__session, client=self)
 
-    def _create_note_instance(self, note_id: str) -> NoteManager:
-        return NoteManager(note_id, session=self.__session, client=self)
-
     def _create_client_channel_manager(self, channel_id: str) -> ClientChannelManager:
         return ClientChannelManager(channel_id=channel_id, session=self.__session, client=self)
 

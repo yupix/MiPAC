@@ -86,15 +86,12 @@ def create_note_body(
     return remove_dict_empty(body)
 
 
-class ClientNoteActions(AbstractAction):
+class SharedNoteActions(AbstractAction):
     def __init__(
         self,
-        note_id: str | None = None,
-        *,
         session: HTTPClient,
         client: ClientManager,
     ):
-        self._note_id: str | None = note_id
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
@@ -104,16 +101,9 @@ class ClientNoteActions(AbstractAction):
         limit: int = 100,
         since_id: str | None = None,
         untilId: str | None = None,
-        note_id: str | None = None,
+        *,
+        note_id: str,
     ) -> list[Note]:
-        if limit > 100:
-            raise ValueError("limit は100以下である必要があります")
-
-        note_id = note_id or self._note_id
-
-        if note_id is None:
-            raise ValueError("note_id is required")
-
         data = {
             "noteId": note_id,
             "limit": limit,
@@ -132,6 +122,642 @@ class ClientNoteActions(AbstractAction):
         limit: int = 100,
         since_id: str | None = None,
         untilId: str | None = None,
+        *,
+        note_id: str,
+    ) -> list[Note]:
+        """Get children of the note.
+        update the cache of the :py:meth:`mipac.actions.note.ClientNoteActions.get_children` method
+
+        Endpoint: `/api/notes/children`
+
+        Parameters
+        ----------
+        limit : int, default=100
+            limit
+        since_id : str | None, default=None
+            Since ID
+        untilId : str | None, default=None
+            Until ID
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Note]
+            Children of the note
+        """
+        return await self.get_children(
+            limit=limit, since_id=since_id, untilId=untilId, note_id=note_id
+        )
+
+    async def get_all_children(
+        self,
+        since_id: str | None = None,
+        untilId: str | None = None,
+        *,
+        note_id: str,
+    ) -> AsyncGenerator[Note, None]:  # TODO: limitをサポートする
+        """Get all children of the note
+
+        Endpoint: `/api/notes/children`
+
+        Parameters
+        ----------
+        since_id : str | None, default=None
+            Since ID
+        untilId : str | None, default=None
+            Until ID
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        AsyncGenerator[Note, None]
+            Children of the note
+        """
+        limit = 100
+
+        data = {
+            "noteId": note_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": untilId,
+        }
+
+        pagination = Pagination[INote](
+            self._session, Route("POST", "/api/notes/children"), json=data
+        )
+
+        while pagination.is_final is False:
+            res_notes = await pagination.next()
+            for note in res_notes:
+                yield Note(note, self._client)
+
+    async def get_clips(self, *, note_id: str) -> list[Clip]:
+        """Get the clips of the note
+
+        Endpoint: `/api/notes/clips`
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Clip]
+            Clips of the note
+        """
+        data = {"noteId": note_id}
+        res: list[IClip] = await self._session.request(
+            Route("POST", "/api/notes/clips"), json=data, auth=True
+        )
+        return [Clip(clip, client=self._client) for clip in res]
+
+    async def get_conversation(
+        self, limit: int = 10, offset: int = 0, *, note_id: str
+    ) -> list[Note]:
+        """Get the conversation of the note
+
+        Endpoint: `/api/notes/conversation`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            limit
+        offset : int, default=0
+            offset
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Note]
+            Notes of the conversation
+        """
+        data = {"noteId": note_id, "limit": limit, "offset": offset}
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/conversation"), json=data, auth=True
+        )
+        return [Note(note, client=self._client) for note in res]
+
+    async def delete(self, *, note_id: str) -> bool:
+        """Delete a note
+
+        Endpoint: `/api/notes/delete`
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        bool
+            success or not
+        """
+        data = {"noteId": note_id}
+        res = await self._session.request(Route("POST", "/api/notes/delete"), json=data, auth=True)
+        return bool(res)
+
+    async def get_reactions(
+        self,
+        type: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        note_id: str,
+    ) -> list[NoteReaction]:
+        return await self._client.note.reaction.action.get_reactions(
+            type=type, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
+        )
+
+    async def fetch_reactions(
+        self,
+        type: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        note_id: str,
+    ) -> list[NoteReaction]:
+        return await self._client.note.reaction.action.fetch_reactions(
+            note_id=note_id, type=type, limit=limit, since_id=since_id, until_id=until_id
+        )
+
+    async def get_renotes(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        note_id: str,
+    ) -> list[Note]:
+        """Get renote of the note
+
+        Endpoint: `/api/notes/renotes`
+
+        Parameters
+        ----------
+        limit : int, default=10
+            limit
+        since_id : str | None, default=None
+            Since ID
+        until_id : str | None, default=None
+            Until ID
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Note]
+            Renotes of the note
+        """
+        data = {
+            "noteId": note_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
+        }
+
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/renotes"), json=data, auth=True
+        )
+        return [Note(note, client=self._client) for note in res]
+
+    async def get_replies(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        *,
+        note_id: str,
+    ) -> list[Note]:
+        """Get replies to the note
+
+        Endpoint: `/api/notes/replies`
+
+        Parameters
+        ---------
+        since_id : str | None, default=None
+            since id
+        until_id : str | None, default=None
+            until id
+        limit : int, default=10
+            limit
+        note_id: str | None, default=None
+            note id
+
+        Returns
+        -------
+        list[Note]
+            replies
+        """
+        data = {
+            "noteId": note_id,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+        }
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/replies"), json=data, auth=True
+        )
+        return [Note(note, client=self._client) for note in res]
+
+    async def get_all_replies(
+        self,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        note_id: str,
+    ) -> AsyncGenerator[Note, None]:
+        """Get replies to the note
+
+        Endpoint: `/api/notes/replies`
+
+        Parameters
+        ---------
+        since_id : str | None, default=None
+            since id
+        until_id : str | None, default=None
+            until id
+        note_id: str | None, default=None
+            note id
+
+        Returns
+        -------
+        AsyncGenerator[Note, None]
+            replies
+        """
+
+        limit = 100
+
+        body = {"noteId": note_id, "sinceId": since_id, "untilId": until_id, "limit": limit}
+
+        pagination = Pagination[INote](
+            self._session, Route("POST", "/api/notes/replies"), json=body
+        )
+
+        while True:
+            res_notes = await pagination.next()
+            for res_note in res_notes:
+                yield Note(res_note, client=self._client)
+
+            if pagination.is_final:
+                break
+
+    @cache(group="get_note_state")
+    async def get_state(self, *, note_id: str) -> NoteState:
+        """Get the state of the note
+
+        Endpoint: `/api/notes/state`
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        NoteState
+            Note state
+        """
+        data = {"noteId": note_id}
+        res: INoteState = await self._session.request(
+            Route("POST", "/api/notes/state"), auth=True, json=data
+        )
+        return NoteState(res)
+
+    @cache(group="get_note_state", override=True)
+    async def fetch_state(self, *, note_id: str) -> NoteState:
+        """Get the state of the note.
+
+        update the cache of the :py:meth:`mipac.actions.note.ClientNoteActions.get_state` method
+
+        Endpoint: `/api/notes/state`
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        NoteState
+            Note state
+        """
+        return await self.get_state(note_id=note_id)
+
+    async def add_clips(self, clip_id: str, *, note_id: str) -> bool:
+        """Add a note to the clip
+
+        Endpoint: `/api/clips/add-note`
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            note id
+        clip_id : str
+            clip id
+
+        Returns
+        -------
+        bool
+            success or not
+        """
+        data = {"noteId": note_id, "clipId": clip_id}
+        return bool(
+            await self._session.request(Route("POST", "/api/clips/add-note"), json=data, auth=True)
+        )
+
+    async def create_renote(self, *, note_id: str) -> Note:
+        """Renote a note
+
+        Endpoint: `/api/notes/create`
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            note id
+
+        Returns
+        -------
+        Note
+            Renoted note
+        """
+        body = create_note_body(renote_id=note_id)
+        res: ICreatedNote = await self._session.request(
+            Route("POST", "/api/notes/create"),
+            json=body,
+            auth=True,
+            lower=True,
+        )
+        return Note(res["created_note"], client=self._client)
+
+    async def renote(
+        self,
+        text: str | None = None,
+        visibility: INoteVisibility = "public",
+        visible_user_ids: list[str] | None = None,
+        cw: str | None = None,
+        local_only: bool = False,
+        reaction_acceptance: IReactionAcceptance = None,
+        extract_mentions: bool = True,
+        extract_hashtags: bool = True,
+        extract_emojis: bool = True,
+        channel_id: str | None = None,
+        files: list[MiFile | File | str] | None = None,
+        poll: MiPoll | None = None,
+        *,
+        renote_id: str,
+    ):
+        """Renote a note
+
+        Endpoint: `/api/notes/create`
+
+        Parameters
+        ----------
+        text : str | None, default=None
+            text
+        visibility : INoteVisibility, default='public'
+            Disclosure range
+        visible_user_ids : list[str] | None, default=None
+            List of users to be published
+        cw : str | None, default=None
+            Text to be displayed when warning is given
+        local_only : bool, default=False
+            Whether to show only locally or not
+        reaction_acceptance : IReactionAcceptance, default=None
+            Reaction acceptance setting
+        extract_mentions : bool, default=True
+            Whether to expand the mention
+        extract_hashtags : bool, default=True
+            Whether to expand the hashtag
+        extract_emojis : bool, default=True
+            Whether to expand the emojis
+        channel_id : str | None, default=None
+            Channel ID
+        files : list[MiFile | File | str] | None, default=None
+            The ID list of files to be attached
+        poll : MiPoll | None, default=None
+        """
+
+        body = create_note_body(
+            text=text,
+            visibility=visibility,
+            visible_user_ids=visible_user_ids,
+            cw=cw,
+            local_only=local_only,
+            reaction_acceptance=reaction_acceptance,
+            extract_mentions=extract_mentions,
+            extract_hashtags=extract_hashtags,
+            extract_emojis=extract_emojis,
+            renote_id=renote_id,
+            channel_id=channel_id,
+            files=files,
+            poll=poll,
+        )
+
+        res: ICreatedNote = await self._session.request(
+            Route("POST", "/api/notes/create"),
+            json=body,
+            auth=True,
+            lower=True,
+        )
+
+        return Note(res["created_note"], client=self._client)
+
+    async def reply(
+        self,
+        text: str | None = None,
+        visibility: INoteVisibility = "public",
+        visible_user_ids: list[str] | None = None,
+        cw: str | None = None,
+        local_only: bool = False,
+        reaction_acceptance: IReactionAcceptance = None,
+        extract_mentions: bool = True,
+        extract_hashtags: bool = True,
+        extract_emojis: bool = True,
+        files: list[MiFile | File | str] | None = None,
+        poll: MiPoll | None = None,
+        *,
+        reply_id: str,
+    ) -> Note:
+        body = create_note_body(
+            text=text,
+            visibility=visibility,
+            visible_user_ids=visible_user_ids,
+            cw=cw,
+            local_only=local_only,
+            reaction_acceptance=reaction_acceptance,
+            extract_mentions=extract_mentions,
+            extract_hashtags=extract_hashtags,
+            extract_emojis=extract_emojis,
+            reply_id=reply_id,
+            files=files,
+            poll=poll,
+        )
+        res: ICreatedNote = await self._session.request(
+            Route("POST", "/api/notes/create"),
+            json=body,
+            lower=True,
+            auth=True,
+        )
+        return Note(res["created_note"], client=self._client)
+
+    async def create_quote(
+        self,
+        content: str | None = None,
+        visibility: INoteVisibility = "public",
+        visible_user_ids: list[str] | None = None,
+        cw: str | None = None,
+        local_only: bool = False,
+        reaction_acceptance: IReactionAcceptance = None,
+        extract_mentions: bool = True,
+        extract_hashtags: bool = True,
+        extract_emojis: bool = True,
+        files: list[MiFile | File | str] | None = None,
+        poll: MiPoll | None = None,
+        *,
+        note_id: str,
+    ) -> Note:
+        """Create a note quote.
+
+        Endpoint: `/api/notes/create`
+
+        Parameters
+        ----------
+        content: str | None, default=None
+            text
+        visibility: INoteVisibility, default='public'
+            Disclosure range
+        visible_user_ids: list[str] | None, default=None
+            List of users to be published
+        cw: str | None, default=None
+            Text to be displayed when warning is given
+        local_only: bool, default=False
+            Whether to show only locally or not
+        extract_mentions: bool, default=True
+            Whether to expand the mention
+        extract_hashtags: bool, default=True
+            Whether to expand the hashtag
+        extract_emojis: bool, default=True
+            Whether to expand the emojis
+        files: list[MiFile | File | str] | None, default=None
+            The ID list of files to be attached
+        poll: MiPoll | None, default=None
+            Questionnaire to be created
+        note_id: str | None, default=None
+            Note IDs to target for renote and citations
+        """
+        body = create_note_body(
+            text=content,
+            visibility=visibility,
+            visible_user_ids=visible_user_ids,
+            cw=cw,
+            local_only=local_only,
+            reaction_acceptance=reaction_acceptance,
+            extract_mentions=extract_mentions,
+            extract_hashtags=extract_hashtags,
+            extract_emojis=extract_emojis,
+            renote_id=note_id,
+            files=files,
+            poll=poll,
+        )
+        res: ICreatedNote = await self._session.request(
+            Route("POST", "/api/notes/create"),
+            json=body,
+            auth=True,
+            lower=True,
+        )
+
+        return Note(res["created_note"], client=self._client)
+
+    @cache(group="translate_note")
+    async def translate(
+        self,
+        target_lang: str = "en-US",
+        *,
+        note_id: str,
+    ) -> NoteTranslateResult:
+        """Translate a note
+
+        Endpoint: `/api/notes/translate`
+
+        Parameters
+        ----------
+        note_id : str | None, default=None
+            Note ID to target for translation
+        target_lang : str, default='en'
+            Target language
+
+        Returns
+        -------
+        NoteTranslateResult
+            Translated result
+        """
+        data = {"noteId": note_id, "targetLang": target_lang}
+        res: INoteTranslateResult = await self._session.request(
+            Route("POST", "/api/notes/translate"), json=data, auth=True
+        )
+        if isinstance(res, dict):
+            return NoteTranslateResult(res)
+        APIError(f"Translate Error: {res}", res if isinstance(res, int) else 204).raise_error()
+
+    async def un_renote(self, *, note_id: str) -> bool:
+        """Releases the note renote for the specified Id
+
+        Parameters
+        ----------
+        note_id : str | None, optional
+            Target note Id., by default None
+
+        Returns
+        -------
+        bool
+            Whether the release was successful
+        """
+        body = {"noteId": note_id}
+        res: bool = await self._session.request(
+            Route("POST", "/api/notes/unrenote"), auth=True, json=body
+        )
+        return res
+
+
+class ClientNoteActions(SharedNoteActions):
+    def __init__(
+        self,
+        note_id: str,
+        *,
+        session: HTTPClient,
+        client: ClientManager,
+    ):
+        super().__init__(session, client)
+        self._note_id: str = note_id
+
+    @override
+    async def get_children(
+        self,
+        limit: int = 100,
+        since_id: str | None = None,
+        untilId: str | None = None,
+        *,
+        note_id: str | None = None,
+    ) -> list[Note]:
+        note_id = note_id or self._note_id
+
+        return await super().get_children(
+            limit=limit, since_id=since_id, untilId=untilId, note_id=note_id
+        )
+
+    @override
+    async def fetch_children(
+        self,
+        limit: int = 100,
+        since_id: str | None = None,
+        untilId: str | None = None,
+        *,
         note_id: str | None = None,
     ) -> list[Note]:
         """Get children of the note.
@@ -156,16 +782,18 @@ class ClientNoteActions(AbstractAction):
             Children of the note
         """
         note_id = note_id or self._note_id
-        return await self.get_children(
+        return await super().fetch_children(
             limit=limit, since_id=since_id, untilId=untilId, note_id=note_id
         )
 
+    @override
     async def get_all_children(
         self,
         since_id: str | None = None,
         untilId: str | None = None,
+        *,
         note_id: str | None = None,
-    ) -> AsyncGenerator[Note, None]:
+    ) -> AsyncGenerator[Note, None]:  # TODO: limitをサポート
         """Get all children of the note
 
         Endpoint: `/api/notes/children`
@@ -184,30 +812,15 @@ class ClientNoteActions(AbstractAction):
         AsyncGenerator[Note, None]
             Children of the note
         """
-        limit = 100
-
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
+        async for i in super().get_all_children(
+            since_id=since_id, untilId=untilId, note_id=note_id
+        ):
+            yield i
 
-        data = {
-            "noteId": note_id,
-            "limit": limit,
-            "sinceId": since_id,
-            "untilId": untilId,
-        }
-
-        pagination = Pagination[INote](
-            self._session, Route("POST", "/api/notes/children"), json=data
-        )
-
-        while pagination.is_final is False:
-            res_notes = await pagination.next()
-            for note in res_notes:
-                yield Note(note, self._client)
-
-    async def get_clips(self, note_id: str | None = None) -> list[Clip]:
+    @override
+    async def get_clips(self, *, note_id: str | None = None) -> list[Clip]:
         """Get the clips of the note
 
         Endpoint: `/api/notes/clips`
@@ -225,15 +838,9 @@ class ClientNoteActions(AbstractAction):
 
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
+        return await super().get_clips(note_id=note_id)
 
-        data = {"noteId": note_id}
-        res: list[IClip] = await self._session.request(
-            Route("POST", "/api/notes/clips"), json=data, auth=True
-        )
-        return [Clip(clip, client=self._client) for clip in res]
-
+    @override
     async def get_conversation(
         self, limit: int = 10, offset: int = 0, *, note_id: str | None = None
     ) -> list[Note]:
@@ -257,15 +864,9 @@ class ClientNoteActions(AbstractAction):
         """
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
+        return await super().get_conversation(limit=limit, offset=offset, note_id=note_id)
 
-        data = {"noteId": note_id, "limit": limit, "offset": offset}
-        res: list[INote] = await self._session.request(
-            Route("POST", "/api/notes/conversation"), json=data, auth=True
-        )
-        return [Note(note, client=self._client) for note in res]
-
+    @override
     async def delete(self, *, note_id: str | None = None) -> bool:
         """Delete a note
 
@@ -281,16 +882,11 @@ class ClientNoteActions(AbstractAction):
         bool
             success or not
         """
-
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
+        return await super().delete(note_id=note_id)
 
-        data = {"noteId": note_id}
-        res = await self._session.request(Route("POST", "/api/notes/delete"), json=data, auth=True)
-        return bool(res)
-
+    @override
     async def get_reactions(
         self,
         type: str | None = None,
@@ -302,13 +898,15 @@ class ClientNoteActions(AbstractAction):
     ) -> list[NoteReaction]:
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
-
-        return await self._client.note.reaction.action.get_reactions(
-            type=type, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
+        return await super().get_reactions(
+            type=type,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+            note_id=note_id,
         )
 
+    @override
     async def fetch_reactions(
         self,
         type: str | None = None,
@@ -320,13 +918,15 @@ class ClientNoteActions(AbstractAction):
     ) -> list[NoteReaction]:
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
-
-        return await self._client.note.reaction.action.fetch_reactions(
-            note_id=note_id, type=type, limit=limit, since_id=since_id, until_id=until_id
+        return await super().fetch_reactions(
+            type=type,
+            limit=limit,
+            since_id=since_id,
+            until_id=until_id,
+            note_id=note_id,
         )
 
+    @override
     async def get_renotes(
         self,
         limit: int = 10,
@@ -357,21 +957,11 @@ class ClientNoteActions(AbstractAction):
         """
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
-
-        data = {
-            "noteId": note_id,
-            "limit": limit,
-            "sinceId": since_id,
-            "untilId": until_id,
-        }
-
-        res: list[INote] = await self._session.request(
-            Route("POST", "/api/notes/renotes"), json=data, auth=True
+        return await super().get_renotes(
+            limit=limit, since_id=since_id, until_id=until_id, note_id=note_id
         )
-        return [Note(note, client=self._client) for note in res]
 
+    @override
     async def get_replies(
         self,
         since_id: str | None = None,
@@ -402,16 +992,9 @@ class ClientNoteActions(AbstractAction):
         """
         note_id = note_id or self._note_id
 
-        data = {
-            "noteId": note_id,
-            "sinceId": since_id,
-            "untilId": until_id,
-            "limit": limit,
-        }
-        res: list[INote] = await self._session.request(
-            Route("POST", "/api/notes/replies"), json=data, auth=True
+        return await super().get_replies(
+            since_id=since_id, until_id=until_id, limit=limit, note_id=note_id
         )
-        return [Note(note, client=self._client) for note in res]
 
     async def get_all_replies(
         self,
@@ -419,7 +1002,7 @@ class ClientNoteActions(AbstractAction):
         until_id: str | None = None,
         *,
         note_id: str | None = None,
-    ) -> AsyncGenerator[Note, None]:
+    ) -> AsyncGenerator[Note, None]:  # TODO: limitをサポート
         """Get replies to the note
 
         Endpoint: `/api/notes/replies`
@@ -438,30 +1021,15 @@ class ClientNoteActions(AbstractAction):
         AsyncGenerator[Note, None]
             replies
         """
-
-        limit = 100
-
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
+        async for i in super().get_all_replies(
+            since_id=since_id, until_id=until_id, note_id=note_id
+        ):
+            yield i
 
-        body = {"noteId": note_id, "sinceId": since_id, "untilId": until_id, "limit": limit}
-
-        pagination = Pagination[INote](
-            self._session, Route("POST", "/api/notes/replies"), json=body
-        )
-
-        while True:
-            res_notes = await pagination.next()
-            for res_note in res_notes:
-                yield Note(res_note, client=self._client)
-
-            if pagination.is_final:
-                break
-
-    @cache(group="get_note_state")
-    async def get_state(self, note_id: str | None = None) -> NoteState:
+    @override
+    async def get_state(self, *, note_id: str | None = None) -> NoteState:
         """Get the state of the note
 
         Endpoint: `/api/notes/state`
@@ -478,17 +1046,10 @@ class ClientNoteActions(AbstractAction):
         """
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
+        return await super().get_state(note_id=note_id)
 
-        data = {"noteId": note_id}
-        res: INoteState = await self._session.request(
-            Route("POST", "/api/notes/state"), auth=True, json=data
-        )
-        return NoteState(res)
-
-    @cache(group="get_note_state", override=True)
-    async def fetch_state(self, note_id: str | None = None) -> NoteState:
+    @override
+    async def fetch_state(self, *, note_id: str | None = None) -> NoteState:
         """Get the state of the note.
 
         update the cache of the :py:meth:`mipac.actions.note.ClientNoteActions.get_state` method
@@ -506,9 +1067,9 @@ class ClientNoteActions(AbstractAction):
             Note state
         """
         note_id = note_id or self._note_id
-        return await self.get_state(note_id=note_id)
+        return await super().fetch_state(note_id=note_id)
 
-    async def add_clips(self, clip_id: str, note_id: str | None = None) -> bool:
+    async def add_clips(self, clip_id: str, *, note_id: str | None = None) -> bool:
         """Add a note to the clip
 
         Endpoint: `/api/clips/add-note`
@@ -528,15 +1089,10 @@ class ClientNoteActions(AbstractAction):
 
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
+        return await super().add_clips(clip_id=clip_id, note_id=note_id)
 
-        data = {"noteId": note_id, "clipId": clip_id}
-        return bool(
-            await self._session.request(Route("POST", "/api/clips/add-note"), json=data, auth=True)
-        )
-
-    async def create_renote(self, note_id: str | None = None) -> Note:
+    @override
+    async def create_renote(self, *, note_id: str | None = None) -> Note:
         """Renote a note
 
         Endpoint: `/api/notes/create`
@@ -552,20 +1108,11 @@ class ClientNoteActions(AbstractAction):
             Renoted note
         """
 
-        note_id = self._note_id or note_id
+        note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
+        return await super().create_renote(note_id=note_id)
 
-        body = create_note_body(renote_id=note_id)
-        res: ICreatedNote = await self._session.request(
-            Route("POST", "/api/notes/create"),
-            json=body,
-            auth=True,
-            lower=True,
-        )
-        return Note(res["created_note"], client=self._client)
-
+    @override
     async def renote(
         self,
         text: str | None = None,
@@ -615,7 +1162,7 @@ class ClientNoteActions(AbstractAction):
         """
         renote_id = renote_id or self._note_id
 
-        body = create_note_body(
+        return await super().renote(
             text=text,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
@@ -625,21 +1172,13 @@ class ClientNoteActions(AbstractAction):
             extract_mentions=extract_mentions,
             extract_hashtags=extract_hashtags,
             extract_emojis=extract_emojis,
-            renote_id=renote_id,
             channel_id=channel_id,
             files=files,
             poll=poll,
+            renote_id=renote_id,
         )
 
-        res: ICreatedNote = await self._session.request(
-            Route("POST", "/api/notes/create"),
-            json=body,
-            auth=True,
-            lower=True,
-        )
-
-        return Note(res["created_note"], client=self._client)
-
+    @override
     async def reply(
         self,
         text: str | None = None,
@@ -653,14 +1192,12 @@ class ClientNoteActions(AbstractAction):
         extract_emojis: bool = True,
         files: list[MiFile | File | str] | None = None,
         poll: MiPoll | None = None,
+        *,
         reply_id: str | None = None,
     ) -> Note:
         reply_id = reply_id or self._note_id
 
-        if reply_id is None:
-            raise ValueError("reply_id is required")
-
-        body = create_note_body(
+        return await super().reply(
             text=text,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
@@ -670,18 +1207,12 @@ class ClientNoteActions(AbstractAction):
             extract_mentions=extract_mentions,
             extract_hashtags=extract_hashtags,
             extract_emojis=extract_emojis,
-            reply_id=reply_id,
             files=files,
             poll=poll,
+            reply_id=reply_id,
         )
-        res: ICreatedNote = await self._session.request(
-            Route("POST", "/api/notes/create"),
-            json=body,
-            lower=True,
-            auth=True,
-        )
-        return Note(res["created_note"], client=self._client)
 
+    @override
     async def create_quote(
         self,
         content: str | None = None,
@@ -695,6 +1226,7 @@ class ClientNoteActions(AbstractAction):
         extract_emojis: bool = True,
         files: list[MiFile | File | str] | None = None,
         poll: MiPoll | None = None,
+        *,
         note_id: str | None = None,
     ) -> Note:
         """Create a note quote.
@@ -729,11 +1261,8 @@ class ClientNoteActions(AbstractAction):
 
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
-
-        body = create_note_body(
-            text=content,
+        return await super().create_quote(
+            content=content,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
             cw=cw,
@@ -742,24 +1271,17 @@ class ClientNoteActions(AbstractAction):
             extract_mentions=extract_mentions,
             extract_hashtags=extract_hashtags,
             extract_emojis=extract_emojis,
-            renote_id=note_id,
             files=files,
             poll=poll,
-        )
-        res: ICreatedNote = await self._session.request(
-            Route("POST", "/api/notes/create"),
-            json=body,
-            auth=True,
-            lower=True,
+            note_id=note_id,
         )
 
-        return Note(res["created_note"], client=self._client)
-
-    @cache(group="translate_note")
+    @override
     async def translate(
         self,
-        note_id: str | None = None,
         target_lang: str = "en-US",
+        *,
+        note_id: str | None = None,
     ) -> NoteTranslateResult:
         """Translate a note
 
@@ -779,18 +1301,10 @@ class ClientNoteActions(AbstractAction):
         """
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
+        return await super().translate(target_lang=target_lang, note_id=note_id)
 
-        data = {"noteId": note_id, "targetLang": target_lang}
-        res: INoteTranslateResult = await self._session.request(
-            Route("POST", "/api/notes/translate"), json=data, auth=True
-        )
-        if isinstance(res, dict):
-            return NoteTranslateResult(res)
-        APIError(f"Translate Error: {res}", res if isinstance(res, int) else 204).raise_error()
-
-    async def un_renote(self, note_id: str | None = None) -> bool:
+    @override
+    async def un_renote(self, *, note_id: str | None = None) -> bool:
         """Releases the note renote for the specified Id
 
         Parameters
@@ -805,25 +1319,17 @@ class ClientNoteActions(AbstractAction):
         """
         note_id = note_id or self._note_id
 
-        if note_id is None:
-            raise ValueError("note_id is required")
-
-        body = {"noteId": note_id}
-        res: bool = await self._session.request(
-            Route("POST", "/api/notes/unrenote"), auth=True, json=body
-        )
-        return res
+        return await super().un_renote(note_id=note_id)
 
 
-class NoteActions(ClientNoteActions):
+class NoteActions(SharedNoteActions):
     def __init__(
         self,
-        note_id: str | None = None,
         *,
         session: HTTPClient,
         client: ClientManager,
     ):
-        super().__init__(note_id=note_id, session=session, client=client)
+        super().__init__(session=session, client=client)
 
     async def create(
         self,
@@ -868,51 +1374,6 @@ class NoteActions(ClientNoteActions):
         )
 
         return Note(raw_note=raw_created_note["created_note"], client=self._client)
-
-    @override
-    async def get_children(
-        self,
-        note_id: str,
-        limit: int = 100,
-        since_id: str | None = None,
-        untilId: str | None = None,
-    ) -> list[Note]:
-        return await super().get_children(
-            note_id=note_id, limit=limit, since_id=since_id, untilId=untilId
-        )
-
-    @override
-    async def fetch_children(
-        self,
-        note_id: str,
-        limit: int = 100,
-        since_id: str | None = None,
-        untilId: str | None = None,
-    ) -> list[Note]:
-        return await super().fetch_children(
-            note_id=note_id, limit=limit, since_id=since_id, untilId=untilId
-        )
-
-    @override
-    async def get_all_children(
-        self, note_id: str, since_id: str | None = None, untilId: str | None = None
-    ) -> AsyncGenerator[Note, None] | list[Note]:
-        async for i in super().get_all_children(
-            note_id=note_id, since_id=since_id, untilId=untilId
-        ):
-            yield i
-
-    @override
-    async def get_clips(self, note_id: str) -> list[Clip]:
-        return await super().get_clips(note_id=note_id)
-
-    @override
-    async def get_conversation(self, note_id: str, limit: int = 10, offset: int = 0) -> list[Note]:
-        return await super().get_conversation(note_id=note_id, limit=limit, offset=offset)
-
-    @override
-    async def delete(self, note_id: str) -> bool:
-        return await super().delete(note_id=note_id)
 
     async def get_featured(
         self, limit: int = 10, until_id: str | None = None, channel_id: str | None = None
@@ -1091,68 +1552,6 @@ class NoteActions(ClientNoteActions):
         )
 
         return [Note(note, client=self._client) for note in res]
-
-    @override
-    async def get_reactions(
-        self,
-        note_id: str,
-        type: str | None = None,
-        limit: int = 10,
-        since_id: str | None = None,
-        until_id: str | None = None,
-    ) -> list[NoteReaction]:
-        return await super().get_reactions(
-            note_id=note_id, type=type, limit=limit, since_id=since_id, until_id=until_id
-        )
-
-    @override
-    async def fetch_reactions(
-        self,
-        note_id: str,
-        type: str | None = None,
-        limit: int = 10,
-        since_id: str | None = None,
-        until_id: str | None = None,
-    ) -> list[NoteReaction]:
-        return await super().fetch_reactions(
-            note_id=note_id, type=type, limit=limit, since_id=since_id, until_id=until_id
-        )
-
-    @override
-    async def get_renotes(
-        self,
-        note_id: str,
-        limit: int = 10,
-        since_id: str | None = None,
-        until_id: str | None = None,
-    ) -> list[Note]:
-        return await super().get_renotes(
-            note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
-        )
-
-    @override
-    async def get_replies(
-        self,
-        note_id: str,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        limit: int = 10,
-    ) -> list[Note]:
-        return await super().get_replies(
-            note_id=note_id, since_id=since_id, until_id=until_id, limit=limit
-        )
-
-    @override
-    async def get_all_replies(
-        self,
-        note_id: str,
-        since_id: str | None = None,
-        until_id: str | None = None,
-    ) -> AsyncGenerator[Note, None]:
-        async for i in super().get_all_replies(
-            note_id=note_id, since_id=since_id, until_id=until_id
-        ):
-            yield i
 
     async def search_by_tag(
         self,
