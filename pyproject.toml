@@ -8,6 +8,10 @@ _version.py
 '''
 
 
+[tool.pyright]
+include = ["mipac"]
+exclude = ["mipac/_version.py"]
+
 [tool.isort]
 profile = "black"
 line_length = 99
