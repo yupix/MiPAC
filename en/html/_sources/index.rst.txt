@@ -1557,6 +1557,24 @@ ClientUserListActions
     :members:
 
 
+SharedPartialUserListActions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.users.list.SharedPartialUserListActions
+
+.. autoclass:: mipac.actions.users.list.SharedPartialUserListActions
+    :members:
+
+
+SharedUserListActions
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.users.list.SharedUserListActions
+
+.. autoclass:: mipac.actions.users.list.SharedUserListActions
+    :members:
+
+
 UserListActions
 ~~~~~~~~~~~~~~~
 
