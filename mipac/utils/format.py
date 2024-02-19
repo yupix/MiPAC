@@ -106,18 +106,18 @@ def upper_to_lower(
     """
     Parameters
     ----------
-    data: dict
+    data: dict[str, Any]
         小文字にしたいkeyがあるdict
-    field: dict, default=None
+    field: dict[str, Any] | None, default=None
         謎
     nest: bool, default=True
         ネストされたdictのkeyも小文字にするか否か
-    replace_list: dict, default=None
+    replace_list: dict[str, Any] | None, default=None
         dictのkey名を特定の物に置き換える
 
     Returns
     -------
-    field : dict
+    field : dict[str, Any]
         小文字になった, key名が変更されたdict
     """
     if data is None:
@@ -130,12 +130,12 @@ def upper_to_lower(
     for attr in data:
         pattern = re.compile("[A-Z]")
         large = [i.group().lower() for i in pattern.finditer(attr)]
-        result = [None] * (len(large + pattern.split(attr)))
+        result: list[Any | str] = [None] * (len(large + pattern.split(attr)))
         result[::2] = pattern.split(attr)
         result[1::2] = ["_" + i.lower() for i in large]
         default_key = "".join(result)
-        if replace_list.get(attr):
-            default_key = default_key.replace(attr, replace_list.get(attr))
+        if replaced_value := replace_list.get(attr):
+            default_key = default_key.replace(attr, replaced_value)
         field[default_key] = data[attr]
         if isinstance(field[default_key], dict) and nest:
             field[default_key] = upper_to_lower(field[default_key])
@@ -149,7 +149,7 @@ def upper_to_lower(
 def str_lower(text: str):
     pattern = re.compile("[A-Z]")
     large = [i.group().lower() for i in pattern.finditer(text)]
-    result = [None] * (len(large + pattern.split(text)))
+    result: list[Any | str] = [None] * (len(large + pattern.split(text)))
     result[::2] = pattern.split(text)
     result[1::2] = ["_" + i.lower() for i in large]
     return "".join(result)

@@ -201,7 +201,7 @@ class SharedFolderActions(AbstractAction):
 
         return [Folder(raw_folder=raw_folder, client=self._client) for raw_folder in raw_folders]
 
-    async def create(self, name: str | None = None, parent_id: str | None = None) -> Folder:
+    async def create(self, name: str | None = None, *, parent_id: str | None = None) -> Folder:
         """Create a new folder
 
         Endpoint: `/api/drive/folders/create`
@@ -324,7 +324,7 @@ class ClientFolderActions(SharedFolderActions):
         )
 
     @override
-    async def create(self, name: str | None = None, parent_id: str | None = None) -> Folder:
+    async def create(self, name: str | None = None, *, parent_id: str | None = None) -> Folder:
         """Create a new folder
 
         Endpoint: `/api/drive/folders/create`
@@ -346,7 +346,7 @@ class ClientFolderActions(SharedFolderActions):
         return await super().create(name=name, parent_id=parent_id)
 
     @override
-    async def delete(self, folder_id: str | None = None) -> bool:
+    async def delete(self, *, folder_id: str | None = None) -> bool:
         """Delete a folder
 
         Endpoint: `/api/drive/folders/delete`

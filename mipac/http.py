@@ -4,7 +4,7 @@ import json
 import logging
 import re
 import sys
-from typing import Literal, TypeVar
+from typing import Any, Literal
 
 import aiohttp
 
@@ -17,9 +17,6 @@ from mipac.utils.format import remove_dict_empty, upper_to_lower
 from mipac.utils.util import COLORS, MISSING, _from_json
 
 _log = logging.getLogger(__name__)
-
-
-R = TypeVar("R")
 
 
 class MisskeyClientWebSocketResponse(aiohttp.ClientWebSocketResponse):
@@ -70,7 +67,7 @@ class HTTPClient:
         remove_none: bool = True,
         lower: bool = True,
         **kwargs,
-    ) -> R:
+    ) -> Any:
         headers: dict[str, str] = {
             "User-Agent": self.user_agent,
         }
