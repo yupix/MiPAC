@@ -1494,6 +1494,15 @@ ClientUserActions
     :members:
 
 
+SharedUserActions
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.user.SharedUserActions
+
+.. autoclass:: mipac.actions.user.SharedUserActions
+    :members:
+
+
 UserActions
 ~~~~~~~~~~~
 
