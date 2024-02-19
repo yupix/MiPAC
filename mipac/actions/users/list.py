@@ -212,7 +212,6 @@ class SharedUserListActions(SharedPartialUserListActions):
         )
         return res
 
-
     async def show(self, for_public: bool = False, *, list_id: str) -> UserList:
         """Show a user list
 
@@ -426,7 +425,6 @@ class SharedUserListActions(SharedPartialUserListActions):
             with_files=with_files,
         ):
             yield i
-
 
 
 class ClientUserListActions(SharedUserListActions):
