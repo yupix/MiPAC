@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 from mipac.models.lite.role import PartialRole
 from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
-from mipac.types.roles import IMeRole, IRole, IRolePolicies, IRolePolicieValue, IRoleUser
+from mipac.types.roles import IMeRole, IRole, IRolePolicies, IRoleUser
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
@@ -77,90 +77,105 @@ class MeRole:
         return not self.__eq__(__value)
 
 
-class RolePolicyValue:
-    def __init__(self, policiy_value_data: IRolePolicieValue) -> None:
-        self.__policy_value_data = policiy_value_data
-
-    @property
-    def value(self) -> int:
-        return self.__policy_value_data.get("value")
-
-    @property
-    def use_default(self) -> bool:
-        return self.__policy_value_data.get("use_default")
-
-    @property
-    def priority(self) -> int | None:
-        return self.__policy_value_data.get("priority")
-
-
 class RolePolicies:
     def __init__(self, role_policies_data: IRolePolicies) -> None:
         self.__role_policies_data = role_policies_data
 
     @property
-    def antenna_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["antenna_limit"])
+    def gtl_available(self) -> bool:
+        return self.__role_policies_data["gtl_available"]
 
     @property
-    def gtl_available(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["gtl_available"])
+    def ltl_available(self) -> bool:
+        return self.__role_policies_data["ltl_available"]
 
     @property
-    def ltl_available(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["ltl_available"])
+    def can_public_note(self) -> bool:
+        return self.__role_policies_data["can_public_note"]
 
     @property
-    def can_public_note(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["can_public_note"])
+    def can_invite(self) -> bool:
+        return self.__role_policies_data["can_invite"]
 
     @property
-    def drive_capacity_mb(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["drive_capacity_mb"])
+    def invite_limit(self) -> int:
+        return self.__role_policies_data["invite_limit"]
 
     @property
-    def can_invite(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["can_invite"])
+    def invite_limit_cycle(self) -> int:
+        return self.__role_policies_data["invite_limit_cycle"]
 
     @property
-    def can_manage_custom_emojis(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["can_manage_custom_emojis"])
+    def invite_expiration_time(self) -> int:
+        return self.__role_policies_data["invite_expiration_time"]
 
     @property
-    def can_hide_ads(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["can_hide_ads"])
+    def can_manage_custom_emojis(self) -> bool:
+        return self.__role_policies_data["can_manage_custom_emojis"]
 
     @property
-    def pin_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["pin_limit"])
+    def can_manage_avatar_decorations(self) -> bool:
+        return self.__role_policies_data["can_manage_avatar_decorations"]
 
     @property
-    def word_mute_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["word_mute_limit"])
+    def can_search_notes(self) -> bool:
+        return self.__role_policies_data["can_search_notes"]
 
     @property
-    def webhook_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["webhook_limit"])
+    def can_use_translator(self) -> bool:
+        return self.__role_policies_data["can_use_translator"]
 
     @property
-    def clip_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["clip_limit"])
+    def can_hide_ads(self) -> bool:
+        return self.__role_policies_data["can_hide_ads"]
 
     @property
-    def note_each_clips_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["note_each_clips_limit"])
+    def drive_capacity_mb(self) -> int:
+        return self.__role_policies_data["drive_capacity_mb"]
 
     @property
-    def user_list_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["user_list_limit"])
+    def always_mark_nfsw(self) -> bool:
+        return self.__role_policies_data["always_mark_nfsw"]
 
     @property
-    def user_each_user_lists_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["user_each_user_lists_limit"])
+    def pin_limit(self) -> int:
+        return self.__role_policies_data["pin_limit"]
 
     @property
-    def rate_limit_factor(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data["rate_limit_factor"])
+    def antenna_limit(self) -> int:
+        return self.__role_policies_data["antenna_limit"]
+
+    @property
+    def word_mute_limit(self) -> int:
+        return self.__role_policies_data["word_mute_limit"]
+
+    @property
+    def webhook_limit(self) -> int:
+        return self.__role_policies_data["webhook_limit"]
+
+    @property
+    def clip_limit(self) -> int:
+        return self.__role_policies_data["clip_limit"]
+
+    @property
+    def note_each_clips_limit(self) -> int:
+        return self.__role_policies_data["note_each_clips_limit"]
+
+    @property
+    def user_list_limit(self) -> int:
+        return self.__role_policies_data["user_list_limit"]
+
+    @property
+    def user_each_user_lists_limit(self) -> int:
+        return self.__role_policies_data["user_each_user_lists_limit"]
+
+    @property
+    def rate_limit_factor(self) -> int:
+        return self.__role_policies_data["rate_limit_factor"]
+
+    @property
+    def avatar_decoration_limit(self) -> int:
+        return self.__role_policies_data["avatar_decoration_limit"]
 
 
 class Role(PartialRole[IRole]):
