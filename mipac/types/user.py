@@ -16,7 +16,7 @@ IFfVisibility = Literal["public", "followers", "private"]
 IUserNotify = Literal["normal", "none"]
 ITwoFactorBackupCodesStock = Literal["full", "partial", "none"]
 NotificationRecieveConfigOption = Literal[
-    "all", "following", "follower", "mutualFollow", "list", "never"
+    "all", "following", "follower", "mutualFollow", "never"
 ]  # Misskey側が間違っている(Receiveのミススペル?)ので混乱を招かないようにこっちも統一してある
 EmailNotificationTypes = Literal["mention", "reply", "quote", "follow", "receiveFollowRequest"]
 
@@ -24,6 +24,7 @@ EmailNotificationTypes = Literal["mention", "reply", "quote", "follow", "receive
 class IUserField(TypedDict):
     name: str
     value: str
+
 
 class ISignin(TypedDict):
     id: str
@@ -81,18 +82,26 @@ class NotificationRecieveConfigType(TypedDict):
     type: NotificationRecieveConfigOption
 
 
+class NotificationRecieveConfigWithUserList(TypedDict):
+    type: NotificationRecieveConfigOption
+    user_list_id: str
+
+
 class NotificationRecieveConfig(TypedDict):
-    app: NotificationRecieveConfigType
-    quote: NotificationRecieveConfigType
-    reply: NotificationRecieveConfigType
-    follow: NotificationRecieveConfigType
-    renote: NotificationRecieveConfigType
-    mention: NotificationRecieveConfigType
-    reaction: NotificationRecieveConfigType
-    pollEnded: NotificationRecieveConfigType
-    achievementEarned: NotificationRecieveConfigType
-    receiveFollowRequest: NotificationRecieveConfigType
-    followRequestAccepted: NotificationRecieveConfigType
+    note: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    follow: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    mention: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    reply: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    renote: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    quote: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    reaction: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    pollEnded: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    receive_follow_request: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    follow_request_accepted: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    role_assigned: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    achievement_earned: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    app: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    test: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
 
 
 class IUserSecurityKey(TypedDict):
