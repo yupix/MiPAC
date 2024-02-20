@@ -40,12 +40,12 @@ GalleryPost
     :members:
 
 
-MutedUser
-~~~~~~~~~
+Muting
+~~~~~~
 
-.. attributetable:: mipac.models.mute.MutedUser
+.. attributetable:: mipac.models.mute.Muting
 
-.. autoclass:: mipac.models.mute.MutedUser
+.. autoclass:: mipac.models.mute.Muting
     :members:
 
 
@@ -73,15 +73,6 @@ AnnouncementDetailed
 .. attributetable:: mipac.models.announcement.AnnouncementDetailed
 
 .. autoclass:: mipac.models.announcement.AnnouncementDetailed
-    :members:
-
-
-Header
-~~~~~~
-
-.. attributetable:: mipac.models.note.Header
-
-.. autoclass:: mipac.models.note.Header
     :members:
 
 
@@ -460,15 +451,6 @@ PollChoice
 .. attributetable:: mipac.models.poll.PollChoice
 
 .. autoclass:: mipac.models.poll.PollChoice
-    :members:
-
-
-MeRole
-~~~~~~
-
-.. attributetable:: mipac.models.roles.MeRole
-
-.. autoclass:: mipac.models.roles.MeRole
     :members:
 
 
@@ -1837,12 +1819,12 @@ IGalleryPost
     :members:
 
 
-IMutedUser
-~~~~~~~~~~
+IMuting
+~~~~~~~
 
-.. attributetable:: mipac.types.mute.IMutedUser
+.. attributetable:: mipac.types.mute.IMuting
 
-.. autoclass:: mipac.types.mute.IMutedUser
+.. autoclass:: mipac.types.mute.IMuting
     :members:
 
 
@@ -2455,21 +2437,6 @@ IPartialAd
 .. attributetable:: mipac.types.ads.IPartialAd
 
 .. autoclass:: mipac.types.ads.IPartialAd
-    :members:
-
-
-is_me_role
-~~~~~~~~~~
-
-.. autofunction:: mipac.types.roles.is_me_role
-
-
-IMeRole
-~~~~~~~
-
-.. attributetable:: mipac.types.roles.IMeRole
-
-.. autoclass:: mipac.types.roles.IMeRole
     :members:
 
 
@@ -3823,12 +3790,6 @@ check_multi_arg
 ~~~~~~~~~~~~~~~
 
 .. autofunction:: mipac.utils.util.check_multi_arg
-
-
-credentials_required
-~~~~~~~~~~~~~~~~~~~~
-
-.. autofunction:: mipac.utils.util.credentials_required
 
 
 deprecated
