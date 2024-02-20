@@ -740,6 +740,15 @@ BlockingManager
     :members:
 
 
+ClinetBlockingManager
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.blocking.ClinetBlockingManager
+
+.. autoclass:: mipac.manager.blocking.ClinetBlockingManager
+    :members:
+
+
 ClientInviteManager
 ~~~~~~~~~~~~~~~~~~~
 
@@ -1188,6 +1197,24 @@ BlockingActions
 .. attributetable:: mipac.actions.blocking.BlockingActions
 
 .. autoclass:: mipac.actions.blocking.BlockingActions
+    :members:
+
+
+ClientBlockingActions
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.blocking.ClientBlockingActions
+
+.. autoclass:: mipac.actions.blocking.ClientBlockingActions
+    :members:
+
+
+SharedBlockingActions
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.blocking.SharedBlockingActions
+
+.. autoclass:: mipac.actions.blocking.SharedBlockingActions
     :members:
 
 
