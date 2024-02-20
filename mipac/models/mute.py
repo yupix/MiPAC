@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.user import UserDetailedNotMe
 from mipac.types.mute import IMutedUser
@@ -39,6 +39,9 @@ class MutedUser:
     @property
     def mutee(self) -> UserDetailedNotMe:
         return UserDetailedNotMe(self.__raw_mute_user["mutee"], client=self.__client)
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_mute_user.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, MutedUser) and self.id == __value.id

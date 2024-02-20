@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.role import PartialRole
 from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
@@ -36,6 +36,9 @@ class RoleUser:
             if self.__role_user["expires_at"]
             else None
         )
+
+    def _get(self, key: str) -> Any | None:
+        return self.__role_user.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, RoleUser) and self.id == __value.id
@@ -144,6 +147,9 @@ class RolePolicies:
     def avatar_decoration_limit(self) -> int:
         return self.__role_policies_data["avatar_decoration_limit"]
 
+    def _get(self, key: str) -> Any | None:
+        return self.__role_policies_data.get(key)
+
 
 class Role(PartialRole[IRole]):
     def __init__(self, role_data: IRole, *, client: ClientManager) -> None:
@@ -188,3 +194,6 @@ class Role(PartialRole[IRole]):
     @property
     def users_count(self) -> int:
         return self._raw_role["users_count"]
+
+    def _get(self, key: str) -> Any | None:
+        return self._raw_role.get(key)

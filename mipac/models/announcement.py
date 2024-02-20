@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.types.announcement import (
     AnnoucementDisplay,
@@ -80,8 +80,11 @@ class Announcement:
         return not self.__eq__(__value)
 
     @property
-    def action(self) -> ClientAdminAnnouncementManager:
+    def api(self) -> ClientAdminAnnouncementManager:
         return self.__client.admin._create_client_announcement_manager(announce_id=self.id)
+
+    def _get(self, key: str) -> Any | None:
+        return self.__announcement.get(key)
 
 
 class AnnouncementDetailed:
@@ -157,5 +160,8 @@ class AnnouncementDetailed:
         return not self.__eq__(__value)
 
     @property
-    def action(self) -> ClientAdminAnnouncementManager:
+    def api(self) -> ClientAdminAnnouncementManager:
         return self.__client.admin._create_client_announcement_manager(announce_id=self.id)
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_announcement.get(key)

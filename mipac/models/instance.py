@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.types.instance import IFederationInstance
 
@@ -108,6 +108,9 @@ class FederationInstance:
     @property
     def last_communicated_at(self) -> str | None:
         return self.__instance.get("last_communicated_at")
+
+    def _get(self, key: str) -> Any | None:
+        return self.__instance.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, FederationInstance) and self.id == __value.id

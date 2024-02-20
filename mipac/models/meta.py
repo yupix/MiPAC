@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.meta import PartialMeta
 from mipac.types.meta import (
@@ -50,6 +50,9 @@ class Features:
     @property
     def miauth(self) -> bool:
         return self.__raw_features["miauth"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_features.get(key)
 
 
 class Meta(PartialMeta[IMeta]):
@@ -333,3 +336,6 @@ class AdminMeta:
     @property
     def object_storage_endpoint(self) -> str:
         return self.__raw_meta["object_storage_endpoint"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_meta.get(key)

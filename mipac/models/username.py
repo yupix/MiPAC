@@ -1,3 +1,4 @@
+from typing import Any
 from mipac.types.username import IUsernameAvailable
 
 
@@ -8,3 +9,6 @@ class UsernameAvailable:
     @property
     def available(self) -> bool:
         return self.__raw_username_available["available"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_username_available.get(key)

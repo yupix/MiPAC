@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
@@ -44,6 +44,9 @@ class Notification:
     @property
     def is_read(self) -> bool:
         return self.__notification["is_read"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__notification.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, Notification) and self.id == __value.id

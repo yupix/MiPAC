@@ -41,6 +41,10 @@ class PartialAd[T: IPartialAd]:
     def day_of_week(self) -> int:
         return self._raw_ad["day_of_week"]
 
+    @property
+    def api(self) -> ClientAdminAdManager:
+        return self._client.admin._create_client_ad_manager(ad_id=self.id)
+
     def _get(self, key: str) -> Any | None:
         """You can access the raw response data directly by specifying the key
 
@@ -51,10 +55,6 @@ class PartialAd[T: IPartialAd]:
             raw response data
         """
         return self._raw_ad.get(key)
-
-    @property
-    def api(self) -> ClientAdminAdManager:
-        return self._client.admin._create_client_ad_manager(ad_id=self.id)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, PartialAd) and self.id == __value.id

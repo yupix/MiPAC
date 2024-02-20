@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.user import IAvatarDecoration, IBadgeRole, IPartialUser, IUserOnlineStatus
@@ -296,6 +296,9 @@ class PartialUser[PU: IPartialUser]:
             The user manager instance
         """
         return self._client._create_client_user_manager(self)
+
+    def _get(self, key: str) -> Any | None:
+        return self._raw_user.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, PartialUser) and self.id == __value.id

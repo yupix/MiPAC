@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.user import UserDetailedNotMe, packed_user
 from mipac.types.admin import (
@@ -31,6 +31,9 @@ class UserIP:
     @property
     def created_at(self) -> datetime:
         return str_to_datetime(self.__user_ip["created_at"])
+
+    def _get(self, key: str) -> Any | None:
+        return self.__user_ip.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, UserIP) and self.ip == __value.ip
@@ -63,6 +66,9 @@ class IndexStat:
     def indexdef(self) -> str:
         return self.__index_stat["indexdef"]
 
+    def _get(self, key: str) -> Any | None:
+        return self.__index_stat.get(key)
+
 
 class ModerationLog:
     def __init__(self, moderation_log: IModerationLog, *, client: ClientManager) -> None:
@@ -93,6 +99,9 @@ class ModerationLog:
     def user(self) -> UserDetailedNotMe:
         return packed_user(self.__moderation_log["user"], client=self.__client)
 
+    def _get(self, key: str) -> Any | None:
+        return self.__moderation_log.get(key)
+
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, ModerationLog) and self.id == __value.id
 
@@ -112,6 +121,9 @@ class ServerInfoCpu:
     def cores(self) -> int:
         return self.__server_info_cpu["cores"]
 
+    def _get(self, key: str) -> Any | None:
+        return self.__server_info_cpu.get(key)
+
 
 class ServerInfoMem:
     def __init__(self, server_info_mem: IServerInfoMem) -> None:
@@ -120,6 +132,9 @@ class ServerInfoMem:
     @property
     def total(self) -> int:
         return self.__server_info_mem["total"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__server_info_mem.get(key)
 
 
 class ServerInfoFs:
@@ -134,6 +149,9 @@ class ServerInfoFs:
     def used(self) -> int:
         return self.__server_info_fs["used"]
 
+    def _get(self, key: str) -> Any | None:
+        return self.__server_info_fs.get(key)
+
 
 class ServerInfoNet:
     def __init__(self, server_info_net: IServerInfoNet) -> None:
@@ -142,6 +160,9 @@ class ServerInfoNet:
     @property
     def interface(self) -> str:
         return self.__server_info_net["interface"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__server_info_net.get(key)
 
 
 class ServerInfo:
@@ -179,3 +200,6 @@ class ServerInfo:
     @property
     def net(self) -> ServerInfoNet:
         return ServerInfoNet(self.__server_info["net"])
+
+    def _get(self, key: str) -> Any | None:
+        return self.__server_info.get(key)

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.announcement import Announcement
 from mipac.models.lite.role import PartialRole
@@ -73,6 +73,9 @@ class FollowCommon[FFC: IFederationFollowCommon]:
         raw_followee = self._raw_follow.get("followee")
         return packed_user(raw_followee, client=self._client) if raw_followee else None
 
+    def _get(self, key: str) -> Any | None:
+        return self._raw_follow.get(key)
+
 
 class Follower(FollowCommon[IFederationFollower]):
     def __init__(self, raw_follow: IFederationFollower, *, client: ClientManager) -> None:
@@ -96,6 +99,9 @@ class Achievement:
     def unlocked_at(self) -> int:
         return self.__detail["unlocked_at"]
 
+    def _get(self, key: str) -> Any | None:
+        return self.__detail.get(key)
+
 
 class UserField:
     def __init__(self, raw_user_field: IUserField, *, client: ClientManager) -> None:
@@ -109,6 +115,9 @@ class UserField:
     @property
     def value(self) -> str:
         return self._raw_user_field["value"]
+
+    def _get(self, key: str) -> Any | None:
+        return self._raw_user_field.get(key)
 
 
 @DeprecatedClass(remove_in_version="0.7.0")
@@ -524,6 +533,9 @@ class UserList:
     def api(self) -> ClientUserListManager:
         return self.__client.user._create_client_user_list_manager(self.id)
 
+    def _get(self, key: str) -> Any | None:
+        return self._raw_user_list.get(key)
+
 
 class UserListMembership:
     def __init__(
@@ -552,6 +564,9 @@ class UserListMembership:
     def with_replies(self) -> bool:
         return self.__raw_user_list_membership["with_replies"]
 
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_user_list_membership.get(key)
+
 
 class FrequentlyRepliedUser:
     def __init__(
@@ -572,3 +587,6 @@ class FrequentlyRepliedUser:
     @property
     def weight(self) -> int:
         return self._raw_frequently_replied_user["weight"]
+
+    def _get(self, key: str) -> Any | None:
+        return self._raw_frequently_replied_user.get(key)

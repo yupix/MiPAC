@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import Any
 
 from mipac.types.instance import IInstanceLite
 
@@ -30,3 +31,6 @@ class LiteInstance:
     @property
     def theme_color(self) -> str | None:
         return self.__instance["theme_color"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__instance.get(key)

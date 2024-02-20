@@ -1,3 +1,4 @@
+from typing import Any
 from mipac.types.chart import IActiveUsersChart, IDriveChart, IDriveLocalChart, IDriveRemoteChart
 
 
@@ -43,6 +44,9 @@ class ActiveUsersChart:
     def registered_outside_year(self) -> list[int]:
         return self.__data["registered_outside_year"]
 
+    def _get(self, key: str) -> Any | None:
+        return self.__data.get(key)
+
 
 class DriveLocalChart:
     __slots__ = ("__data",)
@@ -73,6 +77,9 @@ class DriveLocalChart:
     @property
     def dec_size(self) -> list[int]:
         return self.__data["dec_size"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__data.get(key)
 
 
 class DriveRemoteChart:
@@ -105,6 +112,9 @@ class DriveRemoteChart:
     def dec_size(self) -> list[int]:
         return self.__data["dec_size"]
 
+    def _get(self, key: str) -> Any | None:
+        return self.__data.get(key)
+
 
 class DriveChart:
     __slots__ = ("__data",)
@@ -119,3 +129,6 @@ class DriveChart:
     @property
     def remote(self) -> DriveRemoteChart:
         return DriveRemoteChart(self.__data["remote"])
+
+    def _get(self, key: str) -> Any | None:
+        return self.__data.get(key)

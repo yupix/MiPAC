@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.user import PartialUser
 from mipac.types.follow import IFollowRequest
@@ -30,6 +30,9 @@ class FollowRequest:
     @property
     def api(self) -> FollowRequestManager:
         return self.__client._create_user_instance(user=self.follower).follow.request
+
+    def _get(self, key: str) -> Any | None:
+        return self.__follow_request.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, FollowRequest) and self.id == __value.id

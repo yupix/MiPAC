@@ -61,9 +61,6 @@ class Blocking:
         """
         return packed_user(self.__raw_blocking["blockee"], client=self.__client)
 
-    def _get(self, key: str) -> Any | None:
-        return self.__raw_blocking.get(key)
-
     @property
     def api(self) -> ClientBlockingManager:
         """ブロック対象に対するAPIを利用するためのManager
@@ -74,6 +71,9 @@ class Blocking:
             ブロック対象に対するAPIを利用するためのManager
         """
         return self.__client.user._create_client_blocking_manager(user_id=self.blockee.id)
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_blocking.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, Blocking) and self.id == __value.id

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.types.antenna import IAntenna, IAntennaReceiveSource
 from mipac.utils.format import str_to_datetime
@@ -79,6 +79,9 @@ class Antenna:
     @property
     def api(self) -> ClientAntennaManager:
         return self.__client.antenna._create_client_antenna_manager(antenna_id=self.id)
+
+    def _get(self, key: str) -> Any | None:
+        return self.__antenna.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, Antenna) and self.id == __value.id

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.user import PartialUser
 from mipac.types.clip import IClip
@@ -68,3 +68,6 @@ class Clip:
     @property
     def api(self) -> ClientClipManager:
         return self.__client._get_client_clip_instance(clip_id=self.id)
+
+    def _get(self, key: str) -> Any | None:
+        return self.__clip.get(key)

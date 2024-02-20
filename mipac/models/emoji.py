@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.emoji import PartialCustomEmoji
 from mipac.types.emoji import ICustomEmoji, IEmojiDetailed, IEmojiSimple
@@ -76,6 +76,9 @@ class EmojiSimple:
     def role_ids_that_can_be_used_this_emoji_as_reaction(self) -> list[str]:
         return self.__raw_emoji_simple.get("role_ids_that_can_be_used_this_emoji_as_reaction", [])
 
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_emoji_simple.get(key)
+
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, EmojiSimple) and self.name == __value.name
 
@@ -123,6 +126,9 @@ class EmojiDetailed:
     @property
     def role_ids_that_can_be_used_this_emoji_as_reaction(self) -> list[str]:
         return self.__raw_emoji_detailed["role_ids_that_can_be_used_this_emoji_as_reaction"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_emoji_detailed.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, EmojiDetailed) and self.id == __value.id

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.types.roles import IPartialRole
 
@@ -49,6 +49,9 @@ class PartialRole[T: IPartialRole]:
     @property
     def api(self) -> AdminRolesModelManager:
         return self.__client.admin.create_roles_model_manager(self.id)
+
+    def _get(self, key: str) -> Any | None:
+        return self._raw_role.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, PartialRole) and self.id == __value.id

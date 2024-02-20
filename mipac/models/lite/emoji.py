@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.config import config
 from mipac.types.emoji import ICustomEmojiLite
@@ -23,3 +23,6 @@ class PartialCustomEmoji:
         protocol = "https" if config.is_ssl else "http"
         url = f"{protocol}://{config.host}/emoji/{self.name}.webp"
         return url
+
+    def _get(self, key: str) -> Any | None:
+        return self.__emoji.get(key)

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.types.poll import ICreatePoll, IPoll, IPollChoice
 from mipac.utils.format import str_to_datetime
@@ -35,6 +35,9 @@ class PollChoice:
     def votes(self) -> int:
         return self.__choice["votes"]
 
+    def _get(self, key: str) -> Any | None:
+        return self.__choice.get(key)
+
 
 class Poll:
     def __init__(self, poll: IPoll, *, client: ClientManager):
@@ -52,3 +55,6 @@ class Poll:
     @property
     def choices(self) -> list[PollChoice]:
         return [PollChoice(i, client=self.__client) for i in self.__poll["choices"]]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__poll.get(key)

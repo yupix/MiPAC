@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.note import Note
 from mipac.types.channel import IChannel
@@ -199,6 +199,9 @@ class Channel:
         ClientChannelManager
         """
         return self.__client._create_client_channel_manager(channel_id=self.id)
+
+    def _get(self, key: str) -> Any | None:
+        return self._raw_channel.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, Channel) and self.id == __value.id

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.user import PartialUser
 from mipac.types.invite import IInviteCode, IInviteLimit
@@ -73,6 +73,9 @@ class InviteCode:
     def api(self) -> ClientInviteManager:
         return self.__client._create_client_invite_manager(invite_id=self.id)
 
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_invite_code.get(key)
+
 
 class InviteLimit:
     def __init__(self, raw_invite_limit: IInviteLimit, *, client: ClientManager) -> None:
@@ -82,3 +85,6 @@ class InviteLimit:
     @property
     def remaining(self) -> int | None:
         return self.__raw_invite_limit["remaining"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_invite_limit.get(key)

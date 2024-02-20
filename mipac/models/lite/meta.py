@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.ad import PartialAd
 from mipac.types.meta import IPartialMeta, IPolicies
@@ -113,6 +113,9 @@ class Policies:
     @property
     def rate_limit_factor(self) -> int:
         return self.__raw_policies["rate_limit_factor"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_policies.get(key)
 
 
 class PartialMeta[T: IPartialMeta]:
@@ -275,3 +278,6 @@ class PartialMeta[T: IPartialMeta]:
     @property
     def media_proxy(self) -> str:
         return self._raw_meta["media_proxy"]
+
+    def _get(self, key: str) -> Any | None:
+        return self._raw_meta.get(key)

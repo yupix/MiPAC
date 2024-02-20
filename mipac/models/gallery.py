@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.drive import File
 from mipac.models.lite.user import PartialUser
@@ -68,3 +68,6 @@ class GalleryPost:
     @property
     def is_liked(self) -> bool | None:
         return self._raw_gallery.get("is_liked")
+
+    def _get(self, key: str) -> Any | None:
+        return self._raw_gallery.get(key)

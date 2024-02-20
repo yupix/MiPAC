@@ -28,7 +28,6 @@ if TYPE_CHECKING:
 __all__ = (
     "NoteState",
     "Note",
-    "Header",
     "NoteReaction",
     "NoteDeleted",
     "NoteTranslateResult",
@@ -47,6 +46,9 @@ class NoteState:
     def is_muted_thread(self) -> bool:
         return self.__data["is_muted_thread"]
 
+    def _get(self, key: str) -> Any | None:
+        return self.__data.get(key)
+
 
 class NoteDeleted:
     def __init__(self, data: INoteUpdated[INoteUpdatedDelete]) -> None:
@@ -60,17 +62,14 @@ class NoteDeleted:
     def deleted_at(self) -> datetime:
         return str_to_datetime(self.__data["body"]["body"]["deleted_at"])
 
+    def _get(self, key: str) -> Any | None:
+        return self.__data.get(key)
+
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, NoteDeleted) and self.note_id == __value.note_id
 
     def __ne__(self, __value: object) -> bool:
         return not self.__eq__(__value)
-
-
-class Header:
-    def __init__(self, data):
-        self.id = data.get("id")
-        self.type = data.get("type")
 
 
 class NoteReaction:
@@ -127,6 +126,9 @@ class NoteReaction:
             reaction type
         """
         return self.__reaction["type"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__reaction.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, NoteReaction) and self.id == __value.id
@@ -205,6 +207,9 @@ class NoteChannel:
             note channelUserId
         """
         return self.__raw_note_channel["user_id"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_note_channel.get(key)
 
 
 class Note:
@@ -675,3 +680,6 @@ class NoteTranslateResult:
     @property
     def text(self) -> str:
         return self.__translate_result["text"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__translate_result.get(key)
