@@ -1,5 +1,8 @@
-from typing import NotRequired, TypedDict
+from typing import Literal, NotRequired, TypedDict
 
+
+AnnoucementIcon = Literal["info", "wanirng", "error", "success"]
+AnnoucementDisplay = Literal["dialog", "normal", "banner"]
 
 class IAnnouncement(TypedDict):
     id: str
@@ -8,13 +11,12 @@ class IAnnouncement(TypedDict):
     text: str
     title: str
     image_url: str | None
-    icon: str
-    display: str
+    icon: AnnoucementIcon
+    display: AnnoucementDisplay
     need_confirmation_to_read: bool
     silence: bool
     for_you: bool
     is_read: NotRequired[bool]
-
 
 class IAnnouncementDetailed(TypedDict):
     """管理者から見たアナウンス"""
@@ -25,8 +27,8 @@ class IAnnouncementDetailed(TypedDict):
     text: str
     title: str
     image_url: str | None
-    icon: str
-    display: str
+    icon: AnnoucementIcon
+    display: AnnoucementDisplay
     need_confirmation_to_read: bool
     silence: bool
 

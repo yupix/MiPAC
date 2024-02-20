@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from mipac.types.announcement import IAnnouncement, IAnnouncementDetailed
+from mipac.types.announcement import AnnoucementDisplay, AnnoucementIcon, IAnnouncement, IAnnouncementDetailed
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
@@ -45,11 +45,11 @@ class Announcement:
         return self.__announcement["image_url"]
 
     @property
-    def icon(self) -> str | None:
+    def icon(self) -> AnnoucementIcon:
         return self.__announcement["icon"]
 
     @property
-    def display(self) -> str:
+    def display(self) -> AnnoucementDisplay:
         return self.__announcement["display"]
 
     @property
@@ -113,11 +113,11 @@ class AnnouncementDetailed:
         return self.__raw_announcement["image_url"]
 
     @property
-    def icon(self) -> str | None:
+    def icon(self) -> AnnoucementIcon:
         return self.__raw_announcement["icon"]
 
     @property
-    def display(self) -> str:
+    def display(self) -> AnnoucementDisplay:
         return self.__raw_announcement["display"]
 
     @property
