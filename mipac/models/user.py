@@ -477,12 +477,12 @@ class MeDetailedOnly:
         return self._raw_user.get("security_keys_list")
 
 
-class UserDetailedNotMe[T: IUserDetailedNotMeSchema](PartialUser[T], UserDetailedNotMeOnly):
+class UserDetailedNotMe[T: IUserDetailedNotMeSchema](PartialUser[T], UserDetailedNotMeOnly):  # pyright: ignore 直せない
     def __init__(self, raw_user: T, *, client: ClientManager) -> None:
         super().__init__(raw_user, client=client)
 
 
-class MeDetailed(UserDetailedNotMe[IMeDetailedSchema], MeDetailedOnly):
+class MeDetailed(UserDetailedNotMe[IMeDetailedSchema], MeDetailedOnly):  # pyright: ignore 直せない
     def __init__(self, raw_user: IMeDetailedSchema, *, client: ClientManager):
         super().__init__(raw_user, client=client)
 

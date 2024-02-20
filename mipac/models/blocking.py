@@ -8,8 +8,8 @@ from mipac.types.blocking import IBlocking
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
-    from mipac.manager.client import ClientManager
     from mipac.manager.blocking import ClientBlockingManager
+    from mipac.manager.client import ClientManager
 
 
 class Blocking:
