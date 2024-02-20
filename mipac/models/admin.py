@@ -90,7 +90,7 @@ class ModerationLog:
         return self.__moderation_log["user_id"]
 
     @property
-    def user(self) -> UserDetailedNotMe | MeDetailed:
+    def user(self) -> UserDetailedNotMe:
         return packed_user(self.__moderation_log["user"], client=self.__client)
 
     def __eq__(self, __value: object) -> bool:
