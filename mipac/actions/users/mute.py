@@ -4,8 +4,8 @@ from typing import TYPE_CHECKING, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
-from mipac.models.mute import MutedUser
-from mipac.types.mute import IMutedUser
+from mipac.models.mute import Muting
+from mipac.types.mute import IMuting
 from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
@@ -108,22 +108,22 @@ class MuteActions(SharedMuteActions):
 
     async def get_list(
         self, limit: int = 30, since_id: str | None = None, until_id: str | None = None
-    ) -> list[MutedUser]:
+    ) -> list[Muting]:
         """ミュートしているユーザーの一覧を取得します
 
         Returns
         -------
-        list[MutedUser]
+        list[Muting]
             ミュートしているユーザーの一覧
         """
 
         body = {"limit": limit, "sinceId": since_id, "untilId": until_id}
 
-        mutes: list[IMutedUser] = await self._session.request(
+        mutes: list[IMuting] = await self._session.request(
             Route("GET", "/api/mute/list"), json=body, auth=True
         )
 
-        return [MutedUser(raw_mute_user=mute, client=self._client) for mute in mutes]
+        return [Muting(raw_mute_user=mute, client=self._client) for mute in mutes]
 
     async def get_all_list(
         self, limit: int = 30, since_id: str | None = None, until_id: str | None = None
@@ -141,15 +141,15 @@ class MuteActions(SharedMuteActions):
 
         Returns
         -------
-        AsyncGenerator[MutedUser]
+        AsyncGenerator[Muting]
             ミュートしているユーザー
         """
         body = {"limit": limit, "sinceId": since_id, "untilId": until_id}
 
-        pagination = Pagination[IMutedUser](
+        pagination = Pagination[IMuting](
             self._session, Route("GET", "/api/mute/list"), json=body, auth=True
         )
 
         while pagination.is_final is False:
             for raw_muted_user in await pagination.next():
-                yield MutedUser(raw_mute_user=raw_muted_user, client=self._client)
+                yield Muting(raw_mute_user=raw_muted_user, client=self._client)

@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from mipac.types.user import IUserDetailedNotMeSchema
 
 
-class IMutedUser(TypedDict):  # TODO: Mutingに変更
+class IMuting(TypedDict):
     id: str
     created_at: str
     expires_at: str | None
