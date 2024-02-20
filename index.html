@@ -9958,48 +9958,20 @@ when the function is used.</p>
 <dd></dd></dl>
 
 </section>
-<section id="authclient">
-<h3>AuthClient<a class="headerlink" href="#authclient" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.utils.auth.AuthClient"><div class="py-attribute-table-column">
-<span>
-Methods</span><ul>
-<li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.check_auth">check_auth</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get_auth_url">get_auth_url</a></li></ul>
-</div></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.utils.auth.AuthClient">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.utils.auth.</span></span><span class="sig-name descname"><span class="pre">AuthClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance_uri</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_miauth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.utils.auth.AuthClient" title="Link to this definition">#</a></dt>
-<dd><p>Tokenの取得を手助けするクラス</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.utils.auth.AuthClient.check_auth">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_auth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mipac.utils.auth.AuthClient.check_auth" title="Link to this definition">#</a></dt>
-<dd><p>認証が完了するまで待機し、完了した場合はTokenを返します</p>
-<dl class="field-list simple">
-<dt class="field-odd">戻り値<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Token</p>
-</dd>
-<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
+<section id="imiauthpayload">
+<h3>IMiAuthPayload<a class="headerlink" href="#imiauthpayload" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.utils.auth.IMiAuthPayload"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.utils.auth.IMiAuthPayload">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.utils.auth.</span></span><span class="sig-name descname"><span class="pre">IMiAuthPayload</span></span><a class="headerlink" href="#mipac.utils.auth.IMiAuthPayload" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.utils.auth.AuthClient.get_auth_url">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_auth_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mipac.utils.auth.AuthClient.get_auth_url" title="Link to this definition">#</a></dt>
-<dd><p>認証に使用するURLを取得します</p>
-<dl class="field-list simple">
-<dt class="field-odd">戻り値<span class="colon">:</span></dt>
-<dd class="field-odd"><p>認証に使用するURL</p>
-</dd>
-<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
+</section>
+<section id="miauth">
+<h3>MiAuth<a class="headerlink" href="#miauth" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.utils.auth.MiAuth"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.utils.auth.MiAuth">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.utils.auth.</span></span><span class="sig-name descname"><span class="pre">MiAuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'http'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'https'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.utils.auth.MiAuth" title="Link to this definition">#</a></dt>
+<dd><p>Misskey v12以降のインスタンスで使用可能な認証方式です</p>
 </dd></dl>
 
 </section>
@@ -12398,12 +12370,12 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.utils.util.Missing"><code class="docutils literal notranslate"><span class="pre">Missing</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#authclient">AuthClient</a><ul>
-<li><a class="reference internal" href="#mipac.utils.auth.AuthClient"><code class="docutils literal notranslate"><span class="pre">AuthClient</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.utils.auth.AuthClient.check_auth"><code class="docutils literal notranslate"><span class="pre">AuthClient.check_auth()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.utils.auth.AuthClient.get_auth_url"><code class="docutils literal notranslate"><span class="pre">AuthClient.get_auth_url()</span></code></a></li>
+<li><a class="reference internal" href="#imiauthpayload">IMiAuthPayload</a><ul>
+<li><a class="reference internal" href="#mipac.utils.auth.IMiAuthPayload"><code class="docutils literal notranslate"><span class="pre">IMiAuthPayload</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#miauth">MiAuth</a><ul>
+<li><a class="reference internal" href="#mipac.utils.auth.MiAuth"><code class="docutils literal notranslate"><span class="pre">MiAuth</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#setup-logging">setup_logging</a><ul>

@@ -3873,12 +3873,21 @@ Missing
     :members:
 
 
-AuthClient
-~~~~~~~~~~
+IMiAuthPayload
+~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.utils.auth.AuthClient
+.. attributetable:: mipac.utils.auth.IMiAuthPayload
 
-.. autoclass:: mipac.utils.auth.AuthClient
+.. autoclass:: mipac.utils.auth.IMiAuthPayload
+    :members:
+
+
+MiAuth
+~~~~~~
+
+.. attributetable:: mipac.utils.auth.MiAuth
+
+.. autoclass:: mipac.utils.auth.MiAuth
     :members:
 
 
