@@ -66,20 +66,25 @@ class BlockingActions(SharedBlockingActions):
         since_id: str | None = None,
         until_id: str | None = None,
         limit: int = 100,
-        get_all: bool = False,
+    ) -> list[Blocking]:
+        body = {"limit": limit, "sinceId": since_id, "untilId": until_id}
+        raw_blocking_list = await self._session.request(
+            Route("POST", "/api/blocking/list"), json=body, auth=True
+        )
+        return [
+            Blocking(raw_blocking=blocking, client=self._client) for blocking in raw_blocking_list
+        ]
+
+    async def get_all_list(
+        self, limit: int = 30, since_id: str | None = None, until_id: str | None = None
     ) -> AsyncGenerator[Blocking, None]:
-        if get_all:
-            limit = 100
-
-        data = {"limit": limit, "sinceId": since_id, "untilId": until_id}
-
         pagination = Pagination[IBlocking](
-            self._session, Route("POST", "/api/blocking/list"), json=data
+            self._session,
+            Route("POST", "/api/blocking/list"),
+            json={"limit": limit, "sinceId": since_id, "untilId": until_id},
         )
 
-        while True:
-            raw_blockings = await pagination.next()
-            for raw_blocking in raw_blockings:
+        while pagination.is_final is False:
+            raw_blocking = await pagination.next()
+            for raw_blocking in raw_blocking:
                 yield Blocking(raw_blocking=raw_blocking, client=self._client)
-            if get_all is False or pagination.is_final:
-                break
