@@ -11,6 +11,8 @@ _version.py
 [tool.pyright]
 include = ["mipac"]
 exclude = ["mipac/_version.py"]
+venvPath = "."
+venv = ".venv"
 
 [tool.isort]
 profile = "black"

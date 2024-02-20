@@ -1,6 +1,5 @@
 from typing import Literal
 
-
 Permissions = Literal[
     "read:account",
     "write:account",
