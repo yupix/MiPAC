@@ -1,6 +1,6 @@
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
-__all__ = ("IPoll", "IPollChoice", "ICreatePoll", "IBasePoll")
+__all__ = ("IPoll", "IPollChoice", "ICreatePoll")
 
 
 class IPollChoice(TypedDict):
@@ -8,20 +8,17 @@ class IPollChoice(TypedDict):
     text: str
     votes: int
 
-
-class IBasePoll(TypedDict, total=False):
-    multiple: bool
-    expires_at: int
-    expired_after: int
-
-
-class ICreatePoll(IBasePoll, total=False):
-    choices: list[str]
-
-
-class IPoll(IBasePoll):
+class IPoll(TypedDict):
     """
     Questionnaire object
     """
-
+    expires_at: str
+    multiple: bool
     choices: list[IPollChoice]
+
+
+class ICreatePoll(TypedDict):
+    choices: list[str]
+    multiple: NotRequired[bool]
+    expires_at: NotRequired[int]
+    expired_after: NotRequired[int]

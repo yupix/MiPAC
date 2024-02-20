@@ -1,8 +1,10 @@
 from __future__ import annotations
+from datetime import datetime
 
 from typing import TYPE_CHECKING
 
 from mipac.types.poll import ICreatePoll, IPoll, IPollChoice
+from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager import ClientManager
@@ -10,8 +12,8 @@ if TYPE_CHECKING:
 
 class MiPoll:
     def __init__(self, poll: ICreatePoll) -> None:
-        self.multiple = poll.get("multiple", False)
-        self.choices = poll.get("choices")
+        self.choices = poll["choices"]
+        self.multiple = poll.get("multiple")
         self.expired_after = poll.get("expired_after")
         self.expires_at = poll.get("expires_at")
 
@@ -40,16 +42,12 @@ class Poll:
         self.__client: ClientManager = client
 
     @property
-    def multiple(self) -> bool | None:
-        return self.__poll.get("multiple")
+    def expires_at(self) -> datetime:
+        return str_to_datetime(self.__poll["expires_at"])
 
     @property
-    def expires_at(self) -> int | None:
-        return self.__poll.get("expired_at")
-
-    @property
-    def expired_after(self) -> int | None:
-        return self.__poll.get("expired_after")
+    def multiple(self) -> bool:
+        return self.__poll["multiple"]
 
     @property
     def choices(self) -> list[PollChoice]:
