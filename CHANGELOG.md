@@ -2,12 +2,17 @@
 
 ## [Unreleased]
 
+## [0.6.0] 2023-02-20
+
 ### Breaking changes 💔
 
+#### AuthClient が削除されました
+
+今まで MiAuth やアプリ作成方式でのアクセストークンを取得する際に使用できていた `AuthClient` を削除しました。今後は `MiAuth` クラスをご利用ください。
 
 #### 以下のクラスを削除しました
 
-この変更はMisskeyのSchemaに似せた形で再実装するにあたり、MisskeyのSchemaよりも細かくモデルを作成していたため、そういったものを削除した形となります。
+この変更は Misskey の Schema に似せた形で再実装するにあたり、Misskey の Schema よりも細かくモデルを作成していたため、そういったものを削除した形となります。
 
 - `UserDetailed` -> `UserDetailedNotMe | MeDetailed`
 - `MeDetailedModerator` -> `MeDetailed`
@@ -15,6 +20,7 @@
 - `UserDetailedNotLogined` -> `UserDetailedNotMe | MeDetailed`
 - `AdminAnnouncementClientActions` -> `ClientAdminAnnouncementActions`
 - `AnnouncementSystem` -> `AnnoucementDetailed`
+- `MeRole` -> `RoleUser`
 
 #### クラス名の変更
 
@@ -22,6 +28,7 @@
 - `AdminAdvertisingActions` -> `AdminAdActions`
 - `AdminAdvertisingModelManager` -> `ClientAdminAdManager`
 - `AdminAdvertisingManager` -> `AdminAdManager`
+- `MutedUser` -> `Muting`
 
 #### 引数に関する変更
 
@@ -36,7 +43,7 @@
 
 今まで多くの配列を返すメソッドをジェネレータとして作成していましたが、少ししかデータは要らないのに `async for` を書くのは大変ということで `get_all` 引数を廃止します。
 
-これにより今まで `get_all` 引数があった ジェネレータは全て通常の list等を返すメソッドに変更されます。
+これにより今まで `get_all` 引数があった ジェネレータは全て通常の list 等を返すメソッドに変更されます。
 今まで通りのジェネレータとしての機能が必要な場合は `get_all_*` というメソッドが新しく増えているためそちらをご利用ください。
 
 ## [0.5.99] 2023-12-03
@@ -72,20 +79,19 @@ pip install git+https://github.com/yupix/Mi.py.git@shared
 | `ClientNoteActions.get_children` | `ClientNoteActions.get_all_children` |
 | `ClientNoteActions.get_reaction` | `ClientNoteActions.get_reactions`    |
 
+### Drive 周りの作り直し
 
-### Drive周りの作り直し
-
-Driveに関するManagerやActionsを全て作り直しました。詳細に記述してるといつまでも終わらないので、ご迷惑をおかけしますが、確認していただけると幸いです🙏
+Drive に関する Manager や Actions を全て作り直しました。詳細に記述してるといつまでも終わらないので、ご迷惑をおかけしますが、確認していただけると幸いです 🙏
 
 ### モデルの変更
 
 一部のモデルがより良い形で再実装されました。結果的にモデル名が変わっています。以下がその変更後の表になります。
 
-| v0.5.0   | v0.6.0      | 変更理由                                                                           |
-| -------- | ----------- | ---------------------------------------------------------------------------------- |
-| UserRole | PartialRole | Role と共通していた為 User よりも Role の Partial クラスにする方が適切だと考えた為 |
-|PartialNote|Note|分ける必要性が無かったため(実際どこにも使用していなかった)|
-|MuteUser|MutedUser|より分かりやすい名前に変更|
+| v0.5.0      | v0.6.0      | 変更理由                                                                           |
+| ----------- | ----------- | ---------------------------------------------------------------------------------- |
+| UserRole    | PartialRole | Role と共通していた為 User よりも Role の Partial クラスにする方が適切だと考えた為 |
+| PartialNote | Note        | 分ける必要性が無かったため(実際どこにも使用していなかった)                         |
+| MuteUser    | MutedUser   | より分かりやすい名前に変更                                                         |
 
 ### 非推奨になったモデル/クラス
 
