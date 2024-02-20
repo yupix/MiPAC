@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from mipac.models.drive import File
 from mipac.models.lite.user import PartialUser
@@ -480,6 +480,17 @@ class Note:
         )
 
     @property
+    def emojis(self) -> dict[str, str]:
+        """note emojis
+
+        Returns
+        -------
+        dict[str, str]
+            note emojis
+        """
+        return self.__raw_note["emojis"]
+
+    @property
     def channel_id(self) -> str | None:
         """note channelId
 
@@ -633,6 +644,9 @@ class Note:
             note api
         """
         return self.__client._create_client_note_manager(note_id=self.id)
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_note.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, Note) and self.id == __value.id

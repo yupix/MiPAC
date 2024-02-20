@@ -81,6 +81,7 @@ class INote(TypedDict):
     files: list[IFile]
     tags: NotRequired[list[str]]
     poll: NotRequired[IPoll]
+    emojis: dict[str, str]
     channel_id: NotRequired[str | None]
     channel: NotRequired[INoteChannel | None]
     local_only: bool
