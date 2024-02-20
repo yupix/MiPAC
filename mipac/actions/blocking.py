@@ -4,8 +4,10 @@ from typing import TYPE_CHECKING, AsyncGenerator, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
-from mipac.models.user import BlockingUser, MeDetailed, UserDetailedNotMe, packed_user
-from mipac.types.user import IBlockingUser, IUserDetailed
+from mipac.models.blocking import Blocking
+from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
+from mipac.types.blocking import IBlocking
+from mipac.types.user import IUserDetailed
 from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
@@ -65,19 +67,19 @@ class BlockingActions(SharedBlockingActions):
         until_id: str | None = None,
         limit: int = 100,
         get_all: bool = False,
-    ) -> AsyncGenerator[BlockingUser, None]:
+    ) -> AsyncGenerator[Blocking, None]:
         if get_all:
             limit = 100
 
         data = {"limit": limit, "sinceId": since_id, "untilId": until_id}
 
-        pagination = Pagination[IBlockingUser](
+        pagination = Pagination[IBlocking](
             self._session, Route("POST", "/api/blocking/list"), json=data
         )
 
         while True:
-            res_users = await pagination.next()
-            for user in res_users:
-                yield BlockingUser(user, client=self._client)
+            raw_blockings = await pagination.next()
+            for raw_blocking in raw_blockings:
+                yield Blocking(raw_blocking=raw_blocking, client=self._client)
             if get_all is False or pagination.is_final:
                 break

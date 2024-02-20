@@ -14,7 +14,6 @@ from mipac.types.user import (
     EmailNotificationTypes,
     GetFrequentlyRepliedUsersResponse,
     IAchievement,
-    IBlockingUser,
     IFfVisibility,
     IMeDetailedOnlySchema,
     IMeDetailedSchema,
@@ -40,7 +39,7 @@ if TYPE_CHECKING:
     from mipac.manager.users.list import ClientUserListManager
 
 
-__all__ = ("PartialUser", "Achievement", "BlockingUser", "MeDetailed")
+__all__ = ("PartialUser", "Achievement", "MeDetailed")
 
 
 class FollowCommon[FFC: IFederationFollowCommon]:
@@ -83,34 +82,6 @@ class Follower(FollowCommon[IFederationFollower]):
 class Following(FollowCommon[IFederationFollowing]):
     def __init__(self, raw_following: IFederationFollowing, *, client: ClientManager) -> None:
         super().__init__(raw_follow=raw_following, client=client)
-
-
-class BlockingUser:
-    def __init__(self, blocking_user_data: IBlockingUser, *, client: ClientManager) -> None:
-        self.__blocking_user_data: IBlockingUser = blocking_user_data
-        self.__client: ClientManager = client
-
-    @property
-    def id(self) -> str:
-        return self.__blocking_user_data["id"]
-
-    @property
-    def created_at(self) -> datetime:
-        return str_to_datetime(self.__blocking_user_data["created_at"])
-
-    @property
-    def blockee_id(self) -> str:
-        return self.__blocking_user_data["blockee_id"]
-
-    @property
-    def blockee(self) -> UserDetailedNotMe | MeDetailed:
-        return packed_user(self.__blocking_user_data["blockee"], client=self.__client)
-
-    def __eq__(self, __value: object) -> bool:
-        return isinstance(__value, BlockingUser) and self.id == __value.id
-
-    def __ne__(self, __value: object) -> bool:
-        return not self.__eq__(__value)
 
 
 class Achievement:

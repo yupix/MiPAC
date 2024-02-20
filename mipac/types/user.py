@@ -25,14 +25,6 @@ class IUserField(TypedDict):
     name: str
     value: str
 
-
-class IBlockingUser(TypedDict):
-    id: str
-    created_at: str
-    blockee_id: str
-    blockee: IUserDetailed
-
-
 class ISignin(TypedDict):
     id: str
     created_at: str
