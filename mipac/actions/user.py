@@ -83,6 +83,7 @@ class SharedUserActions(AbstractAction):
         self,
         with_replies: bool = False,
         with_renotes: bool = True,
+        limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
         since_data: int | None = None,
@@ -98,7 +99,7 @@ class SharedUserActions(AbstractAction):
             "userId": user_id,
             "withReplies": with_replies,
             "withRenotes": with_renotes,
-            "limit": 100,
+            "limit": limit,
             "sinceId": since_id,
             "untilId": until_id,
             "sinceDate": since_data,
@@ -538,6 +539,7 @@ class ClientUserActions(SharedUserActions):
         self,
         with_replies: bool = False,
         with_renotes: bool = True,
+        limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
         since_data: int | None = None,
@@ -548,12 +550,13 @@ class ClientUserActions(SharedUserActions):
         exclude_nsfw: bool = False,
         *,
         user_id: str | None = None,
-    ) -> AsyncGenerator[Note, None]:  # TODO: limitを指定できるように
+    ) -> AsyncGenerator[Note, None]:
         user_id = user_id or self.__user.id
 
         async for i in super().get_all_notes(
             with_replies=with_replies,
             with_renotes=with_renotes,
+            limit=limit,
             since_id=since_id,
             until_id=until_id,
             since_data=since_data,
@@ -883,14 +886,13 @@ class UserActions(SharedUserActions):
     ):
         super().__init__(session=session, client=client)
 
-    async def get_me(self) -> MeDetailed:  # TODO: トークンが無い場合は例外返すようにする
+    async def get_me(self) -> MeDetailed:
         """
         ログインしているユーザーの情報を取得します
         """
 
         res: IMeDetailedSchema = await self._session.request(
             Route("POST", "/api/i"),
-            auth=True,
             lower=True,
         )
         return MeDetailed(res, client=self._client)

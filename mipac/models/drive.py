@@ -1,9 +1,11 @@
 from __future__ import annotations
+from datetime import datetime
 
 from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.user import PartialUser
 from mipac.types.drive import IDriveStatus
+from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -96,8 +98,8 @@ class Folder:
         return self.__raw_folder["id"]
 
     @property
-    def created_at(self) -> str:  # TODO: 型
-        return self.__raw_folder["created_at"]
+    def created_at(self) -> datetime:
+        return str_to_datetime(self.__raw_folder["created_at"])
 
     @property
     def name(self) -> str:
@@ -155,8 +157,8 @@ class File:
         return self.__raw_file["id"]
 
     @property
-    def created_at(self):
-        return self.__raw_file["created_at"]
+    def created_at(self) -> datetime:
+        return str_to_datetime(self.__raw_file["created_at"])
 
     @property
     def name(self) -> str:

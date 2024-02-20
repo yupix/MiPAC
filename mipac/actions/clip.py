@@ -24,10 +24,25 @@ class SharedClipActions(AbstractAction):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        get_all: bool = False,
         *,
-        clip_id: str | None = None,
-    ) -> AsyncGenerator[Note, None]:  # TODO: 作り直し
+        clip_id: str,
+    ) -> list[Note]:
+        body = {"clipId": clip_id, "limit": limit, "sinceId": since_id, "untilId": until_id}
+
+        raw_notes: list[INote] = await self._session.request(
+            Route("POST", "/api/clips/notes"), json=body
+        )
+
+        return [Note(raw_note=raw_note, client=self._client) for raw_note in raw_notes]
+
+    async def get_all_notes(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        clip_id: str,
+    ) -> AsyncGenerator[Note, None]:
         """Get notes from a clip
         Parameters
         ----------
@@ -39,33 +54,22 @@ class SharedClipActions(AbstractAction):
             The note id to get notes after
         until_id : str | None, optional, by default None
             The note id to get notes before
-        get_all : bool, optional, by default False
-            Whether to get all notes
 
         Yields
         ------
         AsyncGenerator[Note, None]
             The notes
         """
-        if limit > 100:
-            raise ValueError("limit must be less than 100")
-
-        if get_all:
-            limit = 100
-
         body = {"clipId": clip_id, "limit": limit, "sinceId": since_id, "untilId": until_id}
 
         pagination = Pagination[INote](
             self._session, Route("POST", "/api/clips/notes"), json=body, auth=True
         )
 
-        while True:
-            clips = await pagination.next()
-            for raw_clip in clips:
+        while pagination.is_final is False:
+            raw_clips = await pagination.next()
+            for raw_clip in raw_clips:
                 yield Note(raw_clip, client=self._client)
-
-            if get_all is False or pagination.is_final:
-                break
 
     async def add_note(self, note_id: str, *, clip_id: str) -> bool:
         """Add a note to a clip
@@ -162,7 +166,7 @@ class SharedClipActions(AbstractAction):
         return Clip(result, client=self._client)
 
 
-class ClientClipActions(SharedClipActions):  # TODO: 使うようにする
+class ClientClipActions(SharedClipActions):
     def __init__(self, clip_id: str, *, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
         self._clip_id = clip_id
@@ -174,6 +178,21 @@ class ClientClipActions(SharedClipActions):  # TODO: 使うようにする
         since_id: str | None = None,
         until_id: str | None = None,
         get_all: bool = False,
+        *,
+        clip_id: str | None = None,
+    ) -> list[Note]:
+        clip_id = clip_id or self._clip_id
+
+        return await super().get_notes(
+            limit=limit, since_id=since_id, until_id=until_id, clip_id=clip_id
+        )
+
+    @override
+    async def get_all_notes(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
         *,
         clip_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
@@ -199,8 +218,8 @@ class ClientClipActions(SharedClipActions):  # TODO: 使うようにする
 
         clip_id = clip_id or self._clip_id
 
-        async for note in super().get_notes(
-            limit=limit, since_id=since_id, until_id=until_id, get_all=get_all, clip_id=clip_id
+        async for note in super().get_all_notes(
+            limit=limit, since_id=since_id, until_id=until_id, clip_id=clip_id
         ):
             yield note
 

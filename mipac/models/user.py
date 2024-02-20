@@ -214,7 +214,7 @@ class UserDetailedNotMeOnly:
         return self._raw_user["location"]
 
     @property
-    def birthday(self) -> str | None:  # TODO: datetimeにする必要があるか確認する
+    def birthday(self) -> str | None:
         return self._raw_user["birthday"]
 
     @property

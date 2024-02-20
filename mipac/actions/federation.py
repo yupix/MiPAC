@@ -29,8 +29,7 @@ class FederationActions(AbstractAction):
 
     async def show_ap(
         self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10
-    ) -> FederationInstance:
-        # TODO: これ本当にuntilId必要なのか確認する
+    ) -> FederationInstance:  # TODO: 存在するのか確認する
         body = {"host": host, "sinceId": since_id, "untilId": until_id, "limit": limit}
 
         res: FederationInstance = await self.__session.request(

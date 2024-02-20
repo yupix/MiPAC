@@ -152,11 +152,12 @@ class SharedNoteActions(AbstractAction):
 
     async def get_all_children(
         self,
+        limit: int = 10,
         since_id: str | None = None,
         untilId: str | None = None,
         *,
         note_id: str,
-    ) -> AsyncGenerator[Note, None]:  # TODO: limitをサポートする
+    ) -> AsyncGenerator[Note, None]:
         """Get all children of the note
 
         Endpoint: `/api/notes/children`
@@ -175,8 +176,6 @@ class SharedNoteActions(AbstractAction):
         AsyncGenerator[Note, None]
             Children of the note
         """
-        limit = 100
-
         data = {
             "noteId": note_id,
             "limit": limit,
@@ -369,6 +368,7 @@ class SharedNoteActions(AbstractAction):
         self,
         since_id: str | None = None,
         until_id: str | None = None,
+        limit: int = 10,
         *,
         note_id: str,
     ) -> AsyncGenerator[Note, None]:
@@ -390,22 +390,16 @@ class SharedNoteActions(AbstractAction):
         AsyncGenerator[Note, None]
             replies
         """
-
-        limit = 100
-
         body = {"noteId": note_id, "sinceId": since_id, "untilId": until_id, "limit": limit}
 
         pagination = Pagination[INote](
             self._session, Route("POST", "/api/notes/replies"), json=body
         )
 
-        while True:
+        while pagination.is_final is False:
             res_notes = await pagination.next()
             for res_note in res_notes:
                 yield Note(res_note, client=self._client)
-
-            if pagination.is_final:
-                break
 
     @cache(group="get_note_state")
     async def get_state(self, *, note_id: str) -> NoteState:
@@ -789,11 +783,12 @@ class ClientNoteActions(SharedNoteActions):
     @override
     async def get_all_children(
         self,
+        limit: int = 10,
         since_id: str | None = None,
         untilId: str | None = None,
         *,
         note_id: str | None = None,
-    ) -> AsyncGenerator[Note, None]:  # TODO: limitをサポート
+    ) -> AsyncGenerator[Note, None]:
         """Get all children of the note
 
         Endpoint: `/api/notes/children`
@@ -815,7 +810,7 @@ class ClientNoteActions(SharedNoteActions):
         note_id = note_id or self._note_id
 
         async for i in super().get_all_children(
-            since_id=since_id, untilId=untilId, note_id=note_id
+            limit=limit, since_id=since_id, untilId=untilId, note_id=note_id
         ):
             yield i
 
@@ -1000,9 +995,10 @@ class ClientNoteActions(SharedNoteActions):
         self,
         since_id: str | None = None,
         until_id: str | None = None,
+        limit: int = 10,
         *,
         note_id: str | None = None,
-    ) -> AsyncGenerator[Note, None]:  # TODO: limitをサポート
+    ) -> AsyncGenerator[Note, None]:
         """Get replies to the note
 
         Endpoint: `/api/notes/replies`
@@ -1024,7 +1020,7 @@ class ClientNoteActions(SharedNoteActions):
         note_id = note_id or self._note_id
 
         async for i in super().get_all_replies(
-            since_id=since_id, until_id=until_id, note_id=note_id
+            since_id=since_id, until_id=until_id, limit=limit, note_id=note_id
         ):
             yield i
 
@@ -1756,12 +1752,10 @@ class NoteActions(SharedNoteActions):
             self._session, Route("POST", "/api/notes"), json=body, limit=limit
         )
 
-        while True:
-            res_notes = await pagination.next()
-            for note in res_notes:
-                yield Note(note, client=self._client)
-            if get_all is False or pagination.is_final:
-                break
+        while pagination.is_final is False:
+            raw_notes = await pagination.next()
+            for raw_note in raw_notes:
+                yield Note(raw_note=raw_note, client=self._client)
 
     async def get_time_line(
         self,
