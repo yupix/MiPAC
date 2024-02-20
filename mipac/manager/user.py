@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.user import ClientUserActions, UserActions
 from mipac.http import HTTPClient
-from mipac.manager.blocking import BlockingManager, ClinetBlockingManager
+from mipac.manager.blocking import BlockingManager, ClientBlockingManager
 from mipac.manager.follow import FollowManager
 from mipac.manager.users.list import (
     ClientPartialUserListManager,
@@ -33,7 +33,7 @@ class ClientUserManager(AbstractManager):
         self.mute: ClientMuteManager = ClientMuteManager(
             user_id=user.id, session=session, client=client
         )
-        self.block = ClinetBlockingManager(user_id=user.id, session=session, client=client)
+        self.block = ClientBlockingManager(user_id=user.id, session=session, client=client)
         self.list = ClientPartialUserListManager(user_id=user.id, session=session, client=client)
 
     @property
@@ -58,5 +58,5 @@ class UserManager(AbstractManager):
     def _create_client_user_list_manager(self, list_id: str) -> ClientUserListManager:
         return ClientUserListManager(list_id=list_id, session=self.__session, client=self.__client)
 
-    def _create_client_blocking_manager(self, user_id: str) -> ClinetBlockingManager:
-        return ClinetBlockingManager(user_id=user_id, session=self.__session, client=self.__client)
+    def _create_client_blocking_manager(self, user_id: str) -> ClientBlockingManager:
+        return ClientBlockingManager(user_id=user_id, session=self.__session, client=self.__client)

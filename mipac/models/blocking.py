@@ -3,13 +3,13 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Any
 
-from mipac.manager.blocking import ClinetBlockingManager
 from mipac.models.user import UserDetailedNotMe, packed_user
 from mipac.types.blocking import IBlocking
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
+    from mipac.manager.blocking import ClientBlockingManager
 
 
 class Blocking:
@@ -65,12 +65,12 @@ class Blocking:
         return self.__raw_blocking.get(key)
 
     @property
-    def api(self) -> ClinetBlockingManager:
+    def api(self) -> ClientBlockingManager:
         """ブロック対象に対するAPIを利用するためのManager
 
         Returns
         -------
-        ClinetBlockingManager
+        ClientBlockingManager
             ブロック対象に対するAPIを利用するためのManager
         """
         return self.__client.user._create_client_blocking_manager(user_id=self.blockee.id)

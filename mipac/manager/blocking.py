@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class ClinetBlockingManager(BlockingActions):
+class ClientBlockingManager(BlockingActions):
     def __init__(self, user_id: str, *, session: HTTPClient, client: ClientManager):
         self.__action: ClientBlockingActions = ClientBlockingActions(
             user_id=user_id, session=session, client=client
