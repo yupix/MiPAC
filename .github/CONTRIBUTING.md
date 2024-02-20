@@ -20,6 +20,10 @@ Check the going points before creating an assignment
 ## Building a Development Environment
 
 ```
+python -m venv .venv
+
+# after activate env
+
 pip install -r requirements.txt -r requirements-dev.txt
 
 pre-commit install
