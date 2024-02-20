@@ -34,6 +34,7 @@ class IEmojiSimple(TypedDict):
     name: str
     category: str | None
     url: str
+    local_only: bool
     is_sensitive: NotRequired[bool]
     role_ids_that_can_be_used_this_emoji_as_reaction: NotRequired[list[str]]
 

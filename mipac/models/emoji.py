@@ -65,6 +65,10 @@ class EmojiSimple:
         return self.__raw_emoji_simple["url"]
 
     @property
+    def local_only(self) -> bool:
+        return self.__raw_emoji_simple["local_only"]
+
+    @property
     def is_sensitive(self) -> bool:
         return self.__raw_emoji_simple.get("is_sensitive", False)
 
