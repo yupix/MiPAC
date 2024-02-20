@@ -23,9 +23,7 @@ class ClinetBlockingManager(BlockingActions):
 
 class BlockingManager(AbstractManager):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
-        self.__action: BlockingActions = BlockingActions(
-            session=session, client=client
-        )
+        self.__action: BlockingActions = BlockingActions(session=session, client=client)
 
     @property
     def action(self) -> BlockingActions:

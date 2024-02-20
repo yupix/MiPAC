@@ -8,10 +8,12 @@ class IPollChoice(TypedDict):
     text: str
     votes: int
 
+
 class IPoll(TypedDict):
     """
     Questionnaire object
     """
+
     expires_at: str
     multiple: bool
     choices: list[IPollChoice]

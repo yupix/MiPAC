@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.user import ClientUserActions, UserActions
 from mipac.http import HTTPClient
-from mipac.manager.blocking import ClinetBlockingManager, BlockingManager
+from mipac.manager.blocking import BlockingManager, ClinetBlockingManager
 from mipac.manager.follow import FollowManager
 from mipac.manager.users.list import (
     ClientPartialUserListManager,

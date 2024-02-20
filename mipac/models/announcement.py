@@ -3,7 +3,12 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from mipac.types.announcement import AnnoucementDisplay, AnnoucementIcon, IAnnouncement, IAnnouncementDetailed
+from mipac.types.announcement import (
+    AnnoucementDisplay,
+    AnnoucementIcon,
+    IAnnouncement,
+    IAnnouncementDetailed,
+)
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:

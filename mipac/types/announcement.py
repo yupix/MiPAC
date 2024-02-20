@@ -1,8 +1,8 @@
 from typing import Literal, NotRequired, TypedDict
 
-
 AnnoucementIcon = Literal["info", "wanirng", "error", "success"]
 AnnoucementDisplay = Literal["dialog", "normal", "banner"]
+
 
 class IAnnouncement(TypedDict):
     id: str
@@ -17,6 +17,7 @@ class IAnnouncement(TypedDict):
     silence: bool
     for_you: bool
     is_read: NotRequired[bool]
+
 
 class IAnnouncementDetailed(TypedDict):
     """管理者から見たアナウンス"""

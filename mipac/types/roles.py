@@ -17,6 +17,7 @@ class IMeRole(TypedDict):
     user: IMeDetailedSchema
     expires_at: str | None
 
+
 class IRolePolicies(TypedDict):
     gtl_available: bool
     ltl_available: bool
