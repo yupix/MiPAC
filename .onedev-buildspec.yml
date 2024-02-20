@@ -1,0 +1,62 @@
+version: 26
+jobs:
+- name: Publish Packages(OneDev)
+  steps:
+  - !CheckoutStep
+    name: checkout
+    cloneCredential: !DefaultCredential {}
+    withLfs: false
+    withSubmodules: false
+    cloneDepth: 2000
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !CommandStep
+    name: publish artifact
+    runInContainer: true
+    image: python:3.12.2-slim
+    interpreter: !DefaultInterpreter
+      commands:
+      - apt update
+      - apt install -y git
+      - ''
+      - git fetch
+      - ''
+      - cat << EOF > $HOME/.pypirc
+      - '[distutils]'
+      - index-servers=
+      - '  onedev'
+      - ''
+      - '[onedev]'
+      - repository=https://onedev.akarinext.org/yupix/mipac-sync/MiPAC/~pypi
+      - username=@job_token@
+      - password=@secret:access-token@
+      - EOF
+      - ''
+      - python -m pip install --upgrade pip
+      - pip install build twine
+      - ''
+      - python -m build
+      - ''
+      - twine upload --repository onedev dist/*
+    useTTY: true
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  triggers:
+  - !BranchUpdateTrigger {}
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  timeout: 3600
+- name: Sync
+  steps:
+  - !PushRepository
+    name: Push GitLab
+    remoteUrl: https://lab.teamblackcrystal.com/yupix/MiPAC
+    userName: yupix
+    passwordSecret: gitlab-access-token
+    force: true
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  triggers:
+  - !BranchUpdateTrigger {}
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  timeout: 3600

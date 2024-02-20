@@ -1,6 +1,6 @@
 from typing import TypedDict
 
-from mipac.types.user import ILiteUser
+from mipac.types.user import IPartialUser
 
 
 class IClip(TypedDict):
@@ -8,7 +8,7 @@ class IClip(TypedDict):
     created_at: str
     last_clipped_at: str
     user_id: str
-    user: ILiteUser
+    user: IPartialUser
     name: str
     description: str | None
     is_public: bool

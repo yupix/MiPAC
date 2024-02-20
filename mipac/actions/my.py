@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import NotSupportVersion, NotSupportVersionText
 from mipac.http import HTTPClient, Route
 from mipac.models.follow import FollowRequest
 from mipac.types.achievement import IT_ACHIEVEMENT_NAME
@@ -20,7 +19,9 @@ class MyActions(AbstractAction):
 
     async def fetch_follow_requests(self) -> list[FollowRequest]:
         res: list[IFollowRequest] = await self.__session.request(
-            Route('POST', '/api/following/requests/list'), auth=True, lower=True,
+            Route("POST", "/api/following/requests/list"),
+            auth=True,
+            lower=True,
         )
         return [FollowRequest(i, client=self.__client) for i in res]
 
@@ -42,9 +43,7 @@ class MyActions(AbstractAction):
         NotSupportVersion
             実績機能が存在しないサーバーを使用している
         """
-        if self.__client._config.use_version < 13:
-            raise NotSupportVersion(NotSupportVersionText)
         res: bool = await self.__session.request(
-            Route('POST', '/api/i/claim-achievement'), auth=True, json={'name': name}, lower=True
+            Route("POST", "/api/i/claim-achievement"), auth=True, json={"name": name}, lower=True
         )
         return res

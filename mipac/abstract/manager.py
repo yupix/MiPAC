@@ -8,7 +8,7 @@ from mipac.http import HTTPClient
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
-__all__ = ('AbstractManager',)
+__all__ = ("AbstractManager",)
 
 
 class AbstractManager(ABC):

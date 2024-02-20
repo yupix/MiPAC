@@ -1,6 +1,6 @@
 from typing import Self
 
-from mipac.config import Config, IMisskeyVersions, config
+from mipac.config import Config, config
 from mipac.http import HTTPClient
 from mipac.manager.client import ClientManager
 from mipac.utils.log import LOGING_LEVEL_TYPE, setup_logging
@@ -12,13 +12,10 @@ class Client:
         url: str,
         token: str | None = None,
         *,
-        log_level: LOGING_LEVEL_TYPE | None = 'INFO',
-        use_version: IMisskeyVersions = 12,
-        use_version_autodetect: bool = True
+        log_level: LOGING_LEVEL_TYPE | None = "INFO",
     ) -> None:
         if log_level is not None:
             setup_logging(level=log_level)
-        config.from_dict(use_version=use_version, use_version_autodetect=use_version_autodetect)
         self.config: Config = config
         self.http: HTTPClient = HTTPClient(url, token)
 

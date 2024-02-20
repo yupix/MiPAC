@@ -1,32 +1,23 @@
 from typing import NotRequired, TypedDict
 
-from mipac.types.note import IPartialNote
+from mipac.types.note import INote
 
 
-class IPartialChannel(TypedDict):
+class IChannel(TypedDict):
     id: str
-    name: str
-
-
-class IChannelNote(IPartialNote):
-    channel: IPartialChannel
-    channel_id: str
-    local_only: bool
-
-
-class IChannelLite(IPartialChannel):
     created_at: str
     last_noted_at: str | None
+    name: str
     description: str | None
-    user_id: str
+    user_id: str | None
     banner_url: str | None
+    pinned_note_ids: list[str]
+    color: str
+    is_archived: bool
     users_count: int
     notes_count: int
-    pinned_note_ids: NotRequired[list[str]]  # pinned系は 13.11.0以上が必要
-    pinned_notes: NotRequired[list[IChannelNote]]
-
-
-class IChannel(IChannelLite):
-    has_unread_note: bool
-    is_following: bool | None
-    is_favorited: bool | None  # is_favoritedは 13.11.0以上が必要
+    is_sensitive: bool
+    allow_renote_to_external: bool
+    is_following: NotRequired[bool]
+    is_favorited: NotRequired[bool]
+    pinned_notes: NotRequired[list[INote]]

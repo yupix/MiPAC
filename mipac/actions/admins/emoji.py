@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import NotExistRequiredData, ParameterError
+from mipac.errors.base import NotExistRequiredData
 from mipac.http import Route
 from mipac.models.emoji import CustomEmoji
 from mipac.types.emoji import ICustomEmoji
@@ -23,54 +23,36 @@ class AdminEmojiActions(AbstractAction):
 
     async def add(
         self,
+        name: str,
         file_id: str | None = None,
         *,
-        name: str | None = None,
-        url: str | None = None,
         category: str | None = None,
-        aliases: list[str] | None = None
+        aliases: list[str] | None = None,
+        license: str | None = None,
+        is_sensitive: bool = False,
+        local_only: bool = False,
+        role_ids_that_can_be_used_this_emoji_as_reaction: list[str] | None = None,
     ) -> bool:
-        """絵文字を追加します
+        data = {
+            "fileId": file_id,
+            "name": name,
+            "category": category,
+            "aliases": aliases,
+            "license": license,
+            "isSensitive": is_sensitive,
+            "localOnly": local_only,
+            "roleIdsThatCanBeUsedThisEmojiAsReaction": role_ids_that_can_be_used_this_emoji_as_reaction,  # noqa: E501
+        }
 
-        Parameters
-        ----------
-        file_id : str | None, optional
-            追加する絵文字のファイルId, by default None
-        name : str | None, optional
-            絵文字名, by default None
-        url : str | None, optional
-            絵文字があるUrl, by default None
-        category : str | None, optional
-            絵文字のカテゴリー, by default None
-        aliases : list[str] | None, optional
-            絵文字のエイリアス, by default None
+        if not check_multi_arg(file_id, name):
+            raise NotExistRequiredData("required a file_id or name")
 
-        Returns
-        -------
-        bool
-            成功したかどうか
-
-        Raises
-        ------
-        NotExistRequiredData
-            必要なデータが不足している
-        """
-
-        if self.__client._config.use_version >= 12:
-            data = {'fileId': file_id}
-        else:
-            data = {
-                'name': name,
-                'url': url,
-                'category': category,
-                'aliases': aliases,
-            }
-
-        if not check_multi_arg(file_id, url):
-            raise NotExistRequiredData('required a file_id or url')
         return bool(
             await self.__session.request(
-                Route('POST', '/api/admin/emoji/add'), json=data, lower=True, auth=True,
+                Route("POST", "/api/admin/emoji/add"),
+                json=data,
+                lower=True,
+                auth=True,
             )
         )
 
@@ -81,22 +63,22 @@ class AdminEmojiActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        get_all: bool = True
+        get_all: bool = True,
     ) -> AsyncGenerator[CustomEmoji, None]:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ValueError("limitは100以下である必要があります")
         if get_all:
             limit = 100
 
         body = {
-            'query': query,
-            'limit': limit,
-            'sinceId': since_id,
-            'untilId': until_id,
+            "query": query,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
         }
 
         pagination = Pagination[ICustomEmoji](
-            self.__session, Route('POST', '/api/admin/emoji/list'), json=body
+            self.__session, Route("POST", "/api/admin/emoji/list"), json=body
         )
 
         while True:
@@ -115,23 +97,23 @@ class AdminEmojiActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        get_all: bool = True
+        get_all: bool = True,
     ) -> AsyncGenerator[CustomEmoji, None]:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ValueError("limitは100以下である必要があります")
         if get_all:
             limit = 100
 
         body = {
-            'query': query,
-            'host': host,
-            'limit': limit,
-            'sinceId': since_id,
-            'untilId': until_id,
+            "query": query,
+            "host": host,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
         }
 
         pagination = Pagination[ICustomEmoji](
-            self.__session, Route('POST', '/api/admin/emoji/list-remote'), json=body
+            self.__session, Route("POST", "/api/admin/emoji/list-remote"), json=body
         )
 
         while True:
@@ -143,9 +125,9 @@ class AdminEmojiActions(AbstractAction):
                 break
 
     async def set_license_bulk(self, ids: list[str], license: str | None = None) -> bool:
-        body = {'ids': ids, 'license': license}
+        body = {"ids": ids, "license": license}
         res: bool = await self.__session.request(
-            Route('POST', '/api/admin/emoji/set-license-bulk'),
+            Route("POST", "/api/admin/emoji/set-license-bulk"),
             auth=True,
             json=body,
             remove_none=False,  # remove_noneをFalseにしないとlisenceが消せなくなる
@@ -174,16 +156,13 @@ class AdminEmojiActions(AbstractAction):
         emoji_id = emoji_id or self.__emoji_id
 
         if emoji_id is None:
-            raise NotExistRequiredData('idが不足しています')
-
-        endpoint = (
-            '/api/admin/emoji/delete'
-            if self.__client._config.use_version >= 12
-            else '/api/admin/emoji/remove'
-        )
+            raise NotExistRequiredData("idが不足しています")
 
         return bool(
             await self.__session.request(
-                Route('POST', endpoint), auth=True, json={'id': emoji_id}, lower=True,
+                Route("POST", "/api/admin/emoji/delete"),
+                auth=True,
+                json={"id": emoji_id},
+                lower=True,
             )
         )

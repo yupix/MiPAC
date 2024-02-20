@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, TypedDict
+from typing import TypedDict
 
-if TYPE_CHECKING:
-    from mipac.types.user import IUserDetailed
+from mipac.types.user import IUserDetailedNotMeSchema
 
 
 class IUserIP(TypedDict):
@@ -30,7 +29,7 @@ class IModerationLog(TypedDict):
     type: str
     info: dict  # TODO: これ何?
     user_id: str
-    user: IUserDetailed
+    user: IUserDetailedNotMeSchema
 
 
 class IServerInfoCpu(TypedDict):

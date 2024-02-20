@@ -1,30 +1,32 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator
+from typing import TYPE_CHECKING, AsyncGenerator, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
-from mipac.models.announcement import Announcement, AnnouncementSystem
-from mipac.types.announcement import IAnnouncement, IAnnouncementSystem
+from mipac.models.announcement import Announcement, AnnouncementDetailed
+from mipac.types.announcement import IAnnouncement, IAnnouncementDetailed
 from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class AdminAnnouncementClientActions(AbstractAction):
+class SharedAdminAnnouncementActions(AbstractAction):
     def __init__(
-        self, announce_id: str | None = None, *, session: HTTPClient, client: ClientManager,
-    ):
-        self.__announce_id = announce_id
-        self.__session: HTTPClient = session
-        self.__client: ClientManager = client
+        self,
+        *,
+        session: HTTPClient,
+        client: ClientManager,
+    ) -> None:
+        self._session: HTTPClient = session
+        self._client: ClientManager = client
 
-    async def delete(self, announce_id: str | None = None) -> bool:
-        announce_id = announce_id or self.__announce_id
-        res: bool = await self.__session.request(
-            Route('POST', '/api/admin/announcements/delete'), json={'id': announce_id}, auth=True,
+    async def delete(self, *, announce_id: str) -> bool:
+        res: bool = await self._session.request(
+            Route("POST", "/api/admin/announcements/delete"),
+            json={"id": announce_id},
+            auth=True,
         )
         return res
 
@@ -34,17 +36,16 @@ class AdminAnnouncementClientActions(AbstractAction):
         text: str,
         image_url: str | None = None,
         *,
-        announce_id: str | None = None,
+        announce_id: str,
     ):
-        announce_id = announce_id or self.__announce_id
         body = {
-            'id': announce_id,
-            'title': title,
-            'text': text,
-            'imageUrl': image_url,
+            "id": announce_id,
+            "title": title,
+            "text": text,
+            "imageUrl": image_url,
         }
-        res: bool = await self.__session.request(
-            Route('POST', '/api/admin/announcements/update'),
+        res: bool = await self._session.request(
+            Route("POST", "/api/admin/announcements/update"),
             json=body,
             auth=True,
             remove_none=False,
@@ -52,22 +53,56 @@ class AdminAnnouncementClientActions(AbstractAction):
         return res
 
 
-class AdminAnnouncementActions(AdminAnnouncementClientActions):
+class ClientAdminAnnouncementActions(SharedAdminAnnouncementActions):
     def __init__(
-        self, announce_id: str | None = None, *, session: HTTPClient, client: ClientManager,
+        self,
+        announce_id: str,
+        *,
+        session: HTTPClient,
+        client: ClientManager,
+    ) -> None:
+        super().__init__(session=session, client=client)
+        self.__announce_id: str = announce_id
+
+    @override
+    async def delete(self, *, announce_id: str | None = None) -> bool:
+        announce_id = announce_id or self.__announce_id
+        return await super().delete(announce_id=announce_id)
+
+    @override
+    async def update(
+        self,
+        title: str,
+        text: str,
+        image_url: str | None = None,
+        *,
+        announce_id: str | None = None,
     ):
-        super().__init__(announce_id=announce_id, session=session, client=client)
+        announce_id = announce_id or self.__announce_id
+        return await super().update(
+            title=title, text=text, image_url=image_url, announce_id=announce_id
+        )
+
+
+class AdminAnnouncementActions(SharedAdminAnnouncementActions):
+    def __init__(
+        self,
+        *,
+        session: HTTPClient,
+        client: ClientManager,
+    ):
+        super().__init__(session=session, client=client)
 
     async def create(self, title: str, text: str, image_url: str | None = None) -> Announcement:
-        body = {'title': title, 'text': text, 'imageUrl': image_url}
-        created_announcement: IAnnouncement = await self.__session.request(
-            Route('POST', '/api/admin/announcements/create'),
+        body = {"title": title, "text": text, "imageUrl": image_url}
+        created_announcement: IAnnouncement = await self._session.request(
+            Route("POST", "/api/admin/announcements/create"),
             json=body,
             auth=True,
             lower=True,
             remove_none=False,
         )
-        return Announcement(created_announcement, client=self.__client)
+        return Announcement(created_announcement, client=self._client)
 
     async def gets(
         self,
@@ -75,26 +110,26 @@ class AdminAnnouncementActions(AdminAnnouncementClientActions):
         since_id: str | None = None,
         until_id: str | None = None,
         get_all: bool = False,
-    ) -> AsyncGenerator[AnnouncementSystem, None]:
+    ) -> AsyncGenerator[AnnouncementDetailed, None]:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ValueError("limitは100以下である必要があります")
         if get_all:
             limit = 100
 
         body = {
-            'limit': limit,
-            'sinceId': since_id,
-            'untilId': until_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": until_id,
         }
 
-        pagination = Pagination[IAnnouncementSystem](
-            self.__session, Route('POST', '/api/admin/announcements/list'), json=body
+        pagination = Pagination[IAnnouncementDetailed](
+            self._session, Route("POST", "/api/admin/announcements/list"), json=body
         )
 
         while True:
             res_annonuncement_systems = await pagination.next()
             for res_announcement_system in res_annonuncement_systems:
-                yield AnnouncementSystem(res_announcement_system, client=self.__client)
+                yield AnnouncementDetailed(res_announcement_system, client=self._client)
 
             if get_all is False or pagination.is_final:
                 break

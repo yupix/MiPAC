@@ -1,352 +1,2406 @@
-[
-    "/api/admin/meta",
-    "/api/admin/abuse-user-reports",
-    "/api/admin/accounts/create",
-    "/api/admin/accounts/delete",
-    "/api/admin/ad/create",
-    "/api/admin/ad/delete",
-    "/api/admin/ad/list",
-    "/api/admin/ad/update",
-    "/api/admin/announcements/create",
-    "/api/admin/announcements/delete",
-    "/api/admin/announcements/list",
-    "/api/admin/announcements/update",
-    "/api/admin/delete-all-files-of-a-user",
-    "/api/admin/drive/clean-remote-files",
-    "/api/admin/drive/cleanup",
-    "/api/admin/drive/files",
-    "/api/admin/drive/show-file",
-    "/api/admin/emoji/add-aliases-bulk",
-    "/api/admin/emoji/add",
-    "/api/admin/emoji/copy",
-    "/api/admin/emoji/delete-bulk",
-    "/api/admin/emoji/delete",
-    "/api/admin/emoji/list-remote",
-    "/api/admin/emoji/list",
-    "/api/admin/emoji/remove-aliases-bulk",
-    "/api/admin/emoji/set-aliases-bulk",
-    "/api/admin/emoji/set-category-bulk",
-    "/api/admin/emoji/update",
-    "/api/admin/federation/delete-all-files",
-    "/api/admin/federation/refresh-remote-instance-metadata",
-    "/api/admin/federation/remove-all-following",
-    "/api/admin/federation/update-instance",
-    "/api/admin/get-index-stats",
-    "/api/admin/get-table-stats",
-    "/api/admin/get-user-ips",
-    "/api/invite",
-    "/api/admin/promo/create",
-    "/api/admin/queue/clear",
-    "/api/admin/queue/deliver-delayed",
-    "/api/admin/queue/inbox-delayed",
-    "/api/admin/queue/promote",
-    "/api/admin/queue/stats",
-    "/api/admin/relays/add",
-    "/api/admin/relays/list",
-    "/api/admin/relays/remove",
-    "/api/admin/reset-password",
-    "/api/admin/resolve-abuse-user-report",
-    "/api/admin/send-email",
-    "/api/admin/server-info",
-    "/api/admin/show-moderation-logs",
-    "/api/admin/show-user",
-    "/api/admin/show-users",
-    "/api/admin/suspend-user",
-    "/api/admin/unsuspend-user",
-    "/api/admin/update-meta",
-    "/api/admin/delete-account",
-    "/api/admin/update-user-note",
-    "/api/admin/roles/create",
-    "/api/admin/roles/delete",
-    "/api/admin/roles/list",
-    "/api/admin/roles/show",
-    "/api/admin/roles/update",
-    "/api/admin/roles/assign",
-    "/api/admin/roles/unassign",
-    "/api/admin/roles/update-default-policies",
-    "/api/admin/roles/users",
-    "/api/announcements",
-    "/api/antennas/create",
-    "/api/antennas/delete",
-    "/api/antennas/list",
-    "/api/antennas/notes",
-    "/api/antennas/show",
-    "/api/antennas/update",
-    "/api/ap/get",
-    "/api/ap/show",
-    "/api/app/create",
-    "/api/app/show",
-    "/api/auth/session/generate",
-    "/api/auth/session/show",
-    "/api/auth/session/userkey",
-    "/api/blocking/create",
-    "/api/blocking/delete",
-    "/api/blocking/list",
-    "/api/channels/create",
-    "/api/channels/featured",
-    "/api/channels/follow",
-    "/api/channels/followed",
-    "/api/channels/owned",
-    "/api/channels/show",
-    "/api/channels/timeline",
-    "/api/channels/unfollow",
-    "/api/channels/update",
-    "/api/charts/active-users",
-    "/api/charts/ap-request",
-    "/api/charts/drive",
-    "/api/charts/federation",
-    "/api/charts/instance",
-    "/api/charts/notes",
-    "/api/charts/user/drive",
-    "/api/charts/user/following",
-    "/api/charts/user/notes",
-    "/api/charts/user/pv",
-    "/api/charts/user/reactions",
-    "/api/charts/users",
-    "/api/clips/add-note",
-    "/api/clips/remove-note",
-    "/api/clips/create",
-    "/api/clips/delete",
-    "/api/clips/list",
-    "/api/clips/notes",
-    "/api/clips/show",
-    "/api/clips/update",
-    "/api/clips/favorite",
-    "/api/clips/unfavorite",
-    "/api/clips/my-favorites",
-    "/api/drive",
-    "/api/drive/files",
-    "/api/drive/files/attached-notes",
-    "/api/drive/files/check-existence",
-    "/api/drive/files/create",
-    "/api/drive/files/delete",
-    "/api/drive/files/find-by-hash",
-    "/api/drive/files/find",
-    "/api/drive/files/show",
-    "/api/drive/files/update",
-    "/api/drive/files/upload-from-url",
-    "/api/drive/folders",
-    "/api/drive/folders/create",
-    "/api/drive/folders/delete",
-    "/api/drive/folders/find",
-    "/api/drive/folders/show",
-    "/api/drive/folders/update",
-    "/api/drive/stream",
-    "/api/email-address/available",
-    "/api/endpoint",
-    "/api/endpoints",
-    "/api/federation/followers",
-    "/api/federation/following",
-    "/api/federation/instances",
-    "/api/federation/show-instance",
-    "/api/federation/update-remote-user",
-    "/api/federation/users",
-    "/api/federation/stats",
-    "/api/following/create",
-    "/api/following/delete",
-    "/api/following/invalidate",
-    "/api/following/requests/accept",
-    "/api/following/requests/cancel",
-    "/api/following/requests/list",
-    "/api/following/requests/reject",
-    "/api/gallery/featured",
-    "/api/gallery/popular",
-    "/api/gallery/posts",
-    "/api/gallery/posts/create",
-    "/api/gallery/posts/delete",
-    "/api/gallery/posts/like",
-    "/api/gallery/posts/show",
-    "/api/gallery/posts/unlike",
-    "/api/gallery/posts/update",
-    "/api/get-online-users-count",
-    "/api/hashtags/list",
-    "/api/hashtags/search",
-    "/api/hashtags/show",
-    "/api/hashtags/trend",
-    "/api/hashtags/users",
-    "/api/i",
-    "/api/i/claim-achievement",
-    "/api/i/favorites",
-    "/api/i/gallery/likes",
-    "/api/i/gallery/posts",
-    "/api/i/get-word-muted-notes-count",
-    "/api/i/notifications",
-    "/api/i/page-likes",
-    "/api/i/pages",
-    "/api/i/pin",
-    "/api/i/read-all-unread-notes",
-    "/api/i/read-announcement",
-    "/api/i/unpin",
-    "/api/i/update",
-    "/api/i/webhooks/create",
-    "/api/i/webhooks/list",
-    "/api/i/webhooks/show",
-    "/api/i/webhooks/update",
-    "/api/i/webhooks/delete",
-    "/api/meta",
-    "/api/emojis",
-    "/api/emoji",
-    "/api/mute/create",
-    "/api/mute/delete",
-    "/api/mute/list",
-    "/api/renote-mute/create",
-    "/api/renote-mute/delete",
-    "/api/renote-mute/list",
-    "/api/my/apps",
-    "/api/notes",
-    "/api/notes/children",
-    "/api/notes/clips",
-    "/api/notes/conversation",
-    "/api/notes/create",
-    "/api/notes/delete",
-    "/api/notes/favorites/create",
-    "/api/notes/favorites/delete",
-    "/api/notes/featured",
-    "/api/notes/global-timeline",
-    "/api/notes/hybrid-timeline",
-    "/api/notes/local-timeline",
-    "/api/notes/mentions",
-    "/api/notes/polls/recommendation",
-    "/api/notes/polls/vote",
-    "/api/notes/reactions",
-    "/api/notes/reactions/create",
-    "/api/notes/reactions/delete",
-    "/api/notes/renotes",
-    "/api/notes/replies",
-    "/api/notes/search-by-tag",
-    "/api/notes/search",
-    "/api/notes/show",
-    "/api/notes/state",
-    "/api/notes/thread-muting/create",
-    "/api/notes/thread-muting/delete",
-    "/api/notes/timeline",
-    "/api/notes/translate",
-    "/api/notes/unrenote",
-    "/api/notes/user-list-timeline",
-    "/api/notifications/create",
-    "/api/notifications/mark-all-as-read",
-    "/api/notifications/read",
-    "/api/pages/create",
-    "/api/pages/delete",
-    "/api/pages/featured",
-    "/api/pages/like",
-    "/api/pages/show",
-    "/api/pages/unlike",
-    "/api/pages/update",
-    "/api/flash/create",
-    "/api/flash/delete",
-    "/api/flash/featured",
-    "/api/flash/like",
-    "/api/flash/show",
-    "/api/flash/unlike",
-    "/api/flash/update",
-    "/api/flash/my",
-    "/api/flash/my-likes",
-    "/api/ping",
-    "/api/pinned-users",
-    "/api/promo/read",
-    "/api/roles/list",
-    "/api/roles/show",
-    "/api/roles/users",
-    "/api/request-reset-password",
-    "/api/reset-db",
-    "/api/reset-password",
-    "/api/server-info",
-    "/api/stats",
-    "/api/sw/show-registration",
-    "/api/sw/update-registration",
-    "/api/sw/register",
-    "/api/sw/unregister",
-    "/api/test",
-    "/api/username/available",
-    "/api/users",
-    "/api/users/clips",
-    "/api/users/followers",
-    "/api/users/following",
-    "/api/users/gallery/posts",
-    "/api/users/get-frequently-replied-users",
-    "/api/users/lists/create",
-    "/api/users/lists/delete",
-    "/api/users/lists/list",
-    "/api/users/lists/pull",
-    "/api/users/lists/push",
-    "/api/users/lists/show",
-    "/api/users/lists/update",
-    "/api/users/notes",
-    "/api/users/pages",
-    "/api/users/reactions",
-    "/api/users/recommendation",
-    "/api/users/relation",
-    "/api/users/report-abuse",
-    "/api/users/search-by-username-and-host",
-    "/api/users/search",
-    "/api/users/show",
-    "/api/users/stats",
-    "/api/users/achievements",
-    "/api/fetch-rss",
-    "/api/retention",
-    "/api/admin/delete-logs",
-    "/api/admin/emoji/remove",
-    "/api/admin/invite",
-    "/api/admin/logs",
-    "/api/admin/moderators/add",
-    "/api/admin/moderators/remove",
-    "/api/admin/queue/jobs",
-    "/api/admin/remove-abuse-user-report",
-    "/api/admin/resync-chart",
-    "/api/admin/set-premium",
-    "/api/admin/silence-user",
-    "/api/admin/unset-premium",
-    "/api/admin/unsilence-user",
-    "/api/admin/unverify-user",
-    "/api/admin/update-remote-user",
-    "/api/admin/vacuum",
-    "/api/admin/verify-user",
-    "/api/channels/pin-note",
-    "/api/charts/hashtag",
-    "/api/charts/network",
-    "/api/games/reversi/games",
-    "/api/games/reversi/games/show",
-    "/api/games/reversi/games/surrender",
-    "/api/games/reversi/invitations",
-    "/api/games/reversi/match",
-    "/api/games/reversi/match/cancel",
-    "/api/i/read-all-messaging-messages",
-    "/api/i/registry/get-all",
-    "/api/i/registry/get-detail",
-    "/api/i/registry/get",
-    "/api/i/registry/keys-with-type",
-    "/api/i/registry/keys",
-    "/api/i/registry/remove",
-    "/api/i/registry/scopes",
-    "/api/i/registry/set",
-    "/api/i/user-group-invites",
-    "/api/messaging/history",
-    "/api/messaging/messages",
-    "/api/messaging/messages/create",
-    "/api/messaging/messages/delete",
-    "/api/messaging/messages/read",
-    "/api/notes/watching/create",
-    "/api/notes/watching/delete",
-    "/api/room/show",
-    "/api/room/update",
-    "/api/users/groups/create",
-    "/api/users/groups/delete",
-    "/api/users/groups/invitations/accept",
-    "/api/users/groups/invitations/reject",
-    "/api/users/groups/invite",
-    "/api/users/groups/joined",
-    "/api/users/groups/owned",
-    "/api/users/groups/pull",
-    "/api/users/groups/show",
-    "/api/users/groups/transfer",
-    "/api/users/groups/update",
-    "/api/version",
-    "/api/channels/favorite",
-    "/api/channels/unfavorite",
-    "/api/channels/my-favorites",
-    "/api/channels/search",
-    "/api/roles/notes",
-    "/api/users/update-memo",
-    "/api/admin/emoji/set-license-bulk"
-]
+{
+    "endpoints": {
+        "support": {
+            "/admin/abuse-user-reports": {
+                "path": "/admin/abuse-user-reports",
+                "request_body_hash": "b6e2d483b6034835ea8b345447fb61ea20b6165c717441d673839800cbb8dc97",
+                "response_body_hash": "13c667a454b73525a38a0fd22e5d5cea95fb1e9217a9af6f2378ea2e234cfaaf",
+                "status": "notSupported"
+            },
+            "/admin/accounts/create": {
+                "path": "/admin/accounts/create",
+                "request_body_hash": "1e41c87931385dd3cf7555c9a467d7d2a7ad385d06b65c9ba5fa8fc41fd2fff6",
+                "response_body_hash": "4cca43cad58263d213ec8740c853481b82de318e6a852eeabda66424633449ee",
+                "status": "notSupported"
+            },
+            "/admin/accounts/delete": {
+                "path": "/admin/accounts/delete",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/ad/create": {
+                "path": "/admin/ad/create",
+                "request_body_hash": "4d22f18a3e08dac47da6a65986d887fec39078111c373ddd4b4e960c783a8f2b",
+                "response_body_hash": "1dfbf2512ea09c7c850948c3122d596054723ecf10ca46b3e4e6d8f9d0e31ad9",
+                "status": "supported"
+            },
+            "/admin/ad/delete": {
+                "path": "/admin/ad/delete",
+                "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
+                "response_body_hash": "8a4c5615e979ae63fc8f52e891b84bc4a51104b72d0534a4e42da0b830e66f6c",
+                "status": "notSupported"
+            },
+            "/admin/ad/list": {
+                "path": "/admin/ad/list",
+                "request_body_hash": "6b9fe0d49f97df216cbdccd365e7a57acf65e38c6bf08d0cedae7a80217ded1d",
+                "response_body_hash": "a59532fabd97a3c0faf5ef29d7be14c889ecc9294592de34565a991615a8c4f2",
+                "status": "supported"
+            },
+            "/admin/ad/update": {
+                "path": "/admin/ad/update",
+                "request_body_hash": "dfb711cee3e9a3ed83e16f5aa69cfbdd62c37c4dc4eefbc3ce3583ff830b6097",
+                "response_body_hash": "bf3dcbf5d0f19fa1102b7efc8947170c2292180d72b1188152338f42706edeb9",
+                "status": "notSupported"
+            },
+            "/admin/announcements/create": {
+                "path": "/admin/announcements/create",
+                "request_body_hash": "30a3fa44f6fa2ccff55c827b474567ea4616e5a95bf7910c5adba04b338c9380",
+                "response_body_hash": "ce1d7028219c7b4f65c53f49a59ee93a927f42b4a67d88fd946548800fbfe673",
+                "status": "notSupported"
+            },
+            "/admin/announcements/delete": {
+                "path": "/admin/announcements/delete",
+                "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
+                "response_body_hash": "dec257babf6b429ef5d7b5101d4f5892f0fd6d562294bf65f522fff42a3ba0ef",
+                "status": "notSupported"
+            },
+            "/admin/announcements/list": {
+                "path": "/admin/announcements/list",
+                "request_body_hash": "39fc2cdb726b8e838010dcd8ec8caeafcfee0004c3163ab32cde5d47361003d9",
+                "response_body_hash": "393e9f5bc6ddeb37f28db1ee06d3c75bb291bf8678bd6d116b5fb4d246bda00e",
+                "status": "notSupported"
+            },
+            "/admin/announcements/update": {
+                "path": "/admin/announcements/update",
+                "request_body_hash": "e1f20f358947ce703f94e84a714bedea3a4f3735bc461a04ce2285251610cf48",
+                "response_body_hash": "3f16c78ba027db00c082f201279056ad3f787ce1b754e435044d4c8f67e11c0f",
+                "status": "notSupported"
+            },
+            "/admin/avatar-decorations/create": {
+                "path": "/admin/avatar-decorations/create",
+                "request_body_hash": "b740709b9f22f20dbc5fa952b3b54b708efa1701289dd740f23f5702d9990afe",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/avatar-decorations/delete": {
+                "path": "/admin/avatar-decorations/delete",
+                "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/avatar-decorations/list": {
+                "path": "/admin/avatar-decorations/list",
+                "request_body_hash": "39fc2cdb726b8e838010dcd8ec8caeafcfee0004c3163ab32cde5d47361003d9",
+                "response_body_hash": "ece73ac4d7c39bdc25d18d93c14fe5b8461afff066b9850c4448f766bb392d45",
+                "status": "notSupported"
+            },
+            "/admin/avatar-decorations/update": {
+                "path": "/admin/avatar-decorations/update",
+                "request_body_hash": "8c943061b97adfe655b2ec33b6b813a082bd1f51145c91e63cf15a7fbabec81d",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/delete-all-files-of-a-user": {
+                "path": "/admin/delete-all-files-of-a-user",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/drive/clean-remote-files": {
+                "path": "/admin/drive/clean-remote-files",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "supported"
+            },
+            "/admin/drive/cleanup": {
+                "path": "/admin/drive/cleanup",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "supported"
+            },
+            "/admin/drive/files": {
+                "path": "/admin/drive/files",
+                "request_body_hash": "751e858ba48d04d2e94f1605465961858328a351ecc035ab4965a4ab0b5ee414",
+                "response_body_hash": "f34c75e26e857fadd415d1e4a3bd80f224779a84be6a3e142e4ed7896e888c1b",
+                "status": "supported"
+            },
+            "/admin/drive/show-file": {
+                "path": "/admin/drive/show-file",
+                "request_body_hash": "469dab9342135333df7936e6dd1a691a975e6b5c205b5ab3040be3bf31a18a17",
+                "response_body_hash": "f45d00ac657a7054e3c94628e5ebb8b0e17aa5d0c01b1927761ba7756421ea80",
+                "status": "supported"
+            },
+            "/admin/emoji/add-aliases-bulk": {
+                "path": "/admin/emoji/add-aliases-bulk",
+                "request_body_hash": "ebc0308c45341574960839598a6c91e26f5699a049d471faa2af4b4edc628456",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/emoji/add": {
+                "path": "/admin/emoji/add",
+                "request_body_hash": "ebf63e0ecc9b3ec602e123e128968d06950de79c0189bc3cc9c1beafce33b316",
+                "response_body_hash": "3a83981ec3ff130c62969a753be1b6074313d44d6e022f6c47a6ef7f9b5aa322",
+                "status": "notSupported"
+            },
+            "/admin/emoji/copy": {
+                "path": "/admin/emoji/copy",
+                "request_body_hash": "b03a21f019432ea214bc9dbc491c2dc403bb077f27488d27de723ed28f9682b7",
+                "response_body_hash": "3065a44868be7b719c8cbaeda3a7601fd89f80ba3416c57eb157c1fbd66bc2c5",
+                "status": "notSupported"
+            },
+            "/admin/emoji/delete-bulk": {
+                "path": "/admin/emoji/delete-bulk",
+                "request_body_hash": "e6668b22f7bbeab0fe3e3fc291ab3a972c23c5a1c90cae6dd0d8a9363174b5bd",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/emoji/delete": {
+                "path": "/admin/emoji/delete",
+                "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
+                "response_body_hash": "d72da91342ab51c4b6716d27cef6f60ed91725eea3acfc0a97777e7b222e4a53",
+                "status": "notSupported"
+            },
+            "/admin/emoji/list-remote": {
+                "path": "/admin/emoji/list-remote",
+                "request_body_hash": "149ca6793228020eb03835976d2ef0c6c7d6d29f52b47e7650f841622e0d16b9",
+                "response_body_hash": "9992ad3f17e9b8573b42e74c0300bdc08b531bb4d60ec3b67be6b657b4203d81",
+                "status": "notSupported"
+            },
+            "/admin/emoji/list": {
+                "path": "/admin/emoji/list",
+                "request_body_hash": "bc3b85fdcddd33a61d5ccdfaf6bb64a31913534f0cb2add1ddef07672e897156",
+                "response_body_hash": "be0eba696abb8f5550aa58aeb46202c97bba6ae868e162f6d5b52912a74da867",
+                "status": "notSupported"
+            },
+            "/admin/emoji/remove-aliases-bulk": {
+                "path": "/admin/emoji/remove-aliases-bulk",
+                "request_body_hash": "ebc0308c45341574960839598a6c91e26f5699a049d471faa2af4b4edc628456",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/emoji/set-aliases-bulk": {
+                "path": "/admin/emoji/set-aliases-bulk",
+                "request_body_hash": "ebc0308c45341574960839598a6c91e26f5699a049d471faa2af4b4edc628456",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/emoji/set-category-bulk": {
+                "path": "/admin/emoji/set-category-bulk",
+                "request_body_hash": "82c4e6f4ac5de55a4953a9fb3719b76fca47e69f42a213d56a94bef2ec8cc1a4",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/emoji/set-license-bulk": {
+                "path": "/admin/emoji/set-license-bulk",
+                "request_body_hash": "b76a140a4612fe51922918ea951a850bce40417219a99bbab6062b369cb37a99",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/emoji/update": {
+                "path": "/admin/emoji/update",
+                "request_body_hash": "c69de1145bef4e9297f4ac1b306eb33131693ea5bc9c7eb1a2d5df9fbfd36c55",
+                "response_body_hash": "7e39b6fda31bae9ff514b58e201a824a35ef1efad5aed5eeb8e6cd6432992a5e",
+                "status": "notSupported"
+            },
+            "/admin/federation/delete-all-files": {
+                "path": "/admin/federation/delete-all-files",
+                "request_body_hash": "236265f716570bc655917ff0ba8f17d7a45a479f31e0027d2762c234c08542a2",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/federation/refresh-remote-instance-metadata": {
+                "path": "/admin/federation/refresh-remote-instance-metadata",
+                "request_body_hash": "236265f716570bc655917ff0ba8f17d7a45a479f31e0027d2762c234c08542a2",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/federation/remove-all-following": {
+                "path": "/admin/federation/remove-all-following",
+                "request_body_hash": "236265f716570bc655917ff0ba8f17d7a45a479f31e0027d2762c234c08542a2",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/federation/update-instance": {
+                "path": "/admin/federation/update-instance",
+                "request_body_hash": "765aaf7fae3452f6239297cfab56c8c1747e3197ce7cc9cbdec731d6280aac5f",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/get-index-stats": {
+                "path": "/admin/get-index-stats",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "0f3c93e6f64da29ef45a07febcd94bab10d290a8608a4a73f3f7371fef5b6419",
+                "status": "needToWork"
+            },
+            "/admin/get-table-stats": {
+                "path": "/admin/get-table-stats",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "88e2019329616268b4f952a2062d09c5439262a2e6d2cc920bbb3b85bfdd4849",
+                "status": "needToWork"
+            },
+            "/admin/get-user-ips": {
+                "path": "/admin/get-user-ips",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "fec10f3947e5e7cd19284ab9db845b0ce02711720cacddd519f151455518033f",
+                "status": "supported"
+            },
+            "/admin/invite/create": {
+                "path": "/admin/invite/create",
+                "request_body_hash": "e20a3cea35c6931f3497b77483a916558b88efd78d72822c2c7a00f52b59341f",
+                "response_body_hash": "ae560e69de75b18a3bf4412510d9dea8b3527831832349858bf7823152b3c044",
+                "status": "supported"
+            },
+            "/admin/invite/list": {
+                "path": "/admin/invite/list",
+                "request_body_hash": "89eb514c7f6cd1c5aae218c9e8d4102f26a63d22d36e5ada8c11a6959d74f6a8",
+                "response_body_hash": "719dddaac9f63e5b9b48bb92355f267b0229a7e0e41f144c6b79759a4da8181d",
+                "status": "supported"
+            },
+            "/admin/promo/create": {
+                "path": "/admin/promo/create",
+                "request_body_hash": "1d7b1fe3e95e0d46800c8302cffe4de42991b455ee5a739da53f4182d0054c7d",
+                "response_body_hash": "f4d23995e5a249332d500182b5422edd989b1c7f319184d5fb88e812210f717d",
+                "status": "notSupported"
+            },
+            "/admin/queue/clear": {
+                "path": "/admin/queue/clear",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/queue/deliver-delayed": {
+                "path": "/admin/queue/deliver-delayed",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aac920470cf2d53e18543f95d4fe74e2c7be95cc882d738715dda9b34699303a",
+                "status": "notSupported"
+            },
+            "/admin/queue/inbox-delayed": {
+                "path": "/admin/queue/inbox-delayed",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aac920470cf2d53e18543f95d4fe74e2c7be95cc882d738715dda9b34699303a",
+                "status": "notSupported"
+            },
+            "/admin/queue/promote": {
+                "path": "/admin/queue/promote",
+                "request_body_hash": "63e826b22ff5d33dea8d090e86a68e962eed10ff05722c02d4f2b1141455170a",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/queue/stats": {
+                "path": "/admin/queue/stats",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "d7dfd54a8da11da87b9c1302a0ca7733a93ed4dffc29b54d118f7603ddffe9c6",
+                "status": "notSupported"
+            },
+            "/admin/relays/add": {
+                "path": "/admin/relays/add",
+                "request_body_hash": "26d8e560709b1f8119f028bc96762a3ae36e16ca01f94b1386b1cacab93d7a31",
+                "response_body_hash": "93dc38488ff423c2ecd279405322919b6ee2451cebd15453de958ec355264fd0",
+                "status": "notSupported"
+            },
+            "/admin/relays/list": {
+                "path": "/admin/relays/list",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "2d0ad5a8cd82ef4b57a4c3c16943ad942c57ee972b0a9d1b78b703c03b690764",
+                "status": "notSupported"
+            },
+            "/admin/relays/remove": {
+                "path": "/admin/relays/remove",
+                "request_body_hash": "26d8e560709b1f8119f028bc96762a3ae36e16ca01f94b1386b1cacab93d7a31",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/reset-password": {
+                "path": "/admin/reset-password",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "0b157f80cf23cd0d52f933fca25f17cb7cdfc166388b2eecad373eaefadb76a1",
+                "status": "supported"
+            },
+            "/admin/resolve-abuse-user-report": {
+                "path": "/admin/resolve-abuse-user-report",
+                "request_body_hash": "ed9ebb3e513741301a21f71ab2927a7321f32eae633a7c5bdab6731944720ac9",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "supported"
+            },
+            "/admin/send-email": {
+                "path": "/admin/send-email",
+                "request_body_hash": "f98bd1f33cca83bb22a38b3a6d7ef1bdf3a0d07740bdde970abd4fb8bff76f68",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "supported"
+            },
+            "/admin/server-info": {
+                "path": "/admin/server-info",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "885cec10a360856b5128d0cff6a71a3b60d5da31377e20208735766788873de9",
+                "status": "notSupported"
+            },
+            "/admin/show-moderation-logs": {
+                "path": "/admin/show-moderation-logs",
+                "request_body_hash": "a6203df42cecfa3c3c1eaed8307f59b8aa039f6c25debef3d8c8958d78500c08",
+                "response_body_hash": "b4c44cb679836e4cedb24811c90fbfd87728cecfed9cf3e84b2c62ad54143862",
+                "status": "supported"
+            },
+            "/admin/show-user": {
+                "path": "/admin/show-user",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "7bf0116f498ce47044927701dfecaba646fd01670d82eba596492a14402d605c",
+                "status": "notSupported"
+            },
+            "/admin/show-users": {
+                "path": "/admin/show-users",
+                "request_body_hash": "ab6835009618436932947c9a386a7a49fa8440df950dab4207ee29d870fd90e4",
+                "response_body_hash": "f711c88a06f184d959627953fff320b77c3bcfbb871fe226d61cfacd7b6eb5cd",
+                "status": "notSupported"
+            },
+            "/admin/suspend-user": {
+                "path": "/admin/suspend-user",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/unsuspend-user": {
+                "path": "/admin/unsuspend-user",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "supported"
+            },
+            "/admin/update-meta": {
+                "path": "/admin/update-meta",
+                "request_body_hash": "7273c04f4b0ced06974fa0844023eb5decb7043be9885bf822797c6d7e5e2e36",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "needToWork"
+            },
+            "/admin/delete-account": {
+                "path": "/admin/delete-account",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "6db55b1f03dc038b85901c4148769125bb686c9d407b5b0d420770f27ab6b15c",
+                "status": "notSupported"
+            },
+            "/admin/update-user-note": {
+                "path": "/admin/update-user-note",
+                "request_body_hash": "f012905c1e978e94f4c2b45234c86d940e77870504a15903aa6e3b41bac96128",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "supported"
+            },
+            "/admin/roles/create": {
+                "path": "/admin/roles/create",
+                "request_body_hash": "0aa7e24050e82ccf83500724eba4ec57bf16252a049778b33d65784ef25a93e3",
+                "response_body_hash": "352c7db3e7a1ca57658d6ae7adb66b2d19884c1207709ed43287906064590fd9",
+                "status": "supported"
+            },
+            "/admin/roles/delete": {
+                "path": "/admin/roles/delete",
+                "request_body_hash": "f1e8b29b15487ead09234ea7c06fb900cd4a56f76907ff025d55eb2ba96e5ce1",
+                "response_body_hash": "71b65c61c5c44f132273c289122399d5647599a18f1ec6fc6afc7f171167fd88",
+                "status": "notSupported"
+            },
+            "/admin/roles/list": {
+                "path": "/admin/roles/list",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "a29e73a8aec4949d55a8b55d8e4fa2a7399dbb81a71831731df51e1519f150f5",
+                "status": "needToWork"
+            },
+            "/admin/roles/show": {
+                "path": "/admin/roles/show",
+                "request_body_hash": "f1e8b29b15487ead09234ea7c06fb900cd4a56f76907ff025d55eb2ba96e5ce1",
+                "response_body_hash": "a6e416c46472c8b0d8724047737649572fa2b02742d43313bb986421b3762f74",
+                "status": "needToWork"
+            },
+            "/admin/roles/update": {
+                "path": "/admin/roles/update",
+                "request_body_hash": "5a0b48979f607bbd1fae04044a256f6f00f3bb05cf8bf37f07fc9d0fc545191e",
+                "response_body_hash": "82b31d1805b5b4e5d352dc02dc8a966b532db3df7a76519ee01bcbb8f0d802d8",
+                "status": "notSupported"
+            },
+            "/admin/roles/assign": {
+                "path": "/admin/roles/assign",
+                "request_body_hash": "f7f3a63bda8c0a2670a08918641f2da445b7facd0cf159352849e07243e8141f",
+                "response_body_hash": "b6a9bfadd555c5023efaec61262e0dd7de6061991691004961cd22523a55bd68",
+                "status": "notSupported"
+            },
+            "/admin/roles/unassign": {
+                "path": "/admin/roles/unassign",
+                "request_body_hash": "edc227b6268e5d1a1d78948f2db5b24c648cb4cef9bd75f0898aa27580a5c85c",
+                "response_body_hash": "bc66aa1fb3138ce1a11a6b63af9d5f22cfdf731e228c9c64ae9655581c24f5e6",
+                "status": "notSupported"
+            },
+            "/admin/roles/update-default-policies": {
+                "path": "/admin/roles/update-default-policies",
+                "request_body_hash": "5993aa1848dbf1d239b51b5828e8fcad1dbb16ef12d1dd6cf570651f014efc9a",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/admin/roles/users": {
+                "path": "/admin/roles/users",
+                "request_body_hash": "985b8d2726a2e859a58a14d37b694af0e1a8911794cd692dbef09c20d9ba3cde",
+                "response_body_hash": "07c4c4aa9d7d863214274b76fb5258ddeedf9afa99a4196a928aa7cb081f3f8f",
+                "status": "needToWork"
+            },
+            "/announcements": {
+                "path": "/announcements",
+                "request_body_hash": "3b9784fd1a6d99a6278ad4642df1b6aa283dd6e91e9641cfb2ecd0d12b94829e",
+                "response_body_hash": "456eef150de01ee4e28226f596a746005fb36d5a78dd6d45efadc86b5da381c2",
+                "status": "notSupported"
+            },
+            "/antennas/create": {
+                "path": "/antennas/create",
+                "request_body_hash": "a71e081231fdcb86f03cdf8dce38b8d42d4ad9f67d8475e0aa4c9586740e6ddf",
+                "response_body_hash": "bebe066a5eb4b3f00bcadb48d44888726abf162d6c35015ccb632e9fe3d0a012",
+                "status": "notSupported"
+            },
+            "/antennas/delete": {
+                "path": "/antennas/delete",
+                "request_body_hash": "6475830a622393667b4511acc8e062ffd471cb7a26e5ac07e3ae5c88a3642ef6",
+                "response_body_hash": "73ac31320189c68a4fcdab9dd1ce04e93f317159d1f1cde669fc0bd71b85ce1d",
+                "status": "notSupported"
+            },
+            "/antennas/list": {
+                "path": "/antennas/list",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "d78f02e445c4d407dfc3739873205463552ca21af71204a8387ec5829c96c13d",
+                "status": "notSupported"
+            },
+            "/antennas/notes": {
+                "path": "/antennas/notes",
+                "request_body_hash": "639d814ca8690eae52969e5ae30ac91931901da9862dd112927d6270dd2d94d2",
+                "response_body_hash": "6698dde36d9b6f139df982013172a16a2c3956e57c5df0d1c964ae10db625c1f",
+                "status": "notSupported"
+            },
+            "/antennas/show": {
+                "path": "/antennas/show",
+                "request_body_hash": "6475830a622393667b4511acc8e062ffd471cb7a26e5ac07e3ae5c88a3642ef6",
+                "response_body_hash": "55aae179b8f1d100e8a11cfa45481d8c08326cb4835775ea591f5a606721cdce",
+                "status": "notSupported"
+            },
+            "/antennas/update": {
+                "path": "/antennas/update",
+                "request_body_hash": "557d2fec6208b6da2d85823eb5a958b43cdb4abb2545542d7d16f261cace3640",
+                "response_body_hash": "6298c6ba345854a384dc45e66ec60dd5d5d9f8f1876ebd5ff77e17a6a1af72c4",
+                "status": "notSupported"
+            },
+            "/ap/get": {
+                "path": "/ap/get",
+                "request_body_hash": "f6a2f2d7db4d8a191130151fe8bb661ff9e11583d381d9de1b3313a88912309c",
+                "response_body_hash": "8e160575767eaa2dde80e684c50b4df0cfb7380607880ee71c0b4f9136db9b6e",
+                "status": "notSupported"
+            },
+            "/ap/show": {
+                "path": "/ap/show",
+                "request_body_hash": "f6a2f2d7db4d8a191130151fe8bb661ff9e11583d381d9de1b3313a88912309c",
+                "response_body_hash": "0d2a4f81588a9a274bfb234cfbfc00df799bc78aa2da866e1bc25993947c3f63",
+                "status": "notSupported"
+            },
+            "/app/create": {
+                "path": "/app/create",
+                "request_body_hash": "0eaea814b5b1a92f537b2354ac5905098b67526211a7f204ad26ed032cc16ffe",
+                "response_body_hash": "22a993ada948e6394b933b6635f1f458c51257b8e90b9843be12e449f68ad2e0",
+                "status": "notSupported"
+            },
+            "/app/show": {
+                "path": "/app/show",
+                "request_body_hash": "d3abe297818ec4c1a1b6cd43ec9e92deed5db060da288f29d7b9c2be63954dc4",
+                "response_body_hash": "fcbdd34fa6c7b238b898b1c19d85d2c17cdc7d67c68cdde33addbe469051a451",
+                "status": "notSupported"
+            },
+            "/auth/session/generate": {
+                "path": "/auth/session/generate",
+                "request_body_hash": "d447346623f6b57e53a5230dd5151f59eccda419067808d39288052498c5d447",
+                "response_body_hash": "73f0b25ff0b204ef7ab93cfd2b94fb9cd8ca2dbd8465d880b9c2bbd7affb26cf",
+                "status": "notSupported"
+            },
+            "/auth/session/show": {
+                "path": "/auth/session/show",
+                "request_body_hash": "c6d1b6e1498ff55d17517f38d6d3c4390d319429202a85908b4fc622d175e957",
+                "response_body_hash": "fcdb3c22f0839af26ddb9dd0315a2d18362a0a1db90d98c50b9788b79e733d62",
+                "status": "notSupported"
+            },
+            "/auth/session/userkey": {
+                "path": "/auth/session/userkey",
+                "request_body_hash": "72580613e7553242e6f8205d7bf409335aac592ffccfd42b8e012d491adbe731",
+                "response_body_hash": "f8707bab9f73dea126a32626dea36da8c6ae2c82878e9fb62bff57bb17ad6260",
+                "status": "notSupported"
+            },
+            "/blocking/create": {
+                "path": "/blocking/create",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "3641f1cead8ec4e88def9809b5a71a36d5b85f85f6fd748041f815da346ca190",
+                "status": "notSupported"
+            },
+            "/blocking/delete": {
+                "path": "/blocking/delete",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "c2385557c4c8f9fc44ab4c99cff89919ec9ae128ca3d98750b67d2f3b4b6c9de",
+                "status": "notSupported"
+            },
+            "/blocking/list": {
+                "path": "/blocking/list",
+                "request_body_hash": "d392bfbe478ea28a41fcb4b1cfd5b120fb85cc71ad890eea4e0abb19916c7fe1",
+                "response_body_hash": "32837bc9c3e9d92723727e8fbc6824b7b7fa86343322bab099539bf05c32b09e",
+                "status": "notSupported"
+            },
+            "/channels/create": {
+                "path": "/channels/create",
+                "request_body_hash": "0821f58e8ddbac903c7f62d7d5ea25d430e37232628de49143cfa1fde5e45a86",
+                "response_body_hash": "608eb6e443017aa25b21384cfd527ed6e78eb918bf21ec9acc80ee73e5eeafc5",
+                "status": "supported"
+            },
+            "/channels/featured": {
+                "path": "/channels/featured",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "fbb9041d5545cb5780f43ff68016616c5fe9bebfba80f90eda6178f5deebd1cb",
+                "status": "supported"
+            },
+            "/channels/follow": {
+                "path": "/channels/follow",
+                "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
+                "response_body_hash": "6b66afa06051d494558994e6b9a3d5229059ac8a6638ef092a26e3f9559f04f9",
+                "status": "supported"
+            },
+            "/channels/followed": {
+                "path": "/channels/followed",
+                "request_body_hash": "874fe7a09828d52b1e209c103e7d8808af6b0af79213965be746d011906df3d3",
+                "response_body_hash": "fbb9041d5545cb5780f43ff68016616c5fe9bebfba80f90eda6178f5deebd1cb",
+                "status": "supported"
+            },
+            "/channels/owned": {
+                "path": "/channels/owned",
+                "request_body_hash": "874fe7a09828d52b1e209c103e7d8808af6b0af79213965be746d011906df3d3",
+                "response_body_hash": "fbb9041d5545cb5780f43ff68016616c5fe9bebfba80f90eda6178f5deebd1cb",
+                "status": "supported"
+            },
+            "/channels/show": {
+                "path": "/channels/show",
+                "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
+                "response_body_hash": "d0d74a1473e306b569f31d8f672ca9c2428e1302a13f19fe3ef7cdf01a42f3ab",
+                "status": "supported"
+            },
+            "/channels/timeline": {
+                "path": "/channels/timeline",
+                "request_body_hash": "f84bc86cda77ab3229f1aa0836d6f511617b52f6ac7d5c762758ad1497a3df22",
+                "response_body_hash": "714749ed97123df2377e503859138f94944f1a45f21df5300e02b250f0a817df",
+                "status": "supported"
+            },
+            "/channels/unfollow": {
+                "path": "/channels/unfollow",
+                "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
+                "response_body_hash": "e4f90abe92cc8eabcb43faa501d98d6be2fd3ca16b3bb4f4f978621012a91381",
+                "status": "supported"
+            },
+            "/channels/update": {
+                "path": "/channels/update",
+                "request_body_hash": "cd6cd79b9399329dcbe59cf945c94a4d00a3d8ad813c0265680cd21371020741",
+                "response_body_hash": "df6853d35700a2daac21cca9d083f01471da7336f995c3ec27dd6f9e6ca376af",
+                "status": "supported"
+            },
+            "/channels/favorite": {
+                "path": "/channels/favorite",
+                "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
+                "response_body_hash": "0e50dd9d6190d1252681a3a892b43db593f79a296da9440aa0f98b2c6fccd5e3",
+                "status": "supported"
+            },
+            "/channels/unfavorite": {
+                "path": "/channels/unfavorite",
+                "request_body_hash": "680923b4e18887b81f0c58cdda275876c2b7ba3f072efa9f91e00bcf4361bb1a",
+                "response_body_hash": "4dca34b5e13d095bd1572b4d4665d65dbed089ddeb0b0d51f7e6b9e84aeb1713",
+                "status": "supported"
+            },
+            "/channels/my-favorites": {
+                "path": "/channels/my-favorites",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "fbb9041d5545cb5780f43ff68016616c5fe9bebfba80f90eda6178f5deebd1cb",
+                "status": "supported"
+            },
+            "/channels/search": {
+                "path": "/channels/search",
+                "request_body_hash": "99efb621a25e5e80a19df58b6cbdccf5d64f8e11f33a4aeedfc3bd6ab9a17b99",
+                "response_body_hash": "fbb9041d5545cb5780f43ff68016616c5fe9bebfba80f90eda6178f5deebd1cb",
+                "status": "supported"
+            },
+            "/charts/active-users": {
+                "path": "/charts/active-users",
+                "request_body_hash": "311ddf37149d748825b4e71f28bfdb568553316dee530b24cd85a42d84b31995",
+                "response_body_hash": "7a6772e6244abd6e6d869f908f81e56adb3ede13f863fec6ef30ca52a5c7547e",
+                "status": "notSupported"
+            },
+            "/charts/ap-request": {
+                "path": "/charts/ap-request",
+                "request_body_hash": "311ddf37149d748825b4e71f28bfdb568553316dee530b24cd85a42d84b31995",
+                "response_body_hash": "282c66a8bed981963d3437e2cfeeafc65eebe9d6e50800a439d6015250f6f366",
+                "status": "notSupported"
+            },
+            "/charts/drive": {
+                "path": "/charts/drive",
+                "request_body_hash": "311ddf37149d748825b4e71f28bfdb568553316dee530b24cd85a42d84b31995",
+                "response_body_hash": "7a1d11c5afef13df38b79390d9be1850b37ca72710cd29080faea31378a05d63",
+                "status": "notSupported"
+            },
+            "/charts/federation": {
+                "path": "/charts/federation",
+                "request_body_hash": "311ddf37149d748825b4e71f28bfdb568553316dee530b24cd85a42d84b31995",
+                "response_body_hash": "b8d327e02d87ff3f48931f23c665b7d317a8a5d0995499adc9b972ba71357b4a",
+                "status": "notSupported"
+            },
+            "/charts/instance": {
+                "path": "/charts/instance",
+                "request_body_hash": "f5db7f9a257a61fad4ed241207fc6a53d752c610988e599bd4f84b1160928aea",
+                "response_body_hash": "6cb0c8b89c61e6f518d0e3514574b31cb43e16e2475408f16feaf5b264b84434",
+                "status": "notSupported"
+            },
+            "/charts/notes": {
+                "path": "/charts/notes",
+                "request_body_hash": "311ddf37149d748825b4e71f28bfdb568553316dee530b24cd85a42d84b31995",
+                "response_body_hash": "795066a96462f22e4439b40914cb171db5f68a81fbb05ea039510a10a11beef0",
+                "status": "notSupported"
+            },
+            "/charts/user/drive": {
+                "path": "/charts/user/drive",
+                "request_body_hash": "0235d8892df858adeb1ad0ec74eb126e032c79daa8ab9d34964adcb36f1fd685",
+                "response_body_hash": "04fd904e4921d41e6bded4d772cc265d6538832acb27d6e73dac08e838aae27a",
+                "status": "notSupported"
+            },
+            "/charts/user/following": {
+                "path": "/charts/user/following",
+                "request_body_hash": "0235d8892df858adeb1ad0ec74eb126e032c79daa8ab9d34964adcb36f1fd685",
+                "response_body_hash": "e6a44b8adff258c63751fc59841f1c21cf3f814ee0a1beb8c5b8c52419a6c614",
+                "status": "notSupported"
+            },
+            "/charts/user/notes": {
+                "path": "/charts/user/notes",
+                "request_body_hash": "0235d8892df858adeb1ad0ec74eb126e032c79daa8ab9d34964adcb36f1fd685",
+                "response_body_hash": "02c2f0228d5e1c785ceaebc0081f0227572aae5a23483bf9c4e66a42d027057c",
+                "status": "notSupported"
+            },
+            "/charts/user/pv": {
+                "path": "/charts/user/pv",
+                "request_body_hash": "0235d8892df858adeb1ad0ec74eb126e032c79daa8ab9d34964adcb36f1fd685",
+                "response_body_hash": "432698e69362723b1c6868ed8396f4f063536f07bfa27654fe4e1ab6dd889bab",
+                "status": "notSupported"
+            },
+            "/charts/user/reactions": {
+                "path": "/charts/user/reactions",
+                "request_body_hash": "0235d8892df858adeb1ad0ec74eb126e032c79daa8ab9d34964adcb36f1fd685",
+                "response_body_hash": "ba8f3c62e7451525adce01d3258731a112240811596c115a9cd4f2844e7ec854",
+                "status": "notSupported"
+            },
+            "/charts/users": {
+                "path": "/charts/users",
+                "request_body_hash": "311ddf37149d748825b4e71f28bfdb568553316dee530b24cd85a42d84b31995",
+                "response_body_hash": "ced821304757542b717b86e741fd976b99d7ace69e7c05ecce38ff76afdfb942",
+                "status": "notSupported"
+            },
+            "/clips/add-note": {
+                "path": "/clips/add-note",
+                "request_body_hash": "36b9d1c969daeb95a60ea783a48307fb19331b4f9da018fe701dba8c5be19b11",
+                "response_body_hash": "b5d8256ca0f02fe1fe33942ae8f95e9a8115b44e3cd09cdff60b55f104ddd85f",
+                "status": "notSupported"
+            },
+            "/clips/remove-note": {
+                "path": "/clips/remove-note",
+                "request_body_hash": "36b9d1c969daeb95a60ea783a48307fb19331b4f9da018fe701dba8c5be19b11",
+                "response_body_hash": "ec4db0cd1e9d70069771ceb60172205e35496fddcbf5c64ac81d08387b7101f5",
+                "status": "notSupported"
+            },
+            "/clips/create": {
+                "path": "/clips/create",
+                "request_body_hash": "f981f985742aec01dcc150397b1441593c82d8ee80d07e1f134d6757915a2192",
+                "response_body_hash": "81a43463106b00a1a501425a629b73677c5a4fa77f1949c862e8d2ade267d94e",
+                "status": "notSupported"
+            },
+            "/clips/delete": {
+                "path": "/clips/delete",
+                "request_body_hash": "b59b4e3fcd48a90141dae0e1978559d8e96633a53fb575fc14a457b214a2b79d",
+                "response_body_hash": "3feeaaf737ff47f5df15368d557c57c28c8ec5c5fc940390005799c5666fd0c3",
+                "status": "notSupported"
+            },
+            "/clips/list": {
+                "path": "/clips/list",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "089bcc24b48e57ccb14a837c9473a81083aaa4d1c25de3f56286752a6cc94515",
+                "status": "notSupported"
+            },
+            "/clips/notes": {
+                "path": "/clips/notes",
+                "request_body_hash": "3b4fd408ba9ea7b6c770495537f06685fadea9e766ca0d0aeb9c5088aa157a67",
+                "response_body_hash": "f7028b5076cda55579c949dfc3cbe50ba9f06d0bdf10f2f78af5fb7ff331e22b",
+                "status": "notSupported"
+            },
+            "/clips/show": {
+                "path": "/clips/show",
+                "request_body_hash": "b59b4e3fcd48a90141dae0e1978559d8e96633a53fb575fc14a457b214a2b79d",
+                "response_body_hash": "d52c76bf7ed0cee84bb82785b8d381d5559fbac878e1df07eed4b0eda9ac5b9b",
+                "status": "notSupported"
+            },
+            "/clips/update": {
+                "path": "/clips/update",
+                "request_body_hash": "6de2facd93fc112b3f741035c669618b6bb634f3026ad6b2b815c692445bf48d",
+                "response_body_hash": "b0678171323212ff21db9d26d5b5915c370c2076dad1625d0b0d8f4e87e86afa",
+                "status": "notSupported"
+            },
+            "/clips/favorite": {
+                "path": "/clips/favorite",
+                "request_body_hash": "b59b4e3fcd48a90141dae0e1978559d8e96633a53fb575fc14a457b214a2b79d",
+                "response_body_hash": "74547ab21976130f6899865c997f12cb3bf294b30f46fd8572300c83f905f6e7",
+                "status": "notSupported"
+            },
+            "/clips/unfavorite": {
+                "path": "/clips/unfavorite",
+                "request_body_hash": "b59b4e3fcd48a90141dae0e1978559d8e96633a53fb575fc14a457b214a2b79d",
+                "response_body_hash": "4039c43247cf6b4ab2a91f5dab36da5be213324b8ef4e8584d86a34ba853d9bf",
+                "status": "notSupported"
+            },
+            "/clips/my-favorites": {
+                "path": "/clips/my-favorites",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "089bcc24b48e57ccb14a837c9473a81083aaa4d1c25de3f56286752a6cc94515",
+                "status": "notSupported"
+            },
+            "/drive": {
+                "path": "/drive",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "c0158a26309e6fdbe4661e3c61df1525620049072bcc3351c69ee886acbc753a",
+                "status": "needToWork"
+            },
+            "/drive/files": {
+                "path": "/drive/files",
+                "request_body_hash": "de170aba65c766eae921b10a16b99d9a5793ac39cb15e05c1a9453d0645427aa",
+                "response_body_hash": "f34c75e26e857fadd415d1e4a3bd80f224779a84be6a3e142e4ed7896e888c1b",
+                "status": "supported"
+            },
+            "/drive/files/attached-notes": {
+                "path": "/drive/files/attached-notes",
+                "request_body_hash": "483cf6378fc3db55c9c3acfb484f77012c0e9ab2abf81bef519089ad0ae27a03",
+                "response_body_hash": "59ed123a9e73d1c69b6b839ad265088fba9bb182cf8bf01a8d8740f56ecbc26c",
+                "status": "supported"
+            },
+            "/drive/files/check-existence": {
+                "path": "/drive/files/check-existence",
+                "request_body_hash": "ea75dd1736f53c4238eada5abf871fea88c144b71f03fdaf9f7e56024322a2f3",
+                "response_body_hash": "a30e415134454e401e525679afbcbf54a5332e3c7d0b7a6c23ef7c136449ccc1",
+                "status": "supported"
+            },
+            "/drive/files/create": {
+                "path": "/drive/files/create",
+                "request_body_hash": "4daf046c7caee68e160edf1397dfcbb2ddfce5d88feeabbcecc5f55e0aef6b41",
+                "response_body_hash": "3d48931274764784925e437c048e319e3f3bedc61389bc41a24fdec4e2d7db8e",
+                "status": "supported"
+            },
+            "/drive/files/delete": {
+                "path": "/drive/files/delete",
+                "request_body_hash": "d7c20d1b69b13b8c3bdce034764d6b159e21e14eb20dc6f001c023ed47973e4c",
+                "response_body_hash": "01c3864371cb588f305a706f8083f52d6bb7d249280aa302dfef644c27531a67",
+                "status": "supported"
+            },
+            "/drive/files/find-by-hash": {
+                "path": "/drive/files/find-by-hash",
+                "request_body_hash": "ea75dd1736f53c4238eada5abf871fea88c144b71f03fdaf9f7e56024322a2f3",
+                "response_body_hash": "f34c75e26e857fadd415d1e4a3bd80f224779a84be6a3e142e4ed7896e888c1b",
+                "status": "supported"
+            },
+            "/drive/files/find": {
+                "path": "/drive/files/find",
+                "request_body_hash": "7dee493b1ba72068bda7b172d6b2ca2ae4bb8cecde349c91df64169762208af6",
+                "response_body_hash": "f34c75e26e857fadd415d1e4a3bd80f224779a84be6a3e142e4ed7896e888c1b",
+                "status": "supported"
+            },
+            "/drive/files/show": {
+                "path": "/drive/files/show",
+                "request_body_hash": "469dab9342135333df7936e6dd1a691a975e6b5c205b5ab3040be3bf31a18a17",
+                "response_body_hash": "aa4ce4ad0294514e3ab4d69b359a6de15072d14ab3cd3548e53df145ebcdeafe",
+                "status": "supported"
+            },
+            "/drive/files/update": {
+                "path": "/drive/files/update",
+                "request_body_hash": "aabe195bd23689ffb4bd5689d2ae0adfa829f6e9ad5a762a5328712e36c9c792",
+                "response_body_hash": "77f59d7531292397a241c2b821a0a9cbd333a55f6f3153a11d95694829b5144d",
+                "status": "supported"
+            },
+            "/drive/files/upload-from-url": {
+                "path": "/drive/files/upload-from-url",
+                "request_body_hash": "dcd283b9998e8d418129a1a5352d489d4f7cdbba4c644c1ee8d834d7ddebb357",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291",
+                "status": "supported"
+            },
+            "/drive/folders": {
+                "path": "/drive/folders",
+                "request_body_hash": "c7994546f15ac56e6d47b2c9513c720ffb05b146e2c58f4d5f8b7cdd1fa5fe27",
+                "response_body_hash": "05c56769de07a802e8ac7956c76ec95c025fd4ef2445500a18afdca430fca406",
+                "status": "needToWork"
+            },
+            "/drive/folders/create": {
+                "path": "/drive/folders/create",
+                "request_body_hash": "9c570cb675f851abf3624e608486d98f75932447e983524d8a2fef010a832c4e",
+                "response_body_hash": "65943f2e45eac25dbbd3acd9ba9249b2b5a83176797b863389a1932cdd5b94f8",
+                "status": "needToWork"
+            },
+            "/drive/folders/delete": {
+                "path": "/drive/folders/delete",
+                "request_body_hash": "7ddbf084df376fe1ced074c9454678879e8908a99fe0432fb2abaadfa597afec",
+                "response_body_hash": "c558d54c2fd862408f9556860946477010c0c5b6896032e5e3674ee638e2011b",
+                "status": "supported"
+            },
+            "/drive/folders/find": {
+                "path": "/drive/folders/find",
+                "request_body_hash": "f2f302ec5a018e252ce013efab000ef654223cdbd470afb2aee18e1fd0e6865b",
+                "response_body_hash": "05c56769de07a802e8ac7956c76ec95c025fd4ef2445500a18afdca430fca406",
+                "status": "needToWork"
+            },
+            "/drive/folders/show": {
+                "path": "/drive/folders/show",
+                "request_body_hash": "7ddbf084df376fe1ced074c9454678879e8908a99fe0432fb2abaadfa597afec",
+                "response_body_hash": "5ab07c4af0d6e1e2bbcb44f5e15fae98ce7b37a16583f3a2ebe85eeafd0406ae",
+                "status": "needToWork"
+            },
+            "/drive/folders/update": {
+                "path": "/drive/folders/update",
+                "request_body_hash": "6b715c2e3d185c4928e6c5f3f714570d9ccc1dbb7880c528f72290d760fa303f",
+                "response_body_hash": "479f18df687ff202504b1964269dedd1ec139c927c446d544809be0645a43042",
+                "status": "needToWork"
+            },
+            "/drive/stream": {
+                "path": "/drive/stream",
+                "request_body_hash": "bcc9a12d16667bf8e0beeb82f256a9c3acc694244f87fd588eada0896704f2e9",
+                "response_body_hash": "f34c75e26e857fadd415d1e4a3bd80f224779a84be6a3e142e4ed7896e888c1b",
+                "status": "needToWork"
+            },
+            "/email-address/available": {
+                "path": "/email-address/available",
+                "request_body_hash": "864a3498ec68eb589d757b70f9c2f783160ddba976b20247ba130c2f099b9c78",
+                "response_body_hash": "4dff2da246c22f5904303d1bd5d3ee9ec310a32812a90556356433c394de8c8e",
+                "status": "notSupported"
+            },
+            "/endpoint": {
+                "path": "/endpoint",
+                "request_body_hash": "f91ec29b8c91a733f25f5dfab0e90a15c7eea823556dc7c01bf362e1a1143609",
+                "response_body_hash": "f8fc8585a2526e5dda78f659476830206893733bd140a4a489f380bbea2ccf30",
+                "status": "needToWork"
+            },
+            "/endpoints": {
+                "path": "/endpoints",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "e5607695dd0d55725e026c05bb09648a1d0b381ab3eb1e6029504775ab00d5f0",
+                "status": "notSupported"
+            },
+            "/federation/followers": {
+                "path": "/federation/followers",
+                "request_body_hash": "ca3e4a04262b36647b321a9510488a0b6d47ed285e325317a1f7807136dc36e6",
+                "response_body_hash": "bb1ad8ead1476203e74c6d141bb96a62e2a1e9f2c2cb2e3b4361deb4036614ec",
+                "status": "notSupported"
+            },
+            "/federation/following": {
+                "path": "/federation/following",
+                "request_body_hash": "ca3e4a04262b36647b321a9510488a0b6d47ed285e325317a1f7807136dc36e6",
+                "response_body_hash": "bb1ad8ead1476203e74c6d141bb96a62e2a1e9f2c2cb2e3b4361deb4036614ec",
+                "status": "notSupported"
+            },
+            "/federation/instances": {
+                "path": "/federation/instances",
+                "request_body_hash": "48bf682f7902a165dacfef2a5cfd981f118341432af3d13a28c0854b68911f0f",
+                "response_body_hash": "93bf81da8fcf9a73732b1799c2d0e3269895ecf1c82b504650912d5f2ed7320f",
+                "status": "needToWork"
+            },
+            "/federation/show-instance": {
+                "path": "/federation/show-instance",
+                "request_body_hash": "236265f716570bc655917ff0ba8f17d7a45a479f31e0027d2762c234c08542a2",
+                "response_body_hash": "3141bef76a9b86ad7ec9180702c6e54e3b6ac95f0afb7a01fba82e49be7ab23c",
+                "status": "notSupported"
+            },
+            "/federation/update-remote-user": {
+                "path": "/federation/update-remote-user",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/federation/users": {
+                "path": "/federation/users",
+                "request_body_hash": "ca3e4a04262b36647b321a9510488a0b6d47ed285e325317a1f7807136dc36e6",
+                "response_body_hash": "cd10f63de19a5c162485911bd3634945762cb7da16aba5dd375fac48fa7b2fc9",
+                "status": "notSupported"
+            },
+            "/federation/stats": {
+                "path": "/federation/stats",
+                "request_body_hash": "70ade9a6ae40ecc5ca1111eb210960c50e9ae4cd7688f3694ac8fe133cb2f228",
+                "response_body_hash": "482b57e766e3f8605d35809c881e006a6042c6220969f0d105ce4ba673a28625",
+                "status": "needToWork"
+            },
+            "/following/create": {
+                "path": "/following/create",
+                "request_body_hash": "b6e2b84e81ed0fd712448e6d36f5b5f94659df8cf63110e3d19b6b7c7e869535",
+                "response_body_hash": "f2e8b6f4f9b57a93d609ea5ef82ce130dd6bf719f0ed7c1c13d436afedc01878",
+                "status": "notSupported"
+            },
+            "/following/delete": {
+                "path": "/following/delete",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "3182c580cb82ae6b57462fd5cb18b4fbd57a90cc931e0eb34fd34b0ddc22e337",
+                "status": "notSupported"
+            },
+            "/following/update": {
+                "path": "/following/update",
+                "request_body_hash": "de84de24ffe1301224fef0e2e656f6a37476f0c0973051eceaa08824cbc7ae95",
+                "response_body_hash": "1cdae17d64666c91f393277176dfa628d42479c674b2264fc031e9e87015414b",
+                "status": "notSupported"
+            },
+            "/following/update-all": {
+                "path": "/following/update-all",
+                "request_body_hash": "310a2e3c418a910b8bb952e967782814e6e3d3f61f22cfe62d2cd89b30056eeb",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291",
+                "status": "notSupported"
+            },
+            "/following/invalidate": {
+                "path": "/following/invalidate",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "f550ee5a598ce42f7c3e77347e266f8f83f99df3fd9e9213441d9d364c39e08b",
+                "status": "notSupported"
+            },
+            "/following/requests/accept": {
+                "path": "/following/requests/accept",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "9d61d7a39d61177d1d7d8d8be930594fe86467c8a760606e3af56a00c2615ac5",
+                "status": "notSupported"
+            },
+            "/following/requests/cancel": {
+                "path": "/following/requests/cancel",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "5a93c304fac6eda4a82cf64688c5ca5661595d453f0b465c42754b0dba347500",
+                "status": "notSupported"
+            },
+            "/following/requests/list": {
+                "path": "/following/requests/list",
+                "request_body_hash": "e5dcd117724e45fa3bd109bc1415f785efd282e974b5399e7feb162ad7c05633",
+                "response_body_hash": "ec70a4a6065c604b945c53d0384efa4cbe52d000737e5d358f307f3655f270cf",
+                "status": "notSupported"
+            },
+            "/following/requests/reject": {
+                "path": "/following/requests/reject",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "40a35057f9eb7e4823cb3c3501ec4fb988345c9e8e58ad591e593ff5aefbda32",
+                "status": "notSupported"
+            },
+            "/gallery/featured": {
+                "path": "/gallery/featured",
+                "request_body_hash": "5390ac9267e7765c94269e7e4673bf37ba58adb9aac0aedecc8055c2491c8cae",
+                "response_body_hash": "9cc5482ae3d6a02de2df207b180366d9c0ad56263b8c7bd6df6c26e5ccf54e78",
+                "status": "notSupported"
+            },
+            "/gallery/popular": {
+                "path": "/gallery/popular",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "9cc5482ae3d6a02de2df207b180366d9c0ad56263b8c7bd6df6c26e5ccf54e78",
+                "status": "notSupported"
+            },
+            "/gallery/posts": {
+                "path": "/gallery/posts",
+                "request_body_hash": "b4fff2393288eea1aad1697361d897dd715c1de2b672a4aef9540ffd3b677147",
+                "response_body_hash": "9cc5482ae3d6a02de2df207b180366d9c0ad56263b8c7bd6df6c26e5ccf54e78",
+                "status": "notSupported"
+            },
+            "/gallery/posts/create": {
+                "path": "/gallery/posts/create",
+                "request_body_hash": "1bc83c15475ab8e1adf1752386f9aac749631a052e1915215b59c119f5b64645",
+                "response_body_hash": "5229f429fe9c9dd57e6d9bc4676fa96cca1f63e7b29e4a182b62d7b0512f0d20",
+                "status": "notSupported"
+            },
+            "/gallery/posts/delete": {
+                "path": "/gallery/posts/delete",
+                "request_body_hash": "e846a6c6b58b593e284049e6dc8de20da56a8cb6569c480dda15220872920ce3",
+                "response_body_hash": "48cc5e7527439cf630bcbf643ce42dda5faa8abb856fb66f2ef705e5c2d41772",
+                "status": "notSupported"
+            },
+            "/gallery/posts/like": {
+                "path": "/gallery/posts/like",
+                "request_body_hash": "e846a6c6b58b593e284049e6dc8de20da56a8cb6569c480dda15220872920ce3",
+                "response_body_hash": "7f05929013ea5bac54b316217aca507cfc0ab441f550265769288d8c9594619d",
+                "status": "notSupported"
+            },
+            "/gallery/posts/show": {
+                "path": "/gallery/posts/show",
+                "request_body_hash": "e846a6c6b58b593e284049e6dc8de20da56a8cb6569c480dda15220872920ce3",
+                "response_body_hash": "3498226ae8c8009acf59ee252ed3fcd1c08c4ecf18c2cfd338739bfacb1b2080",
+                "status": "notSupported"
+            },
+            "/gallery/posts/unlike": {
+                "path": "/gallery/posts/unlike",
+                "request_body_hash": "e846a6c6b58b593e284049e6dc8de20da56a8cb6569c480dda15220872920ce3",
+                "response_body_hash": "8936b6af5b117a013b8625a8211fc371e81467d742453a777f9b1b5a664532e9",
+                "status": "notSupported"
+            },
+            "/gallery/posts/update": {
+                "path": "/gallery/posts/update",
+                "request_body_hash": "2844d46fdbb83345596c1f2bf80f2bd89d8231296c75b678a1da71c7d9ca5985",
+                "response_body_hash": "5229f429fe9c9dd57e6d9bc4676fa96cca1f63e7b29e4a182b62d7b0512f0d20",
+                "status": "notSupported"
+            },
+            "/get-online-users-count": {
+                "path": "/get-online-users-count",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "1d4515d9c172aaf441bfc1bd76000cb8c3b7dfee87d9c2e55e6799ea4dc05758",
+                "status": "needToWork"
+            },
+            "/get-avatar-decorations": {
+                "path": "/get-avatar-decorations",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "5efe9ebeb382151e6d9d2967bf50557c1c7d0603f00a286e54bef11072ce6183",
+                "status": "notSupported"
+            },
+            "/hashtags/list": {
+                "path": "/hashtags/list",
+                "request_body_hash": "94e486046065b88b3864bc95ed283707ab96b7f9f91147e06148406a75086369",
+                "response_body_hash": "2094d4c2bf514341a838d01f1a89477ebd8e2ce1ca04b40374cf60d0d6e4a74c",
+                "status": "notSupported"
+            },
+            "/hashtags/search": {
+                "path": "/hashtags/search",
+                "request_body_hash": "74c5456046bdb4aa84b5b15d12b3034eca208232c692d68595c455d5d2963952",
+                "response_body_hash": "b27c6f9999974cc9d2aed6a70c37dba1e70641c4fdf5632bca440a6382106105",
+                "status": "notSupported"
+            },
+            "/hashtags/show": {
+                "path": "/hashtags/show",
+                "request_body_hash": "bcb5dbf5529f1fa586775fca5006b1aa723fe5b3fd61243ae776be03ce3897e3",
+                "response_body_hash": "8c8eb54b8e881447ea295ba25d2689a6936f8385f335b531f98fff4b30e31d3e",
+                "status": "notSupported"
+            },
+            "/hashtags/trend": {
+                "path": "/hashtags/trend",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "49f1aefa2720add5521ce6999aa347a293810614dc3cc9e88ef986b494ce3684",
+                "status": "notSupported"
+            },
+            "/hashtags/users": {
+                "path": "/hashtags/users",
+                "request_body_hash": "709f3bb1ebf5a6ea85eca2694ed80dafc896ffa7a8c8bc46bafe3695e70bb90c",
+                "response_body_hash": "f711c88a06f184d959627953fff320b77c3bcfbb871fe226d61cfacd7b6eb5cd",
+                "status": "notSupported"
+            },
+            "/i": {
+                "path": "/i",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "1e35bf5508981715ab4e096d8b6a0c05a9b6baab7a1afced24de405a4c40a42b",
+                "status": "needToWork"
+            },
+            "/i/claim-achievement": {
+                "path": "/i/claim-achievement",
+                "request_body_hash": "0be57e1c381380e26531917bdd947337e4fab554911783cbcc61e2a4622af506",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/i/favorites": {
+                "path": "/i/favorites",
+                "request_body_hash": "b4fff2393288eea1aad1697361d897dd715c1de2b672a4aef9540ffd3b677147",
+                "response_body_hash": "ac86e371230f880385836ccebd5cdf493e0402dfe34a0b02714fe75582571f39",
+                "status": "notSupported"
+            },
+            "/i/gallery/likes": {
+                "path": "/i/gallery/likes",
+                "request_body_hash": "b4fff2393288eea1aad1697361d897dd715c1de2b672a4aef9540ffd3b677147",
+                "response_body_hash": "3d59d9ca4840e94d781a3d7898a493b71157dd01c31d47f38c4c1cc34cbb131b",
+                "status": "notSupported"
+            },
+            "/i/gallery/posts": {
+                "path": "/i/gallery/posts",
+                "request_body_hash": "b4fff2393288eea1aad1697361d897dd715c1de2b672a4aef9540ffd3b677147",
+                "response_body_hash": "9cc5482ae3d6a02de2df207b180366d9c0ad56263b8c7bd6df6c26e5ccf54e78",
+                "status": "notSupported"
+            },
+            "/i/notifications": {
+                "path": "/i/notifications",
+                "request_body_hash": "f3b228be1725d7d20a5447c5bdd77b3607f957493094af6509510324b1c8ec57",
+                "response_body_hash": "4308293ffc2cbf929047ac53a2b622b3cd42a7af9beb394260c6d869a135790e",
+                "status": "needToWork"
+            },
+            "/i/notifications-grouped": {
+                "path": "/i/notifications-grouped",
+                "request_body_hash": "f3b228be1725d7d20a5447c5bdd77b3607f957493094af6509510324b1c8ec57",
+                "response_body_hash": "4308293ffc2cbf929047ac53a2b622b3cd42a7af9beb394260c6d869a135790e",
+                "status": "needToWork"
+            },
+            "/i/page-likes": {
+                "path": "/i/page-likes",
+                "request_body_hash": "b4fff2393288eea1aad1697361d897dd715c1de2b672a4aef9540ffd3b677147",
+                "response_body_hash": "43a7f5e13a731ed37727b05b99cb1d594d2cd8ba6dcba5f3ceec072778ea419d",
+                "status": "notSupported"
+            },
+            "/i/pages": {
+                "path": "/i/pages",
+                "request_body_hash": "b4fff2393288eea1aad1697361d897dd715c1de2b672a4aef9540ffd3b677147",
+                "response_body_hash": "77262c6c13bfeb50654a51dad5d41c9a7995ab60a45eaa4b1134904db9f1a897",
+                "status": "notSupported"
+            },
+            "/i/pin": {
+                "path": "/i/pin",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "49c48a8f749edb374a984cbe1dbf2d645fba563b025e19376408d44a60a2fa6e",
+                "status": "notSupported"
+            },
+            "/i/read-all-unread-notes": {
+                "path": "/i/read-all-unread-notes",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/i/read-announcement": {
+                "path": "/i/read-announcement",
+                "request_body_hash": "4b5386893449a8ceae9be712a28f6dba10758f1459db8dc5686a0ab08b724a15",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/i/registry/get-all": {
+                "path": "/i/registry/get-all",
+                "request_body_hash": "6b59dc57bb1c800b691f50c49e1d722c18fae912039f910f5cdc8700ab6a4d05",
+                "response_body_hash": "7bf0116f498ce47044927701dfecaba646fd01670d82eba596492a14402d605c",
+                "status": "needToWork"
+            },
+            "/i/registry/get-detail": {
+                "path": "/i/registry/get-detail",
+                "request_body_hash": "aed45341057ff5baf85649b8f278029abba3931a7a11a5823503d0518abd29be",
+                "response_body_hash": "21c9736218aa9bf5a272da4eb209f4f5d664f77a3efe98cf6577f84dcf7de83a",
+                "status": "needToWork"
+            },
+            "/i/registry/get": {
+                "path": "/i/registry/get",
+                "request_body_hash": "aed45341057ff5baf85649b8f278029abba3931a7a11a5823503d0518abd29be",
+                "response_body_hash": "3093e9ea0e9e97f2161c92afd1def3abd92424fed55c629de7f67f18179d9e64",
+                "status": "needToWork"
+            },
+            "/i/registry/keys-with-type": {
+                "path": "/i/registry/keys-with-type",
+                "request_body_hash": "6b59dc57bb1c800b691f50c49e1d722c18fae912039f910f5cdc8700ab6a4d05",
+                "response_body_hash": "7bf0116f498ce47044927701dfecaba646fd01670d82eba596492a14402d605c",
+                "status": "needToWork"
+            },
+            "/i/registry/keys": {
+                "path": "/i/registry/keys",
+                "request_body_hash": "6b59dc57bb1c800b691f50c49e1d722c18fae912039f910f5cdc8700ab6a4d05",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/i/registry/remove": {
+                "path": "/i/registry/remove",
+                "request_body_hash": "aed45341057ff5baf85649b8f278029abba3931a7a11a5823503d0518abd29be",
+                "response_body_hash": "d82abde320171f503e60aa1057e9c7b3aac7bc2a33ebb5a2f0f6e4ee775d2732",
+                "status": "notSupported"
+            },
+            "/i/registry/set": {
+                "path": "/i/registry/set",
+                "request_body_hash": "16f98e4a65a513a4d889337938b075448feda4f23d5d5c5b3906af189f60de07",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/i/unpin": {
+                "path": "/i/unpin",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "0e04c2427503157b9ed939abc18044f49c08d51b09cab779a20cd56ba6a03fe3",
+                "status": "notSupported"
+            },
+            "/i/update": {
+                "path": "/i/update",
+                "request_body_hash": "025027b4772daf33aed19b0cc4c6305274acc8de4605dac6c2669b73f3743241",
+                "response_body_hash": "37d128881219e622fd844c82ffc764f3acd5639efa53a2f9b391e4ff59994171",
+                "status": "needToWork"
+            },
+            "/i/webhooks/create": {
+                "path": "/i/webhooks/create",
+                "request_body_hash": "bae2599f488c700607b750edce3c85b291f41d77a1f39eba00795d223c38a728",
+                "response_body_hash": "ed187b156914fa64af4cf9108fac296f2cfe19a88ad039e5960010facf490aa1",
+                "status": "needToWork"
+            },
+            "/i/webhooks/list": {
+                "path": "/i/webhooks/list",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "33f2c7925d24da1f6fc7b8e8835be3ccb6051e8e407c48c38a55f5f4ecf2e41d",
+                "status": "needToWork"
+            },
+            "/i/webhooks/show": {
+                "path": "/i/webhooks/show",
+                "request_body_hash": "af57b8cecb055881f5906c16463874c3a909e8fae3fcb486a4f09613895473f8",
+                "response_body_hash": "7a2df0515d0923188ceba5e5a8d359f34c4c057ceb4fae73dcd4dc98816198db",
+                "status": "needToWork"
+            },
+            "/i/webhooks/update": {
+                "path": "/i/webhooks/update",
+                "request_body_hash": "78c1125fd733e45c554f3557e7e1e39bb5dcbf7b013ac2165ef58cceb864dfce",
+                "response_body_hash": "a20f67840b8e7e27e26ce84ad81ee3c133b7c6c92a4a7116418b2f84b486cc26",
+                "status": "notSupported"
+            },
+            "/i/webhooks/delete": {
+                "path": "/i/webhooks/delete",
+                "request_body_hash": "af57b8cecb055881f5906c16463874c3a909e8fae3fcb486a4f09613895473f8",
+                "response_body_hash": "68a9d1302b5c6c7446d7f8b45eca05d544a72f8ed404319ec87a598b9ee5aebb",
+                "status": "notSupported"
+            },
+            "/invite/create": {
+                "path": "/invite/create",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "889dd514924dd3839dfe6a728b6c3d34e2e09015414d356fe71b19b6bc8b64db",
+                "status": "needToWork"
+            },
+            "/invite/delete": {
+                "path": "/invite/delete",
+                "request_body_hash": "537adfc81074c440eec54f57fb8f7a7e35b7dc53337a58072e9b04fe0d451eb9",
+                "response_body_hash": "6ecf0d16463854de241113a3ce10eda5110a6592335d489fa1fb2af5356fddef",
+                "status": "supported"
+            },
+            "/invite/list": {
+                "path": "/invite/list",
+                "request_body_hash": "d392bfbe478ea28a41fcb4b1cfd5b120fb85cc71ad890eea4e0abb19916c7fe1",
+                "response_body_hash": "719dddaac9f63e5b9b48bb92355f267b0229a7e0e41f144c6b79759a4da8181d",
+                "status": "needToWork"
+            },
+            "/invite/limit": {
+                "path": "/invite/limit",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "9df171ab0454e985bf31bd83e84d01e642ddfc627f06c8569687b87688dc6f0b",
+                "status": "needToWork"
+            },
+            "/meta": {
+                "path": "/meta",
+                "request_body_hash": "a0fd8e84fb4eb3c62c7b26edf9ba0127115e5846392fd66b1171e736933837c5",
+                "response_body_hash": "691cb2447d07dde5b7b8ab84126d69dd7ead11d6cb552f4fa2e148aa97a27096",
+                "status": "needToWork"
+            },
+            "/emojis": {
+                "path": "/emojis",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "04bc0ac51f6c991c67c1b8cd716b0743c2b96f8339d6eaa7a22f0159d51e36a4",
+                "status": "supported"
+            },
+            "/emoji": {
+                "path": "/emoji",
+                "request_body_hash": "618bf1d63c5924aae1eaf27433e465e02f004a837e5e1f407a338413f3fc151f",
+                "response_body_hash": "1a135cf1b102697cf2a475fadd2683cc443b8d232d684885b38942430316f473",
+                "status": "supported"
+            },
+            "/mute/create": {
+                "path": "/mute/create",
+                "request_body_hash": "77b507275380a024941566a1376b1f8ba69a8a6d4a8095f6ca93aa27f04312f8",
+                "response_body_hash": "c1c4d7b547212366f3581bad00c63f70f731f78bc5f861e6e2da7f125c087cba",
+                "status": "supported"
+            },
+            "/mute/delete": {
+                "path": "/mute/delete",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "b9f152b2bf1a9c9b2c6364e7c204faca66f25b84111090a06233ff5b231275b0",
+                "status": "supported"
+            },
+            "/mute/list": {
+                "path": "/mute/list",
+                "request_body_hash": "d392bfbe478ea28a41fcb4b1cfd5b120fb85cc71ad890eea4e0abb19916c7fe1",
+                "response_body_hash": "141e7fba4ba993a6299ae29bde28361e12c11d3f48186cd3819a106c5aaca7b3",
+                "status": "supported"
+            },
+            "/renote-mute/create": {
+                "path": "/renote-mute/create",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "10bb68861753ab3e88329c860d7116c4005c6d873a43dfaad34f810db6a34072",
+                "status": "notSupported"
+            },
+            "/renote-mute/delete": {
+                "path": "/renote-mute/delete",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "52eb2aba9cf25997026f42d843bb78a12363b97117904f39327766ef8dabadbd",
+                "status": "notSupported"
+            },
+            "/renote-mute/list": {
+                "path": "/renote-mute/list",
+                "request_body_hash": "d392bfbe478ea28a41fcb4b1cfd5b120fb85cc71ad890eea4e0abb19916c7fe1",
+                "response_body_hash": "5360cde2c8967b39ec1be66b98941be486e7fdf27b66483f1d6dc7b5345bb7c5",
+                "status": "notSupported"
+            },
+            "/my/apps": {
+                "path": "/my/apps",
+                "request_body_hash": "ea75cb7a456fe25fc086147b7be384a2e8e51b1dfd549a4c4493fc41f2f82d2f",
+                "response_body_hash": "ce947bcdd598582621434a71ec988f8a07255f13d249d90c7f2fa80cc70b9365",
+                "status": "notSupported"
+            },
+            "/notes/create": {
+                "path": "/notes/create",
+                "request_body_hash": "d4b560a6c4c6be2057b98d49d929aecc56a50fd2364ba1f28ee2b873b9f35b56",
+                "response_body_hash": "be3b9b2f61785a6ae44806006b8e2317585af75c8b5532616b4938979946bfab",
+                "status": "needToWork"
+            },
+            "/notes/children": {
+                "path": "/notes/children",
+                "request_body_hash": "b7aedbaad2d3b4c6b86e920746488dc78ebbe717803e242bf2d8f77d8fbe008f",
+                "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
+                "status": "needToWork"
+            },
+            "/notes/clips": {
+                "path": "/notes/clips",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "ecab07380656dac208940b41378545077708ba91bef328983bcb2ffc4a843f66",
+                "status": "notSupported"
+            },
+            "/notes/conversation": {
+                "path": "/notes/conversation",
+                "request_body_hash": "5fdcf6d27743db052316f5d25d973688227b2fb6be6e5f8bab7ae1869dab0a1e",
+                "response_body_hash": "09e364b826362dbd18186fbdaec8644b7d18ef2937f4e734fbc411967000372a",
+                "status": "notSupported"
+            },
+            "/notes/delete": {
+                "path": "/notes/delete",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "d1bc4f3bbfc5a87a5254264c1bc7ed77064cd8f8182addf02bad9e77299b5a57",
+                "status": "supported"
+            },
+            "/notes/favorites/create": {
+                "path": "/notes/favorites/create",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "e1768d73b21b463a0b542a0944497701ff3135480bec4e952f55af4b794918b5",
+                "status": "supported"
+            },
+            "/notes/favorites/delete": {
+                "path": "/notes/favorites/delete",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "a6322364d9a2e32bc24b1907a6b289ed323574208c03288699a3e0fb488bf88f",
+                "status": "supported"
+            },
+            "/notes/featured": {
+                "path": "/notes/featured",
+                "request_body_hash": "c1e36d64f07f658c4557158a65687af6d80a197f86dc0f9fc0686f3b3aeb11c3",
+                "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
+                "status": "notSupported"
+            },
+            "/notes/global-timeline": {
+                "path": "/notes/global-timeline",
+                "request_body_hash": "e850860f9b0a558db0c88a01567e322e94141606f6982891c3ad8cb4604a4b8e",
+                "response_body_hash": "cc1e7717ba06d1a2d4b17b720e88e317f56b3ed5233c3029034aa49287612513",
+                "status": "notSupported"
+            },
+            "/notes/hybrid-timeline": {
+                "path": "/notes/hybrid-timeline",
+                "request_body_hash": "299aa4e0901e4667f9a6edcca3447c2f4e55ec2e97e810d47a609e8669ba808d",
+                "response_body_hash": "e336a21c83ed9bea65db60f82344f41954e2f737ae1a404942f68f959478089b",
+                "status": "needToWork"
+            },
+            "/notes/local-timeline": {
+                "path": "/notes/local-timeline",
+                "request_body_hash": "9d18ebd1828ed207930cb9f0ae8dccd9fe2d4df37bb6466dd9e98d3033aa4bad",
+                "response_body_hash": "b0801e66a6d252961016f3e1473b1f23c39d1d51c2e71c9a1f23e8b4978392c7",
+                "status": "needToWork"
+            },
+            "/notes/mentions": {
+                "path": "/notes/mentions",
+                "request_body_hash": "6992520e652f3d8686fa30e9882775fcf6a768e0e7810ff15923120eb47bf358",
+                "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
+                "status": "needToWork"
+            },
+            "/notes/polls/recommendation": {
+                "path": "/notes/polls/recommendation",
+                "request_body_hash": "ea75cb7a456fe25fc086147b7be384a2e8e51b1dfd549a4c4493fc41f2f82d2f",
+                "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
+                "status": "needToWork"
+            },
+            "/notes/polls/vote": {
+                "path": "/notes/polls/vote",
+                "request_body_hash": "c91f4021a02acb8d48b9e15b1c5829bf3765676a9c683fb0045e00f8fa7f79ba",
+                "response_body_hash": "817206912772c95087d4bc160612f808de1fdac849ec3790652c60a6fe87d36d",
+                "status": "supported"
+            },
+            "/notes/reactions": {
+                "path": "/notes/reactions",
+                "request_body_hash": "e2335bd73b11810b79ed9cb42237e9f85179efcc8721dd8d86ad184361b44daf",
+                "response_body_hash": "f593d22068ed857e522ef84198705477cdfd2e8869ab695db0e3c522a4089108",
+                "status": "needToWork"
+            },
+            "/notes/reactions/create": {
+                "path": "/notes/reactions/create",
+                "request_body_hash": "1b16f263463ad67593786ff036c7ecf7e974993be2cc090b20f0d13d1d95c51e",
+                "response_body_hash": "985ffd34704cf1952de31169782ece7014910b20ce9f91d3845ea3af0ca1ccba",
+                "status": "supported"
+            },
+            "/notes/reactions/delete": {
+                "path": "/notes/reactions/delete",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "4c5af583b256cd286e7464458fcecec09baa36e0fd6fb746411e2c99f1848bb7",
+                "status": "supported"
+            },
+            "/notes/renotes": {
+                "path": "/notes/renotes",
+                "request_body_hash": "b7aedbaad2d3b4c6b86e920746488dc78ebbe717803e242bf2d8f77d8fbe008f",
+                "response_body_hash": "7870a87cf27919d86cc4ae4f4e4d688f094c40013a827af974f1416f421abc64",
+                "status": "needToWork"
+            },
+            "/notes/replies": {
+                "path": "/notes/replies",
+                "request_body_hash": "6dcd836c786300916ec87e61a908a13b769ddfe707d0998d09b2e1ef3ae8f27a",
+                "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
+                "status": "needToWork"
+            },
+            "/notes/search-by-tag": {
+                "path": "/notes/search-by-tag",
+                "request_body_hash": "7c5c6603d6319a53b7516d513c7756a96342dd380ad23be2ab2c4301d2bdb8f9",
+                "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
+                "status": "notSupported"
+            },
+            "/notes/search": {
+                "path": "/notes/search",
+                "request_body_hash": "260e81d6bf3df1911a673a60beccffb32238e98088fe19fd7c821170ff91c574",
+                "response_body_hash": "86ddac11bc58f705040fff2ff6d9a5579183a113739306826e2325d8509e9844",
+                "status": "notSupported"
+            },
+            "/notes/show": {
+                "path": "/notes/show",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "b6ca606f529700a5095c239488cb63282bda302257472551f2cf02820f9a8776",
+                "status": "needToWork"
+            },
+            "/notes/state": {
+                "path": "/notes/state",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "f71f588c3e1c5011a9de17975e622f7b6637c1e4327f2e4929ed2c0c1e6df8e1",
+                "status": "needToWork"
+            },
+            "/notes/thread-muting/create": {
+                "path": "/notes/thread-muting/create",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "719e47211b87efc03addf93389d386de8a8358f85bbfe52e96f4c4d018e2dc4e",
+                "status": "notSupported"
+            },
+            "/notes/thread-muting/delete": {
+                "path": "/notes/thread-muting/delete",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "130f5dd779d0d9e5457e6e9285e7cd345b95848d6f640ff87126a2020dad1025",
+                "status": "notSupported"
+            },
+            "/notes/timeline": {
+                "path": "/notes/timeline",
+                "request_body_hash": "00a1a5d5f980863d258170b44ac60da6b04bcd5504205248a2a4a21ac51c08fb",
+                "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
+                "status": "needToWork"
+            },
+            "/notes/translate": {
+                "path": "/notes/translate",
+                "request_body_hash": "1def882b183104849c8a38b78caede0358e108a9e16dbd26f39f564beb1d87c6",
+                "response_body_hash": "07ef466f12e607bb59451c7400f77784b1b6bafa269657d6a228179999c42f13",
+                "status": "needToWork"
+            },
+            "/notes/unrenote": {
+                "path": "/notes/unrenote",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "b2bc96c15ad51109e7a49d1ba3a75fc4c3f971f0156ed41161bd7b150695b8a8",
+                "status": "supported"
+            },
+            "/notes/user-list-timeline": {
+                "path": "/notes/user-list-timeline",
+                "request_body_hash": "cd541d4c8ccff18df5f21dee9fc5b5ca0bb8df569b1c8846bc973b8fb8287a1e",
+                "response_body_hash": "f0a8431ca1f0d8257882c5df4591d3ebd52e46dbb8098a15cd629e046a53f811",
+                "status": "needToWork"
+            },
+            "/notifications/create": {
+                "path": "/notifications/create",
+                "request_body_hash": "1ea03db9658cdfd7beba8022a093d60bc3e253601ccb9c80829263f88353ae57",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291",
+                "status": "notSupported"
+            },
+            "/notifications/mark-all-as-read": {
+                "path": "/notifications/mark-all-as-read",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/notifications/test-notification": {
+                "path": "/notifications/test-notification",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291",
+                "status": "notSupported"
+            },
+            "/pages/create": {
+                "path": "/pages/create",
+                "request_body_hash": "4a1d7d4e780cc829de27dd9b03f055ed5ee7d12c32ec504048adf521393a6574",
+                "response_body_hash": "0a347df2fd155046574333dce559ea890a4c44fb47bfbbd7efd9489e5415c0aa",
+                "status": "notSupported"
+            },
+            "/pages/delete": {
+                "path": "/pages/delete",
+                "request_body_hash": "eeb69bf7cf1c9790bd14dd10fd4a2fcc9f9e0096ea26e322a4c22479b13de6f9",
+                "response_body_hash": "cc7ea404582e7f0f8fb52d32c7e8828041dab6f74813c119f5797285cbdbd924",
+                "status": "notSupported"
+            },
+            "/pages/featured": {
+                "path": "/pages/featured",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "77262c6c13bfeb50654a51dad5d41c9a7995ab60a45eaa4b1134904db9f1a897",
+                "status": "notSupported"
+            },
+            "/pages/like": {
+                "path": "/pages/like",
+                "request_body_hash": "eeb69bf7cf1c9790bd14dd10fd4a2fcc9f9e0096ea26e322a4c22479b13de6f9",
+                "response_body_hash": "037e5205c7eb8b1b042374579fd86ed21c15461ba385dff8d6c9a9c34370e5a3",
+                "status": "notSupported"
+            },
+            "/pages/show": {
+                "path": "/pages/show",
+                "request_body_hash": "b53cc3ccb5ddcf0b0374f1a764cc69087c621091fa092e1c6601124f0d3c802d",
+                "response_body_hash": "a018f8f0b84abd2c108e55e748c589426216701cf79ffd9379a767464b7a6e9c",
+                "status": "notSupported"
+            },
+            "/pages/unlike": {
+                "path": "/pages/unlike",
+                "request_body_hash": "eeb69bf7cf1c9790bd14dd10fd4a2fcc9f9e0096ea26e322a4c22479b13de6f9",
+                "response_body_hash": "d1e77ba290fa34fc186e1002afe12a53445dbfe138c5c46fcac21d24a6d04f10",
+                "status": "notSupported"
+            },
+            "/pages/update": {
+                "path": "/pages/update",
+                "request_body_hash": "3153c066265775a1c825485ed30c3f0f467d1bddd256929a9eac58ee44354734",
+                "response_body_hash": "73ec6a5889d2e90feac96be8dfd2e822f0a150979f6ecd5bd1e242df8ed40880",
+                "status": "notSupported"
+            },
+            "/flash/create": {
+                "path": "/flash/create",
+                "request_body_hash": "c34ab7bcdfa7507ba77f1b325efc3530720d054c6865150f15223a5aa5b69632",
+                "response_body_hash": "65b236d4079bec9116df945a8073be7c1a6b345cb3c8bf32e2f5d3f3b0a9eab5",
+                "status": "needToWork"
+            },
+            "/flash/delete": {
+                "path": "/flash/delete",
+                "request_body_hash": "f49b7bf2f921b8545da0c14ce3412f1baa2545de62fa229015e12653170474ca",
+                "response_body_hash": "51f4f8d00c207b89e43000cd872c09ecc49dc4b7b8aa797f4c42bfe1c089a7c0",
+                "status": "notSupported"
+            },
+            "/flash/featured": {
+                "path": "/flash/featured",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "fde9f3b6a893c048ccac3ba971f68d13aa3b5e1811bff3d013108d3421a38d91",
+                "status": "notSupported"
+            },
+            "/flash/like": {
+                "path": "/flash/like",
+                "request_body_hash": "f49b7bf2f921b8545da0c14ce3412f1baa2545de62fa229015e12653170474ca",
+                "response_body_hash": "1d9696562971679d834b73158fa432467010525fbf9ae9f6f998e2f6b25e8dcd",
+                "status": "notSupported"
+            },
+            "/flash/show": {
+                "path": "/flash/show",
+                "request_body_hash": "f49b7bf2f921b8545da0c14ce3412f1baa2545de62fa229015e12653170474ca",
+                "response_body_hash": "57deab3561adbe312fa34173fe18db28c7e22d808d6c4b437eb096c6e247ee19",
+                "status": "notSupported"
+            },
+            "/flash/unlike": {
+                "path": "/flash/unlike",
+                "request_body_hash": "f49b7bf2f921b8545da0c14ce3412f1baa2545de62fa229015e12653170474ca",
+                "response_body_hash": "2215d1727fa16f11a93bc93348706e727a783f37e5c1e0dcec1d0fe1d6a19cd2",
+                "status": "notSupported"
+            },
+            "/flash/update": {
+                "path": "/flash/update",
+                "request_body_hash": "23762f32d73fc110d9d615dfd677050884e9ab92e96913d88bb3164c325084db",
+                "response_body_hash": "115f8b79fd6878c3ba249aa21e8434e1082361e34a12bce76c648aa0f099bca5",
+                "status": "notSupported"
+            },
+            "/flash/my": {
+                "path": "/flash/my",
+                "request_body_hash": "b4fff2393288eea1aad1697361d897dd715c1de2b672a4aef9540ffd3b677147",
+                "response_body_hash": "fde9f3b6a893c048ccac3ba971f68d13aa3b5e1811bff3d013108d3421a38d91",
+                "status": "notSupported"
+            },
+            "/flash/my-likes": {
+                "path": "/flash/my-likes",
+                "request_body_hash": "b4fff2393288eea1aad1697361d897dd715c1de2b672a4aef9540ffd3b677147",
+                "response_body_hash": "d6f3f88b79505043379fef258b51922ca89f879ea1c5ee6ec11861a7fcb7eeb7",
+                "status": "notSupported"
+            },
+            "/ping": {
+                "path": "/ping",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "7d03e0d8848bbe6d6e572d45a82364c88afd3bf2f069d45d40980763f535cc0f",
+                "status": "notSupported"
+            },
+            "/pinned-users": {
+                "path": "/pinned-users",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "f711c88a06f184d959627953fff320b77c3bcfbb871fe226d61cfacd7b6eb5cd",
+                "status": "notSupported"
+            },
+            "/promo/read": {
+                "path": "/promo/read",
+                "request_body_hash": "96c112f7b0436a5b8d477b33065a4666f4274102102f233d7625f59b8a214eeb",
+                "response_body_hash": "f81f642d02e261e9afecc0e83a43e2ecefe4325ac6cee5c1b2e4a7208053b42a",
+                "status": "notSupported"
+            },
+            "/roles/list": {
+                "path": "/roles/list",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "a29e73a8aec4949d55a8b55d8e4fa2a7399dbb81a71831731df51e1519f150f5",
+                "status": "needToWork"
+            },
+            "/roles/show": {
+                "path": "/roles/show",
+                "request_body_hash": "f1e8b29b15487ead09234ea7c06fb900cd4a56f76907ff025d55eb2ba96e5ce1",
+                "response_body_hash": "9e4c36e9ddbf38fba5e6883a1a258c5dd09228d8feb91af67739cd010dbbdc5e",
+                "status": "needToWork"
+            },
+            "/roles/users": {
+                "path": "/roles/users",
+                "request_body_hash": "985b8d2726a2e859a58a14d37b694af0e1a8911794cd692dbef09c20d9ba3cde",
+                "response_body_hash": "eb466d442ad8093a3dd30c47e1a27800fafe9997285bb21571da9d752eb68d95",
+                "status": "needToWork"
+            },
+            "/roles/notes": {
+                "path": "/roles/notes",
+                "request_body_hash": "cbfdbe6aa49347dcccdacd8224552b1f1f29e41417e9b00430bd6d1e76d7056c",
+                "response_body_hash": "09089ff0a5c3b008367bc71cfd1fd5e56ba62c0b3c99b4cb7c584e05c251eb83",
+                "status": "needToWork"
+            },
+            "/request-reset-password": {
+                "path": "/request-reset-password",
+                "request_body_hash": "81cfe51c648bd3c152944fdff0515d39c718572def19d6004071147861b7c612",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291",
+                "status": "notSupported"
+            },
+            "/reset-db": {
+                "path": "/reset-db",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/reset-password": {
+                "path": "/reset-password",
+                "request_body_hash": "65caa76401e67c9cbab52b7e574603fb92096e6be486a9e4ca95c2700837d9a4",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/server-info": {
+                "path": "/server-info",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "fdd8d78a33fcb6c4d931bbb20b86fe521bd8f237eeb96ba3b8a28225b8230c02",
+                "status": "needToWork"
+            },
+            "/stats": {
+                "path": "/stats",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "121322cdce229aa23ad85ac6bfceaf47adaee9d10a0a1e2b806c7f68cd53983a",
+                "status": "notSupported"
+            },
+            "/sw/show-registration": {
+                "path": "/sw/show-registration",
+                "request_body_hash": "f91ec29b8c91a733f25f5dfab0e90a15c7eea823556dc7c01bf362e1a1143609",
+                "response_body_hash": "16c76b0e1ab99ed2e5fab67a31350ad7626e70c50baf476ddb57312136a53707",
+                "status": "notSupported"
+            },
+            "/sw/update-registration": {
+                "path": "/sw/update-registration",
+                "request_body_hash": "48ec8a517bc6080696adc02efa6895acbf46a0182ecf6104d0a142edc94d8f11",
+                "response_body_hash": "04db1df997a2f6a1228b6072afe905ae8bc92b17c79974e3f32a53e8862362af",
+                "status": "notSupported"
+            },
+            "/sw/register": {
+                "path": "/sw/register",
+                "request_body_hash": "c3b0b60e3a295ef5a6892d3b10c5fe8366e610cab27eb6814a0caf67ba2f80d0",
+                "response_body_hash": "3d8909d8c65205b3a340f2ecf36e1b539d25f86e75548d2bad8824b8867fb730",
+                "status": "notSupported"
+            },
+            "/sw/unregister": {
+                "path": "/sw/unregister",
+                "request_body_hash": "f91ec29b8c91a733f25f5dfab0e90a15c7eea823556dc7c01bf362e1a1143609",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "notSupported"
+            },
+            "/test": {
+                "path": "/test",
+                "request_body_hash": "c218519678437bf2b18750c3c30ca0a7c0ad9a20fd92a918a3f8bf78a197aa6f",
+                "response_body_hash": "c11f8d5ac1100fb98148bb0d4d8631437fb056846f170cd467ee6a66965da4bd",
+                "status": "needToWork"
+            },
+            "/username/available": {
+                "path": "/username/available",
+                "request_body_hash": "a39a2024889ca9effb961e1aa5dc4aed9ea3ee13d136a6425a8b91f35d925a4f",
+                "response_body_hash": "13d01f923a8c5d5a3091011c6b67652918ff08912ae55def5ad2d6dee1751483",
+                "status": "needToWork"
+            },
+            "/users/notes": {
+                "path": "/users/notes",
+                "request_body_hash": "33782295ff66ae75acd25124bfaae92bc15bf477309d4ae35eff17e85ae66985",
+                "response_body_hash": "fb1c7a869ff3c4eb9ae29a6818831839d6b73af718eb4d488c347e9ef0b534e9",
+                "status": "needToWork"
+            },
+            "/users/clips": {
+                "path": "/users/clips",
+                "request_body_hash": "cad2189dac5f55c4ad37729e636d22035fd68ed1e128394a5955eb2d699d8dab",
+                "response_body_hash": "089bcc24b48e57ccb14a837c9473a81083aaa4d1c25de3f56286752a6cc94515",
+                "status": "needToWork"
+            },
+            "/users/followers": {
+                "path": "/users/followers",
+                "request_body_hash": "37edfff4c118954fac76ea2944c15ade035879d8e711abc18a105798ce8aaacc",
+                "response_body_hash": "2ed1dc6d08baf1da12692e2284fb22d82d5f1dd93bbeb728920d32e29b46c8d1",
+                "status": "needToWork"
+            },
+            "/users/following": {
+                "path": "/users/following",
+                "request_body_hash": "599243389ea2c80889ab03636f61a4c33f44c7a753e1e7d4d16ac792acab4ccb",
+                "response_body_hash": "36b76f2ecd5d6f2e14dd84f6fdbd334f2ef655122a521cee9996d7561ce52f3b",
+                "status": "needToWork"
+            },
+            "/users/gallery/posts": {
+                "path": "/users/gallery/posts",
+                "request_body_hash": "cad2189dac5f55c4ad37729e636d22035fd68ed1e128394a5955eb2d699d8dab",
+                "response_body_hash": "9cc5482ae3d6a02de2df207b180366d9c0ad56263b8c7bd6df6c26e5ccf54e78",
+                "status": "needToWork"
+            },
+            "/users/get-frequently-replied-users": {
+                "path": "/users/get-frequently-replied-users",
+                "request_body_hash": "1111fbf480918f237cacdb52ee4bdfd41a412db6c1e40643a6f42b8516d4e965",
+                "response_body_hash": "bee36384638595f85dae7cdfa29d7c8598b664ed5e943325792e11abf41b6ea4",
+                "status": "needToWork"
+            },
+            "/users/featured-notes": {
+                "path": "/users/featured-notes",
+                "request_body_hash": "81ef65ba143aafa11bd2c08ce5cc377fbf223a17a6e9aa180cbd0c39c4da3bc1",
+                "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
+                "status": "needToWork"
+            },
+            "/users/lists/create": {
+                "path": "/users/lists/create",
+                "request_body_hash": "966ffa9d5a65e1b056fdf50ef42b9569f594844fd34d9a11cb1b584333c18e71",
+                "response_body_hash": "f25381a659a64c33aa72051b3834f840639eefcb3bf666b03e679da547748d9f",
+                "status": "needToWork"
+            },
+            "/users/lists/delete": {
+                "path": "/users/lists/delete",
+                "request_body_hash": "229edae3d09f19d4c0282efd26c63d531a366743a9ef2f60d7f89c252712ae31",
+                "response_body_hash": "46c49578068c6bec4c314be68eda455f3f367bd13fe970580e95c87b2fad5c2b",
+                "status": "supported"
+            },
+            "/users/lists/list": {
+                "path": "/users/lists/list",
+                "request_body_hash": "260af4a996ad193957f8a2fd1dc8b9e4dbad1b063e977e0181f4694f9a57153a",
+                "response_body_hash": "99f4ec400e7700d9fe5d434f43da0ee4a7976e1ed27414d8ae395051d004dced",
+                "status": "needToWork"
+            },
+            "/users/lists/pull": {
+                "path": "/users/lists/pull",
+                "request_body_hash": "ca1d808851576cc83e51f6c87fec44ee9a2afd57579a6bd4f333cda32fed7bad",
+                "response_body_hash": "dc2b3b48ed446f28f44e8468186af637318abc2ec2ac4893eed84a530efa62aa",
+                "status": "supported"
+            },
+            "/users/lists/push": {
+                "path": "/users/lists/push",
+                "request_body_hash": "ca1d808851576cc83e51f6c87fec44ee9a2afd57579a6bd4f333cda32fed7bad",
+                "response_body_hash": "0ad97deb5ccdfed655ea446d2e87e289d74f38c86dfc7719d6e51e795af4f774",
+                "status": "supported"
+            },
+            "/users/lists/show": {
+                "path": "/users/lists/show",
+                "request_body_hash": "6d186a14a1ad553c83bb6da0d6477109aba3ac174820a47da85c79334366c2c4",
+                "response_body_hash": "b60509cab119a3535a31308994bcb55c1a2e1403f06723f531a6b336f180ca2c",
+                "status": "needToWork"
+            },
+            "/users/lists/favorite": {
+                "path": "/users/lists/favorite",
+                "request_body_hash": "229edae3d09f19d4c0282efd26c63d531a366743a9ef2f60d7f89c252712ae31",
+                "response_body_hash": "0ba25e15910a449f52127f1e811a8293af2b0ffb57ecca6b09b5b4a407184431",
+                "status": "supported"
+            },
+            "/users/lists/unfavorite": {
+                "path": "/users/lists/unfavorite",
+                "request_body_hash": "229edae3d09f19d4c0282efd26c63d531a366743a9ef2f60d7f89c252712ae31",
+                "response_body_hash": "05d22dc105f55a1b2be89285d4973389415b5ba849112e6a58e1b7966d3127db",
+                "status": "supported"
+            },
+            "/users/lists/update": {
+                "path": "/users/lists/update",
+                "request_body_hash": "be5e0b160b43e94d6f30a721700ddfab458186371540348b858ef0f785446bf4",
+                "response_body_hash": "d1145b377d60aafceae3d5bba6b123c7fe433656f635c2e8ffc0ca3c80af668d",
+                "status": "needToWork"
+            },
+            "/users/lists/create-from-public": {
+                "path": "/users/lists/create-from-public",
+                "request_body_hash": "0272d0508f063ffe526ff707a82df2c5b510ad7fa686f4d2c1482baf6a439350",
+                "response_body_hash": "9e9750ca808163812efed3bbbf90642a2aff898c088a1f68a83db508d05d9a29",
+                "status": "needToWork"
+            },
+            "/users/lists/update-membership": {
+                "path": "/users/lists/update-membership",
+                "request_body_hash": "3cb2711ea796480c5f0877b219c51e8468e1b6be403b3a6fcf693c99280c9bca",
+                "response_body_hash": "dc2b3b48ed446f28f44e8468186af637318abc2ec2ac4893eed84a530efa62aa",
+                "status": "supported"
+            },
+            "/users/lists/get-memberships": {
+                "path": "/users/lists/get-memberships",
+                "request_body_hash": "479cb359a63d03e3a9adb6e3a497b1b3d460391559db59977a4935bacf514751",
+                "response_body_hash": "f932deeafd1683951a2923cf235ac8bb5c842a1bbec43ae661c9c2013f1b2ff0",
+                "status": "needToWork"
+            },
+            "/users/pages": {
+                "path": "/users/pages",
+                "request_body_hash": "cad2189dac5f55c4ad37729e636d22035fd68ed1e128394a5955eb2d699d8dab",
+                "response_body_hash": "77262c6c13bfeb50654a51dad5d41c9a7995ab60a45eaa4b1134904db9f1a897",
+                "status": "notSupported"
+            },
+            "/users/flashs": {
+                "path": "/users/flashs",
+                "request_body_hash": "cad2189dac5f55c4ad37729e636d22035fd68ed1e128394a5955eb2d699d8dab",
+                "response_body_hash": "fde9f3b6a893c048ccac3ba971f68d13aa3b5e1811bff3d013108d3421a38d91",
+                "status": "notSupported"
+            },
+            "/users/reactions": {
+                "path": "/users/reactions",
+                "request_body_hash": "b25ec7c80ef58b7781824f82da212773307b82440edbe8089e2ef16748d64c96",
+                "response_body_hash": "6d47d8b864fba7dad60dcaf6932a8237ae82a2a840f4fc1672b9666d87473dc3",
+                "status": "notSupported"
+            },
+            "/users/recommendation": {
+                "path": "/users/recommendation",
+                "request_body_hash": "ea75cb7a456fe25fc086147b7be384a2e8e51b1dfd549a4c4493fc41f2f82d2f",
+                "response_body_hash": "f711c88a06f184d959627953fff320b77c3bcfbb871fe226d61cfacd7b6eb5cd",
+                "status": "notSupported"
+            },
+            "/users/relation": {
+                "path": "/users/relation",
+                "request_body_hash": "214644ed0d4b975fbf6fc34bf8233fc4bbc57b7f381a66366387ae973a5c559d",
+                "response_body_hash": "48643cbea101a0752cc3779de7ef97800652e38077f4fdc2661dab7e8252f3d2",
+                "status": "notSupported"
+            },
+            "/users/report-abuse": {
+                "path": "/users/report-abuse",
+                "request_body_hash": "3b699d8bfef6575e3e1a7436c2c2ac190f5a660bfa73495a910c8f77fe24e725",
+                "response_body_hash": "7b363793da62cb9fedef1ba82bd50ab6055255a669a55d295416be34f25ad9a8",
+                "status": "notSupported"
+            },
+            "/users/search-by-username-and-host": {
+                "path": "/users/search-by-username-and-host",
+                "request_body_hash": "de8bf4fb34e4685bc3a830b1eedaaf5f9c2b26f64117edc49c13693d8d4cc61f",
+                "response_body_hash": "86313d9b9aca18d46d95a2cc164f64cc3162eda4d6332a60b5a0575ba854b8c2",
+                "status": "notSupported"
+            },
+            "/users/search": {
+                "path": "/users/search",
+                "request_body_hash": "c8deb4ffbc22115d2d9321d03577bb8f52d43cbbe66a78ea6de139684da1187d",
+                "response_body_hash": "86313d9b9aca18d46d95a2cc164f64cc3162eda4d6332a60b5a0575ba854b8c2",
+                "status": "needToWork"
+            },
+            "/users/show": {
+                "path": "/users/show",
+                "request_body_hash": "528b5ac58e2544549c4b78b8e541fc2618802efd478d5667cddb777a41ae1b6d",
+                "response_body_hash": "6dd0ff96921442b59bb17f9df8cf02d2c0dd4de75c0788e8b42ec9fb642d7ffd",
+                "status": "needToWork"
+            },
+            "/users/achievements": {
+                "path": "/users/achievements",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "3ddae0c9c0a285b235932b70b35825291dc5ad0320b6a17fff33c27a1160968a",
+                "status": "needToWork"
+            },
+            "/users/update-memo": {
+                "path": "/users/update-memo",
+                "request_body_hash": "9d1a6a1f22e589c9c9dd2560b0341aa9640df19723c42d002f2628feb5175d38",
+                "response_body_hash": "bcd6f661187b1dd755e7d1632198142e4160fc7ca668d06b88119d838ae4c56b",
+                "status": "notSupported"
+            },
+            "/fetch-rss": {
+                "path": "/fetch-rss",
+                "request_body_hash": "dd2ec4556fe76c68ffffd7b36ad89aff9fd0eb981c7b4881063a21381d96dd68",
+                "response_body_hash": "5ec414384d6cf9983f6015b58972a06e0e83fdd98ebd4d5feb63d156adb63a68",
+                "status": "needToWork"
+            },
+            "/fetch-external-resources": {
+                "path": "/fetch-external-resources",
+                "request_body_hash": "b9d44f2438dfae19882a6678d900e7e36ebe53bbac72f3896321c60487fb2d80",
+                "response_body_hash": "9d73a930c2b976dea0eaef795378b41adff0a7e885c7828a911b19d9791a8ef1",
+                "status": "needToWork"
+            },
+            "/retention": {
+                "path": "/retention",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "6db55b1f03dc038b85901c4148769125bb686c9d407b5b0d420770f27ab6b15c",
+                "status": "notSupported"
+            },
+            "/admin/accounts/find-by-email": {
+                "path": "/admin/accounts/find-by-email",
+                "request_body_hash": "03aec8bcf9812226154ca4d7ec09b0786afcfb58e2bdf609ec3369b16257d9c1",
+                "response_body_hash": "94a60f7b2643e47dcb95203c436961e8f317591f061bb316725b75e98400cb31",
+                "status": "needToWork"
+            },
+            "/admin/unset-user-avatar": {
+                "path": "/admin/unset-user-avatar",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "supported"
+            },
+            "/admin/unset-user-banner": {
+                "path": "/admin/unset-user-banner",
+                "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "status": "supported"
+            },
+            "/notes": {
+                "path": "/notes",
+                "request_body_hash": "ea666f3e4d6bb609f37fcc15643f55a8fcea1ceac6ae807f8dca9da5c09fc826",
+                "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
+                "status": "needToWork"
+            },
+            "/users": {
+                "path": "/users",
+                "request_body_hash": "74eddccc4113db5742415dc18fe8fa77956e696c574536ae4d177d0f04faa18c",
+                "response_body_hash": "f711c88a06f184d959627953fff320b77c3bcfbb871fe226d61cfacd7b6eb5cd",
+                "status": "needToWork"
+            },
+            "/admin/meta": {
+                "path": "/admin/meta",
+                "status": "needToWork",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "bf189e524b36dd6bbb649c4338a2cbb35757dff220040596940b9da66534ee5d"
+            },
+            "/admin/emoji/import-zip": {
+                "path": "/admin/emoji/import-zip",
+                "status": "notSupported",
+                "request_body_hash": "d7c20d1b69b13b8c3bdce034764d6b159e21e14eb20dc6f001c023ed47973e4c",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
+            },
+            "/auth/accept": {
+                "path": "/auth/accept",
+                "status": "notSupported",
+                "request_body_hash": "c6d1b6e1498ff55d17517f38d6d3c4390d319429202a85908b4fc622d175e957",
+                "response_body_hash": "e61fc778d8a57d71bc3d3d8629187d04fb525a68dc328018c837bb441a65e362"
+            },
+            "/export-custom-emojis": {
+                "path": "/export-custom-emojis",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291"
+            },
+            "/i/2fa/done": {
+                "path": "/i/2fa/done",
+                "status": "notSupported",
+                "request_body_hash": "c6d1b6e1498ff55d17517f38d6d3c4390d319429202a85908b4fc622d175e957",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
+            },
+            "/i/2fa/key-done": {
+                "path": "/i/2fa/key-done",
+                "status": "notSupported",
+                "request_body_hash": "165aae3bc7b36d135658fcd92883d865db3c04b553e9c64c471d3a27532de7b3",
+                "response_body_hash": "9ec7d7598f3621ff545f991c3cb569180f1370cbf790ec45989ce585fbcace63"
+            },
+            "/i/2fa/password-less": {
+                "path": "/i/2fa/password-less",
+                "status": "notSupported",
+                "request_body_hash": "3f9cba16e3afae95a9183354b45bed937fc02eeb2da9cbf22ab405443fd658d0",
+                "response_body_hash": "5dfe6d4b7e4627917d18850fb99f8909e9a731e3f33f6a93ef333d0029f2ec76"
+            },
+            "/i/2fa/register-key": {
+                "path": "/i/2fa/register-key",
+                "status": "notSupported",
+                "request_body_hash": "81cf38a69786af5a9cb75498edb554ce063b0c8e2a0144848fc47d84c4250edf",
+                "response_body_hash": "8342722bc8ad42e7459d329d17163c03b9f041f9c1935e95555e4783ad913a19"
+            },
+            "/i/2fa/register": {
+                "path": "/i/2fa/register",
+                "status": "notSupported",
+                "request_body_hash": "81cf38a69786af5a9cb75498edb554ce063b0c8e2a0144848fc47d84c4250edf",
+                "response_body_hash": "a929f7c4103f3bbcbf9df410fb2af7b05a3d12476b5c52fe43017fb7d991c946"
+            },
+            "/i/2fa/update-key": {
+                "path": "/i/2fa/update-key",
+                "status": "notSupported",
+                "request_body_hash": "cba7dd2c266b0be26d88c3975d0beec569c49bcf0348972f5d78ed090442b46d",
+                "response_body_hash": "6234e3ae24d465bd029015ea2ff6f2e7da94ab9ec4dc5b01b8c4ab3cb9b07682"
+            },
+            "/i/2fa/remove-key": {
+                "path": "/i/2fa/remove-key",
+                "status": "notSupported",
+                "request_body_hash": "8dd667bd751742c5e00d10158bc95efccc521aff822bf62b3bbf374ae0a1ae26",
+                "response_body_hash": "86043e41cfd7032e2d4e5aaf0ce5b03f1eca6b71d5bc3d1329cd6479fdf1e04a"
+            },
+            "/i/2fa/unregister": {
+                "path": "/i/2fa/unregister",
+                "status": "notSupported",
+                "request_body_hash": "81cf38a69786af5a9cb75498edb554ce063b0c8e2a0144848fc47d84c4250edf",
+                "response_body_hash": "8e6cdb1d3647cbd1bbebd31cbe0e94797bec766d3db9d27d26ecc07da9ee18fd"
+            },
+            "/i/apps": {
+                "path": "/i/apps",
+                "status": "notSupported",
+                "request_body_hash": "a7bbc5ec334b53e4f02335f5506596cec7df3b69c7bace6ef4e78a716f417919",
+                "response_body_hash": "8068d4288ed69f8104be6c4f6ec76e3a0f70922c277242c2d123f9c12571b9dd"
+            },
+            "/i/authorized-apps": {
+                "path": "/i/authorized-apps",
+                "status": "notSupported",
+                "request_body_hash": "883322d13b719c00d7787208bcc3c6ea272cd52754b3ee13fdf9853ff692cbbb",
+                "response_body_hash": "027f07391cb3fdf6aff464f72c1c3d3afbd80dcfb80be7db90951bdf3f956018"
+            },
+            "/i/change-password": {
+                "path": "/i/change-password",
+                "status": "notSupported",
+                "request_body_hash": "91283cf542c0e92e18482219db99798de92065ca9f78d720c3583e21df460d66",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
+            },
+            "/i/delete-account": {
+                "path": "/i/delete-account",
+                "status": "notSupported",
+                "request_body_hash": "81cf38a69786af5a9cb75498edb554ce063b0c8e2a0144848fc47d84c4250edf",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
+            },
+            "/i/export-blocking": {
+                "path": "/i/export-blocking",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291"
+            },
+            "/i/export-following": {
+                "path": "/i/export-following",
+                "status": "notSupported",
+                "request_body_hash": "3d245a8feaaa72d915dcb9a756e60e3790234da886f670f789f55c7295281b01",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291"
+            },
+            "/i/export-mute": {
+                "path": "/i/export-mute",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291"
+            },
+            "/i/export-notes": {
+                "path": "/i/export-notes",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291"
+            },
+            "/i/export-favorites": {
+                "path": "/i/export-favorites",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291"
+            },
+            "/i/export-user-lists": {
+                "path": "/i/export-user-lists",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291"
+            },
+            "/i/export-antennas": {
+                "path": "/i/export-antennas",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291"
+            },
+            "/i/import-blocking": {
+                "path": "/i/import-blocking",
+                "status": "notSupported",
+                "request_body_hash": "d7c20d1b69b13b8c3bdce034764d6b159e21e14eb20dc6f001c023ed47973e4c",
+                "response_body_hash": "37b52d1445ab3f25da7ebacaebcb43d4157cb11289ebe2b7df515aeb4e065bee"
+            },
+            "/i/import-following": {
+                "path": "/i/import-following",
+                "status": "notSupported",
+                "request_body_hash": "fd3e4bbcf14b87c43420d349033df43a9ff15d4c1462dd2f6bf492f6278bf221",
+                "response_body_hash": "513a3665a379f1595224e813e6291d067742f4b7aa07e461d1efc7a20bee621e"
+            },
+            "/i/import-muting": {
+                "path": "/i/import-muting",
+                "status": "notSupported",
+                "request_body_hash": "d7c20d1b69b13b8c3bdce034764d6b159e21e14eb20dc6f001c023ed47973e4c",
+                "response_body_hash": "865b7ce7c82058adc9557ca6ce16fa18f0958b578e8fd8a4244d8b6e05c5c9bc"
+            },
+            "/i/import-user-lists": {
+                "path": "/i/import-user-lists",
+                "status": "notSupported",
+                "request_body_hash": "d7c20d1b69b13b8c3bdce034764d6b159e21e14eb20dc6f001c023ed47973e4c",
+                "response_body_hash": "75b6af3789e8e70903280856b838940c6335ebf1db7d79bd0549316cf7eb4177"
+            },
+            "/i/import-antennas": {
+                "path": "/i/import-antennas",
+                "status": "notSupported",
+                "request_body_hash": "d7c20d1b69b13b8c3bdce034764d6b159e21e14eb20dc6f001c023ed47973e4c",
+                "response_body_hash": "05a76b2485a08286951ade7ee525ffa117551f06d7c3d82130a31c5f3dc62003"
+            },
+            "/i/regenerate-token": {
+                "path": "/i/regenerate-token",
+                "status": "notSupported",
+                "request_body_hash": "ee91a880e956e79206f086a211cf667a5af183054293de0f8a9a9f334f2fc8ed",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
+            },
+            "/i/registry/scopes-with-domain": {
+                "path": "/i/registry/scopes-with-domain",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "32be4926764767655c587cab409f22d0c7adf50997cd8ba49d3f603d3c450ad8"
+            },
+            "/i/revoke-token": {
+                "path": "/i/revoke-token",
+                "status": "notSupported",
+                "request_body_hash": "e656a5489c96f920e9c7ff8780b741e719bc583f9142a0ea9cc44f73202809b0",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
+            },
+            "/i/signin-history": {
+                "path": "/i/signin-history",
+                "status": "notSupported",
+                "request_body_hash": "b4fff2393288eea1aad1697361d897dd715c1de2b672a4aef9540ffd3b677147",
+                "response_body_hash": "c1d1777afb48bad8f3fd33963ec31dc36c72144704610f3dc92912ba138e312e"
+            },
+            "/i/update-email": {
+                "path": "/i/update-email",
+                "status": "notSupported",
+                "request_body_hash": "c2b874d747b9a4db158d40371178c6443128dce23f322e78b9e9c183649ca5ee",
+                "response_body_hash": "10fc7c7ba7c9652693a4f167ce92b6bcdae58fe37dd157cb2d36ff21dc53f542"
+            },
+            "/i/move": {
+                "path": "/i/move",
+                "status": "notSupported",
+                "request_body_hash": "1a8cb7426fb89ff098070c8dd85cf8df6b0ababf60f3b7ba4e55defe260ff3d2",
+                "response_body_hash": "6d828252d1323e3da5dd9bd58a1136ec9ec5cc62eb962a8fb71cdeea5cf9d7dd"
+            },
+            "/miauth/gen-token": {
+                "path": "/miauth/gen-token",
+                "status": "notSupported",
+                "request_body_hash": "957254f9771ca36fbad2c3a01866b70742753778d384cb6386c001dec84a268f",
+                "response_body_hash": "2bdd15f8efd78a11800c4e6900a2c9046ed5dc34832b3a4ba86e9979bb60453f"
+            },
+            "/page-push": {
+                "path": "/page-push",
+                "status": "notSupported",
+                "request_body_hash": "6b75b9be224e0b6dda5200a9cc10c68f3e13a43b676177c121150b227f7d4cee",
+                "response_body_hash": "ce68f8d261a520e8f05a22fd96e4da5f5f70f72f0da7841be91c95d560007f8e"
+            },
+            "/i/export-clips": {
+                "path": "/i/export-clips",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "aead474d2cf0cb02f40e88b806a7f993e6dc1567de6897b7d278c9cc96109291"
+            },
+            "/bubble-game/register": {
+                "path": "/bubble-game/register",
+                "status": "notSupported",
+                "request_body_hash": "caeb79db89c8d1e29fd87305186506dd3a3804c0e8e6cb948c5223187ddf047b",
+                "response_body_hash": "cc2d662fe44dfc1503422cf38995c321de833d968a7250769c1c739031b5640c"
+            },
+            "/bubble-game/ranking": {
+                "path": "/bubble-game/ranking",
+                "status": "notSupported",
+                "request_body_hash": "0b215263ffe361b7662ba6637bc999c52cd0e1ae5dd468e922d659cbd0da7e7f",
+                "response_body_hash": "28627f8eac8efec245e9d346ee7504876ee5a99248c7d08bbfc9dc5dff33cd16"
+            },
+            "/reversi/cancel-match": {
+                "path": "/reversi/cancel-match",
+                "status": "notSupported",
+                "request_body_hash": "59fdcf8deb825af590d7508ee69c323445dcde90c4dcb98eb26451d71a12c821",
+                "response_body_hash": "6db55b1f03dc038b85901c4148769125bb686c9d407b5b0d420770f27ab6b15c"
+            },
+            "/reversi/games": {
+                "path": "/reversi/games",
+                "status": "notSupported",
+                "request_body_hash": "644969b1f3d5cb125d11a98462e323bdbfdcc51d7d68a998404f0a4a98592ffd",
+                "response_body_hash": "9bf7f066f63bee4b91a9105e9e123fc010c2b3a43d0c419433940ce6eeef6142"
+            },
+            "/reversi/match": {
+                "path": "/reversi/match",
+                "status": "notSupported",
+                "request_body_hash": "f52ce9b09a7641214aca43a33e39103d90060ffab4564877c62c3ac96f85c7ff",
+                "response_body_hash": "93f2f6e0cb2b153b181fcf4ed630e27481c784799bdefa5025761db8dd912699"
+            },
+            "/reversi/invitations": {
+                "path": "/reversi/invitations",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "cb31c1e087e7324a957288e09612947c8c14dfdf85d3a754ee4598f63939122d"
+            },
+            "/reversi/show-game": {
+                "path": "/reversi/show-game",
+                "status": "notSupported",
+                "request_body_hash": "0146a1e3c7ec1a85dc0b31181d8813de4041daee6cf9c5e908a5e405befb2c1d",
+                "response_body_hash": "b746370208a9c7827041386d0e8eb659b4aada0a34eeba43b65dc845bfb8e362"
+            },
+            "/reversi/surrender": {
+                "path": "/reversi/surrender",
+                "status": "notSupported",
+                "request_body_hash": "0146a1e3c7ec1a85dc0b31181d8813de4041daee6cf9c5e908a5e405befb2c1d",
+                "response_body_hash": "0abdc5ead8417e84558a9fe2ea8d0484ee28eb823db1d4daf88ed641a3db070d"
+            },
+            "/reversi/verify": {
+                "path": "/reversi/verify",
+                "status": "notSupported",
+                "request_body_hash": "4fc27e290638a4312d59de35b50661cc8b9714c6e8e8ca1a1587fd7579c914d8",
+                "response_body_hash": "afb585d56dab7b27886afab4c9a6b84fe73238227ea8d53228e43c1201f70256"
+            }
+        },
+        "removed": {}
+    },
+    "schemas": {
+        "Error": {
+            "name": "Error",
+            "hash": "dd2907a97002980fbe379d3bc3ffffa60d5cd2e421908e2d34d0f04017b32045",
+            "status": "notSupported"
+        },
+        "UserLite": {
+            "name": "UserLite",
+            "hash": "a8477da1fb750f7e0ebbedc95bbda436ce5be396d688063fa64541e8ae5a5262",
+            "status": "supported"
+        },
+        "UserDetailedNotMeOnly": {
+            "name": "UserDetailedNotMeOnly",
+            "hash": "b5de616e11dc1686d7f22cf4e1323bffbbd55a6a9fd983f2742c8a08126c07e5",
+            "status": "supported"
+        },
+        "MeDetailedOnly": {
+            "name": "MeDetailedOnly",
+            "hash": "0cc55ace5d412f1063b9223b4fe899a6d5058e024730332eda967a8ceb1250a5",
+            "status": "supported"
+        },
+        "UserDetailedNotMe": {
+            "name": "UserDetailedNotMe",
+            "hash": "f236342d43bb422cbf08e94f0db544daa5a14c1ffe82176cc6a41644b27beb06",
+            "status": "supported"
+        },
+        "MeDetailed": {
+            "name": "MeDetailed",
+            "hash": "3a94159208d262393a0d5ab83b7672958142c0dece04e8486060416784f6d690",
+            "status": "supported"
+        },
+        "UserDetailed": {
+            "name": "UserDetailed",
+            "hash": "cb42db8862778d9d9b24d5e94eaae98162aae7864c087a9120ad1859285ce777",
+            "status": "supported"
+        },
+        "User": {
+            "name": "User",
+            "hash": "9bb15ce6a2a4f4c3b202bb03ad3af2a28c3d2fabe90f5b211641403f09c67732",
+            "status": "supported"
+        },
+        "UserList": {
+            "name": "UserList",
+            "hash": "5259c1402c1fb77e67dfd6eaedfe3383a75837538a224ce15f2d733793c77ac3",
+            "status": "supported"
+        },
+        "Announcement": {
+            "name": "Announcement",
+            "hash": "c6a99c3f08a0072491961ac4be88ea5789838d47fe2afa56650e60e1fbf0376b",
+            "status": "supported"
+        },
+        "App": {
+            "name": "App",
+            "hash": "1c8addc6c7efdc356e3be846d48e6c8b2f53293d8268e737895da9ab8fae0cac",
+            "status": "notSupported"
+        },
+        "Note": {
+            "name": "Note",
+            "hash": "7e8de387c79b1db582ba2ebeba73aae80a899393042b89325027cab3bf1e0b0c",
+            "status": "supported"
+        },
+        "NoteReaction": {
+            "name": "NoteReaction",
+            "hash": "4ef6fd672338dbe470c9adb15b57f44b2e6a63e7da53c4714c3b1c0aca2b2e3a",
+            "status": "supported"
+        },
+        "NoteFavorite": {
+            "name": "NoteFavorite",
+            "hash": "63038b4094cb5d6667f5f57b1788f4bf4a040cd41bcaba09c64e2ecf9aec086b",
+            "status": "notSupported"
+        },
+        "Notification": {
+            "name": "Notification",
+            "hash": "47afc80f19a4537ede5e8fc5bb5688d56eedfce1d4c0255656765d25819fe47f",
+            "status": "notSupported"
+        },
+        "DriveFile": {
+            "name": "DriveFile",
+            "hash": "9853a428bab9745b8e17a9c2a83231761fcda7cff883f2200e11c11b6342ce71",
+            "status": "supported"
+        },
+        "DriveFolder": {
+            "name": "DriveFolder",
+            "hash": "2ee1d9098539300d5e0e5d9a367a196a8f246b323d86201ef5109b06c5ace611",
+            "status": "supported"
+        },
+        "Following": {
+            "name": "Following",
+            "hash": "7abec68b15d8f0f431abc0022b489dd81b67d5caf48df1121763559bcdff909c",
+            "status": "supported"
+        },
+        "Muting": {
+            "name": "Muting",
+            "hash": "33400bcbcb4c0cb3be9a235f18c22456d8afed04d66597e591dca3cdb4777a6d",
+            "status": "notSupported"
+        },
+        "RenoteMuting": {
+            "name": "RenoteMuting",
+            "hash": "b0162338ef404018678df4d531ead93cb9d2e9d5552495882121d533934c76ad",
+            "status": "notSupported"
+        },
+        "Blocking": {
+            "name": "Blocking",
+            "hash": "2b0438f1ef5156868501093ea7bb9352e8b9329373f822713627fad742069945",
+            "status": "notSupported"
+        },
+        "Hashtag": {
+            "name": "Hashtag",
+            "hash": "619643560ecb9b56a12db881efff441954be264ba1f41a9d9d20ae46ad2d1dfd",
+            "status": "notSupported"
+        },
+        "InviteCode": {
+            "name": "InviteCode",
+            "hash": "3d629e41cf0ab2c1021805142bdf400f4e117a2a4d0e4b66ceace2f478e11036",
+            "status": "supported"
+        },
+        "Page": {
+            "name": "Page",
+            "hash": "0f0c362ee298381088c12969e15cbd10a8183ff37301a76a772e917eaabc47ba",
+            "status": "notSupported"
+        },
+        "Channel": {
+            "name": "Channel",
+            "hash": "65ac71d7cb329a9c3d0f4002198f6df7f525852013f84f277b447e4cde8386fd",
+            "status": "supported"
+        },
+        "QueueCount": {
+            "name": "QueueCount",
+            "hash": "356d80b1581805f4a2d6b4bce9cb469ed9cad7bbdaef6d60c16d7786715acf22",
+            "status": "notSupported"
+        },
+        "Antenna": {
+            "name": "Antenna",
+            "hash": "14ad7ea1c5a1ac52e744b4cff951e0dfe7a6710497d191f2756eec7436e2d8f5",
+            "status": "notSupported"
+        },
+        "Clip": {
+            "name": "Clip",
+            "hash": "03bd8f3b6e536386a6ee9639a90e71f4afc5c8933aeda594ca5c2ef1fa178e77",
+            "status": "notSupported"
+        },
+        "FederationInstance": {
+            "name": "FederationInstance",
+            "hash": "5c701ab845196c5fe00591568d9b4c9c00874a9e067a8f970bd9e92be8aa410f",
+            "status": "notSupported"
+        },
+        "GalleryPost": {
+            "name": "GalleryPost",
+            "hash": "945e43cf955886bbdb19ddbf4abb0b7b5d07f2435be2ec97129f61677a8a042c",
+            "status": "supported"
+        },
+        "EmojiSimple": {
+            "name": "EmojiSimple",
+            "hash": "45a03e8c334edf32ba0acb9781d3909f9d4bb2b6190a4a202758a064363428e1",
+            "status": "supported"
+        },
+        "EmojiDetailed": {
+            "name": "EmojiDetailed",
+            "hash": "66db6b418d8eb98d651a47fc1984230967499a660d8938d1482f844063b06c83",
+            "status": "supported"
+        },
+        "Flash": {
+            "name": "Flash",
+            "hash": "817d50ddeca96c6f0fc5ef18d48ce674c874a9b9793e5efecb325371031ab4bf",
+            "status": "notSupported"
+        },
+        "Ad": {
+            "name": "Ad",
+            "hash": "8bc56ae134b3fe66a8ab20ff421b7f46a1427bd128eed1424d57b0af249a27a3",
+            "status": "notSupported"
+        },
+        "Signin": {
+            "name": "Signin",
+            "hash": "24e2ae88903e9eae9eef9d99f09b6ba2dfae36eb5a17d4445ad7af816efbe446",
+            "status": "notSupported"
+        },
+        "RoleLite": {
+            "name": "RoleLite",
+            "hash": "f5be0c3e464930c1736d4663bc2629000c4797dedbc4ee02d1be233194e33ca9",
+            "status": "notSupported"
+        },
+        "Role": {
+            "name": "Role",
+            "hash": "2a7a5cbd50fb0c67b30ea999c504adab13cda04b15a9b0dfeb7ca2d86a57a6b9",
+            "status": "notSupported"
+        },
+        "ReversiGameLite": {
+            "name": "ReversiGameLite",
+            "hash": "8300e4f0b934e6784dcecc5e7ba523ed21d1cb64c7e4734e436f504e9309faa0",
+            "status": "notSupported"
+        },
+        "ReversiGameDetailed": {
+            "name": "ReversiGameDetailed",
+            "hash": "ce6855e7fa6a6f34883f995aae845ddaf27216902d049f2a52455c260430cd4d",
+            "status": "notSupported"
+        }
+    }
+}

@@ -2,20 +2,20 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Optional, TypedDict
 
-from mipac.types.drive import IDriveFile
-from mipac.types.user import ILiteUser
+from mipac.types.drive import IFile
+from mipac.types.user import IPartialUser
 
 if TYPE_CHECKING:
     from mipac.types.drive import IFileProperties
 
 __all__ = (
-    'PageContentPayload',
-    'VariablePayload',
-    'PageFilePayload',
-    'EyeCatchingImagePayload',
-    'AttachedFilePayload',
-    'PagePayload',
-    'IPage',
+    "PageContentPayload",
+    "VariablePayload",
+    "PageFilePayload",
+    "EyeCatchingImagePayload",
+    "AttachedFilePayload",
+    "PagePayload",
+    "IPage",
 )
 
 
@@ -24,7 +24,7 @@ class IPageRequired(TypedDict):
     createdAt: str
     updatedAt: str
     userId: str
-    user: ILiteUser
+    user: IPartialUser
     content: list[dict[str, Any]]
     variables: list[dict[str, Any]]
     title: str
@@ -40,7 +40,7 @@ class IPageRequired(TypedDict):
 class IPage(IPageRequired, total=False):
     is_liked: bool
     eyeCatchingImageId: str
-    eyeCatchingImage: IDriveFile
+    eyeCatchingImage: IFile
     summary: str
 
 
@@ -66,7 +66,7 @@ class PageContentPayload(TypedDict):
     default: str | None
     value: Optional[list[Any]]
 
-    children: Optional['PageContentPayload']
+    children: Optional["PageContentPayload"]
 
 
 class VariablePayload(TypedDict):
@@ -108,7 +108,7 @@ class PagePayload(TypedDict):
     created_at: str
     updated_at: str
     user_id: str
-    user: ILiteUser
+    user: IPartialUser
     content: list[PageContentPayload]
     variable: list[VariablePayload]
     title: str

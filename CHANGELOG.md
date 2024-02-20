@@ -2,7 +2,160 @@
 
 ## [Unreleased]
 
+## [0.6.0] 2023-02-20
+
+### Breaking changes 💔
+
+#### AuthClient が削除されました
+
+今まで MiAuth やアプリ作成方式でのアクセストークンを取得する際に使用できていた `AuthClient` を削除しました。今後は `MiAuth` クラスをご利用ください。
+
+#### 以下のクラスを削除しました
+
+この変更は Misskey の Schema に似せた形で再実装するにあたり、Misskey の Schema よりも細かくモデルを作成していたため、そういったものを削除した形となります。
+
+- `UserDetailed` -> `UserDetailedNotMe | MeDetailed`
+- `MeDetailedModerator` -> `MeDetailed`
+- `UserDetailedModerator` -> `UserDetailedNotMe | MeDetailed`
+- `UserDetailedNotLogined` -> `UserDetailedNotMe | MeDetailed`
+- `AdminAnnouncementClientActions` -> `ClientAdminAnnouncementActions`
+- `AnnouncementSystem` -> `AnnoucementDetailed`
+- `MeRole` -> `RoleUser`
+
+#### クラス名の変更
+
+- `AdminAdvertisingModelActions` -> `ClientAdminAdActions`
+- `AdminAdvertisingActions` -> `AdminAdActions`
+- `AdminAdvertisingModelManager` -> `ClientAdminAdManager`
+- `AdminAdvertisingManager` -> `AdminAdManager`
+- `MutedUser` -> `Muting`
+
+#### 引数に関する変更
+
+`*Actions` 系にて `*_id` のような引数はすべてキーワード引数に変更されました。これはリスコフの置換法則に則るうえで必要な作業であり、今後のコード変更に対する耐性を上げるためでもあります。ご迷惑をお掛けしますがご理解のほどよろしくお願いいたします。
+
+#### 戻り値の変更
+
+- `Announcement.action -> ClientAdminAnnouncementActions` -> `Announcement.action -> ClientAdminAnnouncementManager`
+- `AnnouncementDetailed.action -> ClientAdminAnnouncementActions` -> `AnnouncementDetailed.action -> ClientAdminAnnouncementManager`
+
+#### `get_all` 引数を廃止
+
+今まで多くの配列を返すメソッドをジェネレータとして作成していましたが、少ししかデータは要らないのに `async for` を書くのは大変ということで `get_all` 引数を廃止します。
+
+これにより今まで `get_all` 引数があった ジェネレータは全て通常の list 等を返すメソッドに変更されます。
+今まで通りのジェネレータとしての機能が必要な場合は `get_all_*` というメソッドが新しく増えているためそちらをご利用ください。
+
+## [0.5.99] 2023-12-03
+
+このリリースは最新の Misskey 向けに最適化された `develop` ブランチの物となります。インスタンスで `v11` や `v12` を利用している場合は更新しないことをおすすめします。
+
+### Breaking changes 💔
+
+#### v13 に合わせてメソッドやモデルを整理しました
+
+主に削除されたモデルはチャットです。その他にも `admin` 向けのエンドポイントで既に削除されている物を削除しました。
+v13 でのリクエストボディーに合わせて引数の追加なども行っています。
+
+#### pypi からダウンロードできる MiPAC は最新の Misskey のみをサポートするようになります。
+
+詳しくは[こちらの Issue](https://github.com/yupix/MiPAC/issues/94)を御覧ください。
+今まで通りの全てのバージョンをサポートした MiPAC を利用したい場合は以下のコマンドで `shared` ブランチの物をご利用いただけます。
+
+今後 `v11` や `v12` のブランチを作成しそれぞれの最新のバージョンをサポートする予定です。そのため、`shared` ブランチは保守モードに入り、基本的にはバグの修正のみを提供します。機能追加も行う可能性はありますが、v11 や v12、最新の Misskey のサポートが終わってからになります。
+
+```bash
+pip install git+https://github.com/yupix/Mi.py.git@shared
+```
+
+#### `Lite*` から始まるモデルの名前が `Partial*` に変更されます。
+
+今まで Lite と Partial が混在していましたが、今回のアップデートを期に `Partial` に統一されます
+
+### メソッドの変更
+
+| v0.5.0                           | v0.6.0                               |
+| -------------------------------- | ------------------------------------ |
+| `ClientNoteActions.get_children` | `ClientNoteActions.get_all_children` |
+| `ClientNoteActions.get_reaction` | `ClientNoteActions.get_reactions`    |
+
+### Drive 周りの作り直し
+
+Drive に関する Manager や Actions を全て作り直しました。詳細に記述してるといつまでも終わらないので、ご迷惑をおかけしますが、確認していただけると幸いです 🙏
+
+### モデルの変更
+
+一部のモデルがより良い形で再実装されました。結果的にモデル名が変わっています。以下がその変更後の表になります。
+
+| v0.5.0      | v0.6.0      | 変更理由                                                                           |
+| ----------- | ----------- | ---------------------------------------------------------------------------------- |
+| UserRole    | PartialRole | Role と共通していた為 User よりも Role の Partial クラスにする方が適切だと考えた為 |
+| PartialNote | Note        | 分ける必要性が無かったため(実際どこにも使用していなかった)                         |
+| MuteUser    | MutedUser   | より分かりやすい名前に変更                                                         |
+
+### 非推奨になったモデル/クラス
+
+| 名前     | 削除されるバージョン | 理由               |
+| -------- | -------------------- | ------------------ |
+| UserRole | 0.7.0                | PartialRole に変更 |
+
+### Other notable changes 📜
+
+- `mipac.util` モジュールが削除されました
+- 例外 `CredentialsError` が追加されました
+
+## [0.5.1] 2023-10-03
+
 ### New Features ✨
+
+#### `MeDetailed` モデルが追加され、自身に関する情報より多く扱えるようになりました
+
+今後は API を使用した際に自動でユーザーが自分自身かを判断し、自身であった場合は `UserDetailed` ではなく、 `MeDetailed` を返すようになります。
+`MeDetailed` と `UserDetailed` の共有体型の場合は `isinstance` を用いて判断が行えます。
+また、`RoleUser` 等のように専用のユーザーモデルがある場合は `MeRole` のようなモデルを作成し、どちらかを返すようになります。
+
+※まだ全てのメソッドに適応されたわけではなく、ごく一部のみの適応となっています。
+
+```py
+async def main():
+    async with Client("https://nr.akarinext.org", "token") as client:
+        api = client.api
+        users = await api.admin.action.show_users(username="yupix")
+        for user in users:
+            if isinstance(user, MeDetailed):
+                print(user.is_admin)
+```
+
+- `LiteUser` モデルに `badge_roles` プロパティーが追加されました
+
+#### 以下のエンドポイントがサポートされました
+
+| エンドポント               | MiPAC でのメソッド                        |
+| -------------------------- | ----------------------------------------- |
+| `/api/admin/invite/create` | `api.admin.invite.action.create_invite`   |
+| `/api/admin/invite/list`   | `api.admin.invite.action.get_invite_list` |
+| `/api/roles/list`          | `api.role.action.get_list`                |
+| `/api/roles/show`          | `api.role.action.get`                     |
+| `/api/roles/users`         | `api.role.action.get_users`               |
+| `/api/roles/notes`         | `api.role.action.get_notes`               |
+
+### Fixed 🛠️
+
+- `RoleUser` モデルで `LiteUser` を使用していましたが、正しくは `UserDetailed`
+
+### 依存関係の更新 📦
+
+- `aiohttp`: `3.8.4` => `3.8.5`
+
+#### 貢献者向け情報
+
+##### `axblack` を使ったフォーマットを辞めました
+
+理由としては `axblack` の更新が止まっており、また移行先である `blue` も更新が止まっているからです。今後は 通常の `black` を使用したフォーマット使用するようにお願いします。
+
+##### Model には `AbstractModel` を継承してください
+
+`pagination_iterator` 関数が新規に追加され、pagination の処理を楽に使えるようになりました。その際に Model 以外のクラスを受け取らないよう識別するのに使用します。
 
 ## [0.5.0] 2023-07-26
 
@@ -19,10 +172,10 @@ async with Client('server url', 'token') as client:
         print(emoji)
 ```
 
-#### 一意のIDを持つモデルで比較演算がサポートされました
+#### 一意の ID を持つモデルで比較演算がサポートされました
 
-サポートされた演算は `__eq__` と `__ne__` の2つです。一意のIDと判断しにくい物は現状サポートしていません。
-一意のIDがあるにもかかわらず、サポートされていないモデルがある際はIssueを作成してください。
+サポートされた演算は `__eq__` と `__ne__` の 2 つです。一意の ID と判断しにくい物は現状サポートしていません。
+一意の ID があるにもかかわらず、サポートされていないモデルがある際は Issue を作成してください。
 
 ```py
 note_one = await api.note.action.get('note one')
@@ -34,7 +187,7 @@ print(note_one == note_three, note_one != note_three)
 
 #### File モデルに `api` プロパティーが追加されました
 
-今まではモデルに `api` プロパティーが無かったため、 `api` プロパティーからアクションにアクセスし、対象のメソッドに対してファイルIDなどといった引数を自分で渡す必要がありましたが、今後はモデルから直接実行できます。
+今まではモデルに `api` プロパティーが無かったため、 `api` プロパティーからアクションにアクセスし、対象のメソッドに対してファイル ID などといった引数を自分で渡す必要がありましたが、今後はモデルから直接実行できます。
 
 ```diff
 -async for file in api.drive.file.action.get_files(get_all=True):
@@ -43,17 +196,18 @@ print(note_one == note_three, note_one != note_three)
 +  await file.api.action.remove()
 ```
 
-
 #### `FileActions` に `save` メソッドが追加されました
 
-指定したパス、またはBufferにファイルをダウンロードできるようになりました。
+指定したパス、または Buffer にファイルをダウンロードできるようになりました。
 パスを指定する場合
+
 ```py
 async for file in api.drive.file.action.get_files(get_all=True):
     await file.api.action.save(f'./test/{file.name}')
 ```
 
-Bufferを指定する場合:
+Buffer を指定する場合:
+
 ```py
 async for file in api.drive.file.action.get_files(get_all=True):
     with open(f'./test/{file.name}', mode='mb') as f:
@@ -106,15 +260,15 @@ async for file in api.drive.file.action.get_files(get_all=True):
 
 #### `NoteManager.get` メソッドが削除されました
 
-何故あったのか分かりませんが、Managerの責務から逸脱しているためです
+何故あったのか分かりませんが、Manager の責務から逸脱しているためです
 
-#### NoteActionsに関する変更
+#### NoteActions に関する変更
 
-- `NoteActions.get` `NoteActions.fetch` メソッドにおいて `note_id` が optionalになっているのはおかしいため必須の引数に変更しました
+- `NoteActions.get` `NoteActions.fetch` メソッドにおいて `note_id` が optional になっているのはおかしいため必須の引数に変更しました
 
 ### Fixed 🛠️
 
-- 一部 `all` 引数が存在しないが、 built-inの `all` が存在することで動作していた箇所が修正されました
+- 一部 `all` 引数が存在しないが、 built-in の `all` が存在することで動作していた箇所が修正されました
 - `ClientNoteActions` において `note_id` が無かった場合の例外処理が無かった為追加
 
 ### Other notable changes 📜
@@ -123,9 +277,9 @@ async for file in api.drive.file.action.get_files(get_all=True):
 - クリップがサポートされました
 - ロールの作成時に `is_explorable` を使用できるようになりました。
   - 最新のインスタンス等で無いと使用できない可能性があります
-- update_metaのリクエスト時に `server_rules` パラメータが使用できるようになりました
+- update_meta のリクエスト時に `server_rules` パラメータが使用できるようになりました
   - このパラメータは `13.11.3` 以降のバージョン（`13.11.3`は含みません）を使用している場合は必須であり、それ以前のバージョンを使用している場合は指定するとエラーが発生する可能性があります。
-- `NoteActions.get_replies` が `ClientNoteActions.getriplies` に移動され、 `ClientNoteActions` でも使用可能になりました。（NoteActionsはClientNoteActionsを継承しているため今後とも使用できます）
+- `NoteActions.get_replies` が `ClientNoteActions.getriplies` に移動され、 `ClientNoteActions` でも使用可能になりました。（NoteActions は ClientNoteActions を継承しているため今後とも使用できます）
 - 全取得が以下のメソッドでサポートされました。それに伴い、一部のメソッドがジェネレーターになっています。
   - `FederationActions.get_followers`
   - `FederationActions.get_following`

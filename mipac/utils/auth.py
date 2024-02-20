@@ -1,119 +1,84 @@
 import asyncio
 import uuid
-from urllib.parse import urlencode
+from typing import Any, Literal, NotRequired, TypedDict
+from urllib.parse import urlencode, urlparse, urlunparse
 
 import aiohttp
 
-from mipac.utils.format import remove_dict_empty
+from mipac.types.permission import Permissions
+from mipac.types.user import IUserDetailed
+from mipac.utils.format import remove_dict_empty, upper_to_lower
 
 
-class AuthClient:
-    """
-    Tokenの取得を手助けするクラス
-    """
+class IMiAuthPayload(TypedDict):
+    ok: bool
+    token: NotRequired[str]
+    user: NotRequired[IUserDetailed]
 
-    def __init__(
+
+class MiAuth:
+    """Misskey v12以降のインスタンスで使用可能な認証方式です"""
+
+    def __init__(self, host: str, protocol: Literal["http", "https"]) -> None:
+        self.host: str = host
+        self.protocol: Literal["http", "https"] = protocol
+        self.session: str
+
+        self.set_session()
+
+    @property
+    def url(self) -> str:
+        return f"{self.protocol}://{self.host}"
+
+    def set_session(self) -> None:
+        self.session = uuid.uuid4().hex
+
+    async def gen_session(
         self,
-        instance_uri: str,
-        name: str,
-        description: str,
-        permissions: list[str] | None = None,
-        *,
+        name: str | None = None,
         icon: str | None = None,
-        use_miauth: bool = False,
+        callback: str | None = None,
+        permission: list[Permissions] | None = None,
     ):
-        """
-        Parameters
-        ----------
-        instance_uri : str
-            アプリケーションを作成したいインスタンスのURL
-        name : str
-            アプリケーションの名前
-        description : str
-            アプリケーションの説明
-        permissions : Optional[list[str]], default=None
-            アプリケーションが要求する権限
-        icon: str | None, default=None
-            アプリケーションのアイコン画像URL
-        use_miauth: bool, default=False
-            MiAuthを使用するか
-        """
-        if permissions is None:
-            permissions = ['read:account']
-        self.__client_session = aiohttp.ClientSession()
-        self.__instance_uri: str = instance_uri
-        self.__name: str = name
-        self.__description: str = description
-        self.__permissions: list[str] = permissions
-        self.__icon: str | None = icon
-        self.__use_miauth: bool = use_miauth
-        self.__session_token: uuid.UUID
-        self.__secret: str
+        # sessionは使いまわししてはいけないのでこのタイミングで新しいsessionを生成する
+        self.set_session()
 
-    async def get_auth_url(self) -> str:
-        """
-        認証に使用するURLを取得します
-
-        Returns
-        -------
-        str
-            認証に使用するURL
-        """
-        field = remove_dict_empty(
-            {'name': self.__name, 'description': self.__description, 'icon': self.__icon}
+        query = remove_dict_empty(
+            {
+                "name": name,
+                "icon": icon,
+                "callback": callback,
+                "permission": ",".join(permission) if permission else None,
+            }
         )
-        if self.__use_miauth:
-            field['permissions'] = self.__permissions
-            query = urlencode(field)
-            self.__session_token = uuid.uuid4()
-            return f'{self.__instance_uri}/miauth/{self.__session_token}?{query}'
-        else:
-            field['permission'] = self.__permissions
-            async with self.__client_session.post(
-                f'{self.__instance_uri}/api/app/create', json=field
-            ) as res:
-                data = await res.json()
-                self.__secret = data['secret']
-            async with self.__client_session.post(
-                f'{self.__instance_uri}/api/auth/session/generate',
-                json={'appSecret': self.__secret},
-            ) as res:
-                data = await res.json()
-                self.__session_token = data['token']
-                return data['url']
 
-    async def wait_miauth(self) -> str:
-        url = f'{self.__instance_uri}/api/miauth/{self.__session_token}/check'
+        url = urlparse(f"{self.url}/miauth/{self.session}")
+        return urlunparse(
+            (url.scheme, url.netloc, url.path, url.params, urlencode(query), url.fragment)
+        )
+
+    async def check_session(self) -> Any:
+        async with aiohttp.ClientSession() as session:
+            res = await session.post(
+                f"{self.url}/api/miauth/{self.session}/check",
+                json={},
+                headers={"Content-Type": "application/json"},
+            )
+
+            if res.status != 200:
+                raise Exception(f"MiAuth Check failed, Status code: {res.status}")
+
+            data = await res.json()
+
+            if data is None:
+                raise Exception("MiAuth Check failed, Response is None")
+            return upper_to_lower(data)
+
+    async def wait_complete(self):
         while True:
-            async with self.__client_session.post(url) as res:
-                data = await res.json()
-                if data.get('ok') is True:
-                    return data
+            is_complete: IMiAuthPayload = await self.check_session()
+            if is_complete["ok"] is True:
+                break
             await asyncio.sleep(1)
 
-    async def wait_oldauth(self) -> None:
-        while True:
-            async with self.__client_session.post(
-                f'{self.__instance_uri}/api/auth/session/userkey',
-                json={'appSecret': self.__secret, 'token': self.__session_token},
-            ) as res:
-                data = await res.json()
-                if data.get('error', {}).get('code') != 'PENDING_SESSION':
-                    break
-            await asyncio.sleep(1)
-
-    async def check_auth(self) -> str:
-        """
-        認証が完了するまで待機し、完了した場合はTokenを返します
-
-        Returns
-        -------
-        str
-            Token
-        """
-        if self.__use_miauth:
-            data = await self.wait_miauth()
-        else:
-            data = await self.wait_oldauth()
-        await self.__client_session.close()
-        return data['token'] if self.__use_miauth else data['accessToken']
+        return is_complete

@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import Any
 
 from mipac.types.instance import IInstanceLite
 
@@ -8,20 +9,28 @@ class LiteInstance:
         self.__instance: IInstanceLite = instance
 
     @property
-    def name(self) -> str:
-        return self.__instance['name']
+    def name(self) -> str | None:
+        return self.__instance["name"]
 
-    def software_name(self) -> str:
-        return self.__instance['software_name']
+    @property
+    def software_name(self) -> str | None:
+        return self.__instance["software_name"]
 
-    def software_version(self) -> str:
-        return self.__instance['software_version']
+    @property
+    def software_version(self) -> str | None:
+        return self.__instance["software_version"]
 
-    def icon_url(self) -> str:
-        return self.__instance['icon_url']
+    @property
+    def icon_url(self) -> str | None:
+        return self.__instance["icon_url"]
 
-    def favicon_url(self) -> str:
-        return self.__instance['favicon_url']
+    @property
+    def favicon_url(self) -> str | None:
+        return self.__instance["favicon_url"]
 
-    def theme_color(self) -> str:
-        return self.__instance['theme_color']
+    @property
+    def theme_color(self) -> str | None:
+        return self.__instance["theme_color"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__instance.get(key)

@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
-from mipac.models.user import UserDetailed
+from mipac.models.user import UserDetailedNotMe, packed_user
 from mipac.types.admin import (
     IIndexStat,
     IModerationLog,
@@ -26,11 +26,14 @@ class UserIP:
 
     @property
     def ip(self) -> str:
-        return self.__user_ip['ip']
+        return self.__user_ip["ip"]
 
     @property
     def created_at(self) -> datetime:
-        return str_to_datetime(self.__user_ip['created_at'])
+        return str_to_datetime(self.__user_ip["created_at"])
+
+    def _get(self, key: str) -> Any | None:
+        return self.__user_ip.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, UserIP) and self.ip == __value.ip
@@ -45,23 +48,26 @@ class IndexStat:
 
     @property
     def schemaname(self) -> str:
-        return self.__index_stat['schemaname']
+        return self.__index_stat["schemaname"]
 
     @property
     def tablename(self) -> str:
-        return self.__index_stat['tablename']
+        return self.__index_stat["tablename"]
 
     @property
     def indexname(self) -> str:
-        return self.__index_stat['indexname']
+        return self.__index_stat["indexname"]
 
     @property
     def tablespace(self) -> str | None:
-        return self.__index_stat['tablespace']
+        return self.__index_stat["tablespace"]
 
     @property
     def indexdef(self) -> str:
-        return self.__index_stat['indexdef']
+        return self.__index_stat["indexdef"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__index_stat.get(key)
 
 
 class ModerationLog:
@@ -71,27 +77,30 @@ class ModerationLog:
 
     @property
     def id(self) -> str:
-        return self.__moderation_log['id']
+        return self.__moderation_log["id"]
 
     @property
     def created_at(self) -> datetime:
-        return str_to_datetime(self.__moderation_log['created_at'])
+        return str_to_datetime(self.__moderation_log["created_at"])
 
     @property
     def type(self) -> str:
-        return self.__moderation_log['type']
+        return self.__moderation_log["type"]
 
     @property
     def info(self) -> dict:
-        return self.__moderation_log['info']
+        return self.__moderation_log["info"]
 
     @property
     def user_id(self) -> str:
-        return self.__moderation_log['user_id']
+        return self.__moderation_log["user_id"]
 
     @property
-    def user(self) -> UserDetailed:
-        return UserDetailed(self.__moderation_log['user'], client=self.__client)
+    def user(self) -> UserDetailedNotMe:
+        return packed_user(self.__moderation_log["user"], client=self.__client)
+
+    def _get(self, key: str) -> Any | None:
+        return self.__moderation_log.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, ModerationLog) and self.id == __value.id
@@ -106,11 +115,14 @@ class ServerInfoCpu:
 
     @property
     def models(self) -> str:
-        return self.__server_info_cpu['models']
+        return self.__server_info_cpu["models"]
 
     @property
     def cores(self) -> int:
-        return self.__server_info_cpu['cores']
+        return self.__server_info_cpu["cores"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__server_info_cpu.get(key)
 
 
 class ServerInfoMem:
@@ -119,7 +131,10 @@ class ServerInfoMem:
 
     @property
     def total(self) -> int:
-        return self.__server_info_mem['total']
+        return self.__server_info_mem["total"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__server_info_mem.get(key)
 
 
 class ServerInfoFs:
@@ -128,11 +143,14 @@ class ServerInfoFs:
 
     @property
     def total(self) -> int:
-        return self.__server_info_fs['total']
+        return self.__server_info_fs["total"]
 
     @property
     def used(self) -> int:
-        return self.__server_info_fs['used']
+        return self.__server_info_fs["used"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__server_info_fs.get(key)
 
 
 class ServerInfoNet:
@@ -141,7 +159,10 @@ class ServerInfoNet:
 
     @property
     def interface(self) -> str:
-        return self.__server_info_net['interface']
+        return self.__server_info_net["interface"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__server_info_net.get(key)
 
 
 class ServerInfo:
@@ -150,32 +171,35 @@ class ServerInfo:
 
     @property
     def machine(self) -> str:
-        return self.__server_info['machine']
+        return self.__server_info["machine"]
 
     @property
     def os(self) -> str:
-        return self.__server_info['os']
+        return self.__server_info["os"]
 
     @property
     def node(self) -> str:
-        return self.__server_info['node']
+        return self.__server_info["node"]
 
     @property
     def psql(self) -> str:
-        return self.__server_info['psql']
+        return self.__server_info["psql"]
 
     @property
     def cpu(self) -> ServerInfoCpu:
-        return ServerInfoCpu(self.__server_info['cpu'])
+        return ServerInfoCpu(self.__server_info["cpu"])
 
     @property
     def mem(self) -> ServerInfoMem:
-        return ServerInfoMem(self.__server_info['mem'])
+        return ServerInfoMem(self.__server_info["mem"])
 
     @property
     def fs(self) -> ServerInfoFs:
-        return ServerInfoFs(self.__server_info['fs'])
+        return ServerInfoFs(self.__server_info["fs"])
 
     @property
     def net(self) -> ServerInfoNet:
-        return ServerInfoNet(self.__server_info['net'])
+        return ServerInfoNet(self.__server_info["net"])
+
+    def _get(self, key: str) -> Any | None:
+        return self.__server_info.get(key)

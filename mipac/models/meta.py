@@ -1,337 +1,341 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
-from mipac.models.lite.meta import LiteMeta, MetaCommon
-from mipac.types.meta import IAdminMeta, IFeatures, IMeta, IPolicies
+from mipac.models.lite.meta import PartialMeta
+from mipac.types.meta import (
+    IAdminMeta,
+    IFeatures,
+    IMeta,
+    ISensitiveMediaDetection,
+    ISensitiveMediaDetectionSentivity,
+)
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class Policies:
-    def __init__(self, policies: IPolicies) -> None:
-        self.__policies: IPolicies = policies
-
-    @property
-    def gtl_available(self) -> bool:
-        return self.__policies['gtl_available']
-
-    @property
-    def ltl_available(self) -> bool:
-        return self.__policies['ltl_available']
-
-    @property
-    def can_public_note(self) -> bool:
-        return self.__policies['can_public_note']
-
-    @property
-    def can_invite(self) -> bool:
-        return self.__policies['can_invite']
-
-    @property
-    def can_manage_custom_emojis(self) -> bool:
-        return self.__policies['can_manage_custom_emojis']
-
-    @property
-    def can_hide_ads(self) -> bool:
-        return self.__policies['can_hide_ads']
-
-    @property
-    def drive_capacity_mb(self) -> int:
-        return self.__policies['drive_capacity_mb']
-
-    @property
-    def pin_limit(self) -> int:
-        return self.__policies['pin_limit']
-
-    @property
-    def antenna_limit(self) -> int:
-        return self.__policies['antenna_limit']
-
-    @property
-    def word_mute_limit(self) -> int:
-        return self.__policies['word_mute_limit']
-
-    @property
-    def webhook_limit(self) -> int:
-        return self.__policies['webhook_limit']
-
-    @property
-    def clip_limit(self) -> int:
-        return self.__policies['clip_limit']
-
-    @property
-    def note_each_clips_limit(self) -> int:
-        return self.__policies['note_each_clips_limit']
-
-    @property
-    def user_list_limit(self) -> int:
-        return self.__policies['user_list_limit']
-
-    @property
-    def user_each_user_lists_limit(self) -> int:
-        return self.__policies['user_each_user_lists_limit']
-
-    @property
-    def rate_limit_factor(self) -> int:
-        return self.__policies['rate_limit_factor']
-
-
 class Features:
-    def __init__(self, features: IFeatures) -> None:
-        self.__features = features
+    def __init__(self, raw_features: IFeatures) -> None:
+        self.__raw_features = raw_features
 
     @property
     def registration(self) -> bool:
-        return self.__features['registration']
-
-    @property
-    def elasticsearch(self) -> bool:
-        return self.__features['elasticsearch']
-
-    @property
-    def hcaptcha(self) -> bool:
-        return self.__features['hcaptcha']
-
-    @property
-    def recaptcha(self) -> bool:
-        return self.__features['recaptcha']
-
-    @property
-    def object_storage(self) -> bool:
-        return self.__features['object_storage']
-
-    @property
-    def twitter(self) -> bool:
-        return self.__features['twitter']
-
-    @property
-    def github(self) -> bool:
-        return self.__features['github']
-
-    @property
-    def discord(self) -> bool:
-        return self.__features['discord']
-
-    @property
-    def service_worker(self) -> bool:
-        return self.__features['service_worker']
-
-    @property
-    def miauth(self) -> bool:
-        return self.__features.get('miauth', False)
+        return self.__raw_features["registration"]
 
     @property
     def email_required_for_signup(self) -> bool:
-        return self.__features.get('email_required_for_signup', False)
+        return self.__raw_features["email_required_for_signup"]
 
     @property
-    def global_time_line(self) -> bool:
-        return self.__features.get('global_time_line', False)
+    def hcaptcha(self) -> bool:
+        return self.__raw_features["hcaptcha"]
 
     @property
-    def local_time_line(self) -> bool:
-        return self.__features.get('local_time_line', False)
+    def recaptcha(self) -> bool:
+        return self.__raw_features["recaptcha"]
+
+    @property
+    def turnstile(self) -> bool:
+        return self.__raw_features["turnstile"]
+
+    @property
+    def object_storage(self) -> bool:
+        return self.__raw_features["object_storage"]
+
+    @property
+    def service_worker(self) -> bool:
+        return self.__raw_features["service_worker"]
+
+    @property
+    def miauth(self) -> bool:
+        return self.__raw_features["miauth"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_features.get(key)
 
 
-class Meta(LiteMeta):
-    def __init__(self, meta: IMeta, *, client: ClientManager) -> None:
-        super().__init__(meta, client=client)
-        self.__meta = meta
-
-    # shared
+class Meta(PartialMeta[IMeta]):
+    def __init__(self, instance_metadata: IMeta, *, client: ClientManager) -> None:
+        super().__init__(instance_metadata, client=client)
 
     @property
     def features(self) -> Features:
-        return Features(self.__meta['features'])
-
-    # v12
+        return Features(self._raw_meta["features"])
 
     @property
-    def pinned_clip_id(self) -> str | None:
-        return self.__meta.get('pinned_clip_id')
+    def cache_remote_files(self) -> bool:
+        return self._raw_meta["cache_remote_files"]
 
     @property
-    def pinned_pages(self) -> list[str]:
-        return self.__meta.get('pinned_pages', [])
-
-    @property
-    def policies(self) -> Policies | None:
-        return Policies(self.__meta['policies']) if 'policies' in self.__meta else None
+    def cache_remote_sensitive_files(self) -> bool:
+        return self._raw_meta["cache_remote_sensitive_files"]
 
     @property
     def require_setup(self) -> bool:
-        return self.__meta.get('require_setup', False)
-
-
-class AdminMeta(MetaCommon):
-    def __init__(self, admin_meta: IAdminMeta, *, client: ClientManager) -> None:
-        super().__init__(admin_meta, client=client)
-        self.__admin_meta = admin_meta
-
-    # 全てのバージョン共通に存在する
+        return self._raw_meta["require_setup"]
 
     @property
-    def drive_capacity_per_local_user_mb(self) -> int | None:
-        return self.__admin_meta.get('drive_capacity_per_local_user_mb')
+    def proxy_account_name(self) -> str:
+        return self._raw_meta["proxy_account_name"]
+
+
+class AdminMeta:
+    def __init__(self, raw_meta: IAdminMeta, *, client: ClientManager) -> None:
+        self.__raw_meta: IAdminMeta = raw_meta
+        self.__client: ClientManager = client
 
     @property
-    def drive_capacity_per_remote_user_mb(self) -> int | None:
-        return self.__admin_meta.get('drive_capacity_per_remote_user_mb')
+    def maintainer_name(self) -> str | None:
+        return self.__raw_meta["maintainer_name"]
 
     @property
-    def hidden_tags(self) -> list[str]:
-        return self.__admin_meta.get('hidden_tags', [])
+    def maintainer_email(self) -> str | None:
+        return self.__raw_meta["maintainer_email"]
 
     @property
-    def blocked_hosts(self) -> list[str]:
-        return self.__admin_meta.get('blocked_hosts', [])
+    def version(self) -> str:
+        return self.__raw_meta["version"]
 
     @property
-    def recaptcha_secret_key(self) -> str | None:
-        return self.__admin_meta.get('recaptcha_secret_key')
+    def name(self) -> str | None:
+        return self.__raw_meta["name"]
 
     @property
-    def twitter_consumer_key(self) -> str | None:
-        return self.__admin_meta.get('twitter_consumer_key')
+    def short_name(self) -> str | None:
+        return self.__raw_meta["short_name"]
 
     @property
-    def twitter_consumer_secret(self) -> str | None:
-        return self.__admin_meta.get('twitter_consumer_secret')
+    def uri(self) -> str:
+        return self.__raw_meta["uri"]
 
     @property
-    def github_client_id(self) -> str | None:
-        return self.__admin_meta.get('github_client_id')
+    def description(self) -> str | None:
+        return self.__raw_meta["description"]
 
     @property
-    def github_client_secret(self) -> str | None:
-        return self.__admin_meta.get('github_client_secret')
+    def langs(self) -> list[str]:
+        return self.__raw_meta["langs"]
 
     @property
-    def discord_client_id(self) -> str | None:
-        return self.__admin_meta.get('discord_client_id')
+    def tos_url(self) -> str:
+        return self.__raw_meta["tos_url"]
 
     @property
-    def discord_client_secret(self) -> str | None:
-        return self.__admin_meta.get('discord_client_secret')
+    def repository_url(self) -> str:
+        return self.__raw_meta["repository_url"]
 
     @property
-    def email(self) -> str | None:
-        return self.__admin_meta.get('email')
+    def feedback_url(self) -> str:
+        return self.__raw_meta["feedback_url"]
 
     @property
-    def smtp_secure(self) -> bool:
-        return self.__admin_meta.get('smtp_secure', False)
+    def disable_registration(self) -> bool:
+        return self.__raw_meta["disable_registration"]
 
     @property
-    def smtp_host(self) -> str | None:
-        return self.__admin_meta.get('smtp_host')
+    def email_required_for_signup(self) -> bool:
+        return self.__raw_meta["email_required_for_signup"]
 
     @property
-    def smtp_port(self) -> int | None:
-        return self.__admin_meta.get('smtp_port')
+    def enable_hcaptcha(self) -> bool:
+        return self.__raw_meta["enable_hcaptcha"]
 
     @property
-    def smtp_user(self) -> str | None:
-        return self.__admin_meta.get('smtp_user')
+    def hcaptcha_site_key(self) -> str | None:
+        return self.__raw_meta["hcaptcha_site_key"]
 
     @property
-    def smtp_pass(self) -> str | None:
-        return self.__admin_meta.get('smtp_pass')
+    def enable_recaptcha(self) -> bool:
+        return self.__raw_meta["enable_recaptcha"]
 
     @property
-    def sw_private_key(self) -> str | None:
-        return self.__admin_meta.get('sw_private_key')
+    def recaptcha_site_key(self) -> str:
+        return self.__raw_meta["recaptcha_site_key"]
 
     @property
-    def use_object_storage(self) -> bool:
-        return self.__admin_meta.get('use_object_storage', False)
+    def enable_turnstile(self) -> bool:
+        return self.__raw_meta["enable_turnstile"]
 
     @property
-    def object_storage_base_url(self) -> str | None:
-        return self.__admin_meta.get('object_storage_base_url')
+    def turnstile_site_key(self) -> str:
+        return self.__raw_meta["turnstile_site_key"]
 
     @property
-    def object_storage_bucket(self) -> str | None:
-        return self.__admin_meta.get('object_storage_bucket')
+    def sw_publickey(self) -> str | None:
+        return self.__raw_meta["sw_publickey"]
 
     @property
-    def object_storage_prefix(self) -> str | None:
-        return self.__admin_meta.get('object_storage_prefix')
+    def theme_color(self) -> str:
+        return self.__raw_meta["theme_color"]
 
     @property
-    def object_storage_endpoint(self) -> str | None:
-        return self.__admin_meta.get('object_storage_endpoint')
+    def mascot_image_url(self) -> str:
+        return self.__raw_meta["mascot_image_url"]
 
     @property
-    def object_storage_region(self) -> str | None:
-        return self.__admin_meta.get('object_storage_region')
+    def banner_url(self) -> str | None:
+        return self.__raw_meta["banner_url"]
 
     @property
-    def object_storage_port(self) -> int | None:
-        return self.__admin_meta.get('object_storage_port')
+    def server_error_image_url(self) -> str | None:
+        return self.__raw_meta["server_error_image_url"]
 
     @property
-    def object_storage_access_key(self) -> str | None:
-        return self.__admin_meta.get('object_storage_access_key')
+    def not_found_image_url(self) -> str | None:
+        return self.__raw_meta["not_found_image_url"]
 
     @property
-    def object_storage_secret_key(self) -> str | None:
-        return self.__admin_meta.get('object_storage_secret_key')
+    def info_image_url(self) -> str | None:
+        return self.__raw_meta["info_image_url"]
 
     @property
-    def object_storage_use_ssl(self) -> bool:
-        return self.__admin_meta.get('object_storage_use_ssl', False)
+    def icon_url(self) -> str | None:
+        return self.__raw_meta["icon_url"]
 
     @property
-    def object_storage_use_proxy(self) -> bool:
-        return self.__admin_meta.get('object_storage_use_proxy', False)
+    def appint_icon_url(self) -> str | None:
+        return self.__raw_meta["appint_icon_url"]
 
     @property
-    def object_storage_set_public_read(self) -> bool:
-        return self.__admin_meta.get('object_storage_set_public_read', False)
+    def background_image_url(self) -> str | None:
+        return self.__raw_meta["background_image_url"]
+
+    @property
+    def logo_image_url(self) -> str | None:
+        return self.__raw_meta["logo_image_url"]
+
+    @property
+    def default_light_theme(self) -> str | None:
+        return self.__raw_meta["default_light_theme"]
+
+    @property
+    def default_dark_theme(self) -> str | None:
+        return self.__raw_meta["default_dark_theme"]
+
+    @property
+    def enable_email(self) -> bool:
+        return self.__raw_meta["enable_email"]
+
+    @property
+    def enable_service_worker(self) -> bool:
+        return self.__raw_meta["enable_service_worker"]
+
+    @property
+    def translator_available(self) -> bool:
+        return self.__raw_meta["translator_available"]
+
+    @property
+    def cache_remote_files(self) -> bool:
+        return self.__raw_meta["cache_remote_files"]
+
+    @property
+    def cache_remote_sensitive_files(self) -> bool:
+        return self.__raw_meta["cache_remote_sensitive_files"]
 
     @property
     def pinned_users(self) -> list[str]:
-        return self.__admin_meta.get('pinned_users', [])
+        return self.__raw_meta["pinned_users"]
 
-    """
-    v12 only
-    """
+    @property
+    def hidden_tags(self) -> list[str]:
+        return self.__raw_meta["hidden_tags"]
+
+    @property
+    def blocked_hosts(self) -> list[str]:
+        return self.__raw_meta["blocked_hosts"]
+
+    @property
+    def sensitive_words(self) -> list[str]:
+        return self.__raw_meta["sensitive_words"]
+
+    @property
+    def preserved_usernames(self) -> list[str]:
+        return self.__raw_meta["preserved_usernames"]
 
     @property
     def hcaptcha_secret_key(self) -> str | None:
-        return self.__admin_meta.get('hcaptcha_secret_key')
+        return self.__raw_meta["hcaptcha_secret_key"]
 
     @property
-    def sensitive_media_detection(self) -> str | None:
-        return self.__admin_meta.get('sensitive_media_detection')
+    def recaptcha_secret_key(self) -> str:
+        return self.__raw_meta["recaptcha_secret_key"]
 
     @property
-    def sensitive_media_detection_sensitivity(self) -> str | None:
-        return self.__admin_meta.get('sensitive_media_detection_sensitivity')
+    def turnstile_secret_key(self) -> str:
+        return self.__raw_meta["turnstile_secret_key"]
+
+    @property
+    def sensitive_media_detection(self) -> ISensitiveMediaDetection:
+        return self.__raw_meta["sensitive_media_detection"]
+
+    @property
+    def sensitive_media_detection_sensitivity(self) -> ISensitiveMediaDetectionSentivity:
+        return self.__raw_meta["sensitive_media_detection_sensitivity"]
 
     @property
     def set_sensitive_flag_automatically(self) -> bool:
-        return self.__admin_meta.get('set_sensitive_flag_automatically', False)
+        return self.__raw_meta["set_sensitive_flag_automatically"]
 
     @property
     def enable_sensitive_media_detection_for_videos(self) -> bool:
-        return self.__admin_meta.get('enable_sensitive_media_detection_for_videos', False)
+        return self.__raw_meta["enable_sensitive_media_detection_for_videos"]
 
     @property
-    def proxy_account_id(self) -> str | None:
-        return self.__admin_meta.get('proxy_account_id')
+    def proxy_account_id(self) -> str:
+        return self.__raw_meta["proxy_account_id"]
 
     @property
-    def summary_proxy(self) -> str | None:
-        return self.__admin_meta.get('summary_proxy')
+    def summaly_proxy(self) -> str | None:
+        return self.__raw_meta["summaly_proxy"]
 
     @property
-    def enable_ip_logging(self) -> bool:
-        return self.__admin_meta.get('enable_ip_logging', False)
+    def email(self) -> str:
+        return self.__raw_meta["email"]
 
     @property
-    def enable_active_email_validation(self) -> bool:
-        return self.__admin_meta.get('enable_active_email_validation', False)
+    def smtp_secure(self) -> bool:
+        return self.__raw_meta["smtp_secure"]
+
+    @property
+    def smtp_host(self) -> str:
+        return self.__raw_meta["smtp_host"]
+
+    @property
+    def smtp_port(self) -> int:
+        return self.__raw_meta["smtp_port"]
+
+    @property
+    def smtp_user(self) -> str:
+        return self.__raw_meta["smtp_user"]
+
+    @property
+    def smtp_pass(self) -> str:
+        return self.__raw_meta["smtp_pass"]
+
+    @property
+    def sw_private_key(self) -> str | None:
+        return self.__raw_meta["sw_private_key"]
+
+    @property
+    def use_object_storage(self) -> bool:
+        return self.__raw_meta["use_object_storage"]
+
+    @property
+    def object_storage_base_url(self) -> str:
+        return self.__raw_meta["object_storage_base_url"]
+
+    @property
+    def object_storage_bucket(self) -> str:
+        return self.__raw_meta["object_storage_bucket"]
+
+    @property
+    def object_storage_prefix(self) -> str:
+        return self.__raw_meta["object_storage_prefix"]
+
+    @property
+    def object_storage_endpoint(self) -> str:
+        return self.__raw_meta["object_storage_endpoint"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__raw_meta.get(key)

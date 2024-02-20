@@ -3,13 +3,12 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator, Literal, overload
 
 from mipac.abstract.action import AbstractAction
-from mipac.errors.base import ParameterError
 from mipac.http import HTTPClient, Route
 from mipac.models.announcement import Announcement
-from mipac.models.lite.meta import LiteMeta
+from mipac.models.lite.meta import PartialMeta
 from mipac.models.meta import Meta
 from mipac.types.announcement import IAnnouncement
-from mipac.types.meta import ILiteMeta, IMeta
+from mipac.types.meta import IMeta, IPartialMeta
 from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
@@ -22,7 +21,7 @@ class ClientActions(AbstractAction):
         self.__client: ClientManager = client
 
     @overload
-    async def get_meta(self, detail: Literal[False] = ...) -> LiteMeta:
+    async def get_meta(self, detail: Literal[False] = ...) -> PartialMeta:
         ...
 
     @overload
@@ -31,16 +30,16 @@ class ClientActions(AbstractAction):
 
     async def get_meta(self, detail: bool = False):
         params = {
-            'route': Route('POST', '/api/meta'),
-            'json': {'detail': detail},
-            'auth': True,
-            'lower': True,
+            "route": Route("POST", "/api/meta"),
+            "json": {"detail": detail},
+            "auth": True,
+            "lower": True,
         }
         if detail is True:
             meta: IMeta = await self.__session.request(**params)
             return Meta(meta, client=self.__client)
-        lite_meta: ILiteMeta = await self.__session.request(**params)
-        return LiteMeta(lite_meta, client=self.__client)
+        lite_meta: IPartialMeta = await self.__session.request(**params)
+        return PartialMeta(lite_meta, client=self.__client)
 
     async def get_announcements(
         self,
@@ -49,22 +48,22 @@ class ClientActions(AbstractAction):
         since_id: str | None = None,
         until_id: str | None = None,
         *,
-        get_all: bool = False
+        get_all: bool = False,
     ) -> AsyncGenerator[Announcement, None]:
         if limit > 100:
-            raise ParameterError('limitは100以下である必要があります')
+            raise ValueError("limitは100以下である必要があります")
         if get_all:
             limit = 100
 
         body = {
-            'limit': limit,
-            'withUnreads': with_unreads,
-            'sinceId': since_id,
-            'untilId': until_id,
+            "limit": limit,
+            "withUnreads": with_unreads,
+            "sinceId": since_id,
+            "untilId": until_id,
         }
 
         pagination = Pagination[IAnnouncement](
-            self.__session, Route('POST', '/api/announcements'), json=body
+            self.__session, Route("POST", "/api/announcements"), json=body
         )
 
         while True:

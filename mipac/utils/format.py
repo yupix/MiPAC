@@ -2,13 +2,15 @@ import re
 from datetime import datetime
 from typing import Any, Mapping
 
+from mipac.utils.util import Missing
+
 
 def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
-    components: list[str] = snake_str.split('_')
+    components: list[str] = snake_str.split("_")
     for i in range(len(components)):
         if components[i] in replace_list:
             components[i] = replace_list[components[i]]
-    return components[0] + ''.join(x.title() for x in components[1:])
+    return components[0] + "".join(x.title() for x in components[1:])
 
 
 def convert_dict_keys_to_camel(
@@ -23,7 +25,7 @@ def convert_dict_keys_to_camel(
     return new_dict
 
 
-def str_to_datetime(data: str, format: str = '%Y-%m-%dT%H:%M:%S.%fZ') -> datetime:
+def str_to_datetime(data: str, format: str = "%Y-%m-%dT%H:%M:%S.%fZ") -> datetime:
     """
     Parameters
     ----------
@@ -55,7 +57,30 @@ def remove_list_empty(data: list[Any]) -> list[Any]:
     return [k for k in data if k]
 
 
-def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
+def remove_dict_empty(
+    data: dict[str, Any], ignore_keys: list[str] | None = None
+) -> dict[str, Any]:
+    """
+    Parameters
+    ----------
+    data: dict
+        空のkeyを削除したいdict
+    ignore_keys: list
+        削除したくないkeyのリスト
+
+    Returns
+    -------
+    _data: dict
+        空のkeyがなくなったdict
+    """
+    _data = {}
+    if ignore_keys is None:
+        ignore_keys = []
+    _data = {k: v for k, v in data.items() if v is not None or k in ignore_keys}
+    return _data
+
+
+def remove_dict_missing(data: dict[str, Any]) -> dict[str, Any]:
     """
     Parameters
     ----------
@@ -65,10 +90,10 @@ def remove_dict_empty(data: dict[str, Any]) -> dict[str, Any]:
     Returns
     -------
     _data: dict
-        空のkeyがなくなったdict
+        MISSINGのkeyがなくなったdict
     """
     _data = {}
-    _data = {k: v for k, v in data.items() if v is not None}
+    _data = {k: v for k, v in data.items() if isinstance(v, Missing) is False}
     return _data
 
 
@@ -81,18 +106,18 @@ def upper_to_lower(
     """
     Parameters
     ----------
-    data: dict
+    data: dict[str, Any]
         小文字にしたいkeyがあるdict
-    field: dict, default=None
+    field: dict[str, Any] | None, default=None
         謎
     nest: bool, default=True
         ネストされたdictのkeyも小文字にするか否か
-    replace_list: dict, default=None
+    replace_list: dict[str, Any] | None, default=None
         dictのkey名を特定の物に置き換える
 
     Returns
     -------
-    field : dict
+    field : dict[str, Any]
         小文字になった, key名が変更されたdict
     """
     if data is None:
@@ -103,14 +128,14 @@ def upper_to_lower(
     if field is None:
         field = {}
     for attr in data:
-        pattern = re.compile('[A-Z]')
+        pattern = re.compile("[A-Z]")
         large = [i.group().lower() for i in pattern.finditer(attr)]
-        result = [None] * (len(large + pattern.split(attr)))
+        result: list[Any | str] = [None] * (len(large + pattern.split(attr)))
         result[::2] = pattern.split(attr)
-        result[1::2] = ['_' + i.lower() for i in large]
-        default_key = ''.join(result)
-        if replace_list.get(attr):
-            default_key = default_key.replace(attr, replace_list.get(attr))
+        result[1::2] = ["_" + i.lower() for i in large]
+        default_key = "".join(result)
+        if replaced_value := replace_list.get(attr):
+            default_key = default_key.replace(attr, replaced_value)
         field[default_key] = data[attr]
         if isinstance(field[default_key], dict) and nest:
             field[default_key] = upper_to_lower(field[default_key])
@@ -122,12 +147,12 @@ def upper_to_lower(
 
 
 def str_lower(text: str):
-    pattern = re.compile('[A-Z]')
+    pattern = re.compile("[A-Z]")
     large = [i.group().lower() for i in pattern.finditer(text)]
-    result = [None] * (len(large + pattern.split(text)))
+    result: list[Any | str] = [None] * (len(large + pattern.split(text)))
     result[::2] = pattern.split(text)
-    result[1::2] = ['_' + i.lower() for i in large]
-    return ''.join(result)
+    result[1::2] = ["_" + i.lower() for i in large]
+    return "".join(result)
 
 
 def bool_to_string(boolean: bool) -> str:
@@ -143,4 +168,4 @@ def bool_to_string(boolean: bool) -> str:
     true or false: str
         小文字になったbool文字列
     """
-    return 'true' if boolean else 'false'
+    return "true" if boolean else "false"

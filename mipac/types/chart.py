@@ -1,10 +1,10 @@
 from typing import TypedDict
 
 __all__ = (
-    'IActiveUsersChart',
-    'IDriveLocalChart',
-    'IDriveRemoteChart',
-    'IDriveChart',
+    "IActiveUsersChart",
+    "IDriveLocalChart",
+    "IDriveRemoteChart",
+    "IDriveChart",
 )
 
 

@@ -9,7 +9,7 @@ from mipac.http import HTTPClient
 if TYPE_CHECKING:
     from mipac.client import ClientManager
 
-__all__ = ('FollowManager', 'FollowRequestManager')
+__all__ = ("FollowManager", "FollowRequestManager")
 
 
 class FollowManager(AbstractManager):
@@ -23,7 +23,11 @@ class FollowManager(AbstractManager):
 
     @property
     def action(self) -> FollowActions:
-        return FollowActions(user_id=self.__user_id, session=self.__session, client=self.__client,)
+        return FollowActions(
+            user_id=self.__user_id,
+            session=self.__session,
+            client=self.__client,
+        )
 
 
 class FollowRequestManager(AbstractManager):
@@ -35,5 +39,7 @@ class FollowRequestManager(AbstractManager):
     @property
     def action(self) -> FollowRequestActions:
         return FollowRequestActions(
-            user_id=self.__user_id, session=self.__session, client=self.__client,
+            user_id=self.__user_id,
+            session=self.__session,
+            client=self.__client,
         )

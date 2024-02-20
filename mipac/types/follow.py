@@ -1,15 +1,15 @@
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
-from mipac.types.user import ILiteUser, IUserDetailed
+from mipac.types.user import IPartialUser, IUserDetailedNotMeSchema
 
 
 class IFederationFollowCommon(TypedDict):
     id: str
     created_at: str
     followee_id: str
-    followee: IUserDetailed
+    followee: NotRequired[IUserDetailedNotMeSchema]
     follower_id: str
-    follower: IUserDetailed
+    follower: NotRequired[IUserDetailedNotMeSchema]
 
 
 class IFederationFollower(IFederationFollowCommon):
@@ -22,5 +22,5 @@ class IFederationFollowing(IFederationFollowCommon):
 
 class IFollowRequest(TypedDict):
     id: str
-    follower: ILiteUser
-    followee: ILiteUser
+    follower: IPartialUser
+    followee: IPartialUser

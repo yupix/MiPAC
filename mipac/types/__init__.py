@@ -3,7 +3,6 @@ from .ads import *
 from .announcement import *
 from .channel import *
 from .chart import *
-from .chat import *
 from .drive import *
 from .emoji import *
 from .endpoints import *

@@ -1,16 +1,15 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
-from mipac.models.lite.user import LiteUser
-from mipac.types.roles import IRole, IRolePolicies, IRolePolicieValue, IRoleUser
+from mipac.models.lite.role import PartialRole
+from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
+from mipac.types.roles import IRole, IRolePolicies, IRoleUser
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
-    from mipac.manager.admins.roles import AdminRolesModelManager
     from mipac.manager.client import ClientManager
-    from mipac.manager.user import UserManager
 
 
 class RoleUser:
@@ -20,23 +19,26 @@ class RoleUser:
 
     @property
     def id(self) -> str:
-        return self.__role_user['id']
+        return self.__role_user["id"]
 
     @property
-    def user(self) -> LiteUser:
-        return LiteUser(self.__role_user['user'], client=self.__client)
+    def created_at(self) -> datetime:
+        return str_to_datetime(self.__role_user["created_at"])
+
+    @property
+    def user(self) -> UserDetailedNotMe | MeDetailed:
+        return packed_user(self.__role_user["user"], client=self.__client)
 
     @property
     def expires_at(self) -> datetime | None:
         return (
-            str_to_datetime(self.__role_user['expires_at'])
-            if self.__role_user['expires_at']
+            str_to_datetime(self.__role_user["expires_at"])
+            if self.__role_user["expires_at"]
             else None
         )
 
-    @property
-    def action(self) -> UserManager:
-        return self.__client._create_user_instance(self.user)
+    def _get(self, key: str) -> Any | None:
+        return self.__role_user.get(key)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, RoleUser) and self.id == __value.id
@@ -45,167 +47,153 @@ class RoleUser:
         return not self.__eq__(__value)
 
 
-class RolePolicyValue:
-    def __init__(self, policiy_value_data: IRolePolicieValue) -> None:
-        self.__policy_value_data = policiy_value_data
-
-    @property
-    def value(self) -> int:
-        return self.__policy_value_data.get('value')
-
-    @property
-    def use_default(self) -> bool:
-        return self.__policy_value_data.get('use_default')
-
-    @property
-    def priority(self) -> int | None:
-        return self.__policy_value_data.get('priority')
-
-
 class RolePolicies:
     def __init__(self, role_policies_data: IRolePolicies) -> None:
         self.__role_policies_data = role_policies_data
 
     @property
-    def antenna_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('antenna_limit'))
+    def gtl_available(self) -> bool:
+        return self.__role_policies_data["gtl_available"]
 
     @property
-    def gtl_available(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('gtl_available'))
+    def ltl_available(self) -> bool:
+        return self.__role_policies_data["ltl_available"]
 
     @property
-    def ltl_available(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('ltl_available'))
+    def can_public_note(self) -> bool:
+        return self.__role_policies_data["can_public_note"]
 
     @property
-    def can_public_note(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('can_public_note'))
+    def can_invite(self) -> bool:
+        return self.__role_policies_data["can_invite"]
 
     @property
-    def drive_capacity_mb(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('drive_capacity_mb'))
+    def invite_limit(self) -> int:
+        return self.__role_policies_data["invite_limit"]
 
     @property
-    def can_invite(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('can_invite'))
+    def invite_limit_cycle(self) -> int:
+        return self.__role_policies_data["invite_limit_cycle"]
 
     @property
-    def can_manage_custom_emojis(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('can_manage_custom_emojis'))
+    def invite_expiration_time(self) -> int:
+        return self.__role_policies_data["invite_expiration_time"]
 
     @property
-    def can_hide_ads(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('can_hide_ads'))
+    def can_manage_custom_emojis(self) -> bool:
+        return self.__role_policies_data["can_manage_custom_emojis"]
 
     @property
-    def pin_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('pin_limit'))
+    def can_manage_avatar_decorations(self) -> bool:
+        return self.__role_policies_data["can_manage_avatar_decorations"]
 
     @property
-    def word_mute_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('word_mute_limit'))
+    def can_search_notes(self) -> bool:
+        return self.__role_policies_data["can_search_notes"]
 
     @property
-    def webhook_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('webhook_limit'))
+    def can_use_translator(self) -> bool:
+        return self.__role_policies_data["can_use_translator"]
 
     @property
-    def clip_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('clip_limit'))
+    def can_hide_ads(self) -> bool:
+        return self.__role_policies_data["can_hide_ads"]
 
     @property
-    def note_each_clips_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('note_each_clips_limit'))
+    def drive_capacity_mb(self) -> int:
+        return self.__role_policies_data["drive_capacity_mb"]
 
     @property
-    def user_list_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('user_list_limit'))
+    def always_mark_nfsw(self) -> bool:
+        return self.__role_policies_data["always_mark_nfsw"]
 
     @property
-    def user_each_user_lists_limit(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('user_each_user_lists_limit'))
+    def pin_limit(self) -> int:
+        return self.__role_policies_data["pin_limit"]
 
     @property
-    def rate_limit_factor(self) -> RolePolicyValue:
-        return RolePolicyValue(self.__role_policies_data.get('rate_limit_factor'))
+    def antenna_limit(self) -> int:
+        return self.__role_policies_data["antenna_limit"]
+
+    @property
+    def word_mute_limit(self) -> int:
+        return self.__role_policies_data["word_mute_limit"]
+
+    @property
+    def webhook_limit(self) -> int:
+        return self.__role_policies_data["webhook_limit"]
+
+    @property
+    def clip_limit(self) -> int:
+        return self.__role_policies_data["clip_limit"]
+
+    @property
+    def note_each_clips_limit(self) -> int:
+        return self.__role_policies_data["note_each_clips_limit"]
+
+    @property
+    def user_list_limit(self) -> int:
+        return self.__role_policies_data["user_list_limit"]
+
+    @property
+    def user_each_user_lists_limit(self) -> int:
+        return self.__role_policies_data["user_each_user_lists_limit"]
+
+    @property
+    def rate_limit_factor(self) -> int:
+        return self.__role_policies_data["rate_limit_factor"]
+
+    @property
+    def avatar_decoration_limit(self) -> int:
+        return self.__role_policies_data["avatar_decoration_limit"]
+
+    def _get(self, key: str) -> Any | None:
+        return self.__role_policies_data.get(key)
 
 
-class Role:
+class Role(PartialRole[IRole]):
     def __init__(self, role_data: IRole, *, client: ClientManager) -> None:
-        self.__role_data: IRole = role_data
-        self.__client: ClientManager = client
-
-    @property
-    def id(self) -> str:
-        return self.__role_data.get('id')
+        super().__init__(role_data, client=client)
 
     @property
     def created_at(self) -> str:
-        return self.__role_data.get('created_at')
+        return self._raw_role["created_at"]
 
     @property
     def updated_at(self) -> str:
-        return self.__role_data.get('updated_at')
-
-    @property
-    def name(self) -> str:
-        return self.__role_data.get('name')
-
-    @property
-    def description(self) -> str:
-        return self.__role_data.get('description')
-
-    @property
-    def color(self) -> str | None:
-        return self.__role_data.get('color')
-
-    @property
-    def icon_url(self) -> str | None:
-        return self.__role_data.get('icon_url')
+        return self._raw_role["updated_at"]
 
     @property
     def target(self) -> str:
-        return self.__role_data.get('target')
+        return self._raw_role["target"]
 
     @property
     def cond_formula(self) -> dict:
-        return self.__role_data.get('cond_formula')
+        return self._raw_role["cond_formula"]
 
     @property
     def is_public(self) -> bool:
-        return self.__role_data.get('is_public')
+        return self._raw_role["is_public"]
 
     @property
-    def is_administrator(self) -> bool:
-        return self.__role_data.get('is_administrator')
-
-    @property
-    def is_moderator(self) -> bool:
-        return self.__role_data.get('is_moderator')
+    def is_explorable(self) -> bool:
+        return self._raw_role["is_explorable"]
 
     @property
     def as_badge(self) -> bool:
-        return self.__role_data.get('as_badge')
+        return self._raw_role["as_badge"]
 
     @property
     def can_edit_members_by_moderator(self) -> bool:
-        return self.__role_data.get('can_edit_members_by_moderator')
+        return self._raw_role["can_edit_members_by_moderator"]
 
     @property
     def policies(self) -> RolePolicies:
-        return RolePolicies(self.__role_data.get('policies'))
+        return RolePolicies(self._raw_role["policies"])
 
     @property
     def users_count(self) -> int:
-        return self.__role_data.get('users_count')
+        return self._raw_role["users_count"]
 
-    @property
-    def api(self) -> AdminRolesModelManager:
-        return self.__client.admin.create_roles_model_manager(self.id)
-
-    def __eq__(self, __value: object) -> bool:
-        return isinstance(__value, Role) and self.id == __value.id
-
-    def __ne__(self, __value: object) -> bool:
-        return not self.__eq__(__value)
+    def _get(self, key: str) -> Any | None:
+        return self._raw_role.get(key)
