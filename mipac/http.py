@@ -63,7 +63,7 @@ class HTTPClient:
     async def request(
         self,
         route: Route,
-        auth: bool = False,
+        auth: bool = True,
         remove_none: bool = True,
         lower: bool = True,
         **kwargs,
