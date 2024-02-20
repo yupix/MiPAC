@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.user import ClientUserActions, UserActions
 from mipac.http import HTTPClient
-from mipac.manager.blocking import BlockingManager
+from mipac.manager.blocking import ClinetBlockingManager, BlockingManager
 from mipac.manager.follow import FollowManager
 from mipac.manager.users.list import (
     ClientPartialUserListManager,
@@ -33,7 +33,7 @@ class ClientUserManager(AbstractManager):
         self.mute: ClientMuteManager = ClientMuteManager(
             user_id=user.id, session=session, client=client
         )
-        # self.block = BlockingManager(session=session, client=client)  TODO: Client版のBlockingManagerを作る
+        self.block = ClinetBlockingManager(user_id=user.id, session=session, client=client)
         self.list = ClientPartialUserListManager(user_id=user.id, session=session, client=client)
 
     @property
