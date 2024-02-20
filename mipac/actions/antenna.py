@@ -77,16 +77,35 @@ class SharedAntennaActions(AbstractAction):
         until_id: str | None = None,
         since_date: str | None = None,
         until_date: str | None = None,
-        get_all: bool = False,
+        *,
+        antenna_id: str,
+    ) -> list[Note]:
+        body = remove_dict_empty(
+            {
+                "antennaId": antenna_id,
+                "limit": limit,
+                "sinceId": since_id,
+                "untilId": until_id,
+                "sinceDate": since_date,
+                "untilDate": until_date,
+            }
+        )
+
+        res: list[INote] = await self._session.request(
+            Route("POST", "/api/antennas/notes"), json=body
+        )
+        return [Note(note, client=self._client) for note in res]
+
+    async def get_all_notes(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: str | None = None,
+        until_date: str | None = None,
         *,
         antenna_id: str,
     ) -> AsyncGenerator[Note, None]:
-        if limit > 100:  # TODO: 廃止する
-            raise ValueError("limit must be less than 100")
-
-        if get_all:
-            limit = 100
-
         body = remove_dict_empty(
             {
                 "antennaId": antenna_id,
@@ -102,13 +121,10 @@ class SharedAntennaActions(AbstractAction):
             self._session, Route("POST", "/api/antennas/notes"), json=body
         )
 
-        while True:
+        while pagination.is_final is False:
             res_notes = await pagination.next()
             for res_note in res_notes:
                 yield Note(res_note, client=self._client)
-
-            if get_all is False or pagination.is_final:
-                break
 
     async def update(
         self,
@@ -190,7 +206,7 @@ class SharedAntennaActions(AbstractAction):
 class ClientAntennaActions(SharedAntennaActions):
     def __init__(self, *, antenna_id: str, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
-        self._antenna_id: str = antenna_id
+        self.__antenna_id: str = antenna_id
 
     @override
     async def delete(self, *, antenna_id: str | None = None) -> bool:
@@ -211,7 +227,7 @@ class ClientAntennaActions(SharedAntennaActions):
         bool
             success or failure
         """
-        antenna_id = antenna_id or self._antenna_id
+        antenna_id = antenna_id or self.__antenna_id
 
         return await super().delete(antenna_id=antenna_id)
 
@@ -234,7 +250,7 @@ class ClientAntennaActions(SharedAntennaActions):
         ParameterError
             antenna id is required
         """
-        antenna_id = antenna_id or self._antenna_id
+        antenna_id = antenna_id or self.__antenna_id
 
         return await super().show(antenna_id=antenna_id)
 
@@ -246,22 +262,37 @@ class ClientAntennaActions(SharedAntennaActions):
         until_id: str | None = None,
         since_date: str | None = None,
         until_date: str | None = None,
-        get_all: bool = False,
         *,
         antenna_id: str | None = None,
-    ) -> AsyncGenerator[Note, None]:
-        antenna_id = antenna_id or self._antenna_id
+    ) -> list[Note]:
+        antenna_id = antenna_id or self.__antenna_id
 
-        async for note in super().get_notes(
+        return await super().get_notes(
             limit=limit,
             since_id=since_id,
             until_id=until_id,
             since_date=since_date,
             until_date=until_date,
-            get_all=get_all,
             antenna_id=antenna_id,
+        )
+
+    @override
+    async def get_all_notes(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        since_date: str | None = None,
+        until_date: str | None = None,
+        *,
+        antenna_id: str | None = None,
+    ) -> AsyncGenerator[Note, None]:
+        antenna_id = antenna_id or self.__antenna_id
+
+        async for i in super().get_all_notes(
+            limit, since_id, until_id, since_date, until_date, antenna_id=antenna_id
         ):
-            yield note
+            yield i
 
     @override
     async def update(
@@ -310,7 +341,7 @@ class ClientAntennaActions(SharedAntennaActions):
             The created antenna.
         """
 
-        antenna_id = antenna_id or self._antenna_id
+        antenna_id = antenna_id or self.__antenna_id
 
         return await super().update(
             name=name,
