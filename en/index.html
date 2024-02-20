@@ -191,6 +191,93 @@
 <h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
 <section id="misskey-models">
 <h2>Misskey Models<a class="headerlink" href="#misskey-models" title="Link to this heading">#</a></h2>
+<section id="blocking">
+<h3>Blocking<a class="headerlink" href="#blocking" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.models.blocking.Blocking"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.blocking.Blocking.api">api</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.blocking.Blocking.blockee">blockee</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.blocking.Blocking.blockee_id">blockee_id</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.blocking.Blocking.created_at">created_at</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.blocking.Blocking.id">id</a></li></ul>
+</div></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.models.blocking.Blocking">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.blocking.</span></span><span class="sig-name descname"><span class="pre">Blocking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_blocking</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.blocking.IBlocking" title="mipac.types.blocking.IBlocking"><span class="pre">IBlocking</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.blocking.Blocking" title="Link to this definition">#</a></dt>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.blocking.Blocking.api">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">api</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.manager.blocking.ClientBlockingManager" title="mipac.manager.blocking.ClientBlockingManager"><span class="pre">ClientBlockingManager</span></a></em><a class="headerlink" href="#mipac.models.blocking.Blocking.api" title="Link to this definition">#</a></dt>
+<dd><p>ブロック対象に対するAPIを利用するためのManager</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ブロック対象に対するAPIを利用するためのManager</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mipac.manager.blocking.ClientBlockingManager" title="mipac.manager.blocking.ClientBlockingManager">ClientBlockingManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.blocking.Blocking.blockee">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">blockee</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.user.UserDetailedNotMe" title="mipac.models.user.UserDetailedNotMe"><span class="pre">UserDetailedNotMe</span></a></em><a class="headerlink" href="#mipac.models.blocking.Blocking.blockee" title="Link to this definition">#</a></dt>
+<dd><p>ブロック対象のユーザー情報</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ブロック対象のユーザー情報</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mipac.models.user.UserDetailedNotMe" title="mipac.models.user.UserDetailedNotMe">UserDetailedNotMe</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.blocking.Blocking.blockee_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">blockee_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.blocking.Blocking.blockee_id" title="Link to this definition">#</a></dt>
+<dd><p>ブロック対象のユーザーID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ブロック対象のユーザーID</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.blocking.Blocking.created_at">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">created_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#mipac.models.blocking.Blocking.created_at" title="Link to this definition">#</a></dt>
+<dd><p>ブロックした日時</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ブロックした日時</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.blocking.Blocking.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.blocking.Blocking.id" title="Link to this definition">#</a></dt>
+<dd><p>ブロックID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ブロックID</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="invitecode">
 <h3>InviteCode<a class="headerlink" href="#invitecode" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.models.invite.InviteCode"></div><dl class="py class">
@@ -281,6 +368,7 @@ Attributes</span><ul>
 <a class="reference internal" href="#mipac.models.note.Note.created_at">created_at</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.cw">cw</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.deleted_at">deleted_at</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.note.Note.emojis">emojis</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.file_ids">file_ids</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.files">files</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.id">id</a></li><li class="py-attribute-table-entry">
@@ -446,6 +534,20 @@ Attributes</span><ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>datetime | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.note.Note.emojis">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">emojis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.note.Note.emojis" title="Link to this definition">#</a></dt>
+<dd><p>note emojis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>note emojis</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[str, str]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1646,14 +1748,6 @@ Attributes</span><ul>
 <dd></dd></dl>
 
 </section>
-<section id="rolepolicyvalue">
-<h3>RolePolicyValue<a class="headerlink" href="#rolepolicyvalue" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.models.roles.RolePolicyValue"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.models.roles.RolePolicyValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.roles.</span></span><span class="sig-name descname"><span class="pre">RolePolicyValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policiy_value_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.roles.IRolePolicieValue" title="mipac.types.roles.IRolePolicieValue"><span class="pre">IRolePolicieValue</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.roles.RolePolicyValue" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
 <section id="roleuser">
 <h3>RoleUser<a class="headerlink" href="#roleuser" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.models.roles.RoleUser"></div><dl class="py class">
@@ -1675,14 +1769,6 @@ Attributes</span><ul>
 <div class="py-attribute-table" data-move-to-id="mipac.models.user.Achievement"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.user.Achievement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">Achievement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IAchievement" title="mipac.types.user.IAchievement"><span class="pre">IAchievement</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.Achievement" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="blockinguser">
-<h3>BlockingUser<a class="headerlink" href="#blockinguser" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.models.user.BlockingUser"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.models.user.BlockingUser">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">BlockingUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocking_user_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IBlockingUser" title="mipac.types.user.IBlockingUser"><span class="pre">IBlockingUser</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.BlockingUser" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -2320,11 +2406,11 @@ Attributes</span><ul>
 <dd></dd></dl>
 
 </section>
-<section id="clinetblockingmanager">
-<h3>ClinetBlockingManager<a class="headerlink" href="#clinetblockingmanager" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.manager.blocking.ClinetBlockingManager"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.manager.blocking.ClinetBlockingManager">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.blocking.</span></span><span class="sig-name descname"><span class="pre">ClinetBlockingManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.blocking.ClinetBlockingManager" title="Link to this definition">#</a></dt>
+<section id="clientblockingmanager">
+<h3>ClientBlockingManager<a class="headerlink" href="#clientblockingmanager" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.manager.blocking.ClientBlockingManager"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.manager.blocking.ClientBlockingManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.blocking.</span></span><span class="sig-name descname"><span class="pre">ClientBlockingManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.blocking.ClientBlockingManager" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -7886,6 +7972,14 @@ async</span><a class="reference internal" href="#mipac.actions.drive.files.Share
 </section>
 <section id="type-class">
 <h2>Type class<a class="headerlink" href="#type-class" title="Link to this heading">#</a></h2>
+<section id="iblocking">
+<h3>IBlocking<a class="headerlink" href="#iblocking" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.blocking.IBlocking"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.blocking.IBlocking">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.blocking.</span></span><span class="sig-name descname"><span class="pre">IBlocking</span></span><a class="headerlink" href="#mipac.types.blocking.IBlocking" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="iinvitecode">
 <h3>IInviteCode<a class="headerlink" href="#iinvitecode" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.types.invite.IInviteCode"></div><dl class="py class">
@@ -8430,14 +8524,6 @@ async</span><a class="reference internal" href="#mipac.actions.drive.files.Share
 <dd></dd></dl>
 
 </section>
-<section id="ibasepoll">
-<h3>IBasePoll<a class="headerlink" href="#ibasepoll" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.types.poll.IBasePoll"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.types.poll.IBasePoll">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.poll.</span></span><span class="sig-name descname"><span class="pre">IBasePoll</span></span><a class="headerlink" href="#mipac.types.poll.IBasePoll" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
 <section id="icreatepoll">
 <h3>ICreatePoll<a class="headerlink" href="#icreatepoll" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.types.poll.ICreatePoll"></div><dl class="py class">
@@ -8508,14 +8594,6 @@ async</span><a class="reference internal" href="#mipac.actions.drive.files.Share
 <div class="py-attribute-table" data-move-to-id="mipac.types.roles.IRole"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.types.roles.IRole">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.roles.</span></span><span class="sig-name descname"><span class="pre">IRole</span></span><a class="headerlink" href="#mipac.types.roles.IRole" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="irolepolicievalue">
-<h3>IRolePolicieValue<a class="headerlink" href="#irolepolicievalue" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.types.roles.IRolePolicieValue"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.types.roles.IRolePolicieValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.roles.</span></span><span class="sig-name descname"><span class="pre">IRolePolicieValue</span></span><a class="headerlink" href="#mipac.types.roles.IRolePolicieValue" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -8606,14 +8684,6 @@ IMeDetailedOnlySchema が持つ avatar_id が無いことを確認する
 <div class="py-attribute-table" data-move-to-id="mipac.types.user.IBadgeRole"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.types.user.IBadgeRole">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IBadgeRole</span></span><a class="headerlink" href="#mipac.types.user.IBadgeRole" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="iblockinguser">
-<h3>IBlockingUser<a class="headerlink" href="#iblockinguser" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.types.user.IBlockingUser"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.types.user.IBlockingUser">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IBlockingUser</span></span><a class="headerlink" href="#mipac.types.user.IBlockingUser" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -8730,6 +8800,14 @@ IMeDetailedOnlySchema が持つ avatar_id が無いことを確認する
 <div class="py-attribute-table" data-move-to-id="mipac.types.user.NotificationRecieveConfigType"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.types.user.NotificationRecieveConfigType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">NotificationRecieveConfigType</span></span><a class="headerlink" href="#mipac.types.user.NotificationRecieveConfigType" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="notificationrecieveconfigwithuserlist">
+<h3>NotificationRecieveConfigWithUserList<a class="headerlink" href="#notificationrecieveconfigwithuserlist" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.user.NotificationRecieveConfigWithUserList"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.user.NotificationRecieveConfigWithUserList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">NotificationRecieveConfigWithUserList</span></span><a class="headerlink" href="#mipac.types.user.NotificationRecieveConfigWithUserList" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -10133,6 +10211,17 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
             <ul>
 <li><a class="reference internal" href="#">API Reference</a><ul>
 <li><a class="reference internal" href="#misskey-models">Misskey Models</a><ul>
+<li><a class="reference internal" href="#blocking">Blocking</a><ul>
+<li><a class="reference internal" href="#mipac.models.blocking.Blocking"><code class="docutils literal notranslate"><span class="pre">Blocking</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.models.blocking.Blocking.api"><code class="docutils literal notranslate"><span class="pre">Blocking.api</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.blocking.Blocking.blockee"><code class="docutils literal notranslate"><span class="pre">Blocking.blockee</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.blocking.Blocking.blockee_id"><code class="docutils literal notranslate"><span class="pre">Blocking.blockee_id</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.blocking.Blocking.created_at"><code class="docutils literal notranslate"><span class="pre">Blocking.created_at</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.blocking.Blocking.id"><code class="docutils literal notranslate"><span class="pre">Blocking.id</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#invitecode">InviteCode</a><ul>
 <li><a class="reference internal" href="#mipac.models.invite.InviteCode"><code class="docutils literal notranslate"><span class="pre">InviteCode</span></code></a></li>
 </ul>
@@ -10179,6 +10268,7 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.models.note.Note.created_at"><code class="docutils literal notranslate"><span class="pre">Note.created_at</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.cw"><code class="docutils literal notranslate"><span class="pre">Note.cw</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.deleted_at"><code class="docutils literal notranslate"><span class="pre">Note.deleted_at</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.note.Note.emojis"><code class="docutils literal notranslate"><span class="pre">Note.emojis</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.file_ids"><code class="docutils literal notranslate"><span class="pre">Note.file_ids</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.files"><code class="docutils literal notranslate"><span class="pre">Note.files</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.id"><code class="docutils literal notranslate"><span class="pre">Note.id</span></code></a></li>
@@ -10434,10 +10524,6 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.models.roles.RolePolicies"><code class="docutils literal notranslate"><span class="pre">RolePolicies</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#rolepolicyvalue">RolePolicyValue</a><ul>
-<li><a class="reference internal" href="#mipac.models.roles.RolePolicyValue"><code class="docutils literal notranslate"><span class="pre">RolePolicyValue</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#roleuser">RoleUser</a><ul>
 <li><a class="reference internal" href="#mipac.models.roles.RoleUser"><code class="docutils literal notranslate"><span class="pre">RoleUser</span></code></a></li>
 </ul>
@@ -10448,10 +10534,6 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 </li>
 <li><a class="reference internal" href="#achievement">Achievement</a><ul>
 <li><a class="reference internal" href="#mipac.models.user.Achievement"><code class="docutils literal notranslate"><span class="pre">Achievement</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#blockinguser">BlockingUser</a><ul>
-<li><a class="reference internal" href="#mipac.models.user.BlockingUser"><code class="docutils literal notranslate"><span class="pre">BlockingUser</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#followcommon">FollowCommon</a><ul>
@@ -10594,8 +10676,8 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.manager.blocking.BlockingManager"><code class="docutils literal notranslate"><span class="pre">BlockingManager</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#clinetblockingmanager">ClinetBlockingManager</a><ul>
-<li><a class="reference internal" href="#mipac.manager.blocking.ClinetBlockingManager"><code class="docutils literal notranslate"><span class="pre">ClinetBlockingManager</span></code></a></li>
+<li><a class="reference internal" href="#clientblockingmanager">ClientBlockingManager</a><ul>
+<li><a class="reference internal" href="#mipac.manager.blocking.ClientBlockingManager"><code class="docutils literal notranslate"><span class="pre">ClientBlockingManager</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#clientinvitemanager">ClientInviteManager</a><ul>
@@ -11374,6 +11456,10 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 </ul>
 </li>
 <li><a class="reference internal" href="#type-class">Type class</a><ul>
+<li><a class="reference internal" href="#iblocking">IBlocking</a><ul>
+<li><a class="reference internal" href="#mipac.types.blocking.IBlocking"><code class="docutils literal notranslate"><span class="pre">IBlocking</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#iinvitecode">IInviteCode</a><ul>
 <li><a class="reference internal" href="#mipac.types.invite.IInviteCode"><code class="docutils literal notranslate"><span class="pre">IInviteCode</span></code></a></li>
 </ul>
@@ -11642,10 +11728,6 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 <li><a class="reference internal" href="#mipac.types.page.VariablePayload"><code class="docutils literal notranslate"><span class="pre">VariablePayload</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#ibasepoll">IBasePoll</a><ul>
-<li><a class="reference internal" href="#mipac.types.poll.IBasePoll"><code class="docutils literal notranslate"><span class="pre">IBasePoll</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#icreatepoll">ICreatePoll</a><ul>
 <li><a class="reference internal" href="#mipac.types.poll.ICreatePoll"><code class="docutils literal notranslate"><span class="pre">ICreatePoll</span></code></a></li>
 </ul>
@@ -11680,10 +11762,6 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 </li>
 <li><a class="reference internal" href="#irole">IRole</a><ul>
 <li><a class="reference internal" href="#mipac.types.roles.IRole"><code class="docutils literal notranslate"><span class="pre">IRole</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#irolepolicievalue">IRolePolicieValue</a><ul>
-<li><a class="reference internal" href="#mipac.types.roles.IRolePolicieValue"><code class="docutils literal notranslate"><span class="pre">IRolePolicieValue</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#irolepolicies">IRolePolicies</a><ul>
@@ -11724,10 +11802,6 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 </li>
 <li><a class="reference internal" href="#ibadgerole">IBadgeRole</a><ul>
 <li><a class="reference internal" href="#mipac.types.user.IBadgeRole"><code class="docutils literal notranslate"><span class="pre">IBadgeRole</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#iblockinguser">IBlockingUser</a><ul>
-<li><a class="reference internal" href="#mipac.types.user.IBlockingUser"><code class="docutils literal notranslate"><span class="pre">IBlockingUser</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#imedetailedonlyschema">IMeDetailedOnlySchema</a><ul>
@@ -11784,6 +11858,10 @@ async</span><a class="reference internal" href="#mipac.utils.auth.AuthClient.get
 </li>
 <li><a class="reference internal" href="#notificationrecieveconfigtype">NotificationRecieveConfigType</a><ul>
 <li><a class="reference internal" href="#mipac.types.user.NotificationRecieveConfigType"><code class="docutils literal notranslate"><span class="pre">NotificationRecieveConfigType</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notificationrecieveconfigwithuserlist">NotificationRecieveConfigWithUserList</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.NotificationRecieveConfigWithUserList"><code class="docutils literal notranslate"><span class="pre">NotificationRecieveConfigWithUserList</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#iadminmeta">IAdminMeta</a><ul>

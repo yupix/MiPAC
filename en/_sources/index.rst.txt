@@ -4,6 +4,15 @@ API Reference
 Misskey Models
 --------------
 
+Blocking
+~~~~~~~~
+
+.. attributetable:: mipac.models.blocking.Blocking
+
+.. autoclass:: mipac.models.blocking.Blocking
+    :members:
+
+
 InviteCode
 ~~~~~~~~~~
 
@@ -481,15 +490,6 @@ RolePolicies
     :members:
 
 
-RolePolicyValue
-~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.roles.RolePolicyValue
-
-.. autoclass:: mipac.models.roles.RolePolicyValue
-    :members:
-
-
 RoleUser
 ~~~~~~~~
 
@@ -511,15 +511,6 @@ Achievement
 .. attributetable:: mipac.models.user.Achievement
 
 .. autoclass:: mipac.models.user.Achievement
-    :members:
-
-
-BlockingUser
-~~~~~~~~~~~~
-
-.. attributetable:: mipac.models.user.BlockingUser
-
-.. autoclass:: mipac.models.user.BlockingUser
     :members:
 
 
@@ -740,12 +731,12 @@ BlockingManager
     :members:
 
 
-ClinetBlockingManager
+ClientBlockingManager
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.blocking.ClinetBlockingManager
+.. attributetable:: mipac.manager.blocking.ClientBlockingManager
 
-.. autoclass:: mipac.manager.blocking.ClinetBlockingManager
+.. autoclass:: mipac.manager.blocking.ClientBlockingManager
     :members:
 
 
@@ -1810,6 +1801,15 @@ SharedFileActions
 Type class
 ----------
 
+IBlocking
+~~~~~~~~~
+
+.. attributetable:: mipac.types.blocking.IBlocking
+
+.. autoclass:: mipac.types.blocking.IBlocking
+    :members:
+
+
 IInviteCode
 ~~~~~~~~~~~
 
@@ -2413,15 +2413,6 @@ VariablePayload
     :members:
 
 
-IBasePoll
-~~~~~~~~~
-
-.. attributetable:: mipac.types.poll.IBasePoll
-
-.. autoclass:: mipac.types.poll.IBasePoll
-    :members:
-
-
 ICreatePoll
 ~~~~~~~~~~~
 
@@ -2500,15 +2491,6 @@ IRole
     :members:
 
 
-IRolePolicieValue
-~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.roles.IRolePolicieValue
-
-.. autoclass:: mipac.types.roles.IRolePolicieValue
-    :members:
-
-
 IRolePolicies
 ~~~~~~~~~~~~~
 
@@ -2584,15 +2566,6 @@ IBadgeRole
 .. attributetable:: mipac.types.user.IBadgeRole
 
 .. autoclass:: mipac.types.user.IBadgeRole
-    :members:
-
-
-IBlockingUser
-~~~~~~~~~~~~~
-
-.. attributetable:: mipac.types.user.IBlockingUser
-
-.. autoclass:: mipac.types.user.IBlockingUser
     :members:
 
 
@@ -2719,6 +2692,15 @@ NotificationRecieveConfigType
 .. attributetable:: mipac.types.user.NotificationRecieveConfigType
 
 .. autoclass:: mipac.types.user.NotificationRecieveConfigType
+    :members:
+
+
+NotificationRecieveConfigWithUserList
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.user.NotificationRecieveConfigWithUserList
+
+.. autoclass:: mipac.types.user.NotificationRecieveConfigWithUserList
     :members:
 
 
