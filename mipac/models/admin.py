@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
+from mipac.models.user import UserDetailedNotMe, packed_user
 from mipac.types.admin import (
     IIndexStat,
     IModerationLog,
