@@ -30,7 +30,6 @@ from mipac.types.user import (
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
-from mipac.utils.util import credentials_required
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -884,7 +883,6 @@ class UserActions(SharedUserActions):
     ):
         super().__init__(session=session, client=client)
 
-    @credentials_required
     async def get_me(self) -> MeDetailed:  # TODO: トークンが無い場合は例外返すようにする
         """
         ログインしているユーザーの情報を取得します

@@ -12,7 +12,7 @@ from mipac.types.drive import IDriveSort, IFile
 from mipac.types.note import INote
 from mipac.utils.format import bool_to_string, remove_dict_missing
 from mipac.utils.pagination import Pagination
-from mipac.utils.util import MISSING, credentials_required
+from mipac.utils.util import MISSING
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -283,7 +283,6 @@ class FileActions(SharedFileActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
 
-    @credentials_required
     async def get_files(
         self,
         limit: int = 10,
@@ -358,7 +357,6 @@ class FileActions(SharedFileActions):
             for raw_file in await pagination.next():
                 yield File(raw_file, client=self._client)
 
-    @credentials_required
     async def check_existence(self, md5: str) -> bool:
         """指定したmd5のファイルが既に存在するか確認します
 

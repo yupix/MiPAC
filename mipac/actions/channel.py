@@ -14,7 +14,7 @@ from mipac.types.note import INote, INoteVisibility
 from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.format import remove_dict_missing
 from mipac.utils.pagination import Pagination
-from mipac.utils.util import MISSING, credentials_required
+from mipac.utils.util import MISSING
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
@@ -305,7 +305,6 @@ class SharedChannelActions(AbstractAction):
             for raw_note in raw_notes:
                 yield Note(raw_note=raw_note, client=self._client)
 
-    @credentials_required
     async def favorite(self, *, channel_id: str) -> bool:
         """指定したIDのチャンネルをお気に入りにします
 
@@ -328,7 +327,6 @@ class SharedChannelActions(AbstractAction):
         )
         return res
 
-    @credentials_required
     async def unfavorite(self, *, channel_id: str) -> bool:
         """指定したIDのチャンネルをお気に入りから外します
 

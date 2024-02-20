@@ -7,7 +7,6 @@ from mipac.http import HTTPClient, Route
 from mipac.models.invite import InviteCode, InviteLimit
 from mipac.types.invite import IInviteCode, IInviteLimit
 from mipac.utils.pagination import Pagination
-from mipac.utils.util import credentials_required
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -83,7 +82,6 @@ class InviteActions(SharedInviteActions):
         )
         return InviteCode(raw_code, client=self._client)
 
-    @credentials_required
     async def get_list(
         self, limit: int = 30, since_id: str | None = None, until_id: str | None = None
     ) -> list[InviteCode]:

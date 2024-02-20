@@ -7,7 +7,6 @@ from mipac.http import HTTPClient, Route
 from mipac.models.note import Note
 from mipac.types.note import INote
 from mipac.utils.pagination import Pagination
-from mipac.utils.util import credentials_required
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -47,7 +46,6 @@ class PollActions(SharedPollActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
 
-    @credentials_required
     async def recommendation(self, limit: int = 100, offset: int = 0):
         if limit > 100:
             raise ValueError("limit must be less than 100")
@@ -59,7 +57,6 @@ class PollActions(SharedPollActions):
         )
         return [Note(note, client=self._client) for note in res]
 
-    @credentials_required
     async def get_all_recommendation(self, offset: int = 0):
         limit = 100
 
