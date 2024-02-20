@@ -17,10 +17,18 @@ Check the going points before creating an assignment
 - `develop` is the branch to work on for the next release
     - If you want to create a pull request, please send it to this branch
 
+## Building a Development Environment
+
+```
+pip install -r requirements.txt -r requirements-dev.txt
+
+pre-commit install
+```
+
 ## Creating a pull request
 
 - Create an Issue before creating a pull request.
-- Please prefix the branch name with a keyword such as `feat` / `fix` / `refactor` / `chore` to identify the pull request as much as possible.  
+- Please prefix the branch name with a keyword such as `feat` / `fix` / `refactor` / `chore` to identify the pull request as much as possible.
     - Also, do not include changes other than to resolve the pull request issue
 - If you have an Issue that will be resolved by a pull request, please include a link
 - Any changes should be described in `CHANGELOG.md`. However, if there is no change from the user's point of view, there is no need to describe it.
@@ -77,4 +85,3 @@ Misskey側に渡すBodyにおいて、例えば `limit` に渡せる最大数が
 
 `is_sensitive` のTypeHintsが `bool` のみにできるので気持ち悪さが解消されます。
 また、 `remove_dict_missing` を使用することで `MISSING` のみを削除出来るため、Noneに設定したい場合は `await update(banner_id=None)` とすることで `banner_id` を null に設定できるようになります。注意点として、 `request` メソッドの `remove_none=False` に設定しないと `None` が削除されてしまうため気を付けてください。基本的に `/api/channels/create` のように作成系等では既にサーバー上にあるデータに留意する必要が無いため、`MISSING` ではなく `None` を使用しても問題ないです
-
