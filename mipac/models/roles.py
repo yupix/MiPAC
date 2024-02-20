@@ -5,12 +5,11 @@ from typing import TYPE_CHECKING
 
 from mipac.models.lite.role import PartialRole
 from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
-from mipac.types.roles import IMeRole, IRole, IRolePolicies, IRoleUser
+from mipac.types.roles import IRole, IRolePolicies, IRoleUser
 from mipac.utils.format import str_to_datetime
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
-    from mipac.manager.user import UserManager
 
 
 class RoleUser:
@@ -23,6 +22,10 @@ class RoleUser:
         return self.__role_user["id"]
 
     @property
+    def created_at(self) -> datetime:
+        return str_to_datetime(self.__role_user["created_at"])
+
+    @property
     def user(self) -> UserDetailedNotMe | MeDetailed:
         return packed_user(self.__role_user["user"], client=self.__client)
 
@@ -33,42 +36,6 @@ class RoleUser:
             if self.__role_user["expires_at"]
             else None
         )
-
-    @property
-    def action(self) -> UserManager:
-        return self.__client._create_user_instance(self.user)
-
-    def __eq__(self, __value: object) -> bool:
-        return isinstance(__value, RoleUser) and self.id == __value.id
-
-    def __ne__(self, __value: object) -> bool:
-        return not self.__eq__(__value)
-
-
-class MeRole:
-    def __init__(self, data: IMeRole, *, client: ClientManager) -> None:
-        self.__role_user = data
-        self.__client = client
-
-    @property
-    def id(self) -> str:
-        return self.__role_user["id"]
-
-    @property
-    def user(self) -> MeDetailed:
-        return MeDetailed(self.__role_user["user"], client=self.__client)
-
-    @property
-    def expires_at(self) -> datetime | None:
-        return (
-            str_to_datetime(self.__role_user["expires_at"])
-            if self.__role_user["expires_at"]
-            else None
-        )
-
-    @property
-    def action(self) -> UserManager:
-        return self.__client._create_user_instance(self.user)
 
     def __eq__(self, __value: object) -> bool:
         return isinstance(__value, RoleUser) and self.id == __value.id

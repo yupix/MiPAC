@@ -1,20 +1,17 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal, TypedDict, TypeGuard
+from typing import TYPE_CHECKING, Literal, TypedDict
+
+from mipac.types.user import IUserDetailedNotMeSchema
 
 if TYPE_CHECKING:
-    from mipac.types.user import IMeDetailedSchema, IUserDetailed
+    from mipac.types.user import IMeDetailedSchema
 
 
 class IRoleUser(TypedDict):
     id: str
-    user: IUserDetailed
-    expires_at: str | None
-
-
-class IMeRole(TypedDict):
-    id: str
-    user: IMeDetailedSchema
+    created_at: str
+    user: IUserDetailedNotMeSchema | IMeDetailedSchema
     expires_at: str | None
 
 
@@ -67,7 +64,3 @@ class IRole(IPartialRole):
     can_edit_members_by_moderator: bool
     policies: IRolePolicies
     users_count: int
-
-
-def is_me_role(data: IMeRole | IRoleUser, me_id: str) -> TypeGuard[IMeRole]:
-    return data["user"]["id"] == me_id and data["user"].get("avatar_id") is not None

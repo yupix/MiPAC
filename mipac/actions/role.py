@@ -3,12 +3,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
-from mipac.config import config
 from mipac.http import HTTPClient, Route
 from mipac.models.note import Note
-from mipac.models.roles import MeRole, Role, RoleUser
+from mipac.models.roles import Role, RoleUser
 from mipac.types.note import INote
-from mipac.types.roles import IMeRole, IRole, IRoleUser, is_me_role
+from mipac.types.roles import IRole, IRoleUser
 from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
@@ -64,7 +63,7 @@ class RoleActions(AbstractAction):
         limit: int = 10,
         *,
         get_all: bool = False,
-    ) -> AsyncGenerator[MeRole | RoleUser, None]:
+    ) -> AsyncGenerator[RoleUser, None]:
         """
         Get users in a role.
         Endpoint: `/api/roles/users`
@@ -84,7 +83,7 @@ class RoleActions(AbstractAction):
 
         Yields
         ------
-        AsyncGenerator[MeRole | RoleUser, None]
+        AsyncGenerator[RoleUser, None]
             The role user data.
         """
 
@@ -96,17 +95,13 @@ class RoleActions(AbstractAction):
 
         body = {"roleId": role_id, "limit": limit, "sinceId": since_id, "untilId": until_id}
 
-        pagination = Pagination[IRoleUser | IMeRole](
+        pagination = Pagination[IRoleUser](
             self.__session, Route("POST", "/api/roles/users"), auth=True, json=body
         )
         while True:
             raw_users = await pagination.next()
             for raw_user in raw_users:
-                yield (
-                    MeRole(raw_user, client=self.__client)
-                    if is_me_role(raw_user, config.account_id)
-                    else RoleUser(raw_user, client=self.__client)
-                )
+                yield RoleUser(raw_user, client=self.__client)
 
             if pagination.is_final or get_all is False:
                 break
