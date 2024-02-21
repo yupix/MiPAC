@@ -1,5 +1,49 @@
 # Change Log
 
+## v0.6.2
+
+[compare changes](https://github.com/yupix/MiPAC/compare/0.6.1...v0.6.2)
+
+### ユーザーに対する管理アクションが簡単に行えるようになりました
+
+今までは以下のように行う必要がありましたが、新たに `admin` 変数が追加され、直接そのユーザーに対して処置を行うことが出来るようになります。
+
+```py
+async with Client('server url', 'token') as client:
+    api = client.api
+    found_user = await api.user.action.get('user_id')
+    await api.admin.user.action.suspend(user_id=found_user.id)
+```
+
+v0.6.2から
+
+```py
+async with Client('server url', 'token') as client:
+    api = client.api
+    found_user = await api.user.action.get('user_id')
+    await found_user.api.admin.action.suspend()
+```
+
+### 🚀 Enhancements
+
+- Get_all_search_by_tag メソッドを追加 ([9d07afb](https://github.com/yupix/MiPAC/commit/9d07afb))
+- AdminAccountActionsを追加 ([60eaad7](https://github.com/yupix/MiPAC/commit/60eaad7))
+- Userに対する管理アクションを容易に行えるように ([9785774](https://github.com/yupix/MiPAC/commit/9785774))
+
+### 💅 Refactors
+
+- AdminUserActionsをClientと分けた ([5297559](https://github.com/yupix/MiPAC/commit/5297559))
+- AdminActionsがSharedAdminUserActions を継承するように ([d37c7ae](https://github.com/yupix/MiPAC/commit/d37c7ae))
+
+### 🏡 Chore
+
+- 使用されていない例外を削除 ([80980cf](https://github.com/yupix/MiPAC/commit/80980cf))
+- サポート状況を更新 ([82cca9c](https://github.com/yupix/MiPAC/commit/82cca9c))
+
+### ❤️ Contributors
+
+- Yupix ([@yupix](http://github.com/yupix))
+
 ## v0.6.1
 
 [compare changes](https://github.com/yupix/MiPAC/compare/0.6.0...v0.6.1)
