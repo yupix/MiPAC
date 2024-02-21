@@ -3680,30 +3680,12 @@ APIError
     :members:
 
 
-CredentialsError
-~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.base.CredentialsError
-
-.. autoclass:: mipac.errors.base.CredentialsError
-    :members:
-
-
 NotExistRequiredData
 ~~~~~~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.errors.base.NotExistRequiredData
 
 .. autoclass:: mipac.errors.base.NotExistRequiredData
-    :members:
-
-
-ParameterError
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.base.ParameterError
-
-.. autoclass:: mipac.errors.base.ParameterError
     :members:
 __OTHER
 -------

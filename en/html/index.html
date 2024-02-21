@@ -5611,14 +5611,11 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.ClientAnt
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>antenna_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – target identifier</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.errors.base.ParameterError" title="mipac.errors.base.ParameterError"><strong>ParameterError</strong></a> – antenna id is required</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>success or failure</p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>success or failure</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5636,9 +5633,6 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.ClientAnt
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#mipac.models.antenna.Antenna" title="mipac.models.antenna.Antenna">Antenna</a></p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.errors.base.ParameterError" title="mipac.errors.base.ParameterError"><strong>ParameterError</strong></a> – antenna id is required</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5697,14 +5691,11 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.SharedAnt
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>antenna_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – target identifier</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.errors.base.ParameterError" title="mipac.errors.base.ParameterError"><strong>ParameterError</strong></a> – antenna id is required</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>success or failure</p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>success or failure</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5722,9 +5713,6 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.SharedAnt
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#mipac.models.antenna.Antenna" title="mipac.models.antenna.Antenna">Antenna</a></p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.errors.base.ParameterError" title="mipac.errors.base.ParameterError"><strong>ParameterError</strong></a> – antenna id is required</p>
 </dd>
 </dl>
 </dd></dl>
@@ -7030,10 +7018,6 @@ async</span><a class="reference internal" href="#mipac.actions.admins.admin.Admi
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.send_email">send_email</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.suspend_user">suspend_user</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.unsuspend_user">unsuspend_user</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.update_user_note">update_user_note</a></li></ul>
 </div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.admins.admin.AdminActions">
@@ -7095,42 +7079,6 @@ Endpoint: <cite>/api/admin/send-email</cite></p>
 <li><p><strong>subject</strong> (<em>str</em>) – email subject</p></li>
 <li><p><strong>text</strong> (<em>str</em>) – email body</p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.admin.AdminActions.suspend_user">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">suspend_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.admin.AdminActions.suspend_user" title="Link to this definition">#</a></dt>
-<dd><p>Suspends the user for the specified Id
-Endpoint: <cite>/api/admin/suspend-user</cite></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user_id</strong> (<em>str</em>) – Id of user to suspend</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>success or failed</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.admin.AdminActions.unsuspend_user">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unsuspend_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.admin.AdminActions.unsuspend_user" title="Link to this definition">#</a></dt>
-<dd><p>Unsuspend user with specified Id
-Endpoint: <cite>/api/admin/unsuspend-user</cite></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user_id</strong> (<em>str</em>) – Id of user to unsuspend</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>success or failed</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -10021,30 +9969,12 @@ IMeDetailedOnlySchema が持つ avatar_id が無いことを確認する
 </dd></dl>
 
 </section>
-<section id="credentialserror">
-<h3>CredentialsError<a class="headerlink" href="#credentialserror" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.errors.base.CredentialsError"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.errors.base.CredentialsError">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.errors.base.</span></span><span class="sig-name descname"><span class="pre">CredentialsError</span></span><a class="headerlink" href="#mipac.errors.base.CredentialsError" title="Link to this definition">#</a></dt>
-<dd><p>認証情報に関するエラー</p>
-</dd></dl>
-
-</section>
 <section id="notexistrequireddata">
 <h3>NotExistRequiredData<a class="headerlink" href="#notexistrequireddata" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.errors.base.NotExistRequiredData"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.errors.base.NotExistRequiredData">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.errors.base.</span></span><span class="sig-name descname"><span class="pre">NotExistRequiredData</span></span><a class="headerlink" href="#mipac.errors.base.NotExistRequiredData" title="Link to this definition">#</a></dt>
 <dd><p>クラスの中に必要なデータが不足している</p>
-</dd></dl>
-
-</section>
-<section id="parametererror">
-<h3>ParameterError<a class="headerlink" href="#parametererror" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.errors.base.ParameterError"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.errors.base.ParameterError">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.errors.base.</span></span><span class="sig-name descname"><span class="pre">ParameterError</span></span><a class="headerlink" href="#mipac.errors.base.ParameterError" title="Link to this definition">#</a></dt>
-<dd><p>引数に関するエラー</p>
 </dd></dl>
 
 </section>
@@ -11626,8 +11556,6 @@ when the function is used.</p>
 <li><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.reset_password"><code class="docutils literal notranslate"><span class="pre">AdminActions.reset_password()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.resolve_abuse_user_report"><code class="docutils literal notranslate"><span class="pre">AdminActions.resolve_abuse_user_report()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.send_email"><code class="docutils literal notranslate"><span class="pre">AdminActions.send_email()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.suspend_user"><code class="docutils literal notranslate"><span class="pre">AdminActions.suspend_user()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.unsuspend_user"><code class="docutils literal notranslate"><span class="pre">AdminActions.unsuspend_user()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.admins.admin.AdminActions.update_user_note"><code class="docutils literal notranslate"><span class="pre">AdminActions.update_user_note()</span></code></a></li>
 </ul>
 </li>
@@ -12590,16 +12518,8 @@ when the function is used.</p>
 <li><a class="reference internal" href="#mipac.errors.base.APIError"><code class="docutils literal notranslate"><span class="pre">APIError</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#credentialserror">CredentialsError</a><ul>
-<li><a class="reference internal" href="#mipac.errors.base.CredentialsError"><code class="docutils literal notranslate"><span class="pre">CredentialsError</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#notexistrequireddata">NotExistRequiredData</a><ul>
 <li><a class="reference internal" href="#mipac.errors.base.NotExistRequiredData"><code class="docutils literal notranslate"><span class="pre">NotExistRequiredData</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#parametererror">ParameterError</a><ul>
-<li><a class="reference internal" href="#mipac.errors.base.ParameterError"><code class="docutils literal notranslate"><span class="pre">ParameterError</span></code></a></li>
 </ul>
 </li>
 </ul>
