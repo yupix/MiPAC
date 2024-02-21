@@ -3,13 +3,29 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from mipac.abstract.manager import AbstractManager
-from mipac.actions.follow import FollowActions, FollowRequestActions
+from mipac.actions.follow import ClientFollowActions, FollowActions, FollowRequestActions
 from mipac.http import HTTPClient
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
 
 __all__ = ("FollowManager", "FollowRequestManager")
+
+
+class ClientFollowManager(AbstractManager):
+    def __init__(self, user_id: str, *, session: HTTPClient, client: ClientManager):
+        # self.request: ClientFollowRequestManager = ClientFollowRequestManager(
+        #     session=session, client=client
+        # )
+        self.__action: ClientFollowActions = ClientFollowActions(
+            user_id=user_id,
+            session=session,
+            client=client,
+        )
+
+    @property
+    def action(self) -> ClientFollowActions:
+        return self.__action
 
 
 class FollowManager(AbstractManager):

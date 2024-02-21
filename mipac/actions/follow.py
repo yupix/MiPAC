@@ -1,26 +1,79 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, override
 
 from mipac.abstract.action import AbstractAction
-from mipac.http import Route
+from mipac.http import HTTPClient, Route
 from mipac.models.follow import FollowRequest
 from mipac.models.user import PartialUser
 from mipac.types.follow import IFollowRequest
 
 if TYPE_CHECKING:
-    from mipac.http import HTTPClient
     from mipac.manager.client import ClientManager
     from mipac.types.user import IPartialUser
 
 
-class FollowActions(AbstractAction):
-    def __init__(self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager):
-        self.__user_id: str | None = user_id
-        self.__session = session
-        self.__client = client
+class SharedFollowActions(AbstractAction):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
+        self._session = session
+        self._client = client
 
-    async def add(self, user_id: str | None = None) -> PartialUser:
+    async def add(self, *, user_id: str) -> PartialUser:
+        """
+        Follow a user
+
+        Returns
+        -------
+        UserLite:
+            The user that you followed
+        """
+        data = {"userId": user_id}
+        res: IPartialUser = await self._session.request(
+            Route("POST", "/api/following/create"),
+            json=data,
+            auth=True,
+            lower=True,
+        )
+        return PartialUser(res, client=self._client)
+
+    async def remove(self, *, user_id: str) -> PartialUser:
+        """
+        Unfollow a user
+
+        Returns
+        -------
+        PartialUser
+            The user that you unfollowed
+        """
+        data = {"userId": user_id}
+        raw_user: IPartialUser = await self._session.request(
+            Route("POST", "/api/following/delete"), json=data, auth=True
+        )
+        return PartialUser(raw_user=raw_user, client=self._client)
+
+    async def invalidate(self, *, user_id: str) -> PartialUser:
+        """
+        Make the user unfollows you
+
+        Returns
+        -------
+        PartialUser
+            The user that followed you
+        """
+        data = {"userId": user_id}
+        res: IPartialUser = await self._session.request(
+            Route("POST", "/api/following/invalidate"), json=data, auth=True
+        )
+        return PartialUser(res, client=self._client)
+
+
+class ClientFollowActions(SharedFollowActions):
+    def __init__(self, user_id: str, *, session: HTTPClient, client: ClientManager):
+        super().__init__(session=session, client=client)
+        self.__user_id: str = user_id
+
+    @override
+    async def add(self, *, user_id: str | None = None) -> PartialUser:
         """
         Follow a user
 
@@ -32,16 +85,10 @@ class FollowActions(AbstractAction):
 
         user_id = user_id or self.__user_id
 
-        data = {"userId": user_id}
-        res: IPartialUser = await self.__session.request(
-            Route("POST", "/api/following/create"),
-            json=data,
-            auth=True,
-            lower=True,
-        )
-        return PartialUser(res, client=self.__client)
+        return await super().add(user_id=user_id)
 
-    async def remove(self, user_id: str | None = None) -> PartialUser:
+    @override
+    async def remove(self, *, user_id: str | None = None) -> PartialUser:
         """
         Unfollow a user
 
@@ -53,13 +100,10 @@ class FollowActions(AbstractAction):
 
         user_id = user_id or self.__user_id
 
-        data = {"userId": user_id}
-        raw_user: IPartialUser = await self.__session.request(
-            Route("POST", "/api/following/delete"), json=data, auth=True
-        )
-        return PartialUser(raw_user=raw_user, client=self.__client)
+        return await super().remove(user_id=user_id)
 
-    async def invalidate(self, user_id: str | None = None) -> PartialUser:
+    @override
+    async def invalidate(self, *, user_id: str | None = None) -> PartialUser:
         """
         Make the user unfollows you
 
@@ -71,18 +115,19 @@ class FollowActions(AbstractAction):
 
         user_id = user_id or self.__user_id
 
-        data = {"userId": user_id}
-        res: IPartialUser = await self.__session.request(
-            Route("POST", "/api/following/invalidate"), json=data, auth=True
-        )
-        return PartialUser(res, client=self.__client)
+        return await super().invalidate(user_id=user_id)
+
+
+class FollowActions(SharedFollowActions):
+    def __init__(self, *, session: HTTPClient, client: ClientManager):
+        super().__init__(session=session, client=client)
 
 
 class FollowRequestActions(AbstractAction):
     def __init__(self, user_id: str | None = None, *, session: HTTPClient, client: ClientManager):
         self.__user_id: str | None = user_id
-        self.__session = session
-        self.__client = client
+        self._session = session
+        self._client = client
 
     async def get_all(self) -> list[FollowRequest]:
         """
@@ -94,12 +139,12 @@ class FollowRequestActions(AbstractAction):
             List of follow requests
         """
 
-        res: list[IFollowRequest] = await self.__session.request(
+        res: list[IFollowRequest] = await self._session.request(
             Route("POST", "/api/following/requests/list"),
             auth=True,
             lower=True,
         )
-        return [FollowRequest(follow_request=i, client=self.__client) for i in res]
+        return [FollowRequest(follow_request=i, client=self._client) for i in res]
 
     async def accept(self, user_id: str | None = None) -> bool:
         """
@@ -120,7 +165,7 @@ class FollowRequestActions(AbstractAction):
 
         data = {"userId": user_id}
         return bool(
-            await self.__session.request(
+            await self._session.request(
                 Route("POST", "/api/following/requests/accept"),
                 json=data,
                 auth=True,
@@ -146,7 +191,7 @@ class FollowRequestActions(AbstractAction):
 
         data = {"userId": user_id}
         return bool(
-            await self.__session.request(
+            await self._session.request(
                 Route("POST", "/api/following/requests/reject"),
                 json=data,
                 auth=True,
@@ -171,10 +216,10 @@ class FollowRequestActions(AbstractAction):
         user_id = user_id or self.__user_id
 
         data = {"userId": user_id}
-        res: IPartialUser = await self.__session.request(
+        res: IPartialUser = await self._session.request(
             Route("POST", "/api/following/requests/cancel"),
             json=data,
             auth=True,
             lower=True,
         )
-        return PartialUser(res, client=self.__client)
+        return PartialUser(res, client=self._client)

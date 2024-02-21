@@ -6,7 +6,7 @@ from mipac.abstract.manager import AbstractManager
 from mipac.actions.user import ClientUserActions, UserActions
 from mipac.http import HTTPClient
 from mipac.manager.blocking import BlockingManager, ClientBlockingManager
-from mipac.manager.follow import FollowManager
+from mipac.manager.follow import ClientFollowManager, FollowManager
 from mipac.manager.users.list import (
     ClientPartialUserListManager,
     ClientUserListManager,
@@ -29,7 +29,9 @@ class ClientUserManager(AbstractManager):
         self.__action: ClientUserActions = ClientUserActions(
             user=user, session=session, client=client
         )
-        # self.follow: FollowManager = FollowManager(session=session, client=client)  TODO: Client版のFollowManagerを作る
+        self.follow: ClientFollowManager = ClientFollowManager(
+            user_id=user.id, session=session, client=client
+        )
         self.mute: ClientMuteManager = ClientMuteManager(
             user_id=user.id, session=session, client=client
         )
