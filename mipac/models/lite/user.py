@@ -297,6 +297,17 @@ class PartialUser[PU: IPartialUser]:
         """
         return self._client._create_client_user_manager(self)
 
+    @property
+    def _get_mention(self) -> str:  # TODO: モデルに移す
+        """対象のユーザーのメンションを取得します
+
+        Returns
+        -------
+        str
+            メンション
+        """
+        return f"@{self.username}@{self.host}" if self.instance else f"@{self.username}"
+
     def _get(self, key: str) -> Any | None:
         return self._raw_user.get(key)
 
