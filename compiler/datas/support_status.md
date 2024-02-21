@@ -1,4 +1,6 @@
-## SUPPORTED ENDPOINTS (139/367)
+## SUPPORTED ENDPOINTS (144/367)
+- [x] /admin/accounts/create
+- [x] /admin/accounts/delete
 - [x] /admin/ad/create
 - [x] /admin/ad/list
 - [x] /admin/drive/clean-remote-files
@@ -12,6 +14,7 @@
 - [x] /admin/resolve-abuse-user-report
 - [x] /admin/send-email
 - [x] /admin/show-moderation-logs
+- [x] /admin/suspend-user
 - [x] /admin/unsuspend-user
 - [x] /admin/update-user-note
 - [x] /admin/roles/create
@@ -53,6 +56,8 @@
 - [x] /notes/polls/vote
 - [x] /notes/reactions/create
 - [x] /notes/reactions/delete
+- [x] /notes/search-by-tag
+- [x] /notes/search
 - [x] /notes/unrenote
 - [x] /users/lists/delete
 - [x] /users/lists/pull
@@ -67,8 +72,6 @@
 ## Not supported endpoints
 
 - [ ] /admin/abuse-user-reports
-- [ ] /admin/accounts/create
-- [ ] /admin/accounts/delete
 - [ ] /admin/ad/delete
 - [ ] /admin/ad/update
 - [ ] /admin/announcements/create
@@ -108,7 +111,6 @@
 - [ ] /admin/server-info
 - [ ] /admin/show-user
 - [ ] /admin/show-users
-- [ ] /admin/suspend-user
 - [ ] /admin/delete-account
 - [ ] /admin/roles/delete
 - [ ] /admin/roles/update
@@ -207,8 +209,6 @@
 - [ ] /notes/conversation
 - [ ] /notes/featured
 - [ ] /notes/global-timeline
-- [ ] /notes/search-by-tag
-- [ ] /notes/search
 - [ ] /notes/thread-muting/create
 - [ ] /notes/thread-muting/delete
 - [ ] /notifications/create

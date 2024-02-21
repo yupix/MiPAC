@@ -11,13 +11,13 @@
                 "path": "/admin/accounts/create",
                 "request_body_hash": "1e41c87931385dd3cf7555c9a467d7d2a7ad385d06b65c9ba5fa8fc41fd2fff6",
                 "response_body_hash": "4cca43cad58263d213ec8740c853481b82de318e6a852eeabda66424633449ee",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/accounts/delete": {
                 "path": "/admin/accounts/delete",
                 "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/ad/create": {
                 "path": "/admin/ad/create",
@@ -347,7 +347,7 @@
                 "path": "/admin/suspend-user",
                 "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/unsuspend-user": {
                 "path": "/admin/unsuspend-user",
@@ -1421,13 +1421,13 @@
                 "path": "/notes/search-by-tag",
                 "request_body_hash": "7c5c6603d6319a53b7516d513c7756a96342dd380ad23be2ab2c4301d2bdb8f9",
                 "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/notes/search": {
                 "path": "/notes/search",
                 "request_body_hash": "260e81d6bf3df1911a673a60beccffb32238e98088fe19fd7c821170ff91c574",
                 "response_body_hash": "86ddac11bc58f705040fff2ff6d9a5579183a113739306826e2325d8509e9844",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/notes/show": {
                 "path": "/notes/show",
