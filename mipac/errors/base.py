@@ -34,11 +34,3 @@ class APIError(Exception):
 
 class NotExistRequiredData(Exception):
     """クラスの中に必要なデータが不足している"""
-
-
-class ParameterError(Exception):
-    """引数に関するエラー"""
-
-
-class CredentialsError(Exception):
-    """認証情報に関するエラー"""

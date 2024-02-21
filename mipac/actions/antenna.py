@@ -30,10 +30,6 @@ class SharedAntennaActions(AbstractAction):
         antenna_id : str | None, optional
             target identifier
 
-        Raises
-        ------
-        ParameterError
-            antenna id is required
         Returns
         -------
         bool
@@ -58,11 +54,6 @@ class SharedAntennaActions(AbstractAction):
         -------
         Antenna
             antenna object
-
-        Raises
-        ------
-        ParameterError
-            antenna id is required
         """
         body = {"antennaId": antenna_id}
         res_antenna: IAntenna = await self._session.request(
@@ -218,10 +209,6 @@ class ClientAntennaActions(SharedAntennaActions):
         antenna_id : str | None, optional
             target identifier
 
-        Raises
-        ------
-        ParameterError
-            antenna id is required
         Returns
         -------
         bool
@@ -244,11 +231,6 @@ class ClientAntennaActions(SharedAntennaActions):
         -------
         Antenna
             antenna object
-
-        Raises
-        ------
-        ParameterError
-            antenna id is required
         """
         antenna_id = antenna_id or self.__antenna_id
 
