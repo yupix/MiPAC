@@ -917,13 +917,13 @@
                 "path": "/following/create",
                 "request_body_hash": "b6e2b84e81ed0fd712448e6d36f5b5f94659df8cf63110e3d19b6b7c7e869535",
                 "response_body_hash": "f2e8b6f4f9b57a93d609ea5ef82ce130dd6bf719f0ed7c1c13d436afedc01878",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/following/delete": {
                 "path": "/following/delete",
                 "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
                 "response_body_hash": "3182c580cb82ae6b57462fd5cb18b4fbd57a90cc931e0eb34fd34b0ddc22e337",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/following/update": {
                 "path": "/following/update",

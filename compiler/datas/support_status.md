@@ -1,4 +1,4 @@
-## SUPPORTED ENDPOINTS (137/367)
+## SUPPORTED ENDPOINTS (139/367)
 - [x] /admin/ad/create
 - [x] /admin/ad/list
 - [x] /admin/drive/clean-remote-files
@@ -39,6 +39,8 @@
 - [x] /drive/files/update
 - [x] /drive/files/upload-from-url
 - [x] /drive/folders/delete
+- [x] /following/create
+- [x] /following/delete
 - [x] /invite/delete
 - [x] /emojis
 - [x] /emoji
@@ -160,8 +162,6 @@
 - [ ] /federation/show-instance
 - [ ] /federation/update-remote-user
 - [ ] /federation/users
-- [ ] /following/create
-- [ ] /following/delete
 - [ ] /following/update
 - [ ] /following/update-all
 - [ ] /following/invalidate
