@@ -3683,6 +3683,8 @@ Methods</span><ul>
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.fetch">fetch</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get">get</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="method">
+def</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_all_search">get_all_search</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_featured">get_featured</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
@@ -3691,6 +3693,8 @@ async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_mentions">get_mentions</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.get_time_line">get_time_line</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.note.NoteActions.search">search</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="method">
 def</span><a class="reference internal" href="#mipac.actions.note.NoteActions.send">send</a></li></ul>
 </div></div><dl class="py class">
@@ -3729,6 +3733,34 @@ def</span><a class="reference internal" href="#mipac.actions.note.NoteActions.se
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.note.NoteActions.get_all_search">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.note.NoteActions.get_all_search" title="Link to this definition">#</a></dt>
+<dd><p>ノートを検索します</p>
+<p>Endpoint: <cite>/api/notes/search</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 検索クエリ</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – このIDより後のノートを取得します</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – このIDより前のノートを取得します</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>default=10</em>) – 取得するノートの数</p></li>
+<li><p><strong>offset</strong> (<em>int</em><em>, </em><em>default=0</em>) – オフセット</p></li>
+<li><p><strong>host</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – 対象のサーバー
+localhostは . で表現します</p></li>
+<li><p><strong>user_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – 対象のユーザー</p></li>
+<li><p><strong>channel_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – 対象のチャンネル</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>検索結果</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AsyncGenerator[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>, None]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3821,6 +3853,34 @@ def</span><a class="reference internal" href="#mipac.actions.note.NoteActions.se
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Notes</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.note.NoteActions.search">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.note.NoteActions.search" title="Link to this definition">#</a></dt>
+<dd><p>ノートを検索します</p>
+<p>Endpoint: <cite>/api/notes/search</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 検索クエリ</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – このIDより後のノートを取得します</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – このIDより前のノートを取得します</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>default=10</em>) – 取得するノートの数</p></li>
+<li><p><strong>offset</strong> (<em>int</em><em>, </em><em>default=0</em>) – オフセット</p></li>
+<li><p><strong>host</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – 対象のサーバー
+localhostは . で表現します</p></li>
+<li><p><strong>user_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – 対象のユーザー</p></li>
+<li><p><strong>channel_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) – 対象のチャンネル</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>検索結果</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a>]</p>
@@ -11003,10 +11063,12 @@ when the function is used.</p>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions"><code class="docutils literal notranslate"><span class="pre">NoteActions</span></code></a><ul>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.fetch"><code class="docutils literal notranslate"><span class="pre">NoteActions.fetch()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get"><code class="docutils literal notranslate"><span class="pre">NoteActions.get()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_all_search"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_all_search()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_featured"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_featured()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_global_time_line"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_global_time_line()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_mentions"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_mentions()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.get_time_line"><code class="docutils literal notranslate"><span class="pre">NoteActions.get_time_line()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.note.NoteActions.search"><code class="docutils literal notranslate"><span class="pre">NoteActions.search()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.note.NoteActions.send"><code class="docutils literal notranslate"><span class="pre">NoteActions.send()</span></code></a></li>
 </ul>
 </li>
