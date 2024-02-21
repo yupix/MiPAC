@@ -1578,6 +1578,123 @@ class NoteActions(SharedNoteActions):
         )
         return [Note(raw_note, client=self._client) for raw_note in raw_notes]
 
+    async def search(
+        self,
+        query: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        offset: int = 0,
+        host: str | None = None,
+        user_id: str | None = None,
+        channel_id: str | None = None,
+    ):  # それぞれのIDに合わせたメソッドをactionに実装する
+        """ノートを検索します
+
+        Endpoint: `/api/notes/search`
+
+        Parameters
+        ----------
+        query : str
+            検索クエリ
+        since_id : str | None, default=None
+            このIDより後のノートを取得します
+        until_id : str | None, default=None
+            このIDより前のノートを取得します
+        limit : int, default=10
+            取得するノートの数
+        offset : int, default=0
+            オフセット
+        host : str | None, default=None
+            対象のサーバー
+            localhostは . で表現します
+        user_id : str | None, default=None
+            対象のユーザー
+        channel_id : str | None, default=None
+            対象のチャンネル
+
+        Returns
+        -------
+        list[Note]
+            検索結果
+        """
+        body = {
+            "query": query,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "offset": offset,
+            "host": host,
+            "userId": user_id,
+            "channelId": channel_id,
+        }
+
+        raw_notes: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/search"), json=body
+        )
+
+        return [Note(raw_note, client=self._client) for raw_note in raw_notes]
+
+    async def get_all_search(
+        self,
+        query: str,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        limit: int = 10,
+        offset: int = 0,
+        host: str | None = None,
+        user_id: str | None = None,
+        channel_id: str | None = None,
+    ) -> AsyncGenerator[Note, None]:
+        """ノートを検索します
+
+        Endpoint: `/api/notes/search`
+
+        Parameters
+        ----------
+        query : str
+            検索クエリ
+        since_id : str | None, default=None
+            このIDより後のノートを取得します
+        until_id : str | None, default=None
+            このIDより前のノートを取得します
+        limit : int, default=10
+            取得するノートの数
+        offset : int, default=0
+            オフセット
+        host : str | None, default=None
+            対象のサーバー
+            localhostは . で表現します
+        user_id : str | None, default=None
+            対象のユーザー
+        channel_id : str | None, default=None
+            対象のチャンネル
+
+        Returns
+        -------
+        AsyncGenerator[Note, None]
+            検索結果
+        """
+        body = {
+            "query": query,
+            "sinceId": since_id,
+            "untilId": until_id,
+            "limit": limit,
+            "offset": offset,
+            "host": host,
+            "userId": user_id,
+            "channelId": channel_id,
+        }
+
+        pagination = Pagination[INote](
+            http_client=self._session, route=Route("POST", "/api/notes/search"), json=body
+        )
+
+        while pagination.is_final is False:
+            raw_notes: list[INote] = await pagination.next()
+            for raw_note in raw_notes:
+                yield Note(raw_note, client=self._client)
+
     @deprecated
     async def send(
         self,
