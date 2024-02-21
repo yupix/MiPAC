@@ -6237,10 +6237,13 @@ The <cite>fetch</cite> method is recommended if you want up-to-date user informa
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.user.UserActions.get_mention">
 <span class="sig-name descname"><span class="pre">get_mention</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mipac.actions.user.UserActions.get_mention" title="Link to this definition">#</a></dt>
-<dd><p>Get mention name of user.</p>
+<dd><p>対象のユーザーのメンションを取得します</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.6.3: </span><code class="xref py py-meth docutils literal notranslate"><span class="pre">mipac.models.user.PartialUser._get_mention()</span></code> を使用することを推奨します。</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user</strong> (<em>Optional</em><em>[</em><em>User</em><em>]</em><em>, </em><em>default=None</em>) – The object of the user whose mentions you want to retrieve</p>
+<dd class="field-odd"><p><strong>user</strong> (<a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><em>PartialUser</em></a>) – 対象のユーザー</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>メンション</p>
