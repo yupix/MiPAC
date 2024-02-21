@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.user import ClientUserActions, UserActions
 from mipac.http import HTTPClient
+from mipac.manager.admins.user import AdminUserManager, ClientAdminUserManager
 from mipac.manager.blocking import BlockingManager, ClientBlockingManager
 from mipac.manager.follow import ClientFollowManager, FollowManager
 from mipac.manager.users.list import (
@@ -37,6 +38,9 @@ class ClientUserManager(AbstractManager):
         )
         self.block = ClientBlockingManager(user_id=user.id, session=session, client=client)
         self.list = ClientPartialUserListManager(user_id=user.id, session=session, client=client)
+        self.admin: ClientAdminUserManager = ClientAdminUserManager(
+            user_id=user.id, session=session, client=client
+        )
 
     @property
     def action(self) -> ClientUserActions:
@@ -51,6 +55,7 @@ class UserManager(AbstractManager):
         self.mute: MuteManager = MuteManager(session=session, client=client)
         self.block = BlockingManager(session=session, client=client)
         self.list = UserListManager(session=session, client=client)
+        self.admin: AdminUserManager = AdminUserManager(session=session, client=client)
         self.__actions: UserActions = UserActions(session=session, client=client)
 
     @property
