@@ -43,20 +43,26 @@ class SharedFollowActions(AbstractAction):
         """
         return await self.create(user_id=user_id)
 
+    async def delete(self, *, user_id: str) -> PartialUser:
+        data = {"userId": user_id}
+        raw_user: IPartialUser = await self._session.request(
+            Route("POST", "/api/following/delete"), json=data, auth=True
+        )
+        return PartialUser(raw_user=raw_user, client=self._client)
+
+    @deprecated
     async def remove(self, *, user_id: str) -> PartialUser:
-        """
-        Unfollow a user
+        """対象のユーザーのフォローを解除します
+
+        .. deprecated:: 0.6.1
+            Use :meth:`mipac.actions.follow.SharedFollowActions.delete` instead.
 
         Returns
         -------
         PartialUser
             The user that you unfollowed
         """
-        data = {"userId": user_id}
-        raw_user: IPartialUser = await self._session.request(
-            Route("POST", "/api/following/delete"), json=data, auth=True
-        )
-        return PartialUser(raw_user=raw_user, client=self._client)
+        return await self.delete(user_id=user_id)
 
     async def invalidate(self, *, user_id: str) -> PartialUser:
         """
@@ -88,6 +94,10 @@ class ClientFollowActions(SharedFollowActions):
         user_id = user_id or self.__user_id
 
         return await super().add(user_id=user_id)
+
+    @override
+    async def delete(self, *, user_id: str) -> PartialUser:
+        return await super().delete(user_id=user_id)
 
     @override
     async def remove(self, *, user_id: str | None = None) -> PartialUser:
