@@ -2414,11 +2414,19 @@ Attributes</span><ul>
 <dd></dd></dl>
 
 </section>
+<section id="clientfollowmanager">
+<h3>ClientFollowManager<a class="headerlink" href="#clientfollowmanager" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.manager.follow.ClientFollowManager"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.manager.follow.ClientFollowManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.follow.</span></span><span class="sig-name descname"><span class="pre">ClientFollowManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.follow.ClientFollowManager" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="followmanager">
 <h3>FollowManager<a class="headerlink" href="#followmanager" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.manager.follow.FollowManager"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.manager.follow.FollowManager">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.follow.</span></span><span class="sig-name descname"><span class="pre">FollowManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.follow.FollowManager" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.follow.</span></span><span class="sig-name descname"><span class="pre">FollowManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.follow.FollowManager" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -3053,25 +3061,28 @@ async</span><a class="reference internal" href="#mipac.actions.invite.SharedInvi
 </dd></dl>
 
 </section>
-<section id="followactions">
-<h3>FollowActions<a class="headerlink" href="#followactions" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.follow.FollowActions"><div class="py-attribute-table-column">
+<section id="clientfollowactions">
+<h3>ClientFollowActions<a class="headerlink" href="#clientfollowactions" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.actions.follow.ClientFollowActions"><div class="py-attribute-table-column">
 <span>
 Methods</span><ul>
 <li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.follow.FollowActions.add">add</a></li><li class="py-attribute-table-entry">
+async</span><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.add">add</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.follow.FollowActions.invalidate">invalidate</a></li><li class="py-attribute-table-entry">
+async</span><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.invalidate">invalidate</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.follow.FollowActions.remove">remove</a></li></ul>
+async</span><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.remove">remove</a></li></ul>
 </div></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.actions.follow.FollowActions">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.follow.</span></span><span class="sig-name descname"><span class="pre">FollowActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.follow.FollowActions" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="mipac.actions.follow.ClientFollowActions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.follow.</span></span><span class="sig-name descname"><span class="pre">ClientFollowActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.follow.ClientFollowActions" title="Link to this definition">#</a></dt>
 <dd><dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.follow.FollowActions.add">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowActions.add" title="Link to this definition">#</a></dt>
-<dd><p>Follow a user</p>
+<dt class="sig sig-object py" id="mipac.actions.follow.ClientFollowActions.add">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.ClientFollowActions.add" title="Link to this definition">#</a></dt>
+<dd><p>対象のユーザーをフォローします</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">バージョン 0.6.1 で非推奨: </span>Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">mipac.actions.follow.SharedFollowActions.create()</span></code> instead.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">戻り値<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The user that you followed</p>
@@ -3083,8 +3094,8 @@ async</span><a class="reference internal" href="#mipac.actions.follow.FollowActi
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.follow.FollowActions.invalidate">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invalidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowActions.invalidate" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="mipac.actions.follow.ClientFollowActions.invalidate">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invalidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.ClientFollowActions.invalidate" title="Link to this definition">#</a></dt>
 <dd><p>Make the user unfollows you</p>
 <dl class="field-list simple">
 <dt class="field-odd">戻り値<span class="colon">:</span></dt>
@@ -3097,9 +3108,12 @@ async</span><a class="reference internal" href="#mipac.actions.follow.FollowActi
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.follow.FollowActions.remove">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.FollowActions.remove" title="Link to this definition">#</a></dt>
-<dd><p>Unfollow a user</p>
+<dt class="sig sig-object py" id="mipac.actions.follow.ClientFollowActions.remove">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.ClientFollowActions.remove" title="Link to this definition">#</a></dt>
+<dd><p>対象のユーザーのフォローを解除します</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">バージョン 0.6.1 で非推奨: </span>Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">mipac.actions.follow.SharedFollowActions.delete()</span></code> instead.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">戻り値<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The user that you unfollowed</p>
@@ -3111,6 +3125,14 @@ async</span><a class="reference internal" href="#mipac.actions.follow.FollowActi
 </dd></dl>
 
 </dd></dl>
+
+</section>
+<section id="followactions">
+<h3>FollowActions<a class="headerlink" href="#followactions" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.actions.follow.FollowActions"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.actions.follow.FollowActions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.follow.</span></span><span class="sig-name descname"><span class="pre">FollowActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.follow.FollowActions" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="followrequestactions">
@@ -3191,6 +3213,72 @@ async</span><a class="reference internal" href="#mipac.actions.follow.FollowRequ
 </dd>
 <dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="sharedfollowactions">
+<h3>SharedFollowActions<a class="headerlink" href="#sharedfollowactions" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.actions.follow.SharedFollowActions"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="メソッド">
+def</span><a class="reference internal" href="#mipac.actions.follow.SharedFollowActions.add">add</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.follow.SharedFollowActions.invalidate">invalidate</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="メソッド">
+def</span><a class="reference internal" href="#mipac.actions.follow.SharedFollowActions.remove">remove</a></li></ul>
+</div></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.actions.follow.SharedFollowActions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.follow.</span></span><span class="sig-name descname"><span class="pre">SharedFollowActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.follow.SharedFollowActions" title="Link to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.follow.SharedFollowActions.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.SharedFollowActions.add" title="Link to this definition">#</a></dt>
+<dd><p>対象のユーザーをフォローします</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">バージョン 0.6.1 で非推奨: </span>Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">mipac.actions.follow.SharedFollowActions.create()</span></code> instead.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The user that you followed</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>UserLite</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.follow.SharedFollowActions.invalidate">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invalidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.SharedFollowActions.invalidate" title="Link to this definition">#</a></dt>
+<dd><p>Make the user unfollows you</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The user that followed you</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.follow.SharedFollowActions.remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.SharedFollowActions.remove" title="Link to this definition">#</a></dt>
+<dd><p>対象のユーザーのフォローを解除します</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">バージョン 0.6.1 で非推奨: </span>Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">mipac.actions.follow.SharedFollowActions.delete()</span></code> instead.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The user that you unfollowed</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -10610,6 +10698,10 @@ when the function is used.</p>
 <li><a class="reference internal" href="#mipac.manager.invite.InviteManager"><code class="docutils literal notranslate"><span class="pre">InviteManager</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#clientfollowmanager">ClientFollowManager</a><ul>
+<li><a class="reference internal" href="#mipac.manager.follow.ClientFollowManager"><code class="docutils literal notranslate"><span class="pre">ClientFollowManager</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#followmanager">FollowManager</a><ul>
 <li><a class="reference internal" href="#mipac.manager.follow.FollowManager"><code class="docutils literal notranslate"><span class="pre">FollowManager</span></code></a></li>
 </ul>
@@ -10849,13 +10941,17 @@ when the function is used.</p>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#followactions">FollowActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.follow.FollowActions"><code class="docutils literal notranslate"><span class="pre">FollowActions</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.actions.follow.FollowActions.add"><code class="docutils literal notranslate"><span class="pre">FollowActions.add()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.follow.FollowActions.invalidate"><code class="docutils literal notranslate"><span class="pre">FollowActions.invalidate()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.follow.FollowActions.remove"><code class="docutils literal notranslate"><span class="pre">FollowActions.remove()</span></code></a></li>
+<li><a class="reference internal" href="#clientfollowactions">ClientFollowActions</a><ul>
+<li><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions"><code class="docutils literal notranslate"><span class="pre">ClientFollowActions</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.add"><code class="docutils literal notranslate"><span class="pre">ClientFollowActions.add()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.invalidate"><code class="docutils literal notranslate"><span class="pre">ClientFollowActions.invalidate()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.remove"><code class="docutils literal notranslate"><span class="pre">ClientFollowActions.remove()</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#followactions">FollowActions</a><ul>
+<li><a class="reference internal" href="#mipac.actions.follow.FollowActions"><code class="docutils literal notranslate"><span class="pre">FollowActions</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#followrequestactions">FollowRequestActions</a><ul>
@@ -10864,6 +10960,15 @@ when the function is used.</p>
 <li><a class="reference internal" href="#mipac.actions.follow.FollowRequestActions.cancel"><code class="docutils literal notranslate"><span class="pre">FollowRequestActions.cancel()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.follow.FollowRequestActions.get_all"><code class="docutils literal notranslate"><span class="pre">FollowRequestActions.get_all()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.follow.FollowRequestActions.reject"><code class="docutils literal notranslate"><span class="pre">FollowRequestActions.reject()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sharedfollowactions">SharedFollowActions</a><ul>
+<li><a class="reference internal" href="#mipac.actions.follow.SharedFollowActions"><code class="docutils literal notranslate"><span class="pre">SharedFollowActions</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.follow.SharedFollowActions.add"><code class="docutils literal notranslate"><span class="pre">SharedFollowActions.add()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.follow.SharedFollowActions.invalidate"><code class="docutils literal notranslate"><span class="pre">SharedFollowActions.invalidate()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.follow.SharedFollowActions.remove"><code class="docutils literal notranslate"><span class="pre">SharedFollowActions.remove()</span></code></a></li>
 </ul>
 </li>
 </ul>

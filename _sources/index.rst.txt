@@ -740,6 +740,15 @@ InviteManager
     :members:
 
 
+ClientFollowManager
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.follow.ClientFollowManager
+
+.. autoclass:: mipac.manager.follow.ClientFollowManager
+    :members:
+
+
 FollowManager
 ~~~~~~~~~~~~~
 
@@ -1218,6 +1227,15 @@ SharedInviteActions
     :members:
 
 
+ClientFollowActions
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.follow.ClientFollowActions
+
+.. autoclass:: mipac.actions.follow.ClientFollowActions
+    :members:
+
+
 FollowActions
 ~~~~~~~~~~~~~
 
@@ -1233,6 +1251,15 @@ FollowRequestActions
 .. attributetable:: mipac.actions.follow.FollowRequestActions
 
 .. autoclass:: mipac.actions.follow.FollowRequestActions
+    :members:
+
+
+SharedFollowActions
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.follow.SharedFollowActions
+
+.. autoclass:: mipac.actions.follow.SharedFollowActions
     :members:
 
 
