@@ -30,6 +30,7 @@ from mipac.types.user import (
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
 from mipac.utils.pagination import Pagination
+from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -959,14 +960,17 @@ class UserActions(SharedUserActions):
             user_id=user_id, username=username, host=host, user_ids=user_ids, cache_override=True
         )
 
-    def get_mention(self, user: PartialUser) -> str:  # TODO: モデルに移す
-        """
-        Get mention name of user.
+    @deprecated
+    def get_mention(self, user: PartialUser) -> str:
+        """対象のユーザーのメンションを取得します
+
+        .. deprecated:: 0.6.3
+            :meth:`mipac.models.user.PartialUser._get_mention` を使用することを推奨します。
 
         Parameters
         ----------
-        user : Optional[User], default=None
-            The object of the user whose mentions you want to retrieve
+        user : PartialUser
+            対象のユーザー
 
         Returns
         -------
