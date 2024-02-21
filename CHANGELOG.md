@@ -1,5 +1,25 @@
 # Change Log
 
+## v0.6.1
+
+[compare changes](https://github.com/yupix/MiPAC/compare/0.6.0...v0.6.1)
+
+### 🚀 Enhancements
+
+- FollowActionsをClientと分けた ([dc00a0e](https://github.com/yupix/MiPAC/commit/dc00a0e))
+- Notes/search をサポート ([f3d04fb](https://github.com/yupix/MiPAC/commit/f3d04fb))
+
+### 🏡 Chore
+
+- FollowManagerでActionを再生成しないように ([bb93d03](https://github.com/yupix/MiPAC/commit/bb93d03))
+- FollowActions.add メソッドを非推奨に、代わりにcreateメソッドを追加 ([69c89a7](https://github.com/yupix/MiPAC/commit/69c89a7))
+- FollowActions.remove メソッドを非推奨に、代わりにdeleteメソッドを追加 ([df2ba4f](https://github.com/yupix/MiPAC/commit/df2ba4f))
+- サポート状況を更新 ([be5e608](https://github.com/yupix/MiPAC/commit/be5e608))
+
+### ❤️ Contributors
+
+- Yupix ([@yupix](http://github.com/yupix))
+
 ## [Unreleased]
 
 ## [0.6.0] 2023-02-20
