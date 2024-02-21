@@ -830,6 +830,15 @@ FederationManager
     :members:
 
 
+ClientFollowManager
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.follow.ClientFollowManager
+
+.. autoclass:: mipac.manager.follow.ClientFollowManager
+    :members:
+
+
 FollowManager
 ~~~~~~~~~~~~~
 
@@ -974,6 +983,15 @@ UsernameManager
     :members:
 
 
+AdminAccountManager
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.admins.accounts.AdminAccountManager
+
+.. autoclass:: mipac.manager.admins.accounts.AdminAccountManager
+    :members:
+
+
 AdminAdManager
 ~~~~~~~~~~~~~~
 
@@ -1070,6 +1088,15 @@ AdminUserManager
 .. attributetable:: mipac.manager.admins.user.AdminUserManager
 
 .. autoclass:: mipac.manager.admins.user.AdminUserManager
+    :members:
+
+
+ClientAdminUserManager
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.admins.user.ClientAdminUserManager
+
+.. autoclass:: mipac.manager.admins.user.ClientAdminUserManager
     :members:
 
 
@@ -1335,6 +1362,15 @@ FederationActions
     :members:
 
 
+ClientFollowActions
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.follow.ClientFollowActions
+
+.. autoclass:: mipac.actions.follow.ClientFollowActions
+    :members:
+
+
 FollowActions
 ~~~~~~~~~~~~~
 
@@ -1350,6 +1386,15 @@ FollowRequestActions
 .. attributetable:: mipac.actions.follow.FollowRequestActions
 
 .. autoclass:: mipac.actions.follow.FollowRequestActions
+    :members:
+
+
+SharedFollowActions
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.follow.SharedFollowActions
+
+.. autoclass:: mipac.actions.follow.SharedFollowActions
     :members:
 
 
@@ -1521,6 +1566,15 @@ UsernameActions
     :members:
 
 
+AdminAccountActions
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.accounts.AdminAccountActions
+
+.. autoclass:: mipac.actions.admins.accounts.AdminAccountActions
+    :members:
+
+
 AdminAdActions
 ~~~~~~~~~~~~~~
 
@@ -1635,6 +1689,24 @@ AdminUserActions
 .. attributetable:: mipac.actions.admins.user.AdminUserActions
 
 .. autoclass:: mipac.actions.admins.user.AdminUserActions
+    :members:
+
+
+ClientAdminUserActions
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.user.ClientAdminUserActions
+
+.. autoclass:: mipac.actions.admins.user.ClientAdminUserActions
+    :members:
+
+
+SharedAdminUserActions
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.user.SharedAdminUserActions
+
+.. autoclass:: mipac.actions.admins.user.SharedAdminUserActions
     :members:
 
 
@@ -2735,30 +2807,12 @@ APIError
     :members:
 
 
-CredentialsError
-~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.base.CredentialsError
-
-.. autoclass:: mipac.errors.base.CredentialsError
-    :members:
-
-
 NotExistRequiredData
 ~~~~~~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.errors.base.NotExistRequiredData
 
 .. autoclass:: mipac.errors.base.NotExistRequiredData
-    :members:
-
-
-ParameterError
-~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.base.ParameterError
-
-.. autoclass:: mipac.errors.base.ParameterError
     :members:
 
 
