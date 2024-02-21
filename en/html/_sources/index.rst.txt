@@ -1064,6 +1064,15 @@ AdminEmojiManager
     :members:
 
 
+AdminAccountManager
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.admins.accounts.AdminAccountManager
+
+.. autoclass:: mipac.manager.admins.accounts.AdminAccountManager
+    :members:
+
+
 AdminManager
 ~~~~~~~~~~~~
 
@@ -1124,6 +1133,15 @@ AdminUserManager
 .. attributetable:: mipac.manager.admins.user.AdminUserManager
 
 .. autoclass:: mipac.manager.admins.user.AdminUserManager
+    :members:
+
+
+ClientAdminUserManager
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.admins.user.ClientAdminUserManager
+
+.. autoclass:: mipac.manager.admins.user.ClientAdminUserManager
     :members:
 
 
@@ -1665,6 +1683,15 @@ AdminEmojiActions
     :members:
 
 
+AdminAccountActions
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.accounts.AdminAccountActions
+
+.. autoclass:: mipac.actions.admins.accounts.AdminAccountActions
+    :members:
+
+
 AdminActions
 ~~~~~~~~~~~~
 
@@ -1734,6 +1761,24 @@ AdminUserActions
 .. attributetable:: mipac.actions.admins.user.AdminUserActions
 
 .. autoclass:: mipac.actions.admins.user.AdminUserActions
+    :members:
+
+
+ClientAdminUserActions
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.user.ClientAdminUserActions
+
+.. autoclass:: mipac.actions.admins.user.ClientAdminUserActions
+    :members:
+
+
+SharedAdminUserActions
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.user.SharedAdminUserActions
+
+.. autoclass:: mipac.actions.admins.user.SharedAdminUserActions
     :members:
 
 
