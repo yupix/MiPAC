@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.admins.admin import AdminActions
 from mipac.http import HTTPClient
+from mipac.manager.admins.accounts import AdminAccountManager
 from mipac.manager.admins.ad import AdminAdManager, ClientAdminAdManager
 from mipac.manager.admins.announcement import (
     AdminAnnouncementManager,
@@ -33,6 +34,7 @@ class AdminManager(AbstractManager):
         self.role: AdminRolesManager = AdminRolesManager(session=session, client=client)
         self.invite: AdminInviteManager = AdminInviteManager(session=session, client=client)
         self.drive: AdminDriveManager = AdminDriveManager(session=session, client=client)
+        self.account: AdminAccountManager = AdminAccountManager(session=session, client=client)
 
     @property
     def action(self) -> AdminActions:
