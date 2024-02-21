@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from mipac.abstract.action import AbstractAction
+from mipac.actions.admins.user import SharedAdminUserActions
 from mipac.http import HTTPClient, Route
 from mipac.models.admin import IndexStat, ModerationLog, ServerInfo, UserIP
 from mipac.models.meta import AdminMeta
@@ -16,10 +16,9 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class AdminActions(AbstractAction):
+class AdminActions(SharedAdminUserActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
-        self.__session = session
-        self.__client = client
+        super().__init__(session=session, client=client)
 
     async def get_meta(self, detail: bool = False) -> AdminMeta:
         """
@@ -31,13 +30,13 @@ class AdminActions(AbstractAction):
         detail : bool, optional
             flag of detail, by default False
         """
-        res: IAdminMeta = await self.__session.request(
+        res: IAdminMeta = await self._session.request(
             Route("POST", "/api/admin/meta"),
             json={"detail": detail},  # 現状detailがあってもなんも変わらない
             auth=True,
             lower=True,
         )
-        return AdminMeta(res, client=self.__client)
+        return AdminMeta(res, client=self._client)
 
     async def update_user_note(self, user_id: str, text: str) -> bool:
         """
@@ -53,7 +52,7 @@ class AdminActions(AbstractAction):
         """
         body = {"userId": user_id, "text": text}
         return bool(
-            await self.__session.request(
+            await self._session.request(
                 Route("POST", "/api/admin/update-user-note"), auth=True, json=body
             )
         )
@@ -64,55 +63,12 @@ class AdminActions(AbstractAction):
         )
 
         return bool(
-            await self.__session.request(
+            await self._session.request(
                 Route("POST", "/api/admin/update-meta"),
                 json=body,
                 auth=True,
                 lower=True,
                 remove_none=False,
-            )
-        )
-
-    async def unsuspend_user(self, user_id: str) -> bool:
-        """
-        Unsuspend user with specified Id
-        Endpoint: `/api/admin/unsuspend-user`
-
-        Parameters
-        ----------
-        user_id : str
-            Id of user to unsuspend
-
-        Returns
-        -------
-        bool
-            success or failed
-        """
-
-        return bool(
-            await self.__session.request(
-                Route("POST", "/api/admin/unsuspend-user"), json={"userId": user_id}, auth=True
-            )
-        )
-
-    async def suspend_user(self, user_id: str) -> bool:
-        """
-        Suspends the user for the specified Id
-        Endpoint: `/api/admin/suspend-user`
-
-        Parameters
-        ----------
-        user_id : str
-            Id of user to suspend
-
-        Returns
-        -------
-        bool
-            success or failed
-        """
-        return bool(
-            await self.__session.request(
-                Route("POST", "/api/admin/suspend-user"), json={"userId": user_id}, auth=True
             )
         )
 
@@ -132,10 +88,10 @@ class AdminActions(AbstractAction):
             "userId": user_id,
         }
 
-        res_moderation_logs: list[IModerationLog] = await self.__session.request(
+        res_moderation_logs: list[IModerationLog] = await self._session.request(
             Route("POST", "/api/admin/show-moderation-logs"), json=body, auth=True
         )
-        return [ModerationLog(res, client=self.__client) for res in res_moderation_logs]
+        return [ModerationLog(res, client=self._client) for res in res_moderation_logs]
 
     async def get_all_moderation_logs(
         self,
@@ -154,17 +110,17 @@ class AdminActions(AbstractAction):
         }
 
         pagination = Pagination[IModerationLog](
-            self.__session, Route("POST", "/api/admin/show-moderation-logs"), json=body
+            self._session, Route("POST", "/api/admin/show-moderation-logs"), json=body
         )
 
         while pagination.is_final is False:
             res_moderation_logs: list[IModerationLog] = await pagination.next()
             for res_moderation_log in res_moderation_logs:
-                yield ModerationLog(res_moderation_log, client=self.__client)
+                yield ModerationLog(res_moderation_log, client=self._client)
 
     @cache("server_info")
     async def get_server_info(self, **kwargs) -> ServerInfo:
-        server_info_payload: IServerInfo = await self.__session.request(
+        server_info_payload: IServerInfo = await self._session.request(
             Route("POST", "/api/admin/server-info"), auth=True, lower=True
         )
         return ServerInfo(server_info_payload)
@@ -188,7 +144,7 @@ class AdminActions(AbstractAction):
         """
         body = {"to": to, "subject": subject, "text": text}
         return bool(
-            await self.__session.request(
+            await self._session.request(
                 Route("POST", "/api/admin/send-email"), auth=True, json=body
             )
         )
@@ -207,7 +163,7 @@ class AdminActions(AbstractAction):
         """
         body = {"reportId": report_id, "forward": forward}
         return bool(
-            await self.__session.request(
+            await self._session.request(
                 Route("POST", "/api/admin/resolve-abuse-user-report"), auth=True, json=body
             )
         )
@@ -227,33 +183,27 @@ class AdminActions(AbstractAction):
         str
             new password
         """
-        return await self.__session.request(
+        return await self._session.request(
             Route("POST", "/api/admin/reset-password"), auth=True, json={"userId": user_id}
         )
 
     async def get_table_stats(self) -> dict[str, ITableStats]:  # TODO: モデルにしてもいいかも
-        return await self.__session.request(Route("POST", "/api/admin/get-table-stats"), auth=True)
+        return await self._session.request(Route("POST", "/api/admin/get-table-stats"), auth=True)
 
     async def get_index_stats(self) -> list[IndexStat]:  # TODO: モデルを改めて確認する
-        res: list[IIndexStat] = await self.__session.request(
+        res: list[IIndexStat] = await self._session.request(
             Route("POST", "/api/admin/get-index-stats"), auth=True
         )
         return [IndexStat(i) for i in res]
 
     async def get_user_ips(self, user_id: str) -> list[UserIP]:
-        res: list[IUserIP] = await self.__session.request(
+        res: list[IUserIP] = await self._session.request(
             Route("POST", "/api/admin/get-user-ips"),
             auth=True,
             json={"userId": user_id},
             lower=True,
         )
         return [UserIP(i) for i in res]
-
-    async def show_user(self, user_id: str):
-        res: Any = await self.__session.request(
-            Route("POST", "/api/admin/show-user"), auth=True, json={"userId": user_id}
-        )
-        return res  # TODO: 専用のモデルを作るべき
 
     async def show_users(
         self,
@@ -274,7 +224,7 @@ class AdminActions(AbstractAction):
             "username": username,
             "hostname": hostname,
         }
-        res: Any = await self.__session.request(
+        res: Any = await self._session.request(
             Route("POST", "/api/admin/show-users"), auth=True, json=body
         )
 
