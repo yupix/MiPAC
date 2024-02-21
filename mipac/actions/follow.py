@@ -7,6 +7,8 @@ from mipac.http import HTTPClient, Route
 from mipac.models.follow import FollowRequest
 from mipac.models.user import PartialUser
 from mipac.types.follow import IFollowRequest
+from mipac.utils.format import remove_dict_missing
+from mipac.utils.util import MISSING, deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -18,23 +20,28 @@ class SharedFollowActions(AbstractAction):
         self._session = session
         self._client = client
 
+    async def create(self, with_replies: bool = MISSING, *, user_id: str) -> PartialUser:
+        data = remove_dict_missing({"userId": user_id, "withReplies": with_replies})
+
+        res: IPartialUser = await self._session.request(
+            Route("POST", "/api/following/create"),
+            json=data,
+        )
+        return PartialUser(res, client=self._client)
+
+    @deprecated
     async def add(self, *, user_id: str) -> PartialUser:
-        """
-        Follow a user
+        """対象のユーザーをフォローします
+
+        .. deprecated:: 0.6.1
+            Use :meth:`mipac.actions.follow.SharedFollowActions.create` instead.
 
         Returns
         -------
         UserLite:
             The user that you followed
         """
-        data = {"userId": user_id}
-        res: IPartialUser = await self._session.request(
-            Route("POST", "/api/following/create"),
-            json=data,
-            auth=True,
-            lower=True,
-        )
-        return PartialUser(res, client=self._client)
+        return await self.create(user_id=user_id)
 
     async def remove(self, *, user_id: str) -> PartialUser:
         """
@@ -73,46 +80,23 @@ class ClientFollowActions(SharedFollowActions):
         self.__user_id: str = user_id
 
     @override
+    async def create(self, with_replies: bool = MISSING, *, user_id: str) -> PartialUser:
+        return await super().create(with_replies, user_id=user_id)
+
+    @override
     async def add(self, *, user_id: str | None = None) -> PartialUser:
-        """
-        Follow a user
-
-        Returns
-        -------
-        UserLite:
-            The user that you followed
-        """
-
         user_id = user_id or self.__user_id
 
         return await super().add(user_id=user_id)
 
     @override
     async def remove(self, *, user_id: str | None = None) -> PartialUser:
-        """
-        Unfollow a user
-
-        Returns
-        -------
-        PartialUser
-            The user that you unfollowed
-        """
-
         user_id = user_id or self.__user_id
 
         return await super().remove(user_id=user_id)
 
     @override
     async def invalidate(self, *, user_id: str | None = None) -> PartialUser:
-        """
-        Make the user unfollows you
-
-        Returns
-        -------
-        PartialUser
-            The user that followed you
-        """
-
         user_id = user_id or self.__user_id
 
         return await super().invalidate(user_id=user_id)
