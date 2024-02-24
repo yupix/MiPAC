@@ -177,7 +177,6 @@ class ClientClipActions(SharedClipActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        get_all: bool = False,
         *,
         clip_id: str | None = None,
     ) -> list[Note]:
