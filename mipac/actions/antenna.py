@@ -113,15 +113,10 @@ class SharedAntennaActions(AbstractAction):
         until_date : str | None
             指定した日付のノートより前のノートを取得します, default=None
 
-        Returns
-        -------
-        AsyncGenerator[Note, None]
-            取得したノートのリスト
-
         Yields
         ------
         Iterator[AsyncGenerator[Note, None]]
-            The notes.
+            取得したノートのリスト
         """
         body = remove_dict_empty(
             {
