@@ -1,5 +1,30 @@
 # Change Log
 
+## v0.6.3
+
+[compare changes](https://github.com/yupix/MiPAC/compare/0.6.2...v0.6.3)
+
+### 🚀 Enhancements
+
+- PartialUserに_get_mentionプロパティを追加 ([0e8f8b4](https://github.com/yupix/MiPAC/commit/0e8f8b4))
+- ClientAdminUserManagerにaccountを追加 ([3ff41ca](https://github.com/yupix/MiPAC/commit/3ff41ca))
+
+### 🩹 Fixes
+
+- インスタンス変数にアクセスできない ([1056071](https://github.com/yupix/MiPAC/commit/1056071))
+
+### 📖 Documentation
+
+- Update rst & po ([b8f6937](https://github.com/yupix/MiPAC/commit/b8f6937))
+
+### 🏡 Chore
+
+- UserActions.get_mention メソッドを非推奨に ([26d0f4e](https://github.com/yupix/MiPAC/commit/26d0f4e))
+
+### ❤️ Contributors
+
+- Yupix ([@yupix](http://github.com/yupix))
+
 ## v0.6.2
 
 [compare changes](https://github.com/yupix/MiPAC/compare/0.6.1...v0.6.2)
