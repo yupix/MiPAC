@@ -3750,42 +3750,6 @@ Config
     :members:
 
 
-Features
-~~~~~~~~
-
-.. attributetable:: mipac.config.Features
-
-.. autoclass:: mipac.config.Features
-    :members:
-
-
-IFeatures
-~~~~~~~~~
-
-.. attributetable:: mipac.config.IFeatures
-
-.. autoclass:: mipac.config.IFeatures
-    :members:
-
-
-ILimits
-~~~~~~~
-
-.. attributetable:: mipac.config.ILimits
-
-.. autoclass:: mipac.config.ILimits
-    :members:
-
-
-Limits
-~~~~~~
-
-.. attributetable:: mipac.config.Limits
-
-.. autoclass:: mipac.config.Limits
-    :members:
-
-
 MiFile
 ~~~~~~
 
