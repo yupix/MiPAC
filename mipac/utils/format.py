@@ -42,21 +42,6 @@ def str_to_datetime(data: str, format: str = "%Y-%m-%dT%H:%M:%S.%fZ") -> datetim
     return datetime.strptime(data, format)
 
 
-def remove_list_empty(data: list[Any]) -> list[Any]:
-    """
-    Parameters
-    ----------
-    data: dict
-        空のkeyを削除したいdict
-
-    Returns
-    -------
-    dict[str, Any]
-        空のkeyがなくなったdict
-    """
-    return [k for k in data if k]
-
-
 def remove_dict_empty(
     data: dict[str, Any], ignore_keys: list[str] | None = None
 ) -> dict[str, Any]:
@@ -144,15 +129,6 @@ def upper_to_lower(
                 upper_to_lower(i) if isinstance(i, dict) else i for i in field[default_key]
             ]
     return field
-
-
-def str_lower(text: str):
-    pattern = re.compile("[A-Z]")
-    large = [i.group().lower() for i in pattern.finditer(text)]
-    result: list[Any | str] = [None] * (len(large + pattern.split(text)))
-    result[::2] = pattern.split(text)
-    result[1::2] = ["_" + i.lower() for i in large]
-    return "".join(result)
 
 
 def bool_to_string(boolean: bool) -> str:
