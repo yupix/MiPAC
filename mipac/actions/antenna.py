@@ -96,6 +96,33 @@ class SharedAntennaActions(AbstractAction):
         *,
         antenna_id: str,
     ) -> AsyncGenerator[Note, None]:
+        """すべてのノートを取得します
+
+        Parameters
+        ----------
+        antenna_id : str
+            アンテナのID
+        limit : int, optional
+            一度に取得する件数, default=10
+        since_id : str | None
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : str | None
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : str | None
+            指定した日付のノートより前のノートを取得します, default=None
+
+        Returns
+        -------
+        AsyncGenerator[Note, None]
+            取得したノートのリスト
+
+        Yields
+        ------
+        Iterator[AsyncGenerator[Note, None]]
+            The notes.
+        """
         body = remove_dict_empty(
             {
                 "antennaId": antenna_id,
@@ -427,6 +454,13 @@ class AntennaActions(SharedAntennaActions):
         return Antenna(res_antenna, client=self._client)
 
     async def get_list(self) -> list[Antenna]:
+        """アンテナの一覧を取得します
+
+        Returns
+        -------
+        list[Antenna]
+            アンテナのリスト
+        """
         res_antennas: list[IAntenna] = await self._session.request(
             Route("POST", "/api/antennas/list"), auth=True
         )
