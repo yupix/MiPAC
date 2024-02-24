@@ -1,3 +1,5 @@
+"""クライアントを定義したモジュール"""
+
 from typing import Self
 
 from mipac.config import Config, config
@@ -7,6 +9,8 @@ from mipac.utils.log import LOGING_LEVEL_TYPE, setup_logging
 
 
 class Client:
+    """クライアントを定義したクラス"""
+
     def __init__(
         self,
         url: str,

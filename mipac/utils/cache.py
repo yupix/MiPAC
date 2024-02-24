@@ -5,7 +5,18 @@ DEFAULT_CACHE: dict[str, list[str]] = {}
 DEFAULT_CACHE_VALUE: dict[str, Any] = {}
 
 
-def set_cache(group: str, key: str, value: Any):
+def set_cache(group: str, key: str, value: Any) -> None:
+    """キャッシュを設定します
+
+    Parameters
+    ----------
+    group : str
+        キャッシュのグループ名
+    key : str
+        一意のキー
+    value : Any
+        設定する値
+    """
     if len(DEFAULT_CACHE.get(group, [])) > 50:
         del DEFAULT_CACHE[group][-1]
         del DEFAULT_CACHE_VALUE[key]
@@ -17,6 +28,8 @@ def set_cache(group: str, key: str, value: Any):
 
 
 def cache(group: str = "default", override: bool = False):
+    """キャッシュを行います"""
+
     def decorator(func):
         @wraps(func)
         async def wrapper(self, *args, **kwargs):
@@ -35,6 +48,7 @@ def cache(group: str = "default", override: bool = False):
 
 @lru_cache
 def cache_key_builder(func, cls, *args, **kwargs):
+    """キャッシュのキーを作成します"""
     ordered_kwargs = sorted(kwargs.items())
     key = (func.__module__ or "") + ".{0}" + f"{cls}" + str(args) + str(ordered_kwargs)
     return key

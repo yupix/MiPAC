@@ -1,3 +1,5 @@
+"""汎用的に使用する関数を定義したモジュール"""
+
 import functools
 import json
 import warnings
@@ -19,6 +21,8 @@ else:
 
 
 class Missing:
+    """値が存在しないことを示すクラス"""
+
     def __repr__(self) -> str:
         return "MISSING"
 
@@ -59,11 +63,7 @@ class DeprecatedClass:
 
 
 def deprecated(func):
-    """
-    This is a decorator which can be used to mark functions
-    as deprecated. It will result in a warning being emitted
-    when the function is used.
-    """
+    """指定した関数が非推奨であることを示す為のデコレータ"""
 
     @functools.wraps(func)
     def new_func(*args, **kwargs):
@@ -80,8 +80,7 @@ def deprecated(func):
 
 
 def check_multi_arg(*args: Any) -> bool:
-    """
-    複数の値を受け取り値が存在するかをboolで返します
+    """複数の値を受け取り値が存在するかをboolで返します
 
     Parameters
     ----------

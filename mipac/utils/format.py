@@ -6,6 +6,20 @@ from mipac.utils.util import Missing
 
 
 def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
+    """スネークケースをキャメルケースに変換します
+
+    Parameters
+    ----------
+    snake_str : str
+        変更したい文字列
+    replace_list : dict[str, str]
+        snake_strの特定の文字列を置き換える為の辞書
+
+    Returns
+    -------
+    str
+        変換後の文字列
+    """
     components: list[str] = snake_str.split("_")
     for i in range(len(components)):
         if components[i] in replace_list:
@@ -16,6 +30,21 @@ def snake_to_camel(snake_str: str, replace_list: dict[str, str]) -> str:
 def convert_dict_keys_to_camel(
     data: Mapping[Any, Any], replace_list: dict[str, str] | None = None
 ) -> Mapping[Any, Any]:
+    """dictに含まれるkeyをスネークケースからキャメルケースに変換します
+
+    Parameters
+    ----------
+    data : Mapping[Any, Any]
+        変更したいdict
+
+    replace_list : dict[str, str] | None, default=None
+        dictのkey名を特定の物に置き換える
+
+    Returns
+    -------
+    new_dict : Mapping[Any, Any]
+        変更後のdict
+    """
     if replace_list is None:
         replace_list = {}
     new_dict = {}
@@ -26,7 +55,8 @@ def convert_dict_keys_to_camel(
 
 
 def str_to_datetime(data: str, format: str = "%Y-%m-%dT%H:%M:%S.%fZ") -> datetime:
-    """
+    """文字列をdatetimeに変換します
+
     Parameters
     ----------
     data : str
@@ -45,7 +75,8 @@ def str_to_datetime(data: str, format: str = "%Y-%m-%dT%H:%M:%S.%fZ") -> datetim
 def remove_dict_empty(
     data: dict[str, Any], ignore_keys: list[str] | None = None
 ) -> dict[str, Any]:
-    """
+    """辞書から値がNoneのkeyを削除します
+
     Parameters
     ----------
     data: dict
@@ -66,7 +97,8 @@ def remove_dict_empty(
 
 
 def remove_dict_missing(data: dict[str, Any]) -> dict[str, Any]:
-    """
+    """辞書からMISSINGのkeyを削除します
+
     Parameters
     ----------
     data: dict
@@ -88,7 +120,8 @@ def upper_to_lower(
     nest: bool = True,
     replace_list: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """
+    """dictのkeyを小文字に変換します
+
     Parameters
     ----------
     data: dict[str, Any]
@@ -132,8 +165,7 @@ def upper_to_lower(
 
 
 def bool_to_string(boolean: bool) -> str:
-    """
-    boolを小文字にして文字列として返します
+    """boolを小文字にして文字列として返します
 
     Parameters
     ----------
