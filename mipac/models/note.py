@@ -81,7 +81,7 @@ class NoteReaction:
 
     @property
     def id(self) -> str | None:
-        """note reactionId
+        """Note reactionId
 
         Returns
         -------
@@ -92,7 +92,7 @@ class NoteReaction:
 
     @property
     def created_at(self) -> datetime | None:
-        """note createdAt
+        """Note createdAt
 
         Returns
         -------
@@ -107,7 +107,7 @@ class NoteReaction:
 
     @property
     def user(self) -> PartialUser:
-        """note user
+        """Note user
 
         Returns
         -------
@@ -118,7 +118,7 @@ class NoteReaction:
 
     @property
     def type(self) -> str | None:
-        """reaction type
+        """Reaction type
 
         Returns
         -------
@@ -144,7 +144,7 @@ class NoteChannel:
 
     @property
     def id(self) -> str:
-        """note channelId
+        """Note channelId
 
         Returns
         -------
@@ -155,7 +155,7 @@ class NoteChannel:
 
     @property
     def name(self) -> str:
-        """note channelName
+        """Note channelName
 
         Returns
         -------
@@ -166,7 +166,7 @@ class NoteChannel:
 
     @property
     def color(self) -> str:
-        """note channelColor
+        """Note channelColor
 
         Returns
         -------
@@ -177,7 +177,7 @@ class NoteChannel:
 
     @property
     def is_sensitive(self) -> bool:
-        """note channelIsSensitive
+        """Note channelIsSensitive
 
         Returns
         -------
@@ -188,7 +188,7 @@ class NoteChannel:
 
     @property
     def allow_renote_to_external(self) -> bool:
-        """note channelAllowRenoteToExternal
+        """Note channelAllowRenoteToExternal
 
         Returns
         -------
@@ -199,7 +199,7 @@ class NoteChannel:
 
     @property
     def user_id(self) -> str | None:
-        """note channelUserId
+        """Note channelUserId
 
         Returns
         -------
@@ -241,7 +241,7 @@ class Note:
 
     @property
     def created_at(self) -> datetime:
-        """note createdAt
+        """Note createdAt
 
         Returns
         -------
@@ -252,7 +252,7 @@ class Note:
 
     @property
     def deleted_at(self) -> datetime | None:
-        """note deletedAt
+        """Note deletedAt
 
         Returns
         -------
@@ -267,7 +267,7 @@ class Note:
 
     @property
     def text(self) -> str | None:
-        """note text
+        """Note text
 
         Returns
         -------
@@ -279,7 +279,7 @@ class Note:
     @property
     @deprecated
     def content(self) -> str | None:
-        """note content
+        """Note content
 
         .. deprecated:: 0.6.0
             Use :meth:`mipac.models.note.Note.text` instead.
@@ -293,7 +293,7 @@ class Note:
 
     @property
     def cw(self) -> str | None:
-        """note cw
+        """Note cw
 
         Returns
         -------
@@ -304,7 +304,7 @@ class Note:
 
     @property
     def user_id(self) -> str:
-        """note userId
+        """Note userId
 
         Returns
         -------
@@ -316,7 +316,7 @@ class Note:
     @property
     @deprecated
     def author(self) -> PartialUser:
-        """note author
+        """Note author
 
         .. deprecated:: 0.6.0
             Use :meth:`mipac.models.note.Note.user` instead.
@@ -331,7 +331,7 @@ class Note:
 
     @property
     def user(self) -> PartialUser:
-        """note author
+        """Note author
 
         Returns
         -------
@@ -342,7 +342,7 @@ class Note:
 
     @property
     def reply_id(self) -> str | None:
-        """note replyId
+        """Note replyId
 
         Returns
         -------
@@ -353,7 +353,7 @@ class Note:
 
     @property
     def renote_id(self) -> str | None:
-        """note renoteId
+        """Note renoteId
 
         Returns
         -------
@@ -364,7 +364,7 @@ class Note:
 
     @property
     def reply(self) -> Note | None:
-        """note reply
+        """Note reply
 
         Returns
         -------
@@ -379,7 +379,7 @@ class Note:
 
     @property
     def renote(self) -> Note | None:
-        """note renote
+        """Note renote
 
         Returns
         -------
@@ -394,7 +394,7 @@ class Note:
 
     @property
     def is_hidden(self) -> bool | None:
-        """note isHidden
+        """Note isHidden
 
         Returns
         -------
@@ -405,7 +405,7 @@ class Note:
 
     @property
     def visibility(self) -> INoteVisibility:
-        """note visibility
+        """Note visibility
 
         Returns
         -------
@@ -416,7 +416,7 @@ class Note:
 
     @property
     def mentions(self) -> list[str]:
-        """note mentions
+        """Note mentions
 
         Returns
         -------
@@ -427,7 +427,7 @@ class Note:
 
     @property
     def visible_user_ids(self) -> list[str]:
-        """note visibleUserIds
+        """Note visibleUserIds
 
         Returns
         -------
@@ -438,7 +438,7 @@ class Note:
 
     @property
     def file_ids(self) -> list[str]:
-        """note fileIds
+        """Note fileIds
 
         Returns
         -------
@@ -449,7 +449,7 @@ class Note:
 
     @property
     def files(self) -> list[File]:
-        """note files
+        """Note files
 
         Returns
         -------
@@ -460,7 +460,7 @@ class Note:
 
     @property
     def tags(self) -> list[str]:
-        """note tags
+        """Note tags
 
         Returns
         -------
@@ -471,7 +471,7 @@ class Note:
 
     @property
     def poll(self) -> Poll | None:
-        """note poll
+        """Note poll
 
         Returns
         -------
@@ -486,7 +486,7 @@ class Note:
 
     @property
     def emojis(self) -> dict[str, str]:
-        """note emojis
+        """Note emojis
 
         Returns
         -------
@@ -497,7 +497,7 @@ class Note:
 
     @property
     def channel_id(self) -> str | None:
-        """note channelId
+        """Note channelId
 
         Returns
         -------
@@ -508,7 +508,7 @@ class Note:
 
     @property
     def channel(self) -> NoteChannel | None:
-        """note channel
+        """Note channel
 
         Returns
         -------
@@ -523,7 +523,7 @@ class Note:
 
     @property
     def local_only(self) -> bool:
-        """note localOnly
+        """Note localOnly
 
         Returns
         -------
@@ -534,7 +534,7 @@ class Note:
 
     @property
     def reaction_acceptance(self) -> IReactionAcceptance:
-        """note reactionAcceptance
+        """Note reactionAcceptance
 
         Returns
         -------
@@ -545,7 +545,7 @@ class Note:
 
     @property
     def reactions(self) -> dict[str, int]:
-        """note reactions
+        """Note reactions
 
         Returns
         -------
@@ -556,7 +556,7 @@ class Note:
 
     @property
     def renote_count(self) -> int:
-        """note renoteCount
+        """Note renoteCount
 
         Returns
         -------
@@ -567,7 +567,7 @@ class Note:
 
     @property
     def replies_count(self) -> int:
-        """note repliesCount
+        """Note repliesCount
 
         Returns
         -------
@@ -578,7 +578,7 @@ class Note:
 
     @property
     def uri(self) -> str | None:
-        """note uri
+        """Note uri
 
         Returns
         -------
@@ -589,7 +589,7 @@ class Note:
 
     @property
     def url(self) -> str | None:
-        """note url
+        """Note url
 
         Returns
         -------
@@ -600,7 +600,7 @@ class Note:
 
     @property
     def reaction_and_user_pair_cache(self) -> dict[str, list[PartialUser]]:
-        """note reactionAndUserPairCache
+        """Note reactionAndUserPairCache
 
         Returns
         -------
@@ -619,7 +619,7 @@ class Note:
 
     @property
     def clipped_count(self) -> int | None:
-        """note clippedCount
+        """Note clippedCount
 
         Returns
         -------
@@ -630,7 +630,7 @@ class Note:
 
     @property
     def my_reaction(self) -> str | None:
-        """note myReaction
+        """Note myReaction
 
         Returns
         -------
@@ -641,7 +641,7 @@ class Note:
 
     @property
     def api(self) -> ClientNoteManager:
-        """note api
+        """Note api
 
         Returns
         -------

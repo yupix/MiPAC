@@ -417,7 +417,6 @@ class FolderActions(SharedFolderActions):
         list[Folder]
             The found folders
         """
-
         data = {"name": name, "parentId": parent_id}
         raw_folders: list[IFolder] = await self._session.request(
             Route("POST", "/api/drive/folders/find"),

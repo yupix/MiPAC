@@ -132,7 +132,6 @@ class FollowRequestActions(AbstractAction):
         list[FollowRequest]
             List of follow requests
         """
-
         res: list[IFollowRequest] = await self._session.request(
             Route("POST", "/api/following/requests/list"),
             auth=True,
@@ -154,7 +153,6 @@ class FollowRequestActions(AbstractAction):
         bool
             Whether the request was accepted
         """
-
         user_id = user_id or self.__user_id
 
         data = {"userId": user_id}
@@ -180,7 +178,6 @@ class FollowRequestActions(AbstractAction):
         bool
             Whether the request was rejected
         """
-
         user_id = user_id or self.__user_id
 
         data = {"userId": user_id}
@@ -206,7 +203,6 @@ class FollowRequestActions(AbstractAction):
         PartialUser
             The user that you canceled to follow
         """
-
         user_id = user_id or self.__user_id
 
         data = {"userId": user_id}

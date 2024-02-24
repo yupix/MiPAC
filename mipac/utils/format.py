@@ -163,6 +163,7 @@ def bool_to_string(boolean: bool) -> str:
     ----------
     boolean : bool
         変更したいbool値
+
     Returns
     -------
     true or false: str

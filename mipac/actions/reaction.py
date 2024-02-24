@@ -127,7 +127,6 @@ class ClientReactionActions(SharedReactionActions):
         bool
             success or not
         """
-
         note_id = note_id or self.__note_id
 
         return await super().add(reaction=reaction, note_id=note_id)

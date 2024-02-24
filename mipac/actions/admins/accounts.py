@@ -26,7 +26,6 @@ class AdminAccountActions(AbstractAction):
         password : str
             パスワード
         """
-
         data = {"username": username, "password": password}
         res = await self._session.request(
             Route("POST", "/api/admin/accounts/create"),

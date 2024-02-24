@@ -888,10 +888,7 @@ class UserActions(SharedUserActions):
         super().__init__(session=session, client=client)
 
     async def get_me(self) -> MeDetailed:
-        """
-        ログインしているユーザーの情報を取得します
-        """
-
+        """ログインしているユーザーの情報を取得します"""
         res: IMeDetailedSchema = await self._session.request(
             Route("POST", "/api/i"),
             lower=True,
@@ -923,7 +920,6 @@ class UserActions(SharedUserActions):
         host : str, default=None
             Hosts with target users
         """
-
         field = remove_dict_empty(
             {"userId": user_id, "username": username, "host": host, "userIds": user_ids}
         )
@@ -1005,7 +1001,6 @@ class UserActions(SharedUserActions):
         list[UserDetailedNotMe | MeDetailed | PartialUser]
             A list of users.
         """
-
         if limit > 100:
             raise ValueError("limit は100以下である必要があります")
 
@@ -1080,7 +1075,6 @@ class UserActions(SharedUserActions):
             Whether to return all users.
 
         """
-
         if limit > 100:
             raise ValueError("limit は100以下である必要があります")
 

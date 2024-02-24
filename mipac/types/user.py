@@ -111,9 +111,7 @@ class IUserSecurityKey(TypedDict):
 
 
 class IPartialUser(TypedDict):
-    """
-    Misskey Schema: `packedUserLiteSchema`
-    """
+    """Misskey Schema: `packedUserLiteSchema`"""
 
     id: str
     name: str | None
@@ -131,9 +129,7 @@ class IPartialUser(TypedDict):
 
 
 class IUserDetailedNotMeOnlySchema(TypedDict):
-    """
-    Misskey Schema: `packedUserDetailedNotMeOnlySchema`
-    """
+    """Misskey Schema: `packedUserDetailedNotMeOnlySchema`"""
 
     url: str | None
     uri: str | None

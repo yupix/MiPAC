@@ -192,7 +192,6 @@ class ClientFileActions(SharedFileActions):
         list[Note]
             The attached notes of the file
         """
-
         file_id = file_id or self.__file_ids
 
         return await super().get_attached_notes(
@@ -231,7 +230,6 @@ class ClientFileActions(SharedFileActions):
         bool
             削除に成功したかどうか
         """
-
         file_id = file_id or self.__file_ids
 
         return await super().delete(file_id=file_id)
@@ -316,7 +314,6 @@ class FileActions(SharedFileActions):
         list[File]
             The files of the drive
         """
-
         data = {
             "limit": limit,
             "sinceId": since_id,
@@ -372,7 +369,6 @@ class FileActions(SharedFileActions):
         bool
             存在するかしないか
         """
-
         data = {"md5": md5}
 
         res: bool = await self._session.request(
@@ -414,7 +410,6 @@ class FileActions(SharedFileActions):
         File
             アップロードしたファイル
         """
-
         if isinstance(file, io.IOBase):
             if (file.seekable() and file.readable()) is False:  # 書き込み/読み込みができるか確認
                 raise ValueError(f"File buffer {file!r} must be seekable and readable")
@@ -455,7 +450,6 @@ class FileActions(SharedFileActions):
         list[File]
             見つかったファイル
         """
-
         data = {"md5": md5}
 
         raw_files: list[IFile] = await self._session.request(
@@ -480,7 +474,6 @@ class FileActions(SharedFileActions):
         list[File]
             The found files
         """
-
         data = {"name": name, "folderId": folder_id}
 
         res: list[IFile] = await self._session.request(
@@ -505,7 +498,6 @@ class FileActions(SharedFileActions):
         File
             取得したファイル
         """
-
         data = {"fileId": file_id, "url": url}
 
         res: IFile = await self._session.request(
@@ -546,7 +538,6 @@ class FileActions(SharedFileActions):
         bool
             アップロードのリクエストに成功したかどうか
         """
-
         data = {
             "url": url,
             "folderId": folder_id,

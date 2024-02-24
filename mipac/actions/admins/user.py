@@ -139,7 +139,6 @@ class ClientAdminUserActions(SharedAdminUserActions):
         bool
             成功ならTrue
         """
-
         user_id = user_id or self.__user_id
 
         return await super().suspend(user_id=user_id)

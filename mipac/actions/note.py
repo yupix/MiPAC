@@ -338,7 +338,7 @@ class SharedNoteActions(AbstractAction):
         Endpoint: `/api/notes/replies`
 
         Parameters
-        ---------
+        ----------
         since_id : str | None, default=None
             since id
         until_id : str | None, default=None
@@ -377,7 +377,7 @@ class SharedNoteActions(AbstractAction):
         Endpoint: `/api/notes/replies`
 
         Parameters
-        ---------
+        ----------
         since_id : str | None, default=None
             since id
         until_id : str | None, default=None
@@ -536,7 +536,6 @@ class SharedNoteActions(AbstractAction):
             The ID list of files to be attached
         poll : MiPoll | None, default=None
         """
-
         body = create_note_body(
             text=text,
             visibility=visibility,
@@ -830,7 +829,6 @@ class ClientNoteActions(SharedNoteActions):
         list[Clip]
             Clips of the note
         """
-
         note_id = note_id or self._note_id
 
         return await super().get_clips(note_id=note_id)
@@ -970,7 +968,7 @@ class ClientNoteActions(SharedNoteActions):
         Endpoint: `/api/notes/replies`
 
         Parameters
-        ---------
+        ----------
         since_id : str | None, default=None
             since id
         until_id : str | None, default=None
@@ -1004,7 +1002,7 @@ class ClientNoteActions(SharedNoteActions):
         Endpoint: `/api/notes/replies`
 
         Parameters
-        ---------
+        ----------
         since_id : str | None, default=None
             since id
         until_id : str | None, default=None
@@ -1082,7 +1080,6 @@ class ClientNoteActions(SharedNoteActions):
         bool
             success or not
         """
-
         note_id = note_id or self._note_id
 
         return await super().add_clips(clip_id=clip_id, note_id=note_id)
@@ -1103,7 +1100,6 @@ class ClientNoteActions(SharedNoteActions):
         Note
             Renoted note
         """
-
         note_id = note_id or self._note_id
 
         return await super().create_renote(note_id=note_id)
@@ -1254,7 +1250,6 @@ class ClientNoteActions(SharedNoteActions):
         note_id: str | None, default=None
             Note IDs to target for renote and citations
         """
-
         note_id = note_id or self._note_id
 
         return await super().create_quote(
@@ -1969,7 +1964,9 @@ class NoteActions(SharedNoteActions):
         Returns
         -------
         list[Note]
-            Notes
+
+        Notes
+        -----
         """
         data = {
             "limit": limit,

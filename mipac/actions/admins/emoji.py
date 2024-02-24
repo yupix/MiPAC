@@ -152,7 +152,6 @@ class AdminEmojiActions(AbstractAction):
         NotExistRequiredData
             Idが不足している
         """
-
         emoji_id = emoji_id or self.__emoji_id
 
         if emoji_id is None:

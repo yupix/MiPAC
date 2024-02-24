@@ -44,6 +44,7 @@ class SharedClipActions(AbstractAction):
         clip_id: str,
     ) -> AsyncGenerator[Note, None]:
         """Get notes from a clip
+
         Parameters
         ----------
         clip_id : str | None, optional, by default None
@@ -158,7 +159,6 @@ class SharedClipActions(AbstractAction):
         bool
             True if the clip was updated, False otherwise
         """
-
         body = {"clipId": clip_id, "name": name, "isPublic": is_public, "description": description}
         result: IClip = await self._session.request(
             Route("POST", "/api/clips/update"), json=body, auth=True
@@ -196,6 +196,7 @@ class ClientClipActions(SharedClipActions):
         clip_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
         """Get notes from a clip
+
         Parameters
         ----------
         clip_id : str | None, optional, by default None
@@ -214,7 +215,6 @@ class ClientClipActions(SharedClipActions):
         AsyncGenerator[Note, None]
             The notes
         """
-
         clip_id = clip_id or self._clip_id
 
         async for note in super().get_all_notes(

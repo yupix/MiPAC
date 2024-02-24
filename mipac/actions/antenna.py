@@ -35,7 +35,6 @@ class SharedAntennaActions(AbstractAction):
         bool
             success or failure
         """
-
         body = {"antennaId": antenna_id}
         res: bool = await self._session.request(
             Route("POST", "/api/antennas/delete"), auth=True, json=body
@@ -322,7 +321,6 @@ class ClientAntennaActions(SharedAntennaActions):
         Antenna
             The created antenna.
         """
-
         antenna_id = antenna_id or self.__antenna_id
 
         return await super().update(
@@ -390,7 +388,6 @@ class AntennaActions(SharedAntennaActions):
         Antenna
             The created antenna.
         """
-
         if users is None:
             users = [""]
         if exclude_keywords is None:

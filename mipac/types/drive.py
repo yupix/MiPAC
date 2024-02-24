@@ -17,9 +17,7 @@ class IDriveStatus(TypedDict):
 
 
 class IFileProperties(TypedDict):
-    """
-    プロパティー情報
-    """
+    """プロパティー情報"""
 
     width: NotRequired[int]
     height: NotRequired[int]
@@ -28,9 +26,7 @@ class IFileProperties(TypedDict):
 
 
 class IFolder(TypedDict):
-    """
-    フォルダーの情報
-    """
+    """フォルダーの情報"""
 
     id: str
     created_at: str
@@ -42,9 +38,7 @@ class IFolder(TypedDict):
 
 
 class IFile(TypedDict):
-    """
-    ファイル情報
-    """
+    """ファイル情報"""
 
     id: str
     created_at: str

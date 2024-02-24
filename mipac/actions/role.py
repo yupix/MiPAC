@@ -86,7 +86,6 @@ class RoleActions(AbstractAction):
         AsyncGenerator[RoleUser, None]
             The role user data.
         """
-
         if limit > 100:
             raise ValueError("Limit cannot be greater than 100")
 
@@ -143,7 +142,6 @@ class RoleActions(AbstractAction):
         AsyncGenerator[Note, None]
             The note data.
         """
-
         if limit > 100:
             raise ValueError("Limit cannot be greater than 100")
 

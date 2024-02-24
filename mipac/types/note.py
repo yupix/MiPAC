@@ -99,9 +99,7 @@ class INote(TypedDict):
 
 
 class ICreatedNote(TypedDict):
-    """
-    created note
-    """
+    """created note"""
 
     created_note: INote
 

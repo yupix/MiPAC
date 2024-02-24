@@ -10,9 +10,7 @@ class IPollChoice(TypedDict):
 
 
 class IPoll(TypedDict):
-    """
-    Questionnaire object
-    """
+    """Questionnaire object"""
 
     expires_at: str
     multiple: bool

@@ -47,7 +47,6 @@ class DriveStatus:
     def _get(self, key: str) -> Any | None:
         """You can access the raw response data directly by specifying the key
 
-
         Returns
         -------
         Any | None
@@ -78,7 +77,6 @@ class FileProperties:
 
     def _get(self, key: str) -> Any | None:
         """You can access the raw response data directly by specifying the key
-
 
         Returns
         -------
@@ -127,7 +125,6 @@ class Folder:
 
     def _get(self, key: str) -> Any | None:
         """You can access the raw response data directly by specifying the key
-
 
         Returns
         -------
@@ -226,7 +223,6 @@ class File:
 
     def _get(self, key: str) -> Any | None:
         """You can access the raw response data directly by specifying the key
-
 
         Returns
         -------

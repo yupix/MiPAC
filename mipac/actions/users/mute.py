@@ -116,7 +116,6 @@ class MuteActions(SharedMuteActions):
         list[Muting]
             ミュートしているユーザーの一覧
         """
-
         body = {"limit": limit, "sinceId": since_id, "untilId": until_id}
 
         mutes: list[IMuting] = await self._session.request(

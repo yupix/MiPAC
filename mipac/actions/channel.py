@@ -725,7 +725,6 @@ class ChannelActions(SharedChannelActions):
         list[Channel]
             取得したチャンネルのリスト
         """
-
         raw_channels: list[IChannel] = await self._session.request(
             Route("POST", "/api/channels/featured"), auth=True, lower=True
         )
@@ -754,7 +753,6 @@ class ChannelActions(SharedChannelActions):
         AsyncGenerator[Channel, None]
             取得したフォロー中のチャンネル
         """
-
         body = {"sinceId": since_id, "untilId": until_id, "limit": limit}
 
         pagination = Pagination[IChannel](
@@ -816,7 +814,6 @@ class ChannelActions(SharedChannelActions):
         AsyncGenerator[Channel, None]
             取得した自分が所有しているチャンネル
         """
-
         body = {"sinceId": since_id, "untilId": until_id, "limit": limit}
 
         pagination = Pagination[IChannel](
@@ -894,7 +891,6 @@ class ChannelActions(SharedChannelActions):
         list[Channel]
             見つかったチャンネルのリスト
         """
-
         data = {
             "query": query,
             "type": type,

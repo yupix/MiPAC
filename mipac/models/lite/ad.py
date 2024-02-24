@@ -48,7 +48,6 @@ class PartialAd[T: IPartialAd]:
     def _get(self, key: str) -> Any | None:
         """You can access the raw response data directly by specifying the key
 
-
         Returns
         -------
         Any | None

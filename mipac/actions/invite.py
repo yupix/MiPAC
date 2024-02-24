@@ -30,7 +30,6 @@ class SharedInviteActions(AbstractAction):
         bool
             Whether the invite code was deleted.
         """
-
         res: bool = await self._session.request(
             Route("POST", "/api/invite/delete"), json={"inviteId": invite_id}, auth=True
         )
@@ -57,7 +56,6 @@ class ClientInviteActions(SharedInviteActions):
         bool
             Whether the invite code was deleted.
         """
-
         invite_id = invite_id or self._invite_id
 
         return await super().delete(invite_id=invite_id)
@@ -103,7 +101,6 @@ class InviteActions(SharedInviteActions):
         list[PartialInviteCode]
             The list of invite codes.
         """
-
         data = {"limit": limit, "sinceId": since_id, "untilId": until_id}
 
         raw_codes: list[IInviteCode] = await self._session.request(
@@ -130,7 +127,6 @@ class InviteActions(SharedInviteActions):
         list[PartialInviteCode]
             The list of invite codes.
         """
-
         data = {"limit": 100, "sinceId": since_id, "untilId": until_id}
 
         pagination = Pagination[IInviteCode](
@@ -151,7 +147,6 @@ class InviteActions(SharedInviteActions):
         int
             The number of invite codes you can create.
         """
-
         raw_invite_limit: IInviteLimit = await self._session.request(
             Route("POST", "/api/invite/limit"), auth=True
         )

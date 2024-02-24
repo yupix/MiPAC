@@ -26,7 +26,6 @@ class AdminDriveActions(AbstractAction):
         bool
             Whether the remote files were cleaned
         """
-
         res: bool = await self.__session.request(
             Route("POST", "/api/admin/drive/clean-remote-files"), auth=True
         )
@@ -42,7 +41,6 @@ class AdminDriveActions(AbstractAction):
         bool
             Whether the drive was cleaned up
         """
-
         res: bool = await self.__session.request(
             Route("POST", "/api/admin/drive/cleanup"), auth=True
         )
@@ -84,7 +82,6 @@ class AdminDriveActions(AbstractAction):
         list[File]
             A list of files
         """
-
         data = {
             "limit": limit,
             "sinceId": since_id,
@@ -116,7 +113,6 @@ class AdminDriveActions(AbstractAction):
         dict[str, Any]
             The file
         """
-
         data = {
             "fileId": file_id,
             "url": url,

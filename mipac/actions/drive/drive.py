@@ -26,7 +26,6 @@ class DriveActions(AbstractAction):
         DriveStatus
             The status of the drive
         """
-
         res: IDriveStatus = await self.__session.request(Route("POST", "/api/drive"), auth=True)
         return DriveStatus(raw_drive_status=res, client=self.__client)
 
@@ -57,7 +56,6 @@ class DriveActions(AbstractAction):
         list[File]
             A list of files
         """
-
         params = {
             "limit": limit,
             "sinceId": since_id,
