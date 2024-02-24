@@ -11,8 +11,8 @@ if TYPE_CHECKING:
 
 class AdminAccountActions(AbstractAction):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
-        self.__session: HTTPClient = session
-        self.__client: ClientManager = client
+        self._session: HTTPClient = session
+        self._client: ClientManager = client
 
     async def create(self, username: str, password: str):  # TODO: 多分UserDetailed + tokenってキー
         """ユーザーを作成します
@@ -28,7 +28,7 @@ class AdminAccountActions(AbstractAction):
         """
 
         data = {"username": username, "password": password}
-        res = await self.__session.request(
+        res = await self._session.request(
             Route("POST", "/api/admin/accounts/create"),
             json=data,
         )
