@@ -33,14 +33,6 @@ def cache(group: str = "default", override: bool = False):
     return decorator
 
 
-def get_cache_key(func):
-    async def decorator(self, *args, **kwargs):
-        key = cache_key_builder(func, self, *args, **kwargs)
-        return await func(self, *args, **kwargs, cache_key=key)
-
-    return decorator
-
-
 @lru_cache
 def cache_key_builder(func, cls, *args, **kwargs):
     ordered_kwargs = sorted(kwargs.items())
