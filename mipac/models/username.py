@@ -8,6 +8,13 @@ class UsernameAvailable:
 
     @property
     def available(self) -> bool:
+        """ユーザー名が使用可能かどうか
+
+        Returns
+        -------
+        bool
+            ユーザー名が使用可能かどうか
+        """
         return self.__raw_username_available["available"]
 
     def _get(self, key: str) -> Any | None:

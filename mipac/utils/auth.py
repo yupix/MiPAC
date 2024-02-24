@@ -11,6 +11,8 @@ from mipac.utils.format import remove_dict_empty, upper_to_lower
 
 
 class IMiAuthPayload(TypedDict):
+    """MiAuthの戻り値"""
+
     ok: bool
     token: NotRequired[str]
     user: NotRequired[IUserDetailed]
@@ -27,10 +29,11 @@ class MiAuth:
         self.set_session()
 
     @property
-    def url(self) -> str:
+    def __url(self) -> str:
         return f"{self.protocol}://{self.host}"
 
     def set_session(self) -> None:
+        """sessionを生成してインスタンス変数にセットします"""
         self.session = uuid.uuid4().hex
 
     async def gen_session(
@@ -39,7 +42,25 @@ class MiAuth:
         icon: str | None = None,
         callback: str | None = None,
         permission: list[Permissions] | None = None,
-    ):
+    ) -> str:
+        """MiAuthのセッションを生成します
+
+        Parameters
+        ----------
+        name : str, optional
+            セッション名, by default None
+        icon : str, optional
+            アイコンのURL, by default None
+        callback : str, optional
+            コールバックURL, by default None
+        permission : list[Permissions], optional
+            許可する権限, by default None
+
+        Returns
+        -------
+        str
+            生成された認証用URL
+        """
         # sessionは使いまわししてはいけないのでこのタイミングで新しいsessionを生成する
         self.set_session()
 
@@ -52,15 +73,22 @@ class MiAuth:
             }
         )
 
-        url = urlparse(f"{self.url}/miauth/{self.session}")
+        url = urlparse(f"{self.__url}/miauth/{self.session}")
         return urlunparse(
             (url.scheme, url.netloc, url.path, url.params, urlencode(query), url.fragment)
         )
 
     async def check_session(self) -> Any:
+        """MiAuthのセッションが完了したか確認します
+
+        Returns
+        -------
+        Any
+            MiAuthの戻り値
+        """
         async with aiohttp.ClientSession() as session:
             res = await session.post(
-                f"{self.url}/api/miauth/{self.session}/check",
+                f"{self.__url}/api/miauth/{self.session}/check",
                 json={},
                 headers={"Content-Type": "application/json"},
             )
@@ -74,7 +102,14 @@ class MiAuth:
                 raise Exception("MiAuth Check failed, Response is None")
             return upper_to_lower(data)
 
-    async def wait_complete(self):
+    async def wait_complete(self) -> IMiAuthPayload:
+        """MiAuthのセッションが完了するまで待機します
+
+        Returns
+        -------
+        IMiAuthPayload
+            MiAuthの戻り値
+        """
         while True:
             is_complete: IMiAuthPayload = await self.check_session()
             if is_complete["ok"] is True:

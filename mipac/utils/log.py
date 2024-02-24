@@ -18,6 +18,17 @@ def setup_logging(
     formatter: logging.Formatter | None = None,
     level: LOGING_LEVEL_TYPE = "INFO",
 ) -> None:
+    """ログの設定を行います
+
+    Parameters
+    ----------
+    handler : logging.Handler | None, default=None
+        ログのハンドラー
+    formatter : logging.Formatter | None, default=None
+        ログのフォーマッター
+    level : LOGING_LEVEL_TYPE, default="INFO"
+        ログのレベル
+    """
     if level not in LOGING_LEVELS:
         raise Exception(f"Not found logging level {level}")
     _level = LOGING_LEVELS[level]

@@ -6,6 +6,8 @@ from mipac.http import HTTPClient, Route
 
 
 class Pagination[T]:
+    """ページネーションを行うためのクラスです"""
+
     def __init__(
         self,
         http_client: HTTPClient,
@@ -30,6 +32,13 @@ class Pagination[T]:
         self.latest_res_count: int | None = None
 
     async def next(self) -> list[T]:
+        """次のページを取得します
+
+        Returns
+        -------
+        list
+            取得したページの戻り値
+        """
         if self.pagination_type == "count":
             self.json["offset"] = self.json.get("limit", self.limit) * self.count
             self.count += 1
@@ -49,6 +58,13 @@ class Pagination[T]:
 
     @property
     def is_final(self) -> bool:
+        """現在のページネーションが最後の戻り値かを返します
+
+        Returns
+        -------
+        bool
+            最後の戻り値かどうか
+        """
         if self.latest_res_count is None:
             return False
 

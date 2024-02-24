@@ -492,6 +492,8 @@ class UserDetailedNotMe[T: IUserDetailedNotMeSchema](PartialUser[T], UserDetaile
 
 
 class MeDetailed(UserDetailedNotMe[IMeDetailedSchema], MeDetailedOnly):  # pyright: ignore 直せない
+    """自分の詳細情報"""
+
     def __init__(self, raw_user: IMeDetailedSchema, *, client: ClientManager):
         super().__init__(raw_user, client=client)
 
