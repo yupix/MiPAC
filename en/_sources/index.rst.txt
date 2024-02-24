@@ -3792,12 +3792,6 @@ cache
 .. autofunction:: mipac.utils.cache.cache
 
 
-get_cache_key
-~~~~~~~~~~~~~
-
-.. autofunction:: mipac.utils.cache.get_cache_key
-
-
 set_cache
 ~~~~~~~~~
 
@@ -3909,22 +3903,10 @@ remove_dict_missing
 .. autofunction:: mipac.utils.format.remove_dict_missing
 
 
-remove_list_empty
-~~~~~~~~~~~~~~~~~
-
-.. autofunction:: mipac.utils.format.remove_list_empty
-
-
 snake_to_camel
 ~~~~~~~~~~~~~~
 
 .. autofunction:: mipac.utils.format.snake_to_camel
-
-
-str_lower
-~~~~~~~~~
-
-.. autofunction:: mipac.utils.format.str_lower
 
 
 str_to_datetime

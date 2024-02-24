@@ -1564,10 +1564,29 @@ Attributes</span><ul>
 </section>
 <section id="usernameavailable">
 <h3>UsernameAvailable<a class="headerlink" href="#usernameavailable" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.models.username.UsernameAvailable"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.models.username.UsernameAvailable"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.username.UsernameAvailable.available">available</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.username.UsernameAvailable">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.username.</span></span><span class="sig-name descname"><span class="pre">UsernameAvailable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_username_available</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.username.IUsernameAvailable" title="mipac.types.username.IUsernameAvailable"><span class="pre">IUsernameAvailable</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.username.UsernameAvailable" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.username.UsernameAvailable.available">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">available</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.username.UsernameAvailable.available" title="Link to this definition">#</a></dt>
+<dd><p>ユーザー名が使用可能かどうか</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ユーザー名が使用可能かどうか</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="activeuserschart">
@@ -1793,7 +1812,8 @@ Attributes</span><ul>
 <div class="py-attribute-table" data-move-to-id="mipac.models.user.MeDetailed"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.user.MeDetailed">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">MeDetailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IMeDetailedSchema" title="mipac.types.user.IMeDetailedSchema"><span class="pre">IMeDetailedSchema</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.MeDetailed" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>自分の詳細情報</p>
+</dd></dl>
 
 </section>
 <section id="medetailedonly">
@@ -10080,7 +10100,8 @@ def</span><a class="reference internal" href="#mipac.config.Config.from_dict">fr
 <div class="py-attribute-table" data-move-to-id="mipac.client.Client"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.client.Client">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.client.</span></span><span class="sig-name descname"><span class="pre">Client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'NOTSET'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'DEBUG'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'INFO'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'WARNING'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'ERROR'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'CRITICAL'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'INFO'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.client.Client" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>クライアントを定義したクラス</p>
+</dd></dl>
 
 </section>
 <section id="abstractaction">
@@ -10104,23 +10125,26 @@ def</span><a class="reference internal" href="#mipac.config.Config.from_dict">fr
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.utils.cache.cache">
 <span class="sig-prename descclassname"><span class="pre">mipac.utils.cache.</span></span><span class="sig-name descname"><span class="pre">cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.utils.cache.cache" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="get-cache-key">
-<h3>get_cache_key<a class="headerlink" href="#get-cache-key" title="Link to this heading">#</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="mipac.utils.cache.get_cache_key">
-<span class="sig-prename descclassname"><span class="pre">mipac.utils.cache.</span></span><span class="sig-name descname"><span class="pre">get_cache_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.utils.cache.get_cache_key" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>キャッシュを行います</p>
+</dd></dl>
 
 </section>
 <section id="set-cache">
 <h3>set_cache<a class="headerlink" href="#set-cache" title="Link to this heading">#</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.utils.cache.set_cache">
-<span class="sig-prename descclassname"><span class="pre">mipac.utils.cache.</span></span><span class="sig-name descname"><span class="pre">set_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.utils.cache.set_cache" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">mipac.utils.cache.</span></span><span class="sig-name descname"><span class="pre">set_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mipac.utils.cache.set_cache" title="Link to this definition">#</a></dt>
+<dd><p>キャッシュを設定します</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) -- キャッシュのグループ名</p></li>
+<li><p><strong>key</strong> (<em>str</em>) -- 一意のキー</p></li>
+<li><p><strong>value</strong> (<em>Any</em>) -- 設定する値</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="check-multi-arg">
@@ -10148,9 +10172,7 @@ def</span><a class="reference internal" href="#mipac.config.Config.from_dict">fr
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.utils.util.deprecated">
 <span class="sig-prename descclassname"><span class="pre">mipac.utils.util.</span></span><span class="sig-name descname"><span class="pre">deprecated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.utils.util.deprecated" title="Link to this definition">#</a></dt>
-<dd><p>This is a decorator which can be used to mark functions
-as deprecated. It will result in a warning being emitted
-when the function is used.</p>
+<dd><p>指定した関数が非推奨であることを示す為のデコレータ</p>
 </dd></dl>
 
 </section>
@@ -10183,7 +10205,8 @@ when the function is used.</p>
 <div class="py-attribute-table" data-move-to-id="mipac.utils.util.Missing"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.utils.util.Missing">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.utils.util.</span></span><span class="sig-name descname"><span class="pre">Missing</span></span><a class="headerlink" href="#mipac.utils.util.Missing" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>値が存在しないことを示すクラス</p>
+</dd></dl>
 
 </section>
 <section id="imiauthpayload">
@@ -10191,15 +10214,84 @@ when the function is used.</p>
 <div class="py-attribute-table" data-move-to-id="mipac.utils.auth.IMiAuthPayload"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.utils.auth.IMiAuthPayload">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.utils.auth.</span></span><span class="sig-name descname"><span class="pre">IMiAuthPayload</span></span><a class="headerlink" href="#mipac.utils.auth.IMiAuthPayload" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>MiAuthの戻り値</p>
+</dd></dl>
 
 </section>
 <section id="miauth">
 <h3>MiAuth<a class="headerlink" href="#miauth" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.utils.auth.MiAuth"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.utils.auth.MiAuth"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.check_session">check_session</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.gen_session">gen_session</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="メソッド">
+def</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.set_session">set_session</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_complete">wait_complete</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.utils.auth.MiAuth">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.utils.auth.</span></span><span class="sig-name descname"><span class="pre">MiAuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'http'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'https'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.utils.auth.MiAuth" title="Link to this definition">#</a></dt>
 <dd><p>Misskey v12以降のインスタンスで使用可能な認証方式です</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.utils.auth.MiAuth.check_session">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#mipac.utils.auth.MiAuth.check_session" title="Link to this definition">#</a></dt>
+<dd><p>MiAuthのセッションが完了したか確認します</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>MiAuthの戻り値</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.utils.auth.MiAuth.gen_session">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'read:account'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:account'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:blocks'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:blocks'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:drive'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:drive'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:favorites'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:favorites'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:following'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:following'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:messaging'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:messaging'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:mutes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:mutes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:notes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:notifications'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:notifications'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:reactions'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:reactions'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:votes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:pages'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:pages'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:page-likes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:page-likes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:user-groups'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:user-groups'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:channels'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:channels'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:gallery'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:gallery'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:gallery-likes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:gallery-likes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:flash'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:flash'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:flash-likes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:flash-likes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:abuse-user-reports'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:delete-account'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:delete-all-files-of-a-user'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:index-stats'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:table-stats'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:user-ips'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:meta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:reset-password'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:resolve-abuse-user-report'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:send-email'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:server-info'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:show-moderation-log'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:show-user'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:show-users'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:suspend-user'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:unset-user-avatar'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:unset-user-banner'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:unsuspend-user'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:meta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:user-note'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:roles'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:roles'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:relays'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:relays'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:invite-codes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:invite-codes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:announcements'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:announcements'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:avatar-decorations'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:avatar-decorations'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:federation'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:account'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:account'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:emoji'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:emoji'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:queue'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:queue'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:promo'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:drive'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:drive'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:admin:ad'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:admin:ad'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:invite-codes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:invite-codes'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:clip-favorite'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:clip-favorite'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'read:federation'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'write:report-abuse'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mipac.utils.auth.MiAuth.gen_session" title="Link to this definition">#</a></dt>
+<dd><p>MiAuthのセッションを生成します</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) -- セッション名, by default None</p></li>
+<li><p><strong>icon</strong> (<em>str</em><em>, </em><em>optional</em>) -- アイコンのURL, by default None</p></li>
+<li><p><strong>callback</strong> (<em>str</em><em>, </em><em>optional</em>) -- コールバックURL, by default None</p></li>
+<li><p><strong>permission</strong> (<em>list</em><em>[</em><em>Permissions</em><em>]</em><em>, </em><em>optional</em>) -- 許可する権限, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>生成された認証用URL</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.utils.auth.MiAuth.set_session">
+<span class="sig-name descname"><span class="pre">set_session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mipac.utils.auth.MiAuth.set_session" title="Link to this definition">#</a></dt>
+<dd><p>sessionを生成してインスタンス変数にセットします</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.utils.auth.MiAuth.wait_complete">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wait_complete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.utils.auth.IMiAuthPayload" title="mipac.utils.auth.IMiAuthPayload"><span class="pre">IMiAuthPayload</span></a></span></span><a class="headerlink" href="#mipac.utils.auth.MiAuth.wait_complete" title="Link to this definition">#</a></dt>
+<dd><p>MiAuthのセッションが完了するまで待機します</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>MiAuthの戻り値</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mipac.utils.auth.IMiAuthPayload" title="mipac.utils.auth.IMiAuthPayload">IMiAuthPayload</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -10208,15 +10300,65 @@ when the function is used.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.utils.log.setup_logging">
 <span class="sig-prename descclassname"><span class="pre">mipac.utils.log.</span></span><span class="sig-name descname"><span class="pre">setup_logging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Handler</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Formatter</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'NOTSET'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'DEBUG'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'INFO'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'WARNING'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'ERROR'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'CRITICAL'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'INFO'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mipac.utils.log.setup_logging" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>ログの設定を行います</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handler</strong> (<em>logging.Handler</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- ログのハンドラー</p></li>
+<li><p><strong>formatter</strong> (<em>logging.Formatter</em><em> | </em><em>None</em><em>, </em><em>default=None</em>) -- ログのフォーマッター</p></li>
+<li><p><strong>level</strong> (<em>LOGING_LEVEL_TYPE</em><em>, </em><em>default=&quot;INFO&quot;</em>) -- ログのレベル</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="pagination">
 <h3>Pagination<a class="headerlink" href="#pagination" title="Link to this heading">#</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.utils.pagination.Pagination"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.utils.pagination.Pagination"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.utils.pagination.Pagination.is_final">is_final</a></li></ul>
+</div><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.utils.pagination.Pagination.next">next</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.utils.pagination.Pagination">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.utils.pagination.</span></span><span class="sig-name descname"><span class="pre">Pagination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">http_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">route</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.Route" title="mipac.http.Route"><span class="pre">Route</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">json</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_none</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pagination_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'until'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'count'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'until'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.utils.pagination.Pagination" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>ページネーションを行うためのクラスです</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.utils.pagination.Pagination.is_final">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_final</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.utils.pagination.Pagination.is_final" title="Link to this definition">#</a></dt>
+<dd><p>現在のページネーションが最後の戻り値かを返します</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>最後の戻り値かどうか</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.utils.pagination.Pagination.next">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">next</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.utils.pagination.Pagination.next" title="Link to this definition">#</a></dt>
+<dd><p>次のページを取得します</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>取得したページの戻り値</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="bool-to-string">
@@ -10244,7 +10386,22 @@ when the function is used.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.utils.format.convert_dict_keys_to_camel">
 <span class="sig-prename descclassname"><span class="pre">mipac.utils.format.</span></span><span class="sig-name descname"><span class="pre">convert_dict_keys_to_camel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.utils.format.convert_dict_keys_to_camel" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>dictに含まれるkeyをスネークケースからキャメルケースに変換します</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Mapping</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>]</em>) -- 変更したいdict</p></li>
+<li><p><strong>replace_list</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>] </em><em>| </em><em>None</em><em>, </em><em>default=None</em>) -- dictのkey名を特定の物に置き換える</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>new_dict</strong> -- 変更後のdict</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mapping[Any, Any]</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="remove-dict-empty">
@@ -10252,7 +10409,8 @@ when the function is used.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.utils.format.remove_dict_empty">
 <span class="sig-prename descclassname"><span class="pre">mipac.utils.format.</span></span><span class="sig-name descname"><span class="pre">remove_dict_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.utils.format.remove_dict_empty" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>辞書から値がNoneのkeyを削除します</p>
+<dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<em>dict</em>) -- 空のkeyを削除したいdict</p></li>
@@ -10274,7 +10432,8 @@ when the function is used.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.utils.format.remove_dict_missing">
 <span class="sig-prename descclassname"><span class="pre">mipac.utils.format.</span></span><span class="sig-name descname"><span class="pre">remove_dict_missing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.utils.format.remove_dict_missing" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>辞書からMISSINGのkeyを削除します</p>
+<dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) -- 空のkeyを削除したいdict</p>
 </dd>
@@ -10288,39 +10447,27 @@ when the function is used.</p>
 </dd></dl>
 
 </section>
-<section id="remove-list-empty">
-<h3>remove_list_empty<a class="headerlink" href="#remove-list-empty" title="Link to this heading">#</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="mipac.utils.format.remove_list_empty">
-<span class="sig-prename descclassname"><span class="pre">mipac.utils.format.</span></span><span class="sig-name descname"><span class="pre">remove_list_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.utils.format.remove_list_empty" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) -- 空のkeyを削除したいdict</p>
-</dd>
-<dt class="field-even">戻り値<span class="colon">:</span></dt>
-<dd class="field-even"><p>空のkeyがなくなったdict</p>
-</dd>
-<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict[str, Any]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
 <section id="snake-to-camel">
 <h3>snake_to_camel<a class="headerlink" href="#snake-to-camel" title="Link to this heading">#</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.utils.format.snake_to_camel">
 <span class="sig-prename descclassname"><span class="pre">mipac.utils.format.</span></span><span class="sig-name descname"><span class="pre">snake_to_camel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snake_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mipac.utils.format.snake_to_camel" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="str-lower">
-<h3>str_lower<a class="headerlink" href="#str-lower" title="Link to this heading">#</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="mipac.utils.format.str_lower">
-<span class="sig-prename descclassname"><span class="pre">mipac.utils.format.</span></span><span class="sig-name descname"><span class="pre">str_lower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.utils.format.str_lower" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>スネークケースをキャメルケースに変換します</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>snake_str</strong> (<em>str</em>) -- 変更したい文字列</p></li>
+<li><p><strong>replace_list</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) -- snake_strの特定の文字列を置き換える為の辞書</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>変換後の文字列</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="str-to-datetime">
@@ -10328,7 +10475,8 @@ when the function is used.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.utils.format.str_to_datetime">
 <span class="sig-prename descclassname"><span class="pre">mipac.utils.format.</span></span><span class="sig-name descname"><span class="pre">str_to_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'%Y-%m-%dT%H:%M:%S.%fZ'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="headerlink" href="#mipac.utils.format.str_to_datetime" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>文字列をdatetimeに変換します</p>
+<dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<em>str</em>) -- datetimeに変更したい文字列</p></li>
@@ -10350,7 +10498,8 @@ when the function is used.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="mipac.utils.format.upper_to_lower">
 <span class="sig-prename descclassname"><span class="pre">mipac.utils.format.</span></span><span class="sig-name descname"><span class="pre">upper_to_lower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.utils.format.upper_to_lower" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>dictのkeyを小文字に変換します</p>
+<dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) -- 小文字にしたいkeyがあるdict</p></li>
@@ -10645,7 +10794,10 @@ when the function is used.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#usernameavailable">UsernameAvailable</a><ul>
-<li><a class="reference internal" href="#mipac.models.username.UsernameAvailable"><code class="docutils literal notranslate"><span class="pre">UsernameAvailable</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.username.UsernameAvailable"><code class="docutils literal notranslate"><span class="pre">UsernameAvailable</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.models.username.UsernameAvailable.available"><code class="docutils literal notranslate"><span class="pre">UsernameAvailable.available</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#activeuserschart">ActiveUsersChart</a><ul>
@@ -12574,10 +12726,6 @@ when the function is used.</p>
 <li><a class="reference internal" href="#mipac.utils.cache.cache"><code class="docutils literal notranslate"><span class="pre">cache()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#get-cache-key">get_cache_key</a><ul>
-<li><a class="reference internal" href="#mipac.utils.cache.get_cache_key"><code class="docutils literal notranslate"><span class="pre">get_cache_key()</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#set-cache">set_cache</a><ul>
 <li><a class="reference internal" href="#mipac.utils.cache.set_cache"><code class="docutils literal notranslate"><span class="pre">set_cache()</span></code></a></li>
 </ul>
@@ -12611,7 +12759,13 @@ when the function is used.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#miauth">MiAuth</a><ul>
-<li><a class="reference internal" href="#mipac.utils.auth.MiAuth"><code class="docutils literal notranslate"><span class="pre">MiAuth</span></code></a></li>
+<li><a class="reference internal" href="#mipac.utils.auth.MiAuth"><code class="docutils literal notranslate"><span class="pre">MiAuth</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.utils.auth.MiAuth.check_session"><code class="docutils literal notranslate"><span class="pre">MiAuth.check_session()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.utils.auth.MiAuth.gen_session"><code class="docutils literal notranslate"><span class="pre">MiAuth.gen_session()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.utils.auth.MiAuth.set_session"><code class="docutils literal notranslate"><span class="pre">MiAuth.set_session()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_complete"><code class="docutils literal notranslate"><span class="pre">MiAuth.wait_complete()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#setup-logging">setup_logging</a><ul>
@@ -12619,7 +12773,11 @@ when the function is used.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#pagination">Pagination</a><ul>
-<li><a class="reference internal" href="#mipac.utils.pagination.Pagination"><code class="docutils literal notranslate"><span class="pre">Pagination</span></code></a></li>
+<li><a class="reference internal" href="#mipac.utils.pagination.Pagination"><code class="docutils literal notranslate"><span class="pre">Pagination</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.utils.pagination.Pagination.is_final"><code class="docutils literal notranslate"><span class="pre">Pagination.is_final</span></code></a></li>
+<li><a class="reference internal" href="#mipac.utils.pagination.Pagination.next"><code class="docutils literal notranslate"><span class="pre">Pagination.next()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#bool-to-string">bool_to_string</a><ul>
@@ -12638,16 +12796,8 @@ when the function is used.</p>
 <li><a class="reference internal" href="#mipac.utils.format.remove_dict_missing"><code class="docutils literal notranslate"><span class="pre">remove_dict_missing()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#remove-list-empty">remove_list_empty</a><ul>
-<li><a class="reference internal" href="#mipac.utils.format.remove_list_empty"><code class="docutils literal notranslate"><span class="pre">remove_list_empty()</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#snake-to-camel">snake_to_camel</a><ul>
 <li><a class="reference internal" href="#mipac.utils.format.snake_to_camel"><code class="docutils literal notranslate"><span class="pre">snake_to_camel()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#str-lower">str_lower</a><ul>
-<li><a class="reference internal" href="#mipac.utils.format.str_lower"><code class="docutils literal notranslate"><span class="pre">str_lower()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#str-to-datetime">str_to_datetime</a><ul>
