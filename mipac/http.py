@@ -128,5 +128,4 @@ REQUEST:{COLORS.reset}
         self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
         if self._token:
             data: IMeDetailedSchema = await self.request(Route("POST", "/api/i"), auth=True)
-            config.from_dict(account_id=data["id"])
             return data

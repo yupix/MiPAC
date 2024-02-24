@@ -1,4 +1,4 @@
-"""MiPACで使用する設定を保持するクラスを定義するモジュールです"""
+"""MiPACで使用する設定を保持するクラスを定義するモジュール"""
 
 from dataclasses import dataclass
 from typing import Self
@@ -30,7 +30,6 @@ class Config:
         is_ssl: bool = True,
         cache: CacheConfigData | None = None,
     ) -> None:
-        self.account_id: str = ""
         self.is_ssl: bool = is_ssl
         self.host: str = host
         self.cache: CacheConfig = CacheConfig(cache or CacheConfigData())
@@ -41,7 +40,6 @@ class Config:
         host: str | None = None,
         is_ssl: bool | None = None,
         cache: CacheConfigData | None = None,
-        account_id: str | None = None,
     ) -> Self:
         """dictから設定を更新します
 
@@ -53,8 +51,6 @@ class Config:
             サーバーがsslかどうか, by default None
         cache : CacheConfigData | None, optional
             キャッシュの設定, by default None
-        account_id : str | None, optional
-            自身のアカウントID, by default None
 
         Returns
         -------
@@ -65,7 +61,6 @@ class Config:
         self.is_ssl = is_ssl if is_ssl is not None else self.is_ssl
         if cache:
             self.cache = CacheConfig(cache)
-        self.account_id = account_id or self.account_id
         return self
 
 
