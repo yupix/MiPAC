@@ -4,6 +4,8 @@ from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
+from mipac.models.user import CreatedUser
+from mipac.types.user import ICreatedUser
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
@@ -14,7 +16,7 @@ class AdminAccountActions(AbstractAction):
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
-    async def create(self, username: str, password: str):  # TODO: 多分UserDetailed + tokenってキー
+    async def create(self, username: str, password: str) -> CreatedUser:
         """ユーザーを作成します
 
         Endpoint: `/api/admin/accounts/create`
@@ -25,13 +27,18 @@ class AdminAccountActions(AbstractAction):
             ユーザー名
         password : str
             パスワード
+
+        Returns
+        -------
+        CreatedUser
+            作成されたユーザー
         """
         data = {"username": username, "password": password}
-        res = await self._session.request(
+        raw_created_user: ICreatedUser = await self._session.request(
             Route("POST", "/api/admin/accounts/create"),
             json=data,
         )
-        return res
+        return CreatedUser(raw_created_user, client=self._client)
 
     async def delete(self, *, user_id: str) -> bool:
         """対象のユーザーを削除します
