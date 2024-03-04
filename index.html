@@ -1775,6 +1775,14 @@ Attributes</span><ul>
 <dd></dd></dl>
 
 </section>
+<section id="createduser">
+<h3>CreatedUser<a class="headerlink" href="#createduser" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.models.user.CreatedUser"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.models.user.CreatedUser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">CreatedUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.CreatedUser" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="followcommon">
 <h3>FollowCommon<a class="headerlink" href="#followcommon" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.models.user.FollowCommon"></div><dl class="py class">
@@ -1811,9 +1819,8 @@ Attributes</span><ul>
 <h3>MeDetailed<a class="headerlink" href="#medetailed" title="Link to this heading">#</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.models.user.MeDetailed"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.user.MeDetailed">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">MeDetailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.user.IMeDetailedSchema" title="mipac.types.user.IMeDetailedSchema"><span class="pre">IMeDetailedSchema</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.MeDetailed" title="Link to this definition">#</a></dt>
-<dd><p>自分の詳細情報</p>
-</dd></dl>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.user.</span></span><span class="sig-name descname"><span class="pre">MeDetailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.user.MeDetailed" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="medetailedonly">
@@ -6989,7 +6996,7 @@ async</span><a class="reference internal" href="#mipac.actions.admins.accounts.A
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.accounts.</span></span><span class="sig-name descname"><span class="pre">AdminAccountActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.accounts.AdminAccountActions" title="Link to this definition">#</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.admins.accounts.AdminAccountActions.create">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.accounts.AdminAccountActions.create" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.user.CreatedUser" title="mipac.models.user.CreatedUser"><span class="pre">CreatedUser</span></a></span></span><a class="headerlink" href="#mipac.actions.admins.accounts.AdminAccountActions.create" title="Link to this definition">#</a></dt>
 <dd><p>ユーザーを作成します</p>
 <p>Endpoint: <cite>/api/admin/accounts/create</cite></p>
 <dl class="field-list simple">
@@ -6998,6 +7005,12 @@ async</span><a class="reference internal" href="#mipac.actions.admins.accounts.A
 <li><p><strong>username</strong> (<em>str</em>) -- ユーザー名</p></li>
 <li><p><strong>password</strong> (<em>str</em>) -- パスワード</p></li>
 </ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>作成されたユーザー</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mipac.models.user.CreatedUser" title="mipac.models.user.CreatedUser">CreatedUser</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -8960,6 +8973,14 @@ IMeDetailedOnlySchema が持つ avatar_id が無いことを確認する
 <div class="py-attribute-table" data-move-to-id="mipac.types.user.IBadgeRole"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.types.user.IBadgeRole">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">IBadgeRole</span></span><a class="headerlink" href="#mipac.types.user.IBadgeRole" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="icreateduser">
+<h3>ICreatedUser<a class="headerlink" href="#icreateduser" title="Link to this heading">#</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.user.ICreatedUser"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.user.ICreatedUser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.user.</span></span><span class="sig-name descname"><span class="pre">ICreatedUser</span></span><a class="headerlink" href="#mipac.types.user.ICreatedUser" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -10977,6 +10998,10 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 <li><a class="reference internal" href="#mipac.models.user.Achievement"><code class="docutils literal notranslate"><span class="pre">Achievement</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#createduser">CreatedUser</a><ul>
+<li><a class="reference internal" href="#mipac.models.user.CreatedUser"><code class="docutils literal notranslate"><span class="pre">CreatedUser</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#followcommon">FollowCommon</a><ul>
 <li><a class="reference internal" href="#mipac.models.user.FollowCommon"><code class="docutils literal notranslate"><span class="pre">FollowCommon</span></code></a></li>
 </ul>
@@ -12284,6 +12309,10 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 </li>
 <li><a class="reference internal" href="#ibadgerole">IBadgeRole</a><ul>
 <li><a class="reference internal" href="#mipac.types.user.IBadgeRole"><code class="docutils literal notranslate"><span class="pre">IBadgeRole</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#icreateduser">ICreatedUser</a><ul>
+<li><a class="reference internal" href="#mipac.types.user.ICreatedUser"><code class="docutils literal notranslate"><span class="pre">ICreatedUser</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#imedetailedonlyschema">IMeDetailedOnlySchema</a><ul>

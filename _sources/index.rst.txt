@@ -496,6 +496,15 @@ Achievement
     :members:
 
 
+CreatedUser
+~~~~~~~~~~~
+
+.. attributetable:: mipac.models.user.CreatedUser
+
+.. autoclass:: mipac.models.user.CreatedUser
+    :members:
+
+
 FollowCommon
 ~~~~~~~~~~~~
 
@@ -2605,6 +2614,15 @@ IBadgeRole
 .. attributetable:: mipac.types.user.IBadgeRole
 
 .. autoclass:: mipac.types.user.IBadgeRole
+    :members:
+
+
+ICreatedUser
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.user.ICreatedUser
+
+.. autoclass:: mipac.types.user.ICreatedUser
     :members:
 
 
