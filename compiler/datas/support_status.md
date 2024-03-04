@@ -1,4 +1,4 @@
-## SUPPORTED ENDPOINTS (144/367)
+## SUPPORTED ENDPOINTS (144/368)
 - [x] /admin/accounts/create
 - [x] /admin/accounts/delete
 - [x] /admin/ad/create
@@ -6,7 +6,6 @@
 - [x] /admin/drive/clean-remote-files
 - [x] /admin/drive/cleanup
 - [x] /admin/drive/files
-- [x] /admin/drive/show-file
 - [x] /admin/get-user-ips
 - [x] /admin/invite/create
 - [x] /admin/invite/list
@@ -294,9 +293,11 @@
 - [ ] /reversi/show-game
 - [ ] /reversi/surrender
 - [ ] /reversi/verify
+- [ ] /notifications/flush
 
 ## Changed request body or responses
 
+- [ ] /admin/drive/show-file (Need to work)
 - [ ] /admin/get-index-stats (Need to work)
 - [ ] /admin/get-table-stats (Need to work)
 - [ ] /admin/update-meta (Need to work)
@@ -420,3 +421,15 @@
 - [ ] Role
 - [ ] ReversiGameLite
 - [ ] ReversiGameDetailed
+- [ ] PageBlock
+- [ ] RoleCondFormulaLogics
+- [ ] RoleCondFormulaValueNot
+- [ ] RoleCondFormulaValueIsLocalOrRemote
+- [ ] RoleCondFormulaValueAssignedRole
+- [ ] RoleCondFormulaValueCreated
+- [ ] RoleCondFormulaFollowersOrFollowingOrNotes
+- [ ] RoleCondFormulaValue
+- [ ] RolePolicies
+- [ ] MetaLite
+- [ ] MetaDetailedOnly
+- [ ] MetaDetailed

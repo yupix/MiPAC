@@ -4,13 +4,13 @@
             "/admin/abuse-user-reports": {
                 "path": "/admin/abuse-user-reports",
                 "request_body_hash": "b6e2d483b6034835ea8b345447fb61ea20b6165c717441d673839800cbb8dc97",
-                "response_body_hash": "13c667a454b73525a38a0fd22e5d5cea95fb1e9217a9af6f2378ea2e234cfaaf",
+                "response_body_hash": "aab995163623b954e9db940b41426f6854a00751170acca3a964ef849a30de89",
                 "status": "notSupported"
             },
             "/admin/accounts/create": {
                 "path": "/admin/accounts/create",
                 "request_body_hash": "1e41c87931385dd3cf7555c9a467d7d2a7ad385d06b65c9ba5fa8fc41fd2fff6",
-                "response_body_hash": "4cca43cad58263d213ec8740c853481b82de318e6a852eeabda66424633449ee",
+                "response_body_hash": "bf72e054a2455d1af00655e5d8747f8ea01e584bd22ac0a223ccd101d909e411",
                 "status": "supported"
             },
             "/admin/accounts/delete": {
@@ -118,8 +118,8 @@
             "/admin/drive/show-file": {
                 "path": "/admin/drive/show-file",
                 "request_body_hash": "469dab9342135333df7936e6dd1a691a975e6b5c205b5ab3040be3bf31a18a17",
-                "response_body_hash": "f45d00ac657a7054e3c94628e5ebb8b0e17aa5d0c01b1927761ba7756421ea80",
-                "status": "supported"
+                "response_body_hash": "0b178b0f446c922ad5e40f8a2f98ef9fe5bf89df2d3361eb29af46ac9c3aa828",
+                "status": "needToWork"
             },
             "/admin/emoji/add-aliases-bulk": {
                 "path": "/admin/emoji/add-aliases-bulk",
@@ -130,7 +130,7 @@
             "/admin/emoji/add": {
                 "path": "/admin/emoji/add",
                 "request_body_hash": "ebf63e0ecc9b3ec602e123e128968d06950de79c0189bc3cc9c1beafce33b316",
-                "response_body_hash": "3a83981ec3ff130c62969a753be1b6074313d44d6e022f6c47a6ef7f9b5aa322",
+                "response_body_hash": "f941750f943f893efbb50804a1dbc2fbfdbe71cded4ac73ade3118a61c87e669",
                 "status": "notSupported"
             },
             "/admin/emoji/copy": {
@@ -189,7 +189,7 @@
             },
             "/admin/emoji/update": {
                 "path": "/admin/emoji/update",
-                "request_body_hash": "c69de1145bef4e9297f4ac1b306eb33131693ea5bc9c7eb1a2d5df9fbfd36c55",
+                "request_body_hash": "aabd7b19eb38e32077f73f9ad407d3f3d31a12c008c95709ce402c035ddb389f",
                 "response_body_hash": "7e39b6fda31bae9ff514b58e201a824a35ef1efad5aed5eeb8e6cd6432992a5e",
                 "status": "notSupported"
             },
@@ -213,7 +213,7 @@
             },
             "/admin/federation/update-instance": {
                 "path": "/admin/federation/update-instance",
-                "request_body_hash": "765aaf7fae3452f6239297cfab56c8c1747e3197ce7cc9cbdec731d6280aac5f",
+                "request_body_hash": "733d2f87c9891b1e027a4357ad7d71a3f16d4c17470e6d1b40a91e48d7d5b07c",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
                 "status": "notSupported"
             },
@@ -226,7 +226,7 @@
             "/admin/get-table-stats": {
                 "path": "/admin/get-table-stats",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
-                "response_body_hash": "88e2019329616268b4f952a2062d09c5439262a2e6d2cc920bbb3b85bfdd4849",
+                "response_body_hash": "0ac9a139dc5de22bfaee17097d6211435838b00fc67654c21d030574f8c01f04",
                 "status": "needToWork"
             },
             "/admin/get-user-ips": {
@@ -328,13 +328,13 @@
             "/admin/show-moderation-logs": {
                 "path": "/admin/show-moderation-logs",
                 "request_body_hash": "a6203df42cecfa3c3c1eaed8307f59b8aa039f6c25debef3d8c8958d78500c08",
-                "response_body_hash": "b4c44cb679836e4cedb24811c90fbfd87728cecfed9cf3e84b2c62ad54143862",
+                "response_body_hash": "495a293f2da7b2f97c40811624cd549ea5841282198f76688508dd5fa9285298",
                 "status": "supported"
             },
             "/admin/show-user": {
                 "path": "/admin/show-user",
                 "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
-                "response_body_hash": "7bf0116f498ce47044927701dfecaba646fd01670d82eba596492a14402d605c",
+                "response_body_hash": "87d1261168c76d1575df8d8ad2eb0deca2baf5c00958232bf120343eaf031230",
                 "status": "notSupported"
             },
             "/admin/show-users": {
@@ -357,14 +357,14 @@
             },
             "/admin/update-meta": {
                 "path": "/admin/update-meta",
-                "request_body_hash": "7273c04f4b0ced06974fa0844023eb5decb7043be9885bf822797c6d7e5e2e36",
+                "request_body_hash": "5ad2a9a67cdc283ebe104f592bcafd3d78b58a65ea6fbc648feb5351121e6bfc",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
                 "status": "needToWork"
             },
             "/admin/delete-account": {
                 "path": "/admin/delete-account",
                 "request_body_hash": "2cfcd7c6e5976469d14b285e1b19fdf056fdc327435877d6736135a399b3ad87",
-                "response_body_hash": "6db55b1f03dc038b85901c4148769125bb686c9d407b5b0d420770f27ab6b15c",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
                 "status": "notSupported"
             },
             "/admin/update-user-note": {
@@ -622,7 +622,7 @@
             "/charts/drive": {
                 "path": "/charts/drive",
                 "request_body_hash": "311ddf37149d748825b4e71f28bfdb568553316dee530b24cd85a42d84b31995",
-                "response_body_hash": "7a1d11c5afef13df38b79390d9be1850b37ca72710cd29080faea31378a05d63",
+                "response_body_hash": "d207ad26ee34962f507ce6885a27a85a13ddf4f7fd716d836f4a3d961eef04ca",
                 "status": "notSupported"
             },
             "/charts/federation": {
@@ -634,13 +634,13 @@
             "/charts/instance": {
                 "path": "/charts/instance",
                 "request_body_hash": "f5db7f9a257a61fad4ed241207fc6a53d752c610988e599bd4f84b1160928aea",
-                "response_body_hash": "6cb0c8b89c61e6f518d0e3514574b31cb43e16e2475408f16feaf5b264b84434",
+                "response_body_hash": "61ad02c6296acea6644551cedc408d7ecfd151f928689aaa526ad35929185a00",
                 "status": "notSupported"
             },
             "/charts/notes": {
                 "path": "/charts/notes",
                 "request_body_hash": "311ddf37149d748825b4e71f28bfdb568553316dee530b24cd85a42d84b31995",
-                "response_body_hash": "795066a96462f22e4439b40914cb171db5f68a81fbb05ea039510a10a11beef0",
+                "response_body_hash": "28885dd5185a99d79afb46bcfcdd826c54bddf01340f98b5487eb7cf1c56dcf9",
                 "status": "notSupported"
             },
             "/charts/user/drive": {
@@ -652,31 +652,31 @@
             "/charts/user/following": {
                 "path": "/charts/user/following",
                 "request_body_hash": "0235d8892df858adeb1ad0ec74eb126e032c79daa8ab9d34964adcb36f1fd685",
-                "response_body_hash": "e6a44b8adff258c63751fc59841f1c21cf3f814ee0a1beb8c5b8c52419a6c614",
+                "response_body_hash": "e9611c224846184d99e033500d3bb8a75b9ec5dc31241718f67ee88b3a359b62",
                 "status": "notSupported"
             },
             "/charts/user/notes": {
                 "path": "/charts/user/notes",
                 "request_body_hash": "0235d8892df858adeb1ad0ec74eb126e032c79daa8ab9d34964adcb36f1fd685",
-                "response_body_hash": "02c2f0228d5e1c785ceaebc0081f0227572aae5a23483bf9c4e66a42d027057c",
+                "response_body_hash": "8523aa9f5602b20e84e3134f1e38f3a036be8fa0c28bdaeb92251cfccd35ef00",
                 "status": "notSupported"
             },
             "/charts/user/pv": {
                 "path": "/charts/user/pv",
                 "request_body_hash": "0235d8892df858adeb1ad0ec74eb126e032c79daa8ab9d34964adcb36f1fd685",
-                "response_body_hash": "432698e69362723b1c6868ed8396f4f063536f07bfa27654fe4e1ab6dd889bab",
+                "response_body_hash": "db218a6e492b913df40329f5ea5682f651b6982188585003bc91319da6fc9149",
                 "status": "notSupported"
             },
             "/charts/user/reactions": {
                 "path": "/charts/user/reactions",
                 "request_body_hash": "0235d8892df858adeb1ad0ec74eb126e032c79daa8ab9d34964adcb36f1fd685",
-                "response_body_hash": "ba8f3c62e7451525adce01d3258731a112240811596c115a9cd4f2844e7ec854",
+                "response_body_hash": "576627b1c890a762aece9e54169e9312b78c24309f6b9574a1bde3e9899d52b1",
                 "status": "notSupported"
             },
             "/charts/users": {
                 "path": "/charts/users",
                 "request_body_hash": "311ddf37149d748825b4e71f28bfdb568553316dee530b24cd85a42d84b31995",
-                "response_body_hash": "ced821304757542b717b86e741fd976b99d7ace69e7c05ecce38ff76afdfb942",
+                "response_body_hash": "0e8b9c1029cf3593d682b42c19095672475440dc19b0c50523d2030992919a46",
                 "status": "notSupported"
             },
             "/clips/add-note": {
@@ -1101,7 +1101,7 @@
             },
             "/i/notifications-grouped": {
                 "path": "/i/notifications-grouped",
-                "request_body_hash": "f3b228be1725d7d20a5447c5bdd77b3607f957493094af6509510324b1c8ec57",
+                "request_body_hash": "b7788800a140ac2311dbfeca13da3a96ed6887203987086c208cd40d990ee7f8",
                 "response_body_hash": "4308293ffc2cbf929047ac53a2b622b3cd42a7af9beb394260c6d869a135790e",
                 "status": "needToWork"
             },
@@ -1144,7 +1144,7 @@
             "/i/registry/get-detail": {
                 "path": "/i/registry/get-detail",
                 "request_body_hash": "aed45341057ff5baf85649b8f278029abba3931a7a11a5823503d0518abd29be",
-                "response_body_hash": "21c9736218aa9bf5a272da4eb209f4f5d664f77a3efe98cf6577f84dcf7de83a",
+                "response_body_hash": "b6d9b0394f3f808aaad0956a0bfa92348d055c8b751d094818eb4db01014a26d",
                 "status": "needToWork"
             },
             "/i/registry/get": {
@@ -1156,13 +1156,13 @@
             "/i/registry/keys-with-type": {
                 "path": "/i/registry/keys-with-type",
                 "request_body_hash": "6b59dc57bb1c800b691f50c49e1d722c18fae912039f910f5cdc8700ab6a4d05",
-                "response_body_hash": "7bf0116f498ce47044927701dfecaba646fd01670d82eba596492a14402d605c",
+                "response_body_hash": "f0ef6e44ea6047342718331ff38984ca7f1c12326410fc5bb0611a4e5d43c14c",
                 "status": "needToWork"
             },
             "/i/registry/keys": {
                 "path": "/i/registry/keys",
                 "request_body_hash": "6b59dc57bb1c800b691f50c49e1d722c18fae912039f910f5cdc8700ab6a4d05",
-                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
+                "response_body_hash": "b27c6f9999974cc9d2aed6a70c37dba1e70641c4fdf5632bca440a6382106105",
                 "status": "notSupported"
             },
             "/i/registry/remove": {
@@ -1185,7 +1185,7 @@
             },
             "/i/update": {
                 "path": "/i/update",
-                "request_body_hash": "025027b4772daf33aed19b0cc4c6305274acc8de4605dac6c2669b73f3743241",
+                "request_body_hash": "0085629453979d77d392cd0e6961caa13478a69f7e75cf2145ec4fcff4ee6869",
                 "response_body_hash": "37d128881219e622fd844c82ffc764f3acd5639efa53a2f9b391e4ff59994171",
                 "status": "needToWork"
             },
@@ -1246,7 +1246,7 @@
             "/meta": {
                 "path": "/meta",
                 "request_body_hash": "a0fd8e84fb4eb3c62c7b26edf9ba0127115e5846392fd66b1171e736933837c5",
-                "response_body_hash": "691cb2447d07dde5b7b8ab84126d69dd7ead11d6cb552f4fa2e148aa97a27096",
+                "response_body_hash": "3082ad11c4eaa6a7babe3894131b8c09d11bd427822903d6c555fe63ff193a8f",
                 "status": "needToWork"
             },
             "/emojis": {
@@ -1306,7 +1306,7 @@
             "/notes/create": {
                 "path": "/notes/create",
                 "request_body_hash": "d4b560a6c4c6be2057b98d49d929aecc56a50fd2364ba1f28ee2b873b9f35b56",
-                "response_body_hash": "be3b9b2f61785a6ae44806006b8e2317585af75c8b5532616b4938979946bfab",
+                "response_body_hash": "d6de22e6ec5eb0ae3e11c05074043caaaa66c232a4cb56e616a431199e4bfe77",
                 "status": "needToWork"
             },
             "/notes/children": {
@@ -1575,7 +1575,7 @@
             },
             "/flash/update": {
                 "path": "/flash/update",
-                "request_body_hash": "23762f32d73fc110d9d615dfd677050884e9ab92e96913d88bb3164c325084db",
+                "request_body_hash": "0dfd3e95d6c87e33ed9225c1c0d7eb43f2b45396e58b8818344dbc0a9ce6d7a9",
                 "response_body_hash": "115f8b79fd6878c3ba249aa21e8434e1082361e34a12bce76c648aa0f099bca5",
                 "status": "notSupported"
             },
@@ -1624,7 +1624,7 @@
             "/roles/users": {
                 "path": "/roles/users",
                 "request_body_hash": "985b8d2726a2e859a58a14d37b694af0e1a8911794cd692dbef09c20d9ba3cde",
-                "response_body_hash": "eb466d442ad8093a3dd30c47e1a27800fafe9997285bb21571da9d752eb68d95",
+                "response_body_hash": "8da5c88d420bef21ab132b5c3d64a135c6e83b0d9062d9bd746dc187c6f90312",
                 "status": "needToWork"
             },
             "/roles/notes": {
@@ -1690,7 +1690,7 @@
             "/test": {
                 "path": "/test",
                 "request_body_hash": "c218519678437bf2b18750c3c30ca0a7c0ad9a20fd92a918a3f8bf78a197aa6f",
-                "response_body_hash": "c11f8d5ac1100fb98148bb0d4d8631437fb056846f170cd467ee6a66965da4bd",
+                "response_body_hash": "3bfc2ae45fc5bc2056ac17731c27cbfef6bb153c0f3163df73187769adbb297a",
                 "status": "needToWork"
             },
             "/username/available": {
@@ -1810,7 +1810,7 @@
             "/users/lists/get-memberships": {
                 "path": "/users/lists/get-memberships",
                 "request_body_hash": "479cb359a63d03e3a9adb6e3a497b1b3d460391559db59977a4935bacf514751",
-                "response_body_hash": "f932deeafd1683951a2923cf235ac8bb5c842a1bbec43ae661c9c2013f1b2ff0",
+                "response_body_hash": "a2836aec1204d6d80581f8bbccb7a85d8de9cca26a483c346f114b300c01aa5c",
                 "status": "needToWork"
             },
             "/users/pages": {
@@ -1828,7 +1828,7 @@
             "/users/reactions": {
                 "path": "/users/reactions",
                 "request_body_hash": "b25ec7c80ef58b7781824f82da212773307b82440edbe8089e2ef16748d64c96",
-                "response_body_hash": "6d47d8b864fba7dad60dcaf6932a8237ae82a2a840f4fc1672b9666d87473dc3",
+                "response_body_hash": "c4116b29986cb85c8f75ec8fd3615bf8c3b10fab87505bd2cc526a2c056f5605",
                 "status": "notSupported"
             },
             "/users/recommendation": {
@@ -1894,13 +1894,13 @@
             "/retention": {
                 "path": "/retention",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
-                "response_body_hash": "6db55b1f03dc038b85901c4148769125bb686c9d407b5b0d420770f27ab6b15c",
+                "response_body_hash": "cffa21e66487c440f870ddad0ad3d1f7e17d815d8406d1c0a19d66d30ecf7037",
                 "status": "notSupported"
             },
             "/admin/accounts/find-by-email": {
                 "path": "/admin/accounts/find-by-email",
                 "request_body_hash": "03aec8bcf9812226154ca4d7ec09b0786afcfb58e2bdf609ec3369b16257d9c1",
-                "response_body_hash": "94a60f7b2643e47dcb95203c436961e8f317591f061bb316725b75e98400cb31",
+                "response_body_hash": "d934a8f9c5bd4f4221f76b0152ec2f95dc6c2a6ed994c5a774c2e61051e5d054",
                 "status": "needToWork"
             },
             "/admin/unset-user-avatar": {
@@ -1931,7 +1931,7 @@
                 "path": "/admin/meta",
                 "status": "needToWork",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
-                "response_body_hash": "bf189e524b36dd6bbb649c4338a2cbb35757dff220040596940b9da66534ee5d"
+                "response_body_hash": "0e2d0468d1d4ce76a8718ec6ef8b2aefe8f780162179ceb14ef85ed25d6a044a"
             },
             "/admin/emoji/import-zip": {
                 "path": "/admin/emoji/import-zip",
@@ -1955,7 +1955,7 @@
                 "path": "/i/2fa/done",
                 "status": "notSupported",
                 "request_body_hash": "c6d1b6e1498ff55d17517f38d6d3c4390d319429202a85908b4fc622d175e957",
-                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
+                "response_body_hash": "17a0f052b5b525b00b406ddd3c9fc95ae2a4e39702bc21ddc1352a6796e9c297"
             },
             "/i/2fa/key-done": {
                 "path": "/i/2fa/key-done",
@@ -1973,7 +1973,7 @@
                 "path": "/i/2fa/register-key",
                 "status": "notSupported",
                 "request_body_hash": "81cf38a69786af5a9cb75498edb554ce063b0c8e2a0144848fc47d84c4250edf",
-                "response_body_hash": "8342722bc8ad42e7459d329d17163c03b9f041f9c1935e95555e4783ad913a19"
+                "response_body_hash": "09b7631e623234aee5e11ff860c0c9c675049d574e55322b50c03504c95ad2cd"
             },
             "/i/2fa/register": {
                 "path": "/i/2fa/register",
@@ -2003,13 +2003,13 @@
                 "path": "/i/apps",
                 "status": "notSupported",
                 "request_body_hash": "a7bbc5ec334b53e4f02335f5506596cec7df3b69c7bace6ef4e78a716f417919",
-                "response_body_hash": "8068d4288ed69f8104be6c4f6ec76e3a0f70922c277242c2d123f9c12571b9dd"
+                "response_body_hash": "f20ee7d0422c9b85bc95ca43ae98e097d9d185fdd84233ec96b6d6fa8414577f"
             },
             "/i/authorized-apps": {
                 "path": "/i/authorized-apps",
                 "status": "notSupported",
                 "request_body_hash": "883322d13b719c00d7787208bcc3c6ea272cd52754b3ee13fdf9853ff692cbbb",
-                "response_body_hash": "027f07391cb3fdf6aff464f72c1c3d3afbd80dcfb80be7db90951bdf3f956018"
+                "response_body_hash": "c6fe7260e0c44f12227744e5586ec4ed4b74c01020e642d2c6da8f4fc9caff57"
             },
             "/i/change-password": {
                 "path": "/i/change-password",
@@ -2123,7 +2123,7 @@
                 "path": "/i/update-email",
                 "status": "notSupported",
                 "request_body_hash": "c2b874d747b9a4db158d40371178c6443128dce23f322e78b9e9c183649ca5ee",
-                "response_body_hash": "10fc7c7ba7c9652693a4f167ce92b6bcdae58fe37dd157cb2d36ff21dc53f542"
+                "response_body_hash": "ec2a5bf5de6ddf2b1bd02032e326499676da99341d4bd35c6c0080e5a6972694"
             },
             "/i/move": {
                 "path": "/i/move",
@@ -2152,20 +2152,20 @@
             "/bubble-game/register": {
                 "path": "/bubble-game/register",
                 "status": "notSupported",
-                "request_body_hash": "caeb79db89c8d1e29fd87305186506dd3a3804c0e8e6cb948c5223187ddf047b",
-                "response_body_hash": "cc2d662fe44dfc1503422cf38995c321de833d968a7250769c1c739031b5640c"
+                "request_body_hash": "a994af2bdfd63df0bde7ce457d8e05600c054f871519627ed985061b65ef318c",
+                "response_body_hash": "918f763d587ab04810326a5ef42c50e6c9351b515f8938b148e99e117bda015a"
             },
             "/bubble-game/ranking": {
                 "path": "/bubble-game/ranking",
                 "status": "notSupported",
                 "request_body_hash": "0b215263ffe361b7662ba6637bc999c52cd0e1ae5dd468e922d659cbd0da7e7f",
-                "response_body_hash": "28627f8eac8efec245e9d346ee7504876ee5a99248c7d08bbfc9dc5dff33cd16"
+                "response_body_hash": "02a02ac9e15b0bf5b04dfb368510fb6f471649eb368bcd684e859516908e62a9"
             },
             "/reversi/cancel-match": {
                 "path": "/reversi/cancel-match",
                 "status": "notSupported",
                 "request_body_hash": "59fdcf8deb825af590d7508ee69c323445dcde90c4dcb98eb26451d71a12c821",
-                "response_body_hash": "6db55b1f03dc038b85901c4148769125bb686c9d407b5b0d420770f27ab6b15c"
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
             },
             "/reversi/games": {
                 "path": "/reversi/games",
@@ -2177,7 +2177,7 @@
                 "path": "/reversi/match",
                 "status": "notSupported",
                 "request_body_hash": "f52ce9b09a7641214aca43a33e39103d90060ffab4564877c62c3ac96f85c7ff",
-                "response_body_hash": "93f2f6e0cb2b153b181fcf4ed630e27481c784799bdefa5025761db8dd912699"
+                "response_body_hash": "28b18124991be07194705fed7630c9c7a2bb3d1e266aa06bfeaa19f80da503d4"
             },
             "/reversi/invitations": {
                 "path": "/reversi/invitations",
@@ -2202,6 +2202,12 @@
                 "status": "notSupported",
                 "request_body_hash": "4fc27e290638a4312d59de35b50661cc8b9714c6e8e8ca1a1587fd7579c914d8",
                 "response_body_hash": "afb585d56dab7b27886afab4c9a6b84fe73238227ea8d53228e43c1201f70256"
+            },
+            "/notifications/flush": {
+                "path": "/notifications/flush",
+                "status": "notSupported",
+                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
             }
         },
         "removed": {}
@@ -2214,7 +2220,7 @@
         },
         "UserLite": {
             "name": "UserLite",
-            "hash": "a8477da1fb750f7e0ebbedc95bbda436ce5be396d688063fa64541e8ae5a5262",
+            "hash": "466d00c177d6076364af3a4b229dfc06313c206afa4d73be94bbc1b59c53db03",
             "status": "supported"
         },
         "UserDetailedNotMeOnly": {
@@ -2224,7 +2230,7 @@
         },
         "MeDetailedOnly": {
             "name": "MeDetailedOnly",
-            "hash": "0cc55ace5d412f1063b9223b4fe899a6d5058e024730332eda967a8ceb1250a5",
+            "hash": "3a90b0f9f7a52b50d0e1e1b4d34027ce89992a08cce3b973764f735a110e0ede",
             "status": "supported"
         },
         "UserDetailedNotMe": {
@@ -2244,7 +2250,7 @@
         },
         "User": {
             "name": "User",
-            "hash": "9bb15ce6a2a4f4c3b202bb03ad3af2a28c3d2fabe90f5b211641403f09c67732",
+            "hash": "1390cb7665d5e4152ac55b66a29788c823268e506eac9254b869501be8c08cd5",
             "status": "supported"
         },
         "UserList": {
@@ -2254,7 +2260,7 @@
         },
         "Announcement": {
             "name": "Announcement",
-            "hash": "c6a99c3f08a0072491961ac4be88ea5789838d47fe2afa56650e60e1fbf0376b",
+            "hash": "a5a93362ad8d27594b42bc86ec111e11ea302e45c30b2d0b219d5aa52dd81999",
             "status": "supported"
         },
         "App": {
@@ -2264,7 +2270,7 @@
         },
         "Note": {
             "name": "Note",
-            "hash": "7e8de387c79b1db582ba2ebeba73aae80a899393042b89325027cab3bf1e0b0c",
+            "hash": "ec6d0ee14cb8720876e3dbc2ecc1edf151b576328f0cade1292ef57d1f4770b5",
             "status": "supported"
         },
         "NoteReaction": {
@@ -2279,7 +2285,7 @@
         },
         "Notification": {
             "name": "Notification",
-            "hash": "47afc80f19a4537ede5e8fc5bb5688d56eedfce1d4c0255656765d25819fe47f",
+            "hash": "400c4d12ccffdf21289f9eadf6cd1456c4912d4a4e4b778e6f77309f981f29f7",
             "status": "notSupported"
         },
         "DriveFile": {
@@ -2294,22 +2300,22 @@
         },
         "Following": {
             "name": "Following",
-            "hash": "7abec68b15d8f0f431abc0022b489dd81b67d5caf48df1121763559bcdff909c",
+            "hash": "98d7bf83b27127eb401200cfc66e34a63daabc3c35853fd4fa9bf0004debf1e2",
             "status": "supported"
         },
         "Muting": {
             "name": "Muting",
-            "hash": "33400bcbcb4c0cb3be9a235f18c22456d8afed04d66597e591dca3cdb4777a6d",
+            "hash": "ebd246a571c8d83b5f7a2ca94c82f546ccca64e850eea03dbfee6e6205d734c8",
             "status": "notSupported"
         },
         "RenoteMuting": {
             "name": "RenoteMuting",
-            "hash": "b0162338ef404018678df4d531ead93cb9d2e9d5552495882121d533934c76ad",
+            "hash": "d05e46675c025ca68d45e266c2b8688d169e42bdd2d32c0a319b2e3c02deb6c8",
             "status": "notSupported"
         },
         "Blocking": {
             "name": "Blocking",
-            "hash": "2b0438f1ef5156868501093ea7bb9352e8b9329373f822713627fad742069945",
+            "hash": "ff308cbf8f53dc68328f3ecef7881d0f851f5af75c47d23387cbfacef7be2ec3",
             "status": "notSupported"
         },
         "Hashtag": {
@@ -2324,7 +2330,7 @@
         },
         "Page": {
             "name": "Page",
-            "hash": "0f0c362ee298381088c12969e15cbd10a8183ff37301a76a772e917eaabc47ba",
+            "hash": "90f567b288015be12079ff35a50426c0b40b01caeaabe20bcc3dbb833ff764b6",
             "status": "notSupported"
         },
         "Channel": {
@@ -2349,7 +2355,7 @@
         },
         "FederationInstance": {
             "name": "FederationInstance",
-            "hash": "5c701ab845196c5fe00591568d9b4c9c00874a9e067a8f970bd9e92be8aa410f",
+            "hash": "85a4b7dab56b7ba598d864d04ad5c8b8465030fc2db4147ff90ccd117fa6001f",
             "status": "notSupported"
         },
         "GalleryPost": {
@@ -2359,7 +2365,7 @@
         },
         "EmojiSimple": {
             "name": "EmojiSimple",
-            "hash": "45a03e8c334edf32ba0acb9781d3909f9d4bb2b6190a4a202758a064363428e1",
+            "hash": "3ef42d4f73e075b2beb5a0fea0303adc1956595e1e3190a197cfc020b8d8fe3b",
             "status": "supported"
         },
         "EmojiDetailed": {
@@ -2389,17 +2395,77 @@
         },
         "Role": {
             "name": "Role",
-            "hash": "2a7a5cbd50fb0c67b30ea999c504adab13cda04b15a9b0dfeb7ca2d86a57a6b9",
+            "hash": "d472b6f9841130892156ebb157bfd5ea0582be0de40227eef4d0977c0a034e5d",
             "status": "notSupported"
         },
         "ReversiGameLite": {
             "name": "ReversiGameLite",
-            "hash": "8300e4f0b934e6784dcecc5e7ba523ed21d1cb64c7e4734e436f504e9309faa0",
+            "hash": "80509ad17c4b86594ea29483a8a6ec912cc090bf2e9c0368461e1f0fa93d3c40",
             "status": "notSupported"
         },
         "ReversiGameDetailed": {
             "name": "ReversiGameDetailed",
-            "hash": "ce6855e7fa6a6f34883f995aae845ddaf27216902d049f2a52455c260430cd4d",
+            "hash": "54d88767a83a96b477ed61f217b7c59556f337957fe1caf0c084364be1ca051e",
+            "status": "notSupported"
+        },
+        "PageBlock": {
+            "name": "PageBlock",
+            "hash": "4c403486bdccae6e53206c6238191099b43982f9cd2f52406f03f4703a59ef7e",
+            "status": "notSupported"
+        },
+        "RoleCondFormulaLogics": {
+            "name": "RoleCondFormulaLogics",
+            "hash": "bee2e25cd5c3075944f5ab8deeb8ef91b5e00a4a0a0e1d95b25777d8437597d5",
+            "status": "notSupported"
+        },
+        "RoleCondFormulaValueNot": {
+            "name": "RoleCondFormulaValueNot",
+            "hash": "99f7e12cc1651b5856b03907bc41b05073503159d160c3c08c73d06f879a1f9c",
+            "status": "notSupported"
+        },
+        "RoleCondFormulaValueIsLocalOrRemote": {
+            "name": "RoleCondFormulaValueIsLocalOrRemote",
+            "hash": "efe303f99eeb64c46b0b27231938a60d08ee73d483a7c26b6c4a1403dfa2fd80",
+            "status": "notSupported"
+        },
+        "RoleCondFormulaValueAssignedRole": {
+            "name": "RoleCondFormulaValueAssignedRole",
+            "hash": "80c377cb1623514ec05cd3a2e072accf02c1737d3fbecee63d0f44c42d8bfe3d",
+            "status": "notSupported"
+        },
+        "RoleCondFormulaValueCreated": {
+            "name": "RoleCondFormulaValueCreated",
+            "hash": "5511fc54c99a53cc4dca73892a034156968522b2e95bed5168a5eca4306e3aa2",
+            "status": "notSupported"
+        },
+        "RoleCondFormulaFollowersOrFollowingOrNotes": {
+            "name": "RoleCondFormulaFollowersOrFollowingOrNotes",
+            "hash": "afbf878223e39cd81c780fc8fcc9007cb5c8af7ae362863e29560240a42f642c",
+            "status": "notSupported"
+        },
+        "RoleCondFormulaValue": {
+            "name": "RoleCondFormulaValue",
+            "hash": "9fbf8ffad6c7c22f5b4317fcb7f75357fc9d96c53f402eeba4f66b02c5e9238b",
+            "status": "notSupported"
+        },
+        "RolePolicies": {
+            "name": "RolePolicies",
+            "hash": "2348f865e89d2349624e6f8ff3dfc447a3b94800719e13df151a26907ce0793c",
+            "status": "notSupported"
+        },
+        "MetaLite": {
+            "name": "MetaLite",
+            "hash": "ecbf6409629f7ee838ed01d0837b00b907eab7d657012003245b6e60455b0591",
+            "status": "notSupported"
+        },
+        "MetaDetailedOnly": {
+            "name": "MetaDetailedOnly",
+            "hash": "7c5f566abed62c97fbc3706411b61201edde599c15ac5b7f60af48dbc98528d0",
+            "status": "notSupported"
+        },
+        "MetaDetailed": {
+            "name": "MetaDetailed",
+            "hash": "55a03056b7837895f8c4458648cb70d23517d08ee3e7245243d5b784d840c5b3",
             "status": "notSupported"
         }
     }
