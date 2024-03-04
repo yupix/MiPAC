@@ -242,7 +242,7 @@ class IMeDetailedSchema(IUserDetailedNotMeSchema, IMeDetailedOnlySchema):
 
 IUserDetailed = IUserDetailedNotMeSchema | IMeDetailedSchema
 
-IUser = IPartialUser | IUserDetailed | IUserDetailedNotMeSchema
+IUser = IPartialUser | IUserDetailed
 
 
 def is_partial_user(user: IUser) -> TypeGuard[IPartialUser]:
