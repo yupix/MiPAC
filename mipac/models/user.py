@@ -14,6 +14,7 @@ from mipac.types.user import (
     EmailNotificationTypes,
     GetFrequentlyRepliedUsersResponse,
     IAchievement,
+    ICreatedUser,
     IFfVisibility,
     IMeDetailedOnlySchema,
     IMeDetailedSchema,
@@ -491,10 +492,8 @@ class UserDetailedNotMe[T: IUserDetailedNotMeSchema](PartialUser[T], UserDetaile
         super().__init__(raw_user, client=client)
 
 
-class MeDetailed(UserDetailedNotMe[IMeDetailedSchema], MeDetailedOnly):  # pyright: ignore 直せない
-    """自分の詳細情報"""
-
-    def __init__(self, raw_user: IMeDetailedSchema, *, client: ClientManager):
+class MeDetailed[T: IMeDetailedSchema](UserDetailedNotMe[T], MeDetailedOnly):  # pyright: ignore 直せない
+    def __init__(self, raw_user: T, *, client: ClientManager):
         super().__init__(raw_user, client=client)
 
 
@@ -592,3 +591,12 @@ class FrequentlyRepliedUser:
 
     def _get(self, key: str) -> Any | None:
         return self._raw_frequently_replied_user.get(key)
+
+
+class CreatedUser[T: ICreatedUser](MeDetailed[T]):
+    def __init__(self, raw_user: T, *, client: ClientManager) -> None:
+        super().__init__(raw_user, client=client)
+
+    @property
+    def token(self) -> str:
+        return self._raw_user["token"]

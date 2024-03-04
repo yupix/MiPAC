@@ -240,6 +240,10 @@ class IMeDetailedSchema(IUserDetailedNotMeSchema, IMeDetailedOnlySchema):
     pass
 
 
+class ICreatedUser(IMeDetailedSchema):
+    token: str
+
+
 IUserDetailed = IUserDetailedNotMeSchema | IMeDetailedSchema
 
 IUser = IPartialUser | IUserDetailed
