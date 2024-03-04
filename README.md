@@ -13,7 +13,7 @@ git%2Bgithub.com%2Fyupix%2FMiPAC.svg?type=shield"/></a>
 
 ## Overview
 
-[日本語のREADMEもあります](./README_JP.md)
+[日本語の README もあります](./README_JP.md)
 
 This library is the Core of MiPA.
 
@@ -25,21 +25,9 @@ It absorbs API differences between versions, etc., which you don't have to worry
 > If you are installing from GitHub for some reason, we recommend using the `shared` branch with the following command.
 > `pip install git+https://github.com/yupix/Mi.py.git@shared`
 
-## Supported Misskey
+## Support Status
 
-Indicators of support
-
-|status|meaning|
-|---|---|
-|〇|Operation verified, priority support|
-|△| confirmation of operation, add support for features as and when issues, etc. come in.|
-|×|Not supported and not intended for use|
-
-|name|version|supported|
-|---|---|---|
-|[Misskey Official](https://github.com/misskey-dev/misskey)|v13 or later|〇|
-|[Misskey Official](https://github.com/misskey-dev/misskey)|v12|△|
-|[Misskey Official](https://github.com/misskey-dev/misskey)|v11|△|
+Support status can be found [here](. /compiler/datas/support_status.md). If the endpoint you want to use is not supported, you may create an Issue to get priority support.
 
 If you are using a non-official Fork and it is not working properly, please send us a link to your Fork repository and server in an Issue and we may be able to assist you.
 
