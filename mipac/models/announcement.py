@@ -23,14 +23,37 @@ class Announcement:
 
     @property
     def id(self) -> str:
+        """アナウンスのID
+
+        Returns
+        -------
+        str
+            アナウンスのID
+        """
         return self.__announcement["id"]
 
     @property
     def created_at(self) -> datetime:
+        """アナウンスが作成された日時
+
+        Returns
+        -------
+        datetime
+            アナウンスが作成された日時
+        """
         return str_to_datetime(self.__announcement["created_at"])
 
     @property
     def updated_at(self) -> datetime | None:
+        """アナウンスが更新された日時
+
+        Noneの場合は、アナウンスが更新されていないことを示します。
+
+        Returns
+        -------
+        datetime | None
+            アナウンスが更新された日時
+        """
         return (
             str_to_datetime(self.__announcement["updated_at"])
             if self.__announcement["updated_at"]
@@ -39,10 +62,24 @@ class Announcement:
 
     @property
     def text(self) -> str:
+        """アナウンスの内容
+
+        Returns
+        -------
+        str
+            アナウンスの内容
+        """
         return self.__announcement["text"]
 
     @property
     def title(self) -> str:
+        """アナウンスのタイトル
+
+        Returns
+        -------
+        str
+            アナウンスのタイトル
+        """
         return self.__announcement["title"]
 
     @property

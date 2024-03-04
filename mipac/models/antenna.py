@@ -18,22 +18,57 @@ class Antenna:
 
     @property
     def id(self) -> str:
+        """アンテナのID
+
+        Returns
+        -------
+        str
+            アンテナのID
+        """
         return self.__antenna["id"]
 
     @property
     def created_at(self) -> datetime:
+        """アンテナの作成日時
+
+        Returns
+        -------
+        datetime
+            アンテナの作成日時
+        """
         return str_to_datetime(self.__antenna["created_at"])
 
     @property
     def name(self) -> str:
+        """アンテナ名
+
+        Returns
+        -------
+        str
+            アンテナ名
+        """
         return self.__antenna["name"]
 
     @property
     def keywords(self) -> list[str]:
+        """キーワード
+
+        Returns
+        -------
+        list[str]
+            キーワード
+        """
         return self.__antenna["keywords"]
 
     @property
     def exclude_keywords(self) -> list[str]:
+        """除外キーワード
+
+        Returns
+        -------
+        list[str]
+            除外キーワード
+        """
         return self.__antenna["exclude_keywords"]
 
     @property

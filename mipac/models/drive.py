@@ -61,10 +61,24 @@ class FileProperties:
 
     @property
     def width(self) -> int | None:
+        """ファイルの幅
+
+        Returns
+        -------
+        int | None
+            ファイルの幅
+        """
         return self.__raw_properties.get("width")
 
     @property
     def height(self) -> int | None:
+        """ファイルの高さ
+
+        Returns
+        -------
+        int | None
+            ファイルの高さ
+        """
         return self.__raw_properties.get("height")
 
     @property
@@ -93,30 +107,79 @@ class Folder:
 
     @property
     def id(self) -> str:
+        """フォルダーのID
+
+        Returns
+        -------
+        str
+            フォルダーのID
+        """
         return self.__raw_folder["id"]
 
     @property
     def created_at(self) -> datetime:
+        """フォルダーが作成された日時
+
+        Returns
+        -------
+        datetime
+            フォルダーが作成された日時
+        """
         return str_to_datetime(self.__raw_folder["created_at"])
 
     @property
     def name(self) -> str:
+        """フォルダー名
+
+        Returns
+        -------
+        str
+            フォルダー名
+        """
         return self.__raw_folder["name"]
 
     @property
     def parent_id(self) -> str | None:
+        """親フォルダーのID
+
+        Returns
+        -------
+        str | None
+            親フォルダーのID
+        """
         return self.__raw_folder["parent_id"]
 
     @property
     def folders_count(self) -> int | None:
+        """フォルダー内のフォルダーの数
+
+        Returns
+        -------
+        int | None
+            フォルダー内のフォルダーの数
+        """
         return self.__raw_folder.get("folders_count")
 
     @property
     def files_count(self) -> int | None:
+        """フォルダー内のファイルの数
+
+        Returns
+        -------
+        int | None
+            フォルダー内のファイルの数
+        """
         return self.__raw_folder.get("files_count")
 
     @property
     def parent(self) -> Folder | None:
+        """親フォルダー
+
+        Returns
+        -------
+        Folder | None
+            親フォルダー
+        """
         return (
             Folder(self.__raw_folder["parent"], client=self.__client)
             if "parent" in self.__raw_folder and self.__raw_folder["parent"]
@@ -151,58 +214,156 @@ class File:
 
     @property
     def id(self) -> str:
+        """ファイルのID
+
+        Returns
+        -------
+        str
+            ファイルのID
+        """
         return self.__raw_file["id"]
 
     @property
     def created_at(self) -> datetime:
+        """ファイルが作成された日時
+
+        Returns
+        -------
+        datetime
+            ファイルが作成された日時
+        """
         return str_to_datetime(self.__raw_file["created_at"])
 
     @property
     def name(self) -> str:
+        """ファイル名
+
+        Returns
+        -------
+        str
+            ファイル名
+        """
         return self.__raw_file["name"]
 
     @property
     def type(self) -> str:
+        """ファイルの拡張子
+
+        Returns
+        -------
+        str
+            ファイルの種類
+        """
         return self.__raw_file["type"]
 
     @property
     def md5(self) -> str:
+        """ファイルのMD5ハッシュ
+
+        Returns
+        -------
+        str
+            ファイルのMD5ハッシュ
+        """
         return self.__raw_file["md5"]
 
     @property
     def size(self) -> int:
+        """ファイルのサイズ
+
+        Returns
+        -------
+        int
+            ファイルのサイズ
+        """
         return self.__raw_file["size"]
 
     @property
     def is_sensitive(self) -> bool:
+        """ファイルがセンシティブかどうか
+
+        Returns
+        -------
+        bool
+            ファイルがセンシティブかどうか
+        """
         return self.__raw_file["is_sensitive"]
 
     @property
     def blurhash(self) -> str | None:
+        """ファイルのBlurHash
+
+        Returns
+        -------
+        str | None
+            ファイルのBlurHash
+        """
         return self.__raw_file["blurhash"]
 
     @property
     def properties(self) -> FileProperties:
+        """ファイルのプロパティ
+
+        Returns
+        -------
+        FileProperties
+            ファイルのプロパティ
+        """
         return FileProperties(self.__raw_file["properties"])
 
     @property
     def url(self) -> str:
+        """ファイルのURL
+
+        Returns
+        -------
+        str
+            ファイルのURL
+        """
         return self.__raw_file["url"]
 
     @property
     def thumbnail_url(self) -> str | None:
+        """ファイルのサムネイルURL
+
+        Returns
+        -------
+        str | None
+            ファイルのサムネイルURL
+        """
         return self.__raw_file["thumbnail_url"]
 
     @property
     def comment(self) -> str | None:
+        """ファイルのコメント
+
+        Returns
+        -------
+        str | None
+            ファイルのコメント
+        """
         return self.__raw_file["comment"]
 
     @property
     def folder_id(self) -> str | None:
+        """フォルダーのID
+
+        Returns
+        -------
+        str | None
+            フォルダーのID
+        """
         return self.__raw_file["folder_id"]
 
     @property
     def folder(self) -> Folder | None:
+        """フォルダー
+
+        Returns
+        -------
+        Folder | None
+            フォルダー
+        """
         return (
             Folder(self.__raw_file["folder"], client=self.__client)
             if "folder" in self.__raw_file and self.__raw_file["folder"]
@@ -211,10 +372,24 @@ class File:
 
     @property
     def user_id(self) -> str | None:
+        """ファイルを作成したユーザーのID
+
+        Returns
+        -------
+        str | None
+            ユーザーのID
+        """
         return self.__raw_file["user_id"]
 
     @property
     def user(self) -> PartialUser | None:
+        """ファイルを作成したユーザー
+
+        Returns
+        -------
+        PartialUser | None
+            ユーザー
+        """
         return (
             PartialUser(self.__raw_file["user"], client=self.__client)
             if "user" in self.__raw_file and self.__raw_file["user"]
