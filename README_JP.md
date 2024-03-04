@@ -65,7 +65,6 @@ from mipac.client import Client
 
 async def main():
     client = Client(url, token)
-    await client.http.login()
     api = client.api
     note = await api.note.action.send('Hello World')
     print(note.author.name, note.content)

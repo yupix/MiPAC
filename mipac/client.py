@@ -24,7 +24,6 @@ class Client:
         self.http: HTTPClient = HTTPClient(url, token)
 
     async def __aenter__(self) -> Self:
-        await self.http.login()
         return self
 
     async def __aexit__(self, exc_type, exc, tb) -> None:

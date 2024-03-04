@@ -20,7 +20,7 @@ This library is the Core of MiPA.
 MiPAC is an Api Wrapper that supports Misskey v11, 12, and 13.
 It absorbs API differences between versions, etc., which you don't have to worry about originally.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > Extensive work is currently underway. Please see [here](https://github.com/yupix/MiPAC/issues/94) for more information.
 > If you are installing from GitHub for some reason, we recommend using the `shared` branch with the following command.
 > `pip install git+https://github.com/yupix/Mi.py.git@shared`
@@ -65,7 +65,6 @@ from mipac.client import Client
 
 async def main():
     client = Client(url, token)
-    await client.http.login()
     api = client.api
     note = await api.note.action.send('Hello World')
     print(note.author.name, note.content)

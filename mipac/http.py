@@ -14,7 +14,7 @@ from mipac.errors.base import APIError
 from mipac.types.endpoints import ENDPOINTS
 from mipac.types.user import IMeDetailedSchema
 from mipac.utils.format import remove_dict_empty, upper_to_lower
-from mipac.utils.util import COLORS, MISSING, _from_json
+from mipac.utils.util import COLORS, _from_json, deprecated
 
 _log = logging.getLogger(__name__)
 
@@ -34,23 +34,59 @@ async def json_or_text(response: aiohttp.ClientResponse):
 
 
 class Route:
+    """MisskeyのAPIを使用するためのルートとメソッドを定義するクラス
+
+    Parameters
+    ----------
+    method : Literal["GET", "POST"]
+        メソッド
+    path : ENDPOINTS
+        ルートパス
+
+    Attributes
+    ----------
+    path : str
+        ルートパス
+    method : str
+        メソッド
+    """
+
     def __init__(self, method: Literal["GET", "POST"], path: ENDPOINTS):
         self.path: str = path
         self.method: str = method
 
 
 class HTTPClient:
+    """MisskeyのAPIを使用するためのクライアントクラス
+
+    Parameters
+    ----------
+    url : str
+        MisskeyのURL
+    token : str | None
+        Misskeyのトークン
+    """
+
     def __init__(self, url: str, token: str | None = None) -> None:
         user_agent = (
             "Misskey Bot (https://github.com/yupix/MiPA {0})" + "Python/{1[0]}.{1[1]} aiohttp/{2}"
         )
-        self.user_agent = user_agent.format(__version__, sys.version_info, aiohttp.__version__)
-        self._session: aiohttp.ClientSession = MISSING
         self._url: str = url
         self._token: str | None = token
+        self.user_agent = user_agent.format(__version__, sys.version_info, aiohttp.__version__)
+        self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
+
+        match_domain = re.search(r"https?:\/\/([^\/]+)", self._url)
+        match_protocol = re.search(r"^(http|https)", self._url)
+        if match_domain is None or match_protocol is None:
+            raise Exception("Server URL cannot be retrieved or protocol (http / https) is missing")
+        protocol = True if match_protocol.group(1) == "https" else False
+        config.from_dict(
+            host=match_domain.group(1),
+            is_ssl=protocol,
+        )
 
     async def __aenter__(self) -> HTTPClient:
-        await self.login()
         return self
 
     async def __aexit__(self, exc_type, exc, tb) -> None:
@@ -58,6 +94,13 @@ class HTTPClient:
 
     @property
     def session(self) -> aiohttp.ClientSession:
+        """現在のセッションを返します
+
+        Returns
+        -------
+        aiohttp.ClientSession
+            現在のセッション
+        """
         return self._session
 
     async def request(
@@ -113,19 +156,21 @@ REQUEST:{COLORS.reset}
             APIError("HTTP ERROR", res.status).raise_error()
 
     async def close_session(self) -> None:
+        """セッションを終了します"""
         await self._session.close()
 
+    @deprecated
     async def login(self) -> IMeDetailedSchema | None:
-        match_domain = re.search(r"https?:\/\/([^\/]+)", self._url)
-        match_protocol = re.search(r"^(http|https)", self._url)
-        if match_domain is None or match_protocol is None:
-            raise Exception("Server URL cannot be retrieved or protocol (http / https) is missing")
-        protocol = True if match_protocol.group(1) == "https" else False
-        config.from_dict(
-            host=match_domain.group(1),
-            is_ssl=protocol,
-        )
-        self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
+        """現在指定されているTokenのユーザー情報を返します
+
+        ..deprecated:: 0.6.4
+            :class:`mipac.http.HTTPClient` をインスタンス化した際に自動的にセッションが作成されるようになったため非推奨になりました。現在のTokenのユーザー情報を取得する場合は :meth:`mipac.actions.user.get_me` を使用してください。
+
+        Returns
+        -------
+        IMeDetailedSchema | None
+            Tokenがある場合は自身の情報を返します。Tokenが無い場合はNoneを返します
+        """
         if self._token:
             data: IMeDetailedSchema = await self.request(Route("POST", "/api/i"), auth=True)
             return data
