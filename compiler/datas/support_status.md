@@ -1,4 +1,11 @@
-## SUPPORTED ENDPOINTS (144/368)
+# Supported Misskey Information
+
+## Supported Misskey Version
+
+`2024.3.1`
+
+## Supported endpoints (144/368)
+
 - [x] /admin/accounts/create
 - [x] /admin/accounts/delete
 - [x] /admin/ad/create
@@ -380,7 +387,7 @@
 
 💯
 
-## SUPPORTED SCHEMAS
+## Supported schemas
 
 - [ ] Error
 - [x] UserLite
