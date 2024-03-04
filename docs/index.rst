@@ -514,6 +514,15 @@ Achievement
     :members:
 
 
+CreatedUser
+~~~~~~~~~~~
+
+.. attributetable:: mipac.models.user.CreatedUser
+
+.. autoclass:: mipac.models.user.CreatedUser
+    :members:
+
+
 FollowCommon
 ~~~~~~~~~~~~
 
@@ -2653,6 +2662,15 @@ IBadgeRole
     :members:
 
 
+ICreatedUser
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.user.ICreatedUser
+
+.. autoclass:: mipac.types.user.ICreatedUser
+    :members:
+
+
 IMeDetailedOnlySchema
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -3726,42 +3744,6 @@ Config
     :members:
 
 
-Features
-~~~~~~~~
-
-.. attributetable:: mipac.config.Features
-
-.. autoclass:: mipac.config.Features
-    :members:
-
-
-IFeatures
-~~~~~~~~~
-
-.. attributetable:: mipac.config.IFeatures
-
-.. autoclass:: mipac.config.IFeatures
-    :members:
-
-
-ILimits
-~~~~~~~
-
-.. attributetable:: mipac.config.ILimits
-
-.. autoclass:: mipac.config.ILimits
-    :members:
-
-
-Limits
-~~~~~~
-
-.. attributetable:: mipac.config.Limits
-
-.. autoclass:: mipac.config.Limits
-    :members:
-
-
 MiFile
 ~~~~~~
 
@@ -3846,12 +3828,6 @@ cache
 .. autofunction:: mipac.utils.cache.cache
 
 
-get_cache_key
-~~~~~~~~~~~~~
-
-.. autofunction:: mipac.utils.cache.get_cache_key
-
-
 set_cache
 ~~~~~~~~~
 
@@ -3882,22 +3858,10 @@ remove_dict_missing
 .. autofunction:: mipac.utils.format.remove_dict_missing
 
 
-remove_list_empty
-~~~~~~~~~~~~~~~~~
-
-.. autofunction:: mipac.utils.format.remove_list_empty
-
-
 snake_to_camel
 ~~~~~~~~~~~~~~
 
 .. autofunction:: mipac.utils.format.snake_to_camel
-
-
-str_lower
-~~~~~~~~~
-
-.. autofunction:: mipac.utils.format.str_lower
 
 
 str_to_datetime

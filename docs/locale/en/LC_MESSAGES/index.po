@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mipac \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-21 23:55+0900\n"
+"POT-Creation-Date: 2024-03-04 12:46+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -87,6 +87,7 @@ msgstr ""
 msgid "ブロック対象に対するAPIを利用するためのManager"
 msgstr ""
 
+#: mipac.actions.admins.accounts.AdminAccountActions.create
 #: mipac.actions.admins.accounts.AdminAccountActions.delete
 #: mipac.actions.admins.admin.AdminActions.reset_password
 #: mipac.actions.admins.drive.AdminDriveActions.clean_remote_files
@@ -209,7 +210,6 @@ msgstr ""
 #: mipac.actions.note.NoteActions.get_all_search_by_tag
 #: mipac.actions.note.NoteActions.get_featured
 #: mipac.actions.note.NoteActions.get_global_time_line
-#: mipac.actions.note.NoteActions.get_time_line
 #: mipac.actions.note.NoteActions.search
 #: mipac.actions.note.NoteActions.search_by_tag
 #: mipac.actions.note.NoteActions.send
@@ -269,6 +269,8 @@ msgstr ""
 #: mipac.actions.users.mute.MuteActions.get_list
 #: mipac.actions.users.mute.SharedMuteActions.create
 #: mipac.actions.users.mute.SharedMuteActions.delete
+#: mipac.config.Config.from_dict mipac.http.HTTPClient.login
+#: mipac.http.HTTPClient.session
 #: mipac.manager.favorite.ClientFavoriteManager.action
 #: mipac.manager.favorite.FavoriteManager.action
 #: mipac.manager.reaction.ClientReactionManager.action
@@ -322,14 +324,19 @@ msgstr ""
 #: mipac.models.note.NoteChannel.name mipac.models.note.NoteChannel.user_id
 #: mipac.models.note.NoteReaction.created_at mipac.models.note.NoteReaction.id
 #: mipac.models.note.NoteReaction.type mipac.models.note.NoteReaction.user
-#: mipac.utils.format.bool_to_string mipac.utils.format.remove_dict_empty
-#: mipac.utils.format.remove_dict_missing mipac.utils.format.remove_list_empty
-#: mipac.utils.format.str_to_datetime mipac.utils.format.upper_to_lower
-#: mipac.utils.util.check_multi_arg
+#: mipac.models.username.UsernameAvailable.available
+#: mipac.utils.auth.MiAuth.check_session mipac.utils.auth.MiAuth.gen_session
+#: mipac.utils.auth.MiAuth.wait_complete mipac.utils.format.bool_to_string
+#: mipac.utils.format.convert_dict_keys_to_camel
+#: mipac.utils.format.remove_dict_empty mipac.utils.format.remove_dict_missing
+#: mipac.utils.format.snake_to_camel mipac.utils.format.str_to_datetime
+#: mipac.utils.format.upper_to_lower mipac.utils.pagination.Pagination.is_final
+#: mipac.utils.pagination.Pagination.next mipac.utils.util.check_multi_arg
 #: mipac.utils.util.deprecated.<locals>.new_func of
 msgid "戻り値"
 msgstr ""
 
+#: mipac.actions.admins.accounts.AdminAccountActions.create
 #: mipac.actions.admins.accounts.AdminAccountActions.delete
 #: mipac.actions.admins.admin.AdminActions.reset_password
 #: mipac.actions.admins.drive.AdminDriveActions.clean_remote_files
@@ -512,6 +519,8 @@ msgstr ""
 #: mipac.actions.users.mute.MuteActions.get_list
 #: mipac.actions.users.mute.SharedMuteActions.create
 #: mipac.actions.users.mute.SharedMuteActions.delete
+#: mipac.config.Config.from_dict mipac.http.HTTPClient.login
+#: mipac.http.HTTPClient.session
 #: mipac.manager.favorite.ClientFavoriteManager.action
 #: mipac.manager.favorite.FavoriteManager.action
 #: mipac.manager.reaction.ClientReactionManager.action
@@ -579,10 +588,14 @@ msgstr ""
 #: mipac.models.note.NoteChannel.name mipac.models.note.NoteChannel.user_id
 #: mipac.models.note.NoteReaction.created_at mipac.models.note.NoteReaction.id
 #: mipac.models.note.NoteReaction.type mipac.models.note.NoteReaction.user
-#: mipac.utils.format.bool_to_string mipac.utils.format.remove_dict_empty
-#: mipac.utils.format.remove_dict_missing mipac.utils.format.remove_list_empty
-#: mipac.utils.format.str_to_datetime mipac.utils.format.upper_to_lower
-#: mipac.utils.util.check_multi_arg
+#: mipac.models.username.UsernameAvailable.available
+#: mipac.utils.auth.MiAuth.check_session mipac.utils.auth.MiAuth.gen_session
+#: mipac.utils.auth.MiAuth.wait_complete mipac.utils.format.bool_to_string
+#: mipac.utils.format.convert_dict_keys_to_camel
+#: mipac.utils.format.remove_dict_empty mipac.utils.format.remove_dict_missing
+#: mipac.utils.format.snake_to_camel mipac.utils.format.str_to_datetime
+#: mipac.utils.format.upper_to_lower mipac.utils.pagination.Pagination.is_final
+#: mipac.utils.pagination.Pagination.next mipac.utils.util.check_multi_arg
 #: mipac.utils.util.deprecated.<locals>.new_func of
 msgid "戻り値の型"
 msgstr ""
@@ -717,11 +730,13 @@ msgstr ""
 
 #: mipac.actions.clip.ClientClipActions.add_note:3
 #: mipac.actions.clip.ClientClipActions.delete:3
+#: mipac.actions.clip.ClientClipActions.get_all_notes:3
 #: mipac.actions.clip.ClientClipActions.remove_note:3
 #: mipac.actions.clip.ClientClipActions.update:3
 #: mipac.actions.clip.ClipActions.get:3
 #: mipac.actions.clip.SharedClipActions.add_note:3
 #: mipac.actions.clip.SharedClipActions.delete:3
+#: mipac.actions.clip.SharedClipActions.get_all_notes:3
 #: mipac.actions.clip.SharedClipActions.remove_note:3
 #: mipac.actions.clip.SharedClipActions.update:3 mipac.models.clip.Clip.id:1 of
 msgid "The clip id"
@@ -816,7 +831,7 @@ msgstr ""
 msgid "AdminMeta"
 msgstr ""
 
-#: ../../index.rst:296 ../../index.rst:3730
+#: ../../index.rst:296
 msgid "Features"
 msgstr ""
 
@@ -887,11 +902,13 @@ msgstr ""
 #: mipac.actions.channel.SharedChannelActions.update
 #: mipac.actions.clip.ClientClipActions.add_note
 #: mipac.actions.clip.ClientClipActions.delete
+#: mipac.actions.clip.ClientClipActions.get_all_notes
 #: mipac.actions.clip.ClientClipActions.remove_note
 #: mipac.actions.clip.ClientClipActions.update
 #: mipac.actions.clip.ClipActions.create mipac.actions.clip.ClipActions.get
 #: mipac.actions.clip.SharedClipActions.add_note
 #: mipac.actions.clip.SharedClipActions.delete
+#: mipac.actions.clip.SharedClipActions.get_all_notes
 #: mipac.actions.clip.SharedClipActions.remove_note
 #: mipac.actions.clip.SharedClipActions.update
 #: mipac.actions.drive.drive.DriveActions.stream
@@ -1012,11 +1029,16 @@ msgstr ""
 #: mipac.actions.users.mute.ClientMuteActions.delete
 #: mipac.actions.users.mute.MuteActions.get_all_list
 #: mipac.actions.users.mute.SharedMuteActions.create
-#: mipac.actions.users.mute.SharedMuteActions.delete mipac.models.note.Note
-#: mipac.models.note.NoteTranslateResult mipac.utils.format.bool_to_string
+#: mipac.actions.users.mute.SharedMuteActions.delete
+#: mipac.config.Config.from_dict mipac.http.HTTPClient mipac.http.Route
+#: mipac.models.note.Note mipac.models.note.NoteTranslateResult
+#: mipac.utils.auth.MiAuth.gen_session mipac.utils.cache.set_cache
+#: mipac.utils.format.bool_to_string
+#: mipac.utils.format.convert_dict_keys_to_camel
 #: mipac.utils.format.remove_dict_empty mipac.utils.format.remove_dict_missing
-#: mipac.utils.format.remove_list_empty mipac.utils.format.str_to_datetime
-#: mipac.utils.format.upper_to_lower mipac.utils.util.check_multi_arg of
+#: mipac.utils.format.snake_to_camel mipac.utils.format.str_to_datetime
+#: mipac.utils.format.upper_to_lower mipac.utils.log.setup_logging
+#: mipac.utils.util.check_multi_arg of
 msgid "パラメータ"
 msgstr ""
 
@@ -1024,64 +1046,109 @@ msgstr ""
 msgid "The raw data of the note"
 msgstr ""
 
-#: mipac.models.note.Note.api:1 mipac.models.note.Note.api:3 of
+#: mipac.models.note.Note.api:1 of
+msgid "Note api"
+msgstr ""
+
+#: mipac.models.note.Note.api:3 of
 msgid "note api"
 msgstr ""
 
-#: mipac.models.note.Note.author:1 mipac.models.note.Note.author:7
-#: mipac.models.note.Note.user:1 of
-msgid "note author"
+#: mipac.models.note.Note.author:1 mipac.models.note.Note.user:1 of
+msgid "Note author"
 msgstr ""
 
 #: mipac.models.note.Note.author:3 of
 msgid "Use :meth:`mipac.models.note.Note.user` instead."
 msgstr ""
 
-#: mipac.models.note.Note.channel:1 mipac.models.note.Note.channel:3 of
+#: mipac.models.note.Note.author:7 of
+msgid "note author"
+msgstr ""
+
+#: mipac.models.note.Note.channel:1 of
+msgid "Note channel"
+msgstr ""
+
+#: mipac.models.note.Note.channel:3 of
 msgid "note channel"
 msgstr ""
 
-#: mipac.models.note.Note.channel_id:1 mipac.models.note.Note.channel_id:3
-#: mipac.models.note.NoteChannel.id:1 mipac.models.note.NoteChannel.id:3 of
+#: mipac.models.note.Note.channel_id:1 mipac.models.note.NoteChannel.id:1 of
+msgid "Note channelId"
+msgstr ""
+
+#: mipac.models.note.Note.channel_id:3 mipac.models.note.NoteChannel.id:3 of
 msgid "note channelId"
 msgstr ""
 
-#: mipac.models.note.Note.clipped_count:1
+#: mipac.models.note.Note.clipped_count:1 of
+msgid "Note clippedCount"
+msgstr ""
+
 #: mipac.models.note.Note.clipped_count:3 of
 msgid "note clippedCount"
 msgstr ""
 
-#: mipac.models.note.Note.content:1 mipac.models.note.Note.content:6 of
-msgid "note content"
+#: mipac.models.note.Note.content:1 of
+msgid "Note content"
 msgstr ""
 
 #: mipac.models.note.Note.content:3 of
 msgid "Use :meth:`mipac.models.note.Note.text` instead."
 msgstr ""
 
-#: mipac.models.note.Note.created_at:1 mipac.models.note.Note.created_at:3
-#: mipac.models.note.NoteReaction.created_at:1
+#: mipac.models.note.Note.content:6 of
+msgid "note content"
+msgstr ""
+
+#: mipac.models.note.Note.created_at:1
+#: mipac.models.note.NoteReaction.created_at:1 of
+msgid "Note createdAt"
+msgstr ""
+
+#: mipac.models.note.Note.created_at:3
 #: mipac.models.note.NoteReaction.created_at:3 of
 msgid "note createdAt"
 msgstr ""
 
-#: mipac.models.note.Note.cw:1 mipac.models.note.Note.cw:3 of
+#: mipac.models.note.Note.cw:1 of
+msgid "Note cw"
+msgstr ""
+
+#: mipac.models.note.Note.cw:3 of
 msgid "note cw"
 msgstr ""
 
-#: mipac.models.note.Note.deleted_at:1 mipac.models.note.Note.deleted_at:3 of
+#: mipac.models.note.Note.deleted_at:1 of
+msgid "Note deletedAt"
+msgstr ""
+
+#: mipac.models.note.Note.deleted_at:3 of
 msgid "note deletedAt"
 msgstr ""
 
-#: mipac.models.note.Note.emojis:1 mipac.models.note.Note.emojis:3 of
+#: mipac.models.note.Note.emojis:1 of
+msgid "Note emojis"
+msgstr ""
+
+#: mipac.models.note.Note.emojis:3 of
 msgid "note emojis"
 msgstr ""
 
-#: mipac.models.note.Note.file_ids:1 mipac.models.note.Note.file_ids:3 of
+#: mipac.models.note.Note.file_ids:1 of
+msgid "Note fileIds"
+msgstr ""
+
+#: mipac.models.note.Note.file_ids:3 of
 msgid "note fileIds"
 msgstr ""
 
-#: mipac.models.note.Note.files:1 mipac.models.note.Note.files:3 of
+#: mipac.models.note.Note.files:1 of
+msgid "Note files"
+msgstr ""
+
+#: mipac.models.note.Note.files:3 of
 msgid "note files"
 msgstr ""
 
@@ -1114,96 +1181,174 @@ msgstr ""
 msgid "note id"
 msgstr ""
 
-#: mipac.models.note.Note.is_hidden:1 mipac.models.note.Note.is_hidden:3 of
+#: mipac.models.note.Note.is_hidden:1 of
+msgid "Note isHidden"
+msgstr ""
+
+#: mipac.models.note.Note.is_hidden:3 of
 msgid "note isHidden"
 msgstr ""
 
-#: mipac.models.note.Note.local_only:1 mipac.models.note.Note.local_only:3 of
+#: mipac.models.note.Note.local_only:1 of
+msgid "Note localOnly"
+msgstr ""
+
+#: mipac.models.note.Note.local_only:3 of
 msgid "note localOnly"
 msgstr ""
 
-#: mipac.models.note.Note.mentions:1 mipac.models.note.Note.mentions:3 of
+#: mipac.models.note.Note.mentions:1 of
+msgid "Note mentions"
+msgstr ""
+
+#: mipac.models.note.Note.mentions:3 of
 msgid "note mentions"
 msgstr ""
 
-#: mipac.models.note.Note.my_reaction:1 mipac.models.note.Note.my_reaction:3 of
+#: mipac.models.note.Note.my_reaction:1 of
+msgid "Note myReaction"
+msgstr ""
+
+#: mipac.models.note.Note.my_reaction:3 of
 msgid "note myReaction"
 msgstr ""
 
-#: mipac.models.note.Note.poll:1 mipac.models.note.Note.poll:3 of
+#: mipac.models.note.Note.poll:1 of
+msgid "Note poll"
+msgstr ""
+
+#: mipac.models.note.Note.poll:3 of
 msgid "note poll"
 msgstr ""
 
-#: mipac.models.note.Note.reaction_acceptance:1
+#: mipac.models.note.Note.reaction_acceptance:1 of
+msgid "Note reactionAcceptance"
+msgstr ""
+
 #: mipac.models.note.Note.reaction_acceptance:3 of
 msgid "note reactionAcceptance"
 msgstr ""
 
-#: mipac.models.note.Note.reaction_and_user_pair_cache:1
+#: mipac.models.note.Note.reaction_and_user_pair_cache:1 of
+msgid "Note reactionAndUserPairCache"
+msgstr ""
+
 #: mipac.models.note.Note.reaction_and_user_pair_cache:3 of
 msgid "note reactionAndUserPairCache"
 msgstr ""
 
-#: mipac.models.note.Note.reactions:1 mipac.models.note.Note.reactions:3 of
+#: mipac.models.note.Note.reactions:1 of
+msgid "Note reactions"
+msgstr ""
+
+#: mipac.models.note.Note.reactions:3 of
 msgid "note reactions"
 msgstr ""
 
-#: mipac.models.note.Note.renote:1 mipac.models.note.Note.renote:3 of
+#: mipac.models.note.Note.renote:1 of
+msgid "Note renote"
+msgstr ""
+
+#: mipac.models.note.Note.renote:3 of
 msgid "note renote"
 msgstr ""
 
-#: mipac.models.note.Note.renote_count:1 mipac.models.note.Note.renote_count:3
-#: of
+#: mipac.models.note.Note.renote_count:1 of
+msgid "Note renoteCount"
+msgstr ""
+
+#: mipac.models.note.Note.renote_count:3 of
 msgid "note renoteCount"
 msgstr ""
 
-#: mipac.models.note.Note.renote_id:1 mipac.models.note.Note.renote_id:3 of
+#: mipac.models.note.Note.renote_id:1 of
+msgid "Note renoteId"
+msgstr ""
+
+#: mipac.models.note.Note.renote_id:3 of
 msgid "note renoteId"
 msgstr ""
 
-#: mipac.models.note.Note.replies_count:1
+#: mipac.models.note.Note.replies_count:1 of
+msgid "Note repliesCount"
+msgstr ""
+
 #: mipac.models.note.Note.replies_count:3 of
 msgid "note repliesCount"
 msgstr ""
 
-#: mipac.models.note.Note.reply:1 mipac.models.note.Note.reply:3 of
+#: mipac.models.note.Note.reply:1 of
+msgid "Note reply"
+msgstr ""
+
+#: mipac.models.note.Note.reply:3 of
 msgid "note reply"
 msgstr ""
 
-#: mipac.models.note.Note.reply_id:1 mipac.models.note.Note.reply_id:3 of
+#: mipac.models.note.Note.reply_id:1 of
+msgid "Note replyId"
+msgstr ""
+
+#: mipac.models.note.Note.reply_id:3 of
 msgid "note replyId"
 msgstr ""
 
-#: mipac.models.note.Note.tags:1 mipac.models.note.Note.tags:3 of
+#: mipac.models.note.Note.tags:1 of
+msgid "Note tags"
+msgstr ""
+
+#: mipac.models.note.Note.tags:3 of
 msgid "note tags"
 msgstr ""
 
-#: mipac.models.note.Note.text:1 mipac.models.note.Note.text:3 of
+#: mipac.models.note.Note.text:1 of
+msgid "Note text"
+msgstr ""
+
+#: mipac.models.note.Note.text:3 of
 msgid "note text"
 msgstr ""
 
-#: mipac.models.note.Note.uri:1 mipac.models.note.Note.uri:3 of
+#: mipac.models.note.Note.uri:1 of
+msgid "Note uri"
+msgstr ""
+
+#: mipac.models.note.Note.uri:3 of
 msgid "note uri"
 msgstr ""
 
-#: mipac.models.note.Note.url:1 mipac.models.note.Note.url:3 of
+#: mipac.models.note.Note.url:1 of
+msgid "Note url"
+msgstr ""
+
+#: mipac.models.note.Note.url:3 of
 msgid "note url"
 msgstr ""
 
-#: mipac.models.note.Note.user:3 mipac.models.note.NoteReaction.user:1
-#: mipac.models.note.NoteReaction.user:3 of
+#: mipac.models.note.Note.user:3 mipac.models.note.NoteReaction.user:3 of
 msgid "note user"
 msgstr ""
 
-#: mipac.models.note.Note.user_id:1 mipac.models.note.Note.user_id:3 of
+#: mipac.models.note.Note.user_id:1 of
+msgid "Note userId"
+msgstr ""
+
+#: mipac.models.note.Note.user_id:3 of
 msgid "note userId"
 msgstr ""
 
-#: mipac.models.note.Note.visibility:1 mipac.models.note.Note.visibility:3 of
+#: mipac.models.note.Note.visibility:1 of
+msgid "Note visibility"
+msgstr ""
+
+#: mipac.models.note.Note.visibility:3 of
 msgid "note visibility"
 msgstr ""
 
-#: mipac.models.note.Note.visible_user_ids:1
+#: mipac.models.note.Note.visible_user_ids:1 of
+msgid "Note visibleUserIds"
+msgstr ""
+
 #: mipac.models.note.Note.visible_user_ids:3 of
 msgid "note visibleUserIds"
 msgstr ""
@@ -1212,26 +1357,42 @@ msgstr ""
 msgid "NoteChannel"
 msgstr ""
 
-#: mipac.models.note.NoteChannel.allow_renote_to_external:1
+#: mipac.models.note.NoteChannel.allow_renote_to_external:1 of
+msgid "Note channelAllowRenoteToExternal"
+msgstr ""
+
 #: mipac.models.note.NoteChannel.allow_renote_to_external:3 of
 msgid "note channelAllowRenoteToExternal"
 msgstr ""
 
-#: mipac.models.note.NoteChannel.color:1 mipac.models.note.NoteChannel.color:3
-#: of
+#: mipac.models.note.NoteChannel.color:1 of
+msgid "Note channelColor"
+msgstr ""
+
+#: mipac.models.note.NoteChannel.color:3 of
 msgid "note channelColor"
 msgstr ""
 
-#: mipac.models.note.NoteChannel.is_sensitive:1
+#: mipac.models.note.NoteChannel.is_sensitive:1 of
+msgid "Note channelIsSensitive"
+msgstr ""
+
 #: mipac.models.note.NoteChannel.is_sensitive:3 of
 msgid "note channelIsSensitive"
 msgstr ""
 
-#: mipac.models.note.NoteChannel.name:1 mipac.models.note.NoteChannel.name:3 of
+#: mipac.models.note.NoteChannel.name:1 of
+msgid "Note channelName"
+msgstr ""
+
+#: mipac.models.note.NoteChannel.name:3 of
 msgid "note channelName"
 msgstr ""
 
-#: mipac.models.note.NoteChannel.user_id:1
+#: mipac.models.note.NoteChannel.user_id:1 of
+msgid "Note channelUserId"
+msgstr ""
+
 #: mipac.models.note.NoteChannel.user_id:3 of
 msgid "note channelUserId"
 msgstr ""
@@ -1244,13 +1405,24 @@ msgstr ""
 msgid "NoteReaction"
 msgstr ""
 
-#: mipac.models.note.NoteReaction.id:1 mipac.models.note.NoteReaction.id:3 of
+#: mipac.models.note.NoteReaction.id:1 of
+msgid "Note reactionId"
+msgstr ""
+
+#: mipac.models.note.NoteReaction.id:3 of
 msgid "note reactionId"
 msgstr ""
 
-#: mipac.models.note.NoteReaction.type:1 mipac.models.note.NoteReaction.type:3
-#: of
+#: mipac.models.note.NoteReaction.type:1 of
+msgid "Reaction type"
+msgstr ""
+
+#: mipac.models.note.NoteReaction.type:3 of
 msgid "reaction type"
+msgstr ""
+
+#: mipac.models.note.NoteReaction.user:1 of
+msgid "Note user"
 msgstr ""
 
 #: ../../index.rst:359
@@ -1330,70 +1502,79 @@ msgid "Achievement"
 msgstr ""
 
 #: ../../index.rst:518
-msgid "FollowCommon"
+msgid "CreatedUser"
 msgstr ""
 
 #: ../../index.rst:527
-msgid "Follower"
+msgid "FollowCommon"
 msgstr ""
 
 #: ../../index.rst:536
-msgid "Following"
+msgid "Follower"
 msgstr ""
 
 #: ../../index.rst:545
-msgid "FrequentlyRepliedUser"
+msgid "Following"
 msgstr ""
 
 #: ../../index.rst:554
-msgid "MeDetailed"
+msgid "FrequentlyRepliedUser"
 msgstr ""
 
 #: ../../index.rst:563
-msgid "MeDetailedOnly"
+msgid "MeDetailed"
 msgstr ""
 
 #: ../../index.rst:572
-msgid "UserDetailedNotMe"
+msgid "MeDetailedOnly"
 msgstr ""
 
 #: ../../index.rst:581
-msgid "UserDetailedNotMeOnly"
+msgid "UserDetailedNotMe"
 msgstr ""
 
 #: ../../index.rst:590
-msgid "UserField"
+msgid "UserDetailedNotMeOnly"
 msgstr ""
 
 #: ../../index.rst:599
-msgid "UserList"
+msgid "UserField"
 msgstr ""
 
 #: ../../index.rst:608
-msgid "UserListMembership"
+msgid "UserList"
 msgstr ""
 
 #: ../../index.rst:617
-msgid "UsernameAvailable"
+msgid "UserListMembership"
 msgstr ""
 
 #: ../../index.rst:626
-msgid "PartialAd"
+msgid "UsernameAvailable"
+msgstr ""
+
+#: mipac.models.username.UsernameAvailable.available:1
+#: mipac.models.username.UsernameAvailable.available:3 of
+msgid "ユーザー名が使用可能かどうか"
 msgstr ""
 
 #: ../../index.rst:635
-msgid "PartialCustomEmoji"
+msgid "PartialAd"
 msgstr ""
 
 #: ../../index.rst:644
-msgid "LiteInstance"
+msgid "PartialCustomEmoji"
 msgstr ""
 
 #: ../../index.rst:653
-msgid "PartialMeta"
+msgid "LiteInstance"
 msgstr ""
 
 #: ../../index.rst:662
+msgid "PartialMeta"
+msgstr ""
+
+#: ../../index.rst:671
 msgid "Policies"
 msgstr ""
 
@@ -1433,11 +1614,11 @@ msgstr ""
 msgid "Whether LTL is effective"
 msgstr ""
 
-#: ../../index.rst:671
+#: ../../index.rst:680
 msgid "PartialRole"
 msgstr ""
 
-#: ../../index.rst:680
+#: ../../index.rst:689
 msgid "AvatarDecoration"
 msgstr ""
 
@@ -1489,7 +1670,7 @@ msgstr ""
 msgid "The url of the avatar decoration."
 msgstr ""
 
-#: ../../index.rst:689
+#: ../../index.rst:698
 msgid "BadgeRole"
 msgstr ""
 
@@ -1517,7 +1698,7 @@ msgstr ""
 msgid "The name of the badge role."
 msgstr ""
 
-#: ../../index.rst:698
+#: ../../index.rst:707
 msgid "PartialUser"
 msgstr ""
 
@@ -1635,55 +1816,55 @@ msgstr ""
 msgid "The username of the user."
 msgstr ""
 
-#: ../../index.rst:705
+#: ../../index.rst:714
 msgid "Managers"
 msgstr ""
 
-#: ../../index.rst:708
+#: ../../index.rst:717
 msgid "AntennaManager"
 msgstr ""
 
-#: ../../index.rst:717
+#: ../../index.rst:726
 msgid "ClientAntennaManager"
 msgstr ""
 
-#: ../../index.rst:726
+#: ../../index.rst:735
 msgid "BlockingManager"
 msgstr ""
 
-#: ../../index.rst:735
+#: ../../index.rst:744
 msgid "ClientBlockingManager"
 msgstr ""
 
-#: ../../index.rst:744
+#: ../../index.rst:753
 msgid "ChannelManager"
 msgstr ""
 
-#: ../../index.rst:753
+#: ../../index.rst:762
 msgid "ClientChannelManager"
 msgstr ""
 
-#: ../../index.rst:762
+#: ../../index.rst:771
 msgid "ChartManager"
 msgstr ""
 
-#: ../../index.rst:771
+#: ../../index.rst:780
 msgid "ClientManager"
 msgstr ""
 
-#: ../../index.rst:780
+#: ../../index.rst:789
 msgid "ClientClipManager"
 msgstr ""
 
-#: ../../index.rst:789
+#: ../../index.rst:798
 msgid "ClipManager"
 msgstr ""
 
-#: ../../index.rst:798
+#: ../../index.rst:807
 msgid "EmojiManager"
 msgstr ""
 
-#: ../../index.rst:807
+#: ../../index.rst:816
 msgid "ClientFavoriteManager"
 msgstr ""
 
@@ -1697,43 +1878,43 @@ msgstr ""
 msgid "お気に入りに対するアクションを行うクラス"
 msgstr ""
 
-#: ../../index.rst:816
+#: ../../index.rst:825
 msgid "FavoriteManager"
 msgstr ""
 
-#: ../../index.rst:825
+#: ../../index.rst:834
 msgid "FederationManager"
 msgstr ""
 
-#: ../../index.rst:834
+#: ../../index.rst:843
 msgid "ClientFollowManager"
 msgstr ""
 
-#: ../../index.rst:843
+#: ../../index.rst:852
 msgid "FollowManager"
 msgstr ""
 
-#: ../../index.rst:852
+#: ../../index.rst:861
 msgid "FollowRequestManager"
 msgstr ""
 
-#: ../../index.rst:861
+#: ../../index.rst:870
 msgid "ClientInviteManager"
 msgstr ""
 
-#: ../../index.rst:870
+#: ../../index.rst:879
 msgid "InviteManager"
 msgstr ""
 
-#: ../../index.rst:879
+#: ../../index.rst:888
 msgid "MyManager"
 msgstr ""
 
-#: ../../index.rst:888
+#: ../../index.rst:897
 msgid "ClientNoteManager"
 msgstr ""
 
-#: ../../index.rst:897
+#: ../../index.rst:906
 msgid "NoteManager"
 msgstr ""
 
@@ -1741,19 +1922,19 @@ msgstr ""
 msgid "User behavior for notes"
 msgstr ""
 
-#: ../../index.rst:906
+#: ../../index.rst:915
 msgid "PagesManager"
 msgstr ""
 
-#: ../../index.rst:915
+#: ../../index.rst:924
 msgid "ClientPollManager"
 msgstr ""
 
-#: ../../index.rst:924
+#: ../../index.rst:933
 msgid "PollManager"
 msgstr ""
 
-#: ../../index.rst:933
+#: ../../index.rst:942
 msgid "ClientReactionManager"
 msgstr ""
 
@@ -1767,123 +1948,123 @@ msgstr ""
 msgid "Reactionに対するアクションを行うクラス"
 msgstr ""
 
-#: ../../index.rst:942
+#: ../../index.rst:951
 msgid "ReactionManager"
 msgstr ""
 
-#: ../../index.rst:951
+#: ../../index.rst:960
 msgid "RoleManager"
 msgstr ""
 
-#: ../../index.rst:960
+#: ../../index.rst:969
 msgid "ClientUserManager"
 msgstr ""
 
-#: ../../index.rst:969
+#: ../../index.rst:978
 msgid "UserManager"
 msgstr ""
 
-#: ../../index.rst:978
+#: ../../index.rst:987
 msgid "UsernameManager"
 msgstr ""
 
-#: ../../index.rst:987
+#: ../../index.rst:996
 msgid "AdminAccountManager"
 msgstr ""
 
-#: ../../index.rst:996
+#: ../../index.rst:1005
 msgid "AdminAdManager"
 msgstr ""
 
-#: ../../index.rst:1005
+#: ../../index.rst:1014
 msgid "ClientAdminAdManager"
 msgstr ""
 
-#: ../../index.rst:1014
+#: ../../index.rst:1023
 msgid "AdminManager"
 msgstr ""
 
-#: ../../index.rst:1023
+#: ../../index.rst:1032
 msgid "AdminAnnouncementManager"
 msgstr ""
 
-#: ../../index.rst:1032
+#: ../../index.rst:1041
 msgid "ClientAdminAnnouncementManager"
 msgstr ""
 
-#: ../../index.rst:1041
+#: ../../index.rst:1050
 msgid "AdminDriveManager"
 msgstr ""
 
-#: ../../index.rst:1050
+#: ../../index.rst:1059
 msgid "AdminEmojiManager"
 msgstr ""
 
-#: ../../index.rst:1059
+#: ../../index.rst:1068
 msgid "AdminInviteManager"
 msgstr ""
 
-#: ../../index.rst:1068
+#: ../../index.rst:1077
 msgid "AdminRolesManager"
 msgstr ""
 
-#: ../../index.rst:1077
+#: ../../index.rst:1086
 msgid "AdminRolesModelManager"
 msgstr ""
 
-#: ../../index.rst:1086
+#: ../../index.rst:1095
 msgid "AdminUserManager"
 msgstr ""
 
-#: ../../index.rst:1095
+#: ../../index.rst:1104
 msgid "ClientAdminUserManager"
 msgstr ""
 
-#: ../../index.rst:1104
+#: ../../index.rst:1113
 msgid "DriveManager"
 msgstr ""
 
-#: ../../index.rst:1113
+#: ../../index.rst:1122
 msgid "ClientFileManager"
 msgstr ""
 
-#: ../../index.rst:1122
+#: ../../index.rst:1131
 msgid "DriveFileManager"
 msgstr ""
 
-#: ../../index.rst:1131
+#: ../../index.rst:1140
 msgid "ClientFolderManager"
 msgstr ""
 
-#: ../../index.rst:1140
+#: ../../index.rst:1149
 msgid "FolderManager"
 msgstr ""
 
-#: ../../index.rst:1149
+#: ../../index.rst:1158
 msgid "ClientPartialUserListManager"
 msgstr ""
 
-#: ../../index.rst:1158
+#: ../../index.rst:1167
 msgid "ClientUserListManager"
 msgstr ""
 
-#: ../../index.rst:1167
+#: ../../index.rst:1176
 msgid "UserListManager"
 msgstr ""
 
-#: ../../index.rst:1176
+#: ../../index.rst:1185
 msgid "ClientMuteManager"
 msgstr ""
 
-#: ../../index.rst:1185
+#: ../../index.rst:1194
 msgid "MuteManager"
 msgstr ""
 
-#: ../../index.rst:1192
+#: ../../index.rst:1201
 msgid "Actions"
 msgstr ""
 
-#: ../../index.rst:1195
+#: ../../index.rst:1204
 msgid "AntennaActions"
 msgstr ""
 
@@ -1965,7 +2146,7 @@ msgstr ""
 msgid "The created antenna."
 msgstr ""
 
-#: ../../index.rst:1204
+#: ../../index.rst:1213
 msgid "ClientAntennaActions"
 msgstr ""
 
@@ -2004,11 +2185,11 @@ msgstr ""
 msgid "Update an antenna."
 msgstr ""
 
-#: ../../index.rst:1213
+#: ../../index.rst:1222
 msgid "SharedAntennaActions"
 msgstr ""
 
-#: ../../index.rst:1222
+#: ../../index.rst:1231
 msgid "BlockingActions"
 msgstr ""
 
@@ -2016,7 +2197,7 @@ msgstr ""
 msgid "ブロックアクション user_idを持たないメソッドのみを持ち、持つものはSharedBlockingActionsに実装する"
 msgstr ""
 
-#: ../../index.rst:1231
+#: ../../index.rst:1240
 msgid "ClientBlockingActions"
 msgstr ""
 
@@ -2028,11 +2209,11 @@ msgstr ""
 msgid "基本的にoverride以外は行わない"
 msgstr ""
 
-#: ../../index.rst:1240
+#: ../../index.rst:1249
 msgid "SharedBlockingActions"
 msgstr ""
 
-#: ../../index.rst:1249
+#: ../../index.rst:1258
 msgid "ChannelActions"
 msgstr ""
 
@@ -2193,7 +2374,7 @@ msgstr ""
 msgid "取得したチャンネル"
 msgstr ""
 
-#: ../../index.rst:1258
+#: ../../index.rst:1267
 msgid "ClientChannelActions"
 msgstr ""
 
@@ -2461,19 +2642,19 @@ msgstr ""
 msgid "更新後のチャンネル"
 msgstr ""
 
-#: ../../index.rst:1267
+#: ../../index.rst:1276
 msgid "SharedChannelActions"
 msgstr ""
 
-#: ../../index.rst:1276
+#: ../../index.rst:1285
 msgid "ChartActions"
 msgstr ""
 
-#: ../../index.rst:1285
+#: ../../index.rst:1294
 msgid "ClientActions"
 msgstr ""
 
-#: ../../index.rst:1294
+#: ../../index.rst:1303
 msgid "ClientClipActions"
 msgstr ""
 
@@ -2504,15 +2685,28 @@ msgstr ""
 msgid "True if the clip was deleted, False otherwise"
 msgstr ""
 
-#: mipac.actions.clip.ClientClipActions.get_all_notes:1 of
-msgid ""
-"Get notes from a clip :param clip_id: The clip id :type clip_id: str | "
-"None, optional, by default None :param limit: The number of notes to get "
-":type limit: int, optional, by default 10 :param since_id: The note id to"
-" get notes after :type since_id: str | None, optional, by default None "
-":param until_id: The note id to get notes before :type until_id: str | "
-"None, optional, by default None :param get_all: Whether to get all notes "
-":type get_all: bool, optional, by default False"
+#: mipac.actions.clip.ClientClipActions.get_all_notes:1
+#: mipac.actions.clip.SharedClipActions.get_all_notes:1 of
+msgid "Get notes from a clip"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.get_all_notes:5
+#: mipac.actions.clip.SharedClipActions.get_all_notes:5 of
+msgid "The number of notes to get"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.get_all_notes:7
+#: mipac.actions.clip.SharedClipActions.get_all_notes:7 of
+msgid "The note id to get notes after"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.get_all_notes:9
+#: mipac.actions.clip.SharedClipActions.get_all_notes:9 of
+msgid "The note id to get notes before"
+msgstr ""
+
+#: mipac.actions.clip.ClientClipActions.get_all_notes:11 of
+msgid "Whether to get all notes"
 msgstr ""
 
 #: mipac.actions.clip.ClientClipActions.get_all_notes
@@ -2522,8 +2716,8 @@ msgstr ""
 msgid "列挙"
 msgstr ""
 
-#: mipac.actions.clip.ClientClipActions.get_all_notes:13
-#: mipac.actions.clip.SharedClipActions.get_all_notes:11 of
+#: mipac.actions.clip.ClientClipActions.get_all_notes:14
+#: mipac.actions.clip.SharedClipActions.get_all_notes:12 of
 msgid "*AsyncGenerator[Note, None]* -- The notes"
 msgstr ""
 
@@ -2558,7 +2752,7 @@ msgstr ""
 msgid "True if the clip was updated, False otherwise"
 msgstr ""
 
-#: ../../index.rst:1303
+#: ../../index.rst:1312
 msgid "ClipActions"
 msgstr ""
 
@@ -2598,41 +2792,31 @@ msgstr ""
 msgid "The favorite clips"
 msgstr ""
 
-#: ../../index.rst:1312
+#: ../../index.rst:1321
 msgid "SharedClipActions"
 msgstr ""
 
-#: mipac.actions.clip.SharedClipActions.get_all_notes:1 of
-msgid ""
-"Get notes from a clip :param clip_id: The clip id :type clip_id: str | "
-"None, optional, by default None :param limit: The number of notes to get "
-":type limit: int, optional, by default 10 :param since_id: The note id to"
-" get notes after :type since_id: str | None, optional, by default None "
-":param until_id: The note id to get notes before :type until_id: str | "
-"None, optional, by default None"
-msgstr ""
-
-#: ../../index.rst:1321
+#: ../../index.rst:1330
 msgid "EmojiActions"
 msgstr ""
 
-#: ../../index.rst:1330
+#: ../../index.rst:1339
 msgid "ClientFavoriteActions"
 msgstr ""
 
-#: ../../index.rst:1339
+#: ../../index.rst:1348
 msgid "FavoriteActions"
 msgstr ""
 
-#: ../../index.rst:1348
+#: ../../index.rst:1357
 msgid "SharedFavoriteActions"
 msgstr ""
 
-#: ../../index.rst:1357
+#: ../../index.rst:1366
 msgid "FederationActions"
 msgstr ""
 
-#: ../../index.rst:1366
+#: ../../index.rst:1375
 msgid "ClientFollowActions"
 msgstr ""
 
@@ -2676,11 +2860,11 @@ msgstr ""
 msgid "The user that you unfollowed"
 msgstr ""
 
-#: ../../index.rst:1375
+#: ../../index.rst:1384
 msgid "FollowActions"
 msgstr ""
 
-#: ../../index.rst:1384
+#: ../../index.rst:1393
 msgid "FollowRequestActions"
 msgstr ""
 
@@ -2728,11 +2912,11 @@ msgstr ""
 msgid "Whether the request was rejected"
 msgstr ""
 
-#: ../../index.rst:1393
+#: ../../index.rst:1402
 msgid "SharedFollowActions"
 msgstr ""
 
-#: ../../index.rst:1402
+#: ../../index.rst:1411
 msgid "ClientInviteActions"
 msgstr ""
 
@@ -2751,7 +2935,7 @@ msgstr ""
 msgid "Whether the invite code was deleted."
 msgstr ""
 
-#: ../../index.rst:1411
+#: ../../index.rst:1420
 msgid "InviteActions"
 msgstr ""
 
@@ -2811,11 +2995,11 @@ msgstr ""
 msgid "The number of invite codes to get, by default 30"
 msgstr ""
 
-#: ../../index.rst:1420
+#: ../../index.rst:1429
 msgid "SharedInviteActions"
 msgstr ""
 
-#: ../../index.rst:1429
+#: ../../index.rst:1438
 msgid "MyActions"
 msgstr ""
 
@@ -2843,11 +3027,11 @@ msgstr ""
 msgid "実績機能が存在しないサーバーを使用している"
 msgstr ""
 
-#: ../../index.rst:1438
+#: ../../index.rst:1447
 msgid "create_note_body"
 msgstr ""
 
-#: ../../index.rst:1444
+#: ../../index.rst:1453
 msgid "ClientNoteActions"
 msgstr ""
 
@@ -3210,7 +3394,7 @@ msgstr ""
 msgid "Whether the release was successful"
 msgstr ""
 
-#: ../../index.rst:1453
+#: ../../index.rst:1462
 msgid "NoteActions"
 msgstr ""
 
@@ -3396,8 +3580,8 @@ msgstr ""
 msgid "Whether to include local renote"
 msgstr ""
 
-#: mipac.actions.note.NoteActions.get_time_line:26 of
-msgid "Notes"
+#: mipac.actions.note.NoteActions.get_time_line:28 of
+msgid "メモ"
 msgstr ""
 
 #: mipac.actions.note.NoteActions.send:5 of
@@ -3466,23 +3650,23 @@ msgstr ""
 msgid "[description]"
 msgstr ""
 
-#: ../../index.rst:1462
+#: ../../index.rst:1471
 msgid "SharedNoteActions"
 msgstr ""
 
-#: ../../index.rst:1471
+#: ../../index.rst:1480
 msgid "ClientPollActions"
 msgstr ""
 
-#: ../../index.rst:1480
+#: ../../index.rst:1489
 msgid "PollActions"
 msgstr ""
 
-#: ../../index.rst:1489
+#: ../../index.rst:1498
 msgid "SharedPollActions"
 msgstr ""
 
-#: ../../index.rst:1498
+#: ../../index.rst:1507
 msgid "ClientReactionActions"
 msgstr ""
 
@@ -3518,15 +3702,15 @@ msgstr ""
 msgid "Endpoint: `/api/notes/reactions/delete`"
 msgstr ""
 
-#: ../../index.rst:1507
+#: ../../index.rst:1516
 msgid "ReactionActions"
 msgstr ""
 
-#: ../../index.rst:1516
+#: ../../index.rst:1525
 msgid "SharedReactionActions"
 msgstr ""
 
-#: ../../index.rst:1525
+#: ../../index.rst:1534
 msgid "RoleActions"
 msgstr ""
 
@@ -3611,7 +3795,7 @@ msgstr ""
 msgid "*AsyncGenerator[RoleUser, None]* -- The role user data."
 msgstr ""
 
-#: ../../index.rst:1534
+#: ../../index.rst:1543
 msgid "ClientUserActions"
 msgstr ""
 
@@ -3815,11 +3999,11 @@ msgstr ""
 msgid "A list of gallery posts."
 msgstr ""
 
-#: ../../index.rst:1543
+#: ../../index.rst:1552
 msgid "SharedUserActions"
 msgstr ""
 
-#: ../../index.rst:1552
+#: ../../index.rst:1561
 msgid "UserActions"
 msgstr ""
 
@@ -3923,11 +4107,11 @@ msgstr ""
 msgid "A list of users."
 msgstr ""
 
-#: ../../index.rst:1561
+#: ../../index.rst:1570
 msgid "UsernameActions"
 msgstr ""
 
-#: ../../index.rst:1570
+#: ../../index.rst:1579
 msgid "AdminAccountActions"
 msgstr ""
 
@@ -3945,6 +4129,10 @@ msgstr ""
 
 #: mipac.actions.admins.accounts.AdminAccountActions.create:7 of
 msgid "パスワード"
+msgstr ""
+
+#: mipac.actions.admins.accounts.AdminAccountActions.create:10 of
+msgid "作成されたユーザー"
 msgstr ""
 
 #: mipac.actions.admins.accounts.AdminAccountActions.delete:1
@@ -3983,19 +4171,19 @@ msgstr ""
 msgid "成功ならTrue"
 msgstr ""
 
-#: ../../index.rst:1579
+#: ../../index.rst:1588
 msgid "AdminAdActions"
 msgstr ""
 
-#: ../../index.rst:1588
+#: ../../index.rst:1597
 msgid "ClientAdminAdActions"
 msgstr ""
 
-#: ../../index.rst:1597
+#: ../../index.rst:1606
 msgid "SharedAdminAdActions"
 msgstr ""
 
-#: ../../index.rst:1606
+#: ../../index.rst:1615
 msgid "AdminActions"
 msgstr ""
 
@@ -4056,19 +4244,19 @@ msgstr ""
 msgid "new note"
 msgstr ""
 
-#: ../../index.rst:1615
+#: ../../index.rst:1624
 msgid "AdminAnnouncementActions"
 msgstr ""
 
-#: ../../index.rst:1624
+#: ../../index.rst:1633
 msgid "ClientAdminAnnouncementActions"
 msgstr ""
 
-#: ../../index.rst:1633
+#: ../../index.rst:1642
 msgid "SharedAdminAnnouncementActions"
 msgstr ""
 
-#: ../../index.rst:1642
+#: ../../index.rst:1651
 msgid "AdminDriveActions"
 msgstr ""
 
@@ -4161,7 +4349,7 @@ msgstr ""
 msgid "The file"
 msgstr ""
 
-#: ../../index.rst:1651
+#: ../../index.rst:1660
 msgid "AdminEmojiActions"
 msgstr ""
 
@@ -4181,15 +4369,15 @@ msgstr ""
 msgid "Idが不足している"
 msgstr ""
 
-#: ../../index.rst:1660
+#: ../../index.rst:1669
 msgid "AdminInviteActions"
 msgstr ""
 
-#: ../../index.rst:1669
+#: ../../index.rst:1678
 msgid "AdminRoleActions"
 msgstr ""
 
-#: ../../index.rst:1678
+#: ../../index.rst:1687
 msgid "AdminRoleModelActions"
 msgstr ""
 
@@ -4213,11 +4401,11 @@ msgstr ""
 msgid "いつまでロールを付与するか, by default None"
 msgstr ""
 
-#: ../../index.rst:1687
+#: ../../index.rst:1696
 msgid "AdminUserActions"
 msgstr ""
 
-#: ../../index.rst:1696
+#: ../../index.rst:1705
 msgid "ClientAdminUserActions"
 msgstr ""
 
@@ -4241,11 +4429,11 @@ msgstr ""
 msgid "ユーザーの凍結を解除します"
 msgstr ""
 
-#: ../../index.rst:1705
+#: ../../index.rst:1714
 msgid "SharedAdminUserActions"
 msgstr ""
 
-#: ../../index.rst:1714
+#: ../../index.rst:1723
 msgid "DriveActions"
 msgstr ""
 
@@ -4269,7 +4457,7 @@ msgstr ""
 msgid "Endpoint: `/api/drive/stream`"
 msgstr ""
 
-#: ../../index.rst:1723
+#: ../../index.rst:1732
 msgid "ClientFileActions"
 msgstr ""
 
@@ -4366,7 +4554,7 @@ msgstr ""
 msgid "更新後のファイル"
 msgstr ""
 
-#: ../../index.rst:1732
+#: ../../index.rst:1741
 msgid "FileActions"
 msgstr ""
 
@@ -4547,11 +4735,11 @@ msgstr ""
 msgid "アップロードのリクエストに成功したかどうか"
 msgstr ""
 
-#: ../../index.rst:1741
+#: ../../index.rst:1750
 msgid "SharedFileActions"
 msgstr ""
 
-#: ../../index.rst:1750
+#: ../../index.rst:1759
 msgid "ClientFileActionsInFolder"
 msgstr ""
 
@@ -4634,7 +4822,7 @@ msgstr ""
 msgid "Whether the file was uploaded or not"
 msgstr ""
 
-#: ../../index.rst:1759
+#: ../../index.rst:1768
 msgid "ClientFolderActions"
 msgstr ""
 
@@ -4747,7 +4935,7 @@ msgstr ""
 msgid "The updated folder"
 msgstr ""
 
-#: ../../index.rst:1768
+#: ../../index.rst:1777
 msgid "FolderActions"
 msgstr ""
 
@@ -4779,11 +4967,11 @@ msgstr ""
 msgid "The found folder"
 msgstr ""
 
-#: ../../index.rst:1777
+#: ../../index.rst:1786
 msgid "SharedFolderActions"
 msgstr ""
 
-#: ../../index.rst:1786
+#: ../../index.rst:1795
 msgid "ClientPartialUserListActions"
 msgstr ""
 
@@ -4861,7 +5049,7 @@ msgstr ""
 msgid "True if the user was pushed, False otherwise"
 msgstr ""
 
-#: ../../index.rst:1795
+#: ../../index.rst:1804
 msgid "ClientUserListActions"
 msgstr ""
 
@@ -4980,15 +5168,15 @@ msgstr ""
 msgid "The updated user list"
 msgstr ""
 
-#: ../../index.rst:1804
+#: ../../index.rst:1813
 msgid "SharedPartialUserListActions"
 msgstr ""
 
-#: ../../index.rst:1813
+#: ../../index.rst:1822
 msgid "SharedUserListActions"
 msgstr ""
 
-#: ../../index.rst:1822
+#: ../../index.rst:1831
 msgid "UserListActions"
 msgstr ""
 
@@ -5008,7 +5196,7 @@ msgstr ""
 msgid "The created user list"
 msgstr ""
 
-#: ../../index.rst:1831
+#: ../../index.rst:1840
 msgid "ClientMuteActions"
 msgstr ""
 
@@ -5037,7 +5225,7 @@ msgstr ""
 msgid "ミュート解除に成功したかどうか"
 msgstr ""
 
-#: ../../index.rst:1840
+#: ../../index.rst:1849
 msgid "MuteActions"
 msgstr ""
 
@@ -5069,7 +5257,7 @@ msgstr ""
 msgid "ミュートしているユーザーの一覧"
 msgstr ""
 
-#: ../../index.rst:1849
+#: ../../index.rst:1858
 msgid "SharedMuteActions"
 msgstr ""
 
@@ -5078,59 +5266,59 @@ msgstr ""
 msgid "対象のユーザーID, default=None"
 msgstr ""
 
-#: ../../index.rst:1856
+#: ../../index.rst:1865
 msgid "Type class"
 msgstr ""
 
-#: ../../index.rst:1859
+#: ../../index.rst:1868
 msgid "IIndexStat"
 msgstr ""
 
-#: ../../index.rst:1868
+#: ../../index.rst:1877
 msgid "IModerationLog"
 msgstr ""
 
-#: ../../index.rst:1877
+#: ../../index.rst:1886
 msgid "IServerInfo"
 msgstr ""
 
-#: ../../index.rst:1886
+#: ../../index.rst:1895
 msgid "IServerInfoCpu"
 msgstr ""
 
-#: ../../index.rst:1895
+#: ../../index.rst:1904
 msgid "IServerInfoFs"
 msgstr ""
 
-#: ../../index.rst:1904
+#: ../../index.rst:1913
 msgid "IServerInfoMem"
 msgstr ""
 
-#: ../../index.rst:1913
+#: ../../index.rst:1922
 msgid "IServerInfoNet"
 msgstr ""
 
-#: ../../index.rst:1922
+#: ../../index.rst:1931
 msgid "ITableStats"
 msgstr ""
 
-#: ../../index.rst:1931
+#: ../../index.rst:1940
 msgid "IUserIP"
 msgstr ""
 
-#: ../../index.rst:1940
+#: ../../index.rst:1949
 msgid "IAd"
 msgstr ""
 
-#: ../../index.rst:1949
+#: ../../index.rst:1958
 msgid "IPartialAd"
 msgstr ""
 
-#: ../../index.rst:1958
+#: ../../index.rst:1967
 msgid "IAnnouncement"
 msgstr ""
 
-#: ../../index.rst:1967
+#: ../../index.rst:1976
 msgid "IAnnouncementDetailed"
 msgstr ""
 
@@ -5138,43 +5326,43 @@ msgstr ""
 msgid "管理者から見たアナウンス"
 msgstr ""
 
-#: ../../index.rst:1976
+#: ../../index.rst:1985
 msgid "IAntenna"
 msgstr ""
 
-#: ../../index.rst:1985
+#: ../../index.rst:1994
 msgid "IBlocking"
 msgstr ""
 
-#: ../../index.rst:1994
+#: ../../index.rst:2003
 msgid "IChannel"
 msgstr ""
 
-#: ../../index.rst:2003
+#: ../../index.rst:2012
 msgid "IActiveUsersChart"
 msgstr ""
 
-#: ../../index.rst:2012
+#: ../../index.rst:2021
 msgid "IDriveChart"
 msgstr ""
 
-#: ../../index.rst:2021
+#: ../../index.rst:2030
 msgid "IDriveLocalChart"
 msgstr ""
 
-#: ../../index.rst:2030
+#: ../../index.rst:2039
 msgid "IDriveRemoteChart"
 msgstr ""
 
-#: ../../index.rst:2039
+#: ../../index.rst:2048
 msgid "IClip"
 msgstr ""
 
-#: ../../index.rst:2048
+#: ../../index.rst:2057
 msgid "IDriveStatus"
 msgstr ""
 
-#: ../../index.rst:2057
+#: ../../index.rst:2066
 msgid "IFile"
 msgstr ""
 
@@ -5182,7 +5370,7 @@ msgstr ""
 msgid "ファイル情報"
 msgstr ""
 
-#: ../../index.rst:2066
+#: ../../index.rst:2075
 msgid "IFileProperties"
 msgstr ""
 
@@ -5190,7 +5378,7 @@ msgstr ""
 msgid "プロパティー情報"
 msgstr ""
 
-#: ../../index.rst:2075
+#: ../../index.rst:2084
 msgid "IFolder"
 msgstr ""
 
@@ -5198,103 +5386,103 @@ msgstr ""
 msgid "フォルダーの情報"
 msgstr ""
 
-#: ../../index.rst:2084
+#: ../../index.rst:2093
 msgid "EmojiPayload"
 msgstr ""
 
-#: ../../index.rst:2093
+#: ../../index.rst:2102
 msgid "ICustomEmoji"
 msgstr ""
 
-#: ../../index.rst:2102
+#: ../../index.rst:2111
 msgid "ICustomEmojiLite"
 msgstr ""
 
-#: ../../index.rst:2111
+#: ../../index.rst:2120
 msgid "ICustomEmojiLiteRequired"
 msgstr ""
 
-#: ../../index.rst:2120
+#: ../../index.rst:2129
 msgid "IEmojiDetailed"
 msgstr ""
 
-#: ../../index.rst:2129
+#: ../../index.rst:2138
 msgid "IEmojiSimple"
 msgstr ""
 
-#: ../../index.rst:2138
+#: ../../index.rst:2147
 msgid "IFederationFollowCommon"
 msgstr ""
 
-#: ../../index.rst:2147
+#: ../../index.rst:2156
 msgid "IFederationFollower"
 msgstr ""
 
-#: ../../index.rst:2156
+#: ../../index.rst:2165
 msgid "IFederationFollowing"
 msgstr ""
 
-#: ../../index.rst:2165
+#: ../../index.rst:2174
 msgid "IFollowRequest"
 msgstr ""
 
-#: ../../index.rst:2174
+#: ../../index.rst:2183
 msgid "IGalleryPost"
 msgstr ""
 
-#: ../../index.rst:2183
+#: ../../index.rst:2192
 msgid "IFederationInstance"
 msgstr ""
 
-#: ../../index.rst:2192
+#: ../../index.rst:2201
 msgid "IFederationInstanceRequired"
 msgstr ""
 
-#: ../../index.rst:2201
+#: ../../index.rst:2210
 msgid "IFederationInstanceStat"
 msgstr ""
 
-#: ../../index.rst:2210
+#: ../../index.rst:2219
 msgid "IInstanceLite"
 msgstr ""
 
-#: ../../index.rst:2219
+#: ../../index.rst:2228
 msgid "IInviteCode"
 msgstr ""
 
-#: ../../index.rst:2228
+#: ../../index.rst:2237
 msgid "IInviteLimit"
 msgstr ""
 
-#: ../../index.rst:2237
+#: ../../index.rst:2246
 msgid "IAdminMeta"
 msgstr ""
 
-#: ../../index.rst:2246 ../../index.rst:3739
+#: ../../index.rst:2255
 msgid "IFeatures"
 msgstr ""
 
-#: ../../index.rst:2255
+#: ../../index.rst:2264
 msgid "IMeta"
 msgstr ""
 
-#: ../../index.rst:2264
+#: ../../index.rst:2273
 msgid "IPartialMeta"
 msgstr ""
 
-#: ../../index.rst:2273
+#: ../../index.rst:2282
 msgid "IPolicies"
 msgstr ""
 
-#: ../../index.rst:2282
+#: ../../index.rst:2291
 msgid "IUpdateMetaBody"
 msgstr ""
 
-#: ../../index.rst:2291
+#: ../../index.rst:2300
 msgid "IMuting"
 msgstr ""
 
-#: ../../index.rst:2300
+#: ../../index.rst:2309
 msgid "ICreatedNote"
 msgstr ""
 
@@ -5302,7 +5490,7 @@ msgstr ""
 msgid "created note"
 msgstr ""
 
-#: ../../index.rst:2309
+#: ../../index.rst:2318
 msgid "INote"
 msgstr ""
 
@@ -5310,7 +5498,7 @@ msgstr ""
 msgid "Misskey Raw Model: Note"
 msgstr ""
 
-#: ../../index.rst:2318
+#: ../../index.rst:2327
 msgid "INoteChannel"
 msgstr ""
 
@@ -5322,99 +5510,99 @@ msgstr ""
 msgid "ログインしていてもis_following等は存在しない"
 msgstr ""
 
-#: ../../index.rst:2327
+#: ../../index.rst:2336
 msgid "INoteReaction"
 msgstr ""
 
-#: ../../index.rst:2336
+#: ../../index.rst:2345
 msgid "INoteState"
 msgstr ""
 
-#: ../../index.rst:2345
+#: ../../index.rst:2354
 msgid "INoteTranslateResult"
 msgstr ""
 
-#: ../../index.rst:2354
+#: ../../index.rst:2363
 msgid "INoteUpdated"
 msgstr ""
 
-#: ../../index.rst:2363
+#: ../../index.rst:2372
 msgid "INoteUpdatedDelete"
 msgstr ""
 
-#: ../../index.rst:2372
+#: ../../index.rst:2381
 msgid "INoteUpdatedDeleteBody"
 msgstr ""
 
-#: ../../index.rst:2381
+#: ../../index.rst:2390
 msgid "INoteUpdatedReaction"
 msgstr ""
 
-#: ../../index.rst:2390
+#: ../../index.rst:2399
 msgid "INoteUpdatedReactionBody"
 msgstr ""
 
-#: ../../index.rst:2399
+#: ../../index.rst:2408
 msgid "IAchievementNf"
 msgstr ""
 
-#: ../../index.rst:2408
+#: ../../index.rst:2417
 msgid "INoteNf"
 msgstr ""
 
-#: ../../index.rst:2417
+#: ../../index.rst:2426
 msgid "INotification"
 msgstr ""
 
-#: ../../index.rst:2426
+#: ../../index.rst:2435
 msgid "IPollEndNf"
 msgstr ""
 
-#: ../../index.rst:2435
+#: ../../index.rst:2444
 msgid "IReactionNf"
 msgstr ""
 
-#: ../../index.rst:2444
+#: ../../index.rst:2453
 msgid "IUserNf"
 msgstr ""
 
-#: ../../index.rst:2453
+#: ../../index.rst:2462
 msgid "AttachedFilePayload"
 msgstr ""
 
-#: ../../index.rst:2462
+#: ../../index.rst:2471
 msgid "EyeCatchingImagePayload"
 msgstr ""
 
-#: ../../index.rst:2471
+#: ../../index.rst:2480
 msgid "IPage"
 msgstr ""
 
-#: ../../index.rst:2480
+#: ../../index.rst:2489
 msgid "IPageRequired"
 msgstr ""
 
-#: ../../index.rst:2489
+#: ../../index.rst:2498
 msgid "PageContentPayload"
 msgstr ""
 
-#: ../../index.rst:2498
+#: ../../index.rst:2507
 msgid "PageFilePayload"
 msgstr ""
 
-#: ../../index.rst:2507
+#: ../../index.rst:2516
 msgid "PagePayload"
 msgstr ""
 
-#: ../../index.rst:2516
+#: ../../index.rst:2525
 msgid "VariablePayload"
 msgstr ""
 
-#: ../../index.rst:2525
+#: ../../index.rst:2534
 msgid "ICreatePoll"
 msgstr ""
 
-#: ../../index.rst:2534
+#: ../../index.rst:2543
 msgid "IPoll"
 msgstr ""
 
@@ -5422,31 +5610,31 @@ msgstr ""
 msgid "Questionnaire object"
 msgstr ""
 
-#: ../../index.rst:2543
+#: ../../index.rst:2552
 msgid "IPollChoice"
 msgstr ""
 
-#: ../../index.rst:2552
+#: ../../index.rst:2561
 msgid "NoteReactionPayload"
 msgstr ""
 
-#: ../../index.rst:2561
+#: ../../index.rst:2570
 msgid "IPartialRole"
 msgstr ""
 
-#: ../../index.rst:2570
+#: ../../index.rst:2579
 msgid "IRole"
 msgstr ""
 
-#: ../../index.rst:2579
+#: ../../index.rst:2588
 msgid "IRolePolicies"
 msgstr ""
 
-#: ../../index.rst:2588
+#: ../../index.rst:2597
 msgid "IRoleUser"
 msgstr ""
 
-#: ../../index.rst:2597
+#: ../../index.rst:2606
 msgid "is_me_detailed"
 msgstr ""
 
@@ -5456,7 +5644,7 @@ msgid ""
 "を持っているのでどちらともを満たしたものがIMeDetailedSchema"
 msgstr ""
 
-#: ../../index.rst:2603
+#: ../../index.rst:2612
 msgid "is_partial_user"
 msgstr ""
 
@@ -5466,11 +5654,11 @@ msgid ""
 "を継承しているため url が無いことを確認し区別する 念のために avatar_url があることも確認する"
 msgstr ""
 
-#: ../../index.rst:2609
+#: ../../index.rst:2618
 msgid "is_user_detailed"
 msgstr ""
 
-#: ../../index.rst:2615
+#: ../../index.rst:2624
 msgid "is_user_detailed_not_me"
 msgstr ""
 
@@ -5480,7 +5668,7 @@ msgid ""
 "avatar_id が無いことを確認する こうすることで IMeDetailedSchema と区別する"
 msgstr ""
 
-#: ../../index.rst:2621
+#: ../../index.rst:2630
 msgid "GetFrequentlyRepliedUsersResponse"
 msgstr ""
 
@@ -5488,27 +5676,31 @@ msgstr ""
 msgid "`users/get-frequently-replied-users` のレスポンス"
 msgstr ""
 
-#: ../../index.rst:2630
+#: ../../index.rst:2639
 msgid "IAchievement"
 msgstr ""
 
-#: ../../index.rst:2639
+#: ../../index.rst:2648
 msgid "IAvatarDecoration"
 msgstr ""
 
-#: ../../index.rst:2648
+#: ../../index.rst:2657
 msgid "IBadgeRole"
 msgstr ""
 
-#: ../../index.rst:2657
-msgid "IMeDetailedOnlySchema"
-msgstr ""
-
 #: ../../index.rst:2666
-msgid "IMeDetailedSchema"
+msgid "ICreatedUser"
 msgstr ""
 
 #: ../../index.rst:2675
+msgid "IMeDetailedOnlySchema"
+msgstr ""
+
+#: ../../index.rst:2684
+msgid "IMeDetailedSchema"
+msgstr ""
+
+#: ../../index.rst:2693
 msgid "IPartialUser"
 msgstr ""
 
@@ -5516,11 +5708,11 @@ msgstr ""
 msgid "Misskey Schema: `packedUserLiteSchema`"
 msgstr ""
 
-#: ../../index.rst:2684
+#: ../../index.rst:2702
 msgid "ISignin"
 msgstr ""
 
-#: ../../index.rst:2693
+#: ../../index.rst:2711
 msgid "IUserDetailedNotMeOnlySchema"
 msgstr ""
 
@@ -5528,27 +5720,27 @@ msgstr ""
 msgid "Misskey Schema: `packedUserDetailedNotMeOnlySchema`"
 msgstr ""
 
-#: ../../index.rst:2702
+#: ../../index.rst:2720
 msgid "IUserDetailedNotMeSchema"
 msgstr ""
 
-#: ../../index.rst:2711
+#: ../../index.rst:2729
 msgid "IUserField"
 msgstr ""
 
-#: ../../index.rst:2720
+#: ../../index.rst:2738
 msgid "IUserList"
 msgstr ""
 
-#: ../../index.rst:2729
+#: ../../index.rst:2747
 msgid "IUserListMembership"
 msgstr ""
 
-#: ../../index.rst:2738
+#: ../../index.rst:2756
 msgid "IUserRequired"
 msgstr ""
 
-#: ../../index.rst:2747
+#: ../../index.rst:2765
 msgid "IUserRole"
 msgstr ""
 
@@ -5560,31 +5752,31 @@ msgstr ""
 msgid "Will be removed in v0.7.0"
 msgstr ""
 
-#: ../../index.rst:2756
+#: ../../index.rst:2774
 msgid "IUserSecurityKey"
 msgstr ""
 
-#: ../../index.rst:2765
+#: ../../index.rst:2783
 msgid "NotificationRecieveConfig"
 msgstr ""
 
-#: ../../index.rst:2774
+#: ../../index.rst:2792
 msgid "NotificationRecieveConfigType"
 msgstr ""
 
-#: ../../index.rst:2783
+#: ../../index.rst:2801
 msgid "NotificationRecieveConfigWithUserList"
 msgstr ""
 
-#: ../../index.rst:2792
+#: ../../index.rst:2810
 msgid "IUsernameAvailable"
 msgstr ""
 
-#: ../../index.rst:2799
+#: ../../index.rst:2817
 msgid "Errors"
 msgstr ""
 
-#: ../../index.rst:2802
+#: ../../index.rst:2820
 msgid "APIError"
 msgstr ""
 
@@ -5592,7 +5784,7 @@ msgstr ""
 msgid "APIのエラー"
 msgstr ""
 
-#: ../../index.rst:2811
+#: ../../index.rst:2829
 msgid "NotExistRequiredData"
 msgstr ""
 
@@ -5600,7 +5792,7 @@ msgstr ""
 msgid "クラスの中に必要なデータが不足している"
 msgstr ""
 
-#: ../../index.rst:2820
+#: ../../index.rst:2838
 msgid "AccessDeniedError"
 msgstr ""
 
@@ -5608,11 +5800,11 @@ msgstr ""
 msgid "アクセス権限がありません。"
 msgstr ""
 
-#: ../../index.rst:2829
+#: ../../index.rst:2847
 msgid "AlreadyAddedError"
 msgstr ""
 
-#: ../../index.rst:2838
+#: ../../index.rst:2856
 msgid "AlreadyBlockingError"
 msgstr ""
 
@@ -5620,15 +5812,15 @@ msgstr ""
 msgid "すでにブロックしています。"
 msgstr ""
 
-#: ../../index.rst:2847
+#: ../../index.rst:2865
 msgid "AlreadyClippedError"
 msgstr ""
 
-#: ../../index.rst:2856
+#: ../../index.rst:2874
 msgid "AlreadyExpiredError"
 msgstr ""
 
-#: ../../index.rst:2865
+#: ../../index.rst:2883
 msgid "AlreadyFavoritedError"
 msgstr ""
 
@@ -5636,7 +5828,7 @@ msgstr ""
 msgid "既にお気に入り登録されています。"
 msgstr ""
 
-#: ../../index.rst:2874
+#: ../../index.rst:2892
 msgid "AlreadyFollowingError"
 msgstr ""
 
@@ -5644,11 +5836,11 @@ msgstr ""
 msgid "すでにフォローしています。"
 msgstr ""
 
-#: ../../index.rst:2883
+#: ../../index.rst:2901
 msgid "AlreadyInvitedError"
 msgstr ""
 
-#: ../../index.rst:2892
+#: ../../index.rst:2910
 msgid "AlreadyLikedError"
 msgstr ""
 
@@ -5656,7 +5848,7 @@ msgstr ""
 msgid "すでにいいねをつけています。"
 msgstr ""
 
-#: ../../index.rst:2901
+#: ../../index.rst:2919
 msgid "AlreadyMutingError"
 msgstr ""
 
@@ -5664,7 +5856,7 @@ msgstr ""
 msgid "すでにそのユーザーをミュートしています。"
 msgstr ""
 
-#: ../../index.rst:2910
+#: ../../index.rst:2928
 msgid "AlreadyPinnedError"
 msgstr ""
 
@@ -5672,11 +5864,11 @@ msgstr ""
 msgid "指定されたノートは既にピン留めされています。"
 msgstr ""
 
-#: ../../index.rst:2919
+#: ../../index.rst:2937
 msgid "AlreadyPromotedError"
 msgstr ""
 
-#: ../../index.rst:2928
+#: ../../index.rst:2946
 msgid "AlreadyReactedError"
 msgstr ""
 
@@ -5684,11 +5876,11 @@ msgstr ""
 msgid "既にリアクションしています。"
 msgstr ""
 
-#: ../../index.rst:2937
+#: ../../index.rst:2955
 msgid "AlreadyVotedError"
 msgstr ""
 
-#: ../../index.rst:2946
+#: ../../index.rst:2964
 msgid "AvatarNotAnImageError"
 msgstr ""
 
@@ -5696,7 +5888,7 @@ msgstr ""
 msgid "アバター画像に、画像ではないファイルが指定されました。"
 msgstr ""
 
-#: ../../index.rst:2955
+#: ../../index.rst:2973
 msgid "BannerNotAnImageError"
 msgstr ""
 
@@ -5704,7 +5896,7 @@ msgstr ""
 msgid "バナー画像に、画像ではないファイルが指定されました。"
 msgstr ""
 
-#: ../../index.rst:2964
+#: ../../index.rst:2982
 msgid "BlockedError"
 msgstr ""
 
@@ -5712,7 +5904,7 @@ msgstr ""
 msgid "ユーザーにブロックされています。"
 msgstr ""
 
-#: ../../index.rst:2973
+#: ../../index.rst:2991
 msgid "BlockeeIsYourselfError"
 msgstr ""
 
@@ -5720,7 +5912,7 @@ msgstr ""
 msgid "自分のブロックを解除しようとしました。"
 msgstr ""
 
-#: ../../index.rst:2982
+#: ../../index.rst:3000
 msgid "BlockingError"
 msgstr ""
 
@@ -5728,7 +5920,7 @@ msgstr ""
 msgid "ユーザーをブロックしています。"
 msgstr ""
 
-#: ../../index.rst:2991
+#: ../../index.rst:3009
 msgid "CannotCreateAlreadyExpiredPollError"
 msgstr ""
 
@@ -5736,7 +5928,7 @@ msgstr ""
 msgid "アンケートの期限の指定が誤っています。"
 msgstr ""
 
-#: ../../index.rst:3000
+#: ../../index.rst:3018
 msgid "CannotRenoteToAPureRenoteError"
 msgstr ""
 
@@ -5744,7 +5936,7 @@ msgstr ""
 msgid "単純なRenoteを再度Renoteすることはできません。"
 msgstr ""
 
-#: ../../index.rst:3009
+#: ../../index.rst:3027
 msgid "CannotReplyToAPureRenoteError"
 msgstr ""
 
@@ -5752,7 +5944,7 @@ msgstr ""
 msgid "単純なRenoteに返信することはできません。"
 msgstr ""
 
-#: ../../index.rst:3018
+#: ../../index.rst:3036
 msgid "CannotReportTheAdminError"
 msgstr ""
 
@@ -5760,7 +5952,7 @@ msgstr ""
 msgid "管理者を通報しようとしました。"
 msgstr ""
 
-#: ../../index.rst:3027
+#: ../../index.rst:3045
 msgid "CannotReportYourselfError"
 msgstr ""
 
@@ -5768,11 +5960,11 @@ msgstr ""
 msgid "自身を通報しようとしました。"
 msgstr ""
 
-#: ../../index.rst:3036
+#: ../../index.rst:3054
 msgid "ContentRequiredError"
 msgstr ""
 
-#: ../../index.rst:3045
+#: ../../index.rst:3063
 msgid "CredentialRequiredError"
 msgstr ""
 
@@ -5780,7 +5972,7 @@ msgstr ""
 msgid "クレデンシャル必須のエンドポイントにクレデンシャル無しでリクエストされました。"
 msgstr ""
 
-#: ../../index.rst:3054
+#: ../../index.rst:3072
 msgid "FailedToResolveRemoteUserError"
 msgstr ""
 
@@ -5788,7 +5980,7 @@ msgstr ""
 msgid "リモートユーザーの検索に失敗しました。"
 msgstr ""
 
-#: ../../index.rst:3063
+#: ../../index.rst:3081
 msgid "FollowRequestNotFoundError"
 msgstr ""
 
@@ -5796,7 +5988,7 @@ msgstr ""
 msgid "フォローリクエストがありません。"
 msgstr ""
 
-#: ../../index.rst:3072
+#: ../../index.rst:3090
 msgid "FolloweeIsYourselfError"
 msgstr ""
 
@@ -5804,7 +5996,7 @@ msgstr ""
 msgid "自分のフォローを解除しようとしました。"
 msgstr ""
 
-#: ../../index.rst:3081
+#: ../../index.rst:3099
 msgid "FollowerIsYourselfError"
 msgstr ""
 
@@ -5812,15 +6004,15 @@ msgstr ""
 msgid "自分をフォロワー解除しようとしました。"
 msgstr ""
 
-#: ../../index.rst:3090
+#: ../../index.rst:3108
 msgid "ForbiddenError"
 msgstr ""
 
-#: ../../index.rst:3099
+#: ../../index.rst:3117
 msgid "GroupAccessDeniedError"
 msgstr ""
 
-#: ../../index.rst:3108
+#: ../../index.rst:3126
 msgid "GtlDisabledError"
 msgstr ""
 
@@ -5828,7 +6020,7 @@ msgstr ""
 msgid "グローバルタイムラインが無効になっています。"
 msgstr ""
 
-#: ../../index.rst:3117
+#: ../../index.rst:3135
 msgid "HasChildFilesOrFoldersError"
 msgstr ""
 
@@ -5836,7 +6028,7 @@ msgstr ""
 msgid "フォルダーが空ではありません。"
 msgstr ""
 
-#: ../../index.rst:3126
+#: ../../index.rst:3144
 msgid "InappropriateError"
 msgstr ""
 
@@ -5844,7 +6036,7 @@ msgstr ""
 msgid "不適切なコンテンツを含んでいる可能性があると判定されました。"
 msgstr ""
 
-#: ../../index.rst:3135
+#: ../../index.rst:3153
 msgid "InternalErrorError"
 msgstr ""
 
@@ -5852,11 +6044,11 @@ msgstr ""
 msgid "サーバー内部で問題が発生しました。引き続き問題が発生する場合は管理者にお問い合わせください。"
 msgstr ""
 
-#: ../../index.rst:3144
+#: ../../index.rst:3162
 msgid "InvalidChoiceError"
 msgstr ""
 
-#: ../../index.rst:3153
+#: ../../index.rst:3171
 msgid "InvalidFileNameError"
 msgstr ""
 
@@ -5864,7 +6056,7 @@ msgstr ""
 msgid "ファイル名が不正です。"
 msgstr ""
 
-#: ../../index.rst:3162
+#: ../../index.rst:3180
 msgid "InvalidParamError"
 msgstr ""
 
@@ -5872,7 +6064,7 @@ msgstr ""
 msgid "リクエストパラメータに誤りがあります。"
 msgstr ""
 
-#: ../../index.rst:3171
+#: ../../index.rst:3189
 msgid "InvalidRegexpError"
 msgstr ""
 
@@ -5880,15 +6072,15 @@ msgstr ""
 msgid "正規表現が不正です。"
 msgstr ""
 
-#: ../../index.rst:3180
+#: ../../index.rst:3198
 msgid "InvalidUrlError"
 msgstr ""
 
-#: ../../index.rst:3189
+#: ../../index.rst:3207
 msgid "IsOwnerError"
 msgstr ""
 
-#: ../../index.rst:3198
+#: ../../index.rst:3216
 msgid "LtlDisabledError"
 msgstr ""
 
@@ -5896,11 +6088,11 @@ msgstr ""
 msgid "ローカルタイムラインが無効になっています。"
 msgstr ""
 
-#: ../../index.rst:3207
+#: ../../index.rst:3225
 msgid "MoSuchFileError"
 msgstr ""
 
-#: ../../index.rst:3216
+#: ../../index.rst:3234
 msgid "MuteeIsYourselfError"
 msgstr ""
 
@@ -5908,7 +6100,7 @@ msgstr ""
 msgid "自分に対してミュートを解除しようとしました。"
 msgstr ""
 
-#: ../../index.rst:3225
+#: ../../index.rst:3243
 msgid "NameAlreadyExistsError"
 msgstr ""
 
@@ -5916,7 +6108,7 @@ msgstr ""
 msgid "同じURLにページがすでに存在します。"
 msgstr ""
 
-#: ../../index.rst:3234
+#: ../../index.rst:3252
 msgid "NoFollowRequestError"
 msgstr ""
 
@@ -5924,7 +6116,7 @@ msgstr ""
 msgid "ユーザーからのフォローリクエストがありません。"
 msgstr ""
 
-#: ../../index.rst:3243
+#: ../../index.rst:3261
 msgid "NoFreeSpaceError"
 msgstr ""
 
@@ -5932,15 +6124,15 @@ msgstr ""
 msgid "ドライブに空き容量がありません。"
 msgstr ""
 
-#: ../../index.rst:3252
+#: ../../index.rst:3270
 msgid "NoPollError"
 msgstr ""
 
-#: ../../index.rst:3261
+#: ../../index.rst:3279
 msgid "NoSuchAdError"
 msgstr ""
 
-#: ../../index.rst:3270
+#: ../../index.rst:3288
 msgid "NoSuchAnnouncementError"
 msgstr ""
 
@@ -5948,11 +6140,11 @@ msgstr ""
 msgid "お知らせが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3279
+#: ../../index.rst:3297
 msgid "NoSuchAntennaError"
 msgstr ""
 
-#: ../../index.rst:3288
+#: ../../index.rst:3306
 msgid "NoSuchAppError"
 msgstr ""
 
@@ -5960,7 +6152,7 @@ msgstr ""
 msgid "アプリが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3297
+#: ../../index.rst:3315
 msgid "NoSuchAvatarError"
 msgstr ""
 
@@ -5968,7 +6160,7 @@ msgstr ""
 msgid "アバター画像のファイルが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3306
+#: ../../index.rst:3324
 msgid "NoSuchBannerError"
 msgstr ""
 
@@ -5976,7 +6168,7 @@ msgstr ""
 msgid "バナー画像のファイルが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3315
+#: ../../index.rst:3333
 msgid "NoSuchChannelError"
 msgstr ""
 
@@ -5984,15 +6176,15 @@ msgstr ""
 msgid "指定されたチャンネルが存在しないか、アクセスが許可されていません。"
 msgstr ""
 
-#: ../../index.rst:3324
+#: ../../index.rst:3342
 msgid "NoSuchClipError"
 msgstr ""
 
-#: ../../index.rst:3333
+#: ../../index.rst:3351
 msgid "NoSuchEmojiError"
 msgstr ""
 
-#: ../../index.rst:3342
+#: ../../index.rst:3360
 msgid "NoSuchFileError"
 msgstr ""
 
@@ -6000,7 +6192,7 @@ msgstr ""
 msgid "ファイルが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3351
+#: ../../index.rst:3369
 msgid "NoSuchFolderError"
 msgstr ""
 
@@ -6008,15 +6200,15 @@ msgstr ""
 msgid "フォルダーが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3360
+#: ../../index.rst:3378
 msgid "NoSuchGroupError"
 msgstr ""
 
-#: ../../index.rst:3369
+#: ../../index.rst:3387
 msgid "NoSuchGroupMemberError"
 msgstr ""
 
-#: ../../index.rst:3378
+#: ../../index.rst:3396
 msgid "NoSuchHashtagError"
 msgstr ""
 
@@ -6024,19 +6216,19 @@ msgstr ""
 msgid "ハッシュタグが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3387
+#: ../../index.rst:3405
 msgid "NoSuchInvitationError"
 msgstr ""
 
-#: ../../index.rst:3396
+#: ../../index.rst:3414
 msgid "NoSuchListError"
 msgstr ""
 
-#: ../../index.rst:3405
+#: ../../index.rst:3423
 msgid "NoSuchMessageError"
 msgstr ""
 
-#: ../../index.rst:3414
+#: ../../index.rst:3432
 msgid "NoSuchNoteError"
 msgstr ""
 
@@ -6044,7 +6236,7 @@ msgstr ""
 msgid "指定されたノートが存在しないか、アクセスが許可されていません。"
 msgstr ""
 
-#: ../../index.rst:3423
+#: ../../index.rst:3441
 msgid "NoSuchNotificationError"
 msgstr ""
 
@@ -6052,11 +6244,11 @@ msgstr ""
 msgid "通知が存在しません。"
 msgstr ""
 
-#: ../../index.rst:3432
+#: ../../index.rst:3450
 msgid "NoSuchObjectError"
 msgstr ""
 
-#: ../../index.rst:3441
+#: ../../index.rst:3459
 msgid "NoSuchPageError"
 msgstr ""
 
@@ -6064,7 +6256,7 @@ msgstr ""
 msgid "ページが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3450
+#: ../../index.rst:3468
 msgid "NoSuchParentFolderError"
 msgstr ""
 
@@ -6072,11 +6264,11 @@ msgstr ""
 msgid "親フォルダーが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3459
+#: ../../index.rst:3477
 msgid "NoSuchPostError"
 msgstr ""
 
-#: ../../index.rst:3468
+#: ../../index.rst:3486
 msgid "NoSuchRenoteTargetError"
 msgstr ""
 
@@ -6084,7 +6276,7 @@ msgstr ""
 msgid "Renoteに指定されたノートが存在しないか、アクセスが許可されていません。"
 msgstr ""
 
-#: ../../index.rst:3477
+#: ../../index.rst:3495
 msgid "NoSuchReplyTargetError"
 msgstr ""
 
@@ -6092,7 +6284,7 @@ msgstr ""
 msgid "返信先に指定されたノートが存在しないか、アクセスが許可されていません。"
 msgstr ""
 
-#: ../../index.rst:3486
+#: ../../index.rst:3504
 msgid "NoSuchSessionError"
 msgstr ""
 
@@ -6100,7 +6292,7 @@ msgstr ""
 msgid "セッションが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3495
+#: ../../index.rst:3513
 msgid "NoSuchUserError"
 msgstr ""
 
@@ -6108,15 +6300,15 @@ msgstr ""
 msgid "ユーザーが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3504
+#: ../../index.rst:3522
 msgid "NoSuchUserGroupError"
 msgstr ""
 
-#: ../../index.rst:3513
+#: ../../index.rst:3531
 msgid "NoSuchUserListError"
 msgstr ""
 
-#: ../../index.rst:3522
+#: ../../index.rst:3540
 msgid "NoSuchWebhookError"
 msgstr ""
 
@@ -6124,7 +6316,7 @@ msgstr ""
 msgid "Webhookが存在しません。"
 msgstr ""
 
-#: ../../index.rst:3531
+#: ../../index.rst:3549
 msgid "NotBlockingError"
 msgstr ""
 
@@ -6132,7 +6324,7 @@ msgstr ""
 msgid "ブロックしていないユーザーです。"
 msgstr ""
 
-#: ../../index.rst:3540
+#: ../../index.rst:3558
 msgid "NotFavoritedError"
 msgstr ""
 
@@ -6140,7 +6332,7 @@ msgstr ""
 msgid "お気に入り登録されていません。"
 msgstr ""
 
-#: ../../index.rst:3549
+#: ../../index.rst:3567
 msgid "NotFollowingError"
 msgstr ""
 
@@ -6148,7 +6340,7 @@ msgstr ""
 msgid "ユーザーにフォローされていません。"
 msgstr ""
 
-#: ../../index.rst:3558
+#: ../../index.rst:3576
 msgid "NotLikedError"
 msgstr ""
 
@@ -6156,7 +6348,7 @@ msgstr ""
 msgid "いいねをつけていないページです。"
 msgstr ""
 
-#: ../../index.rst:3567
+#: ../../index.rst:3585
 msgid "NotMutingError"
 msgstr ""
 
@@ -6164,7 +6356,7 @@ msgstr ""
 msgid "対象となるユーザーをそもそもミュートしていません。"
 msgstr ""
 
-#: ../../index.rst:3576
+#: ../../index.rst:3594
 msgid "NotReactedError"
 msgstr ""
 
@@ -6172,11 +6364,11 @@ msgstr ""
 msgid "リアクションしていません。"
 msgstr ""
 
-#: ../../index.rst:3585
+#: ../../index.rst:3603
 msgid "PendingSessionError"
 msgstr ""
 
-#: ../../index.rst:3594
+#: ../../index.rst:3612
 msgid "PermissionDeniedError"
 msgstr ""
 
@@ -6184,7 +6376,7 @@ msgstr ""
 msgid "与えられたクレデンシャルには必要なパーミッションがありません。"
 msgstr ""
 
-#: ../../index.rst:3603
+#: ../../index.rst:3621
 msgid "PinLimitExceededError"
 msgstr ""
 
@@ -6192,7 +6384,7 @@ msgstr ""
 msgid "これ以上ピン留めできません。"
 msgstr ""
 
-#: ../../index.rst:3612
+#: ../../index.rst:3630
 msgid "RateLimitExceededError"
 msgstr ""
 
@@ -6200,7 +6392,7 @@ msgstr ""
 msgid "レートリミットによる制限のため一時的に利用できません。"
 msgstr ""
 
-#: ../../index.rst:3621
+#: ../../index.rst:3639
 msgid "ReactionsNotPublicError"
 msgstr ""
 
@@ -6208,11 +6400,11 @@ msgstr ""
 msgid "リアクションが公開されていません。"
 msgstr ""
 
-#: ../../index.rst:3630
+#: ../../index.rst:3648
 msgid "RecipientIsYourselfError"
 msgstr ""
 
-#: ../../index.rst:3639
+#: ../../index.rst:3657
 msgid "StlDisabledError"
 msgstr ""
 
@@ -6220,11 +6412,11 @@ msgstr ""
 msgid "ソーシャルタイムラインが無効になっています。"
 msgstr ""
 
-#: ../../index.rst:3648
+#: ../../index.rst:3666
 msgid "YouAreOwnerError"
 msgstr ""
 
-#: ../../index.rst:3657
+#: ../../index.rst:3675
 msgid "YouHaveBeenBlockedError"
 msgstr ""
 
@@ -6232,7 +6424,7 @@ msgstr ""
 msgid "ブロックされているユーザーのノートにリアクションは行えません。"
 msgstr ""
 
-#: ../../index.rst:3666
+#: ../../index.rst:3684
 msgid "YourAccountSuspendedError"
 msgstr ""
 
@@ -6240,7 +6432,7 @@ msgstr ""
 msgid "アカウントが凍結されているため利用できません。"
 msgstr ""
 
-#: ../../index.rst:3675
+#: ../../index.rst:3693
 msgid "YourPageError"
 msgstr ""
 
@@ -6248,71 +6440,163 @@ msgstr ""
 msgid "自身のページにいいねをつけようとしました。"
 msgstr ""
 
-#: ../../index.rst:3684
+#: ../../index.rst:3702
 msgid "YourPostError"
 msgstr ""
 
-#: ../../index.rst:3691
+#: ../../index.rst:3709
 msgid "__OTHER"
 msgstr ""
 
-#: ../../index.rst:3694
+#: ../../index.rst:3712
 msgid "Client"
 msgstr ""
 
-#: ../../index.rst:3703
-msgid "CacheConfig"
-msgstr ""
-
-#: ../../index.rst:3712
-msgid "CacheConfigData"
+#: mipac.client.Client:1 of
+msgid "クライアントを定義したクラス"
 msgstr ""
 
 #: ../../index.rst:3721
+msgid "CacheConfig"
+msgstr ""
+
+#: mipac.config.CacheConfig:1 mipac.config.CacheConfigData:1 of
+msgid "キャッシュの設定を保持するクラス"
+msgstr ""
+
+#: ../../index.rst:3730
+msgid "CacheConfigData"
+msgstr ""
+
+#: ../../index.rst:3739
 msgid "Config"
 msgstr ""
 
+#: mipac.config.Config:1 of
+msgid "MiPACで使用する設定を保持するクラス"
+msgstr ""
+
+#: mipac.config.Config.from_dict:1 of
+msgid "dictから設定を更新します"
+msgstr ""
+
+#: mipac.config.Config.from_dict:3 of
+msgid "サーバーのhost, by default None"
+msgstr ""
+
+#: mipac.config.Config.from_dict:5 of
+msgid "サーバーがsslかどうか, by default None"
+msgstr ""
+
+#: mipac.config.Config.from_dict:7 of
+msgid "キャッシュの設定, by default None"
+msgstr ""
+
+#: mipac.config.Config.from_dict:10 of
+msgid "更新されたConfigクラス"
+msgstr ""
+
 #: ../../index.rst:3748
-msgid "ILimits"
-msgstr ""
-
-#: ../../index.rst:3757
-msgid "Limits"
-msgstr ""
-
-#: ../../index.rst:3766
 msgid "MiFile"
 msgstr ""
 
-#: ../../index.rst:3775
+#: ../../index.rst:3757
 msgid "json_or_text"
 msgstr ""
 
-#: ../../index.rst:3781
+#: ../../index.rst:3763
 msgid "HTTPClient"
 msgstr ""
 
-#: ../../index.rst:3790
+#: mipac.http.HTTPClient:1 of
+msgid "MisskeyのAPIを使用するためのクライアントクラス"
+msgstr ""
+
+#: mipac.http.HTTPClient:3 of
+msgid "MisskeyのURL"
+msgstr ""
+
+#: mipac.http.HTTPClient:5 of
+msgid "Misskeyのトークン"
+msgstr ""
+
+#: mipac.http.HTTPClient.close_session:1 of
+msgid "セッションを終了します"
+msgstr ""
+
+#: mipac.http.HTTPClient.login:1 of
+msgid "現在指定されているTokenのユーザー情報を返します"
+msgstr ""
+
+#: mipac.http.HTTPClient.login:4 of
+msgid "..deprecated:: 0.6.4"
+msgstr ""
+
+#: mipac.http.HTTPClient.login:4 of
+msgid ""
+":class:`mipac.http.HTTPClient` "
+"をインスタンス化した際に自動的にセッションが作成されるようになったため非推奨になりました。現在のTokenのユーザー情報を取得する場合は "
+":meth:`mipac.actions.user.get_me` を使用してください。"
+msgstr ""
+
+#: mipac.http.HTTPClient.login:6 of
+msgid "Tokenがある場合は自身の情報を返します。Tokenが無い場合はNoneを返します"
+msgstr ""
+
+#: mipac.http.HTTPClient.session:1 of
+msgid "現在のセッションを返します"
+msgstr ""
+
+#: mipac.http.HTTPClient.session:3 of
+msgid "現在のセッション"
+msgstr ""
+
+#: ../../index.rst:3772
 msgid "MisskeyClientWebSocketResponse"
 msgstr ""
 
-#: ../../index.rst:3799
+#: ../../index.rst:3781
 msgid "Route"
 msgstr ""
 
-#: ../../index.rst:3808
+#: mipac.http.Route:1 of
+msgid "MisskeyのAPIを使用するためのルートとメソッドを定義するクラス"
+msgstr ""
+
+#: mipac.http.Route:3 mipac.http.Route:16 of
+msgid "メソッド"
+msgstr ""
+
+#: mipac.http.Route:5 mipac.http.Route:10 of
+msgid "ルートパス"
+msgstr ""
+
+#: mipac.http.Route of
+msgid "type"
+msgstr ""
+
+#: mipac.http.Route:12 mipac.http.Route:18 of
+msgid "str"
+msgstr ""
+
+#: ../../index.rst:3790
 msgid "AbstractAction"
 msgstr ""
 
-#: ../../index.rst:3817
+#: ../../index.rst:3799
 msgid "AbstractManager"
 msgstr ""
 
-#: ../../index.rst:3826
+#: ../../index.rst:3808
 msgid "IMiAuthPayload"
 msgstr ""
 
-#: ../../index.rst:3835
+#: mipac.utils.auth.IMiAuthPayload:1 mipac.utils.auth.MiAuth.check_session:3
+#: mipac.utils.auth.MiAuth.wait_complete:3 of
+msgid "MiAuthの戻り値"
+msgstr ""
+
+#: ../../index.rst:3817
 msgid "MiAuth"
 msgstr ""
 
@@ -6320,19 +6604,71 @@ msgstr ""
 msgid "Misskey v12以降のインスタンスで使用可能な認証方式です"
 msgstr ""
 
-#: ../../index.rst:3844
+#: mipac.utils.auth.MiAuth.check_session:1 of
+msgid "MiAuthのセッションが完了したか確認します"
+msgstr ""
+
+#: mipac.utils.auth.MiAuth.gen_session:1 of
+msgid "MiAuthのセッションを生成します"
+msgstr ""
+
+#: mipac.utils.auth.MiAuth.gen_session:3 of
+msgid "セッション名, by default None"
+msgstr ""
+
+#: mipac.utils.auth.MiAuth.gen_session:5 of
+msgid "アイコンのURL, by default None"
+msgstr ""
+
+#: mipac.utils.auth.MiAuth.gen_session:7 of
+msgid "コールバックURL, by default None"
+msgstr ""
+
+#: mipac.utils.auth.MiAuth.gen_session:9 of
+msgid "許可する権限, by default None"
+msgstr ""
+
+#: mipac.utils.auth.MiAuth.gen_session:12 of
+msgid "生成された認証用URL"
+msgstr ""
+
+#: mipac.utils.auth.MiAuth.set_session:1 of
+msgid "sessionを生成してインスタンス変数にセットします"
+msgstr ""
+
+#: mipac.utils.auth.MiAuth.wait_complete:1 of
+msgid "MiAuthのセッションが完了するまで待機します"
+msgstr ""
+
+#: ../../index.rst:3826
 msgid "cache"
 msgstr ""
 
-#: ../../index.rst:3850
-msgid "get_cache_key"
+#: mipac.utils.cache.cache:1 of
+msgid "キャッシュを行います"
 msgstr ""
 
-#: ../../index.rst:3856
+#: ../../index.rst:3832
 msgid "set_cache"
 msgstr ""
 
-#: ../../index.rst:3862
+#: mipac.utils.cache.set_cache:1 of
+msgid "キャッシュを設定します"
+msgstr ""
+
+#: mipac.utils.cache.set_cache:3 of
+msgid "キャッシュのグループ名"
+msgstr ""
+
+#: mipac.utils.cache.set_cache:5 of
+msgid "一意のキー"
+msgstr ""
+
+#: mipac.utils.cache.set_cache:7 of
+msgid "設定する値"
+msgstr ""
+
+#: ../../index.rst:3838
 msgid "bool_to_string"
 msgstr ""
 
@@ -6348,101 +6684,169 @@ msgstr ""
 msgid "**true or false** -- 小文字になったbool文字列"
 msgstr ""
 
-#: ../../index.rst:3868
+#: ../../index.rst:3844
 msgid "convert_dict_keys_to_camel"
 msgstr ""
 
-#: ../../index.rst:3874
+#: mipac.utils.format.convert_dict_keys_to_camel:1 of
+msgid "dictに含まれるkeyをスネークケースからキャメルケースに変換します"
+msgstr ""
+
+#: mipac.utils.format.convert_dict_keys_to_camel:3 of
+msgid "変更したいdict"
+msgstr ""
+
+#: mipac.utils.format.convert_dict_keys_to_camel:5
+#: mipac.utils.format.upper_to_lower:9 of
+msgid "dictのkey名を特定の物に置き換える"
+msgstr ""
+
+#: mipac.utils.format.convert_dict_keys_to_camel:8 of
+msgid "**new_dict** -- 変更後のdict"
+msgstr ""
+
+#: ../../index.rst:3850
 msgid "remove_dict_empty"
 msgstr ""
 
-#: mipac.utils.format.remove_dict_empty:1
-#: mipac.utils.format.remove_dict_missing:1
-#: mipac.utils.format.remove_list_empty:1 of
+#: mipac.utils.format.remove_dict_empty:1 of
+msgid "辞書から値がNoneのkeyを削除します"
+msgstr ""
+
+#: mipac.utils.format.remove_dict_empty:3
+#: mipac.utils.format.remove_dict_missing:3 of
 msgid "空のkeyを削除したいdict"
 msgstr ""
 
-#: mipac.utils.format.remove_dict_empty:3 of
+#: mipac.utils.format.remove_dict_empty:5 of
 msgid "削除したくないkeyのリスト"
 msgstr ""
 
-#: mipac.utils.format.remove_dict_empty:6 of
+#: mipac.utils.format.remove_dict_empty:8 of
 msgid "**_data** -- 空のkeyがなくなったdict"
 msgstr ""
 
-#: ../../index.rst:3880
+#: ../../index.rst:3856
 msgid "remove_dict_missing"
 msgstr ""
 
-#: mipac.utils.format.remove_dict_missing:4 of
+#: mipac.utils.format.remove_dict_missing:1 of
+msgid "辞書からMISSINGのkeyを削除します"
+msgstr ""
+
+#: mipac.utils.format.remove_dict_missing:6 of
 msgid "**_data** -- MISSINGのkeyがなくなったdict"
 msgstr ""
 
-#: ../../index.rst:3886
-msgid "remove_list_empty"
-msgstr ""
-
-#: mipac.utils.format.remove_list_empty:4 of
-msgid "空のkeyがなくなったdict"
-msgstr ""
-
-#: ../../index.rst:3892
+#: ../../index.rst:3862
 msgid "snake_to_camel"
 msgstr ""
 
-#: ../../index.rst:3898
-msgid "str_lower"
+#: mipac.utils.format.snake_to_camel:1 of
+msgid "スネークケースをキャメルケースに変換します"
 msgstr ""
 
-#: ../../index.rst:3904
+#: mipac.utils.format.snake_to_camel:3 of
+msgid "変更したい文字列"
+msgstr ""
+
+#: mipac.utils.format.snake_to_camel:5 of
+msgid "snake_strの特定の文字列を置き換える為の辞書"
+msgstr ""
+
+#: mipac.utils.format.snake_to_camel:8 of
+msgid "変換後の文字列"
+msgstr ""
+
+#: ../../index.rst:3868
 msgid "str_to_datetime"
 msgstr ""
 
 #: mipac.utils.format.str_to_datetime:1 of
-msgid "datetimeに変更したい文字列"
+msgid "文字列をdatetimeに変換します"
 msgstr ""
 
 #: mipac.utils.format.str_to_datetime:3 of
+msgid "datetimeに変更したい文字列"
+msgstr ""
+
+#: mipac.utils.format.str_to_datetime:5 of
 msgid "dataのフォーマット"
 msgstr ""
 
-#: mipac.utils.format.str_to_datetime:6 of
+#: mipac.utils.format.str_to_datetime:8 of
 msgid "変換後のデータ"
 msgstr ""
 
-#: ../../index.rst:3910
+#: ../../index.rst:3874
 msgid "upper_to_lower"
 msgstr ""
 
 #: mipac.utils.format.upper_to_lower:1 of
-msgid "小文字にしたいkeyがあるdict"
+msgid "dictのkeyを小文字に変換します"
 msgstr ""
 
 #: mipac.utils.format.upper_to_lower:3 of
-msgid "謎"
+msgid "小文字にしたいkeyがあるdict"
 msgstr ""
 
 #: mipac.utils.format.upper_to_lower:5 of
-msgid "ネストされたdictのkeyも小文字にするか否か"
+msgid "謎"
 msgstr ""
 
 #: mipac.utils.format.upper_to_lower:7 of
-msgid "dictのkey名を特定の物に置き換える"
+msgid "ネストされたdictのkeyも小文字にするか否か"
 msgstr ""
 
-#: mipac.utils.format.upper_to_lower:10 of
+#: mipac.utils.format.upper_to_lower:12 of
 msgid "**field** -- 小文字になった, key名が変更されたdict"
 msgstr ""
 
-#: ../../index.rst:3916
+#: ../../index.rst:3880
 msgid "setup_logging"
 msgstr ""
 
-#: ../../index.rst:3922
+#: mipac.utils.log.setup_logging:1 of
+msgid "ログの設定を行います"
+msgstr ""
+
+#: mipac.utils.log.setup_logging:3 of
+msgid "ログのハンドラー"
+msgstr ""
+
+#: mipac.utils.log.setup_logging:5 of
+msgid "ログのフォーマッター"
+msgstr ""
+
+#: mipac.utils.log.setup_logging:7 of
+msgid "ログのレベル"
+msgstr ""
+
+#: ../../index.rst:3886
 msgid "Pagination"
 msgstr ""
 
-#: ../../index.rst:3931
+#: mipac.utils.pagination.Pagination:1 of
+msgid "ページネーションを行うためのクラスです"
+msgstr ""
+
+#: mipac.utils.pagination.Pagination.is_final:1 of
+msgid "現在のページネーションが最後の戻り値かを返します"
+msgstr ""
+
+#: mipac.utils.pagination.Pagination.is_final:3 of
+msgid "最後の戻り値かどうか"
+msgstr ""
+
+#: mipac.utils.pagination.Pagination.next:1 of
+msgid "次のページを取得します"
+msgstr ""
+
+#: mipac.utils.pagination.Pagination.next:3 of
+msgid "取得したページの戻り値"
+msgstr ""
+
+#: ../../index.rst:3895
 msgid "check_multi_arg"
 msgstr ""
 
@@ -6458,30 +6862,32 @@ msgstr ""
 msgid "存在する場合はTrue, 存在しない場合はFalse"
 msgstr ""
 
-#: ../../index.rst:3937
+#: ../../index.rst:3901
 msgid "deprecated"
 msgstr ""
 
 #: mipac.utils.util.deprecated:1 of
-msgid ""
-"This is a decorator which can be used to mark functions as deprecated. It"
-" will result in a warning being emitted when the function is used."
+msgid "指定した関数が非推奨であることを示す為のデコレータ"
 msgstr ""
 
-#: ../../index.rst:3943
+#: ../../index.rst:3907
 msgid "Colors"
 msgstr ""
 
-#: ../../index.rst:3952
+#: ../../index.rst:3916
 msgid "DeprecatedClass"
 msgstr ""
 
-#: ../../index.rst:3961
+#: ../../index.rst:3925
 msgid "MiTime"
 msgstr ""
 
-#: ../../index.rst:3970
+#: ../../index.rst:3934
 msgid "Missing"
+msgstr ""
+
+#: mipac.utils.util.Missing:1 of
+msgid "値が存在しないことを示すクラス"
 msgstr ""
 
 #~ msgid "MuteUser"
@@ -6841,4 +7247,66 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "引数に関するエラー"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Get notes from a clip :param "
+#~ "clip_id: The clip id :type clip_id: "
+#~ "str | None, optional, by default "
+#~ "None :param limit: The number of "
+#~ "notes to get :type limit: int, "
+#~ "optional, by default 10 :param since_id:"
+#~ " The note id to get notes after"
+#~ " :type since_id: str | None, "
+#~ "optional, by default None :param "
+#~ "until_id: The note id to get notes"
+#~ " before :type until_id: str | None,"
+#~ " optional, by default None :param "
+#~ "get_all: Whether to get all notes "
+#~ ":type get_all: bool, optional, by "
+#~ "default False"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Get notes from a clip :param "
+#~ "clip_id: The clip id :type clip_id: "
+#~ "str | None, optional, by default "
+#~ "None :param limit: The number of "
+#~ "notes to get :type limit: int, "
+#~ "optional, by default 10 :param since_id:"
+#~ " The note id to get notes after"
+#~ " :type since_id: str | None, "
+#~ "optional, by default None :param "
+#~ "until_id: The note id to get notes"
+#~ " before :type until_id: str | None,"
+#~ " optional, by default None"
+#~ msgstr ""
+
+#~ msgid "Notes"
+#~ msgstr ""
+
+#~ msgid "ILimits"
+#~ msgstr ""
+
+#~ msgid "Limits"
+#~ msgstr ""
+
+#~ msgid "get_cache_key"
+#~ msgstr ""
+
+#~ msgid "remove_list_empty"
+#~ msgstr ""
+
+#~ msgid "空のkeyがなくなったdict"
+#~ msgstr ""
+
+#~ msgid "str_lower"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This is a decorator which can be"
+#~ " used to mark functions as "
+#~ "deprecated. It will result in a "
+#~ "warning being emitted when the function"
+#~ " is used."
 #~ msgstr ""
