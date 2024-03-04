@@ -19,6 +19,7 @@ class IRolePolicies(TypedDict):
     gtl_available: bool
     ltl_available: bool
     can_public_note: bool
+    mention_limit: int
     can_invite: bool
     invite_limit: int
     invite_limit_cycle: int

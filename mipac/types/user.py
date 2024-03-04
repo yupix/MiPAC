@@ -16,7 +16,7 @@ IFfVisibility = Literal["public", "followers", "private"]
 IUserNotify = Literal["normal", "none"]
 ITwoFactorBackupCodesStock = Literal["full", "partial", "none"]
 NotificationRecieveConfigOption = Literal[
-    "all", "following", "follower", "mutualFollow", "never"
+    "all", "following", "follower", "mutualFollow", "followingOrFollower", "never"
 ]  # Misskey側が間違っている(Receiveのミススペル?)ので混乱を招かないようにこっちも統一してある
 EmailNotificationTypes = Literal["mention", "reply", "quote", "follow", "receiveFollowRequest"]
 
@@ -95,7 +95,7 @@ class NotificationRecieveConfig(TypedDict):
     renote: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
     quote: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
     reaction: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
-    pollEnded: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    poll_ended: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
     receive_follow_request: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
     follow_request_accepted: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
     role_assigned: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
