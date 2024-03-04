@@ -544,6 +544,10 @@ class Note:
         return self.__raw_note["reaction_acceptance"]
 
     @property
+    def reaction_emoji(self) -> dict[str, str]:
+        return self.__raw_note["reaction_emoji"]
+
+    @property
     def reactions(self) -> dict[str, int]:
         """Note reactions
 

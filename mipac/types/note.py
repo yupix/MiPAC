@@ -86,6 +86,7 @@ class INote(TypedDict):
     channel: NotRequired[INoteChannel | None]
     local_only: bool
     reaction_acceptance: IReactionAcceptance
+    reaction_emoji: dict[str, str]
     reactions: dict[str, int]  # リアクションの種類と数
     renote_count: int
     replies_count: int
