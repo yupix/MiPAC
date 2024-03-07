@@ -7,3 +7,4 @@ dist
 .idea
 docs/_build
 .env
+compiler/datas/errors.csv
