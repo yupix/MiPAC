@@ -225,34 +225,34 @@ class File:
 
     @property
     def created_at(self) -> datetime:
-        """ファイルが作成された日時
+        """ファイルの作成日時
 
         Returns
         -------
         datetime
-            ファイルが作成された日時
+            ファイルの作成日時
         """
         return str_to_datetime(self.__raw_file["created_at"])
 
     @property
     def name(self) -> str:
-        """ファイル名
+        """拡張子付きのファイル名
 
         Returns
         -------
         str
-            ファイル名
+            拡張子付きのファイル名
         """
         return self.__raw_file["name"]
 
     @property
     def type(self) -> str:
-        """ファイルの拡張子
+        """ファイルの種類 (MIME タイプ)
 
         Returns
         -------
         str
-            ファイルの種類
+            ファイルの種類 (MIME タイプ)
         """
         return self.__raw_file["type"]
 
@@ -280,12 +280,12 @@ class File:
 
     @property
     def is_sensitive(self) -> bool:
-        """ファイルがセンシティブかどうか
+        """ファイルが閲覧注意（NSFW）であるか
 
         Returns
         -------
         bool
-            ファイルがセンシティブかどうか
+            ファイルが閲覧注意であるか
         """
         return self.__raw_file["is_sensitive"]
 
@@ -346,23 +346,23 @@ class File:
 
     @property
     def folder_id(self) -> str | None:
-        """フォルダーのID
+        """ファイルが存在するフォルダのID
 
         Returns
         -------
         str | None
-            フォルダーのID
+            ファイルが存在するフォルダのID
         """
         return self.__raw_file["folder_id"]
 
     @property
     def folder(self) -> Folder | None:
-        """フォルダー
+        """ファイルが存在するフォルダ
 
         Returns
         -------
         Folder | None
-            フォルダー
+            ファイルが存在するフォルダ
         """
         return (
             Folder(self.__raw_file["folder"], client=self.__client)
@@ -372,23 +372,23 @@ class File:
 
     @property
     def user_id(self) -> str | None:
-        """ファイルを作成したユーザーのID
+        """ファイルをアップロードしたユーザーのID
 
         Returns
         -------
         str | None
-            ユーザーのID
+            ファイルをアップロードしたユーザーのID
         """
         return self.__raw_file["user_id"]
 
     @property
     def user(self) -> PartialUser | None:
-        """ファイルを作成したユーザー
+        """ファイルをアップロードしたユーザー
 
         Returns
         -------
         PartialUser | None
-            ユーザー
+            ファイルをアップロードしたユーザー
         """
         return (
             PartialUser(self.__raw_file["user"], client=self.__client)
@@ -397,17 +397,24 @@ class File:
         )
 
     def _get(self, key: str) -> Any | None:
-        """You can access the raw response data directly by specifying the key
+        """生のレスポンスデータに直接アクセスすることができます
 
         Returns
         -------
         Any | None
-            raw response data
+            生のレスポンスデータ
         """
         return self.__raw_file.get(key)
 
     @property
     def api(self) -> ClientFileManager:
+        """このファイルに対する操作を行うためのAPIクライアント
+
+        Returns
+        -------
+        ClientFileManager
+            このファイルに対する操作を行うためのAPIクライアント
+        """
         return self.__client.drive._create_client_file_manager(file_id=self.id)
 
     def __eq__(self, __value: object) -> bool:
