@@ -47,13 +47,13 @@ class SharedClipActions(AbstractAction):
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
+        clip_id : str | None, optional, default=None
             The clip id
-        limit : int, optional, by default 10
+        limit : int, optional, default=10
             The number of notes to get
-        since_id : str | None, optional, by default None
+        since_id : str | None, optional, default=None
             The note id to get notes after
-        until_id : str | None, optional, by default None
+        until_id : str | None, optional, default=None
             The note id to get notes before
 
         Yields
@@ -77,7 +77,7 @@ class SharedClipActions(AbstractAction):
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
+        clip_id : str | None, optional, default=None
             The clip id
         note_id : str
             The note id
@@ -98,7 +98,7 @@ class SharedClipActions(AbstractAction):
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
+        clip_id : str | None, optional, default=None
             The clip id
         note_id : str
             The note id
@@ -119,7 +119,7 @@ class SharedClipActions(AbstractAction):
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
+        clip_id : str | None, optional, default=None
             The clip id
 
         Returns
@@ -145,14 +145,14 @@ class SharedClipActions(AbstractAction):
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
+        clip_id : str | None, optional, default=None
             The clip id
         name : str
             The clip name
         is_public : bool, optional
-            Whether the clip is public, by default None
+            Whether the clip is public, default=None
         description : str, optional
-            The clip description, by default None
+            The clip description, default=None
 
         Returns
         -------
@@ -199,15 +199,15 @@ class ClientClipActions(SharedClipActions):
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
+        clip_id : str | None, optional, default=None
             The clip id
-        limit : int, optional, by default 10
+        limit : int, optional, default=10
             The number of notes to get
-        since_id : str | None, optional, by default None
+        since_id : str | None, optional, default=None
             The note id to get notes after
-        until_id : str | None, optional, by default None
+        until_id : str | None, optional, default=None
             The note id to get notes before
-        get_all : bool, optional, by default False
+        get_all : bool, optional, default=False
             Whether to get all notes
 
         Yields
@@ -228,7 +228,7 @@ class ClientClipActions(SharedClipActions):
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
+        clip_id : str | None, optional, default=None
             The clip id
         note_id : str
             The note id
@@ -248,7 +248,7 @@ class ClientClipActions(SharedClipActions):
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
+        clip_id : str | None, optional, default=None
             The clip id
         note_id : str
             The note id
@@ -268,7 +268,7 @@ class ClientClipActions(SharedClipActions):
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
+        clip_id : str | None, optional, default=None
             The clip id
 
         Returns
@@ -293,14 +293,14 @@ class ClientClipActions(SharedClipActions):
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
+        clip_id : str | None, optional, default=None
             The clip id
         name : str
             The clip name
         is_public : bool, optional
-            Whether the clip is public, by default None
+            Whether the clip is public, default=None
         description : str, optional
-            The clip description, by default None
+            The clip description, default=None
 
         Returns
         -------
@@ -341,9 +341,9 @@ class ClipActions(SharedClipActions):
         name : str
             The clip name
         is_public : bool, optional
-            Whether the clip is public, by default False
+            Whether the clip is public, default=False
         description : str, optional
-            The clip description, by default None
+            The clip description, default=None
 
         Returns
         -------
