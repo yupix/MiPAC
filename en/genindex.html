@@ -445,6 +445,8 @@
 </li>
         <li><a href="index.html#mipac.manager.channel.ChannelManager">ChannelManager (class in mipac.manager.channel)</a>
 </li>
+        <li><a href="index.html#mipac.models.hashtag.TrendHashtag.chart">chart (mipac.models.hashtag.TrendHashtag property)</a>
+</li>
         <li><a href="index.html#mipac.actions.chart.ChartActions">ChartActions (class in mipac.actions.chart)</a>
 </li>
         <li><a href="index.html#mipac.manager.chart.ChartManager">ChartManager (class in mipac.manager.chart)</a>
@@ -965,14 +967,14 @@
           <li><a href="index.html#mipac.actions.drive.files.FileActions.get_files">(mipac.actions.drive.files.FileActions method)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.actions.user.ClientUserActions.get_followers">get_followers() (mipac.actions.user.ClientUserActions method)</a>
 
         <ul>
           <li><a href="index.html#mipac.actions.user.SharedUserActions.get_followers">(mipac.actions.user.SharedUserActions method)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.actions.user.ClientUserActions.get_following">get_following() (mipac.actions.user.ClientUserActions method)</a>
 
         <ul>
@@ -998,6 +1000,8 @@
         <li><a href="index.html#mipac.actions.clip.ClipActions.get_list">get_list() (mipac.actions.clip.ClipActions method)</a>
 
         <ul>
+          <li><a href="index.html#mipac.actions.hashtag.HashtagActions.get_list">(mipac.actions.hashtag.HashtagActions method)</a>
+</li>
           <li><a href="index.html#mipac.actions.invite.InviteActions.get_list">(mipac.actions.invite.InviteActions method)</a>
 </li>
           <li><a href="index.html#mipac.actions.role.RoleActions.get_list">(mipac.actions.role.RoleActions method)</a>
@@ -1043,6 +1047,8 @@
 </li>
         <li><a href="index.html#mipac.actions.note.NoteActions.get_time_line">get_time_line() (mipac.actions.note.NoteActions method)</a>
 </li>
+        <li><a href="index.html#mipac.actions.hashtag.HashtagActions.get_trend">get_trend() (mipac.actions.hashtag.HashtagActions method)</a>
+</li>
         <li><a href="index.html#mipac.actions.role.RoleActions.get_users">get_users() (mipac.actions.role.RoleActions method)</a>
 </li>
         <li><a href="index.html#mipac.types.user.GetFrequentlyRepliedUsersResponse">GetFrequentlyRepliedUsersResponse (class in mipac.types.user)</a>
@@ -1069,8 +1075,14 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.errors.errors.HasChildFilesOrFoldersError">HasChildFilesOrFoldersError (class in mipac.errors.errors)</a>
 </li>
+        <li><a href="index.html#mipac.models.hashtag.Hashtag">Hashtag (class in mipac.models.hashtag)</a>
+</li>
+        <li><a href="index.html#mipac.actions.hashtag.HashtagActions">HashtagActions (class in mipac.actions.hashtag)</a>
+</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="index.html#mipac.manager.hashtag.HashtagManager">HashtagManager (class in mipac.manager.hashtag)</a>
+</li>
         <li><a href="index.html#mipac.models.lite.user.PartialUser.host">host (mipac.models.lite.user.PartialUser property)</a>
 </li>
         <li><a href="index.html#mipac.http.HTTPClient">HTTPClient (class in mipac.http)</a>
@@ -1176,6 +1188,8 @@
         <li><a href="index.html#mipac.types.follow.IFollowRequest">IFollowRequest (class in mipac.types.follow)</a>
 </li>
         <li><a href="index.html#mipac.types.gallery.IGalleryPost">IGalleryPost (class in mipac.types.gallery)</a>
+</li>
+        <li><a href="index.html#mipac.types.hashtag.IHashtag">IHashtag (class in mipac.types.hashtag)</a>
 </li>
         <li><a href="index.html#mipac.types.admin.IIndexStat">IIndexStat (class in mipac.types.admin)</a>
 </li>
@@ -1332,6 +1346,8 @@
         <li><a href="index.html#mipac.errors.errors.IsOwnerError">IsOwnerError (class in mipac.errors.errors)</a>
 </li>
         <li><a href="index.html#mipac.types.admin.ITableStats">ITableStats (class in mipac.types.admin)</a>
+</li>
+        <li><a href="index.html#mipac.types.hashtag.ITrendHashtag">ITrendHashtag (class in mipac.types.hashtag)</a>
 </li>
         <li><a href="index.html#mipac.types.meta.IUpdateMetaBody">IUpdateMetaBody (class in mipac.types.meta)</a>
 </li>
@@ -1776,6 +1792,8 @@
         <li><a href="index.html#mipac.actions.channel.ChannelActions.search">search() (mipac.actions.channel.ChannelActions method)</a>
 
         <ul>
+          <li><a href="index.html#mipac.actions.hashtag.HashtagActions.search">(mipac.actions.hashtag.HashtagActions method)</a>
+</li>
           <li><a href="index.html#mipac.actions.note.NoteActions.search">(mipac.actions.note.NoteActions method)</a>
 </li>
           <li><a href="index.html#mipac.actions.user.UserActions.search">(mipac.actions.user.UserActions method)</a>
@@ -1864,6 +1882,8 @@
 </li>
           <li><a href="index.html#mipac.actions.drive.folders.FolderActions.show">(mipac.actions.drive.folders.FolderActions method)</a>
 </li>
+          <li><a href="index.html#mipac.actions.hashtag.HashtagActions.show">(mipac.actions.hashtag.HashtagActions method)</a>
+</li>
           <li><a href="index.html#mipac.actions.users.list.ClientUserListActions.show">(mipac.actions.users.list.ClientUserListActions method)</a>
 </li>
           <li><a href="index.html#mipac.actions.users.list.SharedUserListActions.show">(mipac.actions.users.list.SharedUserListActions method)</a>
@@ -1899,6 +1919,8 @@
   <h2>T</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="index.html#mipac.models.hashtag.TrendHashtag.tag">tag (mipac.models.hashtag.TrendHashtag property)</a>
+</li>
         <li><a href="index.html#mipac.models.note.Note.tags">tags (mipac.models.note.Note property)</a>
 </li>
         <li><a href="index.html#mipac.models.note.Note.text">text (mipac.models.note.Note property)</a>
@@ -1917,6 +1939,8 @@
           <li><a href="index.html#mipac.actions.note.SharedNoteActions.translate">(mipac.actions.note.SharedNoteActions method)</a>
 </li>
         </ul></li>
+        <li><a href="index.html#mipac.models.hashtag.TrendHashtag">TrendHashtag (class in mipac.models.hashtag)</a>
+</li>
         <li><a href="index.html#mipac.models.note.NoteReaction.type">type (mipac.models.note.NoteReaction property)</a>
 </li>
     </ul></td>
@@ -2054,7 +2078,11 @@
         <li><a href="index.html#mipac.manager.username.UsernameManager">UsernameManager (class in mipac.manager.username)</a>
 </li>
         <li><a href="index.html#mipac.models.channel.Channel.users_count">users_count (mipac.models.channel.Channel property)</a>
+
+        <ul>
+          <li><a href="index.html#mipac.models.hashtag.TrendHashtag.users_count">(mipac.models.hashtag.TrendHashtag property)</a>
 </li>
+        </ul></li>
     </ul></td>
   </tr></table>
 </section>
