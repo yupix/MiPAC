@@ -1037,31 +1037,31 @@
                 "path": "/hashtags/list",
                 "request_body_hash": "94e486046065b88b3864bc95ed283707ab96b7f9f91147e06148406a75086369",
                 "response_body_hash": "2094d4c2bf514341a838d01f1a89477ebd8e2ce1ca04b40374cf60d0d6e4a74c",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/hashtags/search": {
                 "path": "/hashtags/search",
                 "request_body_hash": "74c5456046bdb4aa84b5b15d12b3034eca208232c692d68595c455d5d2963952",
                 "response_body_hash": "b27c6f9999974cc9d2aed6a70c37dba1e70641c4fdf5632bca440a6382106105",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/hashtags/show": {
                 "path": "/hashtags/show",
                 "request_body_hash": "bcb5dbf5529f1fa586775fca5006b1aa723fe5b3fd61243ae776be03ce3897e3",
                 "response_body_hash": "8c8eb54b8e881447ea295ba25d2689a6936f8385f335b531f98fff4b30e31d3e",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/hashtags/trend": {
                 "path": "/hashtags/trend",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "49f1aefa2720add5521ce6999aa347a293810614dc3cc9e88ef986b494ce3684",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/hashtags/users": {
                 "path": "/hashtags/users",
                 "request_body_hash": "709f3bb1ebf5a6ea85eca2694ed80dafc896ffa7a8c8bc46bafe3695e70bb90c",
                 "response_body_hash": "f711c88a06f184d959627953fff320b77c3bcfbb871fe226d61cfacd7b6eb5cd",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/i": {
                 "path": "/i",
@@ -2321,7 +2321,7 @@
         "Hashtag": {
             "name": "Hashtag",
             "hash": "619643560ecb9b56a12db881efff441954be264ba1f41a9d9d20ae46ad2d1dfd",
-            "status": "notSupported"
+            "status": "supported"
         },
         "InviteCode": {
             "name": "InviteCode",

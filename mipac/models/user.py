@@ -40,7 +40,23 @@ if TYPE_CHECKING:
     from mipac.manager.users.list import ClientUserListManager
 
 
-__all__ = ("PartialUser", "Achievement", "MeDetailed")
+__all__ = (
+    "FollowCommon",
+    "Follower",
+    "Following",
+    "Achievement",
+    "UserField",
+    "UserRole",
+    "UserDetailedNotMeOnly",
+    "MeDetailedOnly",
+    "UserDetailedNotMe",
+    "MeDetailed",
+    "packed_user",
+    "UserList",
+    "UserListMembership",
+    "FrequentlyRepliedUser",
+    "CreatedUser",
+)
 
 
 class FollowCommon[FFC: IFederationFollowCommon]:

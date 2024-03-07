@@ -4,7 +4,7 @@
 
 `2024.3.1`
 
-## Supported endpoints (144/368)
+## Supported endpoints (149/368)
 
 - [x] /admin/accounts/create
 - [x] /admin/accounts/delete
@@ -55,6 +55,11 @@
 - [x] /drive/folders/update
 - [x] /following/create
 - [x] /following/delete
+- [x] /hashtags/list
+- [x] /hashtags/search
+- [x] /hashtags/show
+- [x] /hashtags/trend
+- [x] /hashtags/users
 - [x] /invite/delete
 - [x] /emojis
 - [x] /emoji
@@ -192,11 +197,6 @@
 - [ ] /gallery/posts/unlike
 - [ ] /gallery/posts/update
 - [ ] /get-avatar-decorations
-- [ ] /hashtags/list
-- [ ] /hashtags/search
-- [ ] /hashtags/show
-- [ ] /hashtags/trend
-- [ ] /hashtags/users
 - [ ] /i/claim-achievement
 - [ ] /i/favorites
 - [ ] /i/gallery/likes
@@ -410,7 +410,7 @@
 - [ ] Muting
 - [ ] RenoteMuting
 - [ ] Blocking
-- [ ] Hashtag
+- [x] Hashtag
 - [x] InviteCode
 - [ ] Page
 - [x] Channel
