@@ -133,13 +133,13 @@ class SharedAntennaActions(AbstractAction):
             アンテナのID
         limit : int, optional
             一度に取得する件数, default=10
-        since_id : str | None
+        since_id : str | None, optional
             指定したIDのノートより後のノートを取得します, default=None
-        until_id : str | None
+        until_id : str | None, optional
             指定したIDのノートより前のノートを取得します, default=None
-        since_date : str | None
+        since_date : str | None, optional
             指定した日付のノートより後のノートを取得します, default=None
-        until_date : str | None
+        until_date : str | None, optional
             指定した日付のノートより前のノートを取得します, default=None
 
         Yields
@@ -356,20 +356,20 @@ class ClientAntennaActions(SharedAntennaActions):
         ----------
         limit : int, optional
             一度に取得する件数, default=10
-        since_id : str | None
+        since_id : str | None, optional
             指定したIDのノートより後のノートを取得します, default=None
-        until_id : str | None
+        until_id : str | None, optional
             指定したIDのノートより前のノートを取得します, default=None
-        since_date : str | None
+        since_date : str | None, optional
             指定した日付のノートより後のノートを取得します, default=None
-        until_date : str | None
+        until_date : str | None, optional
             指定した日付のノートより前のノートを取得します, default=None
-        antenna_id : str
-            アンテナのID
+        antenna_id : str | None, optional
+            アンテナのID, default=None
 
         Yields
         ------
-        Iterator[AsyncGenerator[Note, None]]
+        AsyncGenerator[Note, None]
             取得したノートのリスト
         """
         antenna_id = antenna_id or self.__antenna_id
@@ -464,7 +464,7 @@ class AntennaActions(SharedAntennaActions):
     ) -> Antenna:
         """Create an antenna.
 
-        Endpoint: /api/antennas/create
+        Endpoint: `/api/antennas/create`
 
         Parameters
         ----------
