@@ -3140,6 +3140,15 @@ CannotReplyToAnInvisibleNoteError
     :members:
 
 
+CannotReplyToSpecifiedVisibilityNoteWithExtendedVisibilityError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.CannotReplyToSpecifiedVisibilityNoteWithExtendedVisibilityError
+
+.. autoclass:: mipac.errors.errors.CannotReplyToSpecifiedVisibilityNoteWithExtendedVisibilityError
+    :members:
+
+
 CannotReportTheAdminError
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3155,6 +3164,24 @@ CannotReportYourselfError
 .. attributetable:: mipac.errors.errors.CannotReportYourselfError
 
 .. autoclass:: mipac.errors.errors.CannotReportYourselfError
+    :members:
+
+
+ContainsProhibitedWordsError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ContainsProhibitedWordsError
+
+.. autoclass:: mipac.errors.errors.ContainsProhibitedWordsError
+    :members:
+
+
+ContainsTooManyMentionsError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ContainsTooManyMentionsError
+
+.. autoclass:: mipac.errors.errors.ContainsTooManyMentionsError
     :members:
 
 
@@ -3389,6 +3416,15 @@ InvalidUrlError
 .. attributetable:: mipac.errors.errors.InvalidUrlError
 
 .. autoclass:: mipac.errors.errors.InvalidUrlError
+    :members:
+
+
+IsRemoteUserError
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.IsRemoteUserError
+
+.. autoclass:: mipac.errors.errors.IsRemoteUserError
     :members:
 
 
