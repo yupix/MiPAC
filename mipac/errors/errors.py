@@ -117,6 +117,10 @@ class CannotReplyToAPureRenoteError(APIError):
     """You can not reply to a pure Renote."""
 
 
+class CannotReplyToSpecifiedVisibilityNoteWithExtendedVisibilityError(APIError):
+    """You cannot reply to a specified visibility note with extended visibility."""
+
+
 class CannotReportTheAdminError(APIError):
     """Cannot report the admin."""
 
@@ -127,6 +131,14 @@ class CannotReportYourselfError(APIError):
 
 class CanNotDeleteInviteCodeError(APIError):
     """You can't delete this invite code."""
+
+
+class ContainsProhibitedWordsError(APIError):
+    """Cannot post because it contains prohibited words."""
+
+
+class ContainsTooManyMentionsError(APIError):
+    """Cannot post because it exceeds the allowed number of mentions."""
 
 
 class CredentialRequiredError(APIError):
@@ -227,6 +239,10 @@ class InvalidSeedError(APIError):
 
 class InvalidUrlError(APIError):
     """Invalid URL"""
+
+
+class IsRemoteUserError(APIError):
+    """Currently unavailable to display reactions of remote users. See https://github.com/misskey-dev/misskey/issues/12964"""
 
 
 class IAmAiError(APIError):
