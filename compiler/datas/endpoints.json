@@ -815,13 +815,13 @@
                 "path": "/drive/folders",
                 "request_body_hash": "c7994546f15ac56e6d47b2c9513c720ffb05b146e2c58f4d5f8b7cdd1fa5fe27",
                 "response_body_hash": "05c56769de07a802e8ac7956c76ec95c025fd4ef2445500a18afdca430fca406",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/folders/create": {
                 "path": "/drive/folders/create",
                 "request_body_hash": "9c570cb675f851abf3624e608486d98f75932447e983524d8a2fef010a832c4e",
                 "response_body_hash": "65943f2e45eac25dbbd3acd9ba9249b2b5a83176797b863389a1932cdd5b94f8",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/folders/delete": {
                 "path": "/drive/folders/delete",
@@ -833,19 +833,19 @@
                 "path": "/drive/folders/find",
                 "request_body_hash": "f2f302ec5a018e252ce013efab000ef654223cdbd470afb2aee18e1fd0e6865b",
                 "response_body_hash": "05c56769de07a802e8ac7956c76ec95c025fd4ef2445500a18afdca430fca406",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/folders/show": {
                 "path": "/drive/folders/show",
                 "request_body_hash": "7ddbf084df376fe1ced074c9454678879e8908a99fe0432fb2abaadfa597afec",
                 "response_body_hash": "5ab07c4af0d6e1e2bbcb44f5e15fae98ce7b37a16583f3a2ebe85eeafd0406ae",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/folders/update": {
                 "path": "/drive/folders/update",
                 "request_body_hash": "6b715c2e3d185c4928e6c5f3f714570d9ccc1dbb7880c528f72290d760fa303f",
                 "response_body_hash": "479f18df687ff202504b1964269dedd1ec139c927c446d544809be0645a43042",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/drive/stream": {
                 "path": "/drive/stream",
@@ -1037,31 +1037,31 @@
                 "path": "/hashtags/list",
                 "request_body_hash": "94e486046065b88b3864bc95ed283707ab96b7f9f91147e06148406a75086369",
                 "response_body_hash": "2094d4c2bf514341a838d01f1a89477ebd8e2ce1ca04b40374cf60d0d6e4a74c",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/hashtags/search": {
                 "path": "/hashtags/search",
                 "request_body_hash": "74c5456046bdb4aa84b5b15d12b3034eca208232c692d68595c455d5d2963952",
                 "response_body_hash": "b27c6f9999974cc9d2aed6a70c37dba1e70641c4fdf5632bca440a6382106105",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/hashtags/show": {
                 "path": "/hashtags/show",
                 "request_body_hash": "bcb5dbf5529f1fa586775fca5006b1aa723fe5b3fd61243ae776be03ce3897e3",
                 "response_body_hash": "8c8eb54b8e881447ea295ba25d2689a6936f8385f335b531f98fff4b30e31d3e",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/hashtags/trend": {
                 "path": "/hashtags/trend",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "49f1aefa2720add5521ce6999aa347a293810614dc3cc9e88ef986b494ce3684",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/hashtags/users": {
                 "path": "/hashtags/users",
                 "request_body_hash": "709f3bb1ebf5a6ea85eca2694ed80dafc896ffa7a8c8bc46bafe3695e70bb90c",
                 "response_body_hash": "f711c88a06f184d959627953fff320b77c3bcfbb871fe226d61cfacd7b6eb5cd",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/i": {
                 "path": "/i",
@@ -2321,7 +2321,7 @@
         "Hashtag": {
             "name": "Hashtag",
             "hash": "619643560ecb9b56a12db881efff441954be264ba1f41a9d9d20ae46ad2d1dfd",
-            "status": "notSupported"
+            "status": "supported"
         },
         "InviteCode": {
             "name": "InviteCode",

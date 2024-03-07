@@ -4,7 +4,7 @@
 
 `2024.3.1`
 
-## Supported endpoints (144/368)
+## Supported endpoints (149/368)
 
 - [x] /admin/accounts/create
 - [x] /admin/accounts/delete
@@ -47,9 +47,19 @@
 - [x] /drive/files/show
 - [x] /drive/files/update
 - [x] /drive/files/upload-from-url
+- [x] /drive/folders
+- [x] /drive/folders/create
 - [x] /drive/folders/delete
+- [x] /drive/folders/find
+- [x] /drive/folders/show
+- [x] /drive/folders/update
 - [x] /following/create
 - [x] /following/delete
+- [x] /hashtags/list
+- [x] /hashtags/search
+- [x] /hashtags/show
+- [x] /hashtags/trend
+- [x] /hashtags/users
 - [x] /invite/delete
 - [x] /emojis
 - [x] /emoji
@@ -187,11 +197,6 @@
 - [ ] /gallery/posts/unlike
 - [ ] /gallery/posts/update
 - [ ] /get-avatar-decorations
-- [ ] /hashtags/list
-- [ ] /hashtags/search
-- [ ] /hashtags/show
-- [ ] /hashtags/trend
-- [ ] /hashtags/users
 - [ ] /i/claim-achievement
 - [ ] /i/favorites
 - [ ] /i/gallery/likes
@@ -312,11 +317,6 @@
 - [ ] /admin/roles/show (Need to work)
 - [ ] /admin/roles/users (Need to work)
 - [ ] /drive (Need to work)
-- [ ] /drive/folders (Need to work)
-- [ ] /drive/folders/create (Need to work)
-- [ ] /drive/folders/find (Need to work)
-- [ ] /drive/folders/show (Need to work)
-- [ ] /drive/folders/update (Need to work)
 - [ ] /drive/stream (Need to work)
 - [ ] /endpoint (Need to work)
 - [ ] /federation/instances (Need to work)
@@ -410,7 +410,7 @@
 - [ ] Muting
 - [ ] RenoteMuting
 - [ ] Blocking
-- [ ] Hashtag
+- [x] Hashtag
 - [x] InviteCode
 - [ ] Page
 - [x] Channel
