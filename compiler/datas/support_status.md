@@ -47,7 +47,12 @@
 - [x] /drive/files/show
 - [x] /drive/files/update
 - [x] /drive/files/upload-from-url
+- [x] /drive/folders
+- [x] /drive/folders/create
 - [x] /drive/folders/delete
+- [x] /drive/folders/find
+- [x] /drive/folders/show
+- [x] /drive/folders/update
 - [x] /following/create
 - [x] /following/delete
 - [x] /invite/delete
@@ -312,11 +317,6 @@
 - [ ] /admin/roles/show (Need to work)
 - [ ] /admin/roles/users (Need to work)
 - [ ] /drive (Need to work)
-- [ ] /drive/folders (Need to work)
-- [ ] /drive/folders/create (Need to work)
-- [ ] /drive/folders/find (Need to work)
-- [ ] /drive/folders/show (Need to work)
-- [ ] /drive/folders/update (Need to work)
 - [ ] /drive/stream (Need to work)
 - [ ] /endpoint (Need to work)
 - [ ] /federation/instances (Need to work)
