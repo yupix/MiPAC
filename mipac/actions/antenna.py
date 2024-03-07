@@ -22,8 +22,9 @@ class SharedAntennaActions(AbstractAction):
         self._client: ClientManager = client
 
     async def delete(self, *, antenna_id: str) -> bool:
-        """
-        Delete antenna from identifier
+        """Delete antenna from identifier
+
+        Endpoint: `/api/antennas/delete`
 
         Parameters
         ----------
@@ -43,6 +44,8 @@ class SharedAntennaActions(AbstractAction):
 
     async def show(self, *, antenna_id: str) -> Antenna:
         """Show antenna from identifier
+
+        Endpoint: `/api/antennas/show`
 
         Parameters
         ----------
@@ -70,6 +73,30 @@ class SharedAntennaActions(AbstractAction):
         *,
         antenna_id: str,
     ) -> list[Note]:
+        """ノートを取得します
+
+        Endpoint: `/api/antennas/notes`
+
+        Parameters
+        ----------
+        antenna_id : str
+            アンテナのID
+        limit : int, optional
+            一度に取得する件数, default=10
+        since_id : str | None
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : str | None
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : str | None
+            指定した日付のノートより前のノートを取得します, default=None
+
+        Returns
+        -------
+        list[Note]
+            取得したノートのリスト
+        """
         body = remove_dict_empty(
             {
                 "antennaId": antenna_id,
@@ -96,6 +123,30 @@ class SharedAntennaActions(AbstractAction):
         *,
         antenna_id: str,
     ) -> AsyncGenerator[Note, None]:
+        """すべてのノートを取得します
+
+        Endpoint: `/api/antennas/notes`
+
+        Parameters
+        ----------
+        antenna_id : str
+            アンテナのID
+        limit : int, optional
+            一度に取得する件数, default=10
+        since_id : str | None, optional
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None, optional
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : str | None, optional
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : str | None, optional
+            指定した日付のノートより前のノートを取得します, default=None
+
+        Yields
+        ------
+        Iterator[AsyncGenerator[Note, None]]
+            取得したノートのリスト
+        """
         body = remove_dict_empty(
             {
                 "antennaId": antenna_id,
@@ -132,6 +183,8 @@ class SharedAntennaActions(AbstractAction):
         antenna_id: str,
     ) -> Antenna:
         """Update an antenna.
+
+        Endpoint: `/api/antennas/update`
 
         Parameters
         ----------
@@ -200,8 +253,9 @@ class ClientAntennaActions(SharedAntennaActions):
 
     @override
     async def delete(self, *, antenna_id: str | None = None) -> bool:
-        """
-        Delete antenna from identifier
+        """Delete antenna from identifier
+
+        Endpoint: `/api/antennas/delete`
 
         Parameters
         ----------
@@ -220,6 +274,8 @@ class ClientAntennaActions(SharedAntennaActions):
     @override
     async def show(self, *, antenna_id: str | None = None) -> Antenna:
         """Show antenna from identifier
+
+        Endpoint: `/api/antennas/show`
 
         Parameters
         ----------
@@ -246,6 +302,30 @@ class ClientAntennaActions(SharedAntennaActions):
         *,
         antenna_id: str | None = None,
     ) -> list[Note]:
+        """ノートを取得します
+
+        Endpoint: `/api/antennas/notes`
+
+        Parameters
+        ----------
+        limit : int, optional
+            一度に取得する件数, default=10
+        since_id : str | None, optional
+            指定したIDのノートより後のノートを取得します, by default None
+        until_id : str | None, optional
+            指定したIDのノートより前のノートを取得します, by default None
+        since_date : str | None, optional
+            指定した日付のノートより後のノートを取得します, by default None
+        until_date : str | None, optional
+            指定した日付のノートより前のノートを取得します, by default None
+        antenna_id : str | None, optional
+            アンテナのID, by default None
+
+        Returns
+        -------
+        list[Note]
+            取得したノートのリスト
+        """
         antenna_id = antenna_id or self.__antenna_id
 
         return await super().get_notes(
@@ -268,6 +348,30 @@ class ClientAntennaActions(SharedAntennaActions):
         *,
         antenna_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
+        """すべてのノートを取得します
+
+        Endpoint: `/api/antennas/notes`
+
+        Parameters
+        ----------
+        limit : int, optional
+            一度に取得する件数, default=10
+        since_id : str | None, optional
+            指定したIDのノートより後のノートを取得します, default=None
+        until_id : str | None, optional
+            指定したIDのノートより前のノートを取得します, default=None
+        since_date : str | None, optional
+            指定した日付のノートより後のノートを取得します, default=None
+        until_date : str | None, optional
+            指定した日付のノートより前のノートを取得します, default=None
+        antenna_id : str | None, optional
+            アンテナのID, default=None
+
+        Yields
+        ------
+        AsyncGenerator[Note, None]
+            取得したノートのリスト
+        """
         antenna_id = antenna_id or self.__antenna_id
 
         async for i in super().get_all_notes(
@@ -292,6 +396,8 @@ class ClientAntennaActions(SharedAntennaActions):
         antenna_id: str | None = None,
     ) -> Antenna:
         """Update an antenna.
+
+        Endpoint: `/api/antennas/update`
 
         Parameters
         ----------
@@ -357,6 +463,8 @@ class AntennaActions(SharedAntennaActions):
         user_list_id: str | None = None,
     ) -> Antenna:
         """Create an antenna.
+
+        Endpoint: `/api/antennas/create`
 
         Parameters
         ----------
@@ -427,6 +535,15 @@ class AntennaActions(SharedAntennaActions):
         return Antenna(res_antenna, client=self._client)
 
     async def get_list(self) -> list[Antenna]:
+        """アンテナの一覧を取得します
+
+        Endpoint: `/api/antennas/list`
+
+        Returns
+        -------
+        list[Antenna]
+            アンテナのリスト
+        """
         res_antennas: list[IAntenna] = await self._session.request(
             Route("POST", "/api/antennas/list"), auth=True
         )

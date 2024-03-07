@@ -73,13 +73,13 @@ class RoleActions(AbstractAction):
         role_id : str
             The ID of the role to get users.
         since_id : str, optional
-            The ID of the user to get users after, by default None
+            The ID of the user to get users after, default=None
         until_id : str, optional
-            The ID of the user to get users before, by default None
+            The ID of the user to get users before, default=None
         limit : int, optional
-            The number of users to get, by default 10
+            The number of users to get, default=10
         get_all : bool, optional
-            Whether to get all users, by default False
+            Whether to get all users, default=False
 
         Yields
         ------
@@ -125,17 +125,17 @@ class RoleActions(AbstractAction):
         role_id : str
             The ID of the role to get notes.
         limit : int, optional
-            The number of notes to get, by default 10
+            The number of notes to get, default=10
         since_id : str, optional
-            The ID of the note to get notes after, by default None
+            The ID of the note to get notes after, default=None
         until_id : str, optional
-            The ID of the note to get notes before, by default None
+            The ID of the note to get notes before, default=None
         since_data : int, optional
-            The timestamp of the note to get notes after, by default None
+            The timestamp of the note to get notes after, default=None
         until_data : int, optional
-            The timestamp of the note to get notes before, by default None
+            The timestamp of the note to get notes before, default=None
         get_all : bool, optional
-            Whether to get all notes, by default False
+            Whether to get all notes, default=False
 
         Yields
         ------
