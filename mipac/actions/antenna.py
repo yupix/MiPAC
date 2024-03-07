@@ -82,7 +82,7 @@ class SharedAntennaActions(AbstractAction):
         antenna_id : str
             アンテナのID
         limit : int, optional
-            一度に取得する件数, by default 10
+            一度に取得する件数, default=10
         since_id : str | None
             指定したIDのノートより後のノートを取得します, default=None
         until_id : str | None
@@ -309,7 +309,7 @@ class ClientAntennaActions(SharedAntennaActions):
         Parameters
         ----------
         limit : int, optional
-            一度に取得する件数, by default 10
+            一度に取得する件数, default=10
         since_id : str | None, optional
             指定したIDのノートより後のノートを取得します, by default None
         until_id : str | None, optional
