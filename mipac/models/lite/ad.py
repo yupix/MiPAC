@@ -19,10 +19,24 @@ class PartialAd[T: IPartialAd]:
 
     @property
     def id(self) -> str:
+        """広告のID
+
+        Returns
+        -------
+        str
+            広告のID
+        """
         return self._raw_ad["id"]
 
     @property
     def url(self) -> str:
+        """広告のURL
+
+        Returns
+        -------
+        str
+            広告のURL
+        """
         return self._raw_ad["url"]
 
     @property
