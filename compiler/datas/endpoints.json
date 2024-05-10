@@ -29,7 +29,7 @@
                 "path": "/admin/ad/delete",
                 "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
                 "response_body_hash": "8a4c5615e979ae63fc8f52e891b84bc4a51104b72d0534a4e42da0b830e66f6c",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/ad/list": {
                 "path": "/admin/ad/list",
@@ -41,7 +41,7 @@
                 "path": "/admin/ad/update",
                 "request_body_hash": "dfb711cee3e9a3ed83e16f5aa69cfbdd62c37c4dc4eefbc3ce3583ff830b6097",
                 "response_body_hash": "bf3dcbf5d0f19fa1102b7efc8947170c2292180d72b1188152338f42706edeb9",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/announcements/create": {
                 "path": "/admin/announcements/create",

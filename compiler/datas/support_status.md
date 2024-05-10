@@ -4,12 +4,14 @@
 
 `2024.3.1`
 
-## Supported endpoints (149/368)
+## Supported endpoints (151/368)
 
 - [x] /admin/accounts/create
 - [x] /admin/accounts/delete
 - [x] /admin/ad/create
+- [x] /admin/ad/delete
 - [x] /admin/ad/list
+- [x] /admin/ad/update
 - [x] /admin/drive/clean-remote-files
 - [x] /admin/drive/cleanup
 - [x] /admin/drive/files
@@ -88,8 +90,6 @@
 ## Not supported endpoints
 
 - [ ] /admin/abuse-user-reports
-- [ ] /admin/ad/delete
-- [ ] /admin/ad/update
 - [ ] /admin/announcements/create
 - [ ] /admin/announcements/delete
 - [ ] /admin/announcements/list
