@@ -62,6 +62,26 @@ class DeprecatedClass:
         return Wrapped
 
 
+def check_char_length_least(char: str | list[str], length: int) -> bool:
+    """指定した文字列の長さが指定した長さ以上かをboolで返します
+
+    Parameters
+    ----------
+    char : str | list[str]
+        確認したい文字列
+    length : int
+        指定した長さ
+
+    Returns
+    -------
+    bool
+        指定した長さ以上の場合はTrue, それ以外はFalse
+    """
+    if isinstance(char, str):
+        return len(char) >= length
+    return all(len(i) >= length for i in char)
+
+
 def deprecated(func):
     """指定した関数が非推奨であることを示す為のデコレータ"""
 
