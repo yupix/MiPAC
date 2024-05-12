@@ -47,13 +47,13 @@
                 "path": "/admin/announcements/create",
                 "request_body_hash": "30a3fa44f6fa2ccff55c827b474567ea4616e5a95bf7910c5adba04b338c9380",
                 "response_body_hash": "ce1d7028219c7b4f65c53f49a59ee93a927f42b4a67d88fd946548800fbfe673",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/announcements/delete": {
                 "path": "/admin/announcements/delete",
                 "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
                 "response_body_hash": "dec257babf6b429ef5d7b5101d4f5892f0fd6d562294bf65f522fff42a3ba0ef",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/announcements/list": {
                 "path": "/admin/announcements/list",
@@ -65,7 +65,7 @@
                 "path": "/admin/announcements/update",
                 "request_body_hash": "e1f20f358947ce703f94e84a714bedea3a4f3735bc461a04ce2285251610cf48",
                 "response_body_hash": "3f16c78ba027db00c082f201279056ad3f787ce1b754e435044d4c8f67e11c0f",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/avatar-decorations/create": {
                 "path": "/admin/avatar-decorations/create",
