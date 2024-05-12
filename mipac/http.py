@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import json
 import logging
-import re
 import sys
 from typing import Any, Literal
+import urllib.parse
 
 import aiohttp
 
@@ -71,18 +71,20 @@ class HTTPClient:
         user_agent = (
             "Misskey Bot (https://github.com/yupix/MiPA {0})" + "Python/{1[0]}.{1[1]} aiohttp/{2}"
         )
-        self._url: str = url
+        parsed_url = urllib.parse.urlparse(url)
+
+        if parsed_url.scheme not in ["http", "https"] or parsed_url.netloc is None:
+            raise Exception("Server URL cannot be retrieved or protocol (http / https) is missing")
+
+        protocol = True if parsed_url.scheme == "https" else False
+
         self._token: str | None = token
         self.user_agent = user_agent.format(__version__, sys.version_info, aiohttp.__version__)
         self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
 
-        match_domain = re.search(r"https?:\/\/([^\/]+)", self._url)
-        match_protocol = re.search(r"^(http|https)", self._url)
-        if match_domain is None or match_protocol is None:
-            raise Exception("Server URL cannot be retrieved or protocol (http / https) is missing")
-        protocol = True if match_protocol.group(1) == "https" else False
+        self._url = f"{parsed_url.scheme}://{parsed_url.netloc}"
         config.from_dict(
-            host=match_domain.group(1),
+            host=parsed_url.netloc,
             is_ssl=protocol,
         )
 
