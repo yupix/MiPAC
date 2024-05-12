@@ -7435,18 +7435,124 @@ async</span><a class="reference internal" href="#mipac.actions.admins.roles.Admi
 </section>
 <section id="clientadminannouncementactions">
 <h3>ClientAdminAnnouncementActions<a class="headerlink" href="#clientadminannouncementactions" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete">delete</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update">update</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.announcement.</span></span><span class="sig-name descname"><span class="pre">ClientAdminAnnouncementActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete" title="Link to this definition">¶</a></dt>
+<dd><p>指定したお知らせを削除します</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>announce_id</strong> (<em>str</em>) – 削除したいお知らせのID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>削除に成功した場合はTrue, それ以外はFalse</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'info'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'wanirng'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'error'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'success'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'dialog'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'normal'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'banner'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">for_existing_users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">need_confirmation_to_read</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update" title="Link to this definition">¶</a></dt>
+<dd><p>指定したお知らせを更新します</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>) – お知らせのタイトル</p></li>
+<li><p><strong>text</strong> (<em>str</em>) – お知らせの本文</p></li>
+<li><p><strong>image_url</strong> (<em>str</em><em>, </em><em>optional</em>) – お知らせの画像URL, by default None</p></li>
+<li><p><strong>icon</strong> (<em>AnnoucementIcon</em><em>, </em><em>optional</em>) – お知らせのアイコン, by default MISSING</p></li>
+<li><p><strong>display</strong> (<em>AnnouncementDisplay</em><em>, </em><em>optional</em>) – お知らせの表示方法, by default MISSING</p></li>
+<li><p><strong>for_existing_users</strong> (<em>bool</em><em>, </em><em>optional</em>) – 既存ユーザーに表示するか, by default MISSING</p></li>
+<li><p><strong>silence</strong> (<em>bool</em><em>, </em><em>optional</em>) – お知らせを静かにするか, by default MISSING</p></li>
+<li><p><strong>need_confirmation_to_read</strong> (<em>bool</em><em>, </em><em>optional</em>) – 読んだか確認が必要か, by default MISSING</p></li>
+<li><p><strong>is_active</strong> (<em>bool</em><em>, </em><em>optional</em>) – お知らせが有効かどうか, by default MISSING</p></li>
+<li><p><strong>announce_id</strong> (<em>str</em>) – 更新したいお知らせのID</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>更新に成功した場合はTrue, それ以外はFalse</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="sharedadminannouncementactions">
 <h3>SharedAdminAnnouncementActions<a class="headerlink" href="#sharedadminannouncementactions" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.announcement.SharedAdminAnnouncementActions"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.announcement.SharedAdminAnnouncementActions"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete">delete</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update">update</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.admins.announcement.SharedAdminAnnouncementActions">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.announcement.</span></span><span class="sig-name descname"><span class="pre">SharedAdminAnnouncementActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.announcement.SharedAdminAnnouncementActions" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete" title="Link to this definition">¶</a></dt>
+<dd><p>指定したお知らせを削除します</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>announce_id</strong> (<em>str</em>) – 削除したいお知らせのID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>削除に成功した場合はTrue, それ以外はFalse</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'info'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'wanirng'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'error'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'success'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'dialog'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'normal'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'banner'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">for_existing_users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">need_confirmation_to_read</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update" title="Link to this definition">¶</a></dt>
+<dd><p>指定したお知らせを更新します</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>) – お知らせのタイトル</p></li>
+<li><p><strong>text</strong> (<em>str</em>) – お知らせの本文</p></li>
+<li><p><strong>image_url</strong> (<em>str</em><em>, </em><em>optional</em>) – お知らせの画像URL, by default None</p></li>
+<li><p><strong>icon</strong> (<em>AnnoucementIcon</em><em>, </em><em>optional</em>) – お知らせのアイコン, by default MISSING</p></li>
+<li><p><strong>display</strong> (<em>AnnouncementDisplay</em><em>, </em><em>optional</em>) – お知らせの表示方法, by default MISSING</p></li>
+<li><p><strong>for_existing_users</strong> (<em>bool</em><em>, </em><em>optional</em>) – 既存ユーザーに表示するか, by default MISSING</p></li>
+<li><p><strong>silence</strong> (<em>bool</em><em>, </em><em>optional</em>) – お知らせを静かにするか, by default MISSING</p></li>
+<li><p><strong>need_confirmation_to_read</strong> (<em>bool</em><em>, </em><em>optional</em>) – 読んだか確認が必要か, by default MISSING</p></li>
+<li><p><strong>is_active</strong> (<em>bool</em><em>, </em><em>optional</em>) – お知らせが有効かどうか, by default MISSING</p></li>
+<li><p><strong>announce_id</strong> (<em>str</em>) – 更新したいお知らせのID</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>更新に成功した場合はTrue, それ以外はFalse</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="adminactions">
@@ -11941,6 +12047,29 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 </dd></dl>
 
 </section>
+<section id="check-char-length-least">
+<h3>check_char_length_least<a class="headerlink" href="#check-char-length-least" title="Link to this heading">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="mipac.utils.util.check_char_length_least">
+<span class="sig-prename descclassname"><span class="pre">mipac.utils.util.</span></span><span class="sig-name descname"><span class="pre">check_char_length_least</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">char</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.utils.util.check_char_length_least" title="Link to this definition">¶</a></dt>
+<dd><p>指定した文字列の長さが指定した長さ以上かをboolで返します</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>char</strong> (<em>str</em><em> | </em><em>list</em><em>[</em><em>str</em><em>]</em>) – 確認したい文字列</p></li>
+<li><p><strong>length</strong> (<em>int</em>) – 指定した長さ</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>指定した長さ以上の場合はTrue, それ以外はFalse</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="check-multi-arg">
 <h3>check_multi_arg<a class="headerlink" href="#check-multi-arg" title="Link to this heading">¶</a></h3>
 <dl class="py function">
@@ -13229,11 +13358,19 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 </ul>
 </li>
 <li><a class="reference internal" href="#clientadminannouncementactions">ClientAdminAnnouncementActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions"><code class="docutils literal notranslate"><span class="pre">ClientAdminAnnouncementActions</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions"><code class="docutils literal notranslate"><span class="pre">ClientAdminAnnouncementActions</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete"><code class="docutils literal notranslate"><span class="pre">ClientAdminAnnouncementActions.delete()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update"><code class="docutils literal notranslate"><span class="pre">ClientAdminAnnouncementActions.update()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#sharedadminannouncementactions">SharedAdminAnnouncementActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.announcement.SharedAdminAnnouncementActions"><code class="docutils literal notranslate"><span class="pre">SharedAdminAnnouncementActions</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.announcement.SharedAdminAnnouncementActions"><code class="docutils literal notranslate"><span class="pre">SharedAdminAnnouncementActions</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete"><code class="docutils literal notranslate"><span class="pre">SharedAdminAnnouncementActions.delete()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update"><code class="docutils literal notranslate"><span class="pre">SharedAdminAnnouncementActions.update()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#adminactions">AdminActions</a><ul>
@@ -14549,6 +14686,10 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 <li><a class="reference internal" href="#mipac.utils.pagination.Pagination.next"><code class="docutils literal notranslate"><span class="pre">Pagination.next()</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#check-char-length-least">check_char_length_least</a><ul>
+<li><a class="reference internal" href="#mipac.utils.util.check_char_length_least"><code class="docutils literal notranslate"><span class="pre">check_char_length_least()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#check-multi-arg">check_multi_arg</a><ul>

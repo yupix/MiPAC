@@ -4281,6 +4281,12 @@ Pagination
     :members:
 
 
+check_char_length_least
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: mipac.utils.util.check_char_length_least
+
+
 check_multi_arg
 ~~~~~~~~~~~~~~~
 
