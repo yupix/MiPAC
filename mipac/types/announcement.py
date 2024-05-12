@@ -1,7 +1,7 @@
 from typing import Literal, NotRequired, TypedDict
 
 AnnoucementIcon = Literal["info", "wanirng", "error", "success"]
-AnnoucementDisplay = Literal["dialog", "normal", "banner"]
+AnnouncementDisplay = Literal["dialog", "normal", "banner"]
 
 
 class IAnnouncement(TypedDict):
@@ -12,7 +12,7 @@ class IAnnouncement(TypedDict):
     title: str
     image_url: str | None
     icon: AnnoucementIcon
-    display: AnnoucementDisplay
+    display: AnnouncementDisplay
     need_confirmation_to_read: bool
     silence: bool
     for_you: bool
@@ -29,7 +29,7 @@ class IAnnouncementDetailed(TypedDict):
     title: str
     image_url: str | None
     icon: AnnoucementIcon
-    display: AnnoucementDisplay
+    display: AnnouncementDisplay
     need_confirmation_to_read: bool
     silence: bool
 

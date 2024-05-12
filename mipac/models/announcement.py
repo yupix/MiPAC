@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Any
 
 from mipac.types.announcement import (
-    AnnoucementDisplay,
+    AnnouncementDisplay,
     AnnoucementIcon,
     IAnnouncement,
     IAnnouncementDetailed,
@@ -91,7 +91,7 @@ class Announcement:
         return self.__announcement["icon"]
 
     @property
-    def display(self) -> AnnoucementDisplay:
+    def display(self) -> AnnouncementDisplay:
         return self.__announcement["display"]
 
     @property
@@ -146,12 +146,12 @@ class AnnouncementDetailed:
         )
 
     @property
-    def title(self) -> str:
-        return self.__raw_announcement["title"]
-
-    @property
     def text(self) -> str:
         return self.__raw_announcement["text"]
+
+    @property
+    def title(self) -> str:
+        return self.__raw_announcement["title"]
 
     @property
     def image_url(self) -> str | None:
@@ -162,7 +162,7 @@ class AnnouncementDetailed:
         return self.__raw_announcement["icon"]
 
     @property
-    def display(self) -> AnnoucementDisplay:
+    def display(self) -> AnnouncementDisplay:
         return self.__raw_announcement["display"]
 
     @property
