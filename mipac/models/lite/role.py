@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any
 from mipac.types.roles import IPartialRole
 
 if TYPE_CHECKING:
-    from mipac.manager.admins.roles import AdminRolesModelManager
+    from mipac.manager.admins.roles import ClientAdminRoleManager
     from mipac.manager.client import ClientManager
 
 
@@ -47,8 +47,8 @@ class PartialRole[T: IPartialRole]:
         return self._raw_role["display_order"]
 
     @property
-    def api(self) -> AdminRolesModelManager:
-        return self.__client.admin.create_roles_model_manager(self.id)
+    def api(self) -> ClientAdminRoleManager:
+        return self.__client.admin._create_role_model_manager(self.id)
 
     def _get(self, key: str) -> Any | None:
         return self._raw_role.get(key)

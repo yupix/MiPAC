@@ -383,49 +383,49 @@
                 "path": "/admin/roles/delete",
                 "request_body_hash": "f1e8b29b15487ead09234ea7c06fb900cd4a56f76907ff025d55eb2ba96e5ce1",
                 "response_body_hash": "71b65c61c5c44f132273c289122399d5647599a18f1ec6fc6afc7f171167fd88",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/roles/list": {
                 "path": "/admin/roles/list",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "a29e73a8aec4949d55a8b55d8e4fa2a7399dbb81a71831731df51e1519f150f5",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/roles/show": {
                 "path": "/admin/roles/show",
                 "request_body_hash": "f1e8b29b15487ead09234ea7c06fb900cd4a56f76907ff025d55eb2ba96e5ce1",
                 "response_body_hash": "a6e416c46472c8b0d8724047737649572fa2b02742d43313bb986421b3762f74",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/roles/update": {
                 "path": "/admin/roles/update",
                 "request_body_hash": "5a0b48979f607bbd1fae04044a256f6f00f3bb05cf8bf37f07fc9d0fc545191e",
                 "response_body_hash": "82b31d1805b5b4e5d352dc02dc8a966b532db3df7a76519ee01bcbb8f0d802d8",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/roles/assign": {
                 "path": "/admin/roles/assign",
                 "request_body_hash": "f7f3a63bda8c0a2670a08918641f2da445b7facd0cf159352849e07243e8141f",
                 "response_body_hash": "b6a9bfadd555c5023efaec61262e0dd7de6061991691004961cd22523a55bd68",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/roles/unassign": {
                 "path": "/admin/roles/unassign",
                 "request_body_hash": "edc227b6268e5d1a1d78948f2db5b24c648cb4cef9bd75f0898aa27580a5c85c",
                 "response_body_hash": "bc66aa1fb3138ce1a11a6b63af9d5f22cfdf731e228c9c64ae9655581c24f5e6",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/roles/update-default-policies": {
                 "path": "/admin/roles/update-default-policies",
                 "request_body_hash": "5993aa1848dbf1d239b51b5828e8fcad1dbb16ef12d1dd6cf570651f014efc9a",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/roles/users": {
                 "path": "/admin/roles/users",
                 "request_body_hash": "985b8d2726a2e859a58a14d37b694af0e1a8911794cd692dbef09c20d9ba3cde",
                 "response_body_hash": "07c4c4aa9d7d863214274b76fb5258ddeedf9afa99a4196a928aa7cb081f3f8f",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/announcements": {
                 "path": "/announcements",

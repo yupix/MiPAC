@@ -4,7 +4,7 @@
 
 `2024.3.1`
 
-## Supported endpoints (154/368)
+## Supported endpoints (159/368)
 
 - [x] /admin/accounts/create
 - [x] /admin/accounts/delete
@@ -29,6 +29,14 @@
 - [x] /admin/unsuspend-user
 - [x] /admin/update-user-note
 - [x] /admin/roles/create
+- [x] /admin/roles/delete
+- [x] /admin/roles/list
+- [x] /admin/roles/show
+- [x] /admin/roles/update
+- [x] /admin/roles/assign
+- [x] /admin/roles/unassign
+- [x] /admin/roles/update-default-policies
+- [x] /admin/roles/users
 - [x] /channels/create
 - [x] /channels/featured
 - [x] /channels/follow
@@ -128,11 +136,6 @@
 - [ ] /admin/show-user
 - [ ] /admin/show-users
 - [ ] /admin/delete-account
-- [ ] /admin/roles/delete
-- [ ] /admin/roles/update
-- [ ] /admin/roles/assign
-- [ ] /admin/roles/unassign
-- [ ] /admin/roles/update-default-policies
 - [ ] /announcements
 - [ ] /antennas/create
 - [ ] /antennas/delete
@@ -313,9 +316,6 @@
 - [ ] /admin/get-index-stats (Need to work)
 - [ ] /admin/get-table-stats (Need to work)
 - [ ] /admin/update-meta (Need to work)
-- [ ] /admin/roles/list (Need to work)
-- [ ] /admin/roles/show (Need to work)
-- [ ] /admin/roles/users (Need to work)
 - [ ] /drive (Need to work)
 - [ ] /drive/stream (Need to work)
 - [ ] /endpoint (Need to work)

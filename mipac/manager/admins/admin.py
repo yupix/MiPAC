@@ -14,7 +14,7 @@ from mipac.manager.admins.announcement import (
 from mipac.manager.admins.drive import AdminDriveManager
 from mipac.manager.admins.emoji import AdminEmojiManager
 from mipac.manager.admins.invite import AdminInviteManager
-from mipac.manager.admins.roles import AdminRolesManager, AdminRolesModelManager
+from mipac.manager.admins.roles import AdminRoleManager, ClientAdminRoleManager
 from mipac.manager.admins.user import AdminUserManager
 
 if TYPE_CHECKING:
@@ -31,7 +31,7 @@ class AdminManager(AbstractManager):
         self.announcement: AdminAnnouncementManager = AdminAnnouncementManager(
             session=session, client=client
         )
-        self.role: AdminRolesManager = AdminRolesManager(session=session, client=client)
+        self.role: AdminRoleManager = AdminRoleManager(session=session, client=client)
         self.invite: AdminInviteManager = AdminInviteManager(session=session, client=client)
         self.drive: AdminDriveManager = AdminDriveManager(session=session, client=client)
         self.account: AdminAccountManager = AdminAccountManager(session=session, client=client)
@@ -40,8 +40,8 @@ class AdminManager(AbstractManager):
     def action(self) -> AdminActions:
         return AdminActions(session=self.__session, client=self.__client)
 
-    def create_roles_model_manager(self, role_id: str | None = None) -> AdminRolesModelManager:
-        return AdminRolesModelManager(
+    def _create_role_model_manager(self, role_id: str) -> ClientAdminRoleManager:
+        return ClientAdminRoleManager(
             role_id=role_id, session=self.__session, client=self.__client
         )
 
