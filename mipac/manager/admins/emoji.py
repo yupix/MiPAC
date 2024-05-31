@@ -5,7 +5,6 @@ from typing import TYPE_CHECKING
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.admins.emoji import AdminEmojiAction, ClientAdminEmojiAction
 from mipac.http import HTTPClient
-from mipac.manager.client import ClientManager
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager

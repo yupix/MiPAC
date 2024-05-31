@@ -4,7 +4,6 @@ from typing import TYPE_CHECKING, AsyncGenerator, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
-from mipac.manager.client import ClientManager
 from mipac.models.common import ID
 from mipac.models.emoji import EmojiDetailed
 from mipac.types.common import IID

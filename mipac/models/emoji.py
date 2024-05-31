@@ -2,12 +2,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from mipac.manager.admins.emoji import ClientAdminEmojiManager
 from mipac.models.lite.emoji import PartialCustomEmoji
 from mipac.types.emoji import ICustomEmoji, IEmojiDetailed, IEmojiSimple
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
+    from mipac.manager.admins.emoji import ClientAdminEmojiManager
+
 
 __all__ = ("CustomEmoji",)
 
