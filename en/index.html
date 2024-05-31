@@ -2087,7 +2087,8 @@ Attributes</span><ul>
 <div class="py-attribute-table" data-move-to-id="mipac.models.emoji.EmojiSimple"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.emoji.EmojiSimple">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.emoji.</span></span><span class="sig-name descname"><span class="pre">EmojiSimple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_emoji_simple</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.emoji.IEmojiSimple" title="mipac.types.emoji.IEmojiSimple"><span class="pre">IEmojiSimple</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.emoji.EmojiSimple" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Misskeyの <cite>EmojiSimple</cite> を表すクラス</p>
+</dd></dl>
 
 </section>
 <section id="antenna">
@@ -2199,6 +2200,60 @@ Attributes</span><ul>
 <dd class="field-even"><p>bool</p>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="app">
+<h3>App<a class="headerlink" href="#app" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.models.app.App"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.app.App.callback_url">callback_url</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.app.App.id">id</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.app.App.is_authorized">is_authorized</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.app.App.name">name</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.app.App.permission">permission</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.app.App.secret">secret</a></li></ul>
+</div></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.models.app.App">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.app.</span></span><span class="sig-name descname"><span class="pre">App</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.app.IApp" title="mipac.types.app.IApp"><span class="pre">IApp</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.app.App" title="Link to this definition">¶</a></dt>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.app.App.callback_url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback_url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.app.App.callback_url" title="Link to this definition">¶</a></dt>
+<dd><p>The callback url of the app</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.app.App.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.app.App.id" title="Link to this definition">¶</a></dt>
+<dd><p>The id of the app</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.app.App.is_authorized">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_authorized</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.app.App.is_authorized" title="Link to this definition">¶</a></dt>
+<dd><p>If the app is authorized or not</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.app.App.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.app.App.name" title="Link to this definition">¶</a></dt>
+<dd><p>The name of the app</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.app.App.permission">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">permission</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.app.App.permission" title="Link to this definition">¶</a></dt>
+<dd><p>The permissions the app has</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.app.App.secret">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">secret</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.app.App.secret" title="Link to this definition">¶</a></dt>
+<dd><p>The secret of the app</p>
 </dd></dl>
 
 </dd></dl>
@@ -2549,6 +2604,25 @@ Attributes</span><ul>
 <dt class="sig sig-object py" id="mipac.models.invite.InviteLimit">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.invite.</span></span><span class="sig-name descname"><span class="pre">InviteLimit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_invite_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.invite.IInviteLimit" title="mipac.types.invite.IInviteLimit"><span class="pre">IInviteLimit</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.invite.InviteLimit" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</section>
+<section id="id">
+<h3>ID<a class="headerlink" href="#id" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.models.common.ID"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.common.ID.id">id</a></li></ul>
+</div></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.models.common.ID">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.common.</span></span><span class="sig-name descname"><span class="pre">ID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.common.IID" title="mipac.types.common.IID"><span class="pre">IID</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.common.ID" title="Link to this definition">¶</a></dt>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.common.ID.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.common.ID.id" title="Link to this definition">¶</a></dt>
+<dd><p>The id of the object</p>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="federationinstance">
@@ -3427,6 +3501,14 @@ Attributes</span><ul>
 <dd></dd></dl>
 
 </section>
+<section id="appmanager">
+<h3>AppManager<a class="headerlink" href="#appmanager" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.manager.app.AppManager"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.manager.app.AppManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.app.</span></span><span class="sig-name descname"><span class="pre">AppManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.app.AppManager" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="blockingmanager">
 <h3>BlockingManager<a class="headerlink" href="#blockingmanager" title="Link to this heading">¶</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.manager.blocking.BlockingManager"></div><dl class="py class">
@@ -3756,6 +3838,14 @@ Attributes</span><ul>
 <div class="py-attribute-table" data-move-to-id="mipac.manager.admins.emoji.AdminEmojiManager"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.manager.admins.emoji.AdminEmojiManager">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.admins.emoji.</span></span><span class="sig-name descname"><span class="pre">AdminEmojiManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.admins.emoji.AdminEmojiManager" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="clientadminemojimanager">
+<h3>ClientAdminEmojiManager<a class="headerlink" href="#clientadminemojimanager" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.manager.admins.emoji.ClientAdminEmojiManager"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.manager.admins.emoji.ClientAdminEmojiManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.admins.emoji.</span></span><span class="sig-name descname"><span class="pre">ClientAdminEmojiManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.admins.emoji.ClientAdminEmojiManager" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -6240,6 +6330,61 @@ async</span><a class="reference internal" href="#mipac.actions.my.MyActions.get_
 <dt class="sig sig-object py" id="mipac.actions.username.UsernameActions">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.username.</span></span><span class="sig-name descname"><span class="pre">UsernameActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.username.UsernameActions" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</section>
+<section id="appactions">
+<h3>AppActions<a class="headerlink" href="#appactions" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.actions.app.AppActions"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.app.AppActions.create">create</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.app.AppActions.show">show</a></li></ul>
+</div></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.actions.app.AppActions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.app.</span></span><span class="sig-name descname"><span class="pre">AppActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.app.AppActions" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.app.AppActions.create">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.app.App" title="mipac.models.app.App"><span class="pre">App</span></a></span></span><a class="headerlink" href="#mipac.actions.app.AppActions.create" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new app</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the app</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – The description of the app</p></li>
+<li><p><strong>permission</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The permissions the app has</p></li>
+<li><p><strong>callback_url</strong> (<em>str</em><em>, </em><em>optional</em>) – The callback url of the app, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created app</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mipac.models.app.App" title="mipac.models.app.App">App</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.app.AppActions.show">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.app.App" title="mipac.models.app.App"><span class="pre">App</span></a></span></span><a class="headerlink" href="#mipac.actions.app.AppActions.show" title="Link to this definition">¶</a></dt>
+<dd><p>Show an app</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>app_id</strong> (<em>str</em>) – The id of the app</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The app</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mipac.models.app.App" title="mipac.models.app.App">App</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="blockingactions">
@@ -8854,33 +8999,403 @@ async</span><a class="reference internal" href="#mipac.actions.admins.announceme
 <dd></dd></dl>
 
 </section>
-<section id="adminemojiactions">
-<h3>AdminEmojiActions<a class="headerlink" href="#adminemojiactions" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.emoji.AdminEmojiActions"><div class="py-attribute-table-column">
+<section id="adminemojiaction">
+<h3>AdminEmojiAction<a class="headerlink" href="#adminemojiaction" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.emoji.AdminEmojiAction"><div class="py-attribute-table-column">
 <span>
 Methods</span><ul>
 <li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiActions.remove">remove</a></li></ul>
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.add">add</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.add_aliases_bulk">add_aliases_bulk</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.delete_bulk">delete_bulk</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="method">
+def</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_all_list">get_all_list</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="method">
+def</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_all_list_remote">get_all_list_remote</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_list">get_list</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_list_remote">get_list_remote</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.remove_aliases_bulk">remove_aliases_bulk</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.set_aliases_bulk">set_aliases_bulk</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.set_category_bulk">set_category_bulk</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.set_license_bulk">set_license_bulk</a></li></ul>
 </div></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiActions">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.emoji.</span></span><span class="sig-name descname"><span class="pre">AdminEmojiActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiActions" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.emoji.</span></span><span class="sig-name descname"><span class="pre">AdminEmojiAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction" title="Link to this definition">¶</a></dt>
 <dd><dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiActions.remove">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiActions.remove" title="Link to this definition">¶</a></dt>
-<dd><p>指定したIdの絵文字を削除します</p>
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.add">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.emoji.EmojiDetailed" title="mipac.models.emoji.EmojiDetailed"><span class="pre">EmojiDetailed</span></a></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.add" title="Link to this definition">¶</a></dt>
+<dd><p>Add a new emoji</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>emoji_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – 削除する絵文字のId, by default None</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the emoji</p></li>
+<li><p><strong>file_id</strong> (<em>str</em>) – The id of the file</p></li>
+<li><p><strong>category</strong> (<em>str</em><em>, </em><em>optional</em>) – The category of the emoji, by default None</p></li>
+<li><p><strong>aliases</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – The aliases of the emoji, by default None</p></li>
+<li><p><strong>license</strong> (<em>str</em><em>, </em><em>optional</em>) – The license of the emoji, by default None</p></li>
+<li><p><strong>is_sensitive</strong> (<em>bool</em>) – Whether the emoji is sensitive</p></li>
+<li><p><strong>local_only</strong> (<em>bool</em>) – Whether the emoji is local only</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>成功したかどうか</p>
+<dd class="field-even"><p>The added emoji</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mipac.models.emoji.EmojiDetailed" title="mipac.models.emoji.EmojiDetailed">EmojiDetailed</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.add_aliases_bulk">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_aliases_bulk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.add_aliases_bulk" title="Link to this definition">¶</a></dt>
+<dd><p>Add aliases to emojis in bulk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ids</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The ids of the emojis</p></li>
+<li><p><strong>aliases</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The aliases to add</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the operation was successful</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.errors.base.NotExistRequiredData" title="mipac.errors.base.NotExistRequiredData"><strong>NotExistRequiredData</strong></a> – Idが不足している</p>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.delete_bulk">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_bulk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.delete_bulk" title="Link to this definition">¶</a></dt>
+<dd><p>Delete emojis in bulk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ids</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The ids of the emojis</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the operation was successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.get_all_list">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.emoji.EmojiDetailed" title="mipac.models.emoji.EmojiDetailed"><span class="pre">EmojiDetailed</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_all_list" title="Link to this definition">¶</a></dt>
+<dd><p>List all emojis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em><em>, </em><em>optional</em>) – The query to search for, by default None</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – The limit of the emojis to get, by default 10</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – The id to get emojis since, by default None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – The id to get emojis until, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>AsyncGenerator[EmojiDetailed, None]</em> – The emojis</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.get_all_list_remote">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_list_remote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.emoji.EmojiDetailed" title="mipac.models.emoji.EmojiDetailed"><span class="pre">EmojiDetailed</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_all_list_remote" title="Link to this definition">¶</a></dt>
+<dd><p>List remote emojis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em><em>, </em><em>optional</em>) – The query to search for, by default None</p></li>
+<li><p><strong>host</strong> (<em>str</em><em>, </em><em>optional</em>) – The host of the emoji, by default None</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – The limit of the emojis to get, by default 10</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – The id to get emojis since, by default None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – The id to get emojis until, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>AsyncGenerator[EmojiDetailed, None]</em> – The emojis</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.get_list">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.emoji.EmojiDetailed" title="mipac.models.emoji.EmojiDetailed"><span class="pre">EmojiDetailed</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_list" title="Link to this definition">¶</a></dt>
+<dd><p>List emojis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em><em>, </em><em>optional</em>) – The query to search for, by default None</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – The limit of the emojis to get, by default 10</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – The id to get emojis since, by default None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – The id to get emojis until, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The emojis</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.emoji.EmojiDetailed" title="mipac.models.emoji.EmojiDetailed">EmojiDetailed</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.get_list_remote">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_list_remote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.emoji.EmojiDetailed" title="mipac.models.emoji.EmojiDetailed"><span class="pre">EmojiDetailed</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_list_remote" title="Link to this definition">¶</a></dt>
+<dd><p>List remote emojis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em><em>, </em><em>optional</em>) – The query to search for, by default None</p></li>
+<li><p><strong>host</strong> (<em>str</em><em>, </em><em>optional</em>) – The host of the emoji, by default None</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – The limit of the emojis to get, by default 10</p></li>
+<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – The id to get emojis since, by default None</p></li>
+<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – The id to get emojis until, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The emojis</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#mipac.models.emoji.EmojiDetailed" title="mipac.models.emoji.EmojiDetailed">EmojiDetailed</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.remove_aliases_bulk">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove_aliases_bulk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.remove_aliases_bulk" title="Link to this definition">¶</a></dt>
+<dd><p>Remove aliases from emojis in bulk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ids</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The ids of the emojis</p></li>
+<li><p><strong>aliases</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The aliases to remove</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the operation was successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.set_aliases_bulk">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_aliases_bulk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.set_aliases_bulk" title="Link to this definition">¶</a></dt>
+<dd><p>Set aliases to emojis in bulk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ids</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The ids of the emojis</p></li>
+<li><p><strong>aliases</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The aliases to set</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the operation was successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.set_category_bulk">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_category_bulk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.set_category_bulk" title="Link to this definition">¶</a></dt>
+<dd><p>Set category to emojis in bulk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ids</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The ids of the emojis</p></li>
+<li><p><strong>category</strong> (<em>str</em>) – The category to set</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the operation was successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.AdminEmojiAction.set_license_bulk">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_license_bulk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.AdminEmojiAction.set_license_bulk" title="Link to this definition">¶</a></dt>
+<dd><p>Set license to emojis in bulk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ids</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The ids of the emojis</p></li>
+<li><p><strong>license</strong> (<em>str</em>) – The license to set</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the operation was successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="clientadminemojiaction">
+<h3>ClientAdminEmojiAction<a class="headerlink" href="#clientadminemojiaction" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.emoji.ClientAdminEmojiAction"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction.copy">copy</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction.delete">delete</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction.update">update</a></li></ul>
+</div></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.ClientAdminEmojiAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.emoji.</span></span><span class="sig-name descname"><span class="pre">ClientAdminEmojiAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.ClientAdminEmojiAction.copy">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.common.ID" title="mipac.models.common.ID"><span class="pre">ID</span></a></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction.copy" title="Link to this definition">¶</a></dt>
+<dd><p>Copy an emoji</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>emoji_id</strong> (<em>str</em>) – The id of the emoji</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.ClientAdminEmojiAction.delete">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction.delete" title="Link to this definition">¶</a></dt>
+<dd><p>Delete an emoji</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – The id of the emoji</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the operation was successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.ClientAdminEmojiAction.update">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role_ids_that_can_be_used_this_emoji_as_reaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction.update" title="Link to this definition">¶</a></dt>
+<dd><p>Update an emoji</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the emoji</p></li>
+<li><p><strong>file_id</strong> (<em>str</em>) – The id of the file</p></li>
+<li><p><strong>category</strong> (<em>str</em><em>, </em><em>optional</em>) – The category of the emoji, by default None</p></li>
+<li><p><strong>aliases</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – The aliases of the emoji, by default None</p></li>
+<li><p><strong>is_sensitive</strong> (<em>bool</em>) – Whether the emoji is sensitive</p></li>
+<li><p><strong>local_only</strong> (<em>bool</em>) – Whether the emoji is local only</p></li>
+<li><p><strong>role_ids_that_can_be_used_this_emoji_as_reaction</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The role ids that can be used this emoji as reaction</p></li>
+<li><p><strong>emoji_id</strong> (<em>str</em>) – The id of the emoji</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the operation was successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="sharedadminemojiaction">
+<h3>SharedAdminEmojiAction<a class="headerlink" href="#sharedadminemojiaction" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.emoji.SharedAdminEmojiAction"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction.copy">copy</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction.delete">delete</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction.update">update</a></li></ul>
+</div></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.SharedAdminEmojiAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.emoji.</span></span><span class="sig-name descname"><span class="pre">SharedAdminEmojiAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.SharedAdminEmojiAction.copy">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction.copy" title="Link to this definition">¶</a></dt>
+<dd><p>Copy an emoji</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>emoji_id</strong> (<em>str</em>) – The id of the emoji</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.SharedAdminEmojiAction.delete">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction.delete" title="Link to this definition">¶</a></dt>
+<dd><p>Delete an emoji</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – The id of the emoji</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the operation was successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.emoji.SharedAdminEmojiAction.update">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role_ids_that_can_be_used_this_emoji_as_reaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction.update" title="Link to this definition">¶</a></dt>
+<dd><p>Update an emoji</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the emoji</p></li>
+<li><p><strong>file_id</strong> (<em>str</em>) – The id of the file</p></li>
+<li><p><strong>category</strong> (<em>str</em><em>, </em><em>optional</em>) – The category of the emoji, by default None</p></li>
+<li><p><strong>aliases</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – The aliases of the emoji, by default None</p></li>
+<li><p><strong>is_sensitive</strong> (<em>bool</em>) – Whether the emoji is sensitive</p></li>
+<li><p><strong>local_only</strong> (<em>bool</em>) – Whether the emoji is local only</p></li>
+<li><p><strong>role_ids_that_can_be_used_this_emoji_as_reaction</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The role ids that can be used this emoji as reaction</p></li>
+<li><p><strong>emoji_id</strong> (<em>str</em>) – The id of the emoji</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the operation was successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -10241,6 +10756,14 @@ IMeDetailedOnlySchema が持つ avatar_id が無いことを確認する
 <dd></dd></dl>
 
 </section>
+<section id="iapp">
+<h3>IApp<a class="headerlink" href="#iapp" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.app.IApp"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.app.IApp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.app.</span></span><span class="sig-name descname"><span class="pre">IApp</span></span><a class="headerlink" href="#mipac.types.app.IApp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="iblocking">
 <h3>IBlocking<a class="headerlink" href="#iblocking" title="Link to this heading">¶</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.types.blocking.IBlocking"></div><dl class="py class">
@@ -10303,6 +10826,15 @@ IMeDetailedOnlySchema が持つ avatar_id が無いことを確認する
 <dt class="sig sig-object py" id="mipac.types.ads.IPartialAd">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.ads.</span></span><span class="sig-name descname"><span class="pre">IPartialAd</span></span><a class="headerlink" href="#mipac.types.ads.IPartialAd" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</section>
+<section id="iid">
+<h3>IID<a class="headerlink" href="#iid" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.common.IID"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.common.IID">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.common.</span></span><span class="sig-name descname"><span class="pre">IID</span></span><a class="headerlink" href="#mipac.types.common.IID" title="Link to this definition">¶</a></dt>
+<dd><p>IDを表す型</p>
+</dd></dl>
 
 </section>
 <section id="ifederationinstance">
@@ -12661,6 +13193,18 @@ async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_co
 </li>
 </ul>
 </li>
+<li><a class="reference internal" href="#app">App</a><ul>
+<li><a class="reference internal" href="#mipac.models.app.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.models.app.App.callback_url"><code class="docutils literal notranslate"><span class="pre">App.callback_url</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.app.App.id"><code class="docutils literal notranslate"><span class="pre">App.id</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.app.App.is_authorized"><code class="docutils literal notranslate"><span class="pre">App.is_authorized</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.app.App.name"><code class="docutils literal notranslate"><span class="pre">App.name</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.app.App.permission"><code class="docutils literal notranslate"><span class="pre">App.permission</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.app.App.secret"><code class="docutils literal notranslate"><span class="pre">App.secret</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#blocking">Blocking</a><ul>
 <li><a class="reference internal" href="#mipac.models.blocking.Blocking"><code class="docutils literal notranslate"><span class="pre">Blocking</span></code></a><ul>
 <li><a class="reference internal" href="#mipac.models.blocking.Blocking.api"><code class="docutils literal notranslate"><span class="pre">Blocking.api</span></code></a></li>
@@ -12710,6 +13254,13 @@ async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_co
 </li>
 <li><a class="reference internal" href="#invitelimit">InviteLimit</a><ul>
 <li><a class="reference internal" href="#mipac.models.invite.InviteLimit"><code class="docutils literal notranslate"><span class="pre">InviteLimit</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id">ID</a><ul>
+<li><a class="reference internal" href="#mipac.models.common.ID"><code class="docutils literal notranslate"><span class="pre">ID</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.models.common.ID.id"><code class="docutils literal notranslate"><span class="pre">ID.id</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#federationinstance">FederationInstance</a><ul>
@@ -12901,6 +13452,10 @@ async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_co
 <li><a class="reference internal" href="#mipac.manager.username.UsernameManager"><code class="docutils literal notranslate"><span class="pre">UsernameManager</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#appmanager">AppManager</a><ul>
+<li><a class="reference internal" href="#mipac.manager.app.AppManager"><code class="docutils literal notranslate"><span class="pre">AppManager</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#blockingmanager">BlockingManager</a><ul>
 <li><a class="reference internal" href="#mipac.manager.blocking.BlockingManager"><code class="docutils literal notranslate"><span class="pre">BlockingManager</span></code></a></li>
 </ul>
@@ -13039,6 +13594,10 @@ async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_co
 </li>
 <li><a class="reference internal" href="#adminemojimanager">AdminEmojiManager</a><ul>
 <li><a class="reference internal" href="#mipac.manager.admins.emoji.AdminEmojiManager"><code class="docutils literal notranslate"><span class="pre">AdminEmojiManager</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clientadminemojimanager">ClientAdminEmojiManager</a><ul>
+<li><a class="reference internal" href="#mipac.manager.admins.emoji.ClientAdminEmojiManager"><code class="docutils literal notranslate"><span class="pre">ClientAdminEmojiManager</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#admininvitemanager">AdminInviteManager</a><ul>
@@ -13287,6 +13846,14 @@ async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_co
 </li>
 <li><a class="reference internal" href="#usernameactions">UsernameActions</a><ul>
 <li><a class="reference internal" href="#mipac.actions.username.UsernameActions"><code class="docutils literal notranslate"><span class="pre">UsernameActions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#appactions">AppActions</a><ul>
+<li><a class="reference internal" href="#mipac.actions.app.AppActions"><code class="docutils literal notranslate"><span class="pre">AppActions</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.app.AppActions.create"><code class="docutils literal notranslate"><span class="pre">AppActions.create()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.app.AppActions.show"><code class="docutils literal notranslate"><span class="pre">AppActions.show()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#blockingactions">BlockingActions</a><ul>
@@ -13613,9 +14180,37 @@ async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_co
 <li><a class="reference internal" href="#mipac.actions.admins.ad.SharedAdminAdActions"><code class="docutils literal notranslate"><span class="pre">SharedAdminAdActions</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#adminemojiactions">AdminEmojiActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiActions"><code class="docutils literal notranslate"><span class="pre">AdminEmojiActions</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiActions.remove"><code class="docutils literal notranslate"><span class="pre">AdminEmojiActions.remove()</span></code></a></li>
+<li><a class="reference internal" href="#adminemojiaction">AdminEmojiAction</a><ul>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.add"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.add()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.add_aliases_bulk"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.add_aliases_bulk()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.delete_bulk"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.delete_bulk()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_all_list"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.get_all_list()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_all_list_remote"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.get_all_list_remote()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_list"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.get_list()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.get_list_remote"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.get_list_remote()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.remove_aliases_bulk"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.remove_aliases_bulk()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.set_aliases_bulk"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.set_aliases_bulk()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.set_category_bulk"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.set_category_bulk()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.AdminEmojiAction.set_license_bulk"><code class="docutils literal notranslate"><span class="pre">AdminEmojiAction.set_license_bulk()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clientadminemojiaction">ClientAdminEmojiAction</a><ul>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction"><code class="docutils literal notranslate"><span class="pre">ClientAdminEmojiAction</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction.copy"><code class="docutils literal notranslate"><span class="pre">ClientAdminEmojiAction.copy()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction.delete"><code class="docutils literal notranslate"><span class="pre">ClientAdminEmojiAction.delete()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiAction.update"><code class="docutils literal notranslate"><span class="pre">ClientAdminEmojiAction.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sharedadminemojiaction">SharedAdminEmojiAction</a><ul>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction"><code class="docutils literal notranslate"><span class="pre">SharedAdminEmojiAction</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction.copy"><code class="docutils literal notranslate"><span class="pre">SharedAdminEmojiAction.copy()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction.delete"><code class="docutils literal notranslate"><span class="pre">SharedAdminEmojiAction.delete()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.SharedAdminEmojiAction.update"><code class="docutils literal notranslate"><span class="pre">SharedAdminEmojiAction.update()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -14066,6 +14661,10 @@ async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_co
 <li><a class="reference internal" href="#mipac.types.username.IUsernameAvailable"><code class="docutils literal notranslate"><span class="pre">IUsernameAvailable</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#iapp">IApp</a><ul>
+<li><a class="reference internal" href="#mipac.types.app.IApp"><code class="docutils literal notranslate"><span class="pre">IApp</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#iblocking">IBlocking</a><ul>
 <li><a class="reference internal" href="#mipac.types.blocking.IBlocking"><code class="docutils literal notranslate"><span class="pre">IBlocking</span></code></a></li>
 </ul>
@@ -14096,6 +14695,10 @@ async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_co
 </li>
 <li><a class="reference internal" href="#ipartialad">IPartialAd</a><ul>
 <li><a class="reference internal" href="#mipac.types.ads.IPartialAd"><code class="docutils literal notranslate"><span class="pre">IPartialAd</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#iid">IID</a><ul>
+<li><a class="reference internal" href="#mipac.types.common.IID"><code class="docutils literal notranslate"><span class="pre">IID</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ifederationinstance">IFederationInstance</a><ul>

@@ -541,6 +541,15 @@ UsernameAvailable
     :members:
 
 
+App
+~~~
+
+.. attributetable:: mipac.models.app.App
+
+.. autoclass:: mipac.models.app.App
+    :members:
+
+
 Blocking
 ~~~~~~~~
 
@@ -592,6 +601,15 @@ InviteLimit
 .. attributetable:: mipac.models.invite.InviteLimit
 
 .. autoclass:: mipac.models.invite.InviteLimit
+    :members:
+
+
+ID
+~~
+
+.. attributetable:: mipac.models.common.ID
+
+.. autoclass:: mipac.models.common.ID
     :members:
 
 
@@ -884,6 +902,15 @@ UsernameManager
     :members:
 
 
+AppManager
+~~~~~~~~~~
+
+.. attributetable:: mipac.manager.app.AppManager
+
+.. autoclass:: mipac.manager.app.AppManager
+    :members:
+
+
 BlockingManager
 ~~~~~~~~~~~~~~~
 
@@ -1172,6 +1199,15 @@ AdminEmojiManager
     :members:
 
 
+ClientAdminEmojiManager
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.admins.emoji.ClientAdminEmojiManager
+
+.. autoclass:: mipac.manager.admins.emoji.ClientAdminEmojiManager
+    :members:
+
+
 AdminInviteManager
 ~~~~~~~~~~~~~~~~~~
 
@@ -1419,6 +1455,15 @@ UsernameActions
 .. attributetable:: mipac.actions.username.UsernameActions
 
 .. autoclass:: mipac.actions.username.UsernameActions
+    :members:
+
+
+AppActions
+~~~~~~~~~~
+
+.. attributetable:: mipac.actions.app.AppActions
+
+.. autoclass:: mipac.actions.app.AppActions
     :members:
 
 
@@ -1818,12 +1863,30 @@ SharedAdminAdActions
     :members:
 
 
-AdminEmojiActions
-~~~~~~~~~~~~~~~~~
+AdminEmojiAction
+~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.emoji.AdminEmojiActions
+.. attributetable:: mipac.actions.admins.emoji.AdminEmojiAction
 
-.. autoclass:: mipac.actions.admins.emoji.AdminEmojiActions
+.. autoclass:: mipac.actions.admins.emoji.AdminEmojiAction
+    :members:
+
+
+ClientAdminEmojiAction
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.emoji.ClientAdminEmojiAction
+
+.. autoclass:: mipac.actions.admins.emoji.ClientAdminEmojiAction
+    :members:
+
+
+SharedAdminEmojiAction
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.emoji.SharedAdminEmojiAction
+
+.. autoclass:: mipac.actions.admins.emoji.SharedAdminEmojiAction
     :members:
 
 
@@ -2725,6 +2788,15 @@ IUsernameAvailable
     :members:
 
 
+IApp
+~~~~
+
+.. attributetable:: mipac.types.app.IApp
+
+.. autoclass:: mipac.types.app.IApp
+    :members:
+
+
 IBlocking
 ~~~~~~~~~
 
@@ -2794,6 +2866,15 @@ IPartialAd
 .. attributetable:: mipac.types.ads.IPartialAd
 
 .. autoclass:: mipac.types.ads.IPartialAd
+    :members:
+
+
+IID
+~~~
+
+.. attributetable:: mipac.types.common.IID
+
+.. autoclass:: mipac.types.common.IID
     :members:
 
 

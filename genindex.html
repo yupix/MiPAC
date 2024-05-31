@@ -275,9 +275,11 @@
 </li>
         <li><a href="index.html#mipac.models.ad.Ad">Ad (mipac.models.ad のクラス)</a>
 </li>
-        <li><a href="index.html#mipac.actions.follow.ClientFollowActions.add">add() (mipac.actions.follow.ClientFollowActions のメソッド)</a>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.add">add() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
 
         <ul>
+          <li><a href="index.html#mipac.actions.follow.ClientFollowActions.add">(mipac.actions.follow.ClientFollowActions のメソッド)</a>
+</li>
           <li><a href="index.html#mipac.actions.follow.SharedFollowActions.add">(mipac.actions.follow.SharedFollowActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.reaction.ClientReactionActions.add">(mipac.actions.reaction.ClientReactionActions のメソッド)</a>
@@ -285,6 +287,8 @@
           <li><a href="index.html#mipac.actions.reaction.SharedReactionActions.add">(mipac.actions.reaction.SharedReactionActions のメソッド)</a>
 </li>
         </ul></li>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.add_aliases_bulk">add_aliases_bulk() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
+</li>
         <li><a href="index.html#mipac.actions.note.ClientNoteActions.add_clips">add_clips() (mipac.actions.note.ClientNoteActions のメソッド)</a>
 
         <ul>
@@ -315,7 +319,7 @@
 </li>
         <li><a href="index.html#mipac.manager.admins.drive.AdminDriveManager">AdminDriveManager (mipac.manager.admins.drive のクラス)</a>
 </li>
-        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiActions">AdminEmojiActions (mipac.actions.admins.emoji のクラス)</a>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction">AdminEmojiAction (mipac.actions.admins.emoji のクラス)</a>
 </li>
         <li><a href="index.html#mipac.manager.admins.emoji.AdminEmojiManager">AdminEmojiManager (mipac.manager.admins.emoji のクラス)</a>
 </li>
@@ -335,14 +339,14 @@
 </li>
         <li><a href="index.html#mipac.manager.admins.user.AdminUserManager">AdminUserManager (mipac.manager.admins.user のクラス)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.models.channel.Channel.allow_renote_to_external">allow_renote_to_external (mipac.models.channel.Channel のプロパティ)</a>
 
         <ul>
           <li><a href="index.html#mipac.models.note.NoteChannel.allow_renote_to_external">(mipac.models.note.NoteChannel のプロパティ)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.errors.errors.AlreadyAddedError">AlreadyAddedError (mipac.errors.errors のクラス)</a>
 </li>
         <li><a href="index.html#mipac.errors.errors.AlreadyBlockingError">AlreadyBlockingError (mipac.errors.errors のクラス)</a>
@@ -396,6 +400,12 @@
 </li>
         </ul></li>
         <li><a href="index.html#mipac.errors.base.APIError">APIError (mipac.errors.base のクラス)</a>
+</li>
+        <li><a href="index.html#mipac.models.app.App">App (mipac.models.app のクラス)</a>
+</li>
+        <li><a href="index.html#mipac.actions.app.AppActions">AppActions (mipac.actions.app のクラス)</a>
+</li>
+        <li><a href="index.html#mipac.manager.app.AppManager">AppManager (mipac.manager.app のクラス)</a>
 </li>
         <li><a href="index.html#mipac.actions.admins.roles.ClientAdminRoleActions.assign">assign() (mipac.actions.admins.roles.ClientAdminRoleActions のメソッド)</a>
 
@@ -477,6 +487,8 @@
 </li>
         <li><a href="index.html#mipac.config.CacheConfigData">CacheConfigData (mipac.config のクラス)</a>
 </li>
+        <li><a href="index.html#mipac.models.app.App.callback_url">callback_url (mipac.models.app.App のプロパティ)</a>
+</li>
         <li><a href="index.html#mipac.models.lite.meta.Policies.can_edit_note">can_edit_note (mipac.models.lite.meta.Policies のプロパティ)</a>
 </li>
         <li><a href="index.html#mipac.models.lite.meta.Policies.can_hide_ads">can_hide_ads (mipac.models.lite.meta.Policies のプロパティ)</a>
@@ -554,6 +566,10 @@
         <li><a href="index.html#mipac.actions.admins.announcement.ClientAdminAnnouncementActions">ClientAdminAnnouncementActions (mipac.actions.admins.announcement のクラス)</a>
 </li>
         <li><a href="index.html#mipac.manager.admins.announcement.ClientAdminAnnouncementManager">ClientAdminAnnouncementManager (mipac.manager.admins.announcement のクラス)</a>
+</li>
+        <li><a href="index.html#mipac.actions.admins.emoji.ClientAdminEmojiAction">ClientAdminEmojiAction (mipac.actions.admins.emoji のクラス)</a>
+</li>
+        <li><a href="index.html#mipac.manager.admins.emoji.ClientAdminEmojiManager">ClientAdminEmojiManager (mipac.manager.admins.emoji のクラス)</a>
 </li>
         <li><a href="index.html#mipac.actions.admins.roles.ClientAdminRoleActions">ClientAdminRoleActions (mipac.actions.admins.roles のクラス)</a>
 </li>
@@ -663,10 +679,18 @@
 </li>
         <li><a href="index.html#mipac.utils.format.convert_dict_keys_to_camel">convert_dict_keys_to_camel() (mipac.utils.format モジュール)</a>
 </li>
+        <li><a href="index.html#mipac.actions.admins.emoji.ClientAdminEmojiAction.copy">copy() (mipac.actions.admins.emoji.ClientAdminEmojiAction のメソッド)</a>
+
+        <ul>
+          <li><a href="index.html#mipac.actions.admins.emoji.SharedAdminEmojiAction.copy">(mipac.actions.admins.emoji.SharedAdminEmojiAction のメソッド)</a>
+</li>
+        </ul></li>
         <li><a href="index.html#mipac.actions.admins.accounts.AdminAccountActions.create">create() (mipac.actions.admins.accounts.AdminAccountActions のメソッド)</a>
 
         <ul>
           <li><a href="index.html#mipac.actions.antenna.AntennaActions.create">(mipac.actions.antenna.AntennaActions のメソッド)</a>
+</li>
+          <li><a href="index.html#mipac.actions.app.AppActions.create">(mipac.actions.app.AppActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.channel.ChannelActions.create">(mipac.actions.channel.ChannelActions のメソッド)</a>
 </li>
@@ -746,6 +770,10 @@
 </li>
           <li><a href="index.html#mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete">(mipac.actions.admins.announcement.SharedAdminAnnouncementActions のメソッド)</a>
 </li>
+          <li><a href="index.html#mipac.actions.admins.emoji.ClientAdminEmojiAction.delete">(mipac.actions.admins.emoji.ClientAdminEmojiAction のメソッド)</a>
+</li>
+          <li><a href="index.html#mipac.actions.admins.emoji.SharedAdminEmojiAction.delete">(mipac.actions.admins.emoji.SharedAdminEmojiAction のメソッド)</a>
+</li>
           <li><a href="index.html#mipac.actions.antenna.ClientAntennaActions.delete">(mipac.actions.antenna.ClientAntennaActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.antenna.SharedAntennaActions.delete">(mipac.actions.antenna.SharedAntennaActions のメソッド)</a>
@@ -787,6 +815,8 @@
           <li><a href="index.html#mipac.actions.admins.user.SharedAdminUserActions.delete_account">(mipac.actions.admins.user.SharedAdminUserActions のメソッド)</a>
 </li>
         </ul></li>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.delete_bulk">delete_bulk() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
+</li>
         <li><a href="index.html#mipac.models.note.Note.deleted_at">deleted_at (mipac.models.note.Note のプロパティ)</a>
 </li>
         <li><a href="index.html#mipac.utils.util.deprecated">deprecated() (mipac.utils.util モジュール)</a>
@@ -1033,12 +1063,16 @@
         </ul></li>
         <li><a href="index.html#mipac.actions.channel.ChannelActions.get_all_followed">get_all_followed() (mipac.actions.channel.ChannelActions のメソッド)</a>
 </li>
-        <li><a href="index.html#mipac.actions.invite.InviteActions.get_all_list">get_all_list() (mipac.actions.invite.InviteActions のメソッド)</a>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.get_all_list">get_all_list() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
 
         <ul>
+          <li><a href="index.html#mipac.actions.invite.InviteActions.get_all_list">(mipac.actions.invite.InviteActions のメソッド)</a>
+</li>
           <li><a href="index.html#mipac.actions.users.mute.MuteActions.get_all_list">(mipac.actions.users.mute.MuteActions のメソッド)</a>
 </li>
         </ul></li>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.get_all_list_remote">get_all_list_remote() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
+</li>
         <li><a href="index.html#mipac.actions.clip.ClientClipActions.get_all_notes">get_all_notes() (mipac.actions.clip.ClientClipActions のメソッド)</a>
 
         <ul>
@@ -1133,9 +1167,11 @@
 </li>
         <li><a href="index.html#mipac.actions.invite.InviteActions.get_limit">get_limit() (mipac.actions.invite.InviteActions のメソッド)</a>
 </li>
-        <li><a href="index.html#mipac.actions.clip.ClipActions.get_list">get_list() (mipac.actions.clip.ClipActions のメソッド)</a>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.get_list">get_list() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
 
         <ul>
+          <li><a href="index.html#mipac.actions.clip.ClipActions.get_list">(mipac.actions.clip.ClipActions のメソッド)</a>
+</li>
           <li><a href="index.html#mipac.actions.hashtag.HashtagActions.get_list">(mipac.actions.hashtag.HashtagActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.invite.InviteActions.get_list">(mipac.actions.invite.InviteActions のメソッド)</a>
@@ -1149,6 +1185,8 @@
           <li><a href="index.html#mipac.actions.users.mute.MuteActions.get_list">(mipac.actions.users.mute.MuteActions のメソッド)</a>
 </li>
         </ul></li>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.get_list_remote">get_list_remote() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
+</li>
         <li><a href="index.html#mipac.actions.user.UserActions.get_me">get_me() (mipac.actions.user.UserActions のメソッド)</a>
 </li>
         <li><a href="index.html#mipac.actions.user.UserActions.get_mention">get_mention() (mipac.actions.user.UserActions のメソッド)</a>
@@ -1249,6 +1287,8 @@
 </li>
         <li><a href="index.html#mipac.types.antenna.IAntenna">IAntenna (mipac.types.antenna のクラス)</a>
 </li>
+        <li><a href="index.html#mipac.types.app.IApp">IApp (mipac.types.app のクラス)</a>
+</li>
         <li><a href="index.html#mipac.types.user.IAvatarDecoration">IAvatarDecoration (mipac.types.user のクラス)</a>
 </li>
         <li><a href="index.html#mipac.types.user.IBadgeRole">IBadgeRole (mipac.types.user のクラス)</a>
@@ -1282,12 +1322,20 @@
         <ul>
           <li><a href="index.html#mipac.models.antenna.Antenna.id">(mipac.models.antenna.Antenna のプロパティ)</a>
 </li>
+          <li><a href="index.html#mipac.models.app.App.id">(mipac.models.app.App のプロパティ)</a>
+</li>
           <li><a href="index.html#mipac.models.blocking.Blocking.id">(mipac.models.blocking.Blocking のプロパティ)</a>
 </li>
           <li><a href="index.html#mipac.models.channel.Channel.id">(mipac.models.channel.Channel のプロパティ)</a>
 </li>
           <li><a href="index.html#mipac.models.clip.Clip.id">(mipac.models.clip.Clip のプロパティ)</a>
 </li>
+        </ul></li>
+        <li><a href="index.html#mipac.models.common.ID">ID (mipac.models.common のクラス)</a>
+</li>
+        <li><a href="index.html#mipac.models.common.ID.id">id (mipac.models.common.ID のプロパティ)</a>
+
+        <ul>
           <li><a href="index.html#mipac.models.drive.File.id">(mipac.models.drive.File のプロパティ)</a>
 </li>
           <li><a href="index.html#mipac.models.drive.Folder.id">(mipac.models.drive.Folder のプロパティ)</a>
@@ -1343,6 +1391,8 @@
 </li>
         <li><a href="index.html#mipac.types.hashtag.IHashtag">IHashtag (mipac.types.hashtag のクラス)</a>
 </li>
+        <li><a href="index.html#mipac.types.common.IID">IID (mipac.types.common のクラス)</a>
+</li>
         <li><a href="index.html#mipac.types.admin.IIndexStat">IIndexStat (mipac.types.admin のクラス)</a>
 </li>
         <li><a href="index.html#mipac.types.instance.IInstanceLite">IInstanceLite (mipac.types.instance のクラス)</a>
@@ -1375,12 +1425,12 @@
 </li>
         <li><a href="index.html#mipac.types.notification.INoteNf">INoteNf (mipac.types.notification のクラス)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.types.note.INoteReaction">INoteReaction (mipac.types.note のクラス)</a>
 </li>
         <li><a href="index.html#mipac.types.note.INoteState">INoteState (mipac.types.note のクラス)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.types.note.INoteTranslateResult">INoteTranslateResult (mipac.types.note のクラス)</a>
 </li>
         <li><a href="index.html#mipac.types.note.INoteUpdated">INoteUpdated (mipac.types.note のクラス)</a>
@@ -1456,6 +1506,8 @@
         <li><a href="index.html#mipac.types.roles.IRoleUser">IRoleUser (mipac.types.roles のクラス)</a>
 </li>
         <li><a href="index.html#mipac.models.channel.Channel.is_archived">is_archived (mipac.models.channel.Channel のプロパティ)</a>
+</li>
+        <li><a href="index.html#mipac.models.app.App.is_authorized">is_authorized (mipac.models.app.App のプロパティ)</a>
 </li>
         <li><a href="index.html#mipac.models.lite.user.PartialUser.is_bot">is_bot (mipac.models.lite.user.PartialUser のプロパティ)</a>
 </li>
@@ -1642,6 +1694,8 @@
         <li><a href="index.html#mipac.models.antenna.Antenna.name">name (mipac.models.antenna.Antenna のプロパティ)</a>
 
         <ul>
+          <li><a href="index.html#mipac.models.app.App.name">(mipac.models.app.App のプロパティ)</a>
+</li>
           <li><a href="index.html#mipac.models.channel.Channel.name">(mipac.models.channel.Channel のプロパティ)</a>
 </li>
           <li><a href="index.html#mipac.models.clip.Clip.name">(mipac.models.clip.Clip のプロパティ)</a>
@@ -1849,9 +1903,11 @@
 </li>
         <li><a href="index.html#mipac.http.Route.path">path (mipac.http.Route の属性)</a>
 </li>
+        <li><a href="index.html#mipac.errors.errors.PendingSessionError">PendingSessionError (mipac.errors.errors のクラス)</a>
+</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="index.html#mipac.errors.errors.PendingSessionError">PendingSessionError (mipac.errors.errors のクラス)</a>
+        <li><a href="index.html#mipac.models.app.App.permission">permission (mipac.models.app.App のプロパティ)</a>
 </li>
         <li><a href="index.html#mipac.errors.errors.PinLimitExceededError">PinLimitExceededError (mipac.errors.errors のクラス)</a>
 </li>
@@ -1917,11 +1973,9 @@
 </li>
         <li><a href="index.html#mipac.errors.errors.RemoteUserNotAllowedError">RemoteUserNotAllowedError (mipac.errors.errors のクラス)</a>
 </li>
-        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiActions.remove">remove() (mipac.actions.admins.emoji.AdminEmojiActions のメソッド)</a>
+        <li><a href="index.html#mipac.actions.follow.ClientFollowActions.remove">remove() (mipac.actions.follow.ClientFollowActions のメソッド)</a>
 
         <ul>
-          <li><a href="index.html#mipac.actions.follow.ClientFollowActions.remove">(mipac.actions.follow.ClientFollowActions のメソッド)</a>
-</li>
           <li><a href="index.html#mipac.actions.follow.SharedFollowActions.remove">(mipac.actions.follow.SharedFollowActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.reaction.ClientReactionActions.remove">(mipac.actions.reaction.ClientReactionActions のメソッド)</a>
@@ -1929,6 +1983,8 @@
           <li><a href="index.html#mipac.actions.reaction.SharedReactionActions.remove">(mipac.actions.reaction.SharedReactionActions のメソッド)</a>
 </li>
         </ul></li>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.remove_aliases_bulk">remove_aliases_bulk() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
+</li>
         <li><a href="index.html#mipac.utils.format.remove_dict_empty">remove_dict_empty() (mipac.utils.format モジュール)</a>
 </li>
         <li><a href="index.html#mipac.utils.format.remove_dict_missing">remove_dict_missing() (mipac.utils.format モジュール)</a>
@@ -2001,6 +2057,8 @@
 </li>
         <li><a href="index.html#mipac.actions.user.UserActions.search_by_username_and_host">search_by_username_and_host() (mipac.actions.user.UserActions のメソッド)</a>
 </li>
+        <li><a href="index.html#mipac.models.app.App.secret">secret (mipac.models.app.App のプロパティ)</a>
+</li>
         <li><a href="index.html#mipac.actions.channel.ClientChannelActions.send">send() (mipac.actions.channel.ClientChannelActions のメソッド)</a>
 
         <ul>
@@ -2023,7 +2081,13 @@
 </li>
         <li><a href="index.html#mipac.http.HTTPClient.session">session (mipac.http.HTTPClient のプロパティ)</a>
 </li>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.set_aliases_bulk">set_aliases_bulk() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
+</li>
         <li><a href="index.html#mipac.utils.cache.set_cache">set_cache() (mipac.utils.cache モジュール)</a>
+</li>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.set_category_bulk">set_category_bulk() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
+</li>
+        <li><a href="index.html#mipac.actions.admins.emoji.AdminEmojiAction.set_license_bulk">set_license_bulk() (mipac.actions.admins.emoji.AdminEmojiAction のメソッド)</a>
 </li>
         <li><a href="index.html#mipac.utils.auth.MiAuth.set_session">set_session() (mipac.utils.auth.MiAuth のメソッド)</a>
 </li>
@@ -2032,6 +2096,8 @@
         <li><a href="index.html#mipac.actions.admins.ad.SharedAdminAdActions">SharedAdminAdActions (mipac.actions.admins.ad のクラス)</a>
 </li>
         <li><a href="index.html#mipac.actions.admins.announcement.SharedAdminAnnouncementActions">SharedAdminAnnouncementActions (mipac.actions.admins.announcement のクラス)</a>
+</li>
+        <li><a href="index.html#mipac.actions.admins.emoji.SharedAdminEmojiAction">SharedAdminEmojiAction (mipac.actions.admins.emoji のクラス)</a>
 </li>
         <li><a href="index.html#mipac.actions.admins.roles.SharedAdminRoleActions">SharedAdminRoleActions (mipac.actions.admins.roles のクラス)</a>
 </li>
@@ -2045,12 +2111,12 @@
 </li>
         <li><a href="index.html#mipac.actions.clip.SharedClipActions">SharedClipActions (mipac.actions.clip のクラス)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.actions.favorite.SharedFavoriteActions">SharedFavoriteActions (mipac.actions.favorite のクラス)</a>
 </li>
         <li><a href="index.html#mipac.actions.drive.files.SharedFileActions">SharedFileActions (mipac.actions.drive.files のクラス)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="index.html#mipac.actions.drive.folders.SharedFolderActions">SharedFolderActions (mipac.actions.drive.folders のクラス)</a>
 </li>
         <li><a href="index.html#mipac.actions.follow.SharedFollowActions">SharedFollowActions (mipac.actions.follow のクラス)</a>
@@ -2075,6 +2141,8 @@
 
         <ul>
           <li><a href="index.html#mipac.actions.antenna.SharedAntennaActions.show">(mipac.actions.antenna.SharedAntennaActions のメソッド)</a>
+</li>
+          <li><a href="index.html#mipac.actions.app.AppActions.show">(mipac.actions.app.AppActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.channel.ChannelActions.show">(mipac.actions.channel.ChannelActions のメソッド)</a>
 </li>
@@ -2236,6 +2304,10 @@
         <ul>
           <li><a href="index.html#mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update">(mipac.actions.admins.announcement.SharedAdminAnnouncementActions のメソッド)</a>
 </li>
+          <li><a href="index.html#mipac.actions.admins.emoji.ClientAdminEmojiAction.update">(mipac.actions.admins.emoji.ClientAdminEmojiAction のメソッド)</a>
+</li>
+          <li><a href="index.html#mipac.actions.admins.emoji.SharedAdminEmojiAction.update">(mipac.actions.admins.emoji.SharedAdminEmojiAction のメソッド)</a>
+</li>
           <li><a href="index.html#mipac.actions.antenna.ClientAntennaActions.update">(mipac.actions.antenna.ClientAntennaActions のメソッド)</a>
 </li>
           <li><a href="index.html#mipac.actions.antenna.SharedAntennaActions.update">(mipac.actions.antenna.SharedAntennaActions のメソッド)</a>
@@ -2273,10 +2345,10 @@
           <li><a href="index.html#mipac.actions.drive.folders.ClientFileActionsInFolder.upload_from_url">(mipac.actions.drive.folders.ClientFileActionsInFolder のメソッド)</a>
 </li>
         </ul></li>
-        <li><a href="index.html#mipac.utils.format.upper_to_lower">upper_to_lower() (mipac.utils.format モジュール)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="index.html#mipac.utils.format.upper_to_lower">upper_to_lower() (mipac.utils.format モジュール)</a>
+</li>
         <li><a href="index.html#mipac.models.note.Note.uri">uri (mipac.models.note.Note のプロパティ)</a>
 </li>
         <li><a href="index.html#mipac.errors.errors.UriNullError">UriNullError (mipac.errors.errors のクラス)</a>
