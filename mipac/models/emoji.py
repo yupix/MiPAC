@@ -116,6 +116,10 @@ class EmojiDetailed:
         return self.__raw_emoji_detailed["url"]
 
     @property
+    def license(self) -> str | None:
+        return self.__raw_emoji_detailed["license"]
+
+    @property
     def is_sensitive(self) -> bool:
         return self.__raw_emoji_detailed["is_sensitive"]
 
