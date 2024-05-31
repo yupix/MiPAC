@@ -16,7 +16,7 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
-class SharedAdminEmojiAction(AbstractAction):
+class SharedAdminEmojiActions(AbstractAction):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         self.__session: HTTPClient = session
         self.__client: ClientManager = client
@@ -112,7 +112,7 @@ class SharedAdminEmojiAction(AbstractAction):
         return res
 
 
-class ClientAdminEmojiAction(SharedAdminEmojiAction):
+class ClientAdminEmojiActions(SharedAdminEmojiActions):
     def __init__(self, *, emoji_id: str, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
         self.__emoji_id: str = emoji_id
@@ -156,7 +156,7 @@ class ClientAdminEmojiAction(SharedAdminEmojiAction):
         )
 
 
-class AdminEmojiAction(SharedAdminEmojiAction):
+class AdminEmojiActions(SharedAdminEmojiActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
 
