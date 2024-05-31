@@ -12,7 +12,7 @@ from mipac.manager.admins.announcement import (
     ClientAdminAnnouncementManager,
 )
 from mipac.manager.admins.drive import AdminDriveManager
-from mipac.manager.admins.emoji import AdminEmojiManager
+from mipac.manager.admins.emoji import AdminEmojiManager, ClientAdminEmojiManager
 from mipac.manager.admins.invite import AdminInviteManager
 from mipac.manager.admins.roles import AdminRoleManager, ClientAdminRoleManager
 from mipac.manager.admins.user import AdminUserManager
@@ -55,4 +55,9 @@ class AdminManager(AbstractManager):
             announce_id=announce_id,
             session=self.__session,
             client=self.__client,
+        )
+
+    def _create_client_admin_emoji_manager(self, emoji_id: str) -> ClientAdminEmojiManager:
+        return ClientAdminEmojiManager(
+            emoji_id=emoji_id, session=self.__session, client=self.__client
         )
