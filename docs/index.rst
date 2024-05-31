@@ -112,6 +112,15 @@ Antenna
     :members:
 
 
+App
+~~~
+
+.. attributetable:: mipac.models.app.App
+
+.. autoclass:: mipac.models.app.App
+    :members:
+
+
 Blocking
 ~~~~~~~~
 
@@ -172,6 +181,15 @@ Clip
 .. attributetable:: mipac.models.clip.Clip
 
 .. autoclass:: mipac.models.clip.Clip
+    :members:
+
+
+ID
+~~
+
+.. attributetable:: mipac.models.common.ID
+
+.. autoclass:: mipac.models.common.ID
     :members:
 
 
@@ -253,6 +271,24 @@ GalleryPost
 .. attributetable:: mipac.models.gallery.GalleryPost
 
 .. autoclass:: mipac.models.gallery.GalleryPost
+    :members:
+
+
+Hashtag
+~~~~~~~
+
+.. attributetable:: mipac.models.hashtag.Hashtag
+
+.. autoclass:: mipac.models.hashtag.Hashtag
+    :members:
+
+
+TrendHashtag
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.models.hashtag.TrendHashtag
+
+.. autoclass:: mipac.models.hashtag.TrendHashtag
     :members:
 
 
@@ -731,6 +767,15 @@ ClientAntennaManager
     :members:
 
 
+AppManager
+~~~~~~~~~~
+
+.. attributetable:: mipac.manager.app.AppManager
+
+.. autoclass:: mipac.manager.app.AppManager
+    :members:
+
+
 BlockingManager
 ~~~~~~~~~~~~~~~
 
@@ -863,6 +908,15 @@ FollowRequestManager
 .. attributetable:: mipac.manager.follow.FollowRequestManager
 
 .. autoclass:: mipac.manager.follow.FollowRequestManager
+    :members:
+
+
+HashtagManager
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.hashtag.HashtagManager
+
+.. autoclass:: mipac.manager.hashtag.HashtagManager
     :members:
 
 
@@ -1064,6 +1118,15 @@ AdminEmojiManager
     :members:
 
 
+ClientAdminEmojiManager
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.manager.admins.emoji.ClientAdminEmojiManager
+
+.. autoclass:: mipac.manager.admins.emoji.ClientAdminEmojiManager
+    :members:
+
+
 AdminInviteManager
 ~~~~~~~~~~~~~~~~~~
 
@@ -1073,21 +1136,21 @@ AdminInviteManager
     :members:
 
 
-AdminRolesManager
-~~~~~~~~~~~~~~~~~
+AdminRoleManager
+~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.admins.roles.AdminRolesManager
+.. attributetable:: mipac.manager.admins.roles.AdminRoleManager
 
-.. autoclass:: mipac.manager.admins.roles.AdminRolesManager
+.. autoclass:: mipac.manager.admins.roles.AdminRoleManager
     :members:
 
 
-AdminRolesModelManager
+ClientAdminRoleManager
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.manager.admins.roles.AdminRolesModelManager
+.. attributetable:: mipac.manager.admins.roles.ClientAdminRoleManager
 
-.. autoclass:: mipac.manager.admins.roles.AdminRolesModelManager
+.. autoclass:: mipac.manager.admins.roles.ClientAdminRoleManager
     :members:
 
 
@@ -1224,6 +1287,15 @@ SharedAntennaActions
 .. attributetable:: mipac.actions.antenna.SharedAntennaActions
 
 .. autoclass:: mipac.actions.antenna.SharedAntennaActions
+    :members:
+
+
+AppActions
+~~~~~~~~~~
+
+.. attributetable:: mipac.actions.app.AppActions
+
+.. autoclass:: mipac.actions.app.AppActions
     :members:
 
 
@@ -1404,6 +1476,15 @@ SharedFollowActions
 .. attributetable:: mipac.actions.follow.SharedFollowActions
 
 .. autoclass:: mipac.actions.follow.SharedFollowActions
+    :members:
+
+
+HashtagActions
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.hashtag.HashtagActions
+
+.. autoclass:: mipac.actions.hashtag.HashtagActions
     :members:
 
 
@@ -1665,6 +1746,24 @@ AdminEmojiActions
     :members:
 
 
+ClientAdminEmojiActions
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.emoji.ClientAdminEmojiActions
+
+.. autoclass:: mipac.actions.admins.emoji.ClientAdminEmojiActions
+    :members:
+
+
+SharedAdminEmojiActions
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.emoji.SharedAdminEmojiActions
+
+.. autoclass:: mipac.actions.admins.emoji.SharedAdminEmojiActions
+    :members:
+
+
 AdminInviteActions
 ~~~~~~~~~~~~~~~~~~
 
@@ -1683,12 +1782,21 @@ AdminRoleActions
     :members:
 
 
-AdminRoleModelActions
-~~~~~~~~~~~~~~~~~~~~~
+ClientAdminRoleActions
+~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.roles.AdminRoleModelActions
+.. attributetable:: mipac.actions.admins.roles.ClientAdminRoleActions
 
-.. autoclass:: mipac.actions.admins.roles.AdminRoleModelActions
+.. autoclass:: mipac.actions.admins.roles.ClientAdminRoleActions
+    :members:
+
+
+SharedAdminRoleActions
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.actions.admins.roles.SharedAdminRoleActions
+
+.. autoclass:: mipac.actions.admins.roles.SharedAdminRoleActions
     :members:
 
 
@@ -1990,6 +2098,15 @@ IAntenna
     :members:
 
 
+IApp
+~~~~
+
+.. attributetable:: mipac.types.app.IApp
+
+.. autoclass:: mipac.types.app.IApp
+    :members:
+
+
 IBlocking
 ~~~~~~~~~
 
@@ -2050,6 +2167,15 @@ IClip
 .. attributetable:: mipac.types.clip.IClip
 
 .. autoclass:: mipac.types.clip.IClip
+    :members:
+
+
+IID
+~~~
+
+.. attributetable:: mipac.types.common.IID
+
+.. autoclass:: mipac.types.common.IID
     :members:
 
 
@@ -2185,6 +2311,24 @@ IGalleryPost
 .. attributetable:: mipac.types.gallery.IGalleryPost
 
 .. autoclass:: mipac.types.gallery.IGalleryPost
+    :members:
+
+
+IHashtag
+~~~~~~~~
+
+.. attributetable:: mipac.types.hashtag.IHashtag
+
+.. autoclass:: mipac.types.hashtag.IHashtag
+    :members:
+
+
+ITrendHashtag
+~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.hashtag.ITrendHashtag
+
+.. autoclass:: mipac.types.hashtag.ITrendHashtag
     :members:
 
 
@@ -2870,6 +3014,15 @@ AlreadyClippedError
     :members:
 
 
+AlreadyEndedError
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.AlreadyEndedError
+
+.. autoclass:: mipac.errors.errors.AlreadyEndedError
+    :members:
+
+
 AlreadyExpiredError
 ~~~~~~~~~~~~~~~~~~~
 
@@ -2897,21 +3050,21 @@ AlreadyFollowingError
     :members:
 
 
-AlreadyInvitedError
-~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.errors.AlreadyInvitedError
-
-.. autoclass:: mipac.errors.errors.AlreadyInvitedError
-    :members:
-
-
 AlreadyLikedError
 ~~~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.errors.errors.AlreadyLikedError
 
 .. autoclass:: mipac.errors.errors.AlreadyLikedError
+    :members:
+
+
+AlreadyMovedError
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.AlreadyMovedError
+
+.. autoclass:: mipac.errors.errors.AlreadyMovedError
     :members:
 
 
@@ -2960,6 +3113,15 @@ AlreadyVotedError
     :members:
 
 
+AuthenticationFailedError
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.AuthenticationFailedError
+
+.. autoclass:: mipac.errors.errors.AuthenticationFailedError
+    :members:
+
+
 AvatarNotAnImageError
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -2975,6 +3137,15 @@ BannerNotAnImageError
 .. attributetable:: mipac.errors.errors.BannerNotAnImageError
 
 .. autoclass:: mipac.errors.errors.BannerNotAnImageError
+    :members:
+
+
+BirthdayDateFormatInvalidError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.BirthdayDateFormatInvalidError
+
+.. autoclass:: mipac.errors.errors.BirthdayDateFormatInvalidError
     :members:
 
 
@@ -3005,12 +3176,48 @@ BlockingError
     :members:
 
 
+BothWithRepliesAndWithFilesError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.BothWithRepliesAndWithFilesError
+
+.. autoclass:: mipac.errors.errors.BothWithRepliesAndWithFilesError
+    :members:
+
+
+CanNotDeleteInviteCodeError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.CanNotDeleteInviteCodeError
+
+.. autoclass:: mipac.errors.errors.CanNotDeleteInviteCodeError
+    :members:
+
+
 CannotCreateAlreadyExpiredPollError
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.errors.errors.CannotCreateAlreadyExpiredPollError
 
 .. autoclass:: mipac.errors.errors.CannotCreateAlreadyExpiredPollError
+    :members:
+
+
+CannotRenoteDueToVisibilityError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.CannotRenoteDueToVisibilityError
+
+.. autoclass:: mipac.errors.errors.CannotRenoteDueToVisibilityError
+    :members:
+
+
+CannotRenoteOutsideOfChannelError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.CannotRenoteOutsideOfChannelError
+
+.. autoclass:: mipac.errors.errors.CannotRenoteOutsideOfChannelError
     :members:
 
 
@@ -3032,6 +3239,24 @@ CannotReplyToAPureRenoteError
     :members:
 
 
+CannotReplyToAnInvisibleNoteError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.CannotReplyToAnInvisibleNoteError
+
+.. autoclass:: mipac.errors.errors.CannotReplyToAnInvisibleNoteError
+    :members:
+
+
+CannotReplyToSpecifiedVisibilityNoteWithExtendedVisibilityError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.CannotReplyToSpecifiedVisibilityNoteWithExtendedVisibilityError
+
+.. autoclass:: mipac.errors.errors.CannotReplyToSpecifiedVisibilityNoteWithExtendedVisibilityError
+    :members:
+
+
 CannotReportTheAdminError
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3050,12 +3275,21 @@ CannotReportYourselfError
     :members:
 
 
-ContentRequiredError
-~~~~~~~~~~~~~~~~~~~~
+ContainsProhibitedWordsError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.errors.errors.ContentRequiredError
+.. attributetable:: mipac.errors.errors.ContainsProhibitedWordsError
 
-.. autoclass:: mipac.errors.errors.ContentRequiredError
+.. autoclass:: mipac.errors.errors.ContainsProhibitedWordsError
+    :members:
+
+
+ContainsTooManyMentionsError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ContainsTooManyMentionsError
+
+.. autoclass:: mipac.errors.errors.ContainsTooManyMentionsError
     :members:
 
 
@@ -3065,6 +3299,60 @@ CredentialRequiredError
 .. attributetable:: mipac.errors.errors.CredentialRequiredError
 
 .. autoclass:: mipac.errors.errors.CredentialRequiredError
+    :members:
+
+
+DestinationAccountForbidsError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.DestinationAccountForbidsError
+
+.. autoclass:: mipac.errors.errors.DestinationAccountForbidsError
+    :members:
+
+
+DuplicateNameError
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.DuplicateNameError
+
+.. autoclass:: mipac.errors.errors.DuplicateNameError
+    :members:
+
+
+EmptyFileError
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.EmptyFileError
+
+.. autoclass:: mipac.errors.errors.EmptyFileError
+    :members:
+
+
+ExceededLimitOfCreateInviteCodeError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ExceededLimitOfCreateInviteCodeError
+
+.. autoclass:: mipac.errors.errors.ExceededLimitOfCreateInviteCodeError
+    :members:
+
+
+ExtResourceHashDidntMatchError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ExtResourceHashDidntMatchError
+
+.. autoclass:: mipac.errors.errors.ExtResourceHashDidntMatchError
+    :members:
+
+
+ExtResourceReturnedInvalidSchemaError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ExtResourceReturnedInvalidSchemaError
+
+.. autoclass:: mipac.errors.errors.ExtResourceReturnedInvalidSchemaError
     :members:
 
 
@@ -3113,12 +3401,12 @@ ForbiddenError
     :members:
 
 
-GroupAccessDeniedError
-~~~~~~~~~~~~~~~~~~~~~~
+ForbiddenToSetYourselfError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.errors.errors.GroupAccessDeniedError
+.. attributetable:: mipac.errors.errors.ForbiddenToSetYourselfError
 
-.. autoclass:: mipac.errors.errors.GroupAccessDeniedError
+.. autoclass:: mipac.errors.errors.ForbiddenToSetYourselfError
     :members:
 
 
@@ -3140,12 +3428,30 @@ HasChildFilesOrFoldersError
     :members:
 
 
+IAmAiError
+~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.IAmAiError
+
+.. autoclass:: mipac.errors.errors.IAmAiError
+    :members:
+
+
 InappropriateError
 ~~~~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.errors.errors.InappropriateError
 
 .. autoclass:: mipac.errors.errors.InappropriateError
+    :members:
+
+
+IncorrectPasswordError
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.IncorrectPasswordError
+
+.. autoclass:: mipac.errors.errors.IncorrectPasswordError
     :members:
 
 
@@ -3164,6 +3470,15 @@ InvalidChoiceError
 .. attributetable:: mipac.errors.errors.InvalidChoiceError
 
 .. autoclass:: mipac.errors.errors.InvalidChoiceError
+    :members:
+
+
+InvalidDateTimeError
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.InvalidDateTimeError
+
+.. autoclass:: mipac.errors.errors.InvalidDateTimeError
     :members:
 
 
@@ -3194,6 +3509,15 @@ InvalidRegexpError
     :members:
 
 
+InvalidSeedError
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.InvalidSeedError
+
+.. autoclass:: mipac.errors.errors.InvalidSeedError
+    :members:
+
+
 InvalidUrlError
 ~~~~~~~~~~~~~~~
 
@@ -3203,12 +3527,12 @@ InvalidUrlError
     :members:
 
 
-IsOwnerError
-~~~~~~~~~~~~
+IsRemoteUserError
+~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.errors.errors.IsOwnerError
+.. attributetable:: mipac.errors.errors.IsRemoteUserError
 
-.. autoclass:: mipac.errors.errors.IsOwnerError
+.. autoclass:: mipac.errors.errors.IsRemoteUserError
     :members:
 
 
@@ -3218,15 +3542,6 @@ LtlDisabledError
 .. attributetable:: mipac.errors.errors.LtlDisabledError
 
 .. autoclass:: mipac.errors.errors.LtlDisabledError
-    :members:
-
-
-MoSuchFileError
-~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.errors.MoSuchFileError
-
-.. autoclass:: mipac.errors.errors.MoSuchFileError
     :members:
 
 
@@ -3272,6 +3587,15 @@ NoPollError
 .. attributetable:: mipac.errors.errors.NoPollError
 
 .. autoclass:: mipac.errors.errors.NoPollError
+    :members:
+
+
+NoSecurityKeyError
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSecurityKeyError
+
+.. autoclass:: mipac.errors.errors.NoSecurityKeyError
     :members:
 
 
@@ -3365,6 +3689,15 @@ NoSuchFileError
     :members:
 
 
+NoSuchFlashError
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSuchFlashError
+
+.. autoclass:: mipac.errors.errors.NoSuchFlashError
+    :members:
+
+
 NoSuchFolderError
 ~~~~~~~~~~~~~~~~~
 
@@ -3374,21 +3707,12 @@ NoSuchFolderError
     :members:
 
 
-NoSuchGroupError
-~~~~~~~~~~~~~~~~
+NoSuchGameError
+~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.errors.errors.NoSuchGroupError
+.. attributetable:: mipac.errors.errors.NoSuchGameError
 
-.. autoclass:: mipac.errors.errors.NoSuchGroupError
-    :members:
-
-
-NoSuchGroupMemberError
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.errors.NoSuchGroupMemberError
-
-.. autoclass:: mipac.errors.errors.NoSuchGroupMemberError
+.. autoclass:: mipac.errors.errors.NoSuchGameError
     :members:
 
 
@@ -3401,12 +3725,21 @@ NoSuchHashtagError
     :members:
 
 
-NoSuchInvitationError
+NoSuchInviteCodeError
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.errors.errors.NoSuchInvitationError
+.. attributetable:: mipac.errors.errors.NoSuchInviteCodeError
 
-.. autoclass:: mipac.errors.errors.NoSuchInvitationError
+.. autoclass:: mipac.errors.errors.NoSuchInviteCodeError
+    :members:
+
+
+NoSuchKeyError
+~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSuchKeyError
+
+.. autoclass:: mipac.errors.errors.NoSuchKeyError
     :members:
 
 
@@ -3419,30 +3752,12 @@ NoSuchListError
     :members:
 
 
-NoSuchMessageError
-~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.errors.NoSuchMessageError
-
-.. autoclass:: mipac.errors.errors.NoSuchMessageError
-    :members:
-
-
 NoSuchNoteError
 ~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.errors.errors.NoSuchNoteError
 
 .. autoclass:: mipac.errors.errors.NoSuchNoteError
-    :members:
-
-
-NoSuchNotificationError
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.errors.NoSuchNotificationError
-
-.. autoclass:: mipac.errors.errors.NoSuchNotificationError
     :members:
 
 
@@ -3482,6 +3797,15 @@ NoSuchPostError
     :members:
 
 
+NoSuchRegistrationError
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSuchRegistrationError
+
+.. autoclass:: mipac.errors.errors.NoSuchRegistrationError
+    :members:
+
+
 NoSuchRenoteTargetError
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3497,6 +3821,15 @@ NoSuchReplyTargetError
 .. attributetable:: mipac.errors.errors.NoSuchReplyTargetError
 
 .. autoclass:: mipac.errors.errors.NoSuchReplyTargetError
+    :members:
+
+
+NoSuchRoleError
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSuchRoleError
+
+.. autoclass:: mipac.errors.errors.NoSuchRoleError
     :members:
 
 
@@ -3518,15 +3851,6 @@ NoSuchUserError
     :members:
 
 
-NoSuchUserGroupError
-~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.errors.NoSuchUserGroupError
-
-.. autoclass:: mipac.errors.errors.NoSuchUserGroupError
-    :members:
-
-
 NoSuchUserListError
 ~~~~~~~~~~~~~~~~~~~
 
@@ -3542,6 +3866,15 @@ NoSuchWebhookError
 .. attributetable:: mipac.errors.errors.NoSuchWebhookError
 
 .. autoclass:: mipac.errors.errors.NoSuchWebhookError
+    :members:
+
+
+NotAssignedError
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NotAssignedError
+
+.. autoclass:: mipac.errors.errors.NotAssignedError
     :members:
 
 
@@ -3599,21 +3932,21 @@ NotReactedError
     :members:
 
 
+NotRootForbiddenError
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NotRootForbiddenError
+
+.. autoclass:: mipac.errors.errors.NotRootForbiddenError
+    :members:
+
+
 PendingSessionError
 ~~~~~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.errors.errors.PendingSessionError
 
 .. autoclass:: mipac.errors.errors.PendingSessionError
-    :members:
-
-
-PermissionDeniedError
-~~~~~~~~~~~~~~~~~~~~~
-
-.. attributetable:: mipac.errors.errors.PermissionDeniedError
-
-.. autoclass:: mipac.errors.errors.PermissionDeniedError
     :members:
 
 
@@ -3644,12 +3977,39 @@ ReactionsNotPublicError
     :members:
 
 
-RecipientIsYourselfError
+RecursiveNestingError
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.RecursiveNestingError
+
+.. autoclass:: mipac.errors.errors.RecursiveNestingError
+    :members:
+
+
+RemoteUserNotAllowedError
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.RemoteUserNotAllowedError
+
+.. autoclass:: mipac.errors.errors.RemoteUserNotAllowedError
+    :members:
+
+
+RestrictedByRoleError
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.RestrictedByRoleError
+
+.. autoclass:: mipac.errors.errors.RestrictedByRoleError
+    :members:
+
+
+SameNameEmojiExistsError
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.errors.errors.RecipientIsYourselfError
+.. attributetable:: mipac.errors.errors.SameNameEmojiExistsError
 
-.. autoclass:: mipac.errors.errors.RecipientIsYourselfError
+.. autoclass:: mipac.errors.errors.SameNameEmojiExistsError
     :members:
 
 
@@ -3662,12 +4022,138 @@ StlDisabledError
     :members:
 
 
-YouAreOwnerError
+TargetIsYourselfError
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TargetIsYourselfError
+
+.. autoclass:: mipac.errors.errors.TargetIsYourselfError
+    :members:
+
+
+TooBigFileError
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TooBigFileError
+
+.. autoclass:: mipac.errors.errors.TooBigFileError
+    :members:
+
+
+TooManyAntennasError
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TooManyAntennasError
+
+.. autoclass:: mipac.errors.errors.TooManyAntennasError
+    :members:
+
+
+TooManyClipNotesError
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TooManyClipNotesError
+
+.. autoclass:: mipac.errors.errors.TooManyClipNotesError
+    :members:
+
+
+TooManyClipsError
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TooManyClipsError
+
+.. autoclass:: mipac.errors.errors.TooManyClipsError
+    :members:
+
+
+TooManyMutedWordsError
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TooManyMutedWordsError
+
+.. autoclass:: mipac.errors.errors.TooManyMutedWordsError
+    :members:
+
+
+TooManyUserlistsError
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TooManyUserlistsError
+
+.. autoclass:: mipac.errors.errors.TooManyUserlistsError
+    :members:
+
+
+TooManyUsersError
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TooManyUsersError
+
+.. autoclass:: mipac.errors.errors.TooManyUsersError
+    :members:
+
+
+TooManyWebhooksError
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TooManyWebhooksError
+
+.. autoclass:: mipac.errors.errors.TooManyWebhooksError
+    :members:
+
+
+TwoFactorNotEnabledError
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TwoFactorNotEnabledError
+
+.. autoclass:: mipac.errors.errors.TwoFactorNotEnabledError
+    :members:
+
+
+UnavailableError
 ~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.errors.errors.YouAreOwnerError
+.. attributetable:: mipac.errors.errors.UnavailableError
 
-.. autoclass:: mipac.errors.errors.YouAreOwnerError
+.. autoclass:: mipac.errors.errors.UnavailableError
+    :members:
+
+
+UnexpectedFileTypeError
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.UnexpectedFileTypeError
+
+.. autoclass:: mipac.errors.errors.UnexpectedFileTypeError
+    :members:
+
+
+UriNullError
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.UriNullError
+
+.. autoclass:: mipac.errors.errors.UriNullError
+    :members:
+
+
+UserIsDeletedError
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.UserIsDeletedError
+
+.. autoclass:: mipac.errors.errors.UserIsDeletedError
+    :members:
+
+
+UserNotFoundError
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.UserNotFoundError
+
+.. autoclass:: mipac.errors.errors.UserNotFoundError
     :members:
 
 
@@ -3680,12 +4166,12 @@ YouHaveBeenBlockedError
     :members:
 
 
-YourAccountSuspendedError
-~~~~~~~~~~~~~~~~~~~~~~~~~
+YourFlashError
+~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.errors.errors.YourAccountSuspendedError
+.. attributetable:: mipac.errors.errors.YourFlashError
 
-.. autoclass:: mipac.errors.errors.YourAccountSuspendedError
+.. autoclass:: mipac.errors.errors.YourFlashError
     :members:
 
 
@@ -3889,6 +4375,12 @@ Pagination
 
 .. autoclass:: mipac.utils.pagination.Pagination
     :members:
+
+
+check_char_length_least
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: mipac.utils.util.check_char_length_least
 
 
 check_multi_arg

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mipac \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-04 12:46+0900\n"
+"POT-Creation-Date: 2024-05-31 12:16+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -31,72 +31,40 @@ msgstr ""
 msgid "Ad"
 msgstr ""
 
-#: ../../index.rst:17
-msgid "IndexStat"
-msgstr ""
-
-#: ../../index.rst:26
-msgid "ModerationLog"
-msgstr ""
-
-#: ../../index.rst:35
-msgid "ServerInfo"
-msgstr ""
-
-#: ../../index.rst:44
-msgid "ServerInfoCpu"
-msgstr ""
-
-#: ../../index.rst:53
-msgid "ServerInfoFs"
-msgstr ""
-
-#: ../../index.rst:62
-msgid "ServerInfoMem"
-msgstr ""
-
-#: ../../index.rst:71
-msgid "ServerInfoNet"
-msgstr ""
-
-#: ../../index.rst:80
-msgid "UserIP"
-msgstr ""
-
-#: ../../index.rst:89
-msgid "Announcement"
-msgstr ""
-
-#: ../../index.rst:98
-msgid "AnnouncementDetailed"
-msgstr ""
-
-#: mipac.models.announcement.AnnouncementDetailed.reads:1 of
-msgid "Returns the number of reads of the announcement."
-msgstr ""
-
-#: ../../index.rst:107
-msgid "Antenna"
-msgstr ""
-
-#: ../../index.rst:116
-msgid "Blocking"
-msgstr ""
-
-#: mipac.models.blocking.Blocking.api:1 mipac.models.blocking.Blocking.api:3 of
-msgid "ブロック対象に対するAPIを利用するためのManager"
+#: mipac.models.ad.Ad.expires_at:1 mipac.models.ad.Ad.expires_at:3 of
+msgid "いつ広告が終了するか"
 msgstr ""
 
 #: mipac.actions.admins.accounts.AdminAccountActions.create
 #: mipac.actions.admins.accounts.AdminAccountActions.delete
 #: mipac.actions.admins.admin.AdminActions.reset_password
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update
 #: mipac.actions.admins.drive.AdminDriveActions.clean_remote_files
 #: mipac.actions.admins.drive.AdminDriveActions.cleanup
 #: mipac.actions.admins.drive.AdminDriveActions.get_files
 #: mipac.actions.admins.drive.AdminDriveActions.show_file
-#: mipac.actions.admins.emoji.AdminEmojiActions.remove
-#: mipac.actions.admins.roles.AdminRoleModelActions.assign
-#: mipac.actions.admins.roles.AdminRoleModelActions.unassign
+#: mipac.actions.admins.emoji.AdminEmojiActions.add
+#: mipac.actions.admins.emoji.AdminEmojiActions.add_aliases_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.delete_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list_remote
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove_aliases_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_aliases_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_category_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_license_bulk
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.delete
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.delete
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update
+#: mipac.actions.admins.roles.ClientAdminRoleActions.assign
+#: mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users
+#: mipac.actions.admins.roles.ClientAdminRoleActions.unassign
+#: mipac.actions.admins.roles.SharedAdminRoleActions.assign
+#: mipac.actions.admins.roles.SharedAdminRoleActions.get_all_users
+#: mipac.actions.admins.roles.SharedAdminRoleActions.unassign
 #: mipac.actions.admins.user.ClientAdminUserActions.delete_account
 #: mipac.actions.admins.user.ClientAdminUserActions.suspend
 #: mipac.actions.admins.user.ClientAdminUserActions.unsuspend
@@ -110,6 +78,7 @@ msgstr ""
 #: mipac.actions.antenna.SharedAntennaActions.delete
 #: mipac.actions.antenna.SharedAntennaActions.show
 #: mipac.actions.antenna.SharedAntennaActions.update
+#: mipac.actions.app.AppActions.create mipac.actions.app.AppActions.show
 #: mipac.actions.channel.ChannelActions.create
 #: mipac.actions.channel.ChannelActions.featured
 #: mipac.actions.channel.ChannelActions.get_all_followed
@@ -184,6 +153,10 @@ msgstr ""
 #: mipac.actions.follow.SharedFollowActions.add
 #: mipac.actions.follow.SharedFollowActions.invalidate
 #: mipac.actions.follow.SharedFollowActions.remove
+#: mipac.actions.hashtag.HashtagActions.get_list
+#: mipac.actions.hashtag.HashtagActions.get_trend
+#: mipac.actions.hashtag.HashtagActions.search
+#: mipac.actions.hashtag.HashtagActions.show
 #: mipac.actions.invite.ClientInviteActions.delete
 #: mipac.actions.invite.InviteActions.create
 #: mipac.actions.invite.InviteActions.get_all_list
@@ -274,11 +247,45 @@ msgstr ""
 #: mipac.manager.favorite.ClientFavoriteManager.action
 #: mipac.manager.favorite.FavoriteManager.action
 #: mipac.manager.reaction.ClientReactionManager.action
-#: mipac.manager.reaction.ReactionManager.action
-#: mipac.models.blocking.Blocking.api mipac.models.blocking.Blocking.blockee
+#: mipac.manager.reaction.ReactionManager.action mipac.models.ad.Ad.expires_at
+#: mipac.models.ad.Ad.memo mipac.models.ad.Ad.priority
+#: mipac.models.ad.Ad.starts_at
+#: mipac.models.announcement.Announcement.created_at
+#: mipac.models.announcement.Announcement.id
+#: mipac.models.announcement.Announcement.text
+#: mipac.models.announcement.Announcement.title
+#: mipac.models.announcement.Announcement.updated_at
+#: mipac.models.antenna.Antenna.created_at
+#: mipac.models.antenna.Antenna.exclude_keywords
+#: mipac.models.antenna.Antenna.id mipac.models.antenna.Antenna.keywords
+#: mipac.models.antenna.Antenna.name mipac.models.blocking.Blocking.api
+#: mipac.models.blocking.Blocking.blockee
 #: mipac.models.blocking.Blocking.blockee_id
 #: mipac.models.blocking.Blocking.created_at mipac.models.blocking.Blocking.id
 #: mipac.models.drive.DriveStatus.capacity mipac.models.drive.DriveStatus.usage
+#: mipac.models.drive.File.api mipac.models.drive.File.blurhash
+#: mipac.models.drive.File.comment mipac.models.drive.File.created_at
+#: mipac.models.drive.File.folder mipac.models.drive.File.folder_id
+#: mipac.models.drive.File.id mipac.models.drive.File.is_sensitive
+#: mipac.models.drive.File.md5 mipac.models.drive.File.name
+#: mipac.models.drive.File.properties mipac.models.drive.File.size
+#: mipac.models.drive.File.thumbnail_url mipac.models.drive.File.type
+#: mipac.models.drive.File.url mipac.models.drive.File.user
+#: mipac.models.drive.File.user_id mipac.models.drive.FileProperties.height
+#: mipac.models.drive.FileProperties.width mipac.models.drive.Folder.created_at
+#: mipac.models.drive.Folder.files_count
+#: mipac.models.drive.Folder.folders_count mipac.models.drive.Folder.id
+#: mipac.models.drive.Folder.name mipac.models.drive.Folder.parent
+#: mipac.models.drive.Folder.parent_id mipac.models.hashtag.TrendHashtag.chart
+#: mipac.models.hashtag.TrendHashtag.tag
+#: mipac.models.hashtag.TrendHashtag.users_count
+#: mipac.models.lite.ad.PartialAd.id mipac.models.lite.ad.PartialAd.url
+#: mipac.models.lite.instance.LiteInstance.favicon_url
+#: mipac.models.lite.instance.LiteInstance.icon_url
+#: mipac.models.lite.instance.LiteInstance.name
+#: mipac.models.lite.instance.LiteInstance.software_name
+#: mipac.models.lite.instance.LiteInstance.software_version
+#: mipac.models.lite.instance.LiteInstance.theme_color
 #: mipac.models.lite.user.AvatarDecoration.angle
 #: mipac.models.lite.user.AvatarDecoration.flip_h
 #: mipac.models.lite.user.AvatarDecoration.id
@@ -331,7 +338,8 @@ msgstr ""
 #: mipac.utils.format.remove_dict_empty mipac.utils.format.remove_dict_missing
 #: mipac.utils.format.snake_to_camel mipac.utils.format.str_to_datetime
 #: mipac.utils.format.upper_to_lower mipac.utils.pagination.Pagination.is_final
-#: mipac.utils.pagination.Pagination.next mipac.utils.util.check_multi_arg
+#: mipac.utils.pagination.Pagination.next
+#: mipac.utils.util.check_char_length_least mipac.utils.util.check_multi_arg
 #: mipac.utils.util.deprecated.<locals>.new_func of
 msgid "戻り値"
 msgstr ""
@@ -339,13 +347,33 @@ msgstr ""
 #: mipac.actions.admins.accounts.AdminAccountActions.create
 #: mipac.actions.admins.accounts.AdminAccountActions.delete
 #: mipac.actions.admins.admin.AdminActions.reset_password
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update
 #: mipac.actions.admins.drive.AdminDriveActions.clean_remote_files
 #: mipac.actions.admins.drive.AdminDriveActions.cleanup
 #: mipac.actions.admins.drive.AdminDriveActions.get_files
 #: mipac.actions.admins.drive.AdminDriveActions.show_file
-#: mipac.actions.admins.emoji.AdminEmojiActions.remove
-#: mipac.actions.admins.roles.AdminRoleModelActions.assign
-#: mipac.actions.admins.roles.AdminRoleModelActions.unassign
+#: mipac.actions.admins.emoji.AdminEmojiActions.add
+#: mipac.actions.admins.emoji.AdminEmojiActions.add_aliases_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.delete_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list_remote
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove_aliases_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_aliases_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_category_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_license_bulk
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.delete
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.delete
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update
+#: mipac.actions.admins.roles.ClientAdminRoleActions.assign
+#: mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users
+#: mipac.actions.admins.roles.ClientAdminRoleActions.unassign
+#: mipac.actions.admins.roles.SharedAdminRoleActions.assign
+#: mipac.actions.admins.roles.SharedAdminRoleActions.get_all_users
+#: mipac.actions.admins.roles.SharedAdminRoleActions.unassign
 #: mipac.actions.admins.user.ClientAdminUserActions.delete_account
 #: mipac.actions.admins.user.ClientAdminUserActions.suspend
 #: mipac.actions.admins.user.ClientAdminUserActions.unsuspend
@@ -359,6 +387,7 @@ msgstr ""
 #: mipac.actions.antenna.SharedAntennaActions.delete
 #: mipac.actions.antenna.SharedAntennaActions.show
 #: mipac.actions.antenna.SharedAntennaActions.update
+#: mipac.actions.app.AppActions.create mipac.actions.app.AppActions.show
 #: mipac.actions.channel.ChannelActions.create
 #: mipac.actions.channel.ChannelActions.featured
 #: mipac.actions.channel.ChannelActions.get_all_followed
@@ -433,6 +462,10 @@ msgstr ""
 #: mipac.actions.follow.SharedFollowActions.add
 #: mipac.actions.follow.SharedFollowActions.invalidate
 #: mipac.actions.follow.SharedFollowActions.remove
+#: mipac.actions.hashtag.HashtagActions.get_list
+#: mipac.actions.hashtag.HashtagActions.get_trend
+#: mipac.actions.hashtag.HashtagActions.search
+#: mipac.actions.hashtag.HashtagActions.show
 #: mipac.actions.invite.ClientInviteActions.delete
 #: mipac.actions.invite.InviteActions.create
 #: mipac.actions.invite.InviteActions.get_all_list
@@ -524,8 +557,19 @@ msgstr ""
 #: mipac.manager.favorite.ClientFavoriteManager.action
 #: mipac.manager.favorite.FavoriteManager.action
 #: mipac.manager.reaction.ClientReactionManager.action
-#: mipac.manager.reaction.ReactionManager.action
-#: mipac.models.blocking.Blocking.api mipac.models.blocking.Blocking.blockee
+#: mipac.manager.reaction.ReactionManager.action mipac.models.ad.Ad.expires_at
+#: mipac.models.ad.Ad.memo mipac.models.ad.Ad.priority
+#: mipac.models.ad.Ad.starts_at
+#: mipac.models.announcement.Announcement.created_at
+#: mipac.models.announcement.Announcement.id
+#: mipac.models.announcement.Announcement.text
+#: mipac.models.announcement.Announcement.title
+#: mipac.models.announcement.Announcement.updated_at
+#: mipac.models.antenna.Antenna.created_at
+#: mipac.models.antenna.Antenna.exclude_keywords
+#: mipac.models.antenna.Antenna.id mipac.models.antenna.Antenna.keywords
+#: mipac.models.antenna.Antenna.name mipac.models.blocking.Blocking.api
+#: mipac.models.blocking.Blocking.blockee
 #: mipac.models.blocking.Blocking.blockee_id
 #: mipac.models.blocking.Blocking.created_at mipac.models.blocking.Blocking.id
 #: mipac.models.channel.Channel.allow_renote_to_external
@@ -543,6 +587,29 @@ msgstr ""
 #: mipac.models.channel.Channel.user_id
 #: mipac.models.channel.Channel.users_count
 #: mipac.models.drive.DriveStatus.capacity mipac.models.drive.DriveStatus.usage
+#: mipac.models.drive.File.api mipac.models.drive.File.blurhash
+#: mipac.models.drive.File.comment mipac.models.drive.File.created_at
+#: mipac.models.drive.File.folder mipac.models.drive.File.folder_id
+#: mipac.models.drive.File.id mipac.models.drive.File.is_sensitive
+#: mipac.models.drive.File.md5 mipac.models.drive.File.name
+#: mipac.models.drive.File.properties mipac.models.drive.File.size
+#: mipac.models.drive.File.thumbnail_url mipac.models.drive.File.type
+#: mipac.models.drive.File.url mipac.models.drive.File.user
+#: mipac.models.drive.File.user_id mipac.models.drive.FileProperties.height
+#: mipac.models.drive.FileProperties.width mipac.models.drive.Folder.created_at
+#: mipac.models.drive.Folder.files_count
+#: mipac.models.drive.Folder.folders_count mipac.models.drive.Folder.id
+#: mipac.models.drive.Folder.name mipac.models.drive.Folder.parent
+#: mipac.models.drive.Folder.parent_id mipac.models.hashtag.TrendHashtag.chart
+#: mipac.models.hashtag.TrendHashtag.tag
+#: mipac.models.hashtag.TrendHashtag.users_count
+#: mipac.models.lite.ad.PartialAd.id mipac.models.lite.ad.PartialAd.url
+#: mipac.models.lite.instance.LiteInstance.favicon_url
+#: mipac.models.lite.instance.LiteInstance.icon_url
+#: mipac.models.lite.instance.LiteInstance.name
+#: mipac.models.lite.instance.LiteInstance.software_name
+#: mipac.models.lite.instance.LiteInstance.software_version
+#: mipac.models.lite.instance.LiteInstance.theme_color
 #: mipac.models.lite.user.AvatarDecoration.angle
 #: mipac.models.lite.user.AvatarDecoration.flip_h
 #: mipac.models.lite.user.AvatarDecoration.id
@@ -595,9 +662,158 @@ msgstr ""
 #: mipac.utils.format.remove_dict_empty mipac.utils.format.remove_dict_missing
 #: mipac.utils.format.snake_to_camel mipac.utils.format.str_to_datetime
 #: mipac.utils.format.upper_to_lower mipac.utils.pagination.Pagination.is_final
-#: mipac.utils.pagination.Pagination.next mipac.utils.util.check_multi_arg
+#: mipac.utils.pagination.Pagination.next
+#: mipac.utils.util.check_char_length_least mipac.utils.util.check_multi_arg
 #: mipac.utils.util.deprecated.<locals>.new_func of
 msgid "戻り値の型"
+msgstr ""
+
+#: mipac.models.ad.Ad.memo:1 mipac.models.ad.Ad.memo:3 of
+msgid "広告のメモ"
+msgstr ""
+
+#: mipac.models.ad.Ad.priority:1 mipac.models.ad.Ad.priority:3 of
+msgid "広告の優先度"
+msgstr ""
+
+#: mipac.models.ad.Ad.starts_at:1 mipac.models.ad.Ad.starts_at:3 of
+msgid "いつ広告が開始するか"
+msgstr ""
+
+#: ../../index.rst:17
+msgid "IndexStat"
+msgstr ""
+
+#: ../../index.rst:26
+msgid "ModerationLog"
+msgstr ""
+
+#: ../../index.rst:35
+msgid "ServerInfo"
+msgstr ""
+
+#: ../../index.rst:44
+msgid "ServerInfoCpu"
+msgstr ""
+
+#: ../../index.rst:53
+msgid "ServerInfoFs"
+msgstr ""
+
+#: ../../index.rst:62
+msgid "ServerInfoMem"
+msgstr ""
+
+#: ../../index.rst:71
+msgid "ServerInfoNet"
+msgstr ""
+
+#: ../../index.rst:80
+msgid "UserIP"
+msgstr ""
+
+#: ../../index.rst:89
+msgid "Announcement"
+msgstr ""
+
+#: mipac.models.announcement.Announcement.created_at:1
+#: mipac.models.announcement.Announcement.created_at:3 of
+msgid "アナウンスが作成された日時"
+msgstr ""
+
+#: mipac.models.announcement.Announcement.id:1
+#: mipac.models.announcement.Announcement.id:3 of
+msgid "アナウンスのID"
+msgstr ""
+
+#: mipac.models.announcement.Announcement.text:1
+#: mipac.models.announcement.Announcement.text:3 of
+msgid "アナウンスの内容"
+msgstr ""
+
+#: mipac.models.announcement.Announcement.title:1
+#: mipac.models.announcement.Announcement.title:3 of
+msgid "アナウンスのタイトル"
+msgstr ""
+
+#: mipac.models.announcement.Announcement.updated_at:1
+#: mipac.models.announcement.Announcement.updated_at:5 of
+msgid "アナウンスが更新された日時"
+msgstr ""
+
+#: mipac.models.announcement.Announcement.updated_at:3 of
+msgid "Noneの場合は、アナウンスが更新されていないことを示します。"
+msgstr ""
+
+#: ../../index.rst:98
+msgid "AnnouncementDetailed"
+msgstr ""
+
+#: mipac.models.announcement.AnnouncementDetailed.reads:1 of
+msgid "Returns the number of reads of the announcement."
+msgstr ""
+
+#: ../../index.rst:107
+msgid "Antenna"
+msgstr ""
+
+#: mipac.models.antenna.Antenna.created_at:1
+#: mipac.models.antenna.Antenna.created_at:3 of
+msgid "アンテナの作成日時"
+msgstr ""
+
+#: mipac.models.antenna.Antenna.exclude_keywords:1
+#: mipac.models.antenna.Antenna.exclude_keywords:3 of
+msgid "除外キーワード"
+msgstr ""
+
+#: mipac.models.antenna.Antenna.id:1 mipac.models.antenna.Antenna.id:3 of
+msgid "アンテナのID"
+msgstr ""
+
+#: mipac.models.antenna.Antenna.keywords:1
+#: mipac.models.antenna.Antenna.keywords:3 of
+msgid "キーワード"
+msgstr ""
+
+#: mipac.models.antenna.Antenna.name:1 mipac.models.antenna.Antenna.name:3 of
+msgid "アンテナ名"
+msgstr ""
+
+#: ../../index.rst:116
+msgid "App"
+msgstr ""
+
+#: mipac.models.app.App.callback_url:1 of
+msgid "The callback url of the app"
+msgstr ""
+
+#: mipac.actions.app.AppActions.show:3 mipac.models.app.App.id:1 of
+msgid "The id of the app"
+msgstr ""
+
+#: mipac.models.app.App.is_authorized:1 of
+msgid "If the app is authorized or not"
+msgstr ""
+
+#: mipac.actions.app.AppActions.create:3 mipac.models.app.App.name:1 of
+msgid "The name of the app"
+msgstr ""
+
+#: mipac.actions.app.AppActions.create:7 mipac.models.app.App.permission:1 of
+msgid "The permissions the app has"
+msgstr ""
+
+#: mipac.models.app.App.secret:1 of
+msgid "The secret of the app"
+msgstr ""
+
+#: ../../index.rst:125
+msgid "Blocking"
+msgstr ""
+
+#: mipac.models.blocking.Blocking.api:1 mipac.models.blocking.Blocking.api:3 of
+msgid "ブロック対象に対するAPIを利用するためのManager"
 msgstr ""
 
 #: mipac.models.blocking.Blocking.blockee:1
@@ -619,7 +835,7 @@ msgstr ""
 msgid "ブロックID"
 msgstr ""
 
-#: ../../index.rst:125
+#: ../../index.rst:134
 msgid "Channel"
 msgstr ""
 
@@ -696,23 +912,23 @@ msgstr ""
 msgid "チャンネルに参加しているユーザー数"
 msgstr ""
 
-#: ../../index.rst:134
+#: ../../index.rst:143
 msgid "ActiveUsersChart"
 msgstr ""
 
-#: ../../index.rst:143
+#: ../../index.rst:152
 msgid "DriveChart"
 msgstr ""
 
-#: ../../index.rst:152
+#: ../../index.rst:161
 msgid "DriveLocalChart"
 msgstr ""
 
-#: ../../index.rst:161
+#: ../../index.rst:170
 msgid "DriveRemoteChart"
 msgstr ""
 
-#: ../../index.rst:170
+#: ../../index.rst:179
 msgid "Clip"
 msgstr ""
 
@@ -769,7 +985,15 @@ msgstr ""
 msgid "The user id who created the clip"
 msgstr ""
 
-#: ../../index.rst:179
+#: ../../index.rst:188
+msgid "ID"
+msgstr ""
+
+#: mipac.models.common.ID.id:1 of
+msgid "The id of the object"
+msgstr ""
+
+#: ../../index.rst:197
 msgid "DriveStatus"
 msgstr ""
 
@@ -783,67 +1007,209 @@ msgstr ""
 msgid "Total usage of the drive in bytes"
 msgstr ""
 
-#: ../../index.rst:188
+#: ../../index.rst:206
 msgid "File"
 msgstr ""
 
-#: ../../index.rst:197
-msgid "FileProperties"
+#: mipac.models.drive.File.api:1 mipac.models.drive.File.api:3 of
+msgid "このファイルに対する操作を行うためのAPIクライアント"
 msgstr ""
 
-#: ../../index.rst:206
-msgid "Folder"
+#: mipac.models.drive.File.blurhash:1 mipac.models.drive.File.blurhash:3 of
+msgid "ファイルのBlurHash"
+msgstr ""
+
+#: mipac.models.drive.File.comment:1 mipac.models.drive.File.comment:3 of
+msgid "ファイルのコメント"
+msgstr ""
+
+#: mipac.models.drive.File.created_at:1 mipac.models.drive.File.created_at:3 of
+msgid "ファイルの作成日時"
+msgstr ""
+
+#: mipac.models.drive.File.folder:1 mipac.models.drive.File.folder:3 of
+msgid "ファイルが存在するフォルダ"
+msgstr ""
+
+#: mipac.models.drive.File.folder_id:1 mipac.models.drive.File.folder_id:3 of
+msgid "ファイルが存在するフォルダのID"
+msgstr ""
+
+#: mipac.models.drive.File.id:1 mipac.models.drive.File.id:3 of
+msgid "ファイルのID"
+msgstr ""
+
+#: mipac.models.drive.File.is_sensitive:1 of
+msgid "ファイルが閲覧注意（NSFW）であるか"
+msgstr ""
+
+#: mipac.models.drive.File.is_sensitive:3 of
+msgid "ファイルが閲覧注意であるか"
+msgstr ""
+
+#: mipac.models.drive.File.md5:1 mipac.models.drive.File.md5:3 of
+msgid "ファイルのMD5ハッシュ"
+msgstr ""
+
+#: mipac.models.drive.File.name:1 mipac.models.drive.File.name:3 of
+msgid "拡張子付きのファイル名"
+msgstr ""
+
+#: mipac.models.drive.File.properties:1 mipac.models.drive.File.properties:3 of
+msgid "ファイルのプロパティ"
+msgstr ""
+
+#: mipac.models.drive.File.size:1 mipac.models.drive.File.size:3 of
+msgid "ファイルのサイズ"
+msgstr ""
+
+#: mipac.models.drive.File.thumbnail_url:1
+#: mipac.models.drive.File.thumbnail_url:3 of
+msgid "ファイルのサムネイルURL"
+msgstr ""
+
+#: mipac.models.drive.File.type:1 mipac.models.drive.File.type:3 of
+msgid "ファイルの種類 (MIME タイプ)"
+msgstr ""
+
+#: mipac.models.drive.File.url:1 mipac.models.drive.File.url:3 of
+msgid "ファイルのURL"
+msgstr ""
+
+#: mipac.models.drive.File.user:1 mipac.models.drive.File.user:3 of
+msgid "ファイルをアップロードしたユーザー"
+msgstr ""
+
+#: mipac.models.drive.File.user_id:1 mipac.models.drive.File.user_id:3 of
+msgid "ファイルをアップロードしたユーザーのID"
 msgstr ""
 
 #: ../../index.rst:215
-msgid "CustomEmoji"
+msgid "FileProperties"
+msgstr ""
+
+#: mipac.models.drive.FileProperties.height:1
+#: mipac.models.drive.FileProperties.height:3 of
+msgid "ファイルの高さ"
+msgstr ""
+
+#: mipac.models.drive.FileProperties.width:1
+#: mipac.models.drive.FileProperties.width:3 of
+msgid "ファイルの幅"
 msgstr ""
 
 #: ../../index.rst:224
-msgid "EmojiDetailed"
+msgid "Folder"
+msgstr ""
+
+#: mipac.models.drive.Folder.created_at:1
+#: mipac.models.drive.Folder.created_at:3 of
+msgid "フォルダーが作成された日時"
+msgstr ""
+
+#: mipac.models.drive.Folder.files_count:1
+#: mipac.models.drive.Folder.files_count:3 of
+msgid "フォルダー内のファイルの数"
+msgstr ""
+
+#: mipac.models.drive.Folder.folders_count:1
+#: mipac.models.drive.Folder.folders_count:3 of
+msgid "フォルダー内のフォルダーの数"
+msgstr ""
+
+#: mipac.models.drive.Folder.id:1 mipac.models.drive.Folder.id:3 of
+msgid "フォルダーのID"
+msgstr ""
+
+#: mipac.models.drive.Folder.name:1 mipac.models.drive.Folder.name:3 of
+msgid "フォルダー名"
+msgstr ""
+
+#: mipac.models.drive.Folder.parent:1 mipac.models.drive.Folder.parent:3 of
+msgid "親フォルダー"
+msgstr ""
+
+#: mipac.models.drive.Folder.parent_id:1 mipac.models.drive.Folder.parent_id:3
+#: of
+msgid "親フォルダーのID"
 msgstr ""
 
 #: ../../index.rst:233
-msgid "EmojiSimple"
+msgid "CustomEmoji"
 msgstr ""
 
 #: ../../index.rst:242
-msgid "FollowRequest"
+msgid "EmojiDetailed"
 msgstr ""
 
 #: ../../index.rst:251
-msgid "GalleryPost"
+msgid "EmojiSimple"
+msgstr ""
+
+#: mipac.models.emoji.EmojiSimple:1 of
+msgid "Misskeyの `EmojiSimple` を表すクラス"
 msgstr ""
 
 #: ../../index.rst:260
-msgid "FederationInstance"
+msgid "FollowRequest"
 msgstr ""
 
 #: ../../index.rst:269
-msgid "InviteCode"
+msgid "GalleryPost"
 msgstr ""
 
 #: ../../index.rst:278
-msgid "InviteLimit"
+msgid "Hashtag"
 msgstr ""
 
 #: ../../index.rst:287
-msgid "AdminMeta"
+msgid "TrendHashtag"
+msgstr ""
+
+#: mipac.models.hashtag.TrendHashtag.chart:1
+#: mipac.models.hashtag.TrendHashtag.chart:3 of
+msgid "チャート"
+msgstr ""
+
+#: mipac.models.hashtag.TrendHashtag.tag:1
+#: mipac.models.hashtag.TrendHashtag.tag:3 of
+msgid "ハッシュタグ"
+msgstr ""
+
+#: mipac.models.hashtag.TrendHashtag.users_count:1
+#: mipac.models.hashtag.TrendHashtag.users_count:3 of
+msgid "ユーザー数"
 msgstr ""
 
 #: ../../index.rst:296
-msgid "Features"
+msgid "FederationInstance"
 msgstr ""
 
 #: ../../index.rst:305
-msgid "Meta"
+msgid "InviteCode"
 msgstr ""
 
 #: ../../index.rst:314
-msgid "Muting"
+msgid "InviteLimit"
 msgstr ""
 
 #: ../../index.rst:323
+msgid "AdminMeta"
+msgstr ""
+
+#: ../../index.rst:332
+msgid "Features"
+msgstr ""
+
+#: ../../index.rst:341
+msgid "Meta"
+msgstr ""
+
+#: ../../index.rst:350
+msgid "Muting"
+msgstr ""
+
+#: ../../index.rst:359
 msgid "Note"
 msgstr ""
 
@@ -858,11 +1224,35 @@ msgstr ""
 #: mipac.actions.admins.admin.AdminActions.resolve_abuse_user_report
 #: mipac.actions.admins.admin.AdminActions.send_email
 #: mipac.actions.admins.admin.AdminActions.update_user_note
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update
 #: mipac.actions.admins.drive.AdminDriveActions.get_files
 #: mipac.actions.admins.drive.AdminDriveActions.show_file
-#: mipac.actions.admins.emoji.AdminEmojiActions.remove
-#: mipac.actions.admins.roles.AdminRoleModelActions.assign
-#: mipac.actions.admins.roles.AdminRoleModelActions.unassign
+#: mipac.actions.admins.emoji.AdminEmojiActions.add
+#: mipac.actions.admins.emoji.AdminEmojiActions.add_aliases_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.delete_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list_remote
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list_remote
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove_aliases_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_aliases_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_category_bulk
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_license_bulk
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.copy
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.delete
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.copy
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.delete
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update
+#: mipac.actions.admins.roles.ClientAdminRoleActions.assign
+#: mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users
+#: mipac.actions.admins.roles.ClientAdminRoleActions.unassign
+#: mipac.actions.admins.roles.SharedAdminRoleActions.assign
+#: mipac.actions.admins.roles.SharedAdminRoleActions.get_all_users
+#: mipac.actions.admins.roles.SharedAdminRoleActions.unassign
 #: mipac.actions.admins.user.ClientAdminUserActions.delete_account
 #: mipac.actions.admins.user.ClientAdminUserActions.show_user
 #: mipac.actions.admins.user.ClientAdminUserActions.suspend
@@ -878,6 +1268,7 @@ msgstr ""
 #: mipac.actions.antenna.SharedAntennaActions.delete
 #: mipac.actions.antenna.SharedAntennaActions.show
 #: mipac.actions.antenna.SharedAntennaActions.update
+#: mipac.actions.app.AppActions.create mipac.actions.app.AppActions.show
 #: mipac.actions.channel.ChannelActions.create
 #: mipac.actions.channel.ChannelActions.get_all_followed
 #: mipac.actions.channel.ChannelActions.get_all_owned
@@ -942,6 +1333,9 @@ msgstr ""
 #: mipac.actions.follow.FollowRequestActions.accept
 #: mipac.actions.follow.FollowRequestActions.cancel
 #: mipac.actions.follow.FollowRequestActions.reject
+#: mipac.actions.hashtag.HashtagActions.get_list
+#: mipac.actions.hashtag.HashtagActions.search
+#: mipac.actions.hashtag.HashtagActions.show
 #: mipac.actions.invite.ClientInviteActions.delete
 #: mipac.actions.invite.InviteActions.get_all_list
 #: mipac.actions.invite.InviteActions.get_list
@@ -1038,7 +1432,7 @@ msgstr ""
 #: mipac.utils.format.remove_dict_empty mipac.utils.format.remove_dict_missing
 #: mipac.utils.format.snake_to_camel mipac.utils.format.str_to_datetime
 #: mipac.utils.format.upper_to_lower mipac.utils.log.setup_logging
-#: mipac.utils.util.check_multi_arg of
+#: mipac.utils.util.check_char_length_least mipac.utils.util.check_multi_arg of
 msgid "パラメータ"
 msgstr ""
 
@@ -1353,7 +1747,7 @@ msgstr ""
 msgid "note visibleUserIds"
 msgstr ""
 
-#: ../../index.rst:332
+#: ../../index.rst:368
 msgid "NoteChannel"
 msgstr ""
 
@@ -1397,11 +1791,11 @@ msgstr ""
 msgid "note channelUserId"
 msgstr ""
 
-#: ../../index.rst:341
+#: ../../index.rst:377
 msgid "NoteDeleted"
 msgstr ""
 
-#: ../../index.rst:350
+#: ../../index.rst:386
 msgid "NoteReaction"
 msgstr ""
 
@@ -1425,11 +1819,11 @@ msgstr ""
 msgid "Note user"
 msgstr ""
 
-#: ../../index.rst:359
+#: ../../index.rst:395
 msgid "NoteState"
 msgstr ""
 
-#: ../../index.rst:368
+#: ../../index.rst:404
 msgid "NoteTranslateResult"
 msgstr ""
 
@@ -1437,119 +1831,119 @@ msgstr ""
 msgid "The raw data of the note translate result"
 msgstr ""
 
-#: ../../index.rst:377
+#: ../../index.rst:413
 msgid "Notification"
 msgstr ""
 
-#: ../../index.rst:386
+#: ../../index.rst:422
 msgid "NotificationAchievement"
 msgstr ""
 
-#: ../../index.rst:395
+#: ../../index.rst:431
 msgid "NotificationFollow"
 msgstr ""
 
-#: ../../index.rst:404
+#: ../../index.rst:440
 msgid "NotificationFollowRequest"
 msgstr ""
 
-#: ../../index.rst:413
+#: ../../index.rst:449
 msgid "NotificationNote"
 msgstr ""
 
-#: ../../index.rst:422
+#: ../../index.rst:458
 msgid "NotificationPollEnd"
 msgstr ""
 
-#: ../../index.rst:431
+#: ../../index.rst:467
 msgid "NotificationReaction"
 msgstr ""
 
-#: ../../index.rst:440
+#: ../../index.rst:476
 msgid "MiPoll"
 msgstr ""
 
-#: ../../index.rst:449
+#: ../../index.rst:485
 msgid "Poll"
 msgstr ""
 
-#: ../../index.rst:458
+#: ../../index.rst:494
 msgid "PollChoice"
 msgstr ""
 
-#: ../../index.rst:467
+#: ../../index.rst:503
 msgid "PartialReaction"
 msgstr ""
 
-#: ../../index.rst:476
+#: ../../index.rst:512
 msgid "Role"
 msgstr ""
 
-#: ../../index.rst:485
+#: ../../index.rst:521
 msgid "RolePolicies"
 msgstr ""
 
-#: ../../index.rst:494
+#: ../../index.rst:530
 msgid "RoleUser"
 msgstr ""
 
-#: ../../index.rst:503
+#: ../../index.rst:539
 msgid "packed_user"
 msgstr ""
 
-#: ../../index.rst:509
+#: ../../index.rst:545
 msgid "Achievement"
 msgstr ""
 
-#: ../../index.rst:518
+#: ../../index.rst:554
 msgid "CreatedUser"
 msgstr ""
 
-#: ../../index.rst:527
+#: ../../index.rst:563
 msgid "FollowCommon"
 msgstr ""
 
-#: ../../index.rst:536
+#: ../../index.rst:572
 msgid "Follower"
 msgstr ""
 
-#: ../../index.rst:545
+#: ../../index.rst:581
 msgid "Following"
 msgstr ""
 
-#: ../../index.rst:554
+#: ../../index.rst:590
 msgid "FrequentlyRepliedUser"
 msgstr ""
 
-#: ../../index.rst:563
+#: ../../index.rst:599
 msgid "MeDetailed"
 msgstr ""
 
-#: ../../index.rst:572
+#: ../../index.rst:608
 msgid "MeDetailedOnly"
 msgstr ""
 
-#: ../../index.rst:581
+#: ../../index.rst:617
 msgid "UserDetailedNotMe"
 msgstr ""
 
-#: ../../index.rst:590
+#: ../../index.rst:626
 msgid "UserDetailedNotMeOnly"
 msgstr ""
 
-#: ../../index.rst:599
+#: ../../index.rst:635
 msgid "UserField"
 msgstr ""
 
-#: ../../index.rst:608
+#: ../../index.rst:644
 msgid "UserList"
 msgstr ""
 
-#: ../../index.rst:617
+#: ../../index.rst:653
 msgid "UserListMembership"
 msgstr ""
 
-#: ../../index.rst:626
+#: ../../index.rst:662
 msgid "UsernameAvailable"
 msgstr ""
 
@@ -1558,23 +1952,61 @@ msgstr ""
 msgid "ユーザー名が使用可能かどうか"
 msgstr ""
 
-#: ../../index.rst:635
+#: ../../index.rst:671
 msgid "PartialAd"
 msgstr ""
 
-#: ../../index.rst:644
+#: mipac.models.lite.ad.PartialAd.id:1 mipac.models.lite.ad.PartialAd.id:3 of
+msgid "広告のID"
+msgstr ""
+
+#: mipac.models.lite.ad.PartialAd.url:1 mipac.models.lite.ad.PartialAd.url:3 of
+msgid "広告のURL"
+msgstr ""
+
+#: ../../index.rst:680
 msgid "PartialCustomEmoji"
 msgstr ""
 
-#: ../../index.rst:653
+#: ../../index.rst:689
 msgid "LiteInstance"
 msgstr ""
 
-#: ../../index.rst:662
+#: mipac.models.lite.instance.LiteInstance.favicon_url:1
+#: mipac.models.lite.instance.LiteInstance.favicon_url:3 of
+msgid "ファビコンのURL"
+msgstr ""
+
+#: mipac.models.lite.instance.LiteInstance.icon_url:1
+#: mipac.models.lite.instance.LiteInstance.icon_url:3 of
+msgid "アイコンのURL"
+msgstr ""
+
+#: mipac.models.lite.instance.LiteInstance.name:1
+#: mipac.models.lite.instance.LiteInstance.name:3 of
+msgid "サーバー名"
+msgstr ""
+
+#: mipac.models.lite.instance.LiteInstance.software_name:1
+#: mipac.models.lite.instance.LiteInstance.software_name:3 of
+msgid "使用しているソフトウェアの名前"
+msgstr ""
+
+#: mipac.models.lite.instance.LiteInstance.software_version:1
+#: mipac.models.lite.instance.LiteInstance.software_version:3 of
+msgid "使用しているソフトウェアのバージョン"
+msgstr ""
+
+#: mipac.models.lite.instance.LiteInstance.theme_color:1
+#: mipac.models.lite.instance.LiteInstance.theme_color:3 of
+msgid "テーマカラー"
+msgstr ""
+
+#: ../../index.rst:698
 msgid "PartialMeta"
 msgstr ""
 
-#: ../../index.rst:671
+#: ../../index.rst:707
 msgid "Policies"
 msgstr ""
 
@@ -1614,11 +2046,11 @@ msgstr ""
 msgid "Whether LTL is effective"
 msgstr ""
 
-#: ../../index.rst:680
+#: ../../index.rst:716
 msgid "PartialRole"
 msgstr ""
 
-#: ../../index.rst:689
+#: ../../index.rst:725
 msgid "AvatarDecoration"
 msgstr ""
 
@@ -1670,7 +2102,7 @@ msgstr ""
 msgid "The url of the avatar decoration."
 msgstr ""
 
-#: ../../index.rst:698
+#: ../../index.rst:734
 msgid "BadgeRole"
 msgstr ""
 
@@ -1698,7 +2130,7 @@ msgstr ""
 msgid "The name of the badge role."
 msgstr ""
 
-#: ../../index.rst:707
+#: ../../index.rst:743
 msgid "PartialUser"
 msgstr ""
 
@@ -1816,55 +2248,59 @@ msgstr ""
 msgid "The username of the user."
 msgstr ""
 
-#: ../../index.rst:714
+#: ../../index.rst:750
 msgid "Managers"
 msgstr ""
 
-#: ../../index.rst:717
+#: ../../index.rst:753
 msgid "AntennaManager"
 msgstr ""
 
-#: ../../index.rst:726
+#: ../../index.rst:762
 msgid "ClientAntennaManager"
 msgstr ""
 
-#: ../../index.rst:735
-msgid "BlockingManager"
-msgstr ""
-
-#: ../../index.rst:744
-msgid "ClientBlockingManager"
-msgstr ""
-
-#: ../../index.rst:753
-msgid "ChannelManager"
-msgstr ""
-
-#: ../../index.rst:762
-msgid "ClientChannelManager"
-msgstr ""
-
 #: ../../index.rst:771
-msgid "ChartManager"
+msgid "AppManager"
 msgstr ""
 
 #: ../../index.rst:780
-msgid "ClientManager"
+msgid "BlockingManager"
 msgstr ""
 
 #: ../../index.rst:789
-msgid "ClientClipManager"
+msgid "ClientBlockingManager"
 msgstr ""
 
 #: ../../index.rst:798
-msgid "ClipManager"
+msgid "ChannelManager"
 msgstr ""
 
 #: ../../index.rst:807
-msgid "EmojiManager"
+msgid "ClientChannelManager"
 msgstr ""
 
 #: ../../index.rst:816
+msgid "ChartManager"
+msgstr ""
+
+#: ../../index.rst:825
+msgid "ClientManager"
+msgstr ""
+
+#: ../../index.rst:834
+msgid "ClientClipManager"
+msgstr ""
+
+#: ../../index.rst:843
+msgid "ClipManager"
+msgstr ""
+
+#: ../../index.rst:852
+msgid "EmojiManager"
+msgstr ""
+
+#: ../../index.rst:861
 msgid "ClientFavoriteManager"
 msgstr ""
 
@@ -1878,43 +2314,47 @@ msgstr ""
 msgid "お気に入りに対するアクションを行うクラス"
 msgstr ""
 
-#: ../../index.rst:825
+#: ../../index.rst:870
 msgid "FavoriteManager"
 msgstr ""
 
-#: ../../index.rst:834
+#: ../../index.rst:879
 msgid "FederationManager"
 msgstr ""
 
-#: ../../index.rst:843
+#: ../../index.rst:888
 msgid "ClientFollowManager"
 msgstr ""
 
-#: ../../index.rst:852
+#: ../../index.rst:897
 msgid "FollowManager"
 msgstr ""
 
-#: ../../index.rst:861
+#: ../../index.rst:906
 msgid "FollowRequestManager"
 msgstr ""
 
-#: ../../index.rst:870
+#: ../../index.rst:915
+msgid "HashtagManager"
+msgstr ""
+
+#: ../../index.rst:924
 msgid "ClientInviteManager"
 msgstr ""
 
-#: ../../index.rst:879
+#: ../../index.rst:933
 msgid "InviteManager"
 msgstr ""
 
-#: ../../index.rst:888
+#: ../../index.rst:942
 msgid "MyManager"
 msgstr ""
 
-#: ../../index.rst:897
+#: ../../index.rst:951
 msgid "ClientNoteManager"
 msgstr ""
 
-#: ../../index.rst:906
+#: ../../index.rst:960
 msgid "NoteManager"
 msgstr ""
 
@@ -1922,19 +2362,19 @@ msgstr ""
 msgid "User behavior for notes"
 msgstr ""
 
-#: ../../index.rst:915
+#: ../../index.rst:969
 msgid "PagesManager"
 msgstr ""
 
-#: ../../index.rst:924
+#: ../../index.rst:978
 msgid "ClientPollManager"
 msgstr ""
 
-#: ../../index.rst:933
+#: ../../index.rst:987
 msgid "PollManager"
 msgstr ""
 
-#: ../../index.rst:942
+#: ../../index.rst:996
 msgid "ClientReactionManager"
 msgstr ""
 
@@ -1948,123 +2388,127 @@ msgstr ""
 msgid "Reactionに対するアクションを行うクラス"
 msgstr ""
 
-#: ../../index.rst:951
+#: ../../index.rst:1005
 msgid "ReactionManager"
 msgstr ""
 
-#: ../../index.rst:960
+#: ../../index.rst:1014
 msgid "RoleManager"
 msgstr ""
 
-#: ../../index.rst:969
+#: ../../index.rst:1023
 msgid "ClientUserManager"
 msgstr ""
 
-#: ../../index.rst:978
+#: ../../index.rst:1032
 msgid "UserManager"
 msgstr ""
 
-#: ../../index.rst:987
+#: ../../index.rst:1041
 msgid "UsernameManager"
 msgstr ""
 
-#: ../../index.rst:996
+#: ../../index.rst:1050
 msgid "AdminAccountManager"
 msgstr ""
 
-#: ../../index.rst:1005
+#: ../../index.rst:1059
 msgid "AdminAdManager"
 msgstr ""
 
-#: ../../index.rst:1014
+#: ../../index.rst:1068
 msgid "ClientAdminAdManager"
 msgstr ""
 
-#: ../../index.rst:1023
+#: ../../index.rst:1077
 msgid "AdminManager"
 msgstr ""
 
-#: ../../index.rst:1032
+#: ../../index.rst:1086
 msgid "AdminAnnouncementManager"
 msgstr ""
 
-#: ../../index.rst:1041
+#: ../../index.rst:1095
 msgid "ClientAdminAnnouncementManager"
 msgstr ""
 
-#: ../../index.rst:1050
+#: ../../index.rst:1104
 msgid "AdminDriveManager"
 msgstr ""
 
-#: ../../index.rst:1059
+#: ../../index.rst:1113
 msgid "AdminEmojiManager"
 msgstr ""
 
-#: ../../index.rst:1068
-msgid "AdminInviteManager"
-msgstr ""
-
-#: ../../index.rst:1077
-msgid "AdminRolesManager"
-msgstr ""
-
-#: ../../index.rst:1086
-msgid "AdminRolesModelManager"
-msgstr ""
-
-#: ../../index.rst:1095
-msgid "AdminUserManager"
-msgstr ""
-
-#: ../../index.rst:1104
-msgid "ClientAdminUserManager"
-msgstr ""
-
-#: ../../index.rst:1113
-msgid "DriveManager"
-msgstr ""
-
 #: ../../index.rst:1122
-msgid "ClientFileManager"
+msgid "ClientAdminEmojiManager"
 msgstr ""
 
 #: ../../index.rst:1131
-msgid "DriveFileManager"
+msgid "AdminInviteManager"
 msgstr ""
 
 #: ../../index.rst:1140
-msgid "ClientFolderManager"
+msgid "AdminRoleManager"
 msgstr ""
 
 #: ../../index.rst:1149
-msgid "FolderManager"
+msgid "ClientAdminRoleManager"
 msgstr ""
 
 #: ../../index.rst:1158
-msgid "ClientPartialUserListManager"
+msgid "AdminUserManager"
 msgstr ""
 
 #: ../../index.rst:1167
-msgid "ClientUserListManager"
+msgid "ClientAdminUserManager"
 msgstr ""
 
 #: ../../index.rst:1176
-msgid "UserListManager"
+msgid "DriveManager"
 msgstr ""
 
 #: ../../index.rst:1185
-msgid "ClientMuteManager"
+msgid "ClientFileManager"
 msgstr ""
 
 #: ../../index.rst:1194
+msgid "DriveFileManager"
+msgstr ""
+
+#: ../../index.rst:1203
+msgid "ClientFolderManager"
+msgstr ""
+
+#: ../../index.rst:1212
+msgid "FolderManager"
+msgstr ""
+
+#: ../../index.rst:1221
+msgid "ClientPartialUserListManager"
+msgstr ""
+
+#: ../../index.rst:1230
+msgid "ClientUserListManager"
+msgstr ""
+
+#: ../../index.rst:1239
+msgid "UserListManager"
+msgstr ""
+
+#: ../../index.rst:1248
+msgid "ClientMuteManager"
+msgstr ""
+
+#: ../../index.rst:1257
 msgid "MuteManager"
 msgstr ""
 
-#: ../../index.rst:1201
+#: ../../index.rst:1264
 msgid "Actions"
 msgstr ""
 
-#: ../../index.rst:1204
+#: ../../index.rst:1267
 msgid "AntennaActions"
 msgstr ""
 
@@ -2146,7 +2590,7 @@ msgstr ""
 msgid "The created antenna."
 msgstr ""
 
-#: ../../index.rst:1213
+#: ../../index.rst:1276
 msgid "ClientAntennaActions"
 msgstr ""
 
@@ -2185,11 +2629,39 @@ msgstr ""
 msgid "Update an antenna."
 msgstr ""
 
-#: ../../index.rst:1222
+#: ../../index.rst:1285
 msgid "SharedAntennaActions"
 msgstr ""
 
-#: ../../index.rst:1231
+#: ../../index.rst:1294
+msgid "AppActions"
+msgstr ""
+
+#: mipac.actions.app.AppActions.create:1 of
+msgid "Create a new app"
+msgstr ""
+
+#: mipac.actions.app.AppActions.create:5 of
+msgid "The description of the app"
+msgstr ""
+
+#: mipac.actions.app.AppActions.create:9 of
+msgid "The callback url of the app, by default None"
+msgstr ""
+
+#: mipac.actions.app.AppActions.create:12 of
+msgid "The created app"
+msgstr ""
+
+#: mipac.actions.app.AppActions.show:1 of
+msgid "Show an app"
+msgstr ""
+
+#: mipac.actions.app.AppActions.show:6 of
+msgid "The app"
+msgstr ""
+
+#: ../../index.rst:1303
 msgid "BlockingActions"
 msgstr ""
 
@@ -2197,7 +2669,7 @@ msgstr ""
 msgid "ブロックアクション user_idを持たないメソッドのみを持ち、持つものはSharedBlockingActionsに実装する"
 msgstr ""
 
-#: ../../index.rst:1240
+#: ../../index.rst:1312
 msgid "ClientBlockingActions"
 msgstr ""
 
@@ -2209,11 +2681,11 @@ msgstr ""
 msgid "基本的にoverride以外は行わない"
 msgstr ""
 
-#: ../../index.rst:1249
+#: ../../index.rst:1321
 msgid "SharedBlockingActions"
 msgstr ""
 
-#: ../../index.rst:1258
+#: ../../index.rst:1330
 msgid "ChannelActions"
 msgstr ""
 
@@ -2374,7 +2846,7 @@ msgstr ""
 msgid "取得したチャンネル"
 msgstr ""
 
-#: ../../index.rst:1267
+#: ../../index.rst:1339
 msgid "ClientChannelActions"
 msgstr ""
 
@@ -2642,19 +3114,19 @@ msgstr ""
 msgid "更新後のチャンネル"
 msgstr ""
 
-#: ../../index.rst:1276
+#: ../../index.rst:1348
 msgid "SharedChannelActions"
 msgstr ""
 
-#: ../../index.rst:1285
+#: ../../index.rst:1357
 msgid "ChartActions"
 msgstr ""
 
-#: ../../index.rst:1294
+#: ../../index.rst:1366
 msgid "ClientActions"
 msgstr ""
 
-#: ../../index.rst:1303
+#: ../../index.rst:1375
 msgid "ClientClipActions"
 msgstr ""
 
@@ -2709,6 +3181,8 @@ msgstr ""
 msgid "Whether to get all notes"
 msgstr ""
 
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list_remote
 #: mipac.actions.clip.ClientClipActions.get_all_notes
 #: mipac.actions.clip.SharedClipActions.get_all_notes
 #: mipac.actions.role.RoleActions.get_notes
@@ -2752,7 +3226,7 @@ msgstr ""
 msgid "True if the clip was updated, False otherwise"
 msgstr ""
 
-#: ../../index.rst:1312
+#: ../../index.rst:1384
 msgid "ClipActions"
 msgstr ""
 
@@ -2792,31 +3266,31 @@ msgstr ""
 msgid "The favorite clips"
 msgstr ""
 
-#: ../../index.rst:1321
+#: ../../index.rst:1393
 msgid "SharedClipActions"
 msgstr ""
 
-#: ../../index.rst:1330
+#: ../../index.rst:1402
 msgid "EmojiActions"
 msgstr ""
 
-#: ../../index.rst:1339
+#: ../../index.rst:1411
 msgid "ClientFavoriteActions"
 msgstr ""
 
-#: ../../index.rst:1348
+#: ../../index.rst:1420
 msgid "FavoriteActions"
 msgstr ""
 
-#: ../../index.rst:1357
+#: ../../index.rst:1429
 msgid "SharedFavoriteActions"
 msgstr ""
 
-#: ../../index.rst:1366
+#: ../../index.rst:1438
 msgid "FederationActions"
 msgstr ""
 
-#: ../../index.rst:1375
+#: ../../index.rst:1447
 msgid "ClientFollowActions"
 msgstr ""
 
@@ -2860,11 +3334,11 @@ msgstr ""
 msgid "The user that you unfollowed"
 msgstr ""
 
-#: ../../index.rst:1384
+#: ../../index.rst:1456
 msgid "FollowActions"
 msgstr ""
 
-#: ../../index.rst:1393
+#: ../../index.rst:1465
 msgid "FollowRequestActions"
 msgstr ""
 
@@ -2912,11 +3386,83 @@ msgstr ""
 msgid "Whether the request was rejected"
 msgstr ""
 
-#: ../../index.rst:1402
+#: ../../index.rst:1474
 msgid "SharedFollowActions"
 msgstr ""
 
-#: ../../index.rst:1411
+#: ../../index.rst:1483
+msgid "HashtagActions"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.get_list:1 of
+msgid "ハッシュタグのリストを取得します。"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.get_list:3 of
+msgid ""
+"\"+mentionedUsers\", \"-mentionedUsers\", \"+mentionedLocalUsers\", "
+"\"-mentionedLocalUsers\", \"+mentionedRemoteUsers\", "
+"\"-mentionedRemoteUsers\", \"+attachedUsers\", \"-attachedUsers\", "
+"\"+attachedLocalUsers\", \"-attachedLocalUsers\", "
+"\"+attachedRemoteUsers\", \"-attachedRemoteUsers\","
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.get_list:16 of
+msgid "ソートの方法を指定します。"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.get_list:17
+#: mipac.actions.hashtag.HashtagActions.search:5 of
+msgid "取得するハッシュタグの数を指定します, default=10"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.get_list:19 of
+msgid "ユーザーに添付されたハッシュタグのみを取得するかどうかを指定します, default=False"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.get_list:21 of
+msgid "ローカルユーザーに添付されたハッシュタグのみを取得するかどうかを指定します, default=False"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.get_list:23 of
+msgid "リモートユーザーに添付されたハッシュタグのみを取得するかどうかを指定します, default=False"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.get_list:26
+#: mipac.actions.hashtag.HashtagActions.get_trend:3
+#: mipac.actions.hashtag.HashtagActions.search:10 of
+msgid "取得したハッシュタグのリストです。"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.get_trend:1 of
+msgid "トレンドのハッシュタグを取得します。"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.search:1 of
+msgid "ハッシュタグを検索します"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.search:3 of
+msgid "検索するクエリを指定します。"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.search:7 of
+msgid "オフセットを指定します, default=0"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.show:1 of
+msgid "ハッシュタグの情報を取得します。"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.show:3 of
+msgid "取得するハッシュタグの名前です。"
+msgstr ""
+
+#: mipac.actions.hashtag.HashtagActions.show:6 of
+msgid "取得したハッシュタグの情報です。"
+msgstr ""
+
+#: ../../index.rst:1492
 msgid "ClientInviteActions"
 msgstr ""
 
@@ -2935,7 +3481,7 @@ msgstr ""
 msgid "Whether the invite code was deleted."
 msgstr ""
 
-#: ../../index.rst:1420
+#: ../../index.rst:1501
 msgid "InviteActions"
 msgstr ""
 
@@ -2995,11 +3541,11 @@ msgstr ""
 msgid "The number of invite codes to get, by default 30"
 msgstr ""
 
-#: ../../index.rst:1429
+#: ../../index.rst:1510
 msgid "SharedInviteActions"
 msgstr ""
 
-#: ../../index.rst:1438
+#: ../../index.rst:1519
 msgid "MyActions"
 msgstr ""
 
@@ -3011,13 +3557,14 @@ msgstr ""
 msgid "解除したい実績の名前"
 msgstr ""
 
-#: mipac.actions.admins.roles.AdminRoleModelActions.assign:10
-#: mipac.actions.admins.roles.AdminRoleModelActions.unassign:10
+#: mipac.actions.admins.roles.ClientAdminRoleActions.assign:10
+#: mipac.actions.admins.roles.ClientAdminRoleActions.unassign:8
+#: mipac.actions.admins.roles.SharedAdminRoleActions.assign:10
+#: mipac.actions.admins.roles.SharedAdminRoleActions.unassign:8
 #: mipac.actions.my.MyActions.get_claim_achievement:6 of
 msgid "成功したか否か"
 msgstr ""
 
-#: mipac.actions.admins.emoji.AdminEmojiActions.remove
 #: mipac.actions.my.MyActions.get_claim_achievement
 #: mipac.actions.note.NoteActions.send of
 msgid "例外"
@@ -3027,11 +3574,11 @@ msgstr ""
 msgid "実績機能が存在しないサーバーを使用している"
 msgstr ""
 
-#: ../../index.rst:1447
+#: ../../index.rst:1528
 msgid "create_note_body"
 msgstr ""
 
-#: ../../index.rst:1453
+#: ../../index.rst:1534
 msgid "ClientNoteActions"
 msgstr ""
 
@@ -3394,7 +3941,7 @@ msgstr ""
 msgid "Whether the release was successful"
 msgstr ""
 
-#: ../../index.rst:1462
+#: ../../index.rst:1543
 msgid "NoteActions"
 msgstr ""
 
@@ -3650,23 +4197,23 @@ msgstr ""
 msgid "[description]"
 msgstr ""
 
-#: ../../index.rst:1471
+#: ../../index.rst:1552
 msgid "SharedNoteActions"
 msgstr ""
 
-#: ../../index.rst:1480
+#: ../../index.rst:1561
 msgid "ClientPollActions"
 msgstr ""
 
-#: ../../index.rst:1489
+#: ../../index.rst:1570
 msgid "PollActions"
 msgstr ""
 
-#: ../../index.rst:1498
+#: ../../index.rst:1579
 msgid "SharedPollActions"
 msgstr ""
 
-#: ../../index.rst:1507
+#: ../../index.rst:1588
 msgid "ClientReactionActions"
 msgstr ""
 
@@ -3702,15 +4249,15 @@ msgstr ""
 msgid "Endpoint: `/api/notes/reactions/delete`"
 msgstr ""
 
-#: ../../index.rst:1516
+#: ../../index.rst:1597
 msgid "ReactionActions"
 msgstr ""
 
-#: ../../index.rst:1525
+#: ../../index.rst:1606
 msgid "SharedReactionActions"
 msgstr ""
 
-#: ../../index.rst:1534
+#: ../../index.rst:1615
 msgid "RoleActions"
 msgstr ""
 
@@ -3795,7 +4342,7 @@ msgstr ""
 msgid "*AsyncGenerator[RoleUser, None]* -- The role user data."
 msgstr ""
 
-#: ../../index.rst:1543
+#: ../../index.rst:1624
 msgid "ClientUserActions"
 msgstr ""
 
@@ -3999,11 +4546,11 @@ msgstr ""
 msgid "A list of gallery posts."
 msgstr ""
 
-#: ../../index.rst:1552
+#: ../../index.rst:1633
 msgid "SharedUserActions"
 msgstr ""
 
-#: ../../index.rst:1561
+#: ../../index.rst:1642
 msgid "UserActions"
 msgstr ""
 
@@ -4107,11 +4654,11 @@ msgstr ""
 msgid "A list of users."
 msgstr ""
 
-#: ../../index.rst:1570
+#: ../../index.rst:1651
 msgid "UsernameActions"
 msgstr ""
 
-#: ../../index.rst:1579
+#: ../../index.rst:1660
 msgid "AdminAccountActions"
 msgstr ""
 
@@ -4171,19 +4718,19 @@ msgstr ""
 msgid "成功ならTrue"
 msgstr ""
 
-#: ../../index.rst:1588
+#: ../../index.rst:1669
 msgid "AdminAdActions"
 msgstr ""
 
-#: ../../index.rst:1597
+#: ../../index.rst:1678
 msgid "ClientAdminAdActions"
 msgstr ""
 
-#: ../../index.rst:1606
+#: ../../index.rst:1687
 msgid "SharedAdminAdActions"
 msgstr ""
 
-#: ../../index.rst:1615
+#: ../../index.rst:1696
 msgid "AdminActions"
 msgstr ""
 
@@ -4244,19 +4791,101 @@ msgstr ""
 msgid "new note"
 msgstr ""
 
-#: ../../index.rst:1624
+#: ../../index.rst:1705
 msgid "AdminAnnouncementActions"
 msgstr ""
 
-#: ../../index.rst:1633
+#: ../../index.rst:1714
 msgid "ClientAdminAnnouncementActions"
 msgstr ""
 
-#: ../../index.rst:1642
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete:1
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete:1 of
+msgid "指定したお知らせを削除します"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete:3
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete:3 of
+msgid "削除したいお知らせのID"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete:6
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.delete:6 of
+msgid "削除に成功した場合はTrue, それ以外はFalse"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:1
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:1 of
+msgid "指定したお知らせを更新します"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:3
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:3 of
+msgid "お知らせのタイトル"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:5
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:5 of
+msgid "お知らせの本文"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:7
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:7 of
+msgid "お知らせの画像URL, by default None"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:9
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:9 of
+msgid "お知らせのアイコン, by default MISSING"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:11
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:11
+#: of
+msgid "お知らせの表示方法, by default MISSING"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:13
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:13
+#: of
+msgid "既存ユーザーに表示するか, by default MISSING"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:15
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:15
+#: of
+msgid "お知らせを静かにするか, by default MISSING"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:17
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:17
+#: of
+msgid "読んだか確認が必要か, by default MISSING"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:19
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:19
+#: of
+msgid "お知らせが有効かどうか, by default MISSING"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:21
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:21
+#: of
+msgid "更新したいお知らせのID"
+msgstr ""
+
+#: mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update:24
+#: mipac.actions.admins.announcement.SharedAdminAnnouncementActions.update:24
+#: of
+msgid "更新に成功した場合はTrue, それ以外はFalse"
+msgstr ""
+
+#: ../../index.rst:1723
 msgid "SharedAdminAnnouncementActions"
 msgstr ""
 
-#: ../../index.rst:1651
+#: ../../index.rst:1732
 msgid "AdminDriveActions"
 msgstr ""
 
@@ -4349,63 +4978,297 @@ msgstr ""
 msgid "The file"
 msgstr ""
 
-#: ../../index.rst:1660
+#: ../../index.rst:1741
 msgid "AdminEmojiActions"
 msgstr ""
 
-#: mipac.actions.admins.emoji.AdminEmojiActions.remove:1 of
-msgid "指定したIdの絵文字を削除します"
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:1 of
+msgid "Add a new emoji"
 msgstr ""
 
-#: mipac.actions.admins.emoji.AdminEmojiActions.remove:3 of
-msgid "削除する絵文字のId, by default None"
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:3
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update:3
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update:3 of
+msgid "The name of the emoji"
 msgstr ""
 
-#: mipac.actions.admins.emoji.AdminEmojiActions.remove:6 of
-msgid "成功したかどうか"
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:5
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update:5
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update:5 of
+msgid "The id of the file"
 msgstr ""
 
-#: mipac.actions.admins.emoji.AdminEmojiActions.remove:9 of
-msgid "Idが不足している"
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:7
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update:7
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update:7 of
+msgid "The category of the emoji, by default None"
 msgstr ""
 
-#: ../../index.rst:1669
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:9
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update:9
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update:9 of
+msgid "The aliases of the emoji, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:11 of
+msgid "The license of the emoji, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:13
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update:11
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update:11 of
+msgid "Whether the emoji is sensitive"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:15
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update:13
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update:13 of
+msgid "Whether the emoji is local only"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add:18 of
+msgid "The added emoji"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add_aliases_bulk:1 of
+msgid "Add aliases to emojis in bulk"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add_aliases_bulk:3
+#: mipac.actions.admins.emoji.AdminEmojiActions.delete_bulk:3
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove_aliases_bulk:3
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_aliases_bulk:3
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_category_bulk:3
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_license_bulk:3 of
+msgid "The ids of the emojis"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add_aliases_bulk:5 of
+msgid "The aliases to add"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.add_aliases_bulk:8
+#: mipac.actions.admins.emoji.AdminEmojiActions.delete_bulk:6
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove_aliases_bulk:8
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_aliases_bulk:8
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_category_bulk:8
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_license_bulk:8
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.delete:6
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update:20
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.delete:6
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update:20 of
+msgid "Whether the operation was successful"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.delete_bulk:1 of
+msgid "Delete emojis in bulk"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list:1 of
+msgid "List all emojis"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list:3
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list_remote:3
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list:3
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list_remote:3 of
+msgid "The query to search for, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list:5
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list_remote:7
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list:5
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list_remote:7 of
+msgid "The limit of the emojis to get, by default 10"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list:7
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list_remote:9
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list:7
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list_remote:9 of
+msgid "The id to get emojis since, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list:9
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list_remote:11
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list:9
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list_remote:11 of
+msgid "The id to get emojis until, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list:12
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list_remote:14 of
+msgid "*AsyncGenerator[EmojiDetailed, None]* -- The emojis"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list_remote:1
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list_remote:1 of
+msgid "List remote emojis"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_all_list_remote:5
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list_remote:5 of
+msgid "The host of the emoji, by default None"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list:1 of
+msgid "List emojis"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list:12
+#: mipac.actions.admins.emoji.AdminEmojiActions.get_list_remote:14 of
+msgid "The emojis"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove_aliases_bulk:1 of
+msgid "Remove aliases from emojis in bulk"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.remove_aliases_bulk:5 of
+msgid "The aliases to remove"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_aliases_bulk:1 of
+msgid "Set aliases to emojis in bulk"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_aliases_bulk:5 of
+msgid "The aliases to set"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_category_bulk:1 of
+msgid "Set category to emojis in bulk"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_category_bulk:5 of
+msgid "The category to set"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_license_bulk:1 of
+msgid "Set license to emojis in bulk"
+msgstr ""
+
+#: mipac.actions.admins.emoji.AdminEmojiActions.set_license_bulk:5 of
+msgid "The license to set"
+msgstr ""
+
+#: ../../index.rst:1750
+msgid "ClientAdminEmojiActions"
+msgstr ""
+
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.copy:1
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.copy:1 of
+msgid "Copy an emoji"
+msgstr ""
+
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.copy:3
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.delete:3
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update:17
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.copy:3
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.delete:3
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update:17 of
+msgid "The id of the emoji"
+msgstr ""
+
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.delete:1
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.delete:1 of
+msgid "Delete an emoji"
+msgstr ""
+
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update:1
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update:1 of
+msgid "Update an emoji"
+msgstr ""
+
+#: mipac.actions.admins.emoji.ClientAdminEmojiActions.update:15
+#: mipac.actions.admins.emoji.SharedAdminEmojiActions.update:15 of
+msgid "The role ids that can be used this emoji as reaction"
+msgstr ""
+
+#: ../../index.rst:1759
+msgid "SharedAdminEmojiActions"
+msgstr ""
+
+#: ../../index.rst:1768
 msgid "AdminInviteActions"
 msgstr ""
 
-#: ../../index.rst:1678
+#: ../../index.rst:1777
 msgid "AdminRoleActions"
 msgstr ""
 
-#: ../../index.rst:1687
-msgid "AdminRoleModelActions"
+#: ../../index.rst:1786
+msgid "ClientAdminRoleActions"
 msgstr ""
 
-#: mipac.actions.admins.roles.AdminRoleModelActions.assign:1
-#: mipac.actions.admins.roles.AdminRoleModelActions.unassign:1 of
+#: mipac.actions.admins.roles.ClientAdminRoleActions.assign:1
+#: mipac.actions.admins.roles.SharedAdminRoleActions.assign:1 of
 msgid "指定したユーザーに指定したロールを付与します"
 msgstr ""
 
-#: mipac.actions.admins.roles.AdminRoleModelActions.assign:3
-#: mipac.actions.admins.roles.AdminRoleModelActions.unassign:3 of
-msgid "ロールのID"
-msgstr ""
-
-#: mipac.actions.admins.roles.AdminRoleModelActions.assign:5
-#: mipac.actions.admins.roles.AdminRoleModelActions.unassign:5 of
+#: mipac.actions.admins.roles.ClientAdminRoleActions.assign:3
+#: mipac.actions.admins.roles.SharedAdminRoleActions.assign:3 of
 msgid "ロールを付与する対象のユーザーID"
 msgstr ""
 
-#: mipac.actions.admins.roles.AdminRoleModelActions.assign:7
-#: mipac.actions.admins.roles.AdminRoleModelActions.unassign:7 of
+#: mipac.actions.admins.roles.ClientAdminRoleActions.assign:5
+#: mipac.actions.admins.roles.SharedAdminRoleActions.assign:5 of
 msgid "いつまでロールを付与するか, by default None"
 msgstr ""
 
-#: ../../index.rst:1696
+#: mipac.actions.admins.roles.ClientAdminRoleActions.assign:7
+#: mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users:9
+#: mipac.actions.admins.roles.ClientAdminRoleActions.unassign:5
+#: mipac.actions.admins.roles.SharedAdminRoleActions.assign:7
+#: mipac.actions.admins.roles.SharedAdminRoleActions.get_all_users:9
+#: mipac.actions.admins.roles.SharedAdminRoleActions.unassign:5 of
+msgid "ロールのID"
+msgstr ""
+
+#: mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users:1
+#: mipac.actions.admins.roles.SharedAdminRoleActions.get_all_users:1 of
+msgid "指定したロールを持つユーザーを全て取得します"
+msgstr ""
+
+#: mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users:3
+#: mipac.actions.admins.roles.SharedAdminRoleActions.get_all_users:3 of
+msgid "ページネーションの開始位置, by default MISSING"
+msgstr ""
+
+#: mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users:5
+#: mipac.actions.admins.roles.SharedAdminRoleActions.get_all_users:5 of
+msgid "ページネーションの終了位置, by default MISSING"
+msgstr ""
+
+#: mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users:7
+#: mipac.actions.admins.roles.SharedAdminRoleActions.get_all_users:7 of
+msgid "1ページあたりの取得数, by default MISSING"
+msgstr ""
+
+#: mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users:12
+#: mipac.actions.admins.roles.SharedAdminRoleActions.get_all_users:12 of
+msgid "ロールユーザー"
+msgstr ""
+
+#: mipac.actions.admins.roles.ClientAdminRoleActions.unassign:1
+#: mipac.actions.admins.roles.SharedAdminRoleActions.unassign:1 of
+msgid "指定したユーザーから指定したロールを解除します"
+msgstr ""
+
+#: mipac.actions.admins.roles.ClientAdminRoleActions.unassign:3
+#: mipac.actions.admins.roles.SharedAdminRoleActions.unassign:3 of
+msgid "ロールを解除するユーザーID"
+msgstr ""
+
+#: ../../index.rst:1795
+msgid "SharedAdminRoleActions"
+msgstr ""
+
+#: ../../index.rst:1804
 msgid "AdminUserActions"
 msgstr ""
 
-#: ../../index.rst:1705
+#: ../../index.rst:1813
 msgid "ClientAdminUserActions"
 msgstr ""
 
@@ -4429,11 +5292,11 @@ msgstr ""
 msgid "ユーザーの凍結を解除します"
 msgstr ""
 
-#: ../../index.rst:1714
+#: ../../index.rst:1822
 msgid "SharedAdminUserActions"
 msgstr ""
 
-#: ../../index.rst:1723
+#: ../../index.rst:1831
 msgid "DriveActions"
 msgstr ""
 
@@ -4457,7 +5320,7 @@ msgstr ""
 msgid "Endpoint: `/api/drive/stream`"
 msgstr ""
 
-#: ../../index.rst:1732
+#: ../../index.rst:1840
 msgid "ClientFileActions"
 msgstr ""
 
@@ -4554,7 +5417,7 @@ msgstr ""
 msgid "更新後のファイル"
 msgstr ""
 
-#: ../../index.rst:1741
+#: ../../index.rst:1849
 msgid "FileActions"
 msgstr ""
 
@@ -4735,11 +5598,11 @@ msgstr ""
 msgid "アップロードのリクエストに成功したかどうか"
 msgstr ""
 
-#: ../../index.rst:1750
+#: ../../index.rst:1858
 msgid "SharedFileActions"
 msgstr ""
 
-#: ../../index.rst:1759
+#: ../../index.rst:1867
 msgid "ClientFileActionsInFolder"
 msgstr ""
 
@@ -4822,7 +5685,7 @@ msgstr ""
 msgid "Whether the file was uploaded or not"
 msgstr ""
 
-#: ../../index.rst:1768
+#: ../../index.rst:1876
 msgid "ClientFolderActions"
 msgstr ""
 
@@ -4935,7 +5798,7 @@ msgstr ""
 msgid "The updated folder"
 msgstr ""
 
-#: ../../index.rst:1777
+#: ../../index.rst:1885
 msgid "FolderActions"
 msgstr ""
 
@@ -4967,11 +5830,11 @@ msgstr ""
 msgid "The found folder"
 msgstr ""
 
-#: ../../index.rst:1786
+#: ../../index.rst:1894
 msgid "SharedFolderActions"
 msgstr ""
 
-#: ../../index.rst:1795
+#: ../../index.rst:1903
 msgid "ClientPartialUserListActions"
 msgstr ""
 
@@ -5049,7 +5912,7 @@ msgstr ""
 msgid "True if the user was pushed, False otherwise"
 msgstr ""
 
-#: ../../index.rst:1804
+#: ../../index.rst:1912
 msgid "ClientUserListActions"
 msgstr ""
 
@@ -5168,15 +6031,15 @@ msgstr ""
 msgid "The updated user list"
 msgstr ""
 
-#: ../../index.rst:1813
+#: ../../index.rst:1921
 msgid "SharedPartialUserListActions"
 msgstr ""
 
-#: ../../index.rst:1822
+#: ../../index.rst:1930
 msgid "SharedUserListActions"
 msgstr ""
 
-#: ../../index.rst:1831
+#: ../../index.rst:1939
 msgid "UserListActions"
 msgstr ""
 
@@ -5196,7 +6059,7 @@ msgstr ""
 msgid "The created user list"
 msgstr ""
 
-#: ../../index.rst:1840
+#: ../../index.rst:1948
 msgid "ClientMuteActions"
 msgstr ""
 
@@ -5225,7 +6088,7 @@ msgstr ""
 msgid "ミュート解除に成功したかどうか"
 msgstr ""
 
-#: ../../index.rst:1849
+#: ../../index.rst:1957
 msgid "MuteActions"
 msgstr ""
 
@@ -5257,7 +6120,7 @@ msgstr ""
 msgid "ミュートしているユーザーの一覧"
 msgstr ""
 
-#: ../../index.rst:1858
+#: ../../index.rst:1966
 msgid "SharedMuteActions"
 msgstr ""
 
@@ -5266,59 +6129,59 @@ msgstr ""
 msgid "対象のユーザーID, default=None"
 msgstr ""
 
-#: ../../index.rst:1865
+#: ../../index.rst:1973
 msgid "Type class"
 msgstr ""
 
-#: ../../index.rst:1868
+#: ../../index.rst:1976
 msgid "IIndexStat"
 msgstr ""
 
-#: ../../index.rst:1877
+#: ../../index.rst:1985
 msgid "IModerationLog"
 msgstr ""
 
-#: ../../index.rst:1886
+#: ../../index.rst:1994
 msgid "IServerInfo"
 msgstr ""
 
-#: ../../index.rst:1895
+#: ../../index.rst:2003
 msgid "IServerInfoCpu"
 msgstr ""
 
-#: ../../index.rst:1904
+#: ../../index.rst:2012
 msgid "IServerInfoFs"
 msgstr ""
 
-#: ../../index.rst:1913
+#: ../../index.rst:2021
 msgid "IServerInfoMem"
 msgstr ""
 
-#: ../../index.rst:1922
+#: ../../index.rst:2030
 msgid "IServerInfoNet"
 msgstr ""
 
-#: ../../index.rst:1931
+#: ../../index.rst:2039
 msgid "ITableStats"
 msgstr ""
 
-#: ../../index.rst:1940
+#: ../../index.rst:2048
 msgid "IUserIP"
 msgstr ""
 
-#: ../../index.rst:1949
+#: ../../index.rst:2057
 msgid "IAd"
 msgstr ""
 
-#: ../../index.rst:1958
+#: ../../index.rst:2066
 msgid "IPartialAd"
 msgstr ""
 
-#: ../../index.rst:1967
+#: ../../index.rst:2075
 msgid "IAnnouncement"
 msgstr ""
 
-#: ../../index.rst:1976
+#: ../../index.rst:2084
 msgid "IAnnouncementDetailed"
 msgstr ""
 
@@ -5326,43 +6189,55 @@ msgstr ""
 msgid "管理者から見たアナウンス"
 msgstr ""
 
-#: ../../index.rst:1985
+#: ../../index.rst:2093
 msgid "IAntenna"
 msgstr ""
 
-#: ../../index.rst:1994
+#: ../../index.rst:2102
+msgid "IApp"
+msgstr ""
+
+#: ../../index.rst:2111
 msgid "IBlocking"
 msgstr ""
 
-#: ../../index.rst:2003
+#: ../../index.rst:2120
 msgid "IChannel"
 msgstr ""
 
-#: ../../index.rst:2012
+#: ../../index.rst:2129
 msgid "IActiveUsersChart"
 msgstr ""
 
-#: ../../index.rst:2021
+#: ../../index.rst:2138
 msgid "IDriveChart"
 msgstr ""
 
-#: ../../index.rst:2030
+#: ../../index.rst:2147
 msgid "IDriveLocalChart"
 msgstr ""
 
-#: ../../index.rst:2039
+#: ../../index.rst:2156
 msgid "IDriveRemoteChart"
 msgstr ""
 
-#: ../../index.rst:2048
+#: ../../index.rst:2165
 msgid "IClip"
 msgstr ""
 
-#: ../../index.rst:2057
+#: ../../index.rst:2174
+msgid "IID"
+msgstr ""
+
+#: mipac.types.common.IID:1 of
+msgid "IDを表す型"
+msgstr ""
+
+#: ../../index.rst:2183
 msgid "IDriveStatus"
 msgstr ""
 
-#: ../../index.rst:2066
+#: ../../index.rst:2192
 msgid "IFile"
 msgstr ""
 
@@ -5370,7 +6245,7 @@ msgstr ""
 msgid "ファイル情報"
 msgstr ""
 
-#: ../../index.rst:2075
+#: ../../index.rst:2201
 msgid "IFileProperties"
 msgstr ""
 
@@ -5378,7 +6253,7 @@ msgstr ""
 msgid "プロパティー情報"
 msgstr ""
 
-#: ../../index.rst:2084
+#: ../../index.rst:2210
 msgid "IFolder"
 msgstr ""
 
@@ -5386,103 +6261,111 @@ msgstr ""
 msgid "フォルダーの情報"
 msgstr ""
 
-#: ../../index.rst:2093
+#: ../../index.rst:2219
 msgid "EmojiPayload"
 msgstr ""
 
-#: ../../index.rst:2102
+#: ../../index.rst:2228
 msgid "ICustomEmoji"
 msgstr ""
 
-#: ../../index.rst:2111
+#: ../../index.rst:2237
 msgid "ICustomEmojiLite"
 msgstr ""
 
-#: ../../index.rst:2120
+#: ../../index.rst:2246
 msgid "ICustomEmojiLiteRequired"
 msgstr ""
 
-#: ../../index.rst:2129
+#: ../../index.rst:2255
 msgid "IEmojiDetailed"
 msgstr ""
 
-#: ../../index.rst:2138
+#: ../../index.rst:2264
 msgid "IEmojiSimple"
 msgstr ""
 
-#: ../../index.rst:2147
+#: ../../index.rst:2273
 msgid "IFederationFollowCommon"
 msgstr ""
 
-#: ../../index.rst:2156
+#: ../../index.rst:2282
 msgid "IFederationFollower"
 msgstr ""
 
-#: ../../index.rst:2165
+#: ../../index.rst:2291
 msgid "IFederationFollowing"
 msgstr ""
 
-#: ../../index.rst:2174
+#: ../../index.rst:2300
 msgid "IFollowRequest"
 msgstr ""
 
-#: ../../index.rst:2183
+#: ../../index.rst:2309
 msgid "IGalleryPost"
 msgstr ""
 
-#: ../../index.rst:2192
+#: ../../index.rst:2318
+msgid "IHashtag"
+msgstr ""
+
+#: ../../index.rst:2327
+msgid "ITrendHashtag"
+msgstr ""
+
+#: ../../index.rst:2336
 msgid "IFederationInstance"
 msgstr ""
 
-#: ../../index.rst:2201
+#: ../../index.rst:2345
 msgid "IFederationInstanceRequired"
 msgstr ""
 
-#: ../../index.rst:2210
+#: ../../index.rst:2354
 msgid "IFederationInstanceStat"
 msgstr ""
 
-#: ../../index.rst:2219
+#: ../../index.rst:2363
 msgid "IInstanceLite"
 msgstr ""
 
-#: ../../index.rst:2228
+#: ../../index.rst:2372
 msgid "IInviteCode"
 msgstr ""
 
-#: ../../index.rst:2237
+#: ../../index.rst:2381
 msgid "IInviteLimit"
 msgstr ""
 
-#: ../../index.rst:2246
+#: ../../index.rst:2390
 msgid "IAdminMeta"
 msgstr ""
 
-#: ../../index.rst:2255
+#: ../../index.rst:2399
 msgid "IFeatures"
 msgstr ""
 
-#: ../../index.rst:2264
+#: ../../index.rst:2408
 msgid "IMeta"
 msgstr ""
 
-#: ../../index.rst:2273
+#: ../../index.rst:2417
 msgid "IPartialMeta"
 msgstr ""
 
-#: ../../index.rst:2282
+#: ../../index.rst:2426
 msgid "IPolicies"
 msgstr ""
 
-#: ../../index.rst:2291
+#: ../../index.rst:2435
 msgid "IUpdateMetaBody"
 msgstr ""
 
-#: ../../index.rst:2300
+#: ../../index.rst:2444
 msgid "IMuting"
 msgstr ""
 
-#: ../../index.rst:2309
+#: ../../index.rst:2453
 msgid "ICreatedNote"
 msgstr ""
 
@@ -5490,7 +6373,7 @@ msgstr ""
 msgid "created note"
 msgstr ""
 
-#: ../../index.rst:2318
+#: ../../index.rst:2462
 msgid "INote"
 msgstr ""
 
@@ -5498,7 +6381,7 @@ msgstr ""
 msgid "Misskey Raw Model: Note"
 msgstr ""
 
-#: ../../index.rst:2327
+#: ../../index.rst:2471
 msgid "INoteChannel"
 msgstr ""
 
@@ -5510,99 +6393,99 @@ msgstr ""
 msgid "ログインしていてもis_following等は存在しない"
 msgstr ""
 
-#: ../../index.rst:2336
+#: ../../index.rst:2480
 msgid "INoteReaction"
 msgstr ""
 
-#: ../../index.rst:2345
+#: ../../index.rst:2489
 msgid "INoteState"
 msgstr ""
 
-#: ../../index.rst:2354
+#: ../../index.rst:2498
 msgid "INoteTranslateResult"
 msgstr ""
 
-#: ../../index.rst:2363
+#: ../../index.rst:2507
 msgid "INoteUpdated"
 msgstr ""
 
-#: ../../index.rst:2372
+#: ../../index.rst:2516
 msgid "INoteUpdatedDelete"
 msgstr ""
 
-#: ../../index.rst:2381
+#: ../../index.rst:2525
 msgid "INoteUpdatedDeleteBody"
 msgstr ""
 
-#: ../../index.rst:2390
+#: ../../index.rst:2534
 msgid "INoteUpdatedReaction"
 msgstr ""
 
-#: ../../index.rst:2399
+#: ../../index.rst:2543
 msgid "INoteUpdatedReactionBody"
 msgstr ""
 
-#: ../../index.rst:2408
+#: ../../index.rst:2552
 msgid "IAchievementNf"
 msgstr ""
 
-#: ../../index.rst:2417
+#: ../../index.rst:2561
 msgid "INoteNf"
 msgstr ""
 
-#: ../../index.rst:2426
+#: ../../index.rst:2570
 msgid "INotification"
 msgstr ""
 
-#: ../../index.rst:2435
+#: ../../index.rst:2579
 msgid "IPollEndNf"
 msgstr ""
 
-#: ../../index.rst:2444
+#: ../../index.rst:2588
 msgid "IReactionNf"
 msgstr ""
 
-#: ../../index.rst:2453
+#: ../../index.rst:2597
 msgid "IUserNf"
 msgstr ""
 
-#: ../../index.rst:2462
+#: ../../index.rst:2606
 msgid "AttachedFilePayload"
 msgstr ""
 
-#: ../../index.rst:2471
+#: ../../index.rst:2615
 msgid "EyeCatchingImagePayload"
 msgstr ""
 
-#: ../../index.rst:2480
+#: ../../index.rst:2624
 msgid "IPage"
 msgstr ""
 
-#: ../../index.rst:2489
+#: ../../index.rst:2633
 msgid "IPageRequired"
 msgstr ""
 
-#: ../../index.rst:2498
+#: ../../index.rst:2642
 msgid "PageContentPayload"
 msgstr ""
 
-#: ../../index.rst:2507
+#: ../../index.rst:2651
 msgid "PageFilePayload"
 msgstr ""
 
-#: ../../index.rst:2516
+#: ../../index.rst:2660
 msgid "PagePayload"
 msgstr ""
 
-#: ../../index.rst:2525
+#: ../../index.rst:2669
 msgid "VariablePayload"
 msgstr ""
 
-#: ../../index.rst:2534
+#: ../../index.rst:2678
 msgid "ICreatePoll"
 msgstr ""
 
-#: ../../index.rst:2543
+#: ../../index.rst:2687
 msgid "IPoll"
 msgstr ""
 
@@ -5610,31 +6493,31 @@ msgstr ""
 msgid "Questionnaire object"
 msgstr ""
 
-#: ../../index.rst:2552
+#: ../../index.rst:2696
 msgid "IPollChoice"
 msgstr ""
 
-#: ../../index.rst:2561
+#: ../../index.rst:2705
 msgid "NoteReactionPayload"
 msgstr ""
 
-#: ../../index.rst:2570
+#: ../../index.rst:2714
 msgid "IPartialRole"
 msgstr ""
 
-#: ../../index.rst:2579
+#: ../../index.rst:2723
 msgid "IRole"
 msgstr ""
 
-#: ../../index.rst:2588
+#: ../../index.rst:2732
 msgid "IRolePolicies"
 msgstr ""
 
-#: ../../index.rst:2597
+#: ../../index.rst:2741
 msgid "IRoleUser"
 msgstr ""
 
-#: ../../index.rst:2606
+#: ../../index.rst:2750
 msgid "is_me_detailed"
 msgstr ""
 
@@ -5644,7 +6527,7 @@ msgid ""
 "を持っているのでどちらともを満たしたものがIMeDetailedSchema"
 msgstr ""
 
-#: ../../index.rst:2612
+#: ../../index.rst:2756
 msgid "is_partial_user"
 msgstr ""
 
@@ -5654,11 +6537,11 @@ msgid ""
 "を継承しているため url が無いことを確認し区別する 念のために avatar_url があることも確認する"
 msgstr ""
 
-#: ../../index.rst:2618
+#: ../../index.rst:2762
 msgid "is_user_detailed"
 msgstr ""
 
-#: ../../index.rst:2624
+#: ../../index.rst:2768
 msgid "is_user_detailed_not_me"
 msgstr ""
 
@@ -5668,7 +6551,7 @@ msgid ""
 "avatar_id が無いことを確認する こうすることで IMeDetailedSchema と区別する"
 msgstr ""
 
-#: ../../index.rst:2630
+#: ../../index.rst:2774
 msgid "GetFrequentlyRepliedUsersResponse"
 msgstr ""
 
@@ -5676,31 +6559,31 @@ msgstr ""
 msgid "`users/get-frequently-replied-users` のレスポンス"
 msgstr ""
 
-#: ../../index.rst:2639
+#: ../../index.rst:2783
 msgid "IAchievement"
 msgstr ""
 
-#: ../../index.rst:2648
+#: ../../index.rst:2792
 msgid "IAvatarDecoration"
 msgstr ""
 
-#: ../../index.rst:2657
+#: ../../index.rst:2801
 msgid "IBadgeRole"
 msgstr ""
 
-#: ../../index.rst:2666
+#: ../../index.rst:2810
 msgid "ICreatedUser"
 msgstr ""
 
-#: ../../index.rst:2675
+#: ../../index.rst:2819
 msgid "IMeDetailedOnlySchema"
 msgstr ""
 
-#: ../../index.rst:2684
+#: ../../index.rst:2828
 msgid "IMeDetailedSchema"
 msgstr ""
 
-#: ../../index.rst:2693
+#: ../../index.rst:2837
 msgid "IPartialUser"
 msgstr ""
 
@@ -5708,11 +6591,11 @@ msgstr ""
 msgid "Misskey Schema: `packedUserLiteSchema`"
 msgstr ""
 
-#: ../../index.rst:2702
+#: ../../index.rst:2846
 msgid "ISignin"
 msgstr ""
 
-#: ../../index.rst:2711
+#: ../../index.rst:2855
 msgid "IUserDetailedNotMeOnlySchema"
 msgstr ""
 
@@ -5720,27 +6603,27 @@ msgstr ""
 msgid "Misskey Schema: `packedUserDetailedNotMeOnlySchema`"
 msgstr ""
 
-#: ../../index.rst:2720
+#: ../../index.rst:2864
 msgid "IUserDetailedNotMeSchema"
 msgstr ""
 
-#: ../../index.rst:2729
+#: ../../index.rst:2873
 msgid "IUserField"
 msgstr ""
 
-#: ../../index.rst:2738
+#: ../../index.rst:2882
 msgid "IUserList"
 msgstr ""
 
-#: ../../index.rst:2747
+#: ../../index.rst:2891
 msgid "IUserListMembership"
 msgstr ""
 
-#: ../../index.rst:2756
+#: ../../index.rst:2900
 msgid "IUserRequired"
 msgstr ""
 
-#: ../../index.rst:2765
+#: ../../index.rst:2909
 msgid "IUserRole"
 msgstr ""
 
@@ -5752,31 +6635,31 @@ msgstr ""
 msgid "Will be removed in v0.7.0"
 msgstr ""
 
-#: ../../index.rst:2774
+#: ../../index.rst:2918
 msgid "IUserSecurityKey"
 msgstr ""
 
-#: ../../index.rst:2783
+#: ../../index.rst:2927
 msgid "NotificationRecieveConfig"
 msgstr ""
 
-#: ../../index.rst:2792
+#: ../../index.rst:2936
 msgid "NotificationRecieveConfigType"
 msgstr ""
 
-#: ../../index.rst:2801
+#: ../../index.rst:2945
 msgid "NotificationRecieveConfigWithUserList"
 msgstr ""
 
-#: ../../index.rst:2810
+#: ../../index.rst:2954
 msgid "IUsernameAvailable"
 msgstr ""
 
-#: ../../index.rst:2817
+#: ../../index.rst:2961
 msgid "Errors"
 msgstr ""
 
-#: ../../index.rst:2820
+#: ../../index.rst:2964
 msgid "APIError"
 msgstr ""
 
@@ -5784,7 +6667,7 @@ msgstr ""
 msgid "APIのエラー"
 msgstr ""
 
-#: ../../index.rst:2829
+#: ../../index.rst:2973
 msgid "NotExistRequiredData"
 msgstr ""
 
@@ -5792,663 +6675,1098 @@ msgstr ""
 msgid "クラスの中に必要なデータが不足している"
 msgstr ""
 
-#: ../../index.rst:2838
+#: ../../index.rst:2982
 msgid "AccessDeniedError"
 msgstr ""
 
 #: mipac.errors.errors.AccessDeniedError:1 of
-msgid "アクセス権限がありません。"
+msgid "Access denied."
 msgstr ""
 
-#: ../../index.rst:2847
+#: ../../index.rst:2991
 msgid "AlreadyAddedError"
 msgstr ""
 
-#: ../../index.rst:2856
+#: mipac.errors.errors.AlreadyAddedError:1 of
+msgid "That user has already been added to that list."
+msgstr ""
+
+#: ../../index.rst:3000
 msgid "AlreadyBlockingError"
 msgstr ""
 
 #: mipac.errors.errors.AlreadyBlockingError:1 of
-msgid "すでにブロックしています。"
+msgid "You are already blocking that user."
 msgstr ""
 
-#: ../../index.rst:2865
+#: ../../index.rst:3009
 msgid "AlreadyClippedError"
 msgstr ""
 
-#: ../../index.rst:2874
+#: mipac.errors.errors.AlreadyClippedError:1 of
+msgid "The note has already been clipped."
+msgstr ""
+
+#: ../../index.rst:3018
+msgid "AlreadyEndedError"
+msgstr ""
+
+#: mipac.errors.errors.AlreadyEndedError:1 of
+msgid "That game has already ended."
+msgstr ""
+
+#: ../../index.rst:3027
 msgid "AlreadyExpiredError"
 msgstr ""
 
-#: ../../index.rst:2883
+#: mipac.errors.errors.AlreadyExpiredError:1 of
+msgid "The poll is already expired."
+msgstr ""
+
+#: ../../index.rst:3036
 msgid "AlreadyFavoritedError"
 msgstr ""
 
 #: mipac.errors.errors.AlreadyFavoritedError:1 of
-msgid "既にお気に入り登録されています。"
+msgid "You have not favorited the list."
 msgstr ""
 
-#: ../../index.rst:2892
+#: ../../index.rst:3045
 msgid "AlreadyFollowingError"
 msgstr ""
 
 #: mipac.errors.errors.AlreadyFollowingError:1 of
-msgid "すでにフォローしています。"
+msgid "You are already following that user."
 msgstr ""
 
-#: ../../index.rst:2901
-msgid "AlreadyInvitedError"
-msgstr ""
-
-#: ../../index.rst:2910
+#: ../../index.rst:3054
 msgid "AlreadyLikedError"
 msgstr ""
 
 #: mipac.errors.errors.AlreadyLikedError:1 of
-msgid "すでにいいねをつけています。"
+msgid "The flash has already been liked."
 msgstr ""
 
-#: ../../index.rst:2919
+#: ../../index.rst:3063
+msgid "AlreadyMovedError"
+msgstr ""
+
+#: mipac.errors.errors.AlreadyMovedError:1 of
+msgid "Account was already moved to another account."
+msgstr ""
+
+#: ../../index.rst:3072
 msgid "AlreadyMutingError"
 msgstr ""
 
 #: mipac.errors.errors.AlreadyMutingError:1 of
-msgid "すでにそのユーザーをミュートしています。"
+msgid "You are already muting that user."
 msgstr ""
 
-#: ../../index.rst:2928
+#: ../../index.rst:3081
 msgid "AlreadyPinnedError"
 msgstr ""
 
 #: mipac.errors.errors.AlreadyPinnedError:1 of
-msgid "指定されたノートは既にピン留めされています。"
+msgid "That note has already been pinned."
 msgstr ""
 
-#: ../../index.rst:2937
+#: ../../index.rst:3090
 msgid "AlreadyPromotedError"
 msgstr ""
 
-#: ../../index.rst:2946
+#: mipac.errors.errors.AlreadyPromotedError:1 of
+msgid "The note has already promoted."
+msgstr ""
+
+#: ../../index.rst:3099
 msgid "AlreadyReactedError"
 msgstr ""
 
 #: mipac.errors.errors.AlreadyReactedError:1 of
-msgid "既にリアクションしています。"
+msgid "You are already reacting to that note."
 msgstr ""
 
-#: ../../index.rst:2955
+#: ../../index.rst:3108
 msgid "AlreadyVotedError"
 msgstr ""
 
-#: ../../index.rst:2964
+#: mipac.errors.errors.AlreadyVotedError:1 of
+msgid "You have already voted."
+msgstr ""
+
+#: ../../index.rst:3117
+msgid "AuthenticationFailedError"
+msgstr ""
+
+#: mipac.errors.errors.AuthenticationFailedError:1 of
+msgid "Authentication failed. Please ensure your token is correct."
+msgstr ""
+
+#: ../../index.rst:3126
 msgid "AvatarNotAnImageError"
 msgstr ""
 
 #: mipac.errors.errors.AvatarNotAnImageError:1 of
-msgid "アバター画像に、画像ではないファイルが指定されました。"
+msgid "The file specified as an avatar is not an image."
 msgstr ""
 
-#: ../../index.rst:2973
+#: ../../index.rst:3135
 msgid "BannerNotAnImageError"
 msgstr ""
 
 #: mipac.errors.errors.BannerNotAnImageError:1 of
-msgid "バナー画像に、画像ではないファイルが指定されました。"
+msgid "The file specified as a banner is not an image."
 msgstr ""
 
-#: ../../index.rst:2982
+#: ../../index.rst:3144
+msgid "BirthdayDateFormatInvalidError"
+msgstr ""
+
+#: mipac.errors.errors.BirthdayDateFormatInvalidError:1 of
+msgid "Birthday date format is invalid."
+msgstr ""
+
+#: ../../index.rst:3153
 msgid "BlockedError"
 msgstr ""
 
 #: mipac.errors.errors.BlockedError:1 of
-msgid "ユーザーにブロックされています。"
+msgid "You are blocked by that user."
 msgstr ""
 
-#: ../../index.rst:2991
+#: ../../index.rst:3162
 msgid "BlockeeIsYourselfError"
 msgstr ""
 
 #: mipac.errors.errors.BlockeeIsYourselfError:1 of
-msgid "自分のブロックを解除しようとしました。"
+msgid "Blockee is yourself."
 msgstr ""
 
-#: ../../index.rst:3000
+#: ../../index.rst:3171
 msgid "BlockingError"
 msgstr ""
 
 #: mipac.errors.errors.BlockingError:1 of
-msgid "ユーザーをブロックしています。"
+msgid "You are blocking that user."
 msgstr ""
 
-#: ../../index.rst:3009
+#: ../../index.rst:3180
+msgid "BothWithRepliesAndWithFilesError"
+msgstr ""
+
+#: mipac.errors.errors.BothWithRepliesAndWithFilesError:1 of
+msgid "Specifying both withReplies and withFiles is not supported"
+msgstr ""
+
+#: ../../index.rst:3189
+msgid "CanNotDeleteInviteCodeError"
+msgstr ""
+
+#: mipac.errors.errors.CanNotDeleteInviteCodeError:1 of
+msgid "You can't delete this invite code."
+msgstr ""
+
+#: ../../index.rst:3198
 msgid "CannotCreateAlreadyExpiredPollError"
 msgstr ""
 
 #: mipac.errors.errors.CannotCreateAlreadyExpiredPollError:1 of
-msgid "アンケートの期限の指定が誤っています。"
+msgid "Poll is already expired."
 msgstr ""
 
-#: ../../index.rst:3018
+#: ../../index.rst:3207
+msgid "CannotRenoteDueToVisibilityError"
+msgstr ""
+
+#: mipac.errors.errors.CannotRenoteDueToVisibilityError:1 of
+msgid "You can not Renote due to target visibility."
+msgstr ""
+
+#: ../../index.rst:3216
+msgid "CannotRenoteOutsideOfChannelError"
+msgstr ""
+
+#: mipac.errors.errors.CannotRenoteOutsideOfChannelError:1 of
+msgid "Cannot renote outside of channel."
+msgstr ""
+
+#: ../../index.rst:3225
 msgid "CannotRenoteToAPureRenoteError"
 msgstr ""
 
 #: mipac.errors.errors.CannotRenoteToAPureRenoteError:1 of
-msgid "単純なRenoteを再度Renoteすることはできません。"
+msgid "You can not Renote a pure Renote."
 msgstr ""
 
-#: ../../index.rst:3027
+#: ../../index.rst:3234
 msgid "CannotReplyToAPureRenoteError"
 msgstr ""
 
 #: mipac.errors.errors.CannotReplyToAPureRenoteError:1 of
-msgid "単純なRenoteに返信することはできません。"
+msgid "You can not reply to a pure Renote."
 msgstr ""
 
-#: ../../index.rst:3036
+#: ../../index.rst:3243
+msgid "CannotReplyToAnInvisibleNoteError"
+msgstr ""
+
+#: mipac.errors.errors.CannotReplyToAnInvisibleNoteError:1 of
+msgid "You cannot reply to an invisible Note."
+msgstr ""
+
+#: ../../index.rst:3252
+msgid "CannotReplyToSpecifiedVisibilityNoteWithExtendedVisibilityError"
+msgstr ""
+
+#: mipac.errors.errors.CannotReplyToSpecifiedVisibilityNoteWithExtendedVisibilityError:1
+#: of
+msgid "You cannot reply to a specified visibility note with extended visibility."
+msgstr ""
+
+#: ../../index.rst:3261
 msgid "CannotReportTheAdminError"
 msgstr ""
 
 #: mipac.errors.errors.CannotReportTheAdminError:1 of
-msgid "管理者を通報しようとしました。"
+msgid "Cannot report the admin."
 msgstr ""
 
-#: ../../index.rst:3045
+#: ../../index.rst:3270
 msgid "CannotReportYourselfError"
 msgstr ""
 
 #: mipac.errors.errors.CannotReportYourselfError:1 of
-msgid "自身を通報しようとしました。"
+msgid "Cannot report yourself."
 msgstr ""
 
-#: ../../index.rst:3054
-msgid "ContentRequiredError"
+#: ../../index.rst:3279
+msgid "ContainsProhibitedWordsError"
 msgstr ""
 
-#: ../../index.rst:3063
+#: mipac.errors.errors.ContainsProhibitedWordsError:1 of
+msgid "Cannot post because it contains prohibited words."
+msgstr ""
+
+#: ../../index.rst:3288
+msgid "ContainsTooManyMentionsError"
+msgstr ""
+
+#: mipac.errors.errors.ContainsTooManyMentionsError:1 of
+msgid "Cannot post because it exceeds the allowed number of mentions."
+msgstr ""
+
+#: ../../index.rst:3297
 msgid "CredentialRequiredError"
 msgstr ""
 
 #: mipac.errors.errors.CredentialRequiredError:1 of
-msgid "クレデンシャル必須のエンドポイントにクレデンシャル無しでリクエストされました。"
+msgid "Credential required."
 msgstr ""
 
-#: ../../index.rst:3072
+#: ../../index.rst:3306
+msgid "DestinationAccountForbidsError"
+msgstr ""
+
+#: mipac.errors.errors.DestinationAccountForbidsError:1 of
+msgid ""
+"Destination account doesn't have proper 'Known As' alias, or has already "
+"moved."
+msgstr ""
+
+#: ../../index.rst:3315
+msgid "DuplicateNameError"
+msgstr ""
+
+#: mipac.errors.errors.DuplicateNameError:1 of
+msgid "Duplicate name."
+msgstr ""
+
+#: ../../index.rst:3324
+msgid "EmptyFileError"
+msgstr ""
+
+#: mipac.errors.errors.EmptyFileError:1 of
+msgid "That file is empty."
+msgstr ""
+
+#: ../../index.rst:3333
+msgid "ExceededLimitOfCreateInviteCodeError"
+msgstr ""
+
+#: mipac.errors.errors.ExceededLimitOfCreateInviteCodeError:1 of
+msgid "You have exceeded the limit for creating an invitation code."
+msgstr ""
+
+#: ../../index.rst:3342
+msgid "ExtResourceHashDidntMatchError"
+msgstr ""
+
+#: mipac.errors.errors.ExtResourceHashDidntMatchError:1 of
+msgid "Hash did not match."
+msgstr ""
+
+#: ../../index.rst:3351
+msgid "ExtResourceReturnedInvalidSchemaError"
+msgstr ""
+
+#: mipac.errors.errors.ExtResourceReturnedInvalidSchemaError:1 of
+msgid "External resource returned invalid schema."
+msgstr ""
+
+#: ../../index.rst:3360
 msgid "FailedToResolveRemoteUserError"
 msgstr ""
 
 #: mipac.errors.errors.FailedToResolveRemoteUserError:1 of
-msgid "リモートユーザーの検索に失敗しました。"
+msgid "Failed to resolve remote user."
 msgstr ""
 
-#: ../../index.rst:3081
+#: ../../index.rst:3369
 msgid "FollowRequestNotFoundError"
 msgstr ""
 
 #: mipac.errors.errors.FollowRequestNotFoundError:1 of
-msgid "フォローリクエストがありません。"
+msgid "Follow request not found."
 msgstr ""
 
-#: ../../index.rst:3090
+#: ../../index.rst:3378
 msgid "FolloweeIsYourselfError"
 msgstr ""
 
 #: mipac.errors.errors.FolloweeIsYourselfError:1 of
-msgid "自分のフォローを解除しようとしました。"
+msgid "Followee is yourself."
 msgstr ""
 
-#: ../../index.rst:3099
+#: ../../index.rst:3387
 msgid "FollowerIsYourselfError"
 msgstr ""
 
 #: mipac.errors.errors.FollowerIsYourselfError:1 of
-msgid "自分をフォロワー解除しようとしました。"
+msgid "Follower is yourself."
 msgstr ""
 
-#: ../../index.rst:3108
+#: ../../index.rst:3396
 msgid "ForbiddenError"
 msgstr ""
 
-#: ../../index.rst:3117
-msgid "GroupAccessDeniedError"
+#: mipac.errors.errors.ForbiddenError:1 of
+msgid "Forbidden."
 msgstr ""
 
-#: ../../index.rst:3126
+#: ../../index.rst:3405
+msgid "ForbiddenToSetYourselfError"
+msgstr ""
+
+#: mipac.errors.errors.ForbiddenToSetYourselfError:1 of
+msgid "You can't set yourself as your own alias."
+msgstr ""
+
+#: ../../index.rst:3414
 msgid "GtlDisabledError"
 msgstr ""
 
 #: mipac.errors.errors.GtlDisabledError:1 of
-msgid "グローバルタイムラインが無効になっています。"
+msgid "Global timeline has been disabled."
 msgstr ""
 
-#: ../../index.rst:3135
+#: ../../index.rst:3423
 msgid "HasChildFilesOrFoldersError"
 msgstr ""
 
 #: mipac.errors.errors.HasChildFilesOrFoldersError:1 of
-msgid "フォルダーが空ではありません。"
+msgid "This folder has child files or folders."
 msgstr ""
 
-#: ../../index.rst:3144
+#: ../../index.rst:3432
+msgid "IAmAiError"
+msgstr ""
+
+#: mipac.errors.errors.IAmAiError:1 of
+msgid "You sent a request to Ai-chan, Misskey's showgirl, instead of the server."
+msgstr ""
+
+#: ../../index.rst:3441
 msgid "InappropriateError"
 msgstr ""
 
 #: mipac.errors.errors.InappropriateError:1 of
-msgid "不適切なコンテンツを含んでいる可能性があると判定されました。"
+msgid ""
+"Cannot upload the file because it has been determined that it possibly "
+"contains inappropriate content."
 msgstr ""
 
-#: ../../index.rst:3153
+#: ../../index.rst:3450
+msgid "IncorrectPasswordError"
+msgstr ""
+
+#: mipac.errors.errors.IncorrectPasswordError:1 of
+msgid "Incorrect password."
+msgstr ""
+
+#: ../../index.rst:3459
 msgid "InternalErrorError"
 msgstr ""
 
 #: mipac.errors.errors.InternalErrorError:1 of
-msgid "サーバー内部で問題が発生しました。引き続き問題が発生する場合は管理者にお問い合わせください。"
+msgid "Internal error occurred. Please contact us if the error persists."
 msgstr ""
 
-#: ../../index.rst:3162
+#: ../../index.rst:3468
 msgid "InvalidChoiceError"
 msgstr ""
 
-#: ../../index.rst:3171
+#: mipac.errors.errors.InvalidChoiceError:1 of
+msgid "Choice ID is invalid."
+msgstr ""
+
+#: ../../index.rst:3477
+msgid "InvalidDateTimeError"
+msgstr ""
+
+#: mipac.errors.errors.InvalidDateTimeError:1 of
+msgid "Invalid date-time format"
+msgstr ""
+
+#: ../../index.rst:3486
 msgid "InvalidFileNameError"
 msgstr ""
 
 #: mipac.errors.errors.InvalidFileNameError:1 of
-msgid "ファイル名が不正です。"
+msgid "Invalid file name."
 msgstr ""
 
-#: ../../index.rst:3180
+#: ../../index.rst:3495
 msgid "InvalidParamError"
 msgstr ""
 
 #: mipac.errors.errors.InvalidParamError:1 of
-msgid "リクエストパラメータに誤りがあります。"
+msgid "Invalid param."
 msgstr ""
 
-#: ../../index.rst:3189
+#: ../../index.rst:3504
 msgid "InvalidRegexpError"
 msgstr ""
 
 #: mipac.errors.errors.InvalidRegexpError:1 of
-msgid "正規表現が不正です。"
+msgid "Invalid Regular Expression."
 msgstr ""
 
-#: ../../index.rst:3198
+#: ../../index.rst:3513
+msgid "InvalidSeedError"
+msgstr ""
+
+#: mipac.errors.errors.InvalidSeedError:1 of
+msgid "Provided seed is invalid."
+msgstr ""
+
+#: ../../index.rst:3522
 msgid "InvalidUrlError"
 msgstr ""
 
-#: ../../index.rst:3207
-msgid "IsOwnerError"
+#: mipac.errors.errors.InvalidUrlError:1 of
+msgid "Invalid URL"
 msgstr ""
 
-#: ../../index.rst:3216
+#: ../../index.rst:3531
+msgid "IsRemoteUserError"
+msgstr ""
+
+#: mipac.errors.errors.IsRemoteUserError:1 of
+msgid ""
+"Currently unavailable to display reactions of remote users. See "
+"https://github.com/misskey-dev/misskey/issues/12964"
+msgstr ""
+
+#: ../../index.rst:3540
 msgid "LtlDisabledError"
 msgstr ""
 
 #: mipac.errors.errors.LtlDisabledError:1 of
-msgid "ローカルタイムラインが無効になっています。"
+msgid "Local timeline has been disabled."
 msgstr ""
 
-#: ../../index.rst:3225
-msgid "MoSuchFileError"
-msgstr ""
-
-#: ../../index.rst:3234
+#: ../../index.rst:3549
 msgid "MuteeIsYourselfError"
 msgstr ""
 
 #: mipac.errors.errors.MuteeIsYourselfError:1 of
-msgid "自分に対してミュートを解除しようとしました。"
+msgid "Mutee is yourself."
 msgstr ""
 
-#: ../../index.rst:3243
+#: ../../index.rst:3558
 msgid "NameAlreadyExistsError"
 msgstr ""
 
 #: mipac.errors.errors.NameAlreadyExistsError:1 of
-msgid "同じURLにページがすでに存在します。"
+msgid "Specified name already exists."
 msgstr ""
 
-#: ../../index.rst:3252
+#: ../../index.rst:3567
 msgid "NoFollowRequestError"
 msgstr ""
 
 #: mipac.errors.errors.NoFollowRequestError:1 of
-msgid "ユーザーからのフォローリクエストがありません。"
+msgid "No follow request."
 msgstr ""
 
-#: ../../index.rst:3261
+#: ../../index.rst:3576
 msgid "NoFreeSpaceError"
 msgstr ""
 
 #: mipac.errors.errors.NoFreeSpaceError:1 of
-msgid "ドライブに空き容量がありません。"
+msgid "Cannot upload the file because you have no free space of drive."
 msgstr ""
 
-#: ../../index.rst:3270
+#: ../../index.rst:3585
 msgid "NoPollError"
 msgstr ""
 
-#: ../../index.rst:3279
+#: mipac.errors.errors.NoPollError:1 of
+msgid "The note does not attach a poll."
+msgstr ""
+
+#: ../../index.rst:3594
+msgid "NoSecurityKeyError"
+msgstr ""
+
+#: mipac.errors.errors.NoSecurityKeyError:1 of
+msgid "No security key."
+msgstr ""
+
+#: ../../index.rst:3603
 msgid "NoSuchAdError"
 msgstr ""
 
-#: ../../index.rst:3288
+#: mipac.errors.errors.NoSuchAdError:1 of
+msgid "No such ad."
+msgstr ""
+
+#: ../../index.rst:3612
 msgid "NoSuchAnnouncementError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchAnnouncementError:1 of
-msgid "お知らせが存在しません。"
+msgid "No such announcement."
 msgstr ""
 
-#: ../../index.rst:3297
+#: ../../index.rst:3621
 msgid "NoSuchAntennaError"
 msgstr ""
 
-#: ../../index.rst:3306
+#: mipac.errors.errors.NoSuchAntennaError:1 of
+msgid "No such antenna."
+msgstr ""
+
+#: ../../index.rst:3630
 msgid "NoSuchAppError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchAppError:1 of
-msgid "アプリが存在しません。"
+msgid "No such app."
 msgstr ""
 
-#: ../../index.rst:3315
+#: ../../index.rst:3639
 msgid "NoSuchAvatarError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchAvatarError:1 of
-msgid "アバター画像のファイルが存在しません。"
+msgid "No such avatar file."
 msgstr ""
 
-#: ../../index.rst:3324
+#: ../../index.rst:3648
 msgid "NoSuchBannerError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchBannerError:1 of
-msgid "バナー画像のファイルが存在しません。"
+msgid "No such banner file."
 msgstr ""
 
-#: ../../index.rst:3333
+#: ../../index.rst:3657
 msgid "NoSuchChannelError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchChannelError:1 of
-msgid "指定されたチャンネルが存在しないか、アクセスが許可されていません。"
+msgid "No such channel."
 msgstr ""
 
-#: ../../index.rst:3342
+#: ../../index.rst:3666
 msgid "NoSuchClipError"
 msgstr ""
 
-#: ../../index.rst:3351
+#: mipac.errors.errors.NoSuchClipError:1 of
+msgid "No such clip."
+msgstr ""
+
+#: ../../index.rst:3675
 msgid "NoSuchEmojiError"
 msgstr ""
 
-#: ../../index.rst:3360
+#: mipac.errors.errors.NoSuchEmojiError:1 of
+msgid "No such emoji."
+msgstr ""
+
+#: ../../index.rst:3684
 msgid "NoSuchFileError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchFileError:1 of
-msgid "ファイルが存在しません。"
+msgid "No such file."
 msgstr ""
 
-#: ../../index.rst:3369
+#: ../../index.rst:3693
+msgid "NoSuchFlashError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchFlashError:1 of
+msgid "No such flash."
+msgstr ""
+
+#: ../../index.rst:3702
 msgid "NoSuchFolderError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchFolderError:1 of
-msgid "フォルダーが存在しません。"
+msgid "No such folder."
 msgstr ""
 
-#: ../../index.rst:3378
-msgid "NoSuchGroupError"
+#: ../../index.rst:3711
+msgid "NoSuchGameError"
 msgstr ""
 
-#: ../../index.rst:3387
-msgid "NoSuchGroupMemberError"
+#: mipac.errors.errors.NoSuchGameError:1 of
+msgid "No such game."
 msgstr ""
 
-#: ../../index.rst:3396
+#: ../../index.rst:3720
 msgid "NoSuchHashtagError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchHashtagError:1 of
-msgid "ハッシュタグが存在しません。"
+msgid "No such hashtag."
 msgstr ""
 
-#: ../../index.rst:3405
-msgid "NoSuchInvitationError"
+#: ../../index.rst:3729
+msgid "NoSuchInviteCodeError"
 msgstr ""
 
-#: ../../index.rst:3414
+#: mipac.errors.errors.NoSuchInviteCodeError:1 of
+msgid "No such invite code."
+msgstr ""
+
+#: ../../index.rst:3738
+msgid "NoSuchKeyError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchKeyError:1 of
+msgid "No such key."
+msgstr ""
+
+#: ../../index.rst:3747
 msgid "NoSuchListError"
 msgstr ""
 
-#: ../../index.rst:3423
-msgid "NoSuchMessageError"
+#: mipac.errors.errors.NoSuchListError:1 of
+msgid "No such list."
 msgstr ""
 
-#: ../../index.rst:3432
+#: ../../index.rst:3756
 msgid "NoSuchNoteError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchNoteError:1 of
-msgid "指定されたノートが存在しないか、アクセスが許可されていません。"
+msgid "No such note."
 msgstr ""
 
-#: ../../index.rst:3441
-msgid "NoSuchNotificationError"
-msgstr ""
-
-#: mipac.errors.errors.NoSuchNotificationError:1 of
-msgid "通知が存在しません。"
-msgstr ""
-
-#: ../../index.rst:3450
+#: ../../index.rst:3765
 msgid "NoSuchObjectError"
 msgstr ""
 
-#: ../../index.rst:3459
+#: mipac.errors.errors.NoSuchObjectError:1 of
+msgid "No such object."
+msgstr ""
+
+#: ../../index.rst:3774
 msgid "NoSuchPageError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchPageError:1 of
-msgid "ページが存在しません。"
+msgid "No such page."
 msgstr ""
 
-#: ../../index.rst:3468
+#: ../../index.rst:3783
 msgid "NoSuchParentFolderError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchParentFolderError:1 of
-msgid "親フォルダーが存在しません。"
+msgid "No such parent folder."
 msgstr ""
 
-#: ../../index.rst:3477
+#: ../../index.rst:3792
 msgid "NoSuchPostError"
 msgstr ""
 
-#: ../../index.rst:3486
+#: mipac.errors.errors.NoSuchPostError:1 of
+msgid "No such post."
+msgstr ""
+
+#: ../../index.rst:3801
+msgid "NoSuchRegistrationError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchRegistrationError:1 of
+msgid "No such registration."
+msgstr ""
+
+#: ../../index.rst:3810
 msgid "NoSuchRenoteTargetError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchRenoteTargetError:1 of
-msgid "Renoteに指定されたノートが存在しないか、アクセスが許可されていません。"
+msgid "No such renote target."
 msgstr ""
 
-#: ../../index.rst:3495
+#: ../../index.rst:3819
 msgid "NoSuchReplyTargetError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchReplyTargetError:1 of
-msgid "返信先に指定されたノートが存在しないか、アクセスが許可されていません。"
+msgid "No such reply target."
 msgstr ""
 
-#: ../../index.rst:3504
+#: ../../index.rst:3828
+msgid "NoSuchRoleError"
+msgstr ""
+
+#: mipac.errors.errors.NoSuchRoleError:1 of
+msgid "No such role."
+msgstr ""
+
+#: ../../index.rst:3837
 msgid "NoSuchSessionError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchSessionError:1 of
-msgid "セッションが存在しません。"
+msgid "No such session."
 msgstr ""
 
-#: ../../index.rst:3513
+#: ../../index.rst:3846
 msgid "NoSuchUserError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchUserError:1 of
-msgid "ユーザーが存在しません。"
+msgid "No such user."
 msgstr ""
 
-#: ../../index.rst:3522
-msgid "NoSuchUserGroupError"
-msgstr ""
-
-#: ../../index.rst:3531
+#: ../../index.rst:3855
 msgid "NoSuchUserListError"
 msgstr ""
 
-#: ../../index.rst:3540
+#: mipac.errors.errors.NoSuchUserListError:1 of
+msgid "No such user list."
+msgstr ""
+
+#: ../../index.rst:3864
 msgid "NoSuchWebhookError"
 msgstr ""
 
 #: mipac.errors.errors.NoSuchWebhookError:1 of
-msgid "Webhookが存在しません。"
+msgid "No such webhook."
 msgstr ""
 
-#: ../../index.rst:3549
+#: ../../index.rst:3873
+msgid "NotAssignedError"
+msgstr ""
+
+#: mipac.errors.errors.NotAssignedError:1 of
+msgid "Not assigned."
+msgstr ""
+
+#: ../../index.rst:3882
 msgid "NotBlockingError"
 msgstr ""
 
 #: mipac.errors.errors.NotBlockingError:1 of
-msgid "ブロックしていないユーザーです。"
+msgid "You are not blocking that user."
 msgstr ""
 
-#: ../../index.rst:3558
+#: ../../index.rst:3891
 msgid "NotFavoritedError"
 msgstr ""
 
 #: mipac.errors.errors.NotFavoritedError:1 of
-msgid "お気に入り登録されていません。"
+msgid "You have not marked that note a favorite."
 msgstr ""
 
-#: ../../index.rst:3567
+#: ../../index.rst:3900
 msgid "NotFollowingError"
 msgstr ""
 
 #: mipac.errors.errors.NotFollowingError:1 of
-msgid "ユーザーにフォローされていません。"
+msgid "The other use is not following you."
 msgstr ""
 
-#: ../../index.rst:3576
+#: ../../index.rst:3909
 msgid "NotLikedError"
 msgstr ""
 
 #: mipac.errors.errors.NotLikedError:1 of
-msgid "いいねをつけていないページです。"
+msgid "You have not liked that flash."
 msgstr ""
 
-#: ../../index.rst:3585
+#: ../../index.rst:3918
 msgid "NotMutingError"
 msgstr ""
 
 #: mipac.errors.errors.NotMutingError:1 of
-msgid "対象となるユーザーをそもそもミュートしていません。"
+msgid "You are not muting that user."
 msgstr ""
 
-#: ../../index.rst:3594
+#: ../../index.rst:3927
 msgid "NotReactedError"
 msgstr ""
 
 #: mipac.errors.errors.NotReactedError:1 of
-msgid "リアクションしていません。"
+msgid "You are not reacting to that note."
 msgstr ""
 
-#: ../../index.rst:3603
+#: ../../index.rst:3936
+msgid "NotRootForbiddenError"
+msgstr ""
+
+#: mipac.errors.errors.NotRootForbiddenError:1 of
+msgid "The root can't migrate."
+msgstr ""
+
+#: ../../index.rst:3945
 msgid "PendingSessionError"
 msgstr ""
 
-#: ../../index.rst:3612
-msgid "PermissionDeniedError"
+#: mipac.errors.errors.PendingSessionError:1 of
+msgid "This session is not completed yet."
 msgstr ""
 
-#: mipac.errors.errors.PermissionDeniedError:1 of
-msgid "与えられたクレデンシャルには必要なパーミッションがありません。"
-msgstr ""
-
-#: ../../index.rst:3621
+#: ../../index.rst:3954
 msgid "PinLimitExceededError"
 msgstr ""
 
 #: mipac.errors.errors.PinLimitExceededError:1 of
-msgid "これ以上ピン留めできません。"
+msgid "You can not pin notes any more."
 msgstr ""
 
-#: ../../index.rst:3630
+#: ../../index.rst:3963
 msgid "RateLimitExceededError"
 msgstr ""
 
 #: mipac.errors.errors.RateLimitExceededError:1 of
-msgid "レートリミットによる制限のため一時的に利用できません。"
+msgid "Rate limit exceeded. Please try again later."
 msgstr ""
 
-#: ../../index.rst:3639
+#: ../../index.rst:3972
 msgid "ReactionsNotPublicError"
 msgstr ""
 
 #: mipac.errors.errors.ReactionsNotPublicError:1 of
-msgid "リアクションが公開されていません。"
+msgid "Reactions of the user is not public."
 msgstr ""
 
-#: ../../index.rst:3648
-msgid "RecipientIsYourselfError"
+#: ../../index.rst:3981
+msgid "RecursiveNestingError"
 msgstr ""
 
-#: ../../index.rst:3657
+#: mipac.errors.errors.RecursiveNestingError:1 of
+msgid "It can not be structured like nesting folders recursively."
+msgstr ""
+
+#: ../../index.rst:3990
+msgid "RemoteUserNotAllowedError"
+msgstr ""
+
+#: mipac.errors.errors.RemoteUserNotAllowedError:1 of
+msgid "Not allowed to load the remote user's list"
+msgstr ""
+
+#: ../../index.rst:3999
+msgid "RestrictedByRoleError"
+msgstr ""
+
+#: mipac.errors.errors.RestrictedByRoleError:1 of
+msgid "This feature is restricted by your role."
+msgstr ""
+
+#: ../../index.rst:4008
+msgid "SameNameEmojiExistsError"
+msgstr ""
+
+#: mipac.errors.errors.SameNameEmojiExistsError:1 of
+msgid "Emoji that have same name already exists."
+msgstr ""
+
+#: ../../index.rst:4017
 msgid "StlDisabledError"
 msgstr ""
 
 #: mipac.errors.errors.StlDisabledError:1 of
-msgid "ソーシャルタイムラインが無効になっています。"
+msgid "Hybrid timeline has been disabled."
 msgstr ""
 
-#: ../../index.rst:3666
-msgid "YouAreOwnerError"
+#: ../../index.rst:4026
+msgid "TargetIsYourselfError"
 msgstr ""
 
-#: ../../index.rst:3675
+#: mipac.errors.errors.TargetIsYourselfError:1 of
+msgid "Target user is yourself."
+msgstr ""
+
+#: ../../index.rst:4035
+msgid "TooBigFileError"
+msgstr ""
+
+#: mipac.errors.errors.TooBigFileError:1 of
+msgid "That file is too big."
+msgstr ""
+
+#: ../../index.rst:4044
+msgid "TooManyAntennasError"
+msgstr ""
+
+#: mipac.errors.errors.TooManyAntennasError:1 of
+msgid "You cannot create antenna any more."
+msgstr ""
+
+#: ../../index.rst:4053
+msgid "TooManyClipNotesError"
+msgstr ""
+
+#: mipac.errors.errors.TooManyClipNotesError:1 of
+msgid "You cannot add notes to the clip any more."
+msgstr ""
+
+#: ../../index.rst:4062
+msgid "TooManyClipsError"
+msgstr ""
+
+#: mipac.errors.errors.TooManyClipsError:1 of
+msgid "You cannot create clip any more."
+msgstr ""
+
+#: ../../index.rst:4071
+msgid "TooManyMutedWordsError"
+msgstr ""
+
+#: mipac.errors.errors.TooManyMutedWordsError:1 of
+msgid "Too many muted words."
+msgstr ""
+
+#: ../../index.rst:4080
+msgid "TooManyUserlistsError"
+msgstr ""
+
+#: mipac.errors.errors.TooManyUserlistsError:1 of
+msgid "You cannot create user list any more."
+msgstr ""
+
+#: ../../index.rst:4089
+msgid "TooManyUsersError"
+msgstr ""
+
+#: mipac.errors.errors.TooManyUsersError:1 of
+msgid "You can not push users any more."
+msgstr ""
+
+#: ../../index.rst:4098
+msgid "TooManyWebhooksError"
+msgstr ""
+
+#: mipac.errors.errors.TooManyWebhooksError:1 of
+msgid "You cannot create webhook any more."
+msgstr ""
+
+#: ../../index.rst:4107
+msgid "TwoFactorNotEnabledError"
+msgstr ""
+
+#: mipac.errors.errors.TwoFactorNotEnabledError:1 of
+msgid "2fa not enabled."
+msgstr ""
+
+#: ../../index.rst:4116
+msgid "UnavailableError"
+msgstr ""
+
+#: mipac.errors.errors.UnavailableError:1 of
+msgid "Translate of notes unavailable."
+msgstr ""
+
+#: ../../index.rst:4125
+msgid "UnexpectedFileTypeError"
+msgstr ""
+
+#: mipac.errors.errors.UnexpectedFileTypeError:1 of
+msgid "We need csv file."
+msgstr ""
+
+#: ../../index.rst:4134
+msgid "UriNullError"
+msgstr ""
+
+#: mipac.errors.errors.UriNullError:1 of
+msgid "Local User ActivityPup URI is null."
+msgstr ""
+
+#: ../../index.rst:4143
+msgid "UserIsDeletedError"
+msgstr ""
+
+#: mipac.errors.errors.UserIsDeletedError:1 of
+msgid "User is deleted."
+msgstr ""
+
+#: ../../index.rst:4152
+msgid "UserNotFoundError"
+msgstr ""
+
+#: mipac.errors.errors.UserNotFoundError:1 of
+msgid "User not found."
+msgstr ""
+
+#: ../../index.rst:4161
 msgid "YouHaveBeenBlockedError"
 msgstr ""
 
 #: mipac.errors.errors.YouHaveBeenBlockedError:1 of
-msgid "ブロックされているユーザーのノートにリアクションは行えません。"
+msgid "You cannot push this user because you have been blocked by this user."
 msgstr ""
 
-#: ../../index.rst:3684
-msgid "YourAccountSuspendedError"
+#: ../../index.rst:4170
+msgid "YourFlashError"
 msgstr ""
 
-#: mipac.errors.errors.YourAccountSuspendedError:1 of
-msgid "アカウントが凍結されているため利用できません。"
+#: mipac.errors.errors.YourFlashError:1 of
+msgid "You cannot like your flash."
 msgstr ""
 
-#: ../../index.rst:3693
+#: ../../index.rst:4179
 msgid "YourPageError"
 msgstr ""
 
 #: mipac.errors.errors.YourPageError:1 of
-msgid "自身のページにいいねをつけようとしました。"
+msgid "You cannot like your page."
 msgstr ""
 
-#: ../../index.rst:3702
+#: ../../index.rst:4188
 msgid "YourPostError"
 msgstr ""
 
-#: ../../index.rst:3709
+#: mipac.errors.errors.YourPostError:1 of
+msgid "You cannot like your post."
+msgstr ""
+
+#: ../../index.rst:4195
 msgid "__OTHER"
 msgstr ""
 
-#: ../../index.rst:3712
+#: ../../index.rst:4198
 msgid "Client"
 msgstr ""
 
@@ -6456,7 +7774,7 @@ msgstr ""
 msgid "クライアントを定義したクラス"
 msgstr ""
 
-#: ../../index.rst:3721
+#: ../../index.rst:4207
 msgid "CacheConfig"
 msgstr ""
 
@@ -6464,11 +7782,11 @@ msgstr ""
 msgid "キャッシュの設定を保持するクラス"
 msgstr ""
 
-#: ../../index.rst:3730
+#: ../../index.rst:4216
 msgid "CacheConfigData"
 msgstr ""
 
-#: ../../index.rst:3739
+#: ../../index.rst:4225
 msgid "Config"
 msgstr ""
 
@@ -6496,15 +7814,15 @@ msgstr ""
 msgid "更新されたConfigクラス"
 msgstr ""
 
-#: ../../index.rst:3748
+#: ../../index.rst:4234
 msgid "MiFile"
 msgstr ""
 
-#: ../../index.rst:3757
+#: ../../index.rst:4243
 msgid "json_or_text"
 msgstr ""
 
-#: ../../index.rst:3763
+#: ../../index.rst:4249
 msgid "HTTPClient"
 msgstr ""
 
@@ -6551,11 +7869,11 @@ msgstr ""
 msgid "現在のセッション"
 msgstr ""
 
-#: ../../index.rst:3772
+#: ../../index.rst:4258
 msgid "MisskeyClientWebSocketResponse"
 msgstr ""
 
-#: ../../index.rst:3781
+#: ../../index.rst:4267
 msgid "Route"
 msgstr ""
 
@@ -6579,15 +7897,15 @@ msgstr ""
 msgid "str"
 msgstr ""
 
-#: ../../index.rst:3790
+#: ../../index.rst:4276
 msgid "AbstractAction"
 msgstr ""
 
-#: ../../index.rst:3799
+#: ../../index.rst:4285
 msgid "AbstractManager"
 msgstr ""
 
-#: ../../index.rst:3808
+#: ../../index.rst:4294
 msgid "IMiAuthPayload"
 msgstr ""
 
@@ -6596,7 +7914,7 @@ msgstr ""
 msgid "MiAuthの戻り値"
 msgstr ""
 
-#: ../../index.rst:3817
+#: ../../index.rst:4303
 msgid "MiAuth"
 msgstr ""
 
@@ -6640,7 +7958,7 @@ msgstr ""
 msgid "MiAuthのセッションが完了するまで待機します"
 msgstr ""
 
-#: ../../index.rst:3826
+#: ../../index.rst:4312
 msgid "cache"
 msgstr ""
 
@@ -6648,7 +7966,7 @@ msgstr ""
 msgid "キャッシュを行います"
 msgstr ""
 
-#: ../../index.rst:3832
+#: ../../index.rst:4318
 msgid "set_cache"
 msgstr ""
 
@@ -6668,7 +7986,7 @@ msgstr ""
 msgid "設定する値"
 msgstr ""
 
-#: ../../index.rst:3838
+#: ../../index.rst:4324
 msgid "bool_to_string"
 msgstr ""
 
@@ -6684,7 +8002,7 @@ msgstr ""
 msgid "**true or false** -- 小文字になったbool文字列"
 msgstr ""
 
-#: ../../index.rst:3844
+#: ../../index.rst:4330
 msgid "convert_dict_keys_to_camel"
 msgstr ""
 
@@ -6705,7 +8023,7 @@ msgstr ""
 msgid "**new_dict** -- 変更後のdict"
 msgstr ""
 
-#: ../../index.rst:3850
+#: ../../index.rst:4336
 msgid "remove_dict_empty"
 msgstr ""
 
@@ -6726,7 +8044,7 @@ msgstr ""
 msgid "**_data** -- 空のkeyがなくなったdict"
 msgstr ""
 
-#: ../../index.rst:3856
+#: ../../index.rst:4342
 msgid "remove_dict_missing"
 msgstr ""
 
@@ -6738,7 +8056,7 @@ msgstr ""
 msgid "**_data** -- MISSINGのkeyがなくなったdict"
 msgstr ""
 
-#: ../../index.rst:3862
+#: ../../index.rst:4348
 msgid "snake_to_camel"
 msgstr ""
 
@@ -6758,7 +8076,7 @@ msgstr ""
 msgid "変換後の文字列"
 msgstr ""
 
-#: ../../index.rst:3868
+#: ../../index.rst:4354
 msgid "str_to_datetime"
 msgstr ""
 
@@ -6778,7 +8096,7 @@ msgstr ""
 msgid "変換後のデータ"
 msgstr ""
 
-#: ../../index.rst:3874
+#: ../../index.rst:4360
 msgid "upper_to_lower"
 msgstr ""
 
@@ -6802,7 +8120,7 @@ msgstr ""
 msgid "**field** -- 小文字になった, key名が変更されたdict"
 msgstr ""
 
-#: ../../index.rst:3880
+#: ../../index.rst:4366
 msgid "setup_logging"
 msgstr ""
 
@@ -6822,7 +8140,7 @@ msgstr ""
 msgid "ログのレベル"
 msgstr ""
 
-#: ../../index.rst:3886
+#: ../../index.rst:4372
 msgid "Pagination"
 msgstr ""
 
@@ -6846,7 +8164,27 @@ msgstr ""
 msgid "取得したページの戻り値"
 msgstr ""
 
-#: ../../index.rst:3895
+#: ../../index.rst:4381
+msgid "check_char_length_least"
+msgstr ""
+
+#: mipac.utils.util.check_char_length_least:1 of
+msgid "指定した文字列の長さが指定した長さ以上かをboolで返します"
+msgstr ""
+
+#: mipac.utils.util.check_char_length_least:3 of
+msgid "確認したい文字列"
+msgstr ""
+
+#: mipac.utils.util.check_char_length_least:5 of
+msgid "指定した長さ"
+msgstr ""
+
+#: mipac.utils.util.check_char_length_least:8 of
+msgid "指定した長さ以上の場合はTrue, それ以外はFalse"
+msgstr ""
+
+#: ../../index.rst:4387
 msgid "check_multi_arg"
 msgstr ""
 
@@ -6862,7 +8200,7 @@ msgstr ""
 msgid "存在する場合はTrue, 存在しない場合はFalse"
 msgstr ""
 
-#: ../../index.rst:3901
+#: ../../index.rst:4393
 msgid "deprecated"
 msgstr ""
 
@@ -6870,19 +8208,19 @@ msgstr ""
 msgid "指定した関数が非推奨であることを示す為のデコレータ"
 msgstr ""
 
-#: ../../index.rst:3907
+#: ../../index.rst:4399
 msgid "Colors"
 msgstr ""
 
-#: ../../index.rst:3916
+#: ../../index.rst:4408
 msgid "DeprecatedClass"
 msgstr ""
 
-#: ../../index.rst:3925
+#: ../../index.rst:4417
 msgid "MiTime"
 msgstr ""
 
-#: ../../index.rst:3934
+#: ../../index.rst:4426
 msgid "Missing"
 msgstr ""
 
@@ -7310,3 +8648,268 @@ msgstr ""
 #~ "warning being emitted when the function"
 #~ " is used."
 #~ msgstr ""
+
+#~ msgid "AdminRolesManager"
+#~ msgstr ""
+
+#~ msgid "AdminRolesModelManager"
+#~ msgstr ""
+
+#~ msgid "指定したIdの絵文字を削除します"
+#~ msgstr ""
+
+#~ msgid "削除する絵文字のId, by default None"
+#~ msgstr ""
+
+#~ msgid "成功したかどうか"
+#~ msgstr ""
+
+#~ msgid "Idが不足している"
+#~ msgstr ""
+
+#~ msgid "AdminRoleModelActions"
+#~ msgstr ""
+
+#~ msgid "アクセス権限がありません。"
+#~ msgstr ""
+
+#~ msgid "すでにブロックしています。"
+#~ msgstr ""
+
+#~ msgid "既にお気に入り登録されています。"
+#~ msgstr ""
+
+#~ msgid "すでにフォローしています。"
+#~ msgstr ""
+
+#~ msgid "AlreadyInvitedError"
+#~ msgstr ""
+
+#~ msgid "すでにいいねをつけています。"
+#~ msgstr ""
+
+#~ msgid "すでにそのユーザーをミュートしています。"
+#~ msgstr ""
+
+#~ msgid "指定されたノートは既にピン留めされています。"
+#~ msgstr ""
+
+#~ msgid "既にリアクションしています。"
+#~ msgstr ""
+
+#~ msgid "アバター画像に、画像ではないファイルが指定されました。"
+#~ msgstr ""
+
+#~ msgid "バナー画像に、画像ではないファイルが指定されました。"
+#~ msgstr ""
+
+#~ msgid "ユーザーにブロックされています。"
+#~ msgstr ""
+
+#~ msgid "自分のブロックを解除しようとしました。"
+#~ msgstr ""
+
+#~ msgid "ユーザーをブロックしています。"
+#~ msgstr ""
+
+#~ msgid "アンケートの期限の指定が誤っています。"
+#~ msgstr ""
+
+#~ msgid "単純なRenoteを再度Renoteすることはできません。"
+#~ msgstr ""
+
+#~ msgid "単純なRenoteに返信することはできません。"
+#~ msgstr ""
+
+#~ msgid "管理者を通報しようとしました。"
+#~ msgstr ""
+
+#~ msgid "自身を通報しようとしました。"
+#~ msgstr ""
+
+#~ msgid "ContentRequiredError"
+#~ msgstr ""
+
+#~ msgid "クレデンシャル必須のエンドポイントにクレデンシャル無しでリクエストされました。"
+#~ msgstr ""
+
+#~ msgid "リモートユーザーの検索に失敗しました。"
+#~ msgstr ""
+
+#~ msgid "フォローリクエストがありません。"
+#~ msgstr ""
+
+#~ msgid "自分のフォローを解除しようとしました。"
+#~ msgstr ""
+
+#~ msgid "自分をフォロワー解除しようとしました。"
+#~ msgstr ""
+
+#~ msgid "GroupAccessDeniedError"
+#~ msgstr ""
+
+#~ msgid "グローバルタイムラインが無効になっています。"
+#~ msgstr ""
+
+#~ msgid "フォルダーが空ではありません。"
+#~ msgstr ""
+
+#~ msgid "不適切なコンテンツを含んでいる可能性があると判定されました。"
+#~ msgstr ""
+
+#~ msgid "サーバー内部で問題が発生しました。引き続き問題が発生する場合は管理者にお問い合わせください。"
+#~ msgstr ""
+
+#~ msgid "ファイル名が不正です。"
+#~ msgstr ""
+
+#~ msgid "リクエストパラメータに誤りがあります。"
+#~ msgstr ""
+
+#~ msgid "正規表現が不正です。"
+#~ msgstr ""
+
+#~ msgid "IsOwnerError"
+#~ msgstr ""
+
+#~ msgid "ローカルタイムラインが無効になっています。"
+#~ msgstr ""
+
+#~ msgid "MoSuchFileError"
+#~ msgstr ""
+
+#~ msgid "自分に対してミュートを解除しようとしました。"
+#~ msgstr ""
+
+#~ msgid "同じURLにページがすでに存在します。"
+#~ msgstr ""
+
+#~ msgid "ユーザーからのフォローリクエストがありません。"
+#~ msgstr ""
+
+#~ msgid "ドライブに空き容量がありません。"
+#~ msgstr ""
+
+#~ msgid "お知らせが存在しません。"
+#~ msgstr ""
+
+#~ msgid "アプリが存在しません。"
+#~ msgstr ""
+
+#~ msgid "アバター画像のファイルが存在しません。"
+#~ msgstr ""
+
+#~ msgid "バナー画像のファイルが存在しません。"
+#~ msgstr ""
+
+#~ msgid "指定されたチャンネルが存在しないか、アクセスが許可されていません。"
+#~ msgstr ""
+
+#~ msgid "ファイルが存在しません。"
+#~ msgstr ""
+
+#~ msgid "フォルダーが存在しません。"
+#~ msgstr ""
+
+#~ msgid "NoSuchGroupError"
+#~ msgstr ""
+
+#~ msgid "NoSuchGroupMemberError"
+#~ msgstr ""
+
+#~ msgid "ハッシュタグが存在しません。"
+#~ msgstr ""
+
+#~ msgid "NoSuchInvitationError"
+#~ msgstr ""
+
+#~ msgid "NoSuchMessageError"
+#~ msgstr ""
+
+#~ msgid "指定されたノートが存在しないか、アクセスが許可されていません。"
+#~ msgstr ""
+
+#~ msgid "NoSuchNotificationError"
+#~ msgstr ""
+
+#~ msgid "通知が存在しません。"
+#~ msgstr ""
+
+#~ msgid "ページが存在しません。"
+#~ msgstr ""
+
+#~ msgid "親フォルダーが存在しません。"
+#~ msgstr ""
+
+#~ msgid "Renoteに指定されたノートが存在しないか、アクセスが許可されていません。"
+#~ msgstr ""
+
+#~ msgid "返信先に指定されたノートが存在しないか、アクセスが許可されていません。"
+#~ msgstr ""
+
+#~ msgid "セッションが存在しません。"
+#~ msgstr ""
+
+#~ msgid "ユーザーが存在しません。"
+#~ msgstr ""
+
+#~ msgid "NoSuchUserGroupError"
+#~ msgstr ""
+
+#~ msgid "Webhookが存在しません。"
+#~ msgstr ""
+
+#~ msgid "ブロックしていないユーザーです。"
+#~ msgstr ""
+
+#~ msgid "お気に入り登録されていません。"
+#~ msgstr ""
+
+#~ msgid "ユーザーにフォローされていません。"
+#~ msgstr ""
+
+#~ msgid "いいねをつけていないページです。"
+#~ msgstr ""
+
+#~ msgid "対象となるユーザーをそもそもミュートしていません。"
+#~ msgstr ""
+
+#~ msgid "リアクションしていません。"
+#~ msgstr ""
+
+#~ msgid "PermissionDeniedError"
+#~ msgstr ""
+
+#~ msgid "与えられたクレデンシャルには必要なパーミッションがありません。"
+#~ msgstr ""
+
+#~ msgid "これ以上ピン留めできません。"
+#~ msgstr ""
+
+#~ msgid "レートリミットによる制限のため一時的に利用できません。"
+#~ msgstr ""
+
+#~ msgid "リアクションが公開されていません。"
+#~ msgstr ""
+
+#~ msgid "RecipientIsYourselfError"
+#~ msgstr ""
+
+#~ msgid "ソーシャルタイムラインが無効になっています。"
+#~ msgstr ""
+
+#~ msgid "YouAreOwnerError"
+#~ msgstr ""
+
+#~ msgid "ブロックされているユーザーのノートにリアクションは行えません。"
+#~ msgstr ""
+
+#~ msgid "YourAccountSuspendedError"
+#~ msgstr ""
+
+#~ msgid "アカウントが凍結されているため利用できません。"
+#~ msgstr ""
+
+#~ msgid "自身のページにいいねをつけようとしました。"
+#~ msgstr ""
+
