@@ -1863,30 +1863,30 @@ SharedAdminAdActions
     :members:
 
 
-AdminEmojiAction
-~~~~~~~~~~~~~~~~
+AdminEmojiActions
+~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.emoji.AdminEmojiAction
+.. attributetable:: mipac.actions.admins.emoji.AdminEmojiActions
 
-.. autoclass:: mipac.actions.admins.emoji.AdminEmojiAction
+.. autoclass:: mipac.actions.admins.emoji.AdminEmojiActions
     :members:
 
 
-ClientAdminEmojiAction
-~~~~~~~~~~~~~~~~~~~~~~
+ClientAdminEmojiActions
+~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.emoji.ClientAdminEmojiAction
+.. attributetable:: mipac.actions.admins.emoji.ClientAdminEmojiActions
 
-.. autoclass:: mipac.actions.admins.emoji.ClientAdminEmojiAction
+.. autoclass:: mipac.actions.admins.emoji.ClientAdminEmojiActions
     :members:
 
 
-SharedAdminEmojiAction
-~~~~~~~~~~~~~~~~~~~~~~
+SharedAdminEmojiActions
+~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: mipac.actions.admins.emoji.SharedAdminEmojiAction
+.. attributetable:: mipac.actions.admins.emoji.SharedAdminEmojiActions
 
-.. autoclass:: mipac.actions.admins.emoji.SharedAdminEmojiAction
+.. autoclass:: mipac.actions.admins.emoji.SharedAdminEmojiActions
     :members:
 
 
