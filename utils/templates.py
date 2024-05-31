@@ -13,12 +13,11 @@ if TYPE_CHECKING:
 
 class {0}(AbstractManager):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
-        self.__session: HTTPClient = session
-        self.__client: ClientManager = client
+        self.__action: {2} = {2}(session=session, client=client)
 
     @property
     def action(self) -> {2}:
-        return {2}(session=self.__session, client=self.__client)
+        return self.__action
 """
 
 ACTIONS_CLASS_NAME_TEMPLATE = "{0}Actions"
