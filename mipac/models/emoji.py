@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
+from mipac.manager.admins.emoji import ClientAdminEmojiManager
 from mipac.models.lite.emoji import PartialCustomEmoji
 from mipac.types.emoji import ICustomEmoji, IEmojiDetailed, IEmojiSimple
 
@@ -44,6 +45,8 @@ class CustomEmoji(PartialCustomEmoji):
 
 
 class EmojiSimple:
+    """Misskeyの `EmojiSimple` を表すクラス"""
+
     def __init__(self, raw_emoji_simple: IEmojiSimple, *, client: ClientManager):
         self.__raw_emoji_simple: IEmojiSimple = raw_emoji_simple
         self.__client: ClientManager = client
@@ -130,6 +133,10 @@ class EmojiDetailed:
     @property
     def role_ids_that_can_be_used_this_emoji_as_reaction(self) -> list[str]:
         return self.__raw_emoji_detailed["role_ids_that_can_be_used_this_emoji_as_reaction"]
+
+    @property
+    def api(self) -> ClientAdminEmojiManager:
+        return self.__client.admin._create_client_admin_emoji_manager(self.id)
 
     def _get(self, key: str) -> Any | None:
         return self.__raw_emoji_detailed.get(key)
