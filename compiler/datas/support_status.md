@@ -4,7 +4,7 @@
 
 `2024.3.1`
 
-## Supported endpoints (159/368)
+## Supported endpoints (173/368)
 
 - [x] /admin/accounts/create
 - [x] /admin/accounts/delete
@@ -18,6 +18,18 @@
 - [x] /admin/drive/clean-remote-files
 - [x] /admin/drive/cleanup
 - [x] /admin/drive/files
+- [x] /admin/emoji/add-aliases-bulk
+- [x] /admin/emoji/add
+- [x] /admin/emoji/copy
+- [x] /admin/emoji/delete-bulk
+- [x] /admin/emoji/delete
+- [x] /admin/emoji/list-remote
+- [x] /admin/emoji/list
+- [x] /admin/emoji/remove-aliases-bulk
+- [x] /admin/emoji/set-aliases-bulk
+- [x] /admin/emoji/set-category-bulk
+- [x] /admin/emoji/set-license-bulk
+- [x] /admin/emoji/update
 - [x] /admin/get-user-ips
 - [x] /admin/invite/create
 - [x] /admin/invite/list
@@ -37,6 +49,8 @@
 - [x] /admin/roles/unassign
 - [x] /admin/roles/update-default-policies
 - [x] /admin/roles/users
+- [x] /app/create
+- [x] /app/show
 - [x] /channels/create
 - [x] /channels/featured
 - [x] /channels/follow
@@ -107,18 +121,6 @@
 - [ ] /admin/avatar-decorations/list
 - [ ] /admin/avatar-decorations/update
 - [ ] /admin/delete-all-files-of-a-user
-- [ ] /admin/emoji/add-aliases-bulk
-- [ ] /admin/emoji/add
-- [ ] /admin/emoji/copy
-- [ ] /admin/emoji/delete-bulk
-- [ ] /admin/emoji/delete
-- [ ] /admin/emoji/list-remote
-- [ ] /admin/emoji/list
-- [ ] /admin/emoji/remove-aliases-bulk
-- [ ] /admin/emoji/set-aliases-bulk
-- [ ] /admin/emoji/set-category-bulk
-- [ ] /admin/emoji/set-license-bulk
-- [ ] /admin/emoji/update
 - [ ] /admin/federation/delete-all-files
 - [ ] /admin/federation/refresh-remote-instance-metadata
 - [ ] /admin/federation/remove-all-following
@@ -145,8 +147,6 @@
 - [ ] /antennas/update
 - [ ] /ap/get
 - [ ] /ap/show
-- [ ] /app/create
-- [ ] /app/show
 - [ ] /auth/session/generate
 - [ ] /auth/session/show
 - [ ] /auth/session/userkey
@@ -399,7 +399,7 @@
 - [x] User
 - [x] UserList
 - [x] Announcement
-- [ ] App
+- [x] App
 - [x] Note
 - [x] NoteReaction
 - [ ] NoteFavorite

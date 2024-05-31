@@ -125,73 +125,73 @@
                 "path": "/admin/emoji/add-aliases-bulk",
                 "request_body_hash": "ebc0308c45341574960839598a6c91e26f5699a049d471faa2af4b4edc628456",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/add": {
                 "path": "/admin/emoji/add",
                 "request_body_hash": "ebf63e0ecc9b3ec602e123e128968d06950de79c0189bc3cc9c1beafce33b316",
                 "response_body_hash": "f941750f943f893efbb50804a1dbc2fbfdbe71cded4ac73ade3118a61c87e669",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/copy": {
                 "path": "/admin/emoji/copy",
                 "request_body_hash": "b03a21f019432ea214bc9dbc491c2dc403bb077f27488d27de723ed28f9682b7",
                 "response_body_hash": "3065a44868be7b719c8cbaeda3a7601fd89f80ba3416c57eb157c1fbd66bc2c5",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/delete-bulk": {
                 "path": "/admin/emoji/delete-bulk",
                 "request_body_hash": "e6668b22f7bbeab0fe3e3fc291ab3a972c23c5a1c90cae6dd0d8a9363174b5bd",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/delete": {
                 "path": "/admin/emoji/delete",
                 "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
                 "response_body_hash": "d72da91342ab51c4b6716d27cef6f60ed91725eea3acfc0a97777e7b222e4a53",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/list-remote": {
                 "path": "/admin/emoji/list-remote",
                 "request_body_hash": "149ca6793228020eb03835976d2ef0c6c7d6d29f52b47e7650f841622e0d16b9",
                 "response_body_hash": "9992ad3f17e9b8573b42e74c0300bdc08b531bb4d60ec3b67be6b657b4203d81",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/list": {
                 "path": "/admin/emoji/list",
                 "request_body_hash": "bc3b85fdcddd33a61d5ccdfaf6bb64a31913534f0cb2add1ddef07672e897156",
                 "response_body_hash": "be0eba696abb8f5550aa58aeb46202c97bba6ae868e162f6d5b52912a74da867",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/remove-aliases-bulk": {
                 "path": "/admin/emoji/remove-aliases-bulk",
                 "request_body_hash": "ebc0308c45341574960839598a6c91e26f5699a049d471faa2af4b4edc628456",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/set-aliases-bulk": {
                 "path": "/admin/emoji/set-aliases-bulk",
                 "request_body_hash": "ebc0308c45341574960839598a6c91e26f5699a049d471faa2af4b4edc628456",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/set-category-bulk": {
                 "path": "/admin/emoji/set-category-bulk",
                 "request_body_hash": "82c4e6f4ac5de55a4953a9fb3719b76fca47e69f42a213d56a94bef2ec8cc1a4",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/set-license-bulk": {
                 "path": "/admin/emoji/set-license-bulk",
                 "request_body_hash": "b76a140a4612fe51922918ea951a850bce40417219a99bbab6062b369cb37a99",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/emoji/update": {
                 "path": "/admin/emoji/update",
                 "request_body_hash": "aabd7b19eb38e32077f73f9ad407d3f3d31a12c008c95709ce402c035ddb389f",
                 "response_body_hash": "7e39b6fda31bae9ff514b58e201a824a35ef1efad5aed5eeb8e6cd6432992a5e",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/admin/federation/delete-all-files": {
                 "path": "/admin/federation/delete-all-files",
@@ -485,13 +485,13 @@
                 "path": "/app/create",
                 "request_body_hash": "0eaea814b5b1a92f537b2354ac5905098b67526211a7f204ad26ed032cc16ffe",
                 "response_body_hash": "22a993ada948e6394b933b6635f1f458c51257b8e90b9843be12e449f68ad2e0",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/app/show": {
                 "path": "/app/show",
                 "request_body_hash": "d3abe297818ec4c1a1b6cd43ec9e92deed5db060da288f29d7b9c2be63954dc4",
                 "response_body_hash": "fcbdd34fa6c7b238b898b1c19d85d2c17cdc7d67c68cdde33addbe469051a451",
-                "status": "notSupported"
+                "status": "supported"
             },
             "/auth/session/generate": {
                 "path": "/auth/session/generate",
@@ -2266,7 +2266,7 @@
         "App": {
             "name": "App",
             "hash": "1c8addc6c7efdc356e3be846d48e6c8b2f53293d8268e737895da9ab8fae0cac",
-            "status": "notSupported"
+            "status": "supported"
         },
         "Note": {
             "name": "Note",
