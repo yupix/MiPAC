@@ -6,6 +6,7 @@ from mipac.actions.client import ClientActions
 from mipac.http import HTTPClient
 from mipac.manager.admins.admin import AdminManager
 from mipac.manager.antenna import AntennaManager
+from mipac.manager.app import AppManager
 from mipac.manager.channel import ChannelManager, ClientChannelManager
 from mipac.manager.chart import ChartManager
 from mipac.manager.clip import ClientClipManager, ClipManager
@@ -32,6 +33,7 @@ __all__ = ("ClientManager",)
 class ClientManager:
     def __init__(self, session: HTTPClient, config: Config):
         self.__session: HTTPClient = session
+        self.app: AppManager = AppManager(session=session, client=self)
         self.i = MyManager(session=session, client=self)
         self.note: NoteManager = NoteManager(session=session, client=self)
         self.user: UserManager = UserManager(session=session, client=self)
