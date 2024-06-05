@@ -390,15 +390,15 @@ class ClientChannelActions(SharedChannelActions):
         cw : str, optional
             ノートのCW, default=None
         local_only : bool, optional
-            ノートをローカルのみにするかどうか, default=False
+            ノートをローカルのみにするか否か, default=False
         reaction_acceptance : IReactionAcceptance, optional
             ノートにリアクションを受け入れるか, default=None
         extract_mentions : bool, optional
-            メンションを抽出するかどうか, default=True
+            メンションを抽出するかであるか, default=True
         extract_hashtags : bool, optional
-            ハッシュタグを抽出するかどうか, default=True
+            ハッシュタグを抽出するかであるか, default=True
         extract_emojis : bool, optional
-            絵文字を抽出するかどうか, default=True
+            絵文字を抽出するかであるか, default=True
         reply_id : str, optional
             リプライのID, default=None
         renote_id : str, optional
