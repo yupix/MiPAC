@@ -392,7 +392,7 @@ class ClientChannelActions(SharedChannelActions):
         local_only : bool, optional
             ノートをローカルのみにするか否か, default=False
         reaction_acceptance : IReactionAcceptance, optional
-            ノートにリアクションを受け入れるか, default=None
+            ノートにリアクションを受け入れるか否か, default=None
         extract_mentions : bool, optional
             メンションを抽出するかであるか, default=True
         extract_hashtags : bool, optional
@@ -400,9 +400,9 @@ class ClientChannelActions(SharedChannelActions):
         extract_emojis : bool, optional
             絵文字を抽出するかであるか, default=True
         reply_id : str, optional
-            リプライのID, default=None
+            返信元のノートID, default=None
         renote_id : str, optional
-            リノートのID, default=None
+            リノート元のID, default=None
         files : list[MiFile | File | str], optional
             添付するファイル, default=None
         poll : MiPoll, optional
