@@ -386,9 +386,9 @@ class ClientChannelActions(SharedChannelActions):
         visibility : INoteVisibility, optional
             ノートの公開範囲, default="public"
         visible_user_ids : list[str], optional
-            公開するユーザーのIDs, default=None
+            公開するユーザーのIDを持つリスト, default=None
         cw : str, optional
-            ノートのCW, default=None
+            ノートが閲覧注意（NSFW）であるか, default=None
         local_only : bool, optional
             ノートをローカルのみにするか否か, default=False
         reaction_acceptance : IReactionAcceptance, optional
