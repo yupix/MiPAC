@@ -110,7 +110,7 @@ class ClientReactionActions(SharedReactionActions):
         self.__note_id: str = note_id
 
     @override
-    async def add(self, reaction: str, *, note_id: str | None = None) -> bool:
+    async def add(self, reaction: str) -> bool:
         """Add reaction to note
 
         Endpoint: `/api/notes/reactions/create`
@@ -119,37 +119,26 @@ class ClientReactionActions(SharedReactionActions):
         ----------
         reaction : str
             reaction
-        note_id : str, optional
-            note id, by default None
 
         Returns
         -------
         bool
             success or not
         """
-        note_id = note_id or self.__note_id
-
-        return await super().add(reaction=reaction, note_id=note_id)
+        return await super().add(reaction=reaction, note_id=self.__note_id)
 
     @override
-    async def remove(self, *, note_id: str | None = None) -> bool:
+    async def remove(self) -> bool:
         """Remove reaction from note
 
         Endpoint: `/api/notes/reactions/delete`
 
-        Parameters
-        ----------
-        note_id : str, optional
-            note id, by default None
-
         Returns
         -------
         bool
             success or not
         """
-        note_id = note_id or self.__note_id
-
-        return await super().remove(note_id=note_id)
+        return await super().remove(note_id=self.__note_id)
 
     @override
     async def get_reactions(
@@ -158,13 +147,9 @@ class ClientReactionActions(SharedReactionActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        *,
-        note_id: str | None = None,
     ) -> list[NoteReaction]:
-        note_id = note_id or self.__note_id
-
         return await super().get_reactions(
-            type=type, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
+            type=type, note_id=self.__note_id, limit=limit, since_id=since_id, until_id=until_id
         )
 
     @override
@@ -174,13 +159,9 @@ class ClientReactionActions(SharedReactionActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        *,
-        note_id: str | None = None,
     ) -> list[NoteReaction]:
-        note_id = note_id or self.__note_id
-
         return await super().fetch_reactions(
-            type=type, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
+            type=type, note_id=self.__note_id, limit=limit, since_id=since_id, until_id=until_id
         )
 
 
