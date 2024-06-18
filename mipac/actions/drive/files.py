@@ -161,7 +161,7 @@ class SharedFileActions(AbstractAction):
 class ClientFileActions(SharedFileActions):
     def __init__(self, file_ids: str, *, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
-        self.__file_ids: str = file_ids
+        self.__file_ids: str = file_ids  # TODO: 何故複数形なのか確認する
 
     @override
     async def get_attached_notes(
@@ -169,8 +169,6 @@ class ClientFileActions(SharedFileActions):
         since_id: str | None = None,
         until_id: str | None = None,
         limit: int = 10,
-        *,
-        file_id: str | None = None,
     ) -> list[Note]:
         """Get the attached notes of a file
 
@@ -184,18 +182,14 @@ class ClientFileActions(SharedFileActions):
             The id of the note to end at, defaults to None
         limit: int
             The amount of notes to get, defaults to 10
-        file_id: str | None
-            The id of the file to get notes from, defaults to None
 
         Returns
         -------
         list[Note]
             The attached notes of the file
         """
-        file_id = file_id or self.__file_ids
-
         return await super().get_attached_notes(
-            since_id=since_id, until_id=until_id, limit=limit, file_id=file_id
+            since_id=since_id, until_id=until_id, limit=limit, file_id=self.__file_ids
         )
 
     @override
@@ -204,35 +198,24 @@ class ClientFileActions(SharedFileActions):
         since_id: str | None = None,
         until_id: str | None = None,
         limit: int = 10,
-        *,
-        file_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
-        file_id = file_id or self.__file_ids
-
         async for note in super().get_all_attached_notes(
-            since_id=since_id, until_id=until_id, limit=limit, file_id=file_id
+            since_id=since_id, until_id=until_id, limit=limit, file_id=self.__file_ids
         ):
             yield note
 
     @override
-    async def delete(self, *, file_id: str | None = None) -> bool:
+    async def delete(self) -> bool:
         """指定したファイルIDのファイルを削除します
 
         Endpoint: `/api/drive/files/delete`
-
-        Parameters
-        ----------
-        file_id: str | None
-            対象のファイルID, default=None
 
         Returns
         -------
         bool
             削除に成功したかどうか
         """
-        file_id = file_id or self.__file_ids
-
-        return await super().delete(file_id=file_id)
+        return await super().delete(file_id=self.__file_ids)
 
     @override
     async def update(
@@ -241,8 +224,6 @@ class ClientFileActions(SharedFileActions):
         name: str | None = MISSING,
         is_sensitive: bool = MISSING,
         comment: str | None = MISSING,
-        *,
-        file_id: str | None = None,
     ) -> File:
         """指定したIDのファイル情報を更新します
 
@@ -258,22 +239,18 @@ class ClientFileActions(SharedFileActions):
             ファイルがセンシティブかどうか, default=MISSING
         comment: str | None
             ファイルのコメント, default=MISSING
-        file_id: str | None
-            対象のファイルID, default=None
 
         Returns
         -------
         File
             更新後のファイル
         """
-        file_id = file_id or self.__file_ids
-
         return await super().update(
             folder_id=folder_id,
             name=name,
             is_sensitive=is_sensitive,
             comment=comment,
-            file_id=file_id,
+            file_id=self.__file_ids,
         )
 
 
