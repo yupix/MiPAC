@@ -43,14 +43,12 @@ class ClientBlockingActions(SharedBlockingActions):
         self.__user_id: str = user_id
 
     @override
-    async def add(self, *, user_id: str | None = None) -> UserDetailedNotMe | MeDetailed:
-        user_id = user_id or self.__user_id
-        return await super().add(user_id=user_id)
+    async def add(self) -> UserDetailedNotMe | MeDetailed:
+        return await super().add(user_id=self.__user_id)
 
     @override
-    async def remove(self, *, user_id: str | None = None) -> UserDetailedNotMe | MeDetailed:
-        user_id = user_id or self.__user_id
-        return await super().remove(user_id=user_id)
+    async def remove(self) -> UserDetailedNotMe | MeDetailed:
+        return await super().remove(user_id=self.__user_id)
 
 
 class BlockingActions(SharedBlockingActions):
