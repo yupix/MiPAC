@@ -50,30 +50,22 @@ class ClientFavoriteActions(SharedFavoriteActions):
         self.__note_id: str = note_id
 
     @override
-    async def create(self, *, note_id: str | None = None) -> bool:
-        note_id = note_id or self.__note_id
-
-        return await super().create(note_id=note_id)
+    async def create(self) -> bool:
+        return await super().create(note_id=self.__note_id)
 
     @deprecated
     @override
-    async def add(self, *, note_id: str | None = None) -> bool:
-        note_id = note_id or self.__note_id
-
-        return await super().create(note_id=note_id)
+    async def add(self) -> bool:
+        return await super().create(note_id=self.__note_id)
 
     @override
-    async def delete(self, *, note_id: str | None = None) -> bool:
-        note_id = note_id or self.__note_id
-
-        return await super().delete(note_id=note_id)
+    async def delete(self) -> bool:
+        return await super().delete(note_id=self.__note_id)
 
     @deprecated
     @override
-    async def remove(self, *, note_id: str | None = None) -> bool:
-        note_id = note_id or self.__note_id
-
-        return await super().delete(note_id=note_id)
+    async def remove(self) -> bool:
+        return await super().delete(note_id=self.__note_id)
 
 
 class FavoriteActions(SharedFavoriteActions):
