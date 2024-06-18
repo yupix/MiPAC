@@ -177,13 +177,9 @@ class ClientClipActions(SharedClipActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        *,
-        clip_id: str | None = None,
     ) -> list[Note]:
-        clip_id = clip_id or self._clip_id
-
         return await super().get_notes(
-            limit=limit, since_id=since_id, until_id=until_id, clip_id=clip_id
+            limit=limit, since_id=since_id, until_id=until_id, clip_id=self._clip_id
         )
 
     @override
@@ -192,15 +188,11 @@ class ClientClipActions(SharedClipActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        *,
-        clip_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
         """Get notes from a clip
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
-            The clip id
         limit : int, optional, by default 10
             The number of notes to get
         since_id : str | None, optional, by default None
@@ -215,21 +207,17 @@ class ClientClipActions(SharedClipActions):
         AsyncGenerator[Note, None]
             The notes
         """
-        clip_id = clip_id or self._clip_id
-
         async for note in super().get_all_notes(
-            limit=limit, since_id=since_id, until_id=until_id, clip_id=clip_id
+            limit=limit, since_id=since_id, until_id=until_id, clip_id=self._clip_id
         ):
             yield note
 
     @override
-    async def add_note(self, note_id: str, *, clip_id: str | None = None) -> bool:
+    async def add_note(self, note_id: str) -> bool:
         """Add a note to a clip
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
-            The clip id
         note_id : str
             The note id
 
@@ -238,18 +226,14 @@ class ClientClipActions(SharedClipActions):
         bool
             True if the note was added to the clip, False otherwise
         """
-        clip_id = clip_id or self._clip_id
-
-        return await super().add_note(note_id=note_id, clip_id=clip_id)
+        return await super().add_note(note_id=note_id, clip_id=self._clip_id)
 
     @override
-    async def remove_note(self, note_id: str, *, clip_id: str | None) -> bool:
+    async def remove_note(self, note_id: str) -> bool:
         """Remove a note from a clip
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
-            The clip id
         note_id : str
             The note id
 
@@ -258,27 +242,18 @@ class ClientClipActions(SharedClipActions):
         bool
             True if the note was removed from the clip, False otherwise
         """
-        clip_id = clip_id or self._clip_id
-
-        return await super().remove_note(note_id=note_id, clip_id=clip_id)
+        return await super().remove_note(note_id=note_id, clip_id=self._clip_id)
 
     @override
-    async def delete(self, *, clip_id: str | None = None) -> bool:
+    async def delete(self) -> bool:
         """Delete a clip
-
-        Parameters
-        ----------
-        clip_id : str | None, optional, by default None
-            The clip id
 
         Returns
         -------
         bool
             True if the clip was deleted, False otherwise
         """
-        clip_id = clip_id or self._clip_id
-
-        return await super().delete(clip_id=clip_id)
+        return await super().delete(clip_id=self._clip_id)
 
     @override
     async def update(
@@ -286,15 +261,11 @@ class ClientClipActions(SharedClipActions):
         name: str,
         is_public: bool | None = None,
         description: str | None = None,
-        *,
-        clip_id: str | None = None,
     ) -> Clip:
         """Update a clip
 
         Parameters
         ----------
-        clip_id : str | None, optional, by default None
-            The clip id
         name : str
             The clip name
         is_public : bool, optional
@@ -307,10 +278,8 @@ class ClientClipActions(SharedClipActions):
         bool
             True if the clip was updated, False otherwise
         """
-        clip_id = clip_id or self._clip_id
-
         return await super().update(
-            name=name, is_public=is_public, description=description, clip_id=clip_id
+            name=name, is_public=is_public, description=description, clip_id=self._clip_id
         )
 
 
