@@ -110,26 +110,20 @@ class ClientPartialUserListActions(SharedPartialUserListActions):
         self.__user_id: str = user_id
 
     @override
-    async def get_list(self, *, user_id: str | None = None) -> list[UserList]:
+    async def get_list(self) -> list[UserList]:
         """Get the user lists of a user
 
         Endpoint `/api/users/lists/list`
-
-        Parameters
-        ----------
-        user_id : str
-            The id of the user to get the lists of
 
         Returns
         -------
         list[UserList]
             The user lists the user has
         """
-        user_id = user_id or self.__user_id
-        return await super().get_list(user_id=user_id)
+        return await super().get_list(user_id=self.__user_id)
 
     @override
-    async def pull(self, *, list_id: str, user_id: str | None = None) -> bool:
+    async def pull(self, *, list_id: str) -> bool:
         """Pull a user from a user list
 
         Endpoint `/api/users/lists/pull`
@@ -138,20 +132,17 @@ class ClientPartialUserListActions(SharedPartialUserListActions):
         ----------
         list_id : str
             The id of the user list to pull from
-        user_id : str, optional
-            The id of the user to pull, by default None
 
         Returns
         -------
         bool
             True if the user was pulled, False otherwise
         """
-        user_id = user_id or self.__user_id
 
-        return await super().pull(list_id=list_id, user_id=user_id)
+        return await super().pull(list_id=list_id, user_id=self.__user_id)
 
     @override
-    async def push(self, *, list_id: str, user_id: str | None = None) -> bool:
+    async def push(self, *, list_id: str) -> bool:
         """Push a user to a user list
 
         Endpoint `/api/users/lists/push`
@@ -160,26 +151,18 @@ class ClientPartialUserListActions(SharedPartialUserListActions):
         ----------
         list_id : str
             The id of the user list to push to
-        user_id : str, optional
-            The id of the user to push, by default None
 
         Returns
         -------
         bool
             True if the user was pushed, False otherwise
         """
-        user_id = user_id or self.__user_id
-
-        return await super().push(list_id=list_id, user_id=user_id)
+        return await super().push(list_id=list_id, user_id=self.__user_id)
 
     @override
-    async def update_membership(
-        self, with_replies: bool = MISSING, *, list_id: str, user_id: str | None = None
-    ):
-        user_id = user_id or self.__user_id
-
+    async def update_membership(self, with_replies: bool = MISSING, *, list_id: str):
         return await super().update_membership(
-            list_id=list_id, with_replies=with_replies, user_id=user_id
+            list_id=list_id, with_replies=with_replies, user_id=self.__user_id
         )
 
 
@@ -439,27 +422,20 @@ class ClientUserListActions(SharedUserListActions):
         self.__list_id: str = list_id
 
     @override
-    async def delete(self, *, list_id: str | None = None) -> bool:
+    async def delete(self) -> bool:
         """Delete a user list
 
         Endpoint `/api/users/lists/delete`
-
-        Parameters
-        ----------
-        list_id : str, optional
-            The id of the user list to delete, by default None
 
         Returns
         -------
         bool
             True if the user list was deleted, False otherwise
         """
-        list_id = list_id or self.__list_id
-
-        return await super().delete(list_id=list_id)
+        return await super().delete(list_id=self.__list_id)
 
     @override
-    async def show(self, for_public: bool = False, *, list_id: str | None = None) -> UserList:
+    async def show(self, for_public: bool = False) -> UserList:
         """Show a user list
 
         Endpoint `/api/users/lists/show`
@@ -468,61 +444,43 @@ class ClientUserListActions(SharedUserListActions):
         ----------
         for_public : bool, optional
             Whether to show the user list for the public, by default False
-        list_id : str, optional
-            The id of the user list to show, by default None
 
         Returns
         -------
         UserList
             The user list
         """
-        list_id = list_id or self.__list_id
-
-        return await super().show(for_public=for_public, list_id=list_id)
+        return await super().show(for_public=for_public, list_id=self.__list_id)
 
     @override
-    async def favorite(self, *, list_id: str | None = None) -> bool:
+    async def favorite(self) -> bool:
         """Favorite a user list
 
         Endpoint `/api/users/lists/favorite`
-
-        Parameters
-        ----------
-        list_id : str, optional
-            The id of the user list to favorite, by default None
 
         Returns
         -------
         bool
             True if the user list was favorited, False otherwise
         """
-        list_id = list_id or self.__list_id
-
-        return await super().favorite(list_id=list_id)
+        return await super().favorite(list_id=self.__list_id)
 
     @override
-    async def unfavorite(self, *, list_id: str | None = None) -> bool:
+    async def unfavorite(self) -> bool:
         """Unfavorite a user list
 
         Endpoint `/api/users/lists/unfavorite`
-
-        Parameters
-        ----------
-        list_id : str, optional
-            The id of the user list to unfavorite, by default None
 
         Returns
         -------
         bool
             True if the user list was unfavorited, False otherwise
         """
-        list_id = list_id or self.__list_id
-
-        return await super().unfavorite(list_id=list_id)
+        return await super().unfavorite(list_id=self.__list_id)
 
     @override
     async def update(
-        self, name: str = MISSING, is_public: bool = MISSING, *, list_id: str | None = None
+        self, name: str = MISSING, is_public: bool = MISSING
     ) -> UserList:
         """Update a user list
 
@@ -534,23 +492,19 @@ class ClientUserListActions(SharedUserListActions):
             The new name of the user list, by default MISSING
         is_public : bool, optional
             Whether the user list should be public, by default MISSING
-        list_id : str, optional
-            The id of the user list to update, by default None
 
         Returns
         -------
         UserList
             The updated user list
         """
-        list_id = list_id or self.__list_id
 
-        return await super().update(name=name, is_public=is_public, list_id=list_id)
+        return await super().update(name=name, is_public=is_public, list_id=self.__list_id)
 
     @override
-    async def create_from_public(self, name: str, *, list_id: str | None = None):
-        list_id = list_id or self.__list_id
+    async def create_from_public(self, name: str):
 
-        return await super().create_from_public(name=name, list_id=list_id)
+        return await super().create_from_public(name=name, list_id=self.__list_id)
 
     @override
     async def get_memberships(
@@ -559,17 +513,13 @@ class ClientUserListActions(SharedUserListActions):
         limit: int = 30,
         since_id: str | None = None,
         until_id: str | None = None,
-        *,
-        list_id: str | None = None,
     ) -> list[UserListMembership]:
-        list_id = list_id or self.__list_id
-
         return await super().get_memberships(
             for_public=for_public,
             limit=limit,
             since_id=since_id,
             until_id=until_id,
-            list_id=list_id,
+            list_id=self.__list_id,
         )
 
     @override
@@ -579,17 +529,13 @@ class ClientUserListActions(SharedUserListActions):
         limit: int = 30,
         since_id: str | None = None,
         until_id: str | None = None,
-        *,
-        list_id: str | None = None,
     ):
-        list_id = list_id or self.__list_id
-
         async for i in super().get_all_memberships(
             for_public=for_public,
             limit=limit,
             since_id=since_id,
             until_id=until_id,
-            list_id=list_id,
+            list_id=self.__list_id,
         ):
             yield i
 
@@ -606,11 +552,7 @@ class ClientUserListActions(SharedUserListActions):
         include_local_renotes: bool = True,
         with_renotes: bool = True,
         with_files: bool = True,
-        *,
-        list_id: str | None = None,
     ) -> list[Note]:
-        list_id = list_id or self.__list_id
-
         return await super().get_time_line(
             limit=limit,
             since_id=since_id,
@@ -621,7 +563,7 @@ class ClientUserListActions(SharedUserListActions):
             include_local_renotes=include_local_renotes,
             with_renotes=with_renotes,
             with_files=with_files,
-            list_id=list_id,
+            list_id=self.__list_id,
         )
 
     @override
@@ -636,11 +578,7 @@ class ClientUserListActions(SharedUserListActions):
         include_local_renotes: bool = True,
         with_renotes: bool = True,
         with_files: bool = True,
-        *,
-        list_id: str | None = None,
     ):
-        list_id = list_id or self.__list_id
-
         async for i in super().get_all_time_line(
             limit=limit,
             since_id=since_id,
@@ -651,7 +589,7 @@ class ClientUserListActions(SharedUserListActions):
             include_local_renotes=include_local_renotes,
             with_renotes=with_renotes,
             with_files=with_files,
-            list_id=list_id,
+            list_id=self.__list_id,
         ):
             yield i
 
