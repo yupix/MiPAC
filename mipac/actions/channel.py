@@ -372,8 +372,6 @@ class ClientChannelActions(SharedChannelActions):
         renote_id: str | None = None,
         files: list[MiFile | File | str] | None = None,
         poll: MiPoll | None = None,
-        *,
-        channel_id: str | None = None,
     ) -> Note:
         """Send a note
 
@@ -407,15 +405,12 @@ class ClientChannelActions(SharedChannelActions):
             Files, by default None
         poll : MiPoll, optional
             Poll, by default None
-        channel_id : str, optional
-            ID of the channel, by default None
 
         Returns
         -------
         Note
             Created note
         """
-        channel_id = channel_id or self._channel_id
         return await super().send(
             text=text,
             cw=cw,
@@ -429,45 +424,35 @@ class ClientChannelActions(SharedChannelActions):
             extract_emojis=extract_emojis,
             reply_id=reply_id,
             renote_id=renote_id,
-            channel_id=channel_id,
+            channel_id=self._channel_id,
             local_only=local_only,
         )
 
     @override
-    async def follow(self, *, channel_id: str) -> bool:
+    async def follow(self) -> bool:
         """Follow a channel
 
         Endpoint: `/api/channels/follow`
-
-        Parameters
-        ----------
-        channel_id : str, optional
-            ID of the channel, by default None
 
         Returns
         -------
         bool
             Whether the channel is followed
         """
-        return await super().follow(channel_id=channel_id)
+        return await super().follow(channel_id=self._channel_id)
 
     @override
-    async def unfollow(self, *, channel_id: str) -> bool:
+    async def unfollow(self) -> bool:
         """指定したIDのチャンネルのフォローを解除します
 
         Endpoint: `/api/channels/unfollow`
-
-        Parameters
-        ----------
-        channel_id : str | None
-            対象のチャンネルID, default=None
 
         Returns
         -------
         bool
             フォロー解除に成功したかどうか
         """
-        return await super().unfollow(channel_id=channel_id)
+        return await super().unfollow(channel_id=self._channel_id)
 
     @override
     async def update(
@@ -480,8 +465,6 @@ class ClientChannelActions(SharedChannelActions):
         color: str | None = MISSING,
         is_sensitive: bool | None = MISSING,
         allow_renote_to_external: bool | None = MISSING,
-        *,
-        channel_id: str,
     ) -> Channel:
         """チャンネルの情報を更新します
 
@@ -505,15 +488,12 @@ class ClientChannelActions(SharedChannelActions):
             チャンネルがセンシティブかどうか, default=MISSING
         allow_renote_to_external : bool | None
             外部へのリノートを許可するかどうか, default=MISSING
-        channel_id : str | None
-            対象のチャンネルID, default=None
 
         Returns
         -------
         Channel
             更新後のチャンネル
         """
-        channel_id = channel_id or self._channel_id
 
         return await super().update(
             name=name,
@@ -524,7 +504,7 @@ class ClientChannelActions(SharedChannelActions):
             color=color,
             is_sensitive=is_sensitive,
             allow_renote_to_external=allow_renote_to_external,
-            channel_id=channel_id,
+            channel_id=self._channel_id,
         )
 
     @override
@@ -535,8 +515,6 @@ class ClientChannelActions(SharedChannelActions):
         until_id: str | None = None,
         since_date: int | None = None,
         until_date: int | None = None,
-        *,
-        channel_id: str,
     ) -> list[Note]:
         """チャンネルのタイムラインを取得します
 
@@ -554,15 +532,12 @@ class ClientChannelActions(SharedChannelActions):
             指定した日付のノートより後のノートを取得します, default=None
         until_date : int | None
             指定した日付のノートより前のノートを取得します, default=None
-        channel_id : str | None
-            対象のチャンネルID, default=None
 
         Returns
         -------
         list[Note]
             取得したノートのリスト
         """
-        channel_id = channel_id or self._channel_id
 
         return await super().timeline(
             limit=limit,
@@ -570,7 +545,7 @@ class ClientChannelActions(SharedChannelActions):
             until_id=until_id,
             since_date=since_date,
             until_date=until_date,
-            channel_id=channel_id,
+            channel_id=self._channel_id,
         )
 
     @override
@@ -580,8 +555,6 @@ class ClientChannelActions(SharedChannelActions):
         until_id: str | None = None,
         since_date: int | None = None,
         until_date: int | None = None,
-        *,
-        channel_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
         """チャンネルのタイムラインを全て取得します
 
@@ -599,64 +572,46 @@ class ClientChannelActions(SharedChannelActions):
             指定した日付のノートより後のノートを取得します, default=None
         until_date : int | None
             指定した日付のノートより前のノートを取得します, default=None
-        channel_id : str | None
-            対象のチャンネルID, default=None
 
         Returns
         -------
         AsyncGenerator[Note, None]
             取得したノートのリスト
         """
-        channel_id = channel_id or self._channel_id
-
         async for i in super().get_all_timeline(
             since_id=since_id,
             until_id=until_id,
             since_date=since_date,
             until_date=until_date,
-            channel_id=channel_id,
+            channel_id=self._channel_id,
         ):
             yield i
 
     @override
-    async def favorite(self, *, channel_id: str) -> bool:
+    async def favorite(self) -> bool:
         """指定したIDのチャンネルをお気に入りにします
 
         Endpoint: `/api/channels/favorite`
-
-        Parameters
-        ----------
-        channel_id : str | None
-            対象のチャンネルID, default=None
 
         Returns
         -------
         bool
             お気に入りに追加できたかどうか
         """
-        channel_id = channel_id or self._channel_id
-
-        return await super().favorite(channel_id=channel_id)
+        return await super().favorite(channel_id=self._channel_id)
 
     @override
-    async def unfavorite(self, *, channel_id: str) -> bool:
+    async def unfavorite(self) -> bool:
         """指定したIDのチャンネルをお気に入りから外します
 
         Endpoint: `/api/channels/unfavorite`
-
-        Parameters
-        ----------
-        channel_id : str | None
-            対象のチャンネルID, default=None
 
         Returns
         -------
         bool
             お気に入りから外せたかどうか
         """
-        channel_id = channel_id or self._channel_id
-
-        return await super().unfavorite(channel_id=channel_id)
+        return await super().unfavorite(channel_id=self._channel_id)
 
 
 class ChannelActions(SharedChannelActions):
