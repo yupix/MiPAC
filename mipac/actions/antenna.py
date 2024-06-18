@@ -199,41 +199,28 @@ class ClientAntennaActions(SharedAntennaActions):
         self.__antenna_id: str = antenna_id
 
     @override
-    async def delete(self, *, antenna_id: str | None = None) -> bool:
+    async def delete(self) -> bool:
         """
         Delete antenna from identifier
-
-        Parameters
-        ----------
-        antenna_id : str | None, optional
-            target identifier
 
         Returns
         -------
         bool
             success or failure
         """
-        antenna_id = antenna_id or self.__antenna_id
-
-        return await super().delete(antenna_id=antenna_id)
+        return await super().delete(antenna_id=self.__antenna_id)
 
     @override
-    async def show(self, *, antenna_id: str | None = None) -> Antenna:
+    async def show(self) -> Antenna:
         """Show antenna from identifier
-
-        Parameters
-        ----------
-        antenna_id : str | None, optional
-            target identifier, by default None
 
         Returns
         -------
         Antenna
             antenna object
         """
-        antenna_id = antenna_id or self.__antenna_id
 
-        return await super().show(antenna_id=antenna_id)
+        return await super().show(antenna_id=self.__antenna_id)
 
     @override
     async def get_notes(
@@ -243,18 +230,14 @@ class ClientAntennaActions(SharedAntennaActions):
         until_id: str | None = None,
         since_date: str | None = None,
         until_date: str | None = None,
-        *,
-        antenna_id: str | None = None,
     ) -> list[Note]:
-        antenna_id = antenna_id or self.__antenna_id
-
         return await super().get_notes(
             limit=limit,
             since_id=since_id,
             until_id=until_id,
             since_date=since_date,
             until_date=until_date,
-            antenna_id=antenna_id,
+            antenna_id=self.__antenna_id,
         )
 
     @override
@@ -265,13 +248,9 @@ class ClientAntennaActions(SharedAntennaActions):
         until_id: str | None = None,
         since_date: str | None = None,
         until_date: str | None = None,
-        *,
-        antenna_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
-        antenna_id = antenna_id or self.__antenna_id
-
         async for i in super().get_all_notes(
-            limit, since_id, until_id, since_date, until_date, antenna_id=antenna_id
+            limit, since_id, until_id, since_date, until_date, antenna_id=self.__antenna_id
         ):
             yield i
 
@@ -288,8 +267,6 @@ class ClientAntennaActions(SharedAntennaActions):
         with_file: bool,
         notify: bool,
         user_list_id: str | None = None,
-        *,
-        antenna_id: str | None = None,
     ) -> Antenna:
         """Update an antenna.
 
@@ -321,8 +298,6 @@ class ClientAntennaActions(SharedAntennaActions):
         Antenna
             The created antenna.
         """
-        antenna_id = antenna_id or self.__antenna_id
-
         return await super().update(
             name=name,
             src=src,
@@ -334,7 +309,7 @@ class ClientAntennaActions(SharedAntennaActions):
             with_file=with_file,
             notify=notify,
             user_list_id=user_list_id,
-            antenna_id=antenna_id,
+            antenna_id=self.__antenna_id,
         )
 
 
