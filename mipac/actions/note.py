@@ -812,9 +812,7 @@ class ClientNoteActions(SharedNoteActions):
         return await super().get_clips(note_id=self._note_id)
 
     @override
-    async def get_conversation(
-        self, limit: int = 10, offset: int = 0
-    ) -> list[Note]:
+    async def get_conversation(self, limit: int = 10, offset: int = 0) -> list[Note]:
         """Get the conversation of the note
 
         Endpoint: `/api/notes/conversation`
@@ -1109,7 +1107,6 @@ class ClientNoteActions(SharedNoteActions):
         files: list[MiFile | File | str] | None = None,
         poll: MiPoll | None = None,
     ) -> Note:
-
         return await super().reply(
             text=text,
             visibility=visibility,

@@ -5,4 +5,5 @@ from typing import TypedDict
 
 class IID(TypedDict):
     """IDを表す型"""
+
     id: str

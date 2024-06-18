@@ -9,17 +9,21 @@ from mipac.http import HTTPClient
 if TYPE_CHECKING:
     from mipac.client import ClientManager
 
+
 class ClientAdminEmojiManager(AbstractManager):
     def __init__(self, *, emoji_id: str, session: HTTPClient, client: ClientManager):
-        self.__action: ClientAdminEmojiActions = ClientAdminEmojiActions(emoji_id=emoji_id, session=session, client=client)
-    
+        self.__action: ClientAdminEmojiActions = ClientAdminEmojiActions(
+            emoji_id=emoji_id, session=session, client=client
+        )
+
     @property
     def action(self) -> ClientAdminEmojiActions:
         return self.__action
 
+
 class AdminEmojiManager(AbstractManager):
     def __init__(self, session: HTTPClient, client: ClientManager):
-        self.__action:AdminEmojiActions = AdminEmojiActions(session=session, client=client)
+        self.__action: AdminEmojiActions = AdminEmojiActions(session=session, client=client)
 
     @property
     def action(self) -> AdminEmojiActions:
