@@ -86,8 +86,8 @@ class ClientFollowActions(SharedFollowActions):
         self.__user_id: str = user_id
 
     @override
-    async def create(self, with_replies: bool = MISSING, *, user_id: str) -> PartialUser:
-        return await super().create(with_replies, user_id=user_id)
+    async def create(self, with_replies: bool = MISSING) -> PartialUser:
+        return await super().create(with_replies, user_id=self.__user_id)
 
     @override
     async def add(self) -> PartialUser:
