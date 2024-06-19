@@ -2,9 +2,9 @@
 
 ## Supported Misskey Version
 
-`2024.3.1`
+`2024.5.0-wasabi-1`
 
-## Supported endpoints (173/368)
+## Supported endpoints (173/379)
 
 - [x] /admin/accounts/create
 - [x] /admin/accounts/delete
@@ -34,7 +34,6 @@
 - [x] /admin/invite/create
 - [x] /admin/invite/list
 - [x] /admin/reset-password
-- [x] /admin/resolve-abuse-user-report
 - [x] /admin/send-email
 - [x] /admin/show-moderation-logs
 - [x] /admin/suspend-user
@@ -309,12 +308,24 @@
 - [ ] /reversi/surrender
 - [ ] /reversi/verify
 - [ ] /notifications/flush
+- [ ] /admin/abuse-report/notification-recipient/list
+- [ ] /admin/abuse-report/notification-recipient/show
+- [ ] /admin/abuse-report/notification-recipient/create
+- [ ] /admin/abuse-report/notification-recipient/update
+- [ ] /admin/abuse-report/notification-recipient/delete
+- [ ] /admin/system-webhook/create
+- [ ] /admin/system-webhook/delete
+- [ ] /admin/system-webhook/list
+- [ ] /admin/system-webhook/show
+- [ ] /admin/system-webhook/update
+- [ ] /announcements/show
 
 ## Changed request body or responses
 
 - [ ] /admin/drive/show-file (Need to work)
 - [ ] /admin/get-index-stats (Need to work)
 - [ ] /admin/get-table-stats (Need to work)
+- [ ] /admin/resolve-abuse-user-report (Need to work)
 - [ ] /admin/update-meta (Need to work)
 - [ ] /drive (Need to work)
 - [ ] /drive/stream (Need to work)
@@ -437,6 +448,9 @@
 - [ ] RoleCondFormulaFollowersOrFollowingOrNotes
 - [ ] RoleCondFormulaValue
 - [ ] RolePolicies
-- [ ] MetaLite
-- [ ] MetaDetailedOnly
-- [ ] MetaDetailed
+- [x] MetaLite
+- [x] MetaDetailedOnly
+- [x] MetaDetailed
+- [ ] RoleCondFormulaValueUserSettingBooleanSchema
+- [ ] SystemWebhook
+- [ ] AbuseReportNotificationRecipient

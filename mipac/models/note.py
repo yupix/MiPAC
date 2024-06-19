@@ -544,8 +544,8 @@ class Note:
         return self.__raw_note["reaction_acceptance"]
 
     @property
-    def reaction_emoji(self) -> dict[str, str]:
-        return self.__raw_note["reaction_emoji"]
+    def reaction_emojis(self) -> dict[str, str]:
+        return self.__raw_note["reaction_emojis"]
 
     @property
     def reactions(self) -> dict[str, int]:
@@ -557,6 +557,17 @@ class Note:
             note reactions
         """
         return self.__raw_note["reactions"]
+
+    @property
+    def reaction_count(self) -> int:
+        """Note reactionCount
+
+        Returns
+        -------
+        int
+            note reactionCount
+        """
+        return self.__raw_note["reaction_count"]
 
     @property
     def renote_count(self) -> int:

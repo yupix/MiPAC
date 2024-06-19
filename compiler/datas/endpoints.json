@@ -310,8 +310,8 @@
             "/admin/resolve-abuse-user-report": {
                 "path": "/admin/resolve-abuse-user-report",
                 "request_body_hash": "ed9ebb3e513741301a21f71ab2927a7321f32eae633a7c5bdab6731944720ac9",
-                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "supported"
+                "response_body_hash": "41349aaac2a09ac433ea7ea77332f0bd8ee4eaa8c4760650b4f6bc969b22f26a",
+                "status": "needToWork"
             },
             "/admin/send-email": {
                 "path": "/admin/send-email",
@@ -357,7 +357,7 @@
             },
             "/admin/update-meta": {
                 "path": "/admin/update-meta",
-                "request_body_hash": "5ad2a9a67cdc283ebe104f592bcafd3d78b58a65ea6fbc648feb5351121e6bfc",
+                "request_body_hash": "fcfdbe12e31a14d30897fb1317d69e22160db982d63b622f9c526806824051e0",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
                 "status": "needToWork"
             },
@@ -435,7 +435,7 @@
             },
             "/antennas/create": {
                 "path": "/antennas/create",
-                "request_body_hash": "a71e081231fdcb86f03cdf8dce38b8d42d4ad9f67d8475e0aa4c9586740e6ddf",
+                "request_body_hash": "2629b07274bebee336eb94df5c6d0c1758038f086357fdf30ec0b1f93bd773f0",
                 "response_body_hash": "bebe066a5eb4b3f00bcadb48d44888726abf162d6c35015ccb632e9fe3d0a012",
                 "status": "notSupported"
             },
@@ -465,7 +465,7 @@
             },
             "/antennas/update": {
                 "path": "/antennas/update",
-                "request_body_hash": "557d2fec6208b6da2d85823eb5a958b43cdb4abb2545542d7d16f261cace3640",
+                "request_body_hash": "5142c5c1059e96bdb5dde0f14c5dd8ca43d8cc6afd34d86fdff24ea6b87d48c1",
                 "response_body_hash": "6298c6ba345854a384dc45e66ec60dd5d5d9f8f1876ebd5ff77e17a6a1af72c4",
                 "status": "notSupported"
             },
@@ -1377,7 +1377,7 @@
             },
             "/notes/polls/recommendation": {
                 "path": "/notes/polls/recommendation",
-                "request_body_hash": "ea75cb7a456fe25fc086147b7be384a2e8e51b1dfd549a4c4493fc41f2f82d2f",
+                "request_body_hash": "a36b89bcd88ff7d32d3ddf7b13c85a84d27468986d0134890dbab705bc096851",
                 "response_body_hash": "b80217369b7f4ae2b7399b2fd85c03739420e9cd1a08de2ca04071642a2fc096",
                 "status": "needToWork"
             },
@@ -1462,7 +1462,7 @@
             "/notes/translate": {
                 "path": "/notes/translate",
                 "request_body_hash": "1def882b183104849c8a38b78caede0358e108a9e16dbd26f39f564beb1d87c6",
-                "response_body_hash": "07ef466f12e607bb59451c7400f77784b1b6bafa269657d6a228179999c42f13",
+                "response_body_hash": "89dcb1167ca9740ca333df288d4c1bb1d137bc6e14e47141a98bcfcc5a510f47",
                 "status": "needToWork"
             },
             "/notes/unrenote": {
@@ -1539,7 +1539,7 @@
             },
             "/flash/create": {
                 "path": "/flash/create",
-                "request_body_hash": "c34ab7bcdfa7507ba77f1b325efc3530720d054c6865150f15223a5aa5b69632",
+                "request_body_hash": "fa3339d64cce6c35581ce1fc68f4604446222bb7fca01a9c78173787e1a6a636",
                 "response_body_hash": "65b236d4079bec9116df945a8073be7c1a6b345cb3c8bf32e2f5d3f3b0a9eab5",
                 "status": "needToWork"
             },
@@ -1719,7 +1719,7 @@
             },
             "/users/following": {
                 "path": "/users/following",
-                "request_body_hash": "599243389ea2c80889ab03636f61a4c33f44c7a753e1e7d4d16ac792acab4ccb",
+                "request_body_hash": "818ec9f06c34ed092e3e8848cb142164005716d251c5aee86edf22544b68d866",
                 "response_body_hash": "36b76f2ecd5d6f2e14dd84f6fdbd334f2ef655122a521cee9996d7561ce52f3b",
                 "status": "needToWork"
             },
@@ -1882,7 +1882,7 @@
             "/fetch-rss": {
                 "path": "/fetch-rss",
                 "request_body_hash": "dd2ec4556fe76c68ffffd7b36ad89aff9fd0eb981c7b4881063a21381d96dd68",
-                "response_body_hash": "5ec414384d6cf9983f6015b58972a06e0e83fdd98ebd4d5feb63d156adb63a68",
+                "response_body_hash": "8602faafd7b9fcd8ff7da6c34d250408ac05e151b26ff1ec69df546298893461",
                 "status": "needToWork"
             },
             "/fetch-external-resources": {
@@ -1931,7 +1931,7 @@
                 "path": "/admin/meta",
                 "status": "needToWork",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
-                "response_body_hash": "0e2d0468d1d4ce76a8718ec6ef8b2aefe8f780162179ceb14ef85ed25d6a044a"
+                "response_body_hash": "fdbefdc5227175d8d0a164455e7a59e78ae63a870d444114e311975b46b2ab2b"
             },
             "/admin/emoji/import-zip": {
                 "path": "/admin/emoji/import-zip",
@@ -2123,7 +2123,7 @@
                 "path": "/i/update-email",
                 "status": "notSupported",
                 "request_body_hash": "c2b874d747b9a4db158d40371178c6443128dce23f322e78b9e9c183649ca5ee",
-                "response_body_hash": "ec2a5bf5de6ddf2b1bd02032e326499676da99341d4bd35c6c0080e5a6972694"
+                "response_body_hash": "fe25ae0edc17429fe4d2a555ddee420edecb5d61f99b095c137082d8e78df30f"
             },
             "/i/move": {
                 "path": "/i/move",
@@ -2208,6 +2208,72 @@
                 "status": "notSupported",
                 "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
                 "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
+            },
+            "/admin/abuse-report/notification-recipient/list": {
+                "path": "/admin/abuse-report/notification-recipient/list",
+                "status": "notSupported",
+                "request_body_hash": "8f1503506e2d36b4a0c2a199aa3dac352cc9c87307d49581a7f5a875d70bf6fc",
+                "response_body_hash": "c9900fa50f9b30515410f5d8c49ec7f9f16c3482e412044644fc0cb0700e582c"
+            },
+            "/admin/abuse-report/notification-recipient/show": {
+                "path": "/admin/abuse-report/notification-recipient/show",
+                "status": "notSupported",
+                "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
+                "response_body_hash": "4ea053bce84713c7beaccc7dff55648e974279b5394e386db6697b9526fe1a57"
+            },
+            "/admin/abuse-report/notification-recipient/create": {
+                "path": "/admin/abuse-report/notification-recipient/create",
+                "status": "notSupported",
+                "request_body_hash": "98784f268ce34b3b395ec17d6d0ba5f8f66111cb222c1aab484ea30e2f407197",
+                "response_body_hash": "7d4e905aa861eea671f3805b5547b0af92a0e93f2b6af6b846ded87c41593681"
+            },
+            "/admin/abuse-report/notification-recipient/update": {
+                "path": "/admin/abuse-report/notification-recipient/update",
+                "status": "notSupported",
+                "request_body_hash": "0faefa4594bf7f21fe050bd414cd3b9506ffb23e8852e046b21550193c7085f4",
+                "response_body_hash": "7d4e905aa861eea671f3805b5547b0af92a0e93f2b6af6b846ded87c41593681"
+            },
+            "/admin/abuse-report/notification-recipient/delete": {
+                "path": "/admin/abuse-report/notification-recipient/delete",
+                "status": "notSupported",
+                "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
+            },
+            "/admin/system-webhook/create": {
+                "path": "/admin/system-webhook/create",
+                "status": "notSupported",
+                "request_body_hash": "0abcf8a7b36b97e546c87a07d18b418758d6014fa53bbbf27332216cd7d6c685",
+                "response_body_hash": "8a706b3d642206f37fd2b58155b272dc8725211b8316b7455912a1bb42992edf"
+            },
+            "/admin/system-webhook/delete": {
+                "path": "/admin/system-webhook/delete",
+                "status": "notSupported",
+                "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
+                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54"
+            },
+            "/admin/system-webhook/list": {
+                "path": "/admin/system-webhook/list",
+                "status": "notSupported",
+                "request_body_hash": "b0b5a8d1206b0984723951cc034fcffff2fb6d46c8740fc4d322d0010764da81",
+                "response_body_hash": "59c0e782f8b501d0ee1d9dbfcadf86ac845e5e1c2a878a594bd0bb65f1bbc102"
+            },
+            "/admin/system-webhook/show": {
+                "path": "/admin/system-webhook/show",
+                "status": "notSupported",
+                "request_body_hash": "3e47b10418dc28d7a702f3c13c8f0cd061a88803f92ad7d9009e930a8ba8d004",
+                "response_body_hash": "b3e51d24fa36b875bcddf8af5aa9563773430ae9de3cc36b13fd845199a203f7"
+            },
+            "/admin/system-webhook/update": {
+                "path": "/admin/system-webhook/update",
+                "status": "notSupported",
+                "request_body_hash": "83ce8e72010792b0a82d037bd8881bee476c84403c0a265a810a4776f8801e68",
+                "response_body_hash": "8a706b3d642206f37fd2b58155b272dc8725211b8316b7455912a1bb42992edf"
+            },
+            "/announcements/show": {
+                "path": "/announcements/show",
+                "status": "notSupported",
+                "request_body_hash": "4b5386893449a8ceae9be712a28f6dba10758f1459db8dc5686a0ab08b724a15",
+                "response_body_hash": "ce9fa381663085cff7a855f87838e2d62cdfeb2aa4f237e50154dda5905e1013"
             }
         },
         "removed": {}
@@ -2220,17 +2286,17 @@
         },
         "UserLite": {
             "name": "UserLite",
-            "hash": "466d00c177d6076364af3a4b229dfc06313c206afa4d73be94bbc1b59c53db03",
+            "hash": "701ced0237e6ae2057165df2d6ecea410050b19be3b5875a248591a24eae0b12",
             "status": "supported"
         },
         "UserDetailedNotMeOnly": {
             "name": "UserDetailedNotMeOnly",
-            "hash": "b5de616e11dc1686d7f22cf4e1323bffbbd55a6a9fd983f2742c8a08126c07e5",
+            "hash": "c0242559523abcda170011fc6bbb0c1992cd295c3a33a5c367f386ed352909af",
             "status": "supported"
         },
         "MeDetailedOnly": {
             "name": "MeDetailedOnly",
-            "hash": "3a90b0f9f7a52b50d0e1e1b4d34027ce89992a08cce3b973764f735a110e0ede",
+            "hash": "bed2b54940d708764d029e43f96de87f7e818611d044bc1b9493f8e691a4daae",
             "status": "supported"
         },
         "UserDetailedNotMe": {
@@ -2255,22 +2321,22 @@
         },
         "UserList": {
             "name": "UserList",
-            "hash": "5259c1402c1fb77e67dfd6eaedfe3383a75837538a224ce15f2d733793c77ac3",
+            "hash": "0fa8055b54cc2bc9893e5fc185d3f737697adcc52cd76a667d28f4d3cc606e7f",
             "status": "supported"
         },
         "Announcement": {
             "name": "Announcement",
-            "hash": "a5a93362ad8d27594b42bc86ec111e11ea302e45c30b2d0b219d5aa52dd81999",
+            "hash": "45fe590cf676e33180d0ecced67aa06bcc720fe2f3417052f4092362a1b94f25",
             "status": "supported"
         },
         "App": {
             "name": "App",
-            "hash": "1c8addc6c7efdc356e3be846d48e6c8b2f53293d8268e737895da9ab8fae0cac",
+            "hash": "31d201d53c4a4d12f8a0f7e9b56b9f62db11d0caa476594cd5be08953a8dfcba",
             "status": "supported"
         },
         "Note": {
             "name": "Note",
-            "hash": "ec6d0ee14cb8720876e3dbc2ecc1edf151b576328f0cade1292ef57d1f4770b5",
+            "hash": "1d83e8fbe8d1994519e5761df660c938f7472f72e9c966dc8f7bf8efff7f0271",
             "status": "supported"
         },
         "NoteReaction": {
@@ -2290,17 +2356,17 @@
         },
         "DriveFile": {
             "name": "DriveFile",
-            "hash": "9853a428bab9745b8e17a9c2a83231761fcda7cff883f2200e11c11b6342ce71",
+            "hash": "92c8c8b31bb77cdbafe853f4874a9aa643969fd1224aafea2ec5d6f2244b7c77",
             "status": "supported"
         },
         "DriveFolder": {
             "name": "DriveFolder",
-            "hash": "2ee1d9098539300d5e0e5d9a367a196a8f246b323d86201ef5109b06c5ace611",
+            "hash": "6751202b7d4cb6f97465fcd98d21e66f4b746566a3c1d994ee0bd93fbb2aeeca",
             "status": "supported"
         },
         "Following": {
             "name": "Following",
-            "hash": "98d7bf83b27127eb401200cfc66e34a63daabc3c35853fd4fa9bf0004debf1e2",
+            "hash": "02e9d0328a8aa661f33aaddef8cd503fddaea7e4fe999cb454e82883a03eed8b",
             "status": "supported"
         },
         "Muting": {
@@ -2330,12 +2396,12 @@
         },
         "Page": {
             "name": "Page",
-            "hash": "90f567b288015be12079ff35a50426c0b40b01caeaabe20bcc3dbb833ff764b6",
+            "hash": "4ad663188b59d5a6dd0c09b8566ece90d5df76940308045afcaa05d32dfc16c6",
             "status": "notSupported"
         },
         "Channel": {
             "name": "Channel",
-            "hash": "65ac71d7cb329a9c3d0f4002198f6df7f525852013f84f277b447e4cde8386fd",
+            "hash": "c2c1c214653ab92641e031546ee1a7d2e4b17b10e92cab3d265460649533bdf4",
             "status": "supported"
         },
         "QueueCount": {
@@ -2345,27 +2411,27 @@
         },
         "Antenna": {
             "name": "Antenna",
-            "hash": "14ad7ea1c5a1ac52e744b4cff951e0dfe7a6710497d191f2756eec7436e2d8f5",
+            "hash": "4a9346c6704e8fa5f989eeec2eca76aa1853e1060e848aee549133b72484c04a",
             "status": "notSupported"
         },
         "Clip": {
             "name": "Clip",
-            "hash": "03bd8f3b6e536386a6ee9639a90e71f4afc5c8933aeda594ca5c2ef1fa178e77",
+            "hash": "00bbcc85f5605a47e1726fcbefa15da9fc43209889bf095b13266f1224a7162a",
             "status": "notSupported"
         },
         "FederationInstance": {
             "name": "FederationInstance",
-            "hash": "85a4b7dab56b7ba598d864d04ad5c8b8465030fc2db4147ff90ccd117fa6001f",
+            "hash": "9861ff0d4bf3647fe65b44403e4c46303fc9faf4272834c3772b8a22a23f6fb8",
             "status": "notSupported"
         },
         "GalleryPost": {
             "name": "GalleryPost",
-            "hash": "945e43cf955886bbdb19ddbf4abb0b7b5d07f2435be2ec97129f61677a8a042c",
+            "hash": "37ae1b81b8e5398d4e4b9b90fffd9de0d00bd5bd4fb94c0cf4f9e25f93ab3059",
             "status": "supported"
         },
         "EmojiSimple": {
             "name": "EmojiSimple",
-            "hash": "3ef42d4f73e075b2beb5a0fea0303adc1956595e1e3190a197cfc020b8d8fe3b",
+            "hash": "33502fae28c082cd9a837c52d1eb87f35e466f2a4f066d576176ee6d80389336",
             "status": "supported"
         },
         "EmojiDetailed": {
@@ -2375,7 +2441,7 @@
         },
         "Flash": {
             "name": "Flash",
-            "hash": "817d50ddeca96c6f0fc5ef18d48ce674c874a9b9793e5efecb325371031ab4bf",
+            "hash": "b3774648a293a64741dd12b89e313c273aea9caf7cb609ed2b128f76dedc8b82",
             "status": "notSupported"
         },
         "Ad": {
@@ -2445,7 +2511,7 @@
         },
         "RoleCondFormulaValue": {
             "name": "RoleCondFormulaValue",
-            "hash": "9fbf8ffad6c7c22f5b4317fcb7f75357fc9d96c53f402eeba4f66b02c5e9238b",
+            "hash": "4264a82a7437ee0398f55ec718b8268be5ce6072a6601d7d561c041196c9366a",
             "status": "notSupported"
         },
         "RolePolicies": {
@@ -2455,17 +2521,32 @@
         },
         "MetaLite": {
             "name": "MetaLite",
-            "hash": "ecbf6409629f7ee838ed01d0837b00b907eab7d657012003245b6e60455b0591",
-            "status": "notSupported"
+            "hash": "d6283b9b44a4e505603b4a4fa9326a49ef248616f14eccae536bf584ced67960",
+            "status": "supported"
         },
         "MetaDetailedOnly": {
             "name": "MetaDetailedOnly",
-            "hash": "7c5f566abed62c97fbc3706411b61201edde599c15ac5b7f60af48dbc98528d0",
-            "status": "notSupported"
+            "hash": "79538f592fe7385a990df44f20198691b483f771e0b43fa8920ee17cea22c2d2",
+            "status": "supported"
         },
         "MetaDetailed": {
             "name": "MetaDetailed",
             "hash": "55a03056b7837895f8c4458648cb70d23517d08ee3e7245243d5b784d840c5b3",
+            "status": "supported"
+        },
+        "RoleCondFormulaValueUserSettingBooleanSchema": {
+            "name": "RoleCondFormulaValueUserSettingBooleanSchema",
+            "hash": "3fb0f2c3b6b0ceb644a0bf55862d90ea81d213ebcfd4ab089ca5f68260f98ecd",
+            "status": "notSupported"
+        },
+        "SystemWebhook": {
+            "name": "SystemWebhook",
+            "hash": "96c34aa1a06bcc6ff6a8c53cbbec635be7c307ea8e1cdfd18595bafed612800e",
+            "status": "notSupported"
+        },
+        "AbuseReportNotificationRecipient": {
+            "name": "AbuseReportNotificationRecipient",
+            "hash": "d265863c200e954705688b6e429bf6d6bda4b9fbf1fb18e718ea82308f93b43e",
             "status": "notSupported"
         }
     }

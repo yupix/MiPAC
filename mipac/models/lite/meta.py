@@ -268,6 +268,10 @@ class PartialMeta[T: IPartialMeta]:
         return self._raw_meta["translator_available"]
 
     @property
+    def inquiry_url(self) -> str | None:
+        return self._raw_meta["inquiry_url"]
+
+    @property
     def server_rules(self) -> list[str]:
         return self._raw_meta["server_rules"]
 
