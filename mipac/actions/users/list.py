@@ -479,9 +479,7 @@ class ClientUserListActions(SharedUserListActions):
         return await super().unfavorite(list_id=self.__list_id)
 
     @override
-    async def update(
-        self, name: str = MISSING, is_public: bool = MISSING
-    ) -> UserList:
+    async def update(self, name: str = MISSING, is_public: bool = MISSING) -> UserList:
         """Update a user list
 
         Endpoint `/api/users/lists/update`
@@ -503,7 +501,6 @@ class ClientUserListActions(SharedUserListActions):
 
     @override
     async def create_from_public(self, name: str):
-
         return await super().create_from_public(name=name, list_id=self.__list_id)
 
     @override
