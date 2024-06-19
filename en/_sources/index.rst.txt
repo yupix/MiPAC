@@ -2401,6 +2401,15 @@ IMeta
     :members:
 
 
+IMetaDetailedOnly
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.meta.IMetaDetailedOnly
+
+.. autoclass:: mipac.types.meta.IMetaDetailedOnly
+    :members:
+
+
 IPartialMeta
 ~~~~~~~~~~~~
 

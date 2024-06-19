@@ -1705,6 +1705,7 @@ Attributes</span><ul>
 <a class="reference internal" href="#mipac.models.note.Note.poll">poll</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.reaction_acceptance">reaction_acceptance</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.reaction_and_user_pair_cache">reaction_and_user_pair_cache</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.note.Note.reaction_count">reaction_count</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.reactions">reactions</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.renote">renote</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.renote_count">renote_count</a></li><li class="py-attribute-table-entry">
@@ -2014,6 +2015,20 @@ Attributes</span><ul>
 </dd>
 <dt class="field-even">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict[str, list[<a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.note.Note.reaction_count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reaction_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mipac.models.note.Note.reaction_count" title="Link to this definition">¶</a></dt>
+<dd><p>Note reactionCount</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>note reactionCount</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -10281,6 +10296,14 @@ IMeDetailedOnlySchema が持つ avatar_id が無いことを確認する
 <dd></dd></dl>
 
 </section>
+<section id="imetadetailedonly">
+<h3>IMetaDetailedOnly<a class="headerlink" href="#imetadetailedonly" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.meta.IMetaDetailedOnly"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.meta.IMetaDetailedOnly">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.meta.</span></span><span class="sig-name descname"><span class="pre">IMetaDetailedOnly</span></span><a class="headerlink" href="#mipac.types.meta.IMetaDetailedOnly" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="ipartialmeta">
 <h3>IPartialMeta<a class="headerlink" href="#ipartialmeta" title="Link to this heading">¶</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.types.meta.IPartialMeta"></div><dl class="py class">
@@ -13049,6 +13072,7 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 <li><a class="reference internal" href="#mipac.models.note.Note.poll"><code class="docutils literal notranslate"><span class="pre">Note.poll</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.reaction_acceptance"><code class="docutils literal notranslate"><span class="pre">Note.reaction_acceptance</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.reaction_and_user_pair_cache"><code class="docutils literal notranslate"><span class="pre">Note.reaction_and_user_pair_cache</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.note.Note.reaction_count"><code class="docutils literal notranslate"><span class="pre">Note.reaction_count</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.reactions"><code class="docutils literal notranslate"><span class="pre">Note.reactions</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.renote"><code class="docutils literal notranslate"><span class="pre">Note.renote</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.renote_count"><code class="docutils literal notranslate"><span class="pre">Note.renote_count</span></code></a></li>
@@ -14363,6 +14387,10 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 </li>
 <li><a class="reference internal" href="#imeta">IMeta</a><ul>
 <li><a class="reference internal" href="#mipac.types.meta.IMeta"><code class="docutils literal notranslate"><span class="pre">IMeta</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#imetadetailedonly">IMetaDetailedOnly</a><ul>
+<li><a class="reference internal" href="#mipac.types.meta.IMetaDetailedOnly"><code class="docutils literal notranslate"><span class="pre">IMetaDetailedOnly</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ipartialmeta">IPartialMeta</a><ul>
