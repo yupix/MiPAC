@@ -291,8 +291,6 @@ class ClientFolderActions(SharedFolderActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        *,
-        folder_id: str | None = None,
     ) -> list[Folder]:
         """Get folders
 
@@ -306,26 +304,22 @@ class ClientFolderActions(SharedFolderActions):
             The ID of the folder to get since, defaults to None
         until_id: str | None
             The ID of the folder to get until, defaults to None
-        folder_id: str | None
-            The ID of the folder to get, defaults to None
 
         Returns
         -------
         list[Folder]
             The found folders
         """
-        folder_id = folder_id or self.__folder_id
-
         return await super().gets(
             limit=limit,
             since_id=since_id,
             until_id=until_id,
-            folder_id=folder_id,
+            folder_id=self.__folder_id,
         )
 
     @override
-    async def create(self, name: str | None = None, *, parent_id: str | None = None) -> Folder:
-        """Create a new folder
+    async def create(self, name: str | None = None) -> Folder:
+        """現在のフォルダに新しいフォルダを作成します。
 
         Endpoint: `/api/drive/folders/create`
 
@@ -333,20 +327,17 @@ class ClientFolderActions(SharedFolderActions):
         ----------
         name : str, optional
             The name of the folder, by default None
-        parent_id : str, optional
-            The parent ID of the folder, by default None
 
         Returns
         -------
         Folder
             The created folder
         """
-        parent_id = parent_id or self.__folder_id
 
-        return await super().create(name=name, parent_id=parent_id)
+        return await super().create(name=name, parent_id=self.__folder_id)
 
     @override
-    async def delete(self, *, folder_id: str | None = None) -> bool:
+    async def delete(self) -> bool:
         """Delete a folder
 
         Endpoint: `/api/drive/folders/delete`
@@ -361,17 +352,13 @@ class ClientFolderActions(SharedFolderActions):
         bool
             Whether the folder was deleted or not
         """
-        folder_id = folder_id or self.__folder_id
-
-        return await super().delete(folder_id=folder_id)
+        return await super().delete(folder_id=self.__folder_id)
 
     @override
     async def update(
         self,
         name: str | None = MISSING,
         parent_id: str | None = MISSING,
-        *,
-        folder_id: str | None = None,
     ) -> Folder:
         """Update a folder
 
@@ -383,17 +370,13 @@ class ClientFolderActions(SharedFolderActions):
             The name of the folder, by default MISSING
         parent_id : str, optional
             The parent ID of the folder, by default MISSING
-        folder_id : str, optional
-            The ID of the folder, by default None
 
         Returns
         -------
         Folder
             The updated folder
         """
-        folder_id = folder_id or self.__folder_id
-
-        return await super().update(name=name, parent_id=parent_id, folder_id=folder_id)
+        return await super().update(name=name, parent_id=parent_id, folder_id=self.__folder_id)
 
 
 class FolderActions(SharedFolderActions):
