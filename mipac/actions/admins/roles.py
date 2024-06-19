@@ -180,13 +180,8 @@ class ClientAdminRoleActions(SharedAdminRoleActions):
         self.__role_id: str = role_id
 
     @override
-    async def delete(self, *, role_id: str | None = None) -> bool:
-        role_id = role_id or self.__role_id
-
-        if role_id is None:
-            raise ValueError("required role_id")
-
-        return await super().delete(role_id=role_id)
+    async def delete(self) -> bool:
+        return await super().delete(role_id=self.__role_id)
 
     @override
     async def update(
@@ -205,14 +200,7 @@ class ClientAdminRoleActions(SharedAdminRoleActions):
         can_edit_members_by_moderator: bool = False,
         display_order: int = 0,
         policies: dict[Any, Any] | None = None,
-        *,
-        role_id: str | None = None,
     ) -> bool:
-        role_id = role_id or self.__role_id
-
-        if role_id is None:
-            raise ValueError("required role_id")
-
         return await super().update(
             name=name,
             description=description,
@@ -228,28 +216,16 @@ class ClientAdminRoleActions(SharedAdminRoleActions):
             can_edit_members_by_moderator=can_edit_members_by_moderator,
             display_order=display_order,
             policies=policies,
-            role_id=role_id,
+            role_id=self.__role_id,
         )
 
     @override
-    async def assign(
-        self, user_id: str, expires_at: int | None = None, *, role_id: str | None = None
-    ) -> bool:
-        role_id = role_id or self.__role_id
-
-        if role_id is None:
-            raise ValueError("required role_id")
-
-        return await super().assign(user_id=user_id, expires_at=expires_at, role_id=role_id)
+    async def assign(self, user_id: str, expires_at: int | None = None) -> bool:
+        return await super().assign(user_id=user_id, expires_at=expires_at, role_id=self.__role_id)
 
     @override
-    async def unassign(self, user_id: str, *, role_id: str | None = None) -> bool:
-        role_id = role_id or self.__role_id
-
-        if role_id is None:
-            raise ValueError("required role_id")
-
-        return await super().unassign(user_id=user_id, role_id=role_id)
+    async def unassign(self, user_id: str) -> bool:
+        return await super().unassign(user_id=user_id, role_id=self.__role_id)
 
     @override
     async def get_users(
@@ -257,11 +233,9 @@ class ClientAdminRoleActions(SharedAdminRoleActions):
         since_id: str = MISSING,
         until_id: str = MISSING,
         limit: int = MISSING,
-        *,
-        role_id: str,
     ) -> RoleUser:
         return await super().get_users(
-            since_id=since_id, until_id=until_id, limit=limit, role_id=role_id
+            since_id=since_id, until_id=until_id, limit=limit, role_id=self.__role_id
         )
 
     @override
@@ -270,11 +244,9 @@ class ClientAdminRoleActions(SharedAdminRoleActions):
         since_id: str = MISSING,
         until_id: str = MISSING,
         limit: int = MISSING,
-        *,
-        role_id: str,
     ):
         return super().get_all_users(
-            since_id=since_id, until_id=until_id, limit=limit, role_id=role_id
+            since_id=since_id, until_id=until_id, limit=limit, role_id=self.__role_id
         )
 
 
