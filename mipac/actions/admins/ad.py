@@ -58,13 +58,11 @@ class SharedAdminAdActions(AbstractAction):
 class ClientAdminAdActions(SharedAdminAdActions):
     def __init__(self, ad_id: str, *, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
-        self._ad_id: str = ad_id
+        self.__ad_id: str = ad_id
 
     @override
-    async def delete(self, *, ad_id: str | None = None) -> bool:
-        ad_id = ad_id or self._ad_id
-
-        return await super().delete(ad_id=ad_id)
+    async def delete(self) -> bool:
+        return await super().delete(ad_id=self.__ad_id)
 
     @override
     async def update(
@@ -78,11 +76,7 @@ class ClientAdminAdActions(SharedAdminAdActions):
         expires_at: int,
         starts_at: int,
         day_of_week: int,
-        *,
-        ad_id: str | None = None,
     ) -> bool:
-        ad_id = ad_id or self._ad_id
-
         return await super().update(
             memo=memo,
             url=url,
@@ -93,7 +87,7 @@ class ClientAdminAdActions(SharedAdminAdActions):
             expires_at=expires_at,
             starts_at=starts_at,
             day_of_week=day_of_week,
-            ad_id=ad_id,
+            ad_id=self.__ad_id,
         )
 
 
