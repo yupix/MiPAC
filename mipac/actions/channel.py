@@ -43,40 +43,40 @@ class SharedChannelActions(AbstractAction):
         *,
         channel_id: str,
     ) -> Note:
-        """Send a note
+        """ノートを投稿します
 
         Endpoint: `/api/notes/create`
 
         Parameters
         ----------
         text : str, optional
-            Text of the note, by default None
+            ノートのテキスト, default=None
         visibility : INoteVisibility, optional
-            Visibility of the note, by default "public"
+            ノートの公開範囲, default="public"
         visible_user_ids : list[str], optional
-            Visible user IDs, by default None
+            公開するユーザーのIDs, default=None
         cw : str, optional
-            CW of the note, by default None
+            ノートのCW, default=None
         local_only : bool, optional
-            Whether the note is local only, by default False
+            ノートをローカルのみにするかどうか, default=False
         reaction_acceptance : IReactionAcceptance, optional
-            Reaction acceptance of the note, by default None
+            ノートにリアクションを受け入れるか, default=None
         extract_mentions : bool, optional
-            Whether to extract mentions, by default True
+            メンションを抽出するかどうか, default=True
         extract_hashtags : bool, optional
-            Whether to extract hashtags, by default True
+            ハッシュタグを抽出するかどうか, default=True
         extract_emojis : bool, optional
-            Whether to extract emojis, by default True
+            絵文字を抽出するかどうか, default=True
         reply_id : str, optional
-            Reply ID, by default None
+            リプライのID, default=None
         renote_id : str, optional
-            Renote ID, by default None
+            リノートのID, default=None
         files : list[MiFile | File | str], optional
-            Files, by default None
+            添付するファイル, default=None
         poll : MiPoll, optional
-            Poll, by default None
+            アンケート, default=None
         channel_id : str, optional
-            ID of the channel, by default None
+            チャンネルのID, default=None
 
         Returns
         -------
@@ -101,19 +101,19 @@ class SharedChannelActions(AbstractAction):
         )
 
     async def follow(self, *, channel_id: str) -> bool:
-        """Follow a channel
+        """チャンネルをフォローします
 
         Endpoint: `/api/channels/follow`
 
         Parameters
         ----------
         channel_id : str, optional
-            ID of the channel, by default None
+            チャンネルのID, default=None
 
         Returns
         -------
         bool
-            Whether the channel is followed
+            チャンネルをフォローしたかどうか
         """
         data = {"channelId": channel_id}
 
@@ -373,38 +373,38 @@ class ClientChannelActions(SharedChannelActions):
         files: list[MiFile | File | str] | None = None,
         poll: MiPoll | None = None,
     ) -> Note:
-        """Send a note
+        """ノートを投稿します
 
         Endpoint: `/api/notes/create`
 
         Parameters
         ----------
         text : str, optional
-            Text of the note, by default None
+            ノートのテキスト, default=None
         visibility : INoteVisibility, optional
-            Visibility of the note, by default "public"
+            ノートの公開範囲, default="public"
         visible_user_ids : list[str], optional
-            Visible user IDs, by default None
+            公開するユーザーのIDを持つリスト, default=None
         cw : str, optional
-            CW of the note, by default None
+            ノートが閲覧注意（NSFW）であるか, default=None
         local_only : bool, optional
-            Whether the note is local only, by default False
+            ノートをローカルのみにするか否か, default=False
         reaction_acceptance : IReactionAcceptance, optional
-            Reaction acceptance of the note, by default None
+            ノートにリアクションを受け入れるか否か, default=None
         extract_mentions : bool, optional
-            Whether to extract mentions, by default True
+            メンションを抽出するかであるか, default=True
         extract_hashtags : bool, optional
-            Whether to extract hashtags, by default True
+            ハッシュタグを抽出するかであるか, default=True
         extract_emojis : bool, optional
-            Whether to extract emojis, by default True
+            絵文字を抽出するかであるか, default=True
         reply_id : str, optional
-            Reply ID, by default None
+            返信元のノートID, default=None
         renote_id : str, optional
-            Renote ID, by default None
+            リノート元のID, default=None
         files : list[MiFile | File | str], optional
-            Files, by default None
+            添付するファイル, default=None
         poll : MiPoll, optional
-            Poll, by default None
+            アンケート, default=None
 
         Returns
         -------
@@ -430,14 +430,14 @@ class ClientChannelActions(SharedChannelActions):
 
     @override
     async def follow(self) -> bool:
-        """Follow a channel
+        """チャンネルをフォローします
 
         Endpoint: `/api/channels/follow`
 
         Returns
         -------
         bool
-            Whether the channel is followed
+            チャンネルをフォローしているかどうか
         """
         return await super().follow(channel_id=self._channel_id)
 

@@ -20,12 +20,40 @@ class SharedBlockingActions(AbstractAction):
         self._client: ClientManager = client
 
     async def add(self, *, user_id: str) -> UserDetailedNotMe | MeDetailed:
+        """ユーザーをブロックします
+
+        Endpoint: `/api/blocking/create`
+
+        Parameters
+        ----------
+        user_id : str
+            対象のユーザー
+
+        Returns
+        -------
+        UserDetailedNotMe | MeDetailed
+            ブロック対象のユーザー情報
+        """
         res: IUserDetailed = await self._session.request(
             Route("POST", "/api/blocking/create"), auth=True, json={"userId": user_id}, lower=True
         )
         return packed_user(res, client=self._client)
 
     async def remove(self, *, user_id: str) -> UserDetailedNotMe | MeDetailed:
+        """ユーザーのブロックを解除します
+
+        Endpoint: `/api/blocking/delete`
+
+        Parameters
+        ----------
+        user_id : str
+            対象のユーザー
+
+        Returns
+        -------
+        UserDetailedNotMe | MeDetailed
+            ブロック解除対象のユーザー情報
+        """
         res: IUserDetailed = await self._session.request(
             Route("POST", "/api/blocking/delete"), auth=True, json={"userId": user_id}, lower=True
         )
@@ -44,10 +72,28 @@ class ClientBlockingActions(SharedBlockingActions):
 
     @override
     async def add(self) -> UserDetailedNotMe | MeDetailed:
+        """ユーザーをブロックします
+
+        Endpoint: `/api/blocking/create`
+
+        Returns
+        -------
+        UserDetailedNotMe | MeDetailed
+            ブロック対象のユーザー情報
+        """
         return await super().add(user_id=self.__user_id)
 
     @override
     async def remove(self) -> UserDetailedNotMe | MeDetailed:
+        """ユーザーのブロックを解除します
+
+        Endpoint: `/api/blocking/delete`
+
+        Returns
+        -------
+        UserDetailedNotMe | MeDetailed
+            ブロック解除対象のユーザー情報
+        """
         return await super().remove(user_id=self.__user_id)
 
 
@@ -65,6 +111,24 @@ class BlockingActions(SharedBlockingActions):
         until_id: str | None = None,
         limit: int = 100,
     ) -> list[Blocking]:
+        """ブロックしているユーザーの一覧を取得します
+
+        Endpoint: `/api/blocking/list`
+
+        Parameters
+        ----------
+        since_id : str | None, optional
+            指定したIDのユーザーより後のユーザーを取得します, default=None
+        until_id : str | None, optional
+            指定したIDのユーザーより前のユーザーを取得します, default=None
+        limit : int, optional
+            一度に取得する件数, default=100
+
+        Returns
+        -------
+        list[Blocking]
+            ブロックしているユーザーの一覧
+        """
         body = {"limit": limit, "sinceId": since_id, "untilId": until_id}
         raw_blocking_list = await self._session.request(
             Route("POST", "/api/blocking/list"), json=body, auth=True
@@ -76,6 +140,24 @@ class BlockingActions(SharedBlockingActions):
     async def get_all_list(
         self, limit: int = 30, since_id: str | None = None, until_id: str | None = None
     ) -> AsyncGenerator[Blocking, None]:
+        """すべてのブロックしているユーザーの一覧を取得します
+
+        Endpoint: `/api/blocking/list`
+
+        Parameters
+        ----------
+        limit : int, optional
+            一度に取得する件数, default=30
+        since_id : str | None, optional
+            指定したIDのユーザーより前のユーザーを取得します, default=None
+        until_id : str | None, optional
+            指定したIDのユーザーより前のユーザーを取得します, default=None
+
+        Yields
+        ------
+        AsyncGenerator[Blocking, None]
+            ブロックしているユーザーの一覧
+        """
         pagination = Pagination[IBlocking](
             self._session,
             Route("POST", "/api/blocking/list"),
