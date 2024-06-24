@@ -36,10 +36,8 @@ class ClientPollActions(SharedPollActions):
         self._note_id: str = note_id
 
     @override
-    async def vote(self, choice: int, *, note_id: str | None = None) -> bool:
-        note_id = note_id or self._note_id
-
-        return await super().vote(choice=choice, note_id=note_id)
+    async def vote(self, choice: int) -> bool:
+        return await super().vote(choice=choice, note_id=self._note_id)
 
 
 class PollActions(SharedPollActions):

@@ -132,9 +132,8 @@ class ClientAdminAnnouncementActions(SharedAdminAnnouncementActions):
         self.__announce_id: str = announce_id
 
     @override
-    async def delete(self, *, announce_id: str | None = None) -> bool:
-        announce_id = announce_id or self.__announce_id
-        return await super().delete(announce_id=announce_id)
+    async def delete(self) -> bool:
+        return await super().delete(announce_id=self.__announce_id)
 
     @override
     async def update(
@@ -148,11 +147,7 @@ class ClientAdminAnnouncementActions(SharedAdminAnnouncementActions):
         silence: bool = MISSING,
         need_confirmation_to_read: bool = MISSING,
         is_active: bool = MISSING,
-        *,
-        announce_id: str | None = None,
     ) -> bool:
-        announce_id = announce_id or self.__announce_id
-
         return await super().update(
             title=title,
             text=text,
@@ -163,7 +158,7 @@ class ClientAdminAnnouncementActions(SharedAdminAnnouncementActions):
             silence=silence,
             need_confirmation_to_read=need_confirmation_to_read,
             is_active=is_active,
-            announce_id=announce_id,
+            announce_id=self.__announce_id,
         )
 
 

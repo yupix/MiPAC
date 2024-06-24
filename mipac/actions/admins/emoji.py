@@ -118,16 +118,12 @@ class ClientAdminEmojiActions(SharedAdminEmojiActions):
         self.__emoji_id: str = emoji_id
 
     @override
-    async def copy(self, *, emoji_id: str | None = None) -> ID:
-        emoji_id = emoji_id or self.__emoji_id
-
-        return await super().copy(emoji_id=emoji_id)
+    async def copy(self) -> ID:
+        return await super().copy(emoji_id=self.__emoji_id)
 
     @override
-    async def delete(self, *, emoji_id: str | None = None) -> bool:
-        emoji_id = emoji_id or self.__emoji_id
-
-        return await super().delete(emoji_id=emoji_id)
+    async def delete(self) -> bool:
+        return await super().delete(emoji_id=self.__emoji_id)
 
     @override
     async def update(
@@ -139,11 +135,7 @@ class ClientAdminEmojiActions(SharedAdminEmojiActions):
         is_sensitive: bool = MISSING,
         local_only: bool = MISSING,
         role_ids_that_can_be_used_this_emoji_as_reaction: list[str] = MISSING,
-        *,
-        emoji_id: str | None = None,
     ) -> bool:
-        emoji_id = emoji_id or self.__emoji_id
-
         return await super().update(
             name=name,
             file_id=file_id,
@@ -152,7 +144,7 @@ class ClientAdminEmojiActions(SharedAdminEmojiActions):
             is_sensitive=is_sensitive,
             local_only=local_only,
             role_ids_that_can_be_used_this_emoji_as_reaction=role_ids_that_can_be_used_this_emoji_as_reaction,
-            emoji_id=emoji_id,
+            emoji_id=self.__emoji_id,
         )
 
 

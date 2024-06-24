@@ -64,13 +64,11 @@ class ClientMuteActions(SharedMuteActions):
         self.__user_id: str = user_id
 
     @override
-    async def create(self, expires_at: int | None = None, *, user_id: str | None = None) -> bool:
+    async def create(self, expires_at: int | None = None) -> bool:
         """指定したユーザーをミュートします
 
         Parameters
         ----------
-        user_id : str
-            対象のユーザーID
         expires_at : int | None
             ミュートする期間(秒)、無期限でミュートする場合はNoneを指定します
 
@@ -79,27 +77,18 @@ class ClientMuteActions(SharedMuteActions):
         bool
             ミュートに成功したかどうか
         """
-        user_id = user_id or self.__user_id
-
-        return await super().create(expires_at=expires_at, user_id=user_id or self.__user_id)
+        return await super().create(expires_at=expires_at, user_id=self.__user_id)
 
     @override
-    async def delete(self, *, user_id: str | None = None) -> bool:
+    async def delete(self) -> bool:
         """指定したユーザーのミュートを解除します
-
-        Parameters
-        ----------
-        user_id : str
-            対象のユーザーID
 
         Returns
         -------
         bool
             ミュート解除に成功したかどうか
         """
-        user_id = user_id or self.__user_id
-
-        return await super().delete(user_id=user_id or self.__user_id)
+        return await super().delete(user_id=self.__user_id)
 
 
 class MuteActions(SharedMuteActions):

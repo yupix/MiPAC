@@ -71,42 +71,30 @@ class ClientBlockingActions(SharedBlockingActions):
         self.__user_id: str = user_id
 
     @override
-    async def add(self, *, user_id: str | None = None) -> UserDetailedNotMe | MeDetailed:
+    async def add(self) -> UserDetailedNotMe | MeDetailed:
         """ユーザーをブロックします
 
         Endpoint: `/api/blocking/create`
-
-        Parameters
-        ----------
-        user_id : str | None, optional
-            対象のユーザー, default=None
 
         Returns
         -------
         UserDetailedNotMe | MeDetailed
             ブロック対象のユーザー情報
         """
-        user_id = user_id or self.__user_id
-        return await super().add(user_id=user_id)
+        return await super().add(user_id=self.__user_id)
 
     @override
-    async def remove(self, *, user_id: str | None = None) -> UserDetailedNotMe | MeDetailed:
+    async def remove(self) -> UserDetailedNotMe | MeDetailed:
         """ユーザーのブロックを解除します
 
         Endpoint: `/api/blocking/delete`
-
-        Parameters
-        ----------
-        user_id : str | None, optional
-            対象のユーザー, default=None
 
         Returns
         -------
         UserDetailedNotMe | MeDetailed
             ブロック解除対象のユーザー情報
         """
-        user_id = user_id or self.__user_id
-        return await super().remove(user_id=user_id)
+        return await super().remove(user_id=self.__user_id)
 
 
 class BlockingActions(SharedBlockingActions):

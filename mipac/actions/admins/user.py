@@ -107,59 +107,38 @@ class ClientAdminUserActions(SharedAdminUserActions):
         self.__user_id = user_id
 
     @override
-    async def delete_account(self, *, user_id: str | None = None) -> bool:
-        user_id = user_id or self.__user_id
-
-        return await super().delete_account(user_id=user_id)
+    async def delete_account(self) -> bool:
+        return await super().delete_account(user_id=self.__user_id)
 
     @override
-    async def show_user(self, *, user_id: str | None = None):
-        """ユーザーの情報を取得します
+    async def show_user(self):
+        """ユーザーの情報を取得します"""
 
-        Parameters
-        ----------
-        user_id : str
-            対象のユーザーID
-        """
-        user_id = user_id or self.__user_id
-
-        return await super().show_user(user_id=user_id)
+        return await super().show_user(user_id=self.__user_id)
 
     @override
-    async def suspend(self, *, user_id: str | None = None) -> bool:
+    async def suspend(self) -> bool:
         """対象のユーザーを凍結します
 
-        Parameters
-        ----------
-        user_id : str
-            対象のユーザーID
-
         Returns
         -------
         bool
             成功ならTrue
         """
-        user_id = user_id or self.__user_id
 
-        return await super().suspend(user_id=user_id)
+        return await super().suspend(user_id=self.__user_id)
 
     @override
-    async def unsuspend(self, *, user_id: str | None = None) -> bool:
+    async def unsuspend(self) -> bool:
         """ユーザーの凍結を解除します
-
-        Parameters
-        ----------
-        user_id : str
-            対象のユーザーID
 
         Returns
         -------
         bool
             成功ならTrue
         """
-        user_id = user_id or self.__user_id
 
-        return await super().unsuspend(user_id=user_id)
+        return await super().unsuspend(user_id=self.__user_id)
 
 
 class AdminUserActions(SharedAdminUserActions):

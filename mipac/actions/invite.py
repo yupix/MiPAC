@@ -43,22 +43,15 @@ class ClientInviteActions(SharedInviteActions):
         self._invite_id: str = invite_id
 
     @override
-    async def delete(self, *, invite_id: str | None = None) -> bool:
+    async def delete(self) -> bool:
         """Delete an invite code.
-
-        Parameters
-        ----------
-        invite_id : str | None, optional
-            The invite code to delete, by default None
 
         Returns
         -------
         bool
             Whether the invite code was deleted.
         """
-        invite_id = invite_id or self._invite_id
-
-        return await super().delete(invite_id=invite_id)
+        return await super().delete(invite_id=self._invite_id)
 
 
 class InviteActions(SharedInviteActions):

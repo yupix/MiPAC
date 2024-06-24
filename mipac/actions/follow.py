@@ -86,30 +86,24 @@ class ClientFollowActions(SharedFollowActions):
         self.__user_id: str = user_id
 
     @override
-    async def create(self, with_replies: bool = MISSING, *, user_id: str) -> PartialUser:
-        return await super().create(with_replies, user_id=user_id)
+    async def create(self, with_replies: bool = MISSING) -> PartialUser:
+        return await super().create(with_replies, user_id=self.__user_id)
 
     @override
-    async def add(self, *, user_id: str | None = None) -> PartialUser:
-        user_id = user_id or self.__user_id
-
-        return await super().add(user_id=user_id)
+    async def add(self) -> PartialUser:
+        return await super().add(user_id=self.__user_id)
 
     @override
-    async def delete(self, *, user_id: str) -> PartialUser:
-        return await super().delete(user_id=user_id)
+    async def delete(self) -> PartialUser:
+        return await super().delete(user_id=self.__user_id)
 
     @override
-    async def remove(self, *, user_id: str | None = None) -> PartialUser:
-        user_id = user_id or self.__user_id
-
-        return await super().remove(user_id=user_id)
+    async def remove(self) -> PartialUser:
+        return await super().remove(user_id=self.__user_id)
 
     @override
-    async def invalidate(self, *, user_id: str | None = None) -> PartialUser:
-        user_id = user_id or self.__user_id
-
-        return await super().invalidate(user_id=user_id)
+    async def invalidate(self) -> PartialUser:
+        return await super().invalidate(user_id=self.__user_id)
 
 
 class FollowActions(SharedFollowActions):

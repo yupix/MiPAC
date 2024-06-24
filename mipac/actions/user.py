@@ -515,11 +515,7 @@ class ClientUserActions(SharedUserActions):
         with_files: bool = False,
         file_type: list[str] | None = None,
         exclude_nsfw: bool = False,
-        *,
-        user_id: str | None = None,
     ) -> list[Note]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
-        user_id = user_id or self.__user.id
-
         return await super().get_notes(
             with_replies=with_replies,
             with_renotes=with_renotes,
@@ -532,7 +528,7 @@ class ClientUserActions(SharedUserActions):
             with_files=with_files,
             file_type=file_type,
             exclude_nsfw=exclude_nsfw,
-            user_id=user_id,
+            user_id=self.__user.id,
         )
 
     @override
@@ -549,11 +545,7 @@ class ClientUserActions(SharedUserActions):
         with_files: bool = False,
         file_type: list[str] | None = None,
         exclude_nsfw: bool = False,
-        *,
-        user_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
-        user_id = user_id or self.__user.id
-
         async for i in super().get_all_notes(
             with_replies=with_replies,
             with_renotes=with_renotes,
@@ -566,7 +558,7 @@ class ClientUserActions(SharedUserActions):
             with_files=with_files,
             file_type=file_type,
             exclude_nsfw=exclude_nsfw,
-            user_id=user_id,
+            user_id=self.__user.id,
         ):
             yield i
 
@@ -576,13 +568,9 @@ class ClientUserActions(SharedUserActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        *,
-        user_id: str | None = None,
     ) -> list[Clip]:
-        user_id = user_id or self.__user.id
-
         return await super().get_clips(
-            user_id=user_id, limit=limit, since_id=since_id, until_id=until_id
+            user_id=self.__user.id, limit=limit, since_id=since_id, until_id=until_id
         )
 
     @override
@@ -591,13 +579,9 @@ class ClientUserActions(SharedUserActions):
         since_id: str | None = None,
         until_id: str | None = None,
         limit: int = 10,
-        *,
-        user_id: str | None = None,
     ) -> AsyncGenerator[Clip, None]:
-        user_id = user_id or self.__user.id
-
         async for i in super().get_all_clips(
-            user_id=user_id, since_id=since_id, limit=limit, until_id=until_id
+            user_id=self.__user.id, since_id=since_id, limit=limit, until_id=until_id
         ):
             yield i
 
@@ -609,8 +593,6 @@ class ClientUserActions(SharedUserActions):
         limit: int = 10,
         username: str | None = None,
         host: str | None = None,
-        *,
-        user_id: str | None = None,
     ) -> list[Follower]:
         """
         Get followers of user.
@@ -629,15 +611,12 @@ class ClientUserActions(SharedUserActions):
             Get followers with this username.
         host : str, default=None
             Get followers with this host.
-        user_id : str, default=None
-            Get followers with this user id.
 
         Returns
         -------
         list[Follower]
             A list of followers.
         """
-        user_id = user_id or self.__user.id
 
         return await super().get_followers(
             since_id=since_id,
@@ -645,7 +624,7 @@ class ClientUserActions(SharedUserActions):
             limit=limit,
             username=username,
             host=host,
-            user_id=user_id,
+            user_id=self.__user.id,
         )
 
     @override
@@ -656,18 +635,14 @@ class ClientUserActions(SharedUserActions):
         limit: int = 10,
         username: str | None = None,
         host: str | None = None,
-        *,
-        user_id: str | None = None,
     ) -> AsyncGenerator[Follower, None]:
-        user_id = user_id or self.__user.id
-
         async for i in super().get_all_followers(
             since_id=since_id,
             until_id=until_id,
             limit=limit,
             username=username,
             host=host,
-            user_id=user_id,
+            user_id=self.__user.id,
         ):
             yield i
 
@@ -680,8 +655,6 @@ class ClientUserActions(SharedUserActions):
         username: str | None = None,
         host: str | None = None,
         birthday: str | None = None,
-        *,
-        user_id: str | None = None,
     ) -> list[Following]:
         """Get following of user.
 
@@ -699,15 +672,12 @@ class ClientUserActions(SharedUserActions):
             Get following with this username.
         host : str, default=None
             Get following with this host.
-        user_id : str, default=None
-            Get following with this user id.
 
         Returns
         -------
         list[Following]
             A list of following.
         """
-        user_id = user_id or self.__user.id
 
         return await super().get_following(
             since_id=since_id,
@@ -716,7 +686,7 @@ class ClientUserActions(SharedUserActions):
             username=username,
             host=host,
             birthday=birthday,
-            user_id=user_id,
+            user_id=self.__user.id,
         )
 
     @override
@@ -728,11 +698,7 @@ class ClientUserActions(SharedUserActions):
         username: str | None = None,
         host: str | None = None,
         birthday: str | None = None,
-        *,
-        user_id: str | None = None,
     ) -> AsyncGenerator[Following, None]:
-        user_id = user_id or self.__user.id
-
         async for i in super().get_all_following(
             since_id=since_id,
             until_id=until_id,
@@ -740,7 +706,7 @@ class ClientUserActions(SharedUserActions):
             username=username,
             host=host,
             birthday=birthday,
-            user_id=user_id,
+            user_id=self.__user.id,
         ):
             yield i
 
@@ -750,8 +716,6 @@ class ClientUserActions(SharedUserActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        *,
-        user_id: str | None = None,
     ) -> list[GalleryPost]:
         """Get gallery posts of user.
 
@@ -765,18 +729,15 @@ class ClientUserActions(SharedUserActions):
             Get gallery posts after this id.
         until_id : str, default=None
             Get gallery posts before this id.
-        user_id : str, default=None
-            Get gallery posts with this user id.
 
         Returns
         -------
         list[GalleryPost]
             A list of gallery posts.
         """
-        user_id = user_id or self.__user.id
 
         return await super().get_gallery_posts(
-            user_id=user_id, limit=limit, since_id=since_id, until_id=until_id
+            user_id=self.__user.id, limit=limit, since_id=since_id, until_id=until_id
         )
 
     @override
@@ -785,20 +746,16 @@ class ClientUserActions(SharedUserActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
-        *,
-        user_id: str | None = None,
     ) -> AsyncGenerator[GalleryPost, None]:
-        user_id = user_id or self.__user.id
-
         async for i in super().get_all_gallery_posts(
-            user_id=user_id, limit=limit, since_id=since_id, until_id=until_id
+            user_id=self.__user.id, limit=limit, since_id=since_id, until_id=until_id
         ):
             yield i
 
     @override
     async def get_frequently_replied_users(
-        self, limit: int = 10, *, user_id: str | None = None
-    ) -> list[FrequentlyRepliedUser]:
+        self, limit: int = 10
+    ) -> list[FrequentlyRepliedUser]:  # TODO: limitを使うように
         """Get frequently replied users of user.
 
         Endpoint: `/api/users/get-frequently-replied-users`
@@ -815,13 +772,10 @@ class ClientUserActions(SharedUserActions):
         list[FrequentlyRepliedUser]
             A list of frequently replied users.
         """
-        user_id = user_id or self.__user.id
 
-        return await super().get_frequently_replied_users(user_id=user_id)
+        return await super().get_frequently_replied_users(user_id=self.__user.id)
 
-    async def get_featured_notes(
-        self, limit: int = 10, until_id: str | None = None, *, user_id: str | None = None
-    ) -> list[Note]:
+    async def get_featured_notes(self, limit: int = 10, until_id: str | None = None) -> list[Note]:
         """Get featured notes of user.
 
         Endpoint: `/api/users/featured-notes`
@@ -832,20 +786,19 @@ class ClientUserActions(SharedUserActions):
             The maximum number of featured notes to return.
         until_id : str, default=None
             Get featured notes before this id.
-        user_id : str, default=None
-            Get featured notes with this user id.
 
         Returns
         -------
         list[Note]
             A list of featured notes.
         """
-        user_id = user_id or self.__user.id
 
-        return await super().get_featured_notes(user_id=user_id, limit=limit, until_id=until_id)
+        return await super().get_featured_notes(
+            user_id=self.__user.id, limit=limit, until_id=until_id
+        )
 
     async def get_all_featured_notes(
-        self, limit: int = 10, until_id: str | None = None, *, user_id: str | None = None
+        self, limit: int = 10, until_id: str | None = None
     ) -> AsyncGenerator[Note, None]:
         """Get all featured notes of user.
 
@@ -857,26 +810,21 @@ class ClientUserActions(SharedUserActions):
             The maximum number of featured notes to return.
         until_id : str, default=None
             Get featured notes before this id.
-        user_id : str, default=None
-            Get featured notes with this user id.
 
         Returns
         -------
         list[Note]
             A list of featured notes.
         """
-        user_id = user_id or self.__user.id
 
         async for i in super().get_all_featured_notes(
-            user_id=user_id, limit=limit, until_id=until_id
+            user_id=self.__user.id, limit=limit, until_id=until_id
         ):
             yield i
 
-    async def get_achievements(self, *, user_id: str | None = None) -> list[Achievement]:
+    async def get_achievements(self) -> list[Achievement]:
         """Get achievements of user."""
-        user_id = user_id or self.__user.id
-
-        return await super().get_achievements(user_id=user_id)
+        return await super().get_achievements(user_id=self.__user.id)
 
 
 class UserActions(SharedUserActions):

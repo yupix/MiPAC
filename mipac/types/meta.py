@@ -80,17 +80,22 @@ class IPartialMeta(TypedDict):
     enable_email: bool
     enable_service_worker: bool
     translator_available: bool
+    inquiry_url: str | None
     server_rules: list[str]
     policies: IPolicies
     media_proxy: str
 
 
-class IMeta(IPartialMeta):
+class IMetaDetailedOnly(TypedDict):
     features: IFeatures
+    proxy_account_name: str
+    require_setup: bool
     cache_remote_files: bool
     cache_remote_sensitive_files: bool
-    require_setup: bool
-    proxy_account_name: str
+
+
+class IMeta(IPartialMeta, TypedDict):
+    ...
 
 
 class IAdminMeta(TypedDict):  # IMetaに含まれる物が多くあるけど、ない場合もあるので別にする
