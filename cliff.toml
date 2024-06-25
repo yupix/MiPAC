@@ -87,3 +87,6 @@ ignore_tags = ""
 topo_order = false
 # sort the commits inside sections by oldest/newest order
 sort_commits = "oldest"
+
+[bump]
+breaking_always_bump_major = false

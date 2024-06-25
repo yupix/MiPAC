@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.6.4] - 2024-03-07
+## [0.7.0] - 2024-06-25
 
 ### <!-- 0 -->🚀 Features
 
@@ -14,11 +14,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AdminAccountActions.create メソッドの戻り値に `CreatedUser` を使うように ([4cdc1d8](https://github.com/yupix/MiPAC/commit/4cdc1d8820b792edbaa0ed5ae03c1febb42c1338))
 - /hashtags/* をサポート ([a8f61b4](https://github.com/yupix/MiPAC/commit/a8f61b48a5c7f8a63327b802d867ccbb345b48e4))
 - Errors compiler ([ebb6bb5](https://github.com/yupix/MiPAC/commit/ebb6bb503e7dff39afe50e1899d136e13c943667))
+- IAntennaReceiveSource に users_blacklistを追記 ([0fce39c](https://github.com/yupix/MiPAC/commit/0fce39c43aa1b82df09c5b2b9bc4fe4513039ee3))
+- Docstringを追加 ([2b032ac](https://github.com/yupix/MiPAC/commit/2b032ac168b607620fb1986f1309208a48de5456))
+- 文字列の長さを確認するための関数を追加 ([bf0b3d9](https://github.com/yupix/MiPAC/commit/bf0b3d95f5602c3405f023e63fc9621f73f2f2ce))
+- サポート状況を更新 ([3d5b3d9](https://github.com/yupix/MiPAC/commit/3d5b3d9dfc3f1c96b2e494aa710e054748d52a89))
+- Announcement周りを最新の環境に追従 ([a9a3b12](https://github.com/yupix/MiPAC/commit/a9a3b12bda948b7176b661806d331a8c4d5b9a3c))
+- サポート状況を更新 ([08522a3](https://github.com/yupix/MiPAC/commit/08522a306f862a60132f8e9ac2f5baa63ee12626))
+- Urlのパスを使用しないように close #138 ([051a1f5](https://github.com/yupix/MiPAC/commit/051a1f574faf81ba34d13818ddb69ebd65c6b43a))
+- ロールを最新に追従 ([0a42264](https://github.com/yupix/MiPAC/commit/0a42264958f36d14ee1f080edd8774fb44fa5d48))
+- アプリに関する型とモデルを追加 ([3f8b330](https://github.com/yupix/MiPAC/commit/3f8b3303dce1ef2cd0f5ce901f6a0c8dd1cf1f30))
+- アプリに関するmanagerとactionを作成 ([d18a9a2](https://github.com/yupix/MiPAC/commit/d18a9a2c022ec310d76899f931516935cdc724c1))
+- ID用の型とモデルを追加 ([e3fdbcf](https://github.com/yupix/MiPAC/commit/e3fdbcf4687b6404199c324c0342ef292a32915c))
+- Admin/emojiを最新のものに追従 ([5f1d290](https://github.com/yupix/MiPAC/commit/5f1d290dbf441084c4a05d4d8c23aa91cb898434))
+- EmojiDetailedモデルにapiプロパティを追加 ([502cd29](https://github.com/yupix/MiPAC/commit/502cd299dab29ecb2160ea248ad0dd88e5b13ab7))
+- サポート状況を更新 ([f5b527e](https://github.com/yupix/MiPAC/commit/f5b527e09483637aa377c97fa9a07268b07ecd66))
+- 翻訳ファイルの更新 ([fb8a617](https://github.com/yupix/MiPAC/commit/fb8a6175b389b06cdf5376eac659372bb915c2d3))
+- [**breaking**] ClientNoteActionsの対象のIDを指定する引数を削除 #140 ([6d114a3](https://github.com/yupix/MiPAC/commit/6d114a35b65a7a31e55107c7e0771b4023e81f15))
+- [**breaking**] ClientUserActionsの対象のIDを指定する引数を削除 #140 ([f6c7153](https://github.com/yupix/MiPAC/commit/f6c715343b3d8af20e7ac49670373dfaa2bccb59))
+- [**breaking**] ClientAntennaActionsの対象のIDを指定する引数を削除 #140 ([c9e52cc](https://github.com/yupix/MiPAC/commit/c9e52cc506f3a9d2afca82ca5a839200f9efbf04))
+- [**breaking**] ClientBlockingActionsの対象のIDを指定する引数を削除 #140 ([75f96de](https://github.com/yupix/MiPAC/commit/75f96de6ad9c09085bcb2b71100d1faf7b1e1621))
+- [**breaking**] ClientChannelActionsの対象のIDを指定する引数を削除 #140 ([a11c9ea](https://github.com/yupix/MiPAC/commit/a11c9ea5d20e7ec2efac7de928bd254898938dd9))
+- [**breaking**] ClientClipActionsの対象のIDを指定する引数を削除 #140 ([a217f3d](https://github.com/yupix/MiPAC/commit/a217f3d9769d9cdb441e877b08d8db67db3a7a36))
+- [**breaking**] ClientFavoriteActionsの対象のIDを指定する引数を削除 #140 ([8077e2a](https://github.com/yupix/MiPAC/commit/8077e2adf5907bc6d7537d324ee2485d0a6b69a3))
+- [**breaking**] ClientFollowActionsの対象のIDを指定する引数を削除 #140 ([da6a14d](https://github.com/yupix/MiPAC/commit/da6a14df3fbfc81691b40f7d0b7b16b5cf3bb159))
+- [**breaking**] ClientInviteActionsの対象のIDを指定する引数を削除 #140 ([1992fb3](https://github.com/yupix/MiPAC/commit/1992fb399ee6618e94505af223219ff39dd4bc1f))
+- [**breaking**] ClientPollActionsの対象のIDを指定する引数を削除 #140 ([54a0ac6](https://github.com/yupix/MiPAC/commit/54a0ac660e177dbd92f44101185a2c429ada1758))
+- [**breaking**] ClientReactionActionsの対象のIDを指定する引数を削除 #140 ([4f965fe](https://github.com/yupix/MiPAC/commit/4f965fe1e62f3142acde30e662446c0d685eaf31))
+- [**breaking**] Client*UserListActionsの対象のIDを指定する引数を削除 #140 ([7e40adb](https://github.com/yupix/MiPAC/commit/7e40adbb26be43823f36aef52865fd7091b11911))
+- [**breaking**] ClientMuteActionsの対象のIDを指定する引数を削除 #140 ([61257ad](https://github.com/yupix/MiPAC/commit/61257ad655d63b97baa4dcdf149f2bec08f24643))
+- [**breaking**] ClientFileActionsの対象のIDを指定する引数を削除 #140 ([9d9b509](https://github.com/yupix/MiPAC/commit/9d9b50916d59e2cd2723fc907d14f093dcfad7fc))
+- [**breaking**] ClientFolderActions の対象のIDを指定する引数を削除 #140 ([62d21e5](https://github.com/yupix/MiPAC/commit/62d21e5861ee7a3368a3b91dbc5f93ed5a8a2974))
+- [**breaking**] ClientAdminAdActions の対象のIDを指定する引数を削除 #140 ([520da59](https://github.com/yupix/MiPAC/commit/520da59a4718433a68761da1aa87cfe9e2cec034))
+- [**breaking**] ClientAdminAnnouncementActions の対象のIDを指定する引数を削除 #140 ([a6c8fd9](https://github.com/yupix/MiPAC/commit/a6c8fd92bda836cc94be5b5fd3a78c4ccd699763))
+- [**breaking**] ClientAdminEmojiActions の対象のIDを指定する引数を削除 #140 ([37aa930](https://github.com/yupix/MiPAC/commit/37aa9300586505d816f21ec4aa9312c15d5be1f5))
+- [**breaking**] ClientAdminRoleActions の対象のIDを指定する引数を削除 #140 ([db28252](https://github.com/yupix/MiPAC/commit/db282522922e31d809467e6824790532590a4eac))
+- [**breaking**] ClientAdminUserActions の対象のIDを指定する引数を削除 #140 ([69103b0](https://github.com/yupix/MiPAC/commit/69103b09db266601d36f1cce7c04f611fdba3d43))
+- [**breaking**] Client*Actionsで 対象のIDを指定する引数を削除 #140 ([08744e6](https://github.com/yupix/MiPAC/commit/08744e68ac7415a34c98b69930363ffca5c8480d))
+- サポートしてる範囲でモデルを最新に追従 ([77b665b](https://github.com/yupix/MiPAC/commit/77b665b56c4147eb3abdde3615779ea06cf1f0ce))
+
+### <!-- 1 -->🐛 Bug Fixes
+
+- Typo ([663912a](https://github.com/yupix/MiPAC/commit/663912a73a53c2026d9924b1e6e9ce50aa33623b))
+- Mipactlのmanagerでactionを毎度作成しないように ([0ad9c7e](https://github.com/yupix/MiPAC/commit/0ad9c7e1eb19e421bcb6f3dc7078bd48b0651434))
+- EmojiDetailedからlicenseが欠落している ([f85be9b](https://github.com/yupix/MiPAC/commit/f85be9ba94ad4d11f89b9504ae9fec4985d2f536))
+- 循環参照を修正 ([651243b](https://github.com/yupix/MiPAC/commit/651243bf96c72989f3c227b871e161852618ca8c))
+- AdminEmojiActionを複数形に ([4ebe597](https://github.com/yupix/MiPAC/commit/4ebe597e427bb82b2245eb7b5f6f6f1d8463d780))
 
 ### <!-- 3 -->📚 Documentation
 
 - サポート状況についてREADMEで触れるように ([66dc7df](https://github.com/yupix/MiPAC/commit/66dc7df1bffdbeb214574e43e02ac7ff882c5655))
 - Update documentation ([06ba45e](https://github.com/yupix/MiPAC/commit/06ba45e975ed5c162fc636206970b9ffcc299c8a))
+- CHANGELOG.mdの生成にgit-cliffを使うように ([cb25c92](https://github.com/yupix/MiPAC/commit/cb25c92e5304cccc86d446358b2ad485357a1c01))
 
 ### <!-- 7 -->⚙️ Miscellaneous Tasks
 
@@ -39,6 +85,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - サポート状況を更新 ([a76f91c](https://github.com/yupix/MiPAC/commit/a76f91cbd28ad51678d6cf722001259fc652eaac))
 - Errors.csvはバージョン管理する必要無いので削除 ([b7f56d6](https://github.com/yupix/MiPAC/commit/b7f56d671960cfea52d8ea94ce1057e46935ecbd))
 - Update errors ([24ba7f7](https://github.com/yupix/MiPAC/commit/24ba7f777f957d30c5cfa8a6c922d19e3891a428))
+- DocStringを更新 ([631fd2b](https://github.com/yupix/MiPAC/commit/631fd2b186c3e4926527140be955396bb37fa540))
+- Format ([e09736b](https://github.com/yupix/MiPAC/commit/e09736b4a65d5385d959aad0738ef1bb9a7e4b00))
+- Format ([98d59f9](https://github.com/yupix/MiPAC/commit/98d59f962f30a570dc097b81754428cc181f11fe))
 
 ## [0.6.3] - 2024-02-24
 
@@ -1056,7 +1105,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 型の修正 ([0693078](https://github.com/yupix/MiPAC/commit/069307811c79c43de7fe3d689b8d3e44495e8608))
 - リリース時にpypiにアップロードするように ([f711d7e](https://github.com/yupix/MiPAC/commit/f711d7e75a57daf29c88aa72b0d75ea4b7c2ab23))
 
-[0.6.4]: https://github.com/yupix/MiPAC/compare/0.6.3..0.6.4
+[0.7.0]: https://github.com/yupix/MiPAC/compare/0.6.3..0.7.0
 [0.6.3]: https://github.com/yupix/MiPAC/compare/0.6.2..0.6.3
 [0.6.2]: https://github.com/yupix/MiPAC/compare/0.6.1..0.6.2
 [0.6.1]: https://github.com/yupix/MiPAC/compare/0.6.0..0.6.1
