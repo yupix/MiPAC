@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] - 2024-08-18
+
+### <!-- 0 -->🚀 Features
+
+- キャッシュシステムをFIFOからLRUに変更 close #145 ([d8b1c8d](https://github.com/yupix/MiPAC/commit/d8b1c8d9ef3802c5b72297bf7b627faded9372b6))
+
 ## [0.7.0] - 2024-06-25
 
 ### <!-- 0 -->🚀 Features
@@ -51,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [**breaking**] ClientAdminUserActions の対象のIDを指定する引数を削除 #140 ([69103b0](https://github.com/yupix/MiPAC/commit/69103b09db266601d36f1cce7c04f611fdba3d43))
 - [**breaking**] Client*Actionsで 対象のIDを指定する引数を削除 #140 ([08744e6](https://github.com/yupix/MiPAC/commit/08744e68ac7415a34c98b69930363ffca5c8480d))
 - サポートしてる範囲でモデルを最新に追従 ([77b665b](https://github.com/yupix/MiPAC/commit/77b665b56c4147eb3abdde3615779ea06cf1f0ce))
+- Release v0.7.0 ([b6bd49e](https://github.com/yupix/MiPAC/commit/b6bd49e727e811fc1738adf1a15c26e6f0e707bd))
 
 ### <!-- 1 -->🐛 Bug Fixes
 
@@ -1105,6 +1112,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 型の修正 ([0693078](https://github.com/yupix/MiPAC/commit/069307811c79c43de7fe3d689b8d3e44495e8608))
 - リリース時にpypiにアップロードするように ([f711d7e](https://github.com/yupix/MiPAC/commit/f711d7e75a57daf29c88aa72b0d75ea4b7c2ab23))
 
+[0.7.1]: https://github.com/yupix/MiPAC/compare/0.7.0..0.7.1
 [0.7.0]: https://github.com/yupix/MiPAC/compare/0.6.3..0.7.0
 [0.6.3]: https://github.com/yupix/MiPAC/compare/0.6.2..0.6.3
 [0.6.2]: https://github.com/yupix/MiPAC/compare/0.6.1..0.6.2
