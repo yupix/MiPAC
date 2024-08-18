@@ -46,20 +46,6 @@ class IBadgeRole(TypedDict):
     display_order: int
 
 
-class IUserRole(IBadgeRole):
-    """
-    Deprecated
-
-    Will be removed in v0.7.0
-    """
-
-    id: str
-    color: str | None
-    description: str
-    is_moderator: bool
-    is_administrator: bool
-
-
 class IUserRequired(TypedDict):
     id: str
     username: str

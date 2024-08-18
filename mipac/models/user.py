@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any
 
 from mipac.models.announcement import Announcement
 from mipac.models.lite.role import PartialRole
-from mipac.models.lite.user import BadgeRole, PartialUser
+from mipac.models.lite.user import PartialUser
 from mipac.models.note import Note
 from mipac.types.follow import IFederationFollowCommon, IFederationFollower, IFederationFollowing
 from mipac.types.meta import IPolicies
@@ -26,14 +26,12 @@ from mipac.types.user import (
     IUserList,
     IUserListMembership,
     IUserNotify,
-    IUserRole,
     IUserSecurityKey,
     NotificationRecieveConfig,
     is_me_detailed,
     is_user_detailed_not_me,
 )
 from mipac.utils.format import str_to_datetime
-from mipac.utils.util import DeprecatedClass
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -135,32 +133,6 @@ class UserField:
 
     def _get(self, key: str) -> Any | None:
         return self._raw_user_field.get(key)
-
-
-@DeprecatedClass(remove_in_version="0.7.0")
-class UserRole(BadgeRole[IUserRole]):
-    def __init__(self, data: IUserRole, *, client: ClientManager) -> None:
-        super().__init__(data, client=client)
-
-    @property
-    def id(self) -> str:
-        return self._data["id"]
-
-    @property
-    def color(self) -> str | None:
-        return self._data["color"]
-
-    @property
-    def description(self) -> str:
-        return self._data["description"]
-
-    @property
-    def is_moderator(self) -> bool:
-        return self._data["is_moderator"]
-
-    @property
-    def is_administrator(self) -> bool:
-        return self._data["is_administrator"]
 
 
 class UserDetailedNotMeOnly:
