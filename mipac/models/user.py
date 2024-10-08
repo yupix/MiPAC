@@ -44,7 +44,6 @@ __all__ = (
     "Following",
     "Achievement",
     "UserField",
-    "UserRole",
     "UserDetailedNotMeOnly",
     "MeDetailedOnly",
     "UserDetailedNotMe",
