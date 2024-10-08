@@ -75,7 +75,7 @@ class LRUCache:
 
     def put(self, key: str, value: Any):
         if key in self.items:  # 既に同一のキーが存在する場合は再登録するために一度消す
-            del self.items[key]
+            self._remove_node(self.items[key])
 
         node = Node(key, value)
         self._add(node)
