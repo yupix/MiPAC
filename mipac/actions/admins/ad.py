@@ -6,7 +6,9 @@ from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
 from mipac.models.ad import Ad
 from mipac.types.ads import IAd
+from mipac.utils.format import remove_dict_missing
 from mipac.utils.pagination import Pagination
+from mipac.utils.util import MISSING
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
@@ -25,30 +27,32 @@ class SharedAdminAdActions(AbstractAction):
 
     async def update(
         self,
-        memo: str,
-        url: str,
-        image_url: str,
-        place: Literal["square", "horizontal", "horizontal-big"],
-        priority: Literal["high", "middle", "low"],
-        ratio: int,
-        expires_at: int,
-        starts_at: int,
-        day_of_week: int,
+        memo: str = MISSING,
+        url: str = MISSING,
+        image_url: str = MISSING,
+        place: Literal["square", "horizontal", "horizontal-big"] = MISSING,
+        priority: Literal["high", "middle", "low"] = MISSING,
+        ratio: int = MISSING,
+        expires_at: int = MISSING,
+        starts_at: int = MISSING,
+        day_of_week: int = MISSING,
         *,
         ad_id: str,
     ) -> bool:
-        data = {
-            "id": ad_id,
-            "memo": memo or "",
-            "url": url,
-            "imageUrl": image_url,
-            "place": place,
-            "priority": priority,
-            "ratio": ratio,
-            "expiresAt": expires_at,
-            "startsAt": starts_at,
-            "dayOfWeek": day_of_week,
-        }
+        data = remove_dict_missing(
+            {
+                "id": ad_id,
+                "memo": memo,
+                "url": url,
+                "imageUrl": image_url,
+                "place": place,
+                "priority": priority,
+                "ratio": ratio,
+                "expiresAt": expires_at,
+                "startsAt": starts_at,
+                "dayOfWeek": day_of_week,
+            }
+        )
         res: bool = await self._session.request(
             Route("POST", "/api/admin/ad/update"), json=data, auth=True, lower=True
         )
