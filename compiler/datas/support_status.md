@@ -2,16 +2,14 @@
 
 ## Supported Misskey Version
 
-`2024.5.0-wasabi-1`
+`2024.10.0-beta.6`
 
-## Supported endpoints (173/379)
+## Supported endpoints (173/383)
 
-- [x] /admin/accounts/create
 - [x] /admin/accounts/delete
 - [x] /admin/ad/create
 - [x] /admin/ad/delete
 - [x] /admin/ad/list
-- [x] /admin/ad/update
 - [x] /admin/announcements/create
 - [x] /admin/announcements/delete
 - [x] /admin/announcements/update
@@ -43,7 +41,6 @@
 - [x] /admin/roles/delete
 - [x] /admin/roles/list
 - [x] /admin/roles/show
-- [x] /admin/roles/update
 - [x] /admin/roles/assign
 - [x] /admin/roles/unassign
 - [x] /admin/roles/update-default-policies
@@ -96,7 +93,6 @@
 - [x] /notes/favorites/create
 - [x] /notes/favorites/delete
 - [x] /notes/polls/vote
-- [x] /notes/reactions/create
 - [x] /notes/reactions/delete
 - [x] /notes/search-by-tag
 - [x] /notes/search
@@ -319,14 +315,21 @@
 - [ ] /admin/system-webhook/show
 - [ ] /admin/system-webhook/update
 - [ ] /announcements/show
+- [ ] /admin/forward-abuse-user-report
+- [ ] /admin/update-abuse-user-report
+- [ ] /admin/system-webhook/test
+- [ ] /i/webhooks/test
 
 ## Changed request body or responses
 
+- [ ] /admin/accounts/create (Need to work)
+- [ ] /admin/ad/update (Need to work)
 - [ ] /admin/drive/show-file (Need to work)
 - [ ] /admin/get-index-stats (Need to work)
 - [ ] /admin/get-table-stats (Need to work)
 - [ ] /admin/resolve-abuse-user-report (Need to work)
 - [ ] /admin/update-meta (Need to work)
+- [ ] /admin/roles/update (Need to work)
 - [ ] /drive (Need to work)
 - [ ] /drive/stream (Need to work)
 - [ ] /endpoint (Need to work)
@@ -355,6 +358,7 @@
 - [ ] /notes/mentions (Need to work)
 - [ ] /notes/polls/recommendation (Need to work)
 - [ ] /notes/reactions (Need to work)
+- [ ] /notes/reactions/create (Need to work)
 - [ ] /notes/renotes (Need to work)
 - [ ] /notes/replies (Need to work)
 - [ ] /notes/show (Need to work)
@@ -401,36 +405,36 @@
 ## Supported schemas
 
 - [ ] Error
-- [x] UserLite
-- [x] UserDetailedNotMeOnly
-- [x] MeDetailedOnly
+- [ ] UserLite (Need to work)
+- [ ] UserDetailedNotMeOnly (Need to work)
+- [ ] MeDetailedOnly (Need to work)
 - [x] UserDetailedNotMe
 - [x] MeDetailed
 - [x] UserDetailed
 - [x] User
-- [x] UserList
-- [x] Announcement
-- [x] App
-- [x] Note
+- [ ] UserList (Need to work)
+- [ ] Announcement (Need to work)
+- [ ] App (Need to work)
+- [ ] Note (Need to work)
 - [x] NoteReaction
 - [ ] NoteFavorite
 - [ ] Notification
-- [x] DriveFile
-- [x] DriveFolder
-- [x] Following
+- [ ] DriveFile (Need to work)
+- [ ] DriveFolder (Need to work)
+- [ ] Following (Need to work)
 - [ ] Muting
 - [ ] RenoteMuting
 - [ ] Blocking
 - [x] Hashtag
 - [x] InviteCode
 - [ ] Page
-- [x] Channel
+- [ ] Channel (Need to work)
 - [ ] QueueCount
 - [ ] Antenna
 - [ ] Clip
 - [ ] FederationInstance
-- [x] GalleryPost
-- [x] EmojiSimple
+- [ ] GalleryPost (Need to work)
+- [ ] EmojiSimple (Need to work)
 - [x] EmojiDetailed
 - [ ] Flash
 - [ ] Ad
@@ -448,8 +452,8 @@
 - [ ] RoleCondFormulaFollowersOrFollowingOrNotes
 - [ ] RoleCondFormulaValue
 - [ ] RolePolicies
-- [x] MetaLite
-- [x] MetaDetailedOnly
+- [ ] MetaLite (Need to work)
+- [ ] MetaDetailedOnly (Need to work)
 - [x] MetaDetailed
 - [ ] RoleCondFormulaValueUserSettingBooleanSchema
 - [ ] SystemWebhook

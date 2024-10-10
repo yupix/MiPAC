@@ -1,10 +1,6 @@
 {
   "openapi": "3.1.0",
-  "info": {
-    "version": "2024.5.0-wasabi-1",
-    "title": "Misskey API",
-    "x-logo": { "url": "/static-assets/api-doc.png" }
-  },
+  "info": { "version": "2024.10.0-beta.6", "title": "Misskey API" },
   "externalDocs": {
     "description": "Repository",
     "url": "https://github.com/misskey-dev/misskey"
@@ -58,6 +54,10 @@
                     "enableServiceWorker": { "type": "boolean" },
                     "translatorAvailable": { "type": "boolean" },
                     "silencedHosts": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "mediaSilencedHosts": {
                       "type": "array",
                       "items": { "type": "string" }
                     },
@@ -141,6 +141,7 @@
                     "perRemoteUserUserTimelineCacheMax": { "type": "number" },
                     "perUserHomeTimelineCacheMax": { "type": "number" },
                     "perUserListTimelineCacheMax": { "type": "number" },
+                    "enableReactionsBuffering": { "type": "boolean" },
                     "notesPerOneAd": { "type": "number" },
                     "trustedLinkUrlPatterns": {
                       "type": "array",
@@ -176,7 +177,12 @@
                     "urlPreviewMaximumContentLength": { "type": "number" },
                     "urlPreviewRequireContentLength": { "type": "boolean" },
                     "urlPreviewUserAgent": { "type": ["string", "null"] },
-                    "urlPreviewSummaryProxyUrl": { "type": ["string", "null"] }
+                    "urlPreviewSummaryProxyUrl": { "type": ["string", "null"] },
+                    "federation": { "type": "string" },
+                    "federationHosts": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
                   },
                   "required": [
                     "cacheRemoteFiles",
@@ -203,6 +209,7 @@
                     "enableEmail",
                     "enableServiceWorker",
                     "translatorAvailable",
+                    "mediaSilencedHosts",
                     "pinnedUsers",
                     "hiddenTags",
                     "blockedHosts",
@@ -256,6 +263,7 @@
                     "perRemoteUserUserTimelineCacheMax",
                     "perUserHomeTimelineCacheMax",
                     "perUserListTimelineCacheMax",
+                    "enableReactionsBuffering",
                     "notesPerOneAd",
                     "trustedLinkUrlPatterns",
                     "backgroundImageUrl",
@@ -284,7 +292,9 @@
                     "urlPreviewMaximumContentLength",
                     "urlPreviewRequireContentLength",
                     "urlPreviewUserAgent",
-                    "urlPreviewSummaryProxyUrl"
+                    "urlPreviewSummaryProxyUrl",
+                    "federation",
+                    "federationHosts"
                   ]
                 }
               }
@@ -424,8 +434,7 @@
                     "type": "string",
                     "enum": ["combined", "local", "remote"],
                     "default": "combined"
-                  },
-                  "forwarded": { "type": "boolean", "default": false }
+                  }
                 }
               }
             }
@@ -468,7 +477,13 @@
                         "allOf": [
                           { "$ref": "#/components/schemas/UserDetailedNotMe" }
                         ]
-                      }
+                      },
+                      "forwarded": { "type": "boolean" },
+                      "resolvedAs": {
+                        "type": ["string", "null"],
+                        "enum": ["accept", "reject", null]
+                      },
+                      "moderationNote": { "type": "string" }
                     },
                     "required": [
                       "id",
@@ -479,7 +494,11 @@
                       "targetUserId",
                       "assigneeId",
                       "reporter",
-                      "targetUser"
+                      "targetUser",
+                      "assignee",
+                      "forwarded",
+                      "resolvedAs",
+                      "moderationNote"
                     ]
                   }
                 }
@@ -1366,7 +1385,8 @@
                 "type": "object",
                 "properties": {
                   "username": { "type": "string", "pattern": "^\\w{1,20}$" },
-                  "password": { "type": "string", "minLength": 1 }
+                  "password": { "type": "string", "minLength": 1 },
+                  "setupPassword": { "type": ["string", "null"] }
                 },
                 "required": ["username", "password"]
               }
@@ -1393,6 +1413,24 @@
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/Error" },
                 "examples": {
+                  "ACCESS_DENIED": {
+                    "value": {
+                      "error": {
+                        "message": "Access denied.",
+                        "code": "ACCESS_DENIED",
+                        "id": "1fb7cb09-d46a-4fff-b8df-057708cce513"
+                      }
+                    }
+                  },
+                  "INCORRECT_INITIAL_PASSWORD": {
+                    "value": {
+                      "error": {
+                        "message": "Initial password is incorrect.",
+                        "code": "INCORRECT_INITIAL_PASSWORD",
+                        "id": "97147c55-1ae1-4f6f-91d6-e1c3e0e76d62"
+                      }
+                    }
+                  },
                   "INVALID_PARAM": {
                     "value": {
                       "error": {
@@ -2213,18 +2251,7 @@
                   "startsAt": { "type": "integer" },
                   "dayOfWeek": { "type": "integer" }
                 },
-                "required": [
-                  "id",
-                  "memo",
-                  "url",
-                  "imageUrl",
-                  "place",
-                  "priority",
-                  "ratio",
-                  "expiresAt",
-                  "startsAt",
-                  "dayOfWeek"
-                ]
+                "required": ["id"]
               }
             }
           }
@@ -2681,6 +2708,11 @@
                   "userId": {
                     "type": ["string", "null"],
                     "format": "misskey:id"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["all", "active", "archived"],
+                    "default": "active"
                   }
                 }
               }
@@ -4349,7 +4381,7 @@
                       "format": "md5",
                       "example": "15eca7fba0480996e2245f5185bf39f2"
                     },
-                    "name": { "type": "string", "example": "lenna.jpg" },
+                    "name": { "type": "string", "example": "192.jpg" },
                     "type": { "type": "string", "example": "image/jpeg" },
                     "size": { "type": "number", "example": 51469 },
                     "comment": { "type": ["string", "null"] },
@@ -7859,9 +7891,8 @@
                   "type": "array",
                   "items": {
                     "type": "array",
-                    "items": {
-                      "anyOf": [{ "type": "string" }, { "type": "number" }]
-                    }
+                    "prefixItems": [{ "type": "string" }, { "type": "number" }],
+                    "unevaluatedItems": false
                   },
                   "example": [["example.com", 12]]
                 }
@@ -7986,9 +8017,8 @@
                   "type": "array",
                   "items": {
                     "type": "array",
-                    "items": {
-                      "anyOf": [{ "type": "string" }, { "type": "number" }]
-                    }
+                    "prefixItems": [{ "type": "string" }, { "type": "number" }],
+                    "unevaluatedItems": false
                   },
                   "example": [["example.com", 12]]
                 }
@@ -8915,7 +8945,10 @@
                 "type": "object",
                 "properties": {
                   "reportId": { "type": "string", "format": "misskey:id" },
-                  "forward": { "type": "boolean", "default": false }
+                  "resolvedAs": {
+                    "type": ["string", "null"],
+                    "enum": ["accept", "reject", null]
+                  }
                 },
                 "required": ["reportId"]
               }
@@ -8936,6 +8969,279 @@
                         "message": "No such abuse report.",
                         "code": "NO_SUCH_ABUSE_REPORT",
                         "id": "ac3794dd-2ce4-d878-e546-73c60c06b398",
+                        "kind": "server",
+                        "httpStatusCode": 404
+                      }
+                    }
+                  },
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/forward-abuse-user-report": {
+      "post": {
+        "operationId": "admin___forward-abuse-user-report",
+        "summary": "admin/forward-abuse-user-report",
+        "description": "No description provided.\n\n**Credential required**: *Yes* / **Permission**: *write:admin:resolve-abuse-user-report*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/admin/forward-abuse-user-report.ts"
+        },
+        "tags": ["admin"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reportId": { "type": "string", "format": "misskey:id" }
+                },
+                "required": ["reportId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "OK (without any results)" },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "NO_SUCH_ABUSE_REPORT": {
+                    "value": {
+                      "error": {
+                        "message": "No such abuse report.",
+                        "code": "NO_SUCH_ABUSE_REPORT",
+                        "id": "8763e21b-d9bc-40be-acf6-54c1a6986493",
+                        "kind": "server",
+                        "httpStatusCode": 404
+                      }
+                    }
+                  },
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/update-abuse-user-report": {
+      "post": {
+        "operationId": "admin___update-abuse-user-report",
+        "summary": "admin/update-abuse-user-report",
+        "description": "No description provided.\n\n**Credential required**: *Yes* / **Permission**: *write:admin:resolve-abuse-user-report*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/admin/update-abuse-user-report.ts"
+        },
+        "tags": ["admin"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reportId": { "type": "string", "format": "misskey:id" },
+                  "moderationNote": { "type": "string" }
+                },
+                "required": ["reportId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "OK (without any results)" },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "NO_SUCH_ABUSE_REPORT": {
+                    "value": {
+                      "error": {
+                        "message": "No such abuse report.",
+                        "code": "NO_SUCH_ABUSE_REPORT",
+                        "id": "15f51cf5-46d1-4b1d-a618-b35bcbed0662",
                         "kind": "server",
                         "httpStatusCode": 404
                       }
@@ -9528,6 +9834,7 @@
                   "properties": {
                     "email": { "type": ["string", "null"] },
                     "emailVerified": { "type": "boolean" },
+                    "followedMessage": { "type": ["string", "null"] },
                     "autoAcceptFollowed": { "type": "boolean" },
                     "noCrawle": { "type": "boolean" },
                     "preventAiLearning": { "type": "boolean" },
@@ -10053,6 +10360,7 @@
                   "required": [
                     "email",
                     "emailVerified",
+                    "followedMessage",
                     "autoAcceptFollowed",
                     "noCrawle",
                     "preventAiLearning",
@@ -10761,8 +11069,13 @@
                   "perRemoteUserUserTimelineCacheMax": { "type": "integer" },
                   "perUserHomeTimelineCacheMax": { "type": "integer" },
                   "perUserListTimelineCacheMax": { "type": "integer" },
+                  "enableReactionsBuffering": { "type": "boolean" },
                   "notesPerOneAd": { "type": "integer" },
                   "silencedHosts": {
+                    "type": ["array", "null"],
+                    "items": { "type": "string" }
+                  },
+                  "mediaSilencedHosts": {
                     "type": ["array", "null"],
                     "items": { "type": "string" }
                   },
@@ -10779,7 +11092,15 @@
                   "urlPreviewMaximumContentLength": { "type": "integer" },
                   "urlPreviewRequireContentLength": { "type": "boolean" },
                   "urlPreviewUserAgent": { "type": ["string", "null"] },
-                  "urlPreviewSummaryProxyUrl": { "type": ["string", "null"] }
+                  "urlPreviewSummaryProxyUrl": { "type": ["string", "null"] },
+                  "federation": {
+                    "type": "string",
+                    "enum": ["all", "none", "specified"]
+                  },
+                  "federationHosts": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
                 }
               }
             }
@@ -11740,22 +12061,7 @@
                   "displayOrder": { "type": "number" },
                   "policies": { "type": "object" }
                 },
-                "required": [
-                  "roleId",
-                  "name",
-                  "description",
-                  "color",
-                  "iconUrl",
-                  "target",
-                  "condFormula",
-                  "isPublic",
-                  "isModerator",
-                  "isAdministrator",
-                  "asBadge",
-                  "canEditMembersByModerator",
-                  "displayOrder",
-                  "policies"
-                ]
+                "required": ["roleId"]
               }
             }
           }
@@ -12499,7 +12805,11 @@
                     "type": "array",
                     "items": {
                       "type": "string",
-                      "enum": ["abuseReport", "abuseReportResolved"]
+                      "enum": [
+                        "abuseReport",
+                        "abuseReportResolved",
+                        "userCreated"
+                      ]
                     }
                   },
                   "url": {
@@ -12776,7 +13086,11 @@
                     "type": "array",
                     "items": {
                       "type": "string",
-                      "enum": ["abuseReport", "abuseReportResolved"]
+                      "enum": [
+                        "abuseReport",
+                        "abuseReportResolved",
+                        "userCreated"
+                      ]
                     }
                   }
                 }
@@ -13072,7 +13386,11 @@
                     "type": "array",
                     "items": {
                       "type": "string",
-                      "enum": ["abuseReport", "abuseReportResolved"]
+                      "enum": [
+                        "abuseReport",
+                        "abuseReportResolved",
+                        "userCreated"
+                      ]
                     }
                   },
                   "url": {
@@ -13172,6 +13490,174 @@
                         "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
                         "code": "I_AM_AI",
                         "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/system-webhook/test": {
+      "post": {
+        "operationId": "admin___system-webhook___test",
+        "summary": "admin/system-webhook/test",
+        "description": "No description provided.\n\n**Internal Endpoint**: This endpoint is an API for the misskey mainframe and is not intended for use by third parties.\n**Credential required**: *Yes* / **Permission**: *read:admin:system-webhook*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/admin/system-webhook/test.ts"
+        },
+        "tags": ["webhooks"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "webhookId": { "type": "string", "format": "misskey:id" },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "abuseReport",
+                      "abuseReportResolved",
+                      "userCreated"
+                    ]
+                  },
+                  "override": {
+                    "type": "object",
+                    "properties": {
+                      "url": { "type": "string" },
+                      "secret": { "type": "string" }
+                    }
+                  }
+                },
+                "required": ["webhookId", "type"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "OK (without any results)" },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "NO_SUCH_WEBHOOK": {
+                    "value": {
+                      "error": {
+                        "message": "No such webhook.",
+                        "code": "NO_SUCH_WEBHOOK",
+                        "id": "0c52149c-e913-18f8-5dc7-74870bfe0cf9"
+                      }
+                    }
+                  },
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "To many requests",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "RATE_LIMIT_EXCEEDED": {
+                    "value": {
+                      "error": {
+                        "message": "Rate limit exceeded. Please try again later.",
+                        "code": "RATE_LIMIT_EXCEEDED",
+                        "id": "d5826d14-3982-4d2e-8011-b9e9f02499ef"
                       }
                     }
                   }
@@ -13581,6 +14067,15 @@
                         "message": "You cannot create antenna any more.",
                         "code": "TOO_MANY_ANTENNAS",
                         "id": "faf47050-e8b5-438c-913c-db2b1576fde4"
+                      }
+                    }
+                  },
+                  "EMPTY_KEYWORD": {
+                    "value": {
+                      "error": {
+                        "message": "Either keywords or excludeKeywords is required.",
+                        "code": "EMPTY_KEYWORD",
+                        "id": "53ee222e-1ddd-4f9a-92e5-9fb82ddb463a"
                       }
                     }
                   },
@@ -14320,6 +14815,15 @@
                         "message": "No such user list.",
                         "code": "NO_SUCH_USER_LIST",
                         "id": "1c6b35c9-943e-48c2-81e4-2844989407f7"
+                      }
+                    }
+                  },
+                  "EMPTY_KEYWORD": {
+                    "value": {
+                      "error": {
+                        "message": "Either keywords or excludeKeywords is required.",
+                        "code": "EMPTY_KEYWORD",
+                        "id": "721aaff6-4e1b-4d88-8de6-877fae9f68c4"
                       }
                     }
                   },
@@ -23687,7 +24191,7 @@
                     "maxLength": 2048
                   }
                 },
-                "required": ["clipId", "name"]
+                "required": ["clipId"]
               }
             }
           }
@@ -30955,6 +31459,15 @@
                       }
                     }
                   },
+                  "ACCESS_DENIED": {
+                    "value": {
+                      "error": {
+                        "message": "Access denied.",
+                        "code": "ACCESS_DENIED",
+                        "id": "c86e09de-1c48-43ac-a435-1c7e42ed4496"
+                      }
+                    }
+                  },
                   "INVALID_PARAM": {
                     "value": {
                       "error": {
@@ -31515,7 +32028,7 @@
                   },
                   "isSensitive": { "type": "boolean", "default": false }
                 },
-                "required": ["postId", "title", "fileIds"]
+                "required": ["postId"]
               }
             }
           }
@@ -37478,6 +37991,8 @@
                         "followRequestAccepted",
                         "roleAssigned",
                         "achievementEarned",
+                        "exportCompleted",
+                        "login",
                         "app",
                         "test",
                         "pollVote",
@@ -37502,6 +38017,8 @@
                         "followRequestAccepted",
                         "roleAssigned",
                         "achievementEarned",
+                        "exportCompleted",
+                        "login",
                         "app",
                         "test",
                         "pollVote",
@@ -37690,6 +38207,8 @@
                         "followRequestAccepted",
                         "roleAssigned",
                         "achievementEarned",
+                        "exportCompleted",
+                        "login",
                         "app",
                         "test",
                         "reaction:grouped",
@@ -37716,6 +38235,8 @@
                         "followRequestAccepted",
                         "roleAssigned",
                         "achievementEarned",
+                        "exportCompleted",
+                        "login",
                         "app",
                         "test",
                         "reaction:grouped",
@@ -40411,6 +40932,11 @@
                     "minLength": 1,
                     "maxLength": 1500
                   },
+                  "followedMessage": {
+                    "type": ["string", "null"],
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
                   "location": {
                     "type": ["string", "null"],
                     "minLength": 1,
@@ -42233,11 +42759,7 @@
                     "minLength": 1,
                     "maxLength": 1024
                   },
-                  "secret": {
-                    "type": "string",
-                    "maxLength": 1024,
-                    "default": ""
-                  },
+                  "secret": { "type": ["string", "null"], "maxLength": 1024 },
                   "on": {
                     "type": "array",
                     "items": {
@@ -42256,7 +42778,7 @@
                   },
                   "active": { "type": "boolean" }
                 },
-                "required": ["webhookId", "name", "url", "on", "active"]
+                "required": ["webhookId"]
               }
             }
           }
@@ -42475,6 +42997,179 @@
                         "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
                         "code": "I_AM_AI",
                         "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "INTERNAL_ERROR": {
+                    "value": {
+                      "error": {
+                        "message": "Internal error occurred. Please contact us if the error persists.",
+                        "code": "INTERNAL_ERROR",
+                        "id": "5d37dbcb-891e-41ca-a3d6-e690c97775ac"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/i/webhooks/test": {
+      "post": {
+        "operationId": "i___webhooks___test",
+        "summary": "i/webhooks/test",
+        "description": "No description provided.\n\n**Internal Endpoint**: This endpoint is an API for the misskey mainframe and is not intended for use by third parties.\n**Credential required**: *Yes* / **Permission**: *read:account*",
+        "externalDocs": {
+          "description": "Source code",
+          "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/i/webhooks/test.ts"
+        },
+        "tags": ["webhooks"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "webhookId": { "type": "string", "format": "misskey:id" },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "mention",
+                      "unfollow",
+                      "follow",
+                      "followed",
+                      "note",
+                      "reply",
+                      "renote",
+                      "reaction"
+                    ]
+                  },
+                  "override": {
+                    "type": "object",
+                    "properties": {
+                      "url": { "type": "string" },
+                      "secret": { "type": "string" }
+                    }
+                  }
+                },
+                "required": ["webhookId", "type"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "OK (without any results)" },
+          "400": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "NO_SUCH_WEBHOOK": {
+                    "value": {
+                      "error": {
+                        "message": "No such webhook.",
+                        "code": "NO_SUCH_WEBHOOK",
+                        "id": "0c52149c-e913-18f8-5dc7-74870bfe0cf9"
+                      }
+                    }
+                  },
+                  "INVALID_PARAM": {
+                    "value": {
+                      "error": {
+                        "message": "Invalid param.",
+                        "code": "INVALID_PARAM",
+                        "id": "3d81ceae-475f-4600-b2a8-2bc116157532"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "CREDENTIAL_REQUIRED": {
+                    "value": {
+                      "error": {
+                        "message": "Credential required.",
+                        "code": "CREDENTIAL_REQUIRED",
+                        "id": "1384574d-a912-4b81-8601-c7b1c4085df1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "AUTHENTICATION_FAILED": {
+                    "value": {
+                      "error": {
+                        "message": "Authentication failed. Please ensure your token is correct.",
+                        "code": "AUTHENTICATION_FAILED",
+                        "id": "b0a7f5f8-dc2f-4171-b91f-de88ad238e14"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "I'm Ai",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "I_AM_AI": {
+                    "value": {
+                      "error": {
+                        "message": "You sent a request to Ai-chan, Misskey's showgirl, instead of the server.",
+                        "code": "I_AM_AI",
+                        "id": "60c46cd1-f23a-46b1-bebe-5d2b73951a84"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "To many requests",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "RATE_LIMIT_EXCEEDED": {
+                    "value": {
+                      "error": {
+                        "message": "Rate limit exceeded. Please try again later.",
+                        "code": "RATE_LIMIT_EXCEEDED",
+                        "id": "d5826d14-3982-4d2e-8011-b9e9f02499ef"
                       }
                     }
                   }
@@ -48011,6 +48706,15 @@
                       }
                     }
                   },
+                  "CANNOT_REACT_TO_RENOTE": {
+                    "value": {
+                      "error": {
+                        "message": "You cannot react to Renote.",
+                        "code": "CANNOT_REACT_TO_RENOTE",
+                        "id": "eaccdc08-ddef-43fe-908f-d108faad57f5"
+                      }
+                    }
+                  },
                   "INVALID_PARAM": {
                     "value": {
                       "error": {
@@ -51686,14 +52390,7 @@
                   "alignCenter": { "type": "boolean" },
                   "hideTitleWhenPinned": { "type": "boolean" }
                 },
-                "required": [
-                  "pageId",
-                  "title",
-                  "name",
-                  "content",
-                  "variables",
-                  "script"
-                ]
+                "required": ["pageId"]
               }
             }
           }
@@ -52171,6 +52868,25 @@
           "url": "https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/server/api/endpoints/flash/featured.ts"
         },
         "tags": ["flash"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offset": { "type": "integer", "minimum": 0, "default": 0 },
+                  "limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "default": 10
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK (with results)",
@@ -63271,9 +63987,6 @@
             "type": "string",
             "enum": ["public", "followers", "private"]
           },
-          "twoFactorEnabled": { "type": "boolean", "default": false },
-          "usePasswordLessLogin": { "type": "boolean", "default": false },
-          "securityKeys": { "type": "boolean", "default": false },
           "roles": {
             "type": "array",
             "items": {
@@ -63281,8 +63994,12 @@
               "$ref": "#/components/schemas/RoleLite"
             }
           },
+          "followedMessage": { "type": ["string", "null"] },
           "memo": { "type": ["string", "null"] },
           "moderationNote": { "type": "string" },
+          "twoFactorEnabled": { "type": "boolean" },
+          "usePasswordLessLogin": { "type": "boolean" },
+          "securityKeys": { "type": "boolean" },
           "isFollowing": { "type": "boolean" },
           "isFollowed": { "type": "boolean" },
           "hasPendingFollowRequestFromYou": { "type": "boolean" },
@@ -63323,12 +64040,13 @@
           "publicReactions",
           "followingVisibility",
           "followersVisibility",
+          "roles",
+          "followedMessage",
+          "memo",
+          "moderationNote",
           "twoFactorEnabled",
           "usePasswordLessLogin",
           "securityKeys",
-          "roles",
-          "memo",
-          "moderationNote",
           "isFollowing",
           "isFollowed",
           "hasPendingFollowRequestFromYou",
@@ -63346,6 +64064,7 @@
         "properties": {
           "avatarId": { "type": ["string", "null"], "format": "id" },
           "bannerId": { "type": ["string", "null"], "format": "id" },
+          "followedMessage": { "type": ["string", "null"] },
           "isModerator": { "type": ["boolean", "null"] },
           "isAdmin": { "type": ["boolean", "null"] },
           "injectFeaturedNote": { "type": "boolean" },
@@ -63851,6 +64570,9 @@
             "type": "object",
             "$ref": "#/components/schemas/RolePolicies"
           },
+          "twoFactorEnabled": { "type": "boolean", "default": false },
+          "usePasswordLessLogin": { "type": "boolean", "default": false },
+          "securityKeys": { "type": "boolean", "default": false },
           "email": { "type": ["string", "null"] },
           "emailVerified": { "type": ["boolean", "null"] },
           "securityKeysList": {
@@ -63873,6 +64595,7 @@
         "required": [
           "avatarId",
           "bannerId",
+          "followedMessage",
           "isModerator",
           "isAdmin",
           "injectFeaturedNote",
@@ -63904,6 +64627,9 @@
           "achievements",
           "loggedInDays",
           "policies",
+          "twoFactorEnabled",
+          "usePasswordLessLogin",
+          "securityKeys",
           "email",
           "emailVerified",
           "securityKeysList"
@@ -64147,7 +64873,16 @@
             ]
           },
           "localOnly": { "type": "boolean" },
-          "reactionAcceptance": { "type": ["string", "null"] },
+          "reactionAcceptance": {
+            "type": ["string", "null"],
+            "enum": [
+              "likeOnly",
+              "likeOnlyForRemote",
+              "nonSensitiveOnly",
+              "nonSensitiveOnlyForLocalLikeOnlyForRemote",
+              null
+            ]
+          },
           "reactionEmojis": {
             "type": "object",
             "additionalProperties": { "anyOf": [{ "type": "string" }] }
@@ -64380,9 +65115,10 @@
                 "type": "object",
                 "$ref": "#/components/schemas/UserLite"
               },
-              "userId": { "type": "string", "format": "id" }
+              "userId": { "type": "string", "format": "id" },
+              "message": { "type": ["string", "null"] }
             },
-            "required": ["id", "createdAt", "type", "user", "userId"]
+            "required": ["id", "createdAt", "type", "user", "userId", "message"]
           },
           {
             "type": "object",
@@ -64400,7 +65136,89 @@
               "id": { "type": "string", "format": "id" },
               "createdAt": { "type": "string", "format": "date-time" },
               "type": { "type": "string", "enum": ["achievementEarned"] },
-              "achievement": { "type": "string" }
+              "achievement": {
+                "type": "string",
+                "enum": [
+                  "notes1",
+                  "notes10",
+                  "notes100",
+                  "notes500",
+                  "notes1000",
+                  "notes5000",
+                  "notes10000",
+                  "notes20000",
+                  "notes30000",
+                  "notes40000",
+                  "notes50000",
+                  "notes60000",
+                  "notes70000",
+                  "notes80000",
+                  "notes90000",
+                  "notes100000",
+                  "login3",
+                  "login7",
+                  "login15",
+                  "login30",
+                  "login60",
+                  "login100",
+                  "login200",
+                  "login300",
+                  "login400",
+                  "login500",
+                  "login600",
+                  "login700",
+                  "login800",
+                  "login900",
+                  "login1000",
+                  "passedSinceAccountCreated1",
+                  "passedSinceAccountCreated2",
+                  "passedSinceAccountCreated3",
+                  "loggedInOnBirthday",
+                  "loggedInOnNewYearsDay",
+                  "noteClipped1",
+                  "noteFavorited1",
+                  "myNoteFavorited1",
+                  "profileFilled",
+                  "markedAsCat",
+                  "following1",
+                  "following10",
+                  "following50",
+                  "following100",
+                  "following300",
+                  "followers1",
+                  "followers10",
+                  "followers50",
+                  "followers100",
+                  "followers300",
+                  "followers500",
+                  "followers1000",
+                  "collectAchievements30",
+                  "viewAchievements3min",
+                  "iLoveMisskey",
+                  "foundTreasure",
+                  "client30min",
+                  "client60min",
+                  "noteDeletedWithin1min",
+                  "postedAtLateNight",
+                  "postedAt0min0sec",
+                  "selfQuote",
+                  "htl20npm",
+                  "viewInstanceChart",
+                  "outputHelloWorldOnScratchpad",
+                  "open3windows",
+                  "driveFolderCircularReference",
+                  "reactWithoutRead",
+                  "clickedClickHere",
+                  "justPlainLucky",
+                  "setNameToSyuilo",
+                  "cookieClicked",
+                  "brainDiver",
+                  "smashTestNotificationButton",
+                  "tutorialCompleted",
+                  "bubbleGameExplodingHead",
+                  "bubbleGameDoubleExplodingHead"
+                ]
+              }
             },
             "required": ["id", "createdAt", "type", "achievement"]
           },
@@ -64409,10 +65227,43 @@
             "properties": {
               "id": { "type": "string", "format": "id" },
               "createdAt": { "type": "string", "format": "date-time" },
+              "type": { "type": "string", "enum": ["exportCompleted"] },
+              "exportedEntity": {
+                "type": "string",
+                "enum": [
+                  "antenna",
+                  "blocking",
+                  "clip",
+                  "customEmoji",
+                  "favorite",
+                  "following",
+                  "muting",
+                  "note",
+                  "userList"
+                ]
+              },
+              "fileId": { "type": "string", "format": "id" }
+            },
+            "required": ["id", "createdAt", "type", "exportedEntity", "fileId"]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string", "format": "id" },
+              "createdAt": { "type": "string", "format": "date-time" },
+              "type": { "type": "string", "enum": ["login"] }
+            },
+            "required": ["id", "createdAt", "type"]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string", "format": "id" },
+              "createdAt": { "type": "string", "format": "date-time" },
               "type": { "type": "string", "enum": ["app"] },
               "body": { "type": "string" },
-              "header": { "type": "string" },
-              "icon": { "type": "string" }
+              "header": { "type": ["string", "null"] },
+              "icon": { "type": ["string", "null"] }
             },
             "required": ["id", "createdAt", "type", "body", "header", "icon"]
           },
@@ -64473,7 +65324,7 @@
         "properties": {
           "id": { "type": "string", "format": "id", "example": "xxxxxxxxxx" },
           "createdAt": { "type": "string", "format": "date-time" },
-          "name": { "type": "string", "example": "lenna.jpg" },
+          "name": { "type": "string", "example": "192.jpg" },
           "type": { "type": "string", "example": "image/jpeg" },
           "md5": {
             "type": "string",
@@ -64948,6 +65799,7 @@
           "maintainerName": { "type": ["string", "null"] },
           "maintainerEmail": { "type": ["string", "null"] },
           "isSilenced": { "type": "boolean" },
+          "isMediaSilenced": { "type": "boolean" },
           "iconUrl": { "type": ["string", "null"], "format": "url" },
           "faviconUrl": { "type": ["string", "null"], "format": "url" },
           "themeColor": { "type": ["string", "null"] },
@@ -64981,6 +65833,7 @@
           "maintainerName",
           "maintainerEmail",
           "isSilenced",
+          "isMediaSilenced",
           "iconUrl",
           "faviconUrl",
           "themeColor",
@@ -65105,6 +65958,7 @@
           "title": { "type": "string" },
           "summary": { "type": "string" },
           "script": { "type": "string" },
+          "visibility": { "type": "string", "enum": ["private", "public"] },
           "likedCount": { "type": ["number", "null"] },
           "isLiked": { "type": "boolean" }
         },
@@ -65117,6 +65971,7 @@
           "title",
           "summary",
           "script",
+          "visibility",
           "likedCount",
           "isLiked"
         ]
@@ -65342,6 +66197,7 @@
           "canHideAds": { "type": "boolean" },
           "driveCapacityMb": { "type": "integer" },
           "alwaysMarkNsfw": { "type": "boolean" },
+          "canUpdateBioMedia": { "type": "boolean" },
           "pinLimit": { "type": "integer" },
           "antennaLimit": { "type": "integer" },
           "wordMuteLimit": { "type": "integer" },
@@ -65351,7 +66207,12 @@
           "userListLimit": { "type": "integer" },
           "userEachUserListsLimit": { "type": "integer" },
           "rateLimitFactor": { "type": "integer" },
-          "avatarDecorationLimit": { "type": "integer" }
+          "avatarDecorationLimit": { "type": "integer" },
+          "canImportAntennas": { "type": "boolean" },
+          "canImportBlocking": { "type": "boolean" },
+          "canImportFollowing": { "type": "boolean" },
+          "canImportMuting": { "type": "boolean" },
+          "canImportUserLists": { "type": "boolean" }
         },
         "required": [
           "gtlAvailable",
@@ -65369,6 +66230,7 @@
           "canHideAds",
           "driveCapacityMb",
           "alwaysMarkNsfw",
+          "canUpdateBioMedia",
           "pinLimit",
           "antennaLimit",
           "wordMuteLimit",
@@ -65378,7 +66240,12 @@
           "userListLimit",
           "userEachUserListsLimit",
           "rateLimitFactor",
-          "avatarDecorationLimit"
+          "avatarDecorationLimit",
+          "canImportAntennas",
+          "canImportBlocking",
+          "canImportFollowing",
+          "canImportMuting",
+          "canImportUserLists"
         ]
       },
       "ReversiGameLite": {
@@ -65604,7 +66471,13 @@
           "policies": {
             "type": "object",
             "$ref": "#/components/schemas/RolePolicies"
-          }
+          },
+          "noteSearchableScope": {
+            "type": "string",
+            "enum": ["local", "global"],
+            "default": "local"
+          },
+          "maxFileSize": { "type": "number" }
         },
         "required": [
           "maintainerName",
@@ -65655,7 +66528,9 @@
           "inquiryUrl",
           "serverRules",
           "themeColor",
-          "policies"
+          "policies",
+          "noteSearchableScope",
+          "maxFileSize"
         ]
       },
       "MetaDetailedOnly": {
@@ -65721,7 +66596,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": ["abuseReport", "abuseReportResolved"]
+              "enum": ["abuseReport", "abuseReportResolved", "userCreated"]
             }
           },
           "url": { "type": "string" },
