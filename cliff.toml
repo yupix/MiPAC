@@ -90,3 +90,4 @@ sort_commits = "oldest"
 
 [bump]
 breaking_always_bump_major = false
+features_always_bump_minor = false  # まだ0.x系なので
