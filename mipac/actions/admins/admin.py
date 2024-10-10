@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Literal
 
 from mipac.actions.admins.user import SharedAdminUserActions
 from mipac.http import HTTPClient, Route
@@ -149,7 +149,9 @@ class AdminActions(SharedAdminUserActions):
             )
         )
 
-    async def resolve_abuse_user_report(self, report_id: str, forward: bool = False) -> bool:
+    async def resolve_abuse_user_report(
+        self, report_id: str, resolved_as: Literal["accept", "reject"] | None = None
+    ) -> bool:
         """
         Resolve abuse user report
         Endpoint: `/api/admin/resolve-abuse-user-report`
@@ -158,10 +160,10 @@ class AdminActions(SharedAdminUserActions):
         ----------
         report_id : str
             report id
-        forward : bool, optional
-            Whether to forward the report to a remote server
+        resolved_as : Literal["accept", "reject"], optional
+            resolved as, by default None
         """
-        body = {"reportId": report_id, "forward": forward}
+        body = {"reportId": report_id, "resolvedAs": resolved_as}
         return bool(
             await self._session.request(
                 Route("POST", "/api/admin/resolve-abuse-user-report"), auth=True, json=body
