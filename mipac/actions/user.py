@@ -850,7 +850,6 @@ class UserActions(SharedUserActions):
         user_ids: list[str] | None = None,
         username: str | None = None,
         host: str | None = None,
-        **kwargs,
     ) -> UserDetailedNotMe | MeDetailed:
         """
         Retrieve user information from the user ID using the cache.
@@ -868,14 +867,11 @@ class UserActions(SharedUserActions):
         host : str, default=None
             Hosts with target users
         """
-        field = remove_dict_empty(
-            {"userId": user_id, "username": username, "host": host, "userIds": user_ids}
+        return await self.fetch(
+            user_id=user_id, username=username, host=host, user_ids=user_ids
         )
-        data: IUser = await self._session.request(
-            Route("POST", "/api/users/show"), json=field, auth=True, lower=True
-        )
-        return packed_user(data, client=self._client)
 
+    @cache(group="get_user", override=True)
     async def fetch(
         self,
         user_id: str | None = None,
@@ -900,9 +896,13 @@ class UserActions(SharedUserActions):
         host : str, default=None
             Hosts with target users
         """
-        return await self.get(
-            user_id=user_id, username=username, host=host, user_ids=user_ids, cache_override=True
+        field = remove_dict_empty(
+            {"userId": user_id, "username": username, "host": host, "userIds": user_ids}
         )
+        data: IUser = await self._session.request(
+            Route("POST", "/api/users/show"), json=field, auth=True, lower=True
+        )
+        return packed_user(data, client=self._client)
 
     @deprecated
     def get_mention(self, user: PartialUser) -> str:

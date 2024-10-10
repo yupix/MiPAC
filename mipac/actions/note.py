@@ -104,17 +104,9 @@ class SharedNoteActions(AbstractAction):
         *,
         note_id: str,
     ) -> list[Note]:
-        data = {
-            "noteId": note_id,
-            "limit": limit,
-            "sinceId": since_id,
-            "untilId": untilId,
-        }
-
-        notes: list[INote] = await self._session.request(
-            Route("POST", "/api/notes/children"), json=data
+        return await self.fetch_children(
+            limit=limit, since_id=since_id, untilId=untilId, note_id=note_id
         )
-        return [Note(note, self._client) for note in notes]
 
     @cache(group="get_note_children", override=True)
     async def fetch_children(
@@ -146,9 +138,17 @@ class SharedNoteActions(AbstractAction):
         list[Note]
             Children of the note
         """
-        return await self.get_children(
-            limit=limit, since_id=since_id, untilId=untilId, note_id=note_id
+        data = {
+            "noteId": note_id,
+            "limit": limit,
+            "sinceId": since_id,
+            "untilId": untilId,
+        }
+
+        notes: list[INote] = await self._session.request(
+            Route("POST", "/api/notes/children"), json=data
         )
+        return [Note(note, self._client) for note in notes]
 
     async def get_all_children(
         self,
@@ -417,11 +417,7 @@ class SharedNoteActions(AbstractAction):
         NoteState
             Note state
         """
-        data = {"noteId": note_id}
-        res: INoteState = await self._session.request(
-            Route("POST", "/api/notes/state"), auth=True, json=data
-        )
-        return NoteState(res)
+        return await self.fetch_state(note_id=note_id)
 
     @cache(group="get_note_state", override=True)
     async def fetch_state(self, *, note_id: str) -> NoteState:
@@ -441,7 +437,12 @@ class SharedNoteActions(AbstractAction):
         NoteState
             Note state
         """
-        return await self.get_state(note_id=note_id)
+        data = {"noteId": note_id}
+        res: INoteState = await self._session.request(
+            Route("POST", "/api/notes/state"), auth=True, json=data
+        )
+        return NoteState(res)
+        
 
     async def add_clips(self, clip_id: str, *, note_id: str) -> bool:
         """Add a note to the clip

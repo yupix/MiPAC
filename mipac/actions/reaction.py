@@ -72,6 +72,20 @@ class SharedReactionActions(AbstractAction):
         *,
         note_id: str,
     ) -> list[NoteReaction]:
+        return await self.fetch_reactions(
+            type=type, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
+        )
+
+    @cache(group="get_note_reaction", override=True)
+    async def fetch_reactions(
+        self,
+        type: str | None = None,
+        limit: int = 10,
+        since_id: str | None = None,
+        until_id: str | None = None,
+        *,
+        note_id: str,
+    ) -> list[NoteReaction]:
         data = remove_dict_empty(
             {
                 "noteId": note_id,
@@ -88,20 +102,6 @@ class SharedReactionActions(AbstractAction):
             lower=True,
         )
         return [NoteReaction(i, client=self._client) for i in res]
-
-    @cache(group="get_note_reaction", override=True)
-    async def fetch_reactions(
-        self,
-        type: str | None = None,
-        limit: int = 10,
-        since_id: str | None = None,
-        until_id: str | None = None,
-        *,
-        note_id: str,
-    ) -> list[NoteReaction]:
-        return await self.get_reactions(
-            type=type, note_id=note_id, limit=limit, since_id=since_id, until_id=until_id
-        )
 
 
 class ClientReactionActions(SharedReactionActions):
