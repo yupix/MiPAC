@@ -16,7 +16,7 @@ class AdminAccountActions(AbstractAction):
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
-    async def create(self, username: str, password: str) -> CreatedUser:
+    async def create(self, username: str, password: str, setup_password: str | None=None) -> CreatedUser:
         """ユーザーを作成します
 
         Endpoint: `/api/admin/accounts/create`
@@ -27,13 +27,15 @@ class AdminAccountActions(AbstractAction):
             ユーザー名
         password : str
             パスワード
+        setup_password : str, optional
+            セットアップパスワード, by default None
 
         Returns
         -------
         CreatedUser
             作成されたユーザー
         """
-        data = {"username": username, "password": password}
+        data = {"username": username, "password": password, "setupPassword": setup_password}
         raw_created_user: ICreatedUser = await self._session.request(
             Route("POST", "/api/admin/accounts/create"),
             json=data,
