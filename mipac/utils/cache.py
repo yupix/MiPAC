@@ -102,6 +102,9 @@ def cache(group: str = "default", override: bool = False):
                 hit_item = target_cache.get(key)
                 if hit_item and override is False and kwargs.get("cache_override") is None:
                     return hit_item
+                res = await func(self, *args, **kwargs)
+                target_cache.put(key, res)
+                return res
             except KeyError:
                 res = await func(self, *args, **kwargs)
                 target_cache.put(key, res)
