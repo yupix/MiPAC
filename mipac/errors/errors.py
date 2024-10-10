@@ -97,6 +97,10 @@ class CannotCreateAlreadyExpiredPollError(APIError):
     """Poll is already expired."""
 
 
+class CannotReactToRenoteError(APIError):
+    """You cannot react to Renote."""
+
+
 class CannotRenoteDueToVisibilityError(APIError):
     """You can not Renote due to target visibility."""
 
@@ -129,6 +133,10 @@ class CannotReportYourselfError(APIError):
     """Cannot report yourself."""
 
 
+class CannotTranslateInvisibleNoteError(APIError):
+    """Cannot translate invisible note."""
+
+
 class CanNotDeleteInviteCodeError(APIError):
     """You can't delete this invite code."""
 
@@ -139,6 +147,14 @@ class ContainsProhibitedWordsError(APIError):
 
 class ContainsTooManyMentionsError(APIError):
     """Cannot post because it exceeds the allowed number of mentions."""
+
+
+class CorrelationCheckEmailError(APIError):
+    """If "method" is email, "userId" must be set."""
+
+
+class CorrelationCheckWebhookError(APIError):
+    """If "method" is webhook, "systemWebhookId" must be set."""
 
 
 class CredentialRequiredError(APIError):
@@ -153,8 +169,20 @@ class DuplicateNameError(APIError):
     """Duplicate name."""
 
 
+class EmailAddressNotSetError(APIError):
+    """Email address is not set."""
+
+
+class EmailRequiredError(APIError):
+    """Email address is required."""
+
+
 class EmptyFileError(APIError):
     """That file is empty."""
+
+
+class EmptyKeywordError(APIError):
+    """Either keywords or excludeKeywords is required."""
 
 
 class ExceededLimitOfCreateInviteCodeError(APIError):
@@ -203,6 +231,10 @@ class HasChildFilesOrFoldersError(APIError):
 
 class InappropriateError(APIError):
     """Cannot upload the file because it has been determined that it possibly contains inappropriate content."""
+
+
+class IncorrectInitialPasswordError(APIError):
+    """Initial password is incorrect."""
 
 
 class IncorrectPasswordError(APIError):
@@ -309,6 +341,10 @@ class NoSecurityKeyError(APIError):
     """No security key."""
 
 
+class NoSuchAbuseReportError(APIError):
+    """No such abuse report."""
+
+
 class NoSuchAdError(APIError):
     """No such ad."""
 
@@ -397,6 +433,10 @@ class NoSuchPostError(APIError):
     """No such post."""
 
 
+class NoSuchRecipientError(APIError):
+    """No such recipient."""
+
+
 class NoSuchRegistrationError(APIError):
     """No such registration."""
 
@@ -415,6 +455,10 @@ class NoSuchRoleError(APIError):
 
 class NoSuchSessionError(APIError):
     """No such session."""
+
+
+class NoSuchSystemWebhookError(APIError):
+    """No such SystemWebhook."""
 
 
 class NoSuchUserError(APIError):
