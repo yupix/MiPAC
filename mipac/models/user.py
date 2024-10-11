@@ -258,20 +258,12 @@ class UserDetailedNotMeOnly:
         return self._raw_user["followers_visibility"]
 
     @property
-    def two_factor_enabled(self) -> bool:
-        return self._raw_user["two_factor_enabled"]
-
-    @property
-    def use_password_less_login(self) -> bool:
-        return self._raw_user["use_password_less_login"]
-
-    @property
-    def security_keys(self) -> bool:
-        return self._raw_user["security_keys"]
-
-    @property
     def roles(self) -> list[PartialRole]:
         return [PartialRole(i, client=self._client) for i in self._raw_user["roles"]]
+
+    @property
+    def followed_message(self) -> str | None:
+        return self._raw_user.get("followed_message")
 
     @property
     def memo(self) -> str | None:
@@ -280,6 +272,18 @@ class UserDetailedNotMeOnly:
     @property
     def moderation_note(self) -> str | None:
         return self._raw_user.get("moderation_note")
+
+    @property
+    def two_factor_enabled(self) -> bool | None:
+        return self._raw_user.get("two_factor_enabled")
+
+    @property
+    def use_password_less_login(self) -> bool | None:
+        return self._raw_user.get("use_password_less_login")
+
+    @property
+    def security_keys(self) -> bool | None:
+        return self._raw_user.get("security_keys")
 
     @property
     def is_following(self) -> bool | None:
@@ -334,6 +338,10 @@ class MeDetailedOnly:
     @property
     def banner_id(self) -> str | None:
         return self._raw_user["banner_id"]
+    
+    @property
+    def followed_message(self) -> str | None:
+        return self._raw_user["followed_message"]
 
     @property
     def is_moderator(self) -> bool | None:
@@ -460,6 +468,18 @@ class MeDetailedOnly:
     @property
     def policies(self) -> IPolicies:  # TODO: モデル化
         return self._raw_user["policies"]
+
+    @property
+    def two_factor_enabled(self) -> bool:
+        return self._raw_user["two_factor_enabled"]
+    
+    @property
+    def use_password_less_login(self) -> bool:
+        return self._raw_user["use_password_less_login"]
+    
+    @property
+    def security_keys(self) -> bool:
+        return self._raw_user["security_keys"]
 
     @property
     def email(self) -> str | None:

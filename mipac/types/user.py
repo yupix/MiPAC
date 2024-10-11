@@ -145,11 +145,12 @@ class IUserDetailedNotMeOnlySchema(TypedDict):
     public_reactions: bool
     following_visibility: IFfVisibility
     followers_visibility: IFfVisibility
-    two_factor_enabled: bool
-    use_password_less_login: bool
-    security_keys: bool
     roles: list[IPartialRole]
+    followed_message: NotRequired[str | None]
     memo: str | None
+    two_factor_enabled: NotRequired[bool]
+    use_password_less_login: NotRequired[bool]
+    security_keys: NotRequired[bool]
     moderation_note: NotRequired[str]
     is_following: NotRequired[bool]
     is_followed: NotRequired[bool]
@@ -166,7 +167,10 @@ class IUserDetailedNotMeOnlySchema(TypedDict):
 class IMeDetailedOnlySchema(TypedDict):
     avatar_id: str | None
     banner_id: str | None
-    is_moderator: bool | None  # entities/UserEntityService.ts で roleServiceを用いて判断してるからNoneの場合がある?
+    followed_message: str | None
+    is_moderator: (
+        bool | None
+    )  # entities/UserEntityService.ts で roleServiceを用いて判断してるからNoneの場合がある?
     is_admin: bool | None
     inject_featured_note: bool
     receive_announcement_email: bool
@@ -197,6 +201,9 @@ class IMeDetailedOnlySchema(TypedDict):
     achievements: list[IAchievement]
     logged_in_days: int
     policies: IPolicies
+    two_factor_enabled: bool
+    use_password_less_login: bool
+    security_keys: bool
     email: NotRequired[str | None]
     email_verified: NotRequired[bool]
     security_keys_list: NotRequired[list[IUserSecurityKey]]  # セキュリティー
