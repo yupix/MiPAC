@@ -14,9 +14,9 @@ from mipac.types.clip import IClip
 from mipac.types.note import ICreatedNote, INote, INoteState, INoteTranslateResult, INoteVisibility
 from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.cache import cache
-from mipac.utils.format import remove_dict_empty
+from mipac.utils.format import remove_dict_empty, remove_dict_missing
 from mipac.utils.pagination import Pagination
-from mipac.utils.util import check_multi_arg, deprecated
+from mipac.utils.util import MISSING, check_multi_arg, deprecated
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
@@ -26,19 +26,19 @@ __all__ = ["NoteActions"]
 
 def create_note_body(
     text: str | None = None,
-    visibility: INoteVisibility = "public",
-    visible_user_ids: list[str] | None = None,
+    visibility: INoteVisibility = MISSING,
+    visible_user_ids: list[str] = MISSING,
     cw: str | None = None,
-    local_only: bool = False,
+    local_only: bool = MISSING,
     reaction_acceptance: IReactionAcceptance = None,
-    extract_mentions: bool = True,
-    extract_hashtags: bool = True,
-    extract_emojis: bool = True,
+    no_extract_mentions: bool = MISSING,
+    no_extract_hashtags: bool = MISSING,
+    no_extract_emojis: bool = MISSING,
     reply_id: str | None = None,
     renote_id: str | None = None,
     channel_id: str | None = None,
-    files: list[MiFile | File | str] | None = None,
-    media_ids: list[str] | None = None,
+    files: list[MiFile | File | str] = MISSING,
+    media_ids: list[str] = MISSING,
     poll: MiPoll | None = None,
 ):
     text = text or None
@@ -50,9 +50,9 @@ def create_note_body(
         "cw": cw,
         "localOnly": local_only,
         "reactionAcceptance": reaction_acceptance,
-        "noExtractMentions": not extract_mentions,
-        "noExtractHashtags": not extract_hashtags,
-        "noExtractEmojis": not extract_emojis,
+        "noExtractMentions": no_extract_mentions,
+        "noExtractHashtags": no_extract_hashtags,
+        "noExtractEmojis": no_extract_emojis,
         "replyId": reply_id,
         "renoteId": renote_id,
         "channelId": channel_id,
@@ -70,7 +70,7 @@ def create_note_body(
             }
         )
         body["poll"] = poll_data
-    if files:
+    if isinstance(files, MISSING) is False:
         file_ids = []
         for file in files:
             if isinstance(file, MiFile):
@@ -83,7 +83,7 @@ def create_note_body(
                 raise ValueError("files must be MiFile or str or File")
         body["fileIds"] = file_ids
 
-    return remove_dict_empty(body)
+    return remove_dict_missing(body)
 
 
 class SharedNoteActions(AbstractAction):
@@ -333,25 +333,25 @@ class SharedNoteActions(AbstractAction):
         *,
         note_id: str,
     ) -> list[Note]:
-        """Get replies to the note
+        """Get replies to the specified note
 
         Endpoint: `/api/notes/replies`
 
         Parameters
         ----------
         since_id : str | None, default=None
-            since id
+            ID to get replies since this ID (exclusive)
         until_id : str | None, default=None
-            until id
+            ID to get replies until this ID (exclusive)
         limit : int, default=10
-            limit
-        note_id: str | None, default=None
-            note id
+            Maximum number of replies to retrieve
+        note_id : str
+            ID of the note to get replies for
 
         Returns
         -------
         list[Note]
-            replies
+            List of reply notes
         """
         data = {
             "noteId": note_id,
@@ -492,16 +492,16 @@ class SharedNoteActions(AbstractAction):
     async def renote(
         self,
         text: str | None = None,
-        visibility: INoteVisibility = "public",
-        visible_user_ids: list[str] | None = None,
+        visibility: INoteVisibility = MISSING,
+        visible_user_ids: list[str] = MISSING,
         cw: str | None = None,
-        local_only: bool = False,
+        local_only: bool = MISSING,
         reaction_acceptance: IReactionAcceptance = None,
-        extract_mentions: bool = True,
-        extract_hashtags: bool = True,
-        extract_emojis: bool = True,
+        no_extract_mentions: bool = MISSING,
+        no_extract_hashtags: bool = MISSING,
+        no_extract_emojis: bool = MISSING,
         channel_id: str | None = None,
-        files: list[MiFile | File | str] | None = None,
+        files: list[MiFile | File | str] = MISSING,
         poll: MiPoll | None = None,
         *,
         renote_id: str,
@@ -524,11 +524,11 @@ class SharedNoteActions(AbstractAction):
             Whether to show only locally or not
         reaction_acceptance : IReactionAcceptance, default=None
             Reaction acceptance setting
-        extract_mentions : bool, default=True
+        no_extract_mentions : bool, default=TrueMISSING
             Whether to expand the mention
-        extract_hashtags : bool, default=True
+        no_extract_hashtags : bool, default=MISSING
             Whether to expand the hashtag
-        extract_emojis : bool, default=True
+        no_extract_emojis : bool, default=MISSING
             Whether to expand the emojis
         channel_id : str | None, default=None
             Channel ID
@@ -543,9 +543,9 @@ class SharedNoteActions(AbstractAction):
             cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
-            extract_mentions=extract_mentions,
-            extract_hashtags=extract_hashtags,
-            extract_emojis=extract_emojis,
+            no_extract_mentions=no_extract_mentions,
+            no_extract_hashtags=no_extract_hashtags,
+            no_extract_emojis=no_extract_emojis,
             renote_id=renote_id,
             channel_id=channel_id,
             files=files,
@@ -564,15 +564,15 @@ class SharedNoteActions(AbstractAction):
     async def reply(
         self,
         text: str | None = None,
-        visibility: INoteVisibility = "public",
-        visible_user_ids: list[str] | None = None,
+        visibility: INoteVisibility = MISSING,
+        visible_user_ids: list[str] = MISSING,
         cw: str | None = None,
-        local_only: bool = False,
+        local_only: bool = MISSING,
         reaction_acceptance: IReactionAcceptance = None,
-        extract_mentions: bool = True,
-        extract_hashtags: bool = True,
-        extract_emojis: bool = True,
-        files: list[MiFile | File | str] | None = None,
+        no_extract_mentions: bool = MISSING,
+        no_extract_hashtags: bool = MISSING,
+        no_extract_emojis: bool = MISSING,
+        files: list[MiFile | File | str] = MISSING,
         poll: MiPoll | None = None,
         *,
         reply_id: str,
@@ -584,9 +584,9 @@ class SharedNoteActions(AbstractAction):
             cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
-            extract_mentions=extract_mentions,
-            extract_hashtags=extract_hashtags,
-            extract_emojis=extract_emojis,
+            no_extract_mentions=no_extract_mentions,
+            no_extract_hashtags=no_extract_hashtags,
+            no_extract_emojis=no_extract_emojis,
             reply_id=reply_id,
             files=files,
             poll=poll,
@@ -602,15 +602,15 @@ class SharedNoteActions(AbstractAction):
     async def create_quote(
         self,
         content: str | None = None,
-        visibility: INoteVisibility = "public",
-        visible_user_ids: list[str] | None = None,
+        visibility: INoteVisibility = MISSING,
+        visible_user_ids: list[str] = MISSING,
         cw: str | None = None,
-        local_only: bool = False,
+        local_only: bool = MISSING,
         reaction_acceptance: IReactionAcceptance = None,
-        extract_mentions: bool = True,
-        extract_hashtags: bool = True,
-        extract_emojis: bool = True,
-        files: list[MiFile | File | str] | None = None,
+        no_extract_mentions: bool = MISSING,
+        no_extract_hashtags: bool = MISSING,
+        no_extract_emojis: bool = MISSING,
+        files: list[MiFile | File | str] = MISSING,
         poll: MiPoll | None = None,
         *,
         note_id: str,
@@ -651,9 +651,9 @@ class SharedNoteActions(AbstractAction):
             cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
-            extract_mentions=extract_mentions,
-            extract_hashtags=extract_hashtags,
-            extract_emojis=extract_emojis,
+            no_extract_mentions=no_extract_mentions,
+            no_extract_hashtags=no_extract_hashtags,
+            no_extract_emojis=no_extract_emojis,
             renote_id=note_id,
             files=files,
             poll=poll,
@@ -1033,16 +1033,16 @@ class ClientNoteActions(SharedNoteActions):
     async def renote(
         self,
         text: str | None = None,
-        visibility: INoteVisibility = "public",
-        visible_user_ids: list[str] | None = None,
+        visibility: INoteVisibility = MISSING,
+        visible_user_ids: list[str] = MISSING,
         cw: str | None = None,
-        local_only: bool = False,
+        local_only: bool = MISSING,
         reaction_acceptance: IReactionAcceptance = None,
-        extract_mentions: bool = True,
-        extract_hashtags: bool = True,
-        extract_emojis: bool = True,
+        no_extract_mentions: bool = MISSING,
+        no_extract_hashtags: bool = MISSING,
+        no_extract_emojis: bool = MISSING,
         channel_id: str | None = None,
-        files: list[MiFile | File | str] | None = None,
+        files: list[MiFile | File | str] = MISSING,
         poll: MiPoll | None = None,
     ):
         """Renote a note
@@ -1083,9 +1083,9 @@ class ClientNoteActions(SharedNoteActions):
             cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
-            extract_mentions=extract_mentions,
-            extract_hashtags=extract_hashtags,
-            extract_emojis=extract_emojis,
+            no_extract_mentions=no_extract_mentions,
+            no_extract_hashtags=no_extract_hashtags,
+            no_extract_emojis=no_extract_emojis,
             channel_id=channel_id,
             files=files,
             poll=poll,
@@ -1096,15 +1096,15 @@ class ClientNoteActions(SharedNoteActions):
     async def reply(
         self,
         text: str | None = None,
-        visibility: INoteVisibility = "public",
-        visible_user_ids: list[str] | None = None,
+        visibility: INoteVisibility = MISSING,
+        visible_user_ids: list[str] = MISSING,
         cw: str | None = None,
-        local_only: bool = False,
+        local_only: bool = MISSING,
         reaction_acceptance: IReactionAcceptance = None,
-        extract_mentions: bool = True,
-        extract_hashtags: bool = True,
-        extract_emojis: bool = True,
-        files: list[MiFile | File | str] | None = None,
+        no_extract_mentions: bool = MISSING,
+        no_extract_hashtags: bool = MISSING,
+        no_extract_emojis: bool = MISSING,
+        files: list[MiFile | File | str] = MISSING,
         poll: MiPoll | None = None,
     ) -> Note:
         return await super().reply(
@@ -1114,9 +1114,9 @@ class ClientNoteActions(SharedNoteActions):
             cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
-            extract_mentions=extract_mentions,
-            extract_hashtags=extract_hashtags,
-            extract_emojis=extract_emojis,
+            no_extract_mentions=no_extract_mentions,
+            no_extract_hashtags=no_extract_hashtags,
+            no_extract_emojis=no_extract_emojis,
             files=files,
             poll=poll,
             reply_id=self._note_id,
@@ -1126,15 +1126,15 @@ class ClientNoteActions(SharedNoteActions):
     async def create_quote(
         self,
         content: str | None = None,
-        visibility: INoteVisibility = "public",
-        visible_user_ids: list[str] | None = None,
+        visibility: INoteVisibility = MISSING,
+        visible_user_ids: list[str] = MISSING,
         cw: str | None = None,
-        local_only: bool = False,
+        local_only: bool = MISSING,
         reaction_acceptance: IReactionAcceptance = None,
-        extract_mentions: bool = True,
-        extract_hashtags: bool = True,
-        extract_emojis: bool = True,
-        files: list[MiFile | File | str] | None = None,
+        no_extract_mentions: bool = MISSING,
+        no_extract_hashtags: bool = MISSING,
+        no_extract_emojis: bool = MISSING,
+        files: list[MiFile | File | str] = MISSING,
         poll: MiPoll | None = None,
     ) -> Note:
         """Create a note quote.
@@ -1172,9 +1172,9 @@ class ClientNoteActions(SharedNoteActions):
             cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
-            extract_mentions=extract_mentions,
-            extract_hashtags=extract_hashtags,
-            extract_emojis=extract_emojis,
+            no_extract_mentions=no_extract_mentions,
+            no_extract_hashtags=no_extract_hashtags,
+            no_extract_emojis=no_extract_emojis,
             files=files,
             poll=poll,
             note_id=self._note_id,
@@ -1226,20 +1226,20 @@ class NoteActions(SharedNoteActions):
 
     async def create(
         self,
-        visibility: INoteVisibility = "public",
-        visible_user_ids: list[str] | None = None,
+        visibility: INoteVisibility = MISSING,
+        visible_user_ids: list[str] = MISSING,
         cw: str | None = None,
-        local_only: bool = False,
+        local_only: bool = MISSING,
         reaction_acceptance: IReactionAcceptance | None = None,
-        no_extrace_mentions: bool = False,
-        no_extract_hashtags: bool = False,
-        no_extract_emojis: bool = False,
+        no_extract_mentions: bool = MISSING,
+        no_extract_hashtags: bool = MISSING,
+        no_extract_emojis: bool = MISSING,
         reply_id: str | None = None,
         renote_id: str | None = None,
         channel_id: str | None = None,
         text: str | None = None,
-        file_ids: list[MiFile | File | str] | None = None,
-        media_ids: list[str] | None = None,
+        file_ids: list[MiFile | File | str] = MISSING,
+        media_ids: list[str] = MISSING,
         poll: MiPoll | None = None,
     ) -> Note:
         data = create_note_body(
@@ -1249,9 +1249,9 @@ class NoteActions(SharedNoteActions):
             cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
-            extract_mentions=not no_extrace_mentions,
-            extract_hashtags=not no_extract_hashtags,
-            extract_emojis=not no_extract_emojis,
+            no_extract_mentions=no_extract_mentions,
+            no_extract_hashtags=no_extract_hashtags,
+            no_extract_emojis=no_extract_emojis,
             reply_id=reply_id,
             renote_id=renote_id,
             channel_id=channel_id,
@@ -1458,14 +1458,35 @@ class NoteActions(SharedNoteActions):
         limit: int = 10,
         query: list[list[str]] | None = None,
     ):
-        """一致するタグのノートを取得します
+        """Search for notes by tag
 
         Endpoint: `/api/notes/search-by-tag`
+
+        Parameters
+        ----------
+        tag : str
+            Tag to search for
+        reply : bool | None, default=None
+            Whether to include reply notes
+        renote : bool | None, default=None
+            Whether to include renote notes
+        with_files : bool | None, default=None
+            Whether to include notes with files
+        poll : bool | None, default=None
+            Whether to include notes with polls
+        since_id : str | None, default=None
+            ID to get notes since this ID (exclusive)
+        until_id : str | None, default=None
+            ID to get notes until this ID (exclusive)
+        limit : int, default=10
+            Maximum number of notes to retrieve
+        query : list[list[str]] | None, default=None
+            Additional search query
 
         Returns
         -------
         list[Note]
-            見つかったノート
+            Found notes matching the tag
         """
         data = {
             "tag": tag,
@@ -1496,14 +1517,35 @@ class NoteActions(SharedNoteActions):
         limit: int = 10,
         query: list[list[str]] | None = None,
     ) -> AsyncGenerator[Note, None]:
-        """一致するタグのノートを取得します
+        """Search for all notes by tag using pagination
 
         Endpoint: `/api/notes/search-by-tag`
+
+        Parameters
+        ----------
+        tag : str
+            Tag to search for
+        reply : bool | None, default=None
+            Whether to include reply notes
+        renote : bool | None, default=None
+            Whether to include renote notes
+        with_files : bool | None, default=None
+            Whether to include notes with files
+        poll : bool | None, default=None
+            Whether to include notes with polls
+        since_id : str | None, default=None
+            ID to get notes since this ID (exclusive)
+        until_id : str | None, default=None
+            ID to get notes until this ID (exclusive)
+        limit : int, default=10
+            Maximum number of notes per request
+        query : list[list[str]] | None, default=None
+            Additional search query
 
         Returns
         -------
         AsyncGenerator[Note, None]
-            見つかったノート
+            Found notes matching the tag
         """
         data = {
             "tag": tag,
@@ -1536,35 +1578,35 @@ class NoteActions(SharedNoteActions):
         host: str | None = None,
         user_id: str | None = None,
         channel_id: str | None = None,
-    ):  # それぞれのIDに合わせたメソッドをactionに実装する
-        """ノートを検索します
+    ):  # Implement methods for each ID in actions
+        """Search for notes
 
         Endpoint: `/api/notes/search`
 
         Parameters
         ----------
         query : str
-            検索クエリ
+            Search query string
         since_id : str | None, default=None
-            このIDより後のノートを取得します
+            ID to get notes since this ID (exclusive)
         until_id : str | None, default=None
-            このIDより前のノートを取得します
+            ID to get notes until this ID (exclusive)
         limit : int, default=10
-            取得するノートの数
+            Maximum number of notes to retrieve
         offset : int, default=0
-            オフセット
+            Offset for pagination
         host : str | None, default=None
-            対象のサーバー
-            localhostは . で表現します
+            Target server hostname
+            Use "." for localhost
         user_id : str | None, default=None
-            対象のユーザー
+            Target user ID to search within
         channel_id : str | None, default=None
-            対象のチャンネル
+            Target channel ID to search within
 
         Returns
         -------
         list[Note]
-            検索結果
+            Search results
         """
         body = {
             "query": query,
@@ -1594,34 +1636,34 @@ class NoteActions(SharedNoteActions):
         user_id: str | None = None,
         channel_id: str | None = None,
     ) -> AsyncGenerator[Note, None]:
-        """ノートを検索します
+        """Search for all notes using pagination
 
         Endpoint: `/api/notes/search`
 
         Parameters
         ----------
         query : str
-            検索クエリ
+            Search query string
         since_id : str | None, default=None
-            このIDより後のノートを取得します
+            ID to get notes since this ID (exclusive)
         until_id : str | None, default=None
-            このIDより前のノートを取得します
+            ID to get notes until this ID (exclusive)
         limit : int, default=10
-            取得するノートの数
+            Maximum number of notes per request
         offset : int, default=0
-            オフセット
+            Offset for pagination
         host : str | None, default=None
-            対象のサーバー
-            localhostは . で表現します
+            Target server hostname
+            Use "." for localhost
         user_id : str | None, default=None
-            対象のユーザー
+            Target user ID to search within
         channel_id : str | None, default=None
-            対象のチャンネル
+            Target channel ID to search within
 
         Returns
         -------
         AsyncGenerator[Note, None]
-            検索結果
+            Search results
         """
         body = {
             "query": query,
@@ -1647,18 +1689,18 @@ class NoteActions(SharedNoteActions):
     async def send(
         self,
         text: str | None = None,
-        visibility: INoteVisibility = "public",
-        visible_user_ids: list[str] | None = None,
+        visibility: INoteVisibility = MISSING,
+        visible_user_ids: list[str] = MISSING,
         cw: str | None = None,
-        local_only: bool = False,
+        local_only: bool = MISSING,
         reaction_acceptance: IReactionAcceptance = None,
-        extract_mentions: bool = True,  # 元は noExtractMentions
-        extract_hashtags: bool = True,  # 元は noExtractHashtags
-        extract_emojis: bool = True,  # 元は noExtractEmojis
+        no_extract_mentions: bool = MISSING,
+        no_extract_hashtags: bool = MISSING,
+        no_extract_emojis: bool = MISSING,
         reply_id: str | None = None,
         renote_id: str | None = None,
         channel_id: str | None = None,
-        files: list[MiFile | File | str] | None = None,
+        files: list[MiFile | File | str] = MISSING,
         poll: MiPoll | None = None,
     ) -> Note:
         """Send a note
@@ -1668,44 +1710,44 @@ class NoteActions(SharedNoteActions):
         Parameters
         ----------
         text : str | None, default=None
-            投稿する内容
+            Content to post
         visibility : INoteVisibility, optional
-            公開範囲, by default "public"
+            Visibility scope, by default "public"
             Enum: "public" "home" "followers" "specified"
         visible_user_ids : list[str] | None, optional
-            公開するユーザー, by default None
+            Users to share with (for "specified" visibility), by default None
         cw : str | None, optional
-            閲覧注意の文字, by default None
+            Content warning text, by default None
         local_only : bool, optional
-            ローカルにのみ表示するか, by default False
+            Whether to display only locally, by default False
         reaction_acceptance : IReactionAcceptance, optional
-            リアクションの受け入れ設定, by default None
+            Reaction acceptance settings, by default None
         extract_mentions : bool, optional
-            メンションを展開するか, by default True
+            Whether to extract mentions, by default True
         extract_hashtags : bool, optional
-            ハッシュタグを展開するか, by default True
+            Whether to extract hashtags, by default True
         extract_emojis : bool, optional
-            絵文字を展開するか, by default True
+            Whether to extract emojis, by default True
         reply_id : str | None, optional
-            リプライ先のid, by default None
+            ID of the note to reply to, by default None
         renote_id : str | None, optional
-            リノート先のid, by default None
+            ID of the note to renote, by default None
         channel_id : str | None, optional
-            チャンネルid, by default None
+            Channel ID, by default None
         files : list[MiFile | File | str], optional
-            添付するファイルのリスト, by default None
+            List of files to attach, by default None
         poll : MiPoll | None, optional
-            アンケート, by default None
+            Poll data, by default None
 
         Returns
         -------
         Note
-            投稿したノート
+            The posted note
 
         Raises
         ------
         ContentRequired
-            [description]
+            When no content is provided
         """
         body = create_note_body(
             text=text,
@@ -1714,9 +1756,9 @@ class NoteActions(SharedNoteActions):
             cw=cw,
             local_only=local_only,
             reaction_acceptance=reaction_acceptance,
-            extract_mentions=extract_mentions,
-            extract_hashtags=extract_hashtags,
-            extract_emojis=extract_emojis,
+            no_extract_mentions=no_extract_mentions,
+            no_extract_hashtags=no_extract_hashtags,
+            no_extract_emojis=no_extract_emojis,
             reply_id=reply_id,
             renote_id=renote_id,
             channel_id=channel_id,
@@ -1740,12 +1782,12 @@ class NoteActions(SharedNoteActions):
         Parameters
         ----------
         note_id : str
-            ノートのID
+            Note ID
 
         Returns
         -------
         Note
-            取得したノートID
+            Retrieved note
         """
         raw_note: INote = await self._session.request(
             Route("POST", "/api/notes/show"),
@@ -1795,7 +1837,7 @@ class NoteActions(SharedNoteActions):
         get_all: bool = False,
     ) -> AsyncGenerator[Note, None]:
         if limit > 100:
-            raise ValueError("limit は100以下である必要があります")
+            raise ValueError("limit must be 100 or less")
 
         if get_all:
             limit = 100
