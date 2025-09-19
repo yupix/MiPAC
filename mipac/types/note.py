@@ -64,27 +64,27 @@ class INote(TypedDict):
 
     id: str
     created_at: str
-    deleted_at: NotRequired[str]
+    deleted_at: NotRequired[str | None]
     text: str | None
-    cw: str | None
+    cw: NotRequired[str | None]
     user_id: str
     user: IPartialUser
-    reply_id: str | None
-    renote_id: str | None
-    reply: NotRequired["INote"]
-    renote: NotRequired["INote"]
+    reply_id: NotRequired[str | None]
+    renote_id: NotRequired[str | None]
+    reply: NotRequired[INote | None]
+    renote: NotRequired[INote | None]
     is_hidden: NotRequired[bool]
     visibility: INoteVisibility
     mentions: NotRequired[list[str]]
     visible_user_ids: NotRequired[list[str]]
-    file_ids: list[str]
-    files: list[IFile]
+    file_ids: NotRequired[list[str]]
+    files: NotRequired[list[IFile]]
     tags: NotRequired[list[str]]
-    poll: NotRequired[IPoll]
-    emojis: dict[str, str]
+    poll: NotRequired[IPoll|None]
+    emojis: NotRequired[dict[str, str]]
     channel_id: NotRequired[str | None]
     channel: NotRequired[INoteChannel | None]
-    local_only: bool
+    local_only: NotRequired[bool]
     reaction_acceptance: IReactionAcceptance
     reaction_emojis: dict[str, str]
     reactions: dict[str, int]  # リアクションの種類と数
@@ -97,6 +97,7 @@ class INote(TypedDict):
         dict[str, list[IPartialUser]]
     ]  # リアクションとユーザーのペアのキャッシュ
     clipped_count: NotRequired[int]  # Misskeyの内部的にたまに存在しないだけで普通は存在しそう...?
+    has_poll: NotRequired[bool]  # pollが存在するかどうか
     my_reaction: NotRequired[str | None]  # ログイン時のみ存在
 
 

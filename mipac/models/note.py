@@ -18,7 +18,6 @@ from mipac.types.note import (
 )
 from mipac.types.reaction import IReactionAcceptance
 from mipac.utils.format import str_to_datetime
-from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -276,7 +275,6 @@ class Note:
         """
         return self.__raw_note.get("text")
 
-
     @property
     def cw(self) -> str | None:
         """Note cw
@@ -319,7 +317,7 @@ class Note:
         str | None
             note replyId
         """
-        return self.__raw_note["reply_id"]
+        return self.__raw_note.get("reply_id")
 
     @property
     def renote_id(self) -> str | None:
@@ -330,7 +328,7 @@ class Note:
         str | None
             note renoteId
         """
-        return self.__raw_note["renote_id"]
+        return self.__raw_note.get("renote_id")
 
     @property
     def reply(self) -> Note | None:
@@ -343,7 +341,7 @@ class Note:
         """
         return (
             Note(self.__raw_note["reply"], client=self.__client)
-            if "reply" in self.__raw_note
+            if "reply" in self.__raw_note and self.__raw_note["reply"]
             else None
         )
 
@@ -358,7 +356,7 @@ class Note:
         """
         return (
             Note(self.__raw_note["renote"], client=self.__client)
-            if "renote" in self.__raw_note
+            if "renote" in self.__raw_note and self.__raw_note["renote"]
             else None
         )
 
@@ -415,7 +413,7 @@ class Note:
         list[str]
             note fileIds
         """
-        return self.__raw_note["file_ids"]
+        return self.__raw_note.get("file_ids", [])
 
     @property
     def files(self) -> list[File]:
@@ -426,7 +424,11 @@ class Note:
         list[IFile]
             note files
         """
-        return [File(raw_file, client=self.__client) for raw_file in self.__raw_note["files"]]
+        return (
+            [File(raw_file, client=self.__client) for raw_file in self.__raw_note["files"]]
+            if "files" in self.__raw_note
+            else []
+        )
 
     @property
     def tags(self) -> list[str]:
@@ -450,7 +452,7 @@ class Note:
         """
         return (
             Poll(self.__raw_note["poll"], client=self.__client)
-            if "poll" in self.__raw_note
+            if "poll" in self.__raw_note and self.__raw_note["poll"]
             else None
         )
 
@@ -463,7 +465,7 @@ class Note:
         dict[str, str]
             note emojis
         """
-        return self.__raw_note["emojis"]
+        return self.__raw_note.get("emojis", {})
 
     @property
     def channel_id(self) -> str | None:
@@ -492,15 +494,15 @@ class Note:
         )
 
     @property
-    def local_only(self) -> bool:
+    def local_only(self) -> bool | None:
         """Note localOnly
 
         Returns
         -------
-        bool
+        bool | None
             note localOnly
         """
-        return self.__raw_note["local_only"]
+        return self.__raw_note.get("local_only", None)
 
     @property
     def reaction_acceptance(self) -> IReactionAcceptance:
@@ -612,6 +614,17 @@ class Note:
             note clippedCount
         """
         return self.__raw_note.get("clipped_count")
+
+    @property
+    def has_poll(self) -> bool | None:
+        """Note hasPoll
+
+        Returns
+        -------
+        bool | None
+            note hasPoll
+        """
+        return self.__raw_note.get("has_poll")
 
     @property
     def my_reaction(self) -> str | None:
