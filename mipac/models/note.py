@@ -261,7 +261,7 @@ class Note:
         """
         return (
             str_to_datetime(self.__raw_note["deleted_at"])
-            if "deleted_at" in self.__raw_note
+            if "deleted_at" in self.__raw_note and self.__raw_note["deleted_at"]
             else None
         )
 
@@ -298,22 +298,6 @@ class Note:
             note userId
         """
         return self.__raw_note["user_id"]
-
-    @property
-    @deprecated
-    def author(self) -> PartialUser:
-        """Note author
-
-        .. deprecated:: 0.6.0
-            Use :meth:`mipac.models.note.Note.user` instead.
-
-
-        Returns
-        -------
-        PartialUser
-            note author
-        """
-        return PartialUser(self.__raw_note["user"], client=self.__client)
 
     @property
     def user(self) -> PartialUser:
