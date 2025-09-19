@@ -276,20 +276,6 @@ class Note:
         """
         return self.__raw_note.get("text")
 
-    @property
-    @deprecated
-    def content(self) -> str | None:
-        """Note content
-
-        .. deprecated:: 0.6.0
-            Use :meth:`mipac.models.note.Note.text` instead.
-
-        Returns
-        -------
-        str | None
-            note content
-        """
-        return self.text
 
     @property
     def cw(self) -> str | None:
