@@ -406,17 +406,16 @@ Attributes</span><ul>
 Attributes</span><ul>
 <li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.api">api</a></li><li class="py-attribute-table-entry">
-<a class="reference internal" href="#mipac.models.note.Note.author">author</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.channel">channel</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.channel_id">channel_id</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.clipped_count">clipped_count</a></li><li class="py-attribute-table-entry">
-<a class="reference internal" href="#mipac.models.note.Note.content">content</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.created_at">created_at</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.cw">cw</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.deleted_at">deleted_at</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.emojis">emojis</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.file_ids">file_ids</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.files">files</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.note.Note.has_poll">has_poll</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.id">id</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.is_hidden">is_hidden</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.note.Note.local_only">local_only</a></li><li class="py-attribute-table-entry">
@@ -468,23 +467,6 @@ Attributes</span><ul>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="mipac.models.note.Note.author">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">author</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></em><a class="headerlink" href="#mipac.models.note.Note.author" title="Link to this definition">¶</a></dt>
-<dd><p>Note author</p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 0.6.0: </span>Use <a class="reference internal" href="#mipac.models.note.Note.user" title="mipac.models.note.Note.user"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mipac.models.note.Note.user()</span></code></a> instead.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>note author</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="mipac.models.note.Note.channel">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">channel</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.note.NoteChannel" title="mipac.models.note.NoteChannel"><span class="pre">NoteChannel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.note.Note.channel" title="Link to this definition">¶</a></dt>
 <dd><p>Note channel</p>
@@ -522,23 +504,6 @@ Attributes</span><ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int | None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mipac.models.note.Note.content">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">content</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.note.Note.content" title="Link to this definition">¶</a></dt>
-<dd><p>Note content</p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 0.6.0: </span>Use <a class="reference internal" href="#mipac.models.note.Note.text" title="mipac.models.note.Note.text"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mipac.models.note.Note.text()</span></code></a> instead.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>note content</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str | None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -628,6 +593,20 @@ Attributes</span><ul>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.note.Note.has_poll">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_poll</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.note.Note.has_poll" title="Link to this definition">¶</a></dt>
+<dd><p>Note hasPoll</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>note hasPoll</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mipac.models.note.Note.id">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.note.Note.id" title="Link to this definition">¶</a></dt>
 <dd><p>note id</p>
@@ -657,14 +636,14 @@ Attributes</span><ul>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="mipac.models.note.Note.local_only">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">local_only</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.note.Note.local_only" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">local_only</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.note.Note.local_only" title="Link to this definition">¶</a></dt>
 <dd><p>Note localOnly</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>note localOnly</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dd class="field-even"><p>bool | None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -13225,17 +13204,16 @@ async</span><a class="reference internal" href="#mipac.utils.auth.MiAuth.wait_co
 <li><a class="reference internal" href="#note">Note</a><ul>
 <li><a class="reference internal" href="#mipac.models.note.Note"><code class="docutils literal notranslate"><span class="pre">Note</span></code></a><ul>
 <li><a class="reference internal" href="#mipac.models.note.Note.api"><code class="docutils literal notranslate"><span class="pre">Note.api</span></code></a></li>
-<li><a class="reference internal" href="#mipac.models.note.Note.author"><code class="docutils literal notranslate"><span class="pre">Note.author</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.channel"><code class="docutils literal notranslate"><span class="pre">Note.channel</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.channel_id"><code class="docutils literal notranslate"><span class="pre">Note.channel_id</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.clipped_count"><code class="docutils literal notranslate"><span class="pre">Note.clipped_count</span></code></a></li>
-<li><a class="reference internal" href="#mipac.models.note.Note.content"><code class="docutils literal notranslate"><span class="pre">Note.content</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.created_at"><code class="docutils literal notranslate"><span class="pre">Note.created_at</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.cw"><code class="docutils literal notranslate"><span class="pre">Note.cw</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.deleted_at"><code class="docutils literal notranslate"><span class="pre">Note.deleted_at</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.emojis"><code class="docutils literal notranslate"><span class="pre">Note.emojis</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.file_ids"><code class="docutils literal notranslate"><span class="pre">Note.file_ids</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.files"><code class="docutils literal notranslate"><span class="pre">Note.files</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.note.Note.has_poll"><code class="docutils literal notranslate"><span class="pre">Note.has_poll</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.id"><code class="docutils literal notranslate"><span class="pre">Note.id</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.is_hidden"><code class="docutils literal notranslate"><span class="pre">Note.is_hidden</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.note.Note.local_only"><code class="docutils literal notranslate"><span class="pre">Note.local_only</span></code></a></li>
