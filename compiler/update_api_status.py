@@ -1,6 +1,7 @@
 import copy
 import hashlib
 import json
+import pathlib
 import sys
 
 from type import OpenAPI, OpenAPIComponentSchema, OpenAPIRequestBody
@@ -8,7 +9,13 @@ from typing import Any, Literal, TypedDict
 
 import tqdm
 
-sys.path.append("../")
+CURRENT_PATH = sys.path[0]
+if CURRENT_PATH.endswith("compiler"):
+    CURRENT_PATH = CURRENT_PATH[:-9]
+
+COMPILER_PATH = pathlib.Path(CURRENT_PATH).joinpath("compiler").as_posix()
+
+sys.path.append(CURRENT_PATH)
 
 from mipac.utils.util import COLORS  # noqa: E402
 
@@ -53,10 +60,10 @@ removed: MiPACでサポートされているが、Misskeyから削除された
 """
 SECTIONS = Literal["support", "removed"]
 
-with open("./datas/v13_api.json", mode="r", encoding="utf-8") as f:
+with open(f"{COMPILER_PATH}/datas/v13_api.json", mode="r", encoding="utf-8") as f:
     api: OpenAPI = json.load(f)
 
-with open("./datas/endpoints.json", mode="r", encoding="utf-8") as f:
+with open(f"{COMPILER_PATH}/datas/endpoints.json", mode="r", encoding="utf-8") as f:
     endpoints: IData = json.load(f)
     _endpoints: IData = copy.deepcopy(endpoints)
 
@@ -144,7 +151,7 @@ for schema in tqdm.tqdm(api["components"]["schemas"]):
                 endpoints["schemas"][schema]["status"] = "needToWork"
 
 
-with open("./datas/endpoints.json", mode="w", encoding="utf-8") as f:
+with open(f"{COMPILER_PATH}/datas/endpoints.json", mode="w", encoding="utf-8") as f:
     json.dump(endpoints, f, ensure_ascii=False, indent=4)
 
 
@@ -158,7 +165,7 @@ def get_list(data: IData, section: SECTIONS, status: STATUS):
     return result
 
 
-with open("./datas/support_status.md", mode="w", encoding="utf-8") as f:
+with open(f"{COMPILER_PATH}/datas/support_status.md", mode="w", encoding="utf-8") as f:
     path_number = len(endpoints["endpoints"]["support"])
     supported_path_number = len(
         [
