@@ -15,6 +15,7 @@ from mipac.types.user import (
     EmailNotificationTypes,
     GetFrequentlyRepliedUsersResponse,
     IAchievement,
+    IChatScope,
     ICreatedUser,
     IFfVisibility,
     IMeDetailedOnlySchema,
@@ -293,6 +294,15 @@ class UserDetailedNotMeOnly:
     @property
     def followers_visibility(self) -> IFfVisibility:
         return self._raw_user["followers_visibility"]
+
+    @property
+    def chat_scope(self) -> IChatScope:
+        return self._raw_user["chat_scope"]
+    
+
+    @property
+    def can_chat(self) -> bool:
+        return self._raw_user["can_chat"]
 
     @property
     def roles(self) -> list[PartialRole]:

@@ -18,7 +18,7 @@ NotificationRecieveConfigOption = Literal[
     "all", "following", "follower", "mutualFollow", "followingOrFollower", "never"
 ]  # Misskey側が間違っている(Receiveのミススペル?)ので混乱を招かないようにこっちも統一してある
 EmailNotificationTypes = Literal["mention", "reply", "quote", "follow", "receiveFollowRequest"]
-
+IChatScope = Literal['everyone', 'following', 'followers', 'mutual', 'none']
 
 class IUserField(TypedDict):
     name: str
@@ -107,6 +107,9 @@ class IPartialUser(TypedDict):
     avatar_decorations: list[IAvatarDecoration]
     is_bot: NotRequired[bool]
     is_cat: NotRequired[bool]
+    requires_signin_to_view_contents: NotRequired[bool]
+    make_notes_followers_only_before: NotRequired[int | None]
+    make_notes_hidden_before: NotRequired[int | None]
     instance: NotRequired[IInstanceLite]  # ローカルユーザーの場合はキーが無い
     emojis: dict[str, str]
     online_status: IUserOnlineStatus
@@ -144,13 +147,15 @@ class IUserDetailedNotMeOnlySchema(TypedDict):
     public_reactions: bool
     following_visibility: IFfVisibility
     followers_visibility: IFfVisibility
+    chat_scope: IChatScope
+    can_chat: bool
     roles: list[IPartialRole]
     followed_message: NotRequired[str | None]
     memo: str | None
+    moderation_note: NotRequired[str]
     two_factor_enabled: NotRequired[bool]
     use_password_less_login: NotRequired[bool]
     security_keys: NotRequired[bool]
-    moderation_note: NotRequired[str]
     is_following: NotRequired[bool]
     is_followed: NotRequired[bool]
     has_pending_follow_request_from_you: NotRequired[bool]

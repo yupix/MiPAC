@@ -239,6 +239,18 @@ class PartialUser[PU: IPartialUser]:
         return self._raw_user.get("is_cat")
 
     @property
+    def requires_signin_to_view_contents(self) -> bool | None:
+        return self._raw_user.get("requires_signin_to_view_contents")
+
+    @property
+    def make_notes_followers_only_before(self) -> int | None:
+        return self._raw_user.get("make_notes_followers_only_before")
+
+    @property
+    def make_notes_hidden_before(self) -> int | None:
+        return self._raw_user.get("make_notes_hidden_before")
+
+    @property
     def instance(self) -> LiteInstance | None:
         """Returns the instance of the user.
 
