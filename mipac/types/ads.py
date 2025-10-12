@@ -4,17 +4,15 @@ IAdPlaces = Literal["square", "horizontal", "horizontal-big"]
 IAdPriority = Literal["high", "middle", "low"]
 
 
-class IPartialAd(TypedDict):
+class IAd(TypedDict):
     id: str
-    url: str
-    place: IAdPlaces
-    ratio: int
-    image_url: str
-    day_of_week: int
-
-
-class IAd(IPartialAd):
     expires_at: str
     starts_at: str
+    place: IAdPlaces
     priority: IAdPriority
+    ratio: int
+    url: str
+    image_url: str
     memo: str | None
+    day_of_week: int
+    is_sensitive: bool

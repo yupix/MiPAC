@@ -1,10 +1,20 @@
 from typing import Literal, NotRequired, TypedDict
 
-from mipac.types.ads import IPartialAd
+from mipac.types.ads import IAdPlaces
 from mipac.types.roles import IRolePolicies
 
 ISensitiveMediaDetectionSentivity = Literal["medium", "low", "high", "veryLow", "veryHigh"]
 ISensitiveMediaDetection = Literal["none", "all", "local", "remote"]
+
+
+class IMetaAd(TypedDict):
+    id: str
+    url: str
+    place: IAdPlaces
+    ratio: int
+    image_url: str
+    day_of_week: int
+    is_sensitive: bool
 
 
 class IFeatures(TypedDict):
@@ -55,7 +65,7 @@ class IPartialMeta(TypedDict):
     not_found_image_url: str | None
     icon_url: str | None
     max_note_text_length: int
-    ads: list[IPartialAd]
+    ads: list[IMetaAd]
     notes_per_one_ad: int
     enable_email: bool
     enable_service_worker: bool

@@ -36,6 +36,7 @@ class SharedAdminAdActions(AbstractAction):
         expires_at: int = MISSING,
         starts_at: int = MISSING,
         day_of_week: int = MISSING,
+        is_sensitive: bool = MISSING,
         *,
         ad_id: str,
     ) -> bool:
@@ -50,6 +51,7 @@ class SharedAdminAdActions(AbstractAction):
                 "ratio": ratio,
                 "expiresAt": expires_at,
                 "startsAt": starts_at,
+                "isSensitive": is_sensitive,
                 "dayOfWeek": day_of_week,
             }
         )
@@ -65,21 +67,24 @@ class ClientAdminAdActions(SharedAdminAdActions):
         self.__ad_id: str = ad_id
 
     @override
-    async def delete(self) -> bool:
-        return await super().delete(ad_id=self.__ad_id)
+    async def delete(self, *, ad_id: str | None = None) -> bool:
+        return await super().delete(ad_id=ad_id or self.__ad_id)
 
     @override
     async def update(
         self,
-        memo: str,
-        url: str,
-        image_url: str,
-        place: Literal["square", "horizontal", "horizontal-big"],
-        priority: Literal["high", "middle", "low"],
-        ratio: int,
-        expires_at: int,
-        starts_at: int,
-        day_of_week: int,
+        memo: str = MISSING,
+        url: str = MISSING,
+        image_url: str = MISSING,
+        place: Literal["square", "horizontal", "horizontal-big"] = MISSING,
+        priority: Literal["high", "middle", "low"] = MISSING,
+        ratio: int = MISSING,
+        expires_at: int = MISSING,
+        starts_at: int = MISSING,
+        day_of_week: int = MISSING,
+        is_sensitive: bool = MISSING,
+        *,
+        ad_id: str | None = None,
     ) -> bool:
         return await super().update(
             memo=memo,
@@ -91,7 +96,8 @@ class ClientAdminAdActions(SharedAdminAdActions):
             expires_at=expires_at,
             starts_at=starts_at,
             day_of_week=day_of_week,
-            ad_id=self.__ad_id,
+            is_sensitive=is_sensitive,
+            ad_id=ad_id or self.__ad_id,
         )
 
 
@@ -110,18 +116,22 @@ class AdminAdActions(SharedAdminAdActions):
         starts_at: str,
         image_url: str,
         day_of_week: int,
+        is_sensitive: bool = MISSING,
     ) -> Ad:
-        data = {
-            "url": url,
-            "memo": memo or "",
-            "place": place,
-            "priority": priority,
-            "ratio": ratio,
-            "expiresAt": expires_at,
-            "startsAt": starts_at,
-            "imageUrl": image_url,
-            "dayOfWeek": day_of_week,
-        }
+        data = remove_dict_missing(
+            {
+                "url": url,
+                "memo": memo or "",
+                "place": place,
+                "priority": priority,
+                "ratio": ratio,
+                "expiresAt": expires_at,
+                "startsAt": starts_at,
+                "imageUrl": image_url,
+                "dayOfWeek": day_of_week,
+                "isSensitive": is_sensitive,
+            }
+        )
         raw_ad: IAd = await self._session.request(
             Route("POST", "/api/admin/ad/create"), json=data, auth=True, lower=True
         )
@@ -132,14 +142,20 @@ class AdminAdActions(SharedAdminAdActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
+        since_date: int = MISSING,
+        until_date: int = MISSING,
         publishing: bool | None = None,
     ):
-        data = {
-            "limit": limit,
-            "sinceId": since_id,
-            "until_id": until_id,
-            "publishing": publishing,
-        }
+        data = remove_dict_missing(
+            {
+                "limit": limit,
+                "sinceId": since_id,
+                "untilId": until_id,
+                "sinceDate": since_date,
+                "untilDate": until_date,
+                "publishing": publishing,
+            }
+        )
 
         raw_ads: list[IAd] = await self._session.request(
             Route("POST", "/api/admin/ad/list"), auth=True, json=data
@@ -152,12 +168,16 @@ class AdminAdActions(SharedAdminAdActions):
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
+        since_date: int = MISSING,
+        until_date: int = MISSING,
         publishing: bool | None = None,
     ) -> AsyncGenerator[Ad, None]:
         data = {
             "limit": limit,
             "sinceId": since_id,
-            "until_id": until_id,
+            "untilId": until_id,
+            "sinceDate": since_date,
+            "untilDate": until_date,
             "publishing": publishing,
         }
 

@@ -11,7 +11,7 @@
                 "path": "/admin/accounts/create",
                 "request_body_hash": "7eb1f85ad51ffd0d7c2f3526824ab89319c73d0bb4cea9b5b3c3c12dc582e80d",
                 "response_body_hash": "7dbd1348c06d541e4dda99ca3ec0775956d46fb4d66ea3fd5baa530f482680c8",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/accounts/delete": {
                 "path": "/admin/accounts/delete",
@@ -23,7 +23,7 @@
                 "path": "/admin/ad/create",
                 "request_body_hash": "45a2e735dbb7414376e87a01e4525b70fafd3e0212885307566da426f0396d24",
                 "response_body_hash": "f496d710736ef81ff7cd018f4e16590c99e94db41fbdb9bd779b21febb2cb315",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/ad/delete": {
                 "path": "/admin/ad/delete",
@@ -35,19 +35,19 @@
                 "path": "/admin/ad/list",
                 "request_body_hash": "e20de684d25d904639140b74defbe8417941d1013e901e907fc6e4032d504dba",
                 "response_body_hash": "a79855356057d019101f86baf1364bfb69290167ac26340739a70435e4d916c0",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/ad/update": {
                 "path": "/admin/ad/update",
                 "request_body_hash": "7ddf0c0885a2b5070250da0e68948fdc74ea55007c58a321329d4fb0bd717b3b",
                 "response_body_hash": "bf3dcbf5d0f19fa1102b7efc8947170c2292180d72b1188152338f42706edeb9",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/announcements/create": {
                 "path": "/admin/announcements/create",
                 "request_body_hash": "bcc88c1477cca20d084baa10608d882c5a0c905a2cceccdf19dce6984d326f06",
                 "response_body_hash": "ce1d7028219c7b4f65c53f49a59ee93a927f42b4a67d88fd946548800fbfe673",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/announcements/delete": {
                 "path": "/admin/announcements/delete",
@@ -2635,27 +2635,27 @@
         "UserList": {
             "name": "UserList",
             "hash": "5259c1402c1fb77e67dfd6eaedfe3383a75837538a224ce15f2d733793c77ac3",
-            "status": "needToWork"
+            "status": "supported"
         },
         "Announcement": {
             "name": "Announcement",
             "hash": "a5a93362ad8d27594b42bc86ec111e11ea302e45c30b2d0b219d5aa52dd81999",
-            "status": "needToWork"
+            "status": "supported"
         },
         "App": {
             "name": "App",
             "hash": "1c8addc6c7efdc356e3be846d48e6c8b2f53293d8268e737895da9ab8fae0cac",
-            "status": "needToWork"
+            "status": "supported"
         },
         "Note": {
             "name": "Note",
             "hash": "c70af60837e75d4a70ce72760f90885e0d7f37a67faed00958a149cbd8fe7a0c",
-            "status": "needToWork"
+            "status": "supported"
         },
         "NoteReaction": {
             "name": "NoteReaction",
             "hash": "68f73275a5d060bf4beaa993b1053abcb933492d557861bd04d4ec9c708bb710",
-            "status": "needToWork"
+            "status": "supported"
         },
         "NoteFavorite": {
             "name": "NoteFavorite",
@@ -2760,7 +2760,7 @@
         "Ad": {
             "name": "Ad",
             "hash": "b4b13bac8d195ba4c72e69784d2d971598a083217e4338d647d330398a14e84a",
-            "status": "notSupported"
+            "status": "supported"
         },
         "Signin": {
             "name": "Signin",

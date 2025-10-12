@@ -18,7 +18,8 @@ NotificationRecieveConfigOption = Literal[
     "all", "following", "follower", "mutualFollow", "followingOrFollower", "never"
 ]  # Misskey側が間違っている(Receiveのミススペル?)ので混乱を招かないようにこっちも統一してある
 EmailNotificationTypes = Literal["mention", "reply", "quote", "follow", "receiveFollowRequest"]
-IChatScope = Literal['everyone', 'following', 'followers', 'mutual', 'none']
+IChatScope = Literal["everyone", "following", "followers", "mutual", "none"]
+
 
 class IUserField(TypedDict):
     name: str

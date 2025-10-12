@@ -298,7 +298,6 @@ class UserDetailedNotMeOnly:
     @property
     def chat_scope(self) -> IChatScope:
         return self._raw_user["chat_scope"]
-    
 
     @property
     def can_chat(self) -> bool:

@@ -80,7 +80,7 @@ class INote(TypedDict):
     file_ids: NotRequired[list[str]]
     files: NotRequired[list[IFile]]
     tags: NotRequired[list[str]]
-    poll: NotRequired[IPoll|None]
+    poll: NotRequired[IPoll | None]
     emojis: NotRequired[dict[str, str]]
     channel_id: NotRequired[str | None]
     channel: NotRequired[INoteChannel | None]

@@ -437,5 +437,5 @@ ENDPOINTS = Literal[
     "/api/users/show",
     "/api/users/update-memo",
     "/api/v2/admin/emoji/list",
-    "/api/verify-email"
+    "/api/verify-email",
 ]

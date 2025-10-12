@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
 
 class IApp(TypedDict):
@@ -6,5 +6,5 @@ class IApp(TypedDict):
     name: str
     callback_url: str | None
     permission: list[str]
-    secret: str
-    is_authorized: bool
+    secret: NotRequired[str]
+    is_authorized: NotRequired[bool]

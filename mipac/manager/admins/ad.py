@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, Literal
 from mipac.abstract.manager import AbstractManager
 from mipac.actions.admins.ad import AdminAdActions, ClientAdminAdActions
 from mipac.http import HTTPClient, Route
+from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.client import ClientManager
@@ -34,6 +35,7 @@ class AdminAdManager(AbstractManager):
     def action(self) -> AdminAdActions:
         return AdminAdActions(session=self.__session, client=self.__client)
 
+    @deprecated
     async def create(
         self,
         url: str,
@@ -44,6 +46,11 @@ class AdminAdManager(AbstractManager):
         expires_at: int,
         image_url: str,
     ):
+        """
+        ... deprecated
+        Use `AdminAdActions.create` instead
+        責務違反の為 0.8.0 で削除予定
+        """
         data = {
             "url": url,
             "memo": memo,

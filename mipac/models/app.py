@@ -26,11 +26,11 @@ class App:
         return self.__raw_app["permission"]
 
     @property
-    def secret(self) -> str:
+    def secret(self) -> str | None:
         """The secret of the app"""
-        return self.__raw_app["secret"]
+        return self.__raw_app.get("secret")
 
     @property
-    def is_authorized(self) -> bool:
+    def is_authorized(self) -> bool | None:
         """If the app is authorized or not"""
-        return self.__raw_app["is_authorized"]
+        return self.__raw_app.get("is_authorized")
