@@ -703,6 +703,15 @@ PartialRole
     :members:
 
 
+MetaAd
+~~~~~~
+
+.. attributetable:: mipac.models.lite.meta.MetaAd
+
+.. autoclass:: mipac.models.lite.meta.MetaAd
+    :members:
+
+
 PartialMeta
 ~~~~~~~~~~~
 
@@ -736,15 +745,6 @@ PartialUser
 .. attributetable:: mipac.models.lite.user.PartialUser
 
 .. autoclass:: mipac.models.lite.user.PartialUser
-    :members:
-
-
-PartialAd
-~~~~~~~~~
-
-.. attributetable:: mipac.models.lite.ad.PartialAd
-
-.. autoclass:: mipac.models.lite.ad.PartialAd
     :members:
 
 
@@ -2179,6 +2179,15 @@ IMeta
     :members:
 
 
+IMetaAd
+~~~~~~~
+
+.. attributetable:: mipac.types.meta.IMetaAd
+
+.. autoclass:: mipac.types.meta.IMetaAd
+    :members:
+
+
 IMetaDetailed
 ~~~~~~~~~~~~~
 
@@ -2839,15 +2848,6 @@ IAd
 .. attributetable:: mipac.types.ads.IAd
 
 .. autoclass:: mipac.types.ads.IAd
-    :members:
-
-
-IPartialAd
-~~~~~~~~~~
-
-.. attributetable:: mipac.types.ads.IPartialAd
-
-.. autoclass:: mipac.types.ads.IPartialAd
     :members:
 
 

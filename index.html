@@ -1132,9 +1132,15 @@ Attributes</span><ul>
 Attributes</span><ul>
 <li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.ad.Ad.expires_at">expires_at</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.ad.Ad.id">id</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.ad.Ad.image_url">image_url</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.ad.Ad.is_sensitive">is_sensitive</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.ad.Ad.memo">memo</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.ad.Ad.place">place</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.ad.Ad.priority">priority</a></li><li class="py-attribute-table-entry">
-<a class="reference internal" href="#mipac.models.ad.Ad.starts_at">starts_at</a></li></ul>
+<a class="reference internal" href="#mipac.models.ad.Ad.ratio">ratio</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.ad.Ad.starts_at">starts_at</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.ad.Ad.url">url</a></li></ul>
 </div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.ad.Ad">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.ad.</span></span><span class="sig-name descname"><span class="pre">Ad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ad_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.ads.IAd" title="mipac.types.ads.IAd"><span class="pre">IAd</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.ad.Ad" title="Link to this definition">¶</a></dt>
@@ -1148,6 +1154,48 @@ Attributes</span><ul>
 </dd>
 <dt class="field-even">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-even"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.ad.Ad.id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.ad.Ad.id" title="Link to this definition">¶</a></dt>
+<dd><p>広告のID</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>広告のID</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.ad.Ad.image_url">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">image_url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.ad.Ad.image_url" title="Link to this definition">¶</a></dt>
+<dd><p>広告の画像URL</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>広告の画像URL</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.ad.Ad.is_sensitive">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_sensitive</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.ad.Ad.is_sensitive" title="Link to this definition">¶</a></dt>
+<dd><p>広告がセンシティブかどうか</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>広告がセンシティブかどうか</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1167,15 +1215,43 @@ Attributes</span><ul>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.ad.Ad.place">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">place</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'square'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'horizontal'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'horizontal-big'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.ad.Ad.place" title="Link to this definition">¶</a></dt>
+<dd><p>広告の掲載場所</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>広告の掲載場所</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>IAdPlaces</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mipac.models.ad.Ad.priority">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">priority</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'highmiddlelow'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.ad.Ad.priority" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">priority</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'high'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'middle'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'low'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mipac.models.ad.Ad.priority" title="Link to this definition">¶</a></dt>
 <dd><p>広告の優先度</p>
 <dl class="field-list simple">
 <dt class="field-odd">戻り値<span class="colon">:</span></dt>
 <dd class="field-odd"><p>広告の優先度</p>
 </dd>
 <dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p>Literal[&quot;high&quot; &quot;middle&quot; &quot;low&quot;]</p>
+<dd class="field-even"><p>IAdPriority</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.ad.Ad.ratio">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ratio</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mipac.models.ad.Ad.ratio" title="Link to this definition">¶</a></dt>
+<dd><p>広告の表示比率</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>広告の表示比率</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1190,6 +1266,20 @@ Attributes</span><ul>
 </dd>
 <dt class="field-even">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-even"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.ad.Ad.url">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.ad.Ad.url" title="Link to this definition">¶</a></dt>
+<dd><p>広告のリンク先URL</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>広告のリンク先URL</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2692,7 +2782,7 @@ Attributes</span><ul>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="mipac.models.app.App.is_authorized">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_authorized</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mipac.models.app.App.is_authorized" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_authorized</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.app.App.is_authorized" title="Link to this definition">¶</a></dt>
 <dd><p>If the app is authorized or not</p>
 </dd></dl>
 
@@ -2710,7 +2800,7 @@ Attributes</span><ul>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="mipac.models.app.App.secret">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">secret</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.app.App.secret" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">secret</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mipac.models.app.App.secret" title="Link to this definition">¶</a></dt>
 <dd><p>The secret of the app</p>
 </dd></dl>
 
@@ -2722,6 +2812,14 @@ Attributes</span><ul>
 <div class="py-attribute-table" data-move-to-id="mipac.models.lite.role.PartialRole"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.lite.role.PartialRole">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.lite.role.</span></span><span class="sig-name descname"><span class="pre">PartialRole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.lite.role.PartialRole" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="metaad">
+<h3>MetaAd<a class="headerlink" href="#metaad" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.models.lite.meta.MetaAd"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.models.lite.meta.MetaAd">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.lite.meta.</span></span><span class="sig-name descname"><span class="pre">MetaAd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_ad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.lite.meta.MetaAd" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -3119,48 +3217,6 @@ def</span><a class="reference internal" href="#mipac.models.lite.user.PartialUse
 <dl class="field-list simple">
 <dt class="field-odd">戻り値<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The username of the user.</p>
-</dd>
-<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
-<section id="partialad">
-<h3>PartialAd<a class="headerlink" href="#partialad" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.models.lite.ad.PartialAd"><div class="py-attribute-table-column">
-<span>
-Attributes</span><ul>
-<li class="py-attribute-table-entry">
-<a class="reference internal" href="#mipac.models.lite.ad.PartialAd.id">id</a></li><li class="py-attribute-table-entry">
-<a class="reference internal" href="#mipac.models.lite.ad.PartialAd.url">url</a></li></ul>
-</div></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.models.lite.ad.PartialAd">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.models.lite.ad.</span></span><span class="sig-name descname"><span class="pre">PartialAd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_ad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.lite.ad.PartialAd" title="Link to this definition">¶</a></dt>
-<dd><dl class="py property">
-<dt class="sig sig-object py" id="mipac.models.lite.ad.PartialAd.id">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.lite.ad.PartialAd.id" title="Link to this definition">¶</a></dt>
-<dd><p>広告のID</p>
-<dl class="field-list simple">
-<dt class="field-odd">戻り値<span class="colon">:</span></dt>
-<dd class="field-odd"><p>広告のID</p>
-</dd>
-<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mipac.models.lite.ad.PartialAd.url">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mipac.models.lite.ad.PartialAd.url" title="Link to this definition">¶</a></dt>
-<dd><p>広告のURL</p>
-<dl class="field-list simple">
-<dt class="field-odd">戻り値<span class="colon">:</span></dt>
-<dd class="field-odd"><p>広告のURL</p>
 </dd>
 <dt class="field-even">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
@@ -3683,10 +3739,24 @@ Attributes</span><ul>
 </section>
 <section id="adminadmanager">
 <h3>AdminAdManager<a class="headerlink" href="#adminadmanager" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.manager.admins.ad.AdminAdManager"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.manager.admins.ad.AdminAdManager"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="メソッド">
+def</span><a class="reference internal" href="#mipac.manager.admins.ad.AdminAdManager.create">create</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.manager.admins.ad.AdminAdManager">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.manager.admins.ad.</span></span><span class="sig-name descname"><span class="pre">AdminAdManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.admins.ad.AdminAdManager" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.manager.admins.ad.AdminAdManager.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">place</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'high'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'middle'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'low'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_at</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.manager.admins.ad.AdminAdManager.create" title="Link to this definition">¶</a></dt>
+<dd><p>... deprecated
+Use <cite>AdminAdActions.create</cite> instead
+責務違反の為 0.8.0 で削除予定</p>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="clientadminadmanager">
@@ -7653,7 +7723,7 @@ async</span><a class="reference internal" href="#mipac.actions.admins.announceme
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.announcement.</span></span><span class="sig-name descname"><span class="pre">ClientAdminAnnouncementActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions" title="Link to this definition">¶</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete" title="Link to this definition">¶</a></dt>
 <dd><p>指定したお知らせを削除します</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
@@ -7670,7 +7740,7 @@ async</span><a class="reference internal" href="#mipac.actions.admins.announceme
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'info'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'wanirng'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'error'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'success'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'dialog'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'normal'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'banner'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">for_existing_users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">need_confirmation_to_read</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'info'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'wanirng'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'error'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'success'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'dialog'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'normal'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'banner'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">for_existing_users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">need_confirmation_to_read</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update" title="Link to this definition">¶</a></dt>
 <dd><p>指定したお知らせを更新します</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
@@ -10240,6 +10310,14 @@ async</span><a class="reference internal" href="#mipac.actions.users.mute.Shared
 <dd></dd></dl>
 
 </section>
+<section id="imetaad">
+<h3>IMetaAd<a class="headerlink" href="#imetaad" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.meta.IMetaAd"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.meta.IMetaAd">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.meta.</span></span><span class="sig-name descname"><span class="pre">IMetaAd</span></span><a class="headerlink" href="#mipac.types.meta.IMetaAd" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="imetadetailed">
 <h3>IMetaDetailed<a class="headerlink" href="#imetadetailed" title="Link to this heading">¶</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.types.meta.IMetaDetailed"></div><dl class="py class">
@@ -10858,14 +10936,6 @@ IMeDetailedOnlySchema が持つ avatar_id が無いことを確認する
 <div class="py-attribute-table" data-move-to-id="mipac.types.ads.IAd"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.types.ads.IAd">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.ads.</span></span><span class="sig-name descname"><span class="pre">IAd</span></span><a class="headerlink" href="#mipac.types.ads.IAd" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="ipartialad">
-<h3>IPartialAd<a class="headerlink" href="#ipartialad" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.types.ads.IPartialAd"></div><dl class="py class">
-<dt class="sig sig-object py" id="mipac.types.ads.IPartialAd">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mipac.types.ads.</span></span><span class="sig-name descname"><span class="pre">IPartialAd</span></span><a class="headerlink" href="#mipac.types.ads.IPartialAd" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -13345,9 +13415,15 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 <li><a class="reference internal" href="#ad">Ad</a><ul>
 <li><a class="reference internal" href="#mipac.models.ad.Ad"><code class="docutils literal notranslate"><span class="pre">Ad</span></code></a><ul>
 <li><a class="reference internal" href="#mipac.models.ad.Ad.expires_at"><code class="docutils literal notranslate"><span class="pre">Ad.expires_at</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.ad.Ad.id"><code class="docutils literal notranslate"><span class="pre">Ad.id</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.ad.Ad.image_url"><code class="docutils literal notranslate"><span class="pre">Ad.image_url</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.ad.Ad.is_sensitive"><code class="docutils literal notranslate"><span class="pre">Ad.is_sensitive</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.ad.Ad.memo"><code class="docutils literal notranslate"><span class="pre">Ad.memo</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.ad.Ad.place"><code class="docutils literal notranslate"><span class="pre">Ad.place</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.ad.Ad.priority"><code class="docutils literal notranslate"><span class="pre">Ad.priority</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.ad.Ad.ratio"><code class="docutils literal notranslate"><span class="pre">Ad.ratio</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.ad.Ad.starts_at"><code class="docutils literal notranslate"><span class="pre">Ad.starts_at</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.ad.Ad.url"><code class="docutils literal notranslate"><span class="pre">Ad.url</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -13625,6 +13701,10 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 <li><a class="reference internal" href="#mipac.models.lite.role.PartialRole"><code class="docutils literal notranslate"><span class="pre">PartialRole</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#metaad">MetaAd</a><ul>
+<li><a class="reference internal" href="#mipac.models.lite.meta.MetaAd"><code class="docutils literal notranslate"><span class="pre">MetaAd</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#partialmeta">PartialMeta</a><ul>
 <li><a class="reference internal" href="#mipac.models.lite.meta.PartialMeta"><code class="docutils literal notranslate"><span class="pre">PartialMeta</span></code></a></li>
 </ul>
@@ -13667,14 +13747,6 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 <li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.nickname"><code class="docutils literal notranslate"><span class="pre">PartialUser.nickname</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.online_status"><code class="docutils literal notranslate"><span class="pre">PartialUser.online_status</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.username"><code class="docutils literal notranslate"><span class="pre">PartialUser.username</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#partialad">PartialAd</a><ul>
-<li><a class="reference internal" href="#mipac.models.lite.ad.PartialAd"><code class="docutils literal notranslate"><span class="pre">PartialAd</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.models.lite.ad.PartialAd.id"><code class="docutils literal notranslate"><span class="pre">PartialAd.id</span></code></a></li>
-<li><a class="reference internal" href="#mipac.models.lite.ad.PartialAd.url"><code class="docutils literal notranslate"><span class="pre">PartialAd.url</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -13871,7 +13943,10 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 </ul>
 </li>
 <li><a class="reference internal" href="#adminadmanager">AdminAdManager</a><ul>
-<li><a class="reference internal" href="#mipac.manager.admins.ad.AdminAdManager"><code class="docutils literal notranslate"><span class="pre">AdminAdManager</span></code></a></li>
+<li><a class="reference internal" href="#mipac.manager.admins.ad.AdminAdManager"><code class="docutils literal notranslate"><span class="pre">AdminAdManager</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.manager.admins.ad.AdminAdManager.create"><code class="docutils literal notranslate"><span class="pre">AdminAdManager.create()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#clientadminadmanager">ClientAdminAdManager</a><ul>
@@ -14708,6 +14783,10 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 <li><a class="reference internal" href="#mipac.types.meta.IMeta"><code class="docutils literal notranslate"><span class="pre">IMeta</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#imetaad">IMetaAd</a><ul>
+<li><a class="reference internal" href="#mipac.types.meta.IMetaAd"><code class="docutils literal notranslate"><span class="pre">IMetaAd</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#imetadetailed">IMetaDetailed</a><ul>
 <li><a class="reference internal" href="#mipac.types.meta.IMetaDetailed"><code class="docutils literal notranslate"><span class="pre">IMetaDetailed</span></code></a></li>
 </ul>
@@ -15006,10 +15085,6 @@ async</span><a class="reference internal" href="#mipac.utils.pagination.Paginati
 </li>
 <li><a class="reference internal" href="#iad">IAd</a><ul>
 <li><a class="reference internal" href="#mipac.types.ads.IAd"><code class="docutils literal notranslate"><span class="pre">IAd</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#ipartialad">IPartialAd</a><ul>
-<li><a class="reference internal" href="#mipac.types.ads.IPartialAd"><code class="docutils literal notranslate"><span class="pre">IPartialAd</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#attachedfilepayload">AttachedFilePayload</a><ul>
