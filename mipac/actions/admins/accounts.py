@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
-from mipac.models.user import CreatedUser
+from mipac.models.user import CreatedUser, UserDetailedNotMe
 from mipac.types.user import ICreatedUser
 
 if TYPE_CHECKING:
@@ -66,3 +66,12 @@ class AdminAccountActions(AbstractAction):
             lower=True,
         )
         return bool(res)
+
+    async def find_by_email(self, email: str) -> UserDetailedNotMe:
+        res = await self._session.request(
+            Route("POST", "/api/admin/accounts/find-by-email"),
+            json={"email": email},
+            auth=True,
+            lower=True,
+        )
+        return UserDetailedNotMe(res, client=self._client)
