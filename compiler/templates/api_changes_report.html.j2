@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 変更レポート - Misskey {{ api_version }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-gradient: linear-gradient(180deg, #0d0d14 0%, #0a0a0f 100%);
+            --surface: #13131a;
+            --surface-elevated: #1a1a24;
+            --surface-hover: #1e1e2a;
+            --border: rgba(255,255,255,0.06);
+            --border-strong: rgba(255,255,255,0.1);
+            --accent: #a78bfa;
+            --accent-hover: #c4b5fd;
+            --accent-glow: rgba(167, 139, 250, 0.15);
+            --accent-subtle: rgba(167, 139, 250, 0.08);
+            --text: #a1a1aa;
+            --text-bold: #fafafa;
+            --text-muted: #71717a;
+            --success: #34d399;
+            --success-bg: rgba(52, 211, 153, 0.1);
+            --warning: #fbbf24;
+            --warning-bg: rgba(251, 191, 36, 0.1);
+            --danger: #f87171;
+            --danger-bg: rgba(248, 113, 113, 0.1);
+            --font-main: 'DM Sans', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+            --radius: 8px;
+            --radius-sm: 6px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-gradient);
+            color: var(--text);
+            line-height: 1.65;
+            min-height: 100vh;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar - Elysia wiki style */
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            padding: 1.5rem 0;
+            border-right: 1px solid var(--border);
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+        }
+
+        .sidebar-nav {
+            padding: 0 1rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding: 0 0.75rem;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: var(--radius-sm);
+            transition: all 0.15s;
+            margin-bottom: 0.125rem;
+        }
+
+        .sidebar a:hover {
+            color: var(--accent);
+            background: var(--accent-subtle);
+        }
+
+        .main {
+            flex: 1;
+            padding: 2.5rem 3rem 4rem;
+            max-width: 900px;
+        }
+
+        header {
+            margin-bottom: 3rem;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #c084fc);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-bold);
+            letter-spacing: -0.02em;
+        }
+
+        .meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .version-badge {
+            background: var(--accent-subtle);
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: var(--text-bold);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2::before {
+            content: '';
+            width: 3px;
+            height: 1em;
+            background: linear-gradient(180deg, var(--accent), transparent);
+            border-radius: 2px;
+        }
+
+        /* Stats - Card grid */
+        .support-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .support-stat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius);
+            transition: all 0.2s;
+        }
+
+        .support-stat:hover {
+            border-color: var(--border-strong);
+            background: var(--surface-elevated);
+        }
+
+        .support-stat strong {
+            display: block;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-bold);
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
+        }
+
+        .support-stat span {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* Details / Accordion */
+        .support-details { display: flex; flex-direction: column; gap: 0.5rem; }
+
+        details.card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        details.card[open] {
+            border-color: var(--border-strong);
+            box-shadow: 0 0 0 1px var(--accent-subtle);
+        }
+
+        summary {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--surface);
+            transition: all 0.2s;
+        }
+
+        summary:hover { background: var(--surface-hover); }
+
+        summary::after {
+            content: '▼';
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+
+        details[open] summary::after { transform: rotate(180deg); }
+
+        .support-list {
+            padding: 1rem;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .support-list ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 0.35rem;
+        }
+
+        .support-list li {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding: 0.35rem 0.6rem;
+            background: var(--surface);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Table */
+        .table-container {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            background: var(--surface);
+        }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+
+        th {
+            background: var(--surface-elevated);
+            padding: 0.7rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-bold);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        code {
+            font-family: var(--font-mono);
+            background: var(--bg);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+
+        pre {
+            font-family: var(--font-mono);
+            background: #0d0d12;
+            padding: 1rem;
+            overflow-x: auto;
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
+            line-height: 1.5;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        /* Status badges */
+        .status {
+            display: inline-flex;
+            padding: 0.15rem 0.5rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        .status-supported { color: var(--success); background: var(--success-bg); }
+        .status-needToWork { color: var(--warning); background: var(--warning-bg); }
+        .status-notSupported { color: var(--text-muted); background: var(--surface); }
+
+        /* Diff */
+        .diff-details { font-size: 0.8rem; }
+        .diff-group { margin-bottom: 0.5rem; }
+        .diff-group:last-child { margin-bottom: 0; }
+        .diff-label { font-weight: 600; display: block; margin-bottom: 0.2rem; color: var(--text-muted); font-size: 0.75rem; }
+        .diff-list { list-style: none; }
+        .diff-list li {
+            position: relative;
+            padding-left: 0.75rem;
+            margin-bottom: 0.15rem;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            padding: 0.15rem 0 0.15rem 0.75rem;
+        }
+        .diff-list li::before { content: '·'; position: absolute; left: 0; color: var(--accent); }
+
+        .diff-added-text { color: var(--success); }
+        .diff-removed-text { color: var(--danger); }
+        .diff-changed-text { color: var(--warning); }
+        .old-val { color: var(--danger); text-decoration: line-through; opacity: 0.7; }
+        .new-val { color: var(--success); font-weight: 500; }
+
+        .no-changes {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--surface);
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+            color: var(--text-muted);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        @media (max-width: 1024px) {
+            .sidebar { display: none; }
+            .main { padding: 1.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .support-stats { grid-template-columns: repeat(2, 1fr); }
+            .support-list ul { grid-template-columns: 1fr; }
+            th:nth-child(3), td:nth-child(3), th:nth-child(4), td:nth-child(4) { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="sidebar-title">目次</div>
+                <a href="#support">サポート状況</a>
+                <a href="#changes">検出された変更</a>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <header>
+                <div class="brand">
+                    <span class="brand-dot"></span>
+                    <span>MiPAC</span>
+                </div>
+                <h1>API 変更レポート</h1>
+                <p class="meta">
+                    Misskey API バージョン
+                    <span class="version-badge">{{ api_version }}</span>
+                </p>
+            </header>
+
+            <section id="support">
+                <h2>サポート状況</h2>
+                <div class="support-stats">
+                    <div class="support-stat">
+                        <strong>{{ support_status.stats.implemented_endpoints }}/{{ support_status.stats.total_endpoints }}</strong>
+                        <span>エンドポイント</span>
+                    </div>
+                    <div class="support-stat">
+                        <strong>{{ support_status.stats.implemented_schemas }}/{{ support_status.stats.total_schemas }}</strong>
+                        <span>スキーマ</span>
+                    </div>
+                    <div class="support-stat">
+                        <strong>{{ support_status.stats.supported_endpoints }}</strong>
+                        <span>完全対応</span>
+                    </div>
+                    <div class="support-stat">
+                        <strong>{{ support_status.stats.need_to_work_endpoints }}</strong>
+                        <span>要作業</span>
+                    </div>
+                    <div class="support-stat">
+                        <strong>{{ support_status.stats.not_supported_endpoints }}</strong>
+                        <span>未対応</span>
+                    </div>
+                    <div class="support-stat">
+                        <strong>{{ support_status.stats.removed_endpoints }}</strong>
+                        <span>削除済み</span>
+                    </div>
+                </div>
+
+                <div class="support-details">
+                    <details class="card">
+                        <summary>完全対応エンドポイント ({{ support_status.supported_endpoints|length }})</summary>
+                        <div class="support-list"><ul>{% for p in support_status.supported_endpoints %}<li><code>{{ p }}</code></li>{% endfor %}</ul></div>
+                    </details>
+                    <details class="card">
+                        <summary>要作業エンドポイント ({{ support_status.need_to_work_endpoints|length }})</summary>
+                        <div class="support-list"><ul>{% for p in support_status.need_to_work_endpoints %}<li><code>{{ p }}</code></li>{% endfor %}</ul></div>
+                    </details>
+                    <details class="card">
+                        <summary>未対応エンドポイント ({{ support_status.not_supported_endpoints|length }})</summary>
+                        <div class="support-list"><ul>{% for p in support_status.not_supported_endpoints %}<li><code>{{ p }}</code></li>{% endfor %}</ul></div>
+                    </details>
+                    <details class="card">
+                        <summary>Misskeyから削除 ({{ support_status.removed_endpoints|length }})</summary>
+                        <div class="support-list"><ul>{% for p in support_status.removed_endpoints %}<li><code>{{ p }}</code></li>{% endfor %}</ul></div>
+                    </details>
+                    <details class="card">
+                        <summary>スキーマ状況 (対応:{{ support_status.schema_supported|length }} / 要作業:{{ support_status.schema_need_to_work|length }} / 未対応:{{ support_status.schema_not_supported|length }})</summary>
+                        <div style="padding: 1rem; border-top: 1px solid var(--border); background: var(--bg);">
+                            <details style="margin-bottom: 0.5rem;"><summary>対応済みスキーマ</summary><div class="support-list"><ul>{% for n in support_status.schema_supported %}<li><code>{{ n }}</code></li>{% endfor %}</ul></div></details>
+                            <details style="margin-bottom: 0.5rem;"><summary>要作業スキーマ</summary><div class="support-list"><ul>{% for n in support_status.schema_need_to_work %}<li><code>{{ n }}</code></li>{% endfor %}</ul></div></details>
+                            <details><summary>未対応スキーマ</summary><div class="support-list"><ul>{% for n in support_status.schema_not_supported %}<li><code>{{ n }}</code></li>{% endfor %}</ul></div></details>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <section id="changes">
+                <h2>検出された変更</h2>
+                {% if has_changes %}
+                    {% for section in sections %}
+                        {% if section["items"] %}
+                        <h3 style="font-size: 1rem; margin: 2rem 0 0.75rem; color: var(--text-bold); font-weight: 600;">{{ section.title }}</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>パス/名前</th>
+                                        <th>ステータス</th>
+                                        <th>旧ハッシュ</th>
+                                        <th>新ハッシュ</th>
+                                        <th>差分詳細</th>
+                                        <th>内容</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in section["items"] %}
+                                    <tr>
+                                        <td><code>{{ item.path_or_name }}</code></td>
+                                        <td><span class="status status-{{ item.status }}">{{ item.status_label }}</span></td>
+                                        <td><code>{{ item.old_hash[:8] if item.old_hash else '-' }}</code></td>
+                                        <td><code>{{ item.new_hash[:8] if item.new_hash else '-' }}</code></td>
+                                        <td>
+                                            {% if item.diff %}
+                                            <div class="diff-details">
+                                                {% if item.diff.array_changes %}
+                                                <div class="diff-group">
+                                                    <span class="diff-label">配列の変更</span>
+                                                    <ul class="diff-list">
+                                                        {% for ac in item.diff.array_changes %}
+                                                        <li>
+                                                            <code>{{ ac.path_display }}</code>:
+                                                            {% if ac.old_values_display or ac.new_values_display %}
+                                                            <span class="old-val">[{{ ac.old_values_display }}]</span> → <span class="new-val">[{{ ac.new_values_display }}]</span>
+                                                            {% endif %}
+                                                            {% if ac.added %}<span class="diff-added-text"> +{{ ac.added_display }}</span>{% endif %}
+                                                            {% if ac.removed %}<span class="diff-removed-text"> −{{ ac.removed_display }}</span>{% endif %}
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                                {% endif %}
+                                                {% if item.diff.added %}
+                                                <div class="diff-group">
+                                                    <span class="diff-label diff-added-text">追加</span>
+                                                    <ul class="diff-list">{% for a in item.diff.added %}<li><code>{{ a }}</code></li>{% endfor %}</ul>
+                                                </div>
+                                                {% endif %}
+                                                {% if item.diff.removed %}
+                                                <div class="diff-group">
+                                                    <span class="diff-label diff-removed-text">削除</span>
+                                                    <ul class="diff-list">{% for r in item.diff.removed %}<li><code>{{ r }}</code></li>{% endfor %}</ul>
+                                                </div>
+                                                {% endif %}
+                                                {% if item.diff.type_changes %}
+                                                <div class="diff-group">
+                                                    <span class="diff-label diff-changed-text">型・定義の変更</span>
+                                                    <ul class="diff-list">
+                                                        {% for tc in item.diff.type_changes %}
+                                                        <li><code>{{ tc.path }}</code>: <span class="old-val">{{ tc.old }}</span> → <span class="new-val">{{ tc.new }}</span></li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                            {% else %}
+                                            <span style="color: var(--text-muted); font-style: italic;">差分なし</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <details>
+                                                <summary style="padding: 0; font-size: 0.75rem; color: var(--text-muted); cursor: pointer;">JSONを表示</summary>
+                                                <div style="margin-top: 0.5rem;"><pre><code>{{ item.new_content }}</code></pre></div>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="no-changes">
+                        <p>今回の更新で検出された変更はありません。</p>
+                    </div>
+                {% endif %}
+            </section>
+        </main>
+    </div>
+</body>
+</html>

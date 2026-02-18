@@ -2,70 +2,16 @@
 
 ## Supported Misskey Version
 
-`2025.10.1-alpha.1`
+`2026.2.0-alpha.0`
 
-## Supported endpoints (182/429)
+## Supported endpoints (183/433)
 
-- [x] /admin/accounts/create
-- [x] /admin/accounts/delete
-- [x] /admin/ad/create
-- [x] /admin/ad/delete
-- [x] /admin/ad/list
-- [x] /admin/ad/update
-- [x] /admin/announcements/create
-- [x] /admin/announcements/delete
-- [x] /admin/announcements/update
-- [x] /admin/avatar-decorations/delete
-- [x] /admin/avatar-decorations/update
-- [x] /admin/drive/clean-remote-files
-- [x] /admin/drive/cleanup
-- [x] /admin/emoji/add-aliases-bulk
-- [x] /admin/emoji/copy
-- [x] /admin/emoji/delete-bulk
-- [x] /admin/emoji/delete
-- [x] /admin/emoji/remove-aliases-bulk
-- [x] /admin/emoji/set-aliases-bulk
-- [x] /admin/emoji/set-category-bulk
-- [x] /admin/emoji/set-license-bulk
-- [x] /admin/get-user-ips
-- [x] /admin/reset-password
-- [x] /admin/resolve-abuse-user-report
-- [x] /admin/send-email
-- [x] /admin/suspend-user
-- [x] /admin/unsuspend-user
-- [x] /admin/update-user-note
-- [x] /admin/roles/delete
-- [x] /admin/roles/assign
-- [x] /admin/roles/unassign
-- [x] /admin/roles/update-default-policies
-- [x] /channels/follow
-- [x] /channels/unfollow
-- [x] /channels/favorite
-- [x] /channels/unfavorite
-- [x] /drive
-- [x] /drive/files/check-existence
-- [x] /drive/files/delete
-- [x] /drive/folders/delete
-- [x] /hashtags/search
-- [x] /hashtags/trend
-- [x] /invite/delete
-- [x] /mute/delete
-- [x] /notes/favorites/delete
-- [x] /notes/polls/vote
-- [x] /users/lists/delete
-- [x] /users/lists/pull
-- [x] /users/lists/favorite
-- [x] /users/lists/unfavorite
-- [x] /users/lists/update-membership
-- [x] /admin/unset-user-avatar
-- [x] /admin/unset-user-banner
-- [x] /admin/system-webhook/delete
+- [x] /admin/announcements/list
 
 
 ## Not supported endpoints
 
 - [ ] /admin/abuse-user-reports
-- [ ] /admin/announcements/list
 - [ ] /admin/delete-all-files-of-a-user
 - [ ] /admin/federation/delete-all-files
 - [ ] /admin/federation/refresh-remote-instance-metadata
@@ -311,42 +257,85 @@
 - [ ] /notes/show-partial-bulk
 - [ ] /v2/admin/emoji/list
 - [ ] /verify-email
+- [ ] /channels/mute/create
+- [ ] /channels/mute/delete
+- [ ] /channels/mute/list
+- [ ] /users/get-following-birthday-users
 
 ## Changed request body or responses
 
+- [ ] /admin/accounts/create (Need to work)
+- [ ] /admin/accounts/delete (Need to work)
+- [ ] /admin/ad/create (Need to work)
+- [ ] /admin/ad/delete (Need to work)
+- [ ] /admin/ad/list (Need to work)
+- [ ] /admin/ad/update (Need to work)
+- [ ] /admin/announcements/create (Need to work)
+- [ ] /admin/announcements/delete (Need to work)
+- [ ] /admin/announcements/update (Need to work)
 - [ ] /admin/avatar-decorations/create (Need to work)
+- [ ] /admin/avatar-decorations/delete (Need to work)
 - [ ] /admin/avatar-decorations/list (Need to work)
+- [ ] /admin/avatar-decorations/update (Need to work)
+- [ ] /admin/drive/clean-remote-files (Need to work)
+- [ ] /admin/drive/cleanup (Need to work)
 - [ ] /admin/drive/files (Need to work)
 - [ ] /admin/drive/show-file (Need to work)
+- [ ] /admin/emoji/add-aliases-bulk (Need to work)
 - [ ] /admin/emoji/add (Need to work)
+- [ ] /admin/emoji/copy (Need to work)
+- [ ] /admin/emoji/delete-bulk (Need to work)
+- [ ] /admin/emoji/delete (Need to work)
 - [ ] /admin/emoji/list-remote (Need to work)
 - [ ] /admin/emoji/list (Need to work)
+- [ ] /admin/emoji/remove-aliases-bulk (Need to work)
+- [ ] /admin/emoji/set-aliases-bulk (Need to work)
+- [ ] /admin/emoji/set-category-bulk (Need to work)
+- [ ] /admin/emoji/set-license-bulk (Need to work)
 - [ ] /admin/emoji/update (Need to work)
 - [ ] /admin/get-index-stats (Need to work)
 - [ ] /admin/get-table-stats (Need to work)
+- [ ] /admin/get-user-ips (Need to work)
 - [ ] /admin/invite/create (Need to work)
 - [ ] /admin/invite/list (Need to work)
+- [ ] /admin/reset-password (Need to work)
+- [ ] /admin/resolve-abuse-user-report (Need to work)
+- [ ] /admin/send-email (Need to work)
 - [ ] /admin/show-moderation-logs (Need to work)
+- [ ] /admin/suspend-user (Need to work)
+- [ ] /admin/unsuspend-user (Need to work)
 - [ ] /admin/update-meta (Need to work)
+- [ ] /admin/update-user-note (Need to work)
 - [ ] /admin/roles/create (Need to work)
+- [ ] /admin/roles/delete (Need to work)
 - [ ] /admin/roles/list (Need to work)
 - [ ] /admin/roles/show (Need to work)
 - [ ] /admin/roles/update (Need to work)
+- [ ] /admin/roles/assign (Need to work)
+- [ ] /admin/roles/unassign (Need to work)
+- [ ] /admin/roles/update-default-policies (Need to work)
 - [ ] /admin/roles/users (Need to work)
 - [ ] /app/create (Need to work)
 - [ ] /app/show (Need to work)
 - [ ] /channels/create (Need to work)
 - [ ] /channels/featured (Need to work)
+- [ ] /channels/follow (Need to work)
 - [ ] /channels/followed (Need to work)
 - [ ] /channels/owned (Need to work)
 - [ ] /channels/show (Need to work)
 - [ ] /channels/timeline (Need to work)
+- [ ] /channels/unfollow (Need to work)
 - [ ] /channels/update (Need to work)
+- [ ] /channels/favorite (Need to work)
+- [ ] /channels/unfavorite (Need to work)
 - [ ] /channels/my-favorites (Need to work)
 - [ ] /channels/search (Need to work)
+- [ ] /drive (Need to work)
 - [ ] /drive/files (Need to work)
 - [ ] /drive/files/attached-notes (Need to work)
+- [ ] /drive/files/check-existence (Need to work)
 - [ ] /drive/files/create (Need to work)
+- [ ] /drive/files/delete (Need to work)
 - [ ] /drive/files/find-by-hash (Need to work)
 - [ ] /drive/files/find (Need to work)
 - [ ] /drive/files/show (Need to work)
@@ -354,6 +343,7 @@
 - [ ] /drive/files/upload-from-url (Need to work)
 - [ ] /drive/folders (Need to work)
 - [ ] /drive/folders/create (Need to work)
+- [ ] /drive/folders/delete (Need to work)
 - [ ] /drive/folders/find (Need to work)
 - [ ] /drive/folders/show (Need to work)
 - [ ] /drive/folders/update (Need to work)
@@ -365,7 +355,9 @@
 - [ ] /following/delete (Need to work)
 - [ ] /get-online-users-count (Need to work)
 - [ ] /hashtags/list (Need to work)
+- [ ] /hashtags/search (Need to work)
 - [ ] /hashtags/show (Need to work)
+- [ ] /hashtags/trend (Need to work)
 - [ ] /hashtags/users (Need to work)
 - [ ] /i (Need to work)
 - [ ] /i/notifications (Need to work)
@@ -379,21 +371,25 @@
 - [ ] /i/webhooks/list (Need to work)
 - [ ] /i/webhooks/show (Need to work)
 - [ ] /invite/create (Need to work)
+- [ ] /invite/delete (Need to work)
 - [ ] /invite/list (Need to work)
 - [ ] /invite/limit (Need to work)
 - [ ] /meta (Need to work)
 - [ ] /emojis (Need to work)
 - [ ] /emoji (Need to work)
 - [ ] /mute/create (Need to work)
+- [ ] /mute/delete (Need to work)
 - [ ] /mute/list (Need to work)
 - [ ] /notes/create (Need to work)
 - [ ] /notes/children (Need to work)
 - [ ] /notes/delete (Need to work)
 - [ ] /notes/favorites/create (Need to work)
+- [ ] /notes/favorites/delete (Need to work)
 - [ ] /notes/hybrid-timeline (Need to work)
 - [ ] /notes/local-timeline (Need to work)
 - [ ] /notes/mentions (Need to work)
 - [ ] /notes/polls/recommendation (Need to work)
+- [ ] /notes/polls/vote (Need to work)
 - [ ] /notes/reactions (Need to work)
 - [ ] /notes/reactions/create (Need to work)
 - [ ] /notes/reactions/delete (Need to work)
@@ -423,11 +419,16 @@
 - [ ] /users/get-frequently-replied-users (Need to work)
 - [ ] /users/featured-notes (Need to work)
 - [ ] /users/lists/create (Need to work)
+- [ ] /users/lists/delete (Need to work)
 - [ ] /users/lists/list (Need to work)
+- [ ] /users/lists/pull (Need to work)
 - [ ] /users/lists/push (Need to work)
 - [ ] /users/lists/show (Need to work)
+- [ ] /users/lists/favorite (Need to work)
+- [ ] /users/lists/unfavorite (Need to work)
 - [ ] /users/lists/update (Need to work)
 - [ ] /users/lists/create-from-public (Need to work)
+- [ ] /users/lists/update-membership (Need to work)
 - [ ] /users/lists/get-memberships (Need to work)
 - [ ] /users/search (Need to work)
 - [ ] /users/show (Need to work)
@@ -435,10 +436,13 @@
 - [ ] /fetch-rss (Need to work)
 - [ ] /fetch-external-resources (Need to work)
 - [ ] /admin/accounts/find-by-email (Need to work)
+- [ ] /admin/unset-user-avatar (Need to work)
+- [ ] /admin/unset-user-banner (Need to work)
 - [ ] /notes (Need to work)
 - [ ] /users (Need to work)
 - [ ] /admin/meta (Need to work)
 - [ ] /admin/system-webhook/create (Need to work)
+- [ ] /admin/system-webhook/delete (Need to work)
 - [ ] /admin/system-webhook/list (Need to work)
 - [ ] /admin/system-webhook/show (Need to work)
 - [ ] /admin/system-webhook/update (Need to work)
@@ -453,18 +457,18 @@
 ## Supported schemas
 
 - [ ] Error
-- [x] UserLite
-- [x] UserDetailedNotMeOnly
-- [x] MeDetailedOnly
-- [x] UserDetailedNotMe
-- [x] MeDetailed
-- [x] UserDetailed
-- [x] User
-- [x] UserList
-- [x] Announcement
-- [x] App
-- [x] Note
-- [x] NoteReaction
+- [ ] UserLite (Need to work)
+- [ ] UserDetailedNotMeOnly (Need to work)
+- [ ] MeDetailedOnly (Need to work)
+- [ ] UserDetailedNotMe (Need to work)
+- [ ] MeDetailed (Need to work)
+- [ ] UserDetailed (Need to work)
+- [ ] User (Need to work)
+- [ ] UserList (Need to work)
+- [ ] Announcement (Need to work)
+- [ ] App (Need to work)
+- [ ] Note (Need to work)
+- [ ] NoteReaction (Need to work)
 - [ ] NoteFavorite
 - [ ] Notification
 - [ ] DriveFile (Need to work)
@@ -473,7 +477,7 @@
 - [ ] Muting
 - [ ] RenoteMuting
 - [ ] Blocking
-- [x] Hashtag
+- [ ] Hashtag (Need to work)
 - [ ] InviteCode (Need to work)
 - [ ] Page
 - [ ] Channel (Need to work)
@@ -483,9 +487,9 @@
 - [ ] FederationInstance
 - [ ] GalleryPost (Need to work)
 - [ ] EmojiSimple (Need to work)
-- [x] EmojiDetailed
+- [ ] EmojiDetailed (Need to work)
 - [ ] Flash
-- [x] Ad
+- [ ] Ad (Need to work)
 - [ ] Signin
 - [ ] RoleLite
 - [ ] Role
@@ -521,3 +525,4 @@
 - [ ] ChatRoom
 - [ ] ChatRoomInvitation
 - [ ] ChatRoomMembership
+- [ ] MetaClientOptions
