@@ -132,21 +132,6 @@ class PartialUser[PU: IPartialUser]:
         """Returns the id of the user."""
         return self._raw_user["id"]
 
-    @deprecated
-    @property
-    def nickname(self) -> str | None:
-        """Returns the nickname of the user.
-
-        .. deprecated:: 0.6.0
-            Use :meth:`mipac.models.lite.user.PartialUser.name` instead.
-
-        Returns
-        -------
-        str | None
-            The nickname of the user.
-        """
-        return self._raw_user["name"]
-
     @property
     def name(self) -> str | None:
         """Returns the nickname of the user.
