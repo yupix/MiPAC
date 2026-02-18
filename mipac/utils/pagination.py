@@ -18,6 +18,22 @@ def _parse_date_to_timestamp_ms(value: str | int) -> int:
     return int(dt.timestamp() * 1000)
 
 
+def _infer_pagination_type(json: dict[str, Any]) -> Literal["until", "until_date", "since_date", "since", "count"]:
+    """jsonのパラメータからページネーションタイプを自動判定します
+
+    優先順位: untilDate > untilId > sinceDate > sinceId > until（デフォルト）
+    """
+    if json.get("untilDate") is not None:
+        return "until_date"
+    if json.get("untilId") is not None:
+        return "until"
+    if json.get("sinceDate") is not None:
+        return "since_date"
+    if json.get("sinceId") is not None:
+        return "since"
+    return "until"
+
+
 class Pagination[T]:
     """ページネーションを行うためのクラスです"""
 
@@ -29,7 +45,7 @@ class Pagination[T]:
         auth: bool = True,
         remove_none: bool = True,
         lower: bool = True,
-        pagination_type: Literal["until", "until_date", "since_date", "count"] = "until",
+        pagination_type: Literal["until", "until_date", "since_date", "since", "count", "auto"] = "auto",
         limit: int = 100,
         date_key: str = "created_at",
     ) -> None:
@@ -39,7 +55,10 @@ class Pagination[T]:
         self.auth: bool = auth
         self.remove_none: bool = remove_none
         self.lower: bool = lower
-        self.pagination_type: Literal["until", "until_date", "since_date", "count"] = pagination_type
+        _pagination_type = pagination_type
+        if _pagination_type == "auto":
+            _pagination_type = _infer_pagination_type(json)
+        self.pagination_type: Literal["until", "until_date", "since_date", "since", "count"] = _pagination_type
         self.limit: int = limit
         self.date_key: str = date_key
         self.count = 0
@@ -69,6 +88,10 @@ class Pagination[T]:
             if len(res) > 0:
                 self.next_id = res[-1]["id"]  # type: ignore
             self.json["untilId"] = self.next_id
+        elif self.pagination_type == "since":
+            if len(res) > 0:
+                self.next_id = res[0]["id"]  # type: ignore
+            self.json["sinceId"] = self.next_id
         elif self.pagination_type == "until_date":
             if len(res) > 0 and isinstance(last_item := res[-1], dict):
                 date_value = last_item.get(self.date_key) or last_item.get("createdAt")
@@ -99,7 +122,7 @@ class Pagination[T]:
         match self.pagination_type:
             case "count":
                 return self.latest_res_count == 0
-            case "until" | "until_date" | "since_date":
+            case "until" | "until_date" | "since_date" | "since":
                 return self.latest_res_count == 0
             case _:
                 raise ValueError("Invalid pagination type")
