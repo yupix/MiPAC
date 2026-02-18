@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, override
+from typing import TYPE_CHECKING, AsyncGenerator, Literal, override
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -13,7 +13,7 @@ from mipac.types.announcement import (
 )
 from mipac.utils.format import remove_dict_missing
 from mipac.utils.pagination import Pagination
-from mipac.utils.util import MISSING
+from mipac.utils.util import MISSING, deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -207,13 +207,22 @@ class AdminAnnouncementActions(SharedAdminAnnouncementActions):
         )
         return Announcement(created_announcement, client=self._client)
 
+    @deprecated
     async def gets(
         self,
         limit: int = 10,
         since_id: str | None = None,
+        since_date: int | None = None,
+        status: Literal["all", "active", "archived"] = "all",
+        until_date: int | None = None,
         until_id: str | None = None,
+        user_id: str | None = None,
         get_all: bool = False,
-    ) -> AsyncGenerator[AnnouncementDetailed, None]:  # TODO: 戻り値を改めて確認するべき
+    ) -> AsyncGenerator[AnnouncementDetailed, None]:
+        """... deprecated
+        Use `AdminAnnouncementActions.get_list` or `AdminAnnouncementActions.get_all_list` instead
+        責務違反の為 0.9.0 で削除予定
+        """
         if limit > 100:
             raise ValueError("limitは100以下である必要があります")
         if get_all:
@@ -221,8 +230,12 @@ class AdminAnnouncementActions(SharedAdminAnnouncementActions):
 
         body = {
             "limit": limit,
+            "sinceDate": since_date,
             "sinceId": since_id,
+            "status": status,
+            "untilDate": until_date,
             "untilId": until_id,
+            "userId": user_id,
         }
 
         pagination = Pagination[IAnnouncementDetailed](
@@ -235,4 +248,62 @@ class AdminAnnouncementActions(SharedAdminAnnouncementActions):
                 yield AnnouncementDetailed(res_announcement_system, client=self._client)
 
             if get_all is False or pagination.is_final:
+                break
+
+    async def get_list(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        since_date: int | None = None,
+        status: Literal["all", "active", "archived"] = "all",
+        until_date: int | None = None,
+        until_id: str | None = None,
+        user_id: str | None = None,
+    ) -> list[AnnouncementDetailed]:
+        body = {
+            "limit": limit,
+            "sinceDate": since_date,
+            "sinceId": since_id,
+            "status": status,
+            "untilDate": until_date,
+            "untilId": until_id,
+            "userId": user_id,
+        }
+
+        res_annonuncement_systems: list[IAnnouncementDetailed] = await self._session.request(
+            Route("POST", "/api/admin/announcements/list"), json=body, auth=True
+        )
+        return [AnnouncementDetailed(res_announcement_system, client=self._client) for res_announcement_system in res_annonuncement_systems]
+
+    async def get_all_list(
+        self,
+        limit: int = 10,
+        since_id: str | None = None,
+        since_date: int | None = None,
+        status: Literal["all", "active", "archived"] = "all",
+        until_date: int | None = None,
+        until_id: str | None = None,
+        user_id: str | None = None,
+    ) -> AsyncGenerator[AnnouncementDetailed, None]:
+
+        body = {
+            "limit": limit,
+            "sinceDate": since_date,
+            "sinceId": since_id,
+            "status": status,
+            "untilDate": until_date,
+            "untilId": until_id,
+            "userId": user_id,
+        }
+
+        pagination = Pagination[IAnnouncementDetailed](
+            self._session, Route("POST", "/api/admin/announcements/list"), json=body
+        )
+
+        while True:
+            res_annonuncement_systems = await pagination.next()
+            for res_announcement_system in res_annonuncement_systems:
+                yield AnnouncementDetailed(res_announcement_system, client=self._client)
+
+            if pagination.is_final:
                 break

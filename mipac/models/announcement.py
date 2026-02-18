@@ -16,7 +16,10 @@ if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
 
 
+
 class Announcement:
+    """一般ユーザーから見たアナウンス"""
+
     def __init__(self, announcement: IAnnouncement, *, client: ClientManager) -> None:
         self.__announcement: IAnnouncement = announcement
         self.__client: ClientManager = client
@@ -125,6 +128,8 @@ class Announcement:
 
 
 class AnnouncementDetailed:
+    """管理者から見たアナウンス"""
+
     def __init__(self, raw_announcement: IAnnouncementDetailed, *, client: ClientManager) -> None:
         self.__raw_announcement: IAnnouncementDetailed = raw_announcement
         self.__client: ClientManager = client
@@ -154,10 +159,6 @@ class AnnouncementDetailed:
         return self.__raw_announcement["title"]
 
     @property
-    def image_url(self) -> str | None:
-        return self.__raw_announcement["image_url"]
-
-    @property
     def icon(self) -> AnnoucementIcon:
         return self.__raw_announcement["icon"]
 
@@ -184,6 +185,10 @@ class AnnouncementDetailed:
     @property
     def user_id(self) -> str | None:
         return self.__raw_announcement["user_id"]
+
+    @property
+    def image_url(self) -> str | None:
+        return self.__raw_announcement["image_url"]
 
     @property
     def reads(self) -> int:
