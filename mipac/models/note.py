@@ -586,23 +586,15 @@ class Note:
         return self.__raw_note.get("url")
 
     @property
-    def reaction_and_user_pair_cache(self) -> dict[str, list[PartialUser]]:
+    def reaction_and_user_pair_cache(self) -> list[str]:
         """Note reactionAndUserPairCache
 
         Returns
         -------
-        dict[str, list[PartialUser]]
+        list[str]
             note reactionAndUserPairCache
         """
-        if "reaction_and_user_pair_cache" not in self.__raw_note:
-            return {}
-        reaction_and_user_pair_cache = {}
-
-        for k, v in self.__raw_note["reaction_and_user_pair_cache"].items():
-            reaction_and_user_pair_cache[k] = [
-                PartialUser(user, client=self.__client) for user in v
-            ]
-        return reaction_and_user_pair_cache
+        return self.__raw_note.get("reaction_and_user_pair_cache", [])
 
     @property
     def clipped_count(self) -> int | None:
