@@ -7,7 +7,7 @@ from mipac.http import HTTPClient, Route
 from mipac.models.announcement import Announcement, AnnouncementDetailed
 from mipac.types.announcement import (
     AnnouncementDisplay,
-    AnnoucementIcon,
+    AnnouncementIcon,
     IAnnouncement,
     IAnnouncementDetailed,
 )
@@ -54,7 +54,7 @@ class SharedAdminAnnouncementActions(AbstractAction):
         title: str = MISSING,
         text: str = MISSING,
         image_url: str | None = MISSING,
-        icon: AnnoucementIcon = MISSING,
+        icon: AnnouncementIcon = MISSING,
         display: AnnouncementDisplay = MISSING,
         for_existing_users: bool = MISSING,
         silence: bool = MISSING,
@@ -73,7 +73,7 @@ class SharedAdminAnnouncementActions(AbstractAction):
             お知らせの本文
         image_url : str, optional
             お知らせの画像URL, by default None
-        icon : AnnoucementIcon, optional
+        icon : AnnouncementIcon, optional
             お知らせのアイコン, by default MISSING
         display : AnnouncementDisplay, optional
             お知らせの表示方法, by default MISSING
@@ -141,7 +141,7 @@ class ClientAdminAnnouncementActions(SharedAdminAnnouncementActions):
         title: str = MISSING,
         text: str = MISSING,
         image_url: str | None = MISSING,
-        icon: AnnoucementIcon = MISSING,
+        icon: AnnouncementIcon = MISSING,
         display: AnnouncementDisplay = MISSING,
         for_existing_users: bool = MISSING,
         silence: bool = MISSING,
@@ -178,7 +178,7 @@ class AdminAnnouncementActions(SharedAdminAnnouncementActions):
         title: str,
         text: str,
         image_url: str | None = None,
-        icon: AnnoucementIcon = MISSING,
+        icon: AnnouncementIcon = MISSING,
         display: AnnouncementDisplay = MISSING,
         for_existing_users: bool = MISSING,
         silence: bool = MISSING,

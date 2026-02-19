@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any
 
 from mipac.types.announcement import (
     AnnouncementDisplay,
-    AnnoucementIcon,
+    AnnouncementIcon,
     IAnnouncement,
     IAnnouncementDetailed,
 )
@@ -90,7 +90,7 @@ class Announcement:
         return self.__announcement["image_url"]
 
     @property
-    def icon(self) -> AnnoucementIcon:
+    def icon(self) -> AnnouncementIcon:
         return self.__announcement["icon"]
 
     @property
@@ -159,7 +159,7 @@ class AnnouncementDetailed:
         return self.__raw_announcement["title"]
 
     @property
-    def icon(self) -> AnnoucementIcon:
+    def icon(self) -> AnnouncementIcon:
         return self.__raw_announcement["icon"]
 
     @property
