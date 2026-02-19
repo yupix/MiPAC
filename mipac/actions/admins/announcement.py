@@ -183,7 +183,7 @@ class AdminAnnouncementActions(SharedAdminAnnouncementActions):
         for_existing_users: bool = MISSING,
         silence: bool = MISSING,
         need_confirmation_to_read: bool = MISSING,
-        user_id: str = MISSING,
+        user_id: str | None = MISSING,
     ) -> Announcement:
         body = remove_dict_missing(
             {
