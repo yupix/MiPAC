@@ -17,13 +17,13 @@
                 "path": "/admin/accounts/delete",
                 "request_body_hash": "a41a12a77007a825c62532337cb109e30e41f723d0b73c65dddaced210e6b9cc",
                 "response_body_hash": "6371635a8bd668657def0c819a68080c8722df3ac3c1908d06d88177ad4ee537",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/ad/create": {
                 "path": "/admin/ad/create",
                 "request_body_hash": "a986e8cca44bc84cf27858516468008a3872040316c373da3ea3422ae2fe7a37",
                 "response_body_hash": "b5001f86c964b282273d9c60a68a05efe8c53afffbcc1fc4e3ed1146e20a0837",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/ad/delete": {
                 "path": "/admin/ad/delete",
@@ -1889,7 +1889,7 @@
                 "path": "/admin/accounts/find-by-email",
                 "request_body_hash": "af456cb41c6404492ed1b1343ccb8b60289a7882884de2990c196e1497812564",
                 "response_body_hash": "994073a6ac7cbf40f926a1df15905f8647eea9d3c6ff63f751896715d25e1251",
-                "status": "needToWork"
+                "status": "supported"
             },
             "/admin/unset-user-avatar": {
                 "path": "/admin/unset-user-avatar",
@@ -2600,20 +2600,7 @@
                 "response_body_hash": "8992defcb179534d9f814be24dfa76b6bf5b3f858af8cb96867557b08e3bb9da"
             }
         },
-        "removed": {
-            "/admin/queue/promote": {
-                "path": "/admin/queue/promote",
-                "request_body_hash": "63e826b22ff5d33dea8d090e86a68e962eed10ff05722c02d4f2b1141455170a",
-                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "RemovedFromMisskey"
-            },
-            "/i/read-all-unread-notes": {
-                "path": "/i/read-all-unread-notes",
-                "request_body_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
-                "response_body_hash": "df9c0f9df08effe88b00991f12e46077998bd6d6c3442ec518e5f463680a2c54",
-                "status": "RemovedFromMisskey"
-            }
-        }
+        "removed": {}
     },
     "schemas": {
         "Error": {
@@ -2784,7 +2771,7 @@
         "Ad": {
             "name": "Ad",
             "hash": "6490083895ec70ff62e68c754359edefe4cbb8614633ba8a716fd185300ef24d",
-            "status": "needToWork"
+            "status": "supported"
         },
         "Signin": {
             "name": "Signin",

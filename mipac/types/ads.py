@@ -13,6 +13,6 @@ class IAd(TypedDict):
     ratio: int
     url: str
     image_url: str
-    memo: str | None
+    memo: str
     day_of_week: int
     is_sensitive: bool

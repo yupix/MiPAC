@@ -105,12 +105,12 @@ class Ad:
         return self._raw_ad["image_url"]
 
     @property
-    def memo(self) -> str | None:
+    def memo(self) -> str:
         """広告のメモ
 
         Returns
         -------
-        str | None
+        str
             広告のメモ
         """
         return self._raw_ad["memo"]
