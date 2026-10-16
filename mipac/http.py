@@ -80,7 +80,7 @@ class HTTPClient:
 
         self._token: str | None = token
         self.user_agent = user_agent.format(__version__, sys.version_info, aiohttp.__version__)
-        self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
+        self._session: aiohttp.ClientSession | None = None  #初回Request時にセッションは設定される
 
         self._url = f"{parsed_url.scheme}://{parsed_url.netloc}"
         config.from_dict(
@@ -103,6 +103,8 @@ class HTTPClient:
         aiohttp.ClientSession
             現在のセッション
         """
+        if self._session is None or self._session.closed:
+            self._session = aiohttp.ClientSession(ws_response_class=MisskeyClientWebSocketResponse)
         return self._session
 
     async def request(
@@ -133,7 +135,9 @@ class HTTPClient:
         for i in ("json", "data"):
             if kwargs.get(i) and remove_none:
                 kwargs[i] = remove_dict_empty(kwargs[i])
-        async with self._session.request(route.method, self._url + route.path, **kwargs) as res:
+
+        # プロパティ側のSessionを使用することで、セッションが閉じている場合は新しいセッションを作成する
+        async with self.session.request(route.method, self._url + route.path, **kwargs) as res:
             data = await json_or_text(res)
             if lower:
                 if isinstance(data, list):
@@ -159,7 +163,8 @@ REQUEST:{COLORS.reset}
 
     async def close_session(self) -> None:
         """セッションを終了します"""
-        await self._session.close()
+        if self._session is not None and not self._session.closed:
+            await self._session.close()
 
     @deprecated
     async def login(self) -> IMeDetailedSchema | None:
