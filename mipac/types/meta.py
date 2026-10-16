@@ -40,7 +40,7 @@ class IPartialMeta(TypedDict):
     maintainer_name: str | None
     maintainer_email: str | None
     version: str
-    provides_tar_ball: bool
+    provides_tarball: bool
     name: str | None
     short_name: str | None
     uri: str
@@ -167,7 +167,7 @@ class IAdminMeta(TypedDict):
     object_storage_port: int | None
     object_storage_access_key: str | None
     object_storage_secret_key: str | None
-    object_storage_use_ssl: bool
+    object_storage_use_s_s_l: bool
     object_storage_use_proxy: bool
     object_storage_set_public_read: bool
     enable_ip_logging: bool
@@ -238,24 +238,15 @@ class IUpdateMetaBody(TypedDict, total=False):
     url_preview_sensitive_list: list[str] | None
     show_role_badges_of_remote_users: bool
     client_options: IMetaClientOptions
-    announcements: list
     disable_registration: bool
-    disable_local_timeline: bool
-    disable_global_timeline: bool
-    enable_emoji_reaction: bool
-    use_star_for_reaction_fallback: bool
     pinned_users: list[str]
     hidden_tags: list[str]
     blocked_hosts: list[str]
     mascot_image_url: str | None
     banner_url: str | None
-    error_image_url: str | None
     icon_url: str | None
     name: str | None
     description: str | None
-    max_note_text_length: int
-    local_drive_capacity_mb: int
-    remote_drive_capacity_mb: int
     cache_remote_files: bool
     proxy_remote_files: bool
     enable_recaptcha: bool
@@ -264,21 +255,10 @@ class IUpdateMetaBody(TypedDict, total=False):
     enable_turnstile: bool
     turnstile_site_key: str
     turnstile_secret_key: str
-    proxy_account_id: str | None
-    proxy_account: str
     maintainer_name: str | None
     maintainer_email: str | None
     langs: str
     summaly_proxy: str | None
-    enable_twitter_integration: bool
-    twitter_consumer_key: str | None
-    twitter_consumer_secret: str | None
-    enable_github_integration: bool
-    github_client_id: str | None
-    github_client_secret: str | None
-    enable_discord_integration: bool
-    discord_client_id: str | None
-    discord_client_secret: str | None
     enable_email: bool
     email: str
     smtp_secure: bool
@@ -290,7 +270,6 @@ class IUpdateMetaBody(TypedDict, total=False):
     sw_public_key: str
     sw_private_key: str
     tos_url: str | None
-    tos_text_url: str
     repository_url: str
     feedback_url: str
     use_object_storage: bool

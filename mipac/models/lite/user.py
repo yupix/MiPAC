@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.user import IAvatarDecoration, IBadgeRole, IPartialUser, IUserOnlineStatus
+from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -223,8 +224,14 @@ class PartialUser[PU: IPartialUser]:
         return self._raw_user.get("is_cat")
 
     @property
+    def require_signin_to_view_contents(self) -> bool | None:
+        return self._raw_user.get("require_signin_to_view_contents")
+
+    @property
+    @deprecated
     def requires_signin_to_view_contents(self) -> bool | None:
-        return self._raw_user.get("requires_signin_to_view_contents")
+        """.. deprecated:: `require_signin_to_view_contents` を使用してください"""
+        return self.require_signin_to_view_contents
 
     @property
     def make_notes_followers_only_before(self) -> int | None:

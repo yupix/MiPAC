@@ -665,7 +665,7 @@ class NoteTranslateResult:
 
     @property
     def source_language(self) -> str:
-        return self.__translate_result["sourceLang"]
+        return self.__translate_result["source_lang"]
 
     @property
     def text(self) -> str:

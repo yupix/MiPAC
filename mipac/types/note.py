@@ -114,5 +114,5 @@ class INoteReaction(TypedDict):
 
 
 class INoteTranslateResult(TypedDict):
-    sourceLang: str
+    source_lang: str
     text: str

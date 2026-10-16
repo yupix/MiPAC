@@ -41,10 +41,6 @@ class Notification:
     def created_at(self) -> datetime:
         return datetime.strptime(self.__notification["created_at"], "%Y-%m-%dT%H:%M:%S.%fZ")
 
-    @property
-    def is_read(self) -> bool:
-        return self.__notification["is_read"]
-
     def _get(self, key: str) -> Any | None:
         return self.__notification.get(key)
 

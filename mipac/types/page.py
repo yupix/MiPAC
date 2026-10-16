@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Literal, Optional, TypedDict
+from typing import TYPE_CHECKING, Any, Literal, NotRequired, TypedDict
 
 from mipac.types.drive import IFile
 from mipac.types.user import IPartialUser
@@ -21,52 +21,40 @@ __all__ = (
 
 class IPageRequired(TypedDict):
     id: str
-    createdAt: str
-    updatedAt: str
-    userId: str
+    created_at: str
+    updated_at: str
+    user_id: str
     user: IPartialUser
     content: list[dict[str, Any]]
     variables: list[dict[str, Any]]
     title: str
     name: str
-    hideTitleWhenPinned: bool
-    alignCenter: bool
+    hide_title_when_pinned: bool
+    align_center: bool
     font: Literal["serif", "sans-serif"]
     script: str
-    attachedFiles: Any
-    likedCount: int
+    attached_files: Any
+    liked_count: int
 
 
 class IPage(IPageRequired, total=False):
     is_liked: bool
-    eyeCatchingImageId: str
-    eyeCatchingImage: IFile
+    eye_catching_image_id: str | None
+    eye_catching_image: IFile | None
     summary: str
 
 
 class PageContentPayload(TypedDict):
-    id: str
-    type: str
-    text: str | None
-    file_id: str | None
-    width: int | None
-    height: int | None
-    note: str | None
-    detailed: Optional[bool]
-    fn: Optional[Any]
-    var: Optional[Any]
-    event: Optional[Any]
-    action: str | None
-    content: str | None
-    message: Optional[Any]
-    primary: Optional[bool]
-    inc: int | None
-    canvas_id: str | None
-    attach_canvas_image: Optional[bool]
-    default: str | None
-    value: Optional[list[Any]]
+    """Misskey Schema: `PageBlock`"""
 
-    children: Optional["PageContentPayload"]
+    id: str
+    type: Literal["text", "section", "image", "note"]
+    text: NotRequired[str]  # type: text
+    title: NotRequired[str]  # type: section
+    children: NotRequired[list[PageContentPayload]]  # type: section
+    file_id: NotRequired[str | None]  # type: image
+    detailed: NotRequired[bool]  # type: note
+    note: NotRequired[str | None]  # type: note
 
 
 class VariablePayload(TypedDict):
@@ -110,7 +98,7 @@ class PagePayload(TypedDict):
     user_id: str
     user: IPartialUser
     content: list[PageContentPayload]
-    variable: list[VariablePayload]
+    variables: list[VariablePayload]
     title: str
     name: str
     summary: str | None

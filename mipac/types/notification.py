@@ -17,7 +17,6 @@ class INotification(TypedDict):
     id: str
     type: str
     created_at: str
-    is_read: bool
 
 
 class IUserNf(INotification):

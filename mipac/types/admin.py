@@ -11,11 +11,8 @@ class IUserIP(TypedDict):
 
 
 class IIndexStat(TypedDict):
-    schemaname: str
     tablename: str
     indexname: str
-    tablespace: str | None
-    indexdef: str
 
 
 class ITableStats(TypedDict):
@@ -33,7 +30,7 @@ class IModerationLog(TypedDict):
 
 
 class IServerInfoCpu(TypedDict):
-    models: str
+    model: str
     cores: int
 
 

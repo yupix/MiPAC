@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.role import PartialRole
 from mipac.types.roles import IRole, IRolePolicies
+from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -70,8 +71,14 @@ class RolePolicies:
         return self.__role_policies_data["drive_capacity_mb"]
 
     @property
+    def always_mark_nsfw(self) -> bool:
+        return self.__role_policies_data["always_mark_nsfw"]
+
+    @property
+    @deprecated
     def always_mark_nfsw(self) -> bool:
-        return self.__role_policies_data["always_mark_nfsw"]
+        """.. deprecated:: typo のため `always_mark_nsfw` を使用してください"""
+        return self.always_mark_nsfw
 
     @property
     def can_update_bio_media(self) -> bool:

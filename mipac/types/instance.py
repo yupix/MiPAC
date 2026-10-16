@@ -34,10 +34,8 @@ class IFederationInstanceRequired(TypedDict):
 
 
 class IFederationInstance(IFederationInstanceRequired, total=False):
-    caught_at: str
     first_retrieved_at: str
-    latest_request_sent_at: str
-    last_communicated_at: str
+    latest_request_received_at: str | None
 
 
 class IInstanceLite(TypedDict):

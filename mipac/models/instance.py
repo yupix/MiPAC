@@ -94,20 +94,12 @@ class FederationInstance:
         return self.__instance["info_updated_at"]
 
     @property
-    def caught_at(self) -> str | None:
-        return self.__instance.get("caught_at")
-
-    @property
     def first_retrieved_at(self) -> str | None:
         return self.__instance.get("first_retrieved_at")
 
     @property
-    def latest_request_sent_at(self) -> str | None:
-        return self.__instance.get("latest_request_sent_at")
-
-    @property
-    def last_communicated_at(self) -> str | None:
-        return self.__instance.get("last_communicated_at")
+    def latest_request_received_at(self) -> str | None:
+        return self.__instance.get("latest_request_received_at")
 
     def _get(self, key: str) -> Any | None:
         return self.__instance.get(key)

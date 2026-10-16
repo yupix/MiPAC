@@ -31,7 +31,7 @@ class IRolePolicies(TypedDict):
     can_use_translator: bool
     can_hide_ads: bool
     drive_capacity_mb: int
-    always_mark_nfsw: bool
+    always_mark_nsfw: bool
     can_update_bio_media: bool
     pin_limit: int
     antenna_limit: int

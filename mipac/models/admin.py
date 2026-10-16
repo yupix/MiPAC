@@ -15,6 +15,7 @@ from mipac.types.admin import (
     IUserIP,
 )
 from mipac.utils.format import str_to_datetime
+from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -47,24 +48,12 @@ class IndexStat:
         self.__index_stat: IIndexStat = index_stat
 
     @property
-    def schemaname(self) -> str:
-        return self.__index_stat["schemaname"]
-
-    @property
     def tablename(self) -> str:
         return self.__index_stat["tablename"]
 
     @property
     def indexname(self) -> str:
         return self.__index_stat["indexname"]
-
-    @property
-    def tablespace(self) -> str | None:
-        return self.__index_stat["tablespace"]
-
-    @property
-    def indexdef(self) -> str:
-        return self.__index_stat["indexdef"]
 
     def _get(self, key: str) -> Any | None:
         return self.__index_stat.get(key)
@@ -114,8 +103,14 @@ class ServerInfoCpu:
         self.__server_info_cpu = server_info_cpu
 
     @property
+    def model(self) -> str:
+        return self.__server_info_cpu["model"]
+
+    @property
+    @deprecated
     def models(self) -> str:
-        return self.__server_info_cpu["models"]
+        """.. deprecated:: `model` を使用してください"""
+        return self.model
 
     @property
     def cores(self) -> int:

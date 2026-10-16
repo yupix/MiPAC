@@ -340,7 +340,7 @@ class AdminMeta:
 
     @property
     def object_storage_use_ssl(self):
-        return self.__raw_admin_meta["object_storage_use_ssl"]
+        return self.__raw_admin_meta["object_storage_use_s_s_l"]
 
     @property
     def object_storage_use_proxy(self):

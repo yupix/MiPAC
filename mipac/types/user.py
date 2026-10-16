@@ -29,7 +29,6 @@ class IUserField(TypedDict):
 class ISignin(TypedDict):
     id: str
     created_at: str
-    user_id: str
     ip: str
     headers: dict[str, str]
     success: bool
@@ -118,7 +117,7 @@ class IPartialUser(TypedDict):
     avatar_decorations: list[IAvatarDecoration]
     is_bot: NotRequired[bool]
     is_cat: NotRequired[bool]
-    requires_signin_to_view_contents: NotRequired[bool]
+    require_signin_to_view_contents: NotRequired[bool]
     make_notes_followers_only_before: NotRequired[int | None]
     make_notes_hidden_before: NotRequired[int | None]
     instance: NotRequired[IInstanceLite]  # ローカルユーザーの場合はキーが無い
