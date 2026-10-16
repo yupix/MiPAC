@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.1] - 2026-10-16
+
+### <!-- 1 -->🐛 Bug Fixes
+
+- Create_note_body で MISSING を isinstance に渡していたためノートの作成・返信が失敗するのを修正 ([5ebef73](https://github.com/yupix/MiPAC/commit/5ebef73b6d58f16a25bacf7be7e5c81df1663e87))
+
 ## [0.8.0] - 2026-10-16
 
 ### <!-- 0 -->🚀 Features
@@ -1228,6 +1234,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 型の修正 ([0693078](https://github.com/yupix/MiPAC/commit/069307811c79c43de7fe3d689b8d3e44495e8608))
 - リリース時にpypiにアップロードするように ([f711d7e](https://github.com/yupix/MiPAC/commit/f711d7e75a57daf29c88aa72b0d75ea4b7c2ab23))
 
+[0.8.1]: https://github.com/yupix/MiPAC/compare/0.8.0..0.8.1
 [0.8.0]: https://github.com/yupix/MiPAC/compare/0.7.4..0.8.0
 [0.7.4]: https://github.com/yupix/MiPAC/compare/0.7.3..0.7.4
 [0.7.3]: https://github.com/yupix/MiPAC/compare/0.7.2..0.7.3
