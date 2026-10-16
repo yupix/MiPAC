@@ -8,3 +8,4 @@ dist
 docs/_build
 .env
 compiler/datas/errors.csv
+compiler/datas/api_changes_report.html

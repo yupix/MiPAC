@@ -1,80 +1,129 @@
-import copy
+"""OpenAPI 定義から MiPAC の対応状況・変更点・生成物を更新する
+
+使い方:
+    uv run python compiler/update_api_status.py [NEW_API_JSON]
+
+NEW_API_JSON を渡すと datas/v13_api.json(現行)と比較して差分を表示し、
+処理後に datas/v13_api.json を新しい定義で置き換える。
+省略時は現行の定義から生成物だけを作り直す。
+
+対応状況は mipac/ 内の Route("POST", "/api/...") を走査して自動判定する。
+
+生成物:
+    mipac/types/endpoints.py      ENDPOINTS の Literal 型
+    mipac/errors/errors.py        エラークラス
+    compiler/datas/errors.csv     エラー一覧
+    compiler/datas/support_status.md
+    compiler/datas/api_changes_report.html
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
 import hashlib
-import html
 import json
 import pathlib
+import re
+import shutil
 import sys
+from typing import Any, Literal, TypedDict
+
+COMPILER_PATH = pathlib.Path(__file__).resolve().parent
+ROOT_PATH = COMPILER_PATH.parent
+DATAS_PATH = COMPILER_PATH / "datas"
+API_PATH = DATAS_PATH / "v13_api.json"
+
+sys.path.insert(0, str(COMPILER_PATH))
+from type import OpenAPI  # noqa: E402
 
 try:
     from jinja2 import Environment, FileSystemLoader, select_autoescape
 except ImportError:
-    raise ImportError(
-        "Jinja2 が必要です。インストール: pip install jinja2"
-    ) from None
+    raise ImportError("Jinja2 が必要です。`uv sync` を実行してください") from None
 
-from type import OpenAPI, OpenAPIComponentSchema, OpenAPIRequestBody
-from typing import Any, Literal, TypedDict
+STATUS = Literal["supported", "needToWork", "notSupported"]
+STATUS_LABELS: dict[str, str] = {
+    "supported": "完全対応",
+    "needToWork": "要作業",
+    "notSupported": "未対応",
+    "RemovedFromMisskey": "Misskeyから削除",
+}
 
-try:
-    import tqdm
-    progress = tqdm.tqdm
-except ImportError:
-    progress = lambda x: x  # noqa: E731
-
-CURRENT_PATH = sys.path[0]
-if CURRENT_PATH.endswith("compiler"):
-    CURRENT_PATH = CURRENT_PATH[:-9]
-
-COMPILER_PATH = pathlib.Path(CURRENT_PATH).joinpath("compiler").as_posix()
-
-sys.path.append(CURRENT_PATH)
-
-try:
-    from mipac.utils.util import COLORS  # noqa: E402
-except ImportError:
-    COLORS = type("Colors", (), {"green": "", "reset": ""})()
-
-"""
-notSupported: MiPACに実装されていない
-supported: MiPACでサポートされている
-needToWork: サポートされているが、作業が必要
-RemovedFromMisskey: Misskeyから削除された
-Removed: MiPACから削除された（これに変更するとremovedから自動で削除されます）
-"""
-
-STATUS = Literal["notSupported", "supported", "needToWork", "RemovedFromMisskey", "Removed"]
+ROUTE_PATTERN = re.compile(
+    r"""Route\(\s*(?:method=)?["'](?:GET|POST)["'],\s*(?:path=)?["']/api(/[^"']+)["']""", re.S
+)
 
 
-class IEndpoint(TypedDict):
-    path: str
-    status: STATUS
-    request_body_hash: str | None
-    response_body_hash: str | None
+class Change(TypedDict):
+    path: str  # エンドポイントパス or スキーマ名
+    status: str
+    old_hash: str
+    new_hash: str
+    new_content: str
+    diff: dict[str, list[Any]]
 
 
-class ISchema(TypedDict):
-    name: str
-    hash: str
-    status: STATUS
+# --------------------------------------------------------------------------- 読み込み
 
 
-class IData(TypedDict):
-    endpoints: dict[Literal["support", "removed"], dict[str, IEndpoint]]
-    schemas: dict[str, ISchema]
+def load_api(path: pathlib.Path) -> OpenAPI:
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
 
 
-def _canonical_json(data: dict[str, Any] | OpenAPIComponentSchema | OpenAPIRequestBody) -> str:
-    """キー順・フォーマットに依存しない正規化されたJSON文字列を生成する"""
-    return json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+def implemented_paths() -> set[str]:
+    """mipac/ 内で Route として参照されているパス(/api 抜き)を集める"""
+    paths: set[str] = set()
+    for file in (ROOT_PATH / "mipac").rglob("*.py"):
+        paths.update(ROUTE_PATTERN.findall(file.read_text(encoding="utf-8")))
+    return paths
 
 
-def get_sha256_hash(data: dict[str, Any] | OpenAPIComponentSchema | OpenAPIRequestBody) -> str:
-    """キー順やフォーマットの違いに影響されないハッシュを生成する"""
-    return hashlib.sha256(_canonical_json(data).encode("utf-8")).hexdigest()
+def operation(api: OpenAPI, path: str) -> dict[str, Any]:
+    """Misskey は全て POST だが、念のため最初のメソッドを取る"""
+    return next(iter(api["paths"][path].values()))
+
+
+def collect_refs(value: Any, acc: set[str]) -> set[str]:
+    if isinstance(value, dict):
+        ref = value.get("$ref")
+        if isinstance(ref, str) and ref.startswith("#/components/schemas/"):
+            acc.add(ref.rsplit("/", 1)[-1])
+        for v in value.values():
+            collect_refs(v, acc)
+    elif isinstance(value, list):
+        for v in value:
+            collect_refs(v, acc)
+    return acc
+
+
+def referenced_schemas(api: OpenAPI, paths: set[str]) -> set[str]:
+    """実装済みエンドポイントから($ref を辿って)到達できるスキーマ名"""
+    schemas = api["components"]["schemas"]
+    pending = set()
+    for path in paths:
+        if path in api["paths"]:
+            collect_refs(operation(api, path), pending)
+    seen: set[str] = set()
+    while pending:
+        name = pending.pop()
+        if name in seen or name not in schemas:
+            continue
+        seen.add(name)
+        collect_refs(schemas[name], pending)
+    return seen
+
+
+# --------------------------------------------------------------------------- 差分
+
+
+def _hash(data: Any) -> str:
+    canonical = json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 def _value_repr(val: Any) -> str:
-    """型・値の簡潔な表現を返す（差分表示用）"""
     if val is None:
         return "null"
     if isinstance(val, bool):
@@ -84,54 +133,41 @@ def _value_repr(val: Any) -> str:
     if isinstance(val, float):
         return "number"
     if isinstance(val, str):
-        # スキーマの型名（string, integer等）や短い文字列はそのまま
-        if len(val) <= 60 and val not in ("", " "):
-            return val
-        return f"{val[:50]}..." if len(val) > 50 else val
+        return val if len(val) <= 60 else f"{val[:50]}..."
     if isinstance(val, list):
         return f"array[{len(val)}]"
     if isinstance(val, dict):
         return "object"
-    return str(type(val).__name__)
+    return type(val).__name__
 
 
-def _extract_schema_name(ref: str) -> str:
-    """$ref からスキーマ名を抽出。例: #/components/schemas/User → User"""
-    if not isinstance(ref, str) or not ref.startswith("#/components/schemas/"):
-        return ref
-    return ref.split("/")[-1]
+def _extract_schema_name(ref: Any) -> Any:
+    if isinstance(ref, str) and ref.startswith("#/components/schemas/"):
+        return ref.rsplit("/", 1)[-1]
+    return ref
 
 
 def _format_diff_path(path: str, value: Any = None) -> str:
+    """技術的なパスを読みやすくする
+
+    200.content.application/json.schema.items.$ref
+    → responses[200] › schema.items › $ref → User
     """
-    技術的なパスを人間が読みやすい形式に変換。
-    例: 200.content.application/json.schema.items.$ref → responses[200] › schema.items › $ref → User
-    """
-    parts = path.split(".")
     formatted: list[str] = []
-    for i, part in enumerate(parts):
+    for part in path.split("."):
         if part.isdigit() and len(part) == 3:
-            # HTTP ステータスコード
             formatted.append(f"responses[{part}]")
         elif "/" in part:
-            # content type (application/json 等) は省略（冗長なため）
-            continue
+            continue  # content type は冗長なので省略
         elif part == "$ref" and value is not None:
-            schema_name = _extract_schema_name(value) if isinstance(value, str) else value
-            formatted.append(f"$ref → {schema_name}")
+            formatted.append(f"$ref → {_extract_schema_name(value)}")
         else:
             formatted.append(part)
     return " › ".join(p for p in formatted if p)
 
 
-def _compute_json_diff(
-    old_val: Any, new_val: Any, path: str = ""
-) -> dict[str, list[Any]]:
-    """
-    2つのJSON構造を比較し、追加・削除・型変更を検出する。
-    戻り値: {"added": [...], "removed": [...], "type_changes": [...]}
-    added/removed は {path, value} の形式で、参照先などが分かるようにする
-    """
+def _compute_json_diff(old_val: Any, new_val: Any, path: str = "") -> dict[str, list[Any]]:
+    """2つの JSON 構造を比較し added / removed / type_changes / array_changes を返す"""
     result: dict[str, list[Any]] = {
         "added": [],
         "removed": [],
@@ -139,7 +175,7 @@ def _compute_json_diff(
         "array_changes": [],
     }
 
-    def _join_path(base: str, key: str) -> str:
+    def _join(base: str, key: str) -> str:
         return f"{base}.{key}" if base else key
 
     def _is_leaf(val: Any) -> bool:
@@ -148,293 +184,244 @@ def _compute_json_diff(
         )
 
     if isinstance(old_val, dict) and isinstance(new_val, dict):
-        old_keys = set(old_val.keys())
-        new_keys = set(new_val.keys())
-
-        for key in old_keys - new_keys:
+        for key in old_val.keys() - new_val.keys():
             val = old_val[key]
-            full_path = _join_path(path, key)
-            if key == "$ref" and isinstance(val, str):
-                result["removed"].append({"path": full_path, "value": val})
-            elif _is_leaf(val):
-                result["removed"].append({"path": full_path, "value": val})
-            else:
-                result["removed"].append({"path": full_path, "value": None})
-
-        for key in new_keys - old_keys:
+            result["removed"].append(
+                {"path": _join(path, key), "value": val if _is_leaf(val) else None}
+            )
+        for key in new_val.keys() - old_val.keys():
             val = new_val[key]
-            full_path = _join_path(path, key)
-            if key == "$ref" and isinstance(val, str):
-                result["added"].append({"path": full_path, "value": val})
-            elif _is_leaf(val):
-                result["added"].append({"path": full_path, "value": val})
-            else:
-                result["added"].append({"path": full_path, "value": None})
-
-        for key in old_keys & new_keys:
-            sub_path = _join_path(path, key)
-            sub_old = old_val[key]
-            sub_new = new_val[key]
-            sub_result = _compute_json_diff(sub_old, sub_new, sub_path)
-            result["added"].extend(sub_result["added"])
-            result["removed"].extend(sub_result["removed"])
-            result["type_changes"].extend(sub_result["type_changes"])
-            result["array_changes"].extend(sub_result.get("array_changes", []))
+            result["added"].append(
+                {"path": _join(path, key), "value": val if _is_leaf(val) else None}
+            )
+        for key in old_val.keys() & new_val.keys():
+            sub = _compute_json_diff(old_val[key], new_val[key], _join(path, key))
+            for k in result:
+                result[k].extend(sub[k])
     elif isinstance(old_val, list) and isinstance(new_val, list):
         if old_val != new_val:
-            # 配列の差分を具体的に表示（required 等の文字列配列向け）
-            array_diff_done = False
-            try:
-                if all(not isinstance(v, (dict, list)) for v in old_val + new_val):
-                    old_set = set(old_val)
-                    new_set = set(new_val)
-                    added_items = sorted(new_set - old_set, key=str)
-                    removed_items = sorted(old_set - new_set, key=str)
-                    # 追加・削除がなくても enum 等は全文表示するため array_changes に含める
-                    if added_items or removed_items or old_val != new_val:
-                        result["array_changes"].append({
-                            "path": path or "(root)",
-                            "added": added_items,
-                            "removed": removed_items,
-                            "old_values": old_val,  # 全文表示用（enum等）
-                            "new_values": new_val,
-                        })
-                    array_diff_done = True
-            except (TypeError, ValueError):
-                pass
-            if not array_diff_done:
-                result["type_changes"].append({
-                    "path": path or "(root)",
-                    "old": _value_repr(old_val),
-                    "new": _value_repr(new_val),
-                })
+            if all(not isinstance(v, (dict, list)) for v in old_val + new_val):
+                result["array_changes"].append(
+                    {
+                        "path": path or "(root)",
+                        "added": sorted(set(new_val) - set(old_val), key=str),
+                        "removed": sorted(set(old_val) - set(new_val), key=str),
+                        "old_values": old_val,
+                        "new_values": new_val,
+                    }
+                )
+            else:
+                result["type_changes"].append(
+                    {
+                        "path": path or "(root)",
+                        "old": _value_repr(old_val),
+                        "new": _value_repr(new_val),
+                    }
+                )
     else:
-        old_repr = _value_repr(old_val)
-        new_repr = _value_repr(new_val)
+        old_repr, new_repr = _value_repr(old_val), _value_repr(new_val)
         if old_repr != new_repr:
-            # $ref の場合は参照先スキーマ名を表示
-            old_display = _extract_schema_name(old_val) if isinstance(old_val, str) and old_val.startswith("#/") else old_repr
-            new_display = _extract_schema_name(new_val) if isinstance(new_val, str) and new_val.startswith("#/") else new_repr
-            result["type_changes"].append({
-                "path": path or "(root)",
-                "old": old_display,
-                "new": new_display,
-            })
-
+            result["type_changes"].append(
+                {
+                    "path": path or "(root)",
+                    "old": _extract_schema_name(old_val) if isinstance(old_val, str) else old_repr,
+                    "new": _extract_schema_name(new_val) if isinstance(new_val, str) else new_repr,
+                }
+            )
     return result
 
 
-"""
-support: Misskeyに実装されており、実装する予定があるまたは実装されている
-removed: MiPACでサポートされているが、Misskeyから削除された
-"""
-SECTIONS = Literal["support", "removed"]
+def _diff_lines(diff: dict[str, list[Any]]) -> list[str]:
+    """ターミナル要約用の 1 行表現"""
+    lines = [f"  + {_format_diff_path(i['path'], i.get('value'))}" for i in diff["added"]]
+    lines += [f"  - {_format_diff_path(i['path'], i.get('value'))}" for i in diff["removed"]]
+    lines += [
+        f"  ~ {_format_diff_path(tc['path'])}: {tc['old']} -> {tc['new']}"
+        for tc in diff["type_changes"]
+    ]
+    for ac in diff["array_changes"]:
+        if ac["added"] or ac["removed"]:
+            parts = [f"+{v}" for v in ac["added"]] + [f"-{v}" for v in ac["removed"]]
+            lines.append(f"  ~ {_format_diff_path(ac['path'])}: {' '.join(parts)}")
+    return lines
 
-# 変更検知用のレポートデータ
-ChangeReport = TypedDict(
-    "ChangeReport",
-    {
-        "request_body_changes": list[dict[str, Any]],
-        "response_changes": list[dict[str, Any]],
-        "schema_changes": list[dict[str, Any]],
-    },
-)
-change_report: ChangeReport = {
-    "request_body_changes": [],
-    "response_changes": [],
-    "schema_changes": [],
-}
 
-with open(f"{COMPILER_PATH}/datas/v13_api.json", mode="r", encoding="utf-8") as f:
-    api: OpenAPI = json.load(f)
+def _change(name: str, status: str, old: Any, new: Any) -> Change:
+    return {
+        "path": name,
+        "status": status,
+        "old_hash": _hash(old),
+        "new_hash": _hash(new),
+        "new_content": json.dumps(new, ensure_ascii=False, indent=2),
+        "diff": _compute_json_diff(old, new),
+    }
 
-# 前回のAPIスナップショット（差分表示用）
-api_previous: OpenAPI | None = None
-_api_previous_path = pathlib.Path(f"{COMPILER_PATH}/datas/v13_api_previous.json")
-if _api_previous_path.exists():
-    with open(_api_previous_path, mode="r", encoding="utf-8") as f:
-        api_previous = json.load(f)
 
-with open(f"{COMPILER_PATH}/datas/endpoints.json", mode="r", encoding="utf-8") as f:
-    endpoints: IData = json.load(f)
-    _endpoints: IData = copy.deepcopy(endpoints)
+# --------------------------------------------------------------------------- 対応状況
 
-# パスに関する情報を更新する
-for path in progress(api["paths"]):
-    old_data = endpoints["endpoints"]["support"].get(path, None)
-    current_request_body = api["paths"][path]["post"].get("requestBody", {})
-    current_responses = api["paths"][path]["post"].get("responses", {})
-    current_request_body_hash = get_sha256_hash(current_request_body)
-    current_response_body_hash = get_sha256_hash(current_responses)
-    if old_data is None:
-        endpoints["endpoints"]["support"][path] = {
-            "path": path,
-            "status": "notSupported",
-            "request_body_hash": current_request_body_hash,
-            "response_body_hash": current_response_body_hash,
-        }
-    else:
-        # 既存のデータから削除することで残りはremovedにする
-        del _endpoints["endpoints"]["support"][path]
 
-        if endpoints["endpoints"]["support"][path]["status"] == "supported":
-            # ハッシュが変更されている場合はneedToWorkにする、ハッシュの設定前にやらないとハッシュが変更されてるか分からない
-            if (
-                current_request_body_hash != old_data["request_body_hash"]
-                or current_response_body_hash != old_data["response_body_hash"]
+class Report(TypedDict):
+    endpoint_status: dict[str, STATUS]  # 新 API に存在するパス
+    removed_endpoints: list[str]  # 実装済みだが新 API に無いパス
+    added_endpoints: list[str]  # 新 API で増えたパス
+    request_body_changes: list[Change]
+    response_changes: list[Change]
+    schema_status: dict[str, STATUS]
+    schema_changes: list[Change]
+
+
+def build_report(old_api: OpenAPI, new_api: OpenAPI, implemented: set[str]) -> Report:
+    report: Report = {
+        "endpoint_status": {},
+        "removed_endpoints": sorted(p for p in implemented if p not in new_api["paths"]),
+        "added_endpoints": sorted(p for p in new_api["paths"] if p not in old_api["paths"]),
+        "request_body_changes": [],
+        "response_changes": [],
+        "schema_status": {},
+        "schema_changes": [],
+    }
+    for path in new_api["paths"]:
+        if path not in implemented:
+            report["endpoint_status"][path] = "notSupported"
+            continue
+        status: STATUS = "supported"
+        if path in old_api["paths"]:
+            old_op, new_op = operation(old_api, path), operation(new_api, path)
+            for key, bucket in (
+                ("requestBody", "request_body_changes"),
+                ("responses", "response_changes"),
             ):
-                endpoints["endpoints"]["support"][path]["status"] = "needToWork"
+                old_part, new_part = old_op.get(key, {}), new_op.get(key, {})
+                if old_part != new_part:
+                    status = "needToWork"
+                    report[bucket].append(_change(path, status, old_part, new_part))
+        report["endpoint_status"][path] = status
 
-        # ハッシュが変更されているかどうかを確認する
-        if current_request_body_hash != old_data["request_body_hash"]:
-            print(
-                f"{COLORS.green}[CHANGED: REQUEST] changed request body hash {COLORS.reset} {path} {COLORS.reset}"
-            )
-            endpoints["endpoints"]["support"][path]["request_body_hash"] = current_request_body_hash
-            old_request_body = {}
-            if api_previous and path in api_previous.get("paths", {}):
-                old_request_body = api_previous["paths"][path].get("post", {}).get("requestBody", {})
-            diff = _compute_json_diff(old_request_body, current_request_body)
-            change_report["request_body_changes"].append(
-                {
-                    "path": path,
-                    "status": endpoints["endpoints"]["support"][path]["status"],
-                    "old_hash": old_data["request_body_hash"],
-                    "new_hash": current_request_body_hash,
-                    "new_content": json.dumps(current_request_body, ensure_ascii=False, indent=2),
-                    "diff": diff,
-                }
-            )
-        if current_response_body_hash != old_data["response_body_hash"]:
-            print(
-                f"{COLORS.green}[CHANGED: RESPONSES] changed responses hash {COLORS.reset} {path} {COLORS.reset}"
-            )
-            endpoints["endpoints"]["support"][path]["response_body_hash"] = current_response_body_hash
-            old_responses = {}
-            if api_previous and path in api_previous.get("paths", {}):
-                old_responses = api_previous["paths"][path].get("post", {}).get("responses", {})
-            diff = _compute_json_diff(old_responses, current_responses)
-            change_report["response_changes"].append(
-                {
-                    "path": path,
-                    "status": endpoints["endpoints"]["support"][path]["status"],
-                    "old_hash": old_data["response_body_hash"],
-                    "new_hash": current_response_body_hash,
-                    "new_content": json.dumps(current_responses, ensure_ascii=False, indent=2),
-                    "diff": diff,
-                }
-            )
+    referenced = referenced_schemas(new_api, implemented)
+    old_schemas, new_schemas = old_api["components"]["schemas"], new_api["components"]["schemas"]
+    for name, schema in new_schemas.items():
+        if name not in referenced:
+            report["schema_status"][name] = "notSupported"
+            continue
+        old_schema = old_schemas.get(name, {})
+        if old_schema == schema:
+            report["schema_status"][name] = "supported"
+        else:
+            report["schema_status"][name] = "needToWork"
+            report["schema_changes"].append(_change(name, "needToWork", old_schema, schema))
+    return report
 
 
-# Misskeyから削除されたエンドポイントをremovedに移動する
-for path in progress(_endpoints["endpoints"]["support"]):
-    endpoints["endpoints"]["removed"][path] = _endpoints["endpoints"]["support"][path]
-    # Misskeyから削除された場合はRemovedFromMisskeyにする
-    endpoints["endpoints"]["removed"][path]["status"] = "RemovedFromMisskey"
-    del endpoints["endpoints"]["support"][path]
-
-# MiPACからの削除が完了した場合はremovedから削除する
-for path in progress(_endpoints["endpoints"]["removed"]):
-    if endpoints["endpoints"]["removed"][path]["status"] == "Removed":
-        del endpoints["endpoints"]["removed"][path]
-        continue
-
-# スキーマに関する情報を更新する
-for schema in progress(api["components"]["schemas"]):
-    try:
-        del _endpoints["schemas"][schema]
-    except KeyError:
-        pass
-
-    old_data = endpoints["schemas"].get(schema, None)
-    current_schema = api["components"]["schemas"][schema]
-    if old_data is None:
-        endpoints["schemas"][schema] = {
-            "name": schema,
-            "hash": get_sha256_hash(current_schema),
-            "status": "notSupported",
-        }
-    else:
-        current_hash = get_sha256_hash(current_schema)
-        if current_hash != old_data["hash"]:
-            print(
-                f"{COLORS.green}[CHANGED: SCHEMA] changed schema hash {COLORS.reset} {schema} {COLORS.reset}"
-            )
-            endpoints["schemas"][schema]["hash"] = current_hash
-
-            if endpoints["schemas"][schema]["status"] == "supported":
-                # サポート済みの場合のみステータスを変更する
-                endpoints["schemas"][schema]["status"] = "needToWork"
-
-            old_schema = {}
-            if api_previous:
-                old_schema = api_previous.get("components", {}).get("schemas", {}).get(schema, {})
-            diff = _compute_json_diff(old_schema, current_schema)
-            change_report["schema_changes"].append(
-                {
-                    "name": schema,
-                    "status": endpoints["schemas"][schema]["status"],
-                    "old_hash": old_data["hash"],
-                    "new_hash": current_hash,
-                    "new_content": json.dumps(current_schema, ensure_ascii=False, indent=2),
-                    "diff": diff,
-                }
-            )
+# --------------------------------------------------------------------------- 生成物
 
 
-def get_list(data: IData, section: SECTIONS, status: STATUS):
-    result = ""
-    for path_name in data["endpoints"][section]:
-        path = data["endpoints"][section][path_name]
-        if path["status"] == status:
-            affix = "(Need to work)" if path["status"] == "needToWork" else ""
-            result += f"- [{'x' if path['status'] == 'supported' else ' '}] {path['path']}{f' {affix}' if affix else ''}\n"
-    return result
+def write_endpoints_type(api: OpenAPI) -> None:
+    paths = [f"/api{p}" for p in api["paths"]]
+    content = (
+        '"""\n=======================\n        WARNING\n=======================\n'
+        " This file is automatically generated by compiler/update_api_status.py.\n"
+        ' If this file is modified and then auto-generated, the changes will be lost.\n"""\n\n'
+        "from typing import Literal\n\n"
+        f"ENDPOINTS = Literal{json.dumps(paths, ensure_ascii=False, indent=4)}\n"
+    )
+    (ROOT_PATH / "mipac/types/endpoints.py").write_text(content, encoding="utf-8")
 
 
-def _escape_html(text: str) -> str:
-    return html.escape(text)
+def _error_name_to_hump(name: str) -> str:
+    return "".join(i.capitalize() for i in name.split("_"))
 
 
-def _prepare_diff_for_template(diff: dict[str, list] | None) -> dict[str, Any] | None:
-    """テンプレート用に差分データを整形する"""
-    if not diff or not (
-        diff.get("added")
-        or diff.get("removed")
-        or diff.get("type_changes")
-        or diff.get("array_changes")
-    ):
+def write_errors(api: OpenAPI) -> None:
+    error_map: dict[str, str] = {}
+    for path in api["paths"]:
+        for status_code, res in operation(api, path).get("responses", {}).items():
+            if status_code == "200":
+                continue
+            for content in res.get("content", {}).values():
+                if content.get("schema", {}).get("$ref") != "#/components/schemas/Error":
+                    continue
+                for example in content.get("examples", {}).values():
+                    error = example["value"]["error"]
+                    error_map[error["code"]] = error["message"]
+    errors = sorted(error_map.items())
+    with open(DATAS_PATH / "errors.csv", "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["code", "message"])
+        writer.writerows(errors)
+    classes = [
+        f'class {_error_name_to_hump(code)}Error(APIError):\n    """{message}"""\n'
+        for code, message in errors
+    ]
+    (ROOT_PATH / "mipac/errors/errors.py").write_text(
+        "from .base import APIError\n\n\n" + "\n\n".join(classes), encoding="utf-8"
+    )
+
+
+def _checklist(names: list[str], status: dict[str, str]) -> str:
+    lines = []
+    for name in names:
+        affix = " (Need to work)" if status[name] == "needToWork" else ""
+        lines.append(f"- [{'x' if status[name] == 'supported' else ' '}] {name}{affix}")
+    return "\n".join(lines) or "💯"
+
+
+def write_support_status(api: OpenAPI, report: Report) -> None:
+    es, ss = report["endpoint_status"], report["schema_status"]
+    by = lambda d, s: sorted(k for k, v in d.items() if v == s)  # noqa: E731
+    implemented = len(es) - len(by(es, "notSupported"))
+    content = f"""# Supported Misskey Information
+
+## Supported Misskey Version
+
+`{api["info"]["version"]}`
+
+## Supported endpoints ({implemented}/{len(es)})
+
+{_checklist(by(es, "supported"), es)}
+
+## Not supported endpoints
+
+{_checklist(by(es, "notSupported"), es)}
+
+## Changed request body or responses
+
+{_checklist(by(es, "needToWork"), es)}
+
+## Removed from Misskey
+
+{chr(10).join(f"- {p}" for p in report["removed_endpoints"]) or "💯"}
+
+## Supported schemas
+
+{_checklist(sorted(ss), ss)}
+"""
+    (DATAS_PATH / "support_status.md").write_text(content, encoding="utf-8")
+
+
+def _prepare_diff_for_template(diff: dict[str, list[Any]]) -> dict[str, Any] | None:
+    if not any(diff.values()):
         return None
     max_items = 30
-    max_array_items = 15
     result: dict[str, Any] = {}
-    if diff.get("array_changes"):
-        result["array_changes"] = []
-        for ac in diff["array_changes"][:max_items]:
-            added = ac.get("added", [])[:max_array_items]
-            removed = ac.get("removed", [])[:max_array_items]
-            added_extra = f" 他{len(ac.get('added', [])) - max_array_items}件" if len(ac.get("added", [])) > max_array_items else ""
-            removed_extra = f" 他{len(ac.get('removed', [])) - max_array_items}件" if len(ac.get("removed", [])) > max_array_items else ""
-            old_vals = ac.get("old_values", [])
-            new_vals = ac.get("new_values", [])
-            old_values_display = ", ".join(str(v) for v in old_vals) if old_vals else ""
-            new_values_display = ", ".join(str(v) for v in new_vals) if new_vals else ""
-            result["array_changes"].append({
+    if diff["array_changes"]:
+        result["array_changes"] = [
+            {
                 "path_display": _format_diff_path(ac["path"]),
-                "added_display": ", ".join(str(a) for a in added) + added_extra if added else "",
-                "removed_display": ", ".join(str(r) for r in removed) + removed_extra if removed else "",
-                "old_values_display": old_values_display,
-                "new_values_display": new_values_display,
-                "added": bool(added),
-                "removed": bool(removed),
-            })
-    if diff.get("added"):
-        items = diff["added"][:max_items]
-        result["added"] = [_format_diff_path(i["path"], i.get("value")) if isinstance(i, dict) else _format_diff_path(i) for i in items]
-    if diff.get("removed"):
-        items = diff["removed"][:max_items]
-        result["removed"] = [_format_diff_path(i["path"], i.get("value")) if isinstance(i, dict) else _format_diff_path(i) for i in items]
-    if diff.get("type_changes"):
+                "added_display": ", ".join(map(str, ac["added"])),
+                "removed_display": ", ".join(map(str, ac["removed"])),
+                "old_values_display": ", ".join(map(str, ac["old_values"])),
+                "new_values_display": ", ".join(map(str, ac["new_values"])),
+                "added": bool(ac["added"]),
+                "removed": bool(ac["removed"]),
+            }
+            for ac in diff["array_changes"][:max_items]
+        ]
+    for key in ("added", "removed"):
+        if diff[key]:
+            result[key] = [
+                _format_diff_path(i["path"], i.get("value")) for i in diff[key][:max_items]
+            ]
+    if diff["type_changes"]:
         result["type_changes"] = [
             {"path": _format_diff_path(tc["path"]), "old": tc["old"], "new": tc["new"]}
             for tc in diff["type_changes"][:max_items]
@@ -442,176 +429,114 @@ def _prepare_diff_for_template(diff: dict[str, list] | None) -> dict[str, Any] |
     return result
 
 
-STATUS_LABELS: dict[str, str] = {
-    "supported": "完全対応",
-    "needToWork": "要作業",
-    "notSupported": "未対応",
-    "RemovedFromMisskey": "Misskeyから削除",
-    "Removed": "削除済み",
-}
-
-
-def _prepare_section_items(
-    raw_items: list[dict], type_label: str
-) -> list[dict[str, Any]]:
-    """セクションのアイテムをテンプレート用に整形"""
+def _prepare_section_items(changes: list[Change]) -> list[dict[str, Any]]:
     return [
         {
-            "path_or_name": item.get("path", item.get("name", "")),
-            "status": item.get("status", ""),
-            "status_label": STATUS_LABELS.get(item.get("status", ""), item.get("status", "")),
-            "old_hash": (item.get("old_hash") or "")[:16] + "...",
-            "new_hash": (item.get("new_hash") or "")[:16] + "...",
-            "diff": _prepare_diff_for_template(item.get("diff")),
-            "new_content": item.get("new_content", ""),
+            "path_or_name": c["path"],
+            "status": c["status"],
+            "status_label": STATUS_LABELS.get(c["status"], c["status"]),
+            "old_hash": c["old_hash"],
+            "new_hash": c["new_hash"],
+            "diff": _prepare_diff_for_template(c["diff"]),
+            "new_content": c["new_content"],
         }
-        for item in raw_items
+        for c in changes
     ]
 
 
-def _prepare_support_status(endpoints_data: IData) -> dict[str, Any]:
-    """サポート状況をテンプレート用に整形する"""
-    support = endpoints_data["endpoints"]["support"]
-    removed = endpoints_data["endpoints"]["removed"]
-    schemas = endpoints_data["schemas"]
-
-    supported = [p for p, d in support.items() if d["status"] == "supported"]
-    need_to_work = [p for p, d in support.items() if d["status"] == "needToWork"]
-    not_supported = [p for p, d in support.items() if d["status"] == "notSupported"]
-    removed_list = [p for p, d in removed.items() if d["status"] == "RemovedFromMisskey"]
-
-    schema_supported = [n for n, d in schemas.items() if d["status"] == "supported"]
-    schema_need_to_work = [n for n, d in schemas.items() if d["status"] == "needToWork"]
-    schema_not_supported = [n for n, d in schemas.items() if d["status"] == "notSupported"]
-
-    total_endpoints = len(support)
-    implemented_endpoints = len(supported) + len(need_to_work)
-    total_schemas = len(schemas)
-    implemented_schemas = len(schema_supported) + len(schema_need_to_work)
-
-    return {
+def write_html_report(api: OpenAPI, report: Report) -> None:
+    es, ss = report["endpoint_status"], report["schema_status"]
+    by = lambda d, s: sorted(k for k, v in d.items() if v == s)  # noqa: E731
+    support_status = {
         "stats": {
-            "total_endpoints": total_endpoints,
-            "implemented_endpoints": implemented_endpoints,
-            "supported_endpoints": len(supported),
-            "need_to_work_endpoints": len(need_to_work),
-            "not_supported_endpoints": len(not_supported),
-            "removed_endpoints": len(removed_list),
-            "total_schemas": total_schemas,
-            "implemented_schemas": implemented_schemas,
+            "total_endpoints": len(es),
+            "implemented_endpoints": len(by(es, "supported")) + len(by(es, "needToWork")),
+            "supported_endpoints": len(by(es, "supported")),
+            "need_to_work_endpoints": len(by(es, "needToWork")),
+            "not_supported_endpoints": len(by(es, "notSupported")),
+            "removed_endpoints": len(report["removed_endpoints"]),
+            "total_schemas": len(ss),
+            "implemented_schemas": len(by(ss, "supported")) + len(by(ss, "needToWork")),
         },
-        "supported_endpoints": supported,
-        "need_to_work_endpoints": need_to_work,
-        "not_supported_endpoints": not_supported,
-        "removed_endpoints": removed_list,
-        "schema_supported": schema_supported,
-        "schema_need_to_work": schema_need_to_work,
-        "schema_not_supported": schema_not_supported,
+        "supported_endpoints": by(es, "supported"),
+        "need_to_work_endpoints": by(es, "needToWork"),
+        "not_supported_endpoints": by(es, "notSupported"),
+        "removed_endpoints": report["removed_endpoints"],
+        "schema_supported": by(ss, "supported"),
+        "schema_need_to_work": by(ss, "needToWork"),
+        "schema_not_supported": by(ss, "notSupported"),
     }
-
-
-def _generate_html_report(
-    report: ChangeReport, api_version: str, endpoints_data: IData
-) -> str:
-    """JinjaテンプレートでHTMLレポートを生成する"""
-    has_changes = bool(
-        report["request_body_changes"]
-        or report["response_changes"]
-        or report["schema_changes"]
-    )
     sections = [
         {
             "title": "📥 リクエストボディの変更",
-            "type_label": "リクエストボディ",
-            "items": _prepare_section_items(report["request_body_changes"], "リクエストボディ"),
+            "items": _prepare_section_items(report["request_body_changes"]),
         },
         {
             "title": "📤 レスポンスの変更",
-            "type_label": "レスポンス",
-            "items": _prepare_section_items(report["response_changes"], "レスポンス"),
+            "items": _prepare_section_items(report["response_changes"]),
         },
-        {
-            "title": "📋 スキーマの変更",
-            "type_label": "スキーマ",
-            "items": _prepare_section_items(report["schema_changes"], "スキーマ"),
-        },
+        {"title": "📋 スキーマの変更", "items": _prepare_section_items(report["schema_changes"])},
     ]
-    support_status = _prepare_support_status(endpoints_data)
-    template_dir = pathlib.Path(COMPILER_PATH) / "templates"
     env = Environment(
-        loader=FileSystemLoader(str(template_dir)),
+        loader=FileSystemLoader(str(COMPILER_PATH / "templates")),
         autoescape=select_autoescape(("html", "xml")),
     )
-    template = env.get_template("api_changes_report.html.j2")
-    return template.render(
-        api_version=api_version,
-        has_changes=has_changes,
+    html = env.get_template("api_changes_report.html.j2").render(
+        api_version=api["info"]["version"],
+        has_changes=any(s["items"] for s in sections),
         sections=sections,
         support_status=support_status,
     )
+    (DATAS_PATH / "api_changes_report.html").write_text(html, encoding="utf-8")
 
 
-# ファイル出力（処理失敗時は previous を上書きしない）
-try:
-    with open(f"{COMPILER_PATH}/datas/endpoints.json", mode="w", encoding="utf-8") as f:
-        json.dump(endpoints, f, ensure_ascii=False, indent=4)
+def print_summary(old_api: OpenAPI, new_api: OpenAPI, report: Report) -> None:
+    es = report["endpoint_status"]
+    counts = {
+        s: sum(1 for v in es.values() if v == s)
+        for s in ("supported", "needToWork", "notSupported")
+    }
+    print(f"Misskey {old_api['info']['version']} -> {new_api['info']['version']}")
+    print(
+        f"endpoints: {len(es)} total / implemented {counts['supported'] + counts['needToWork']}"
+        f" (supported {counts['supported']}, needToWork {counts['needToWork']})"
+        f" / not implemented {counts['notSupported']}"
+    )
+    print(f"added endpoints: {len(report['added_endpoints'])}")
+    for path in report["added_endpoints"]:
+        print(f"  + {path}")
+    print(f"removed endpoints still used by MiPAC: {len(report['removed_endpoints'])}")
+    for path in report["removed_endpoints"]:
+        print(f"  - {path}")
+    for title, changes in (
+        ("REQUEST", report["request_body_changes"]),
+        ("RESPONSES", report["response_changes"]),
+        ("SCHEMA", report["schema_changes"]),
+    ):
+        for change in changes:
+            print(f"[CHANGED: {title}] {change['path']}")
+            print("\n".join(_diff_lines(change["diff"])))
 
-    with open(f"{COMPILER_PATH}/datas/support_status.md", mode="w", encoding="utf-8") as f:
-        path_number = len(endpoints["endpoints"]["support"])
-        supported_path_number = len(
-            [
-                path
-                for path in endpoints["endpoints"]["support"]
-                if endpoints["endpoints"]["support"][path]["status"] == "supported"
-                or endpoints["endpoints"]["support"][path]["status"] == "needToWork"
-            ]
-        )
-        supported_endpoints = get_list(endpoints, "support", "supported")
-        not_supported_endpoints = get_list(endpoints, "support", "notSupported")
-        removed_from_misskey_endpoints = get_list(endpoints, "removed", "RemovedFromMisskey")
-        need_to_work_endpoints = get_list(endpoints, "support", "needToWork")
-        support_schemas = ""
-        for schema_name in endpoints["schemas"]:
-            schema = endpoints["schemas"][schema_name]
-            affix = "(Need to work)" if schema["status"] == "needToWork" else ""
-            support_schemas += f"- [{'x' if schema['status'] == 'supported' else ' '}] {schema['name']}{f' {affix}' if affix else ''}\n"
-        f.write(
-            f"""# Supported Misskey Information
 
-## Supported Misskey Version
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument("new_api", nargs="?", type=pathlib.Path, help="新しい OpenAPI JSON")
+    args = parser.parse_args()
 
-`{api['info']['version']}`
+    old_api = load_api(API_PATH)
+    new_api = load_api(args.new_api) if args.new_api else old_api
+    report = build_report(old_api, new_api, implemented_paths())
 
-## Supported endpoints ({supported_path_number}/{path_number})
+    write_endpoints_type(new_api)
+    write_errors(new_api)
+    write_support_status(new_api, report)
+    write_html_report(new_api, report)
+    if args.new_api and args.new_api.resolve() != API_PATH.resolve():
+        shutil.copyfile(args.new_api, API_PATH)
+    print_summary(old_api, new_api, report)
 
-{supported_endpoints}
 
-## Not supported endpoints
-
-{"💯" if len(not_supported_endpoints.strip()) == 0 else not_supported_endpoints[:-1]}
-
-## Changed request body or responses
-
-{"💯" if len(need_to_work_endpoints.strip()) == 0 else need_to_work_endpoints}
-
-## Removed from Misskey
-
-{"💯" if len(removed_from_misskey_endpoints.strip()) == 0 else removed_from_misskey_endpoints}
-
-## Supported schemas
-
-{support_schemas[:-1]}
-"""
-        )
-
-    html_report = _generate_html_report(change_report, api["info"]["version"], endpoints)
-    with open(f"{COMPILER_PATH}/datas/api_changes_report.html", mode="w", encoding="utf-8") as f:
-        f.write(html_report)
-except Exception:
-    raise
-else:
-    # 処理がすべて成功した場合のみ previous を上書き（失敗時は既存を保持）
-    with open(_api_previous_path, mode="w", encoding="utf-8") as f:
-        json.dump(api, f, ensure_ascii=False, indent=2)
-
-print("done")
+if __name__ == "__main__":
+    main()

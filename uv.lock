@@ -908,6 +908,7 @@ speed = [
 [package.dev-dependencies]
 dev = [
     { name = "isort" },
+    { name = "jinja2" },
     { name = "mypy" },
     { name = "pre-commit" },
     { name = "pyright" },
@@ -931,6 +932,7 @@ provides-extras = ["speed", "doc"]
 [package.metadata.requires-dev]
 dev = [
     { name = "isort" },
+    { name = "jinja2", specifier = ">=3.1.6" },
     { name = "mypy" },
     { name = "pre-commit" },
     { name = "pyright", specifier = ">=1.1.414" },
