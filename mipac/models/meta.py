@@ -553,3 +553,31 @@ class AdminMeta:
     @property
     def federation_hosts(self):
         return self.__raw_admin_meta["federation_hosts"]
+
+    @property
+    def sensitive_media_detection_api_url(self):
+        return self.__raw_admin_meta["sensitive_media_detection_api_url"]
+
+    @property
+    def sensitive_media_detection_api_key(self):
+        return self.__raw_admin_meta["sensitive_media_detection_api_key"]
+
+    @property
+    def sensitive_media_detection_timeout(self):
+        return self.__raw_admin_meta["sensitive_media_detection_timeout"]
+
+    @property
+    def sensitive_media_detection_max_images_per_request(self):
+        return self.__raw_admin_meta["sensitive_media_detection_max_images_per_request"]
+
+    @property
+    def url_preview_sensitive_list(self):
+        return self.__raw_admin_meta["url_preview_sensitive_list"]
+
+    @property
+    def show_role_badges_of_remote_users(self):
+        return self.__raw_admin_meta["show_role_badges_of_remote_users"]
+
+    @property
+    def client_options(self):
+        return self.__raw_admin_meta["client_options"]

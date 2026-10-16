@@ -37,3 +37,4 @@ class IAnnouncementDetailed(TypedDict):
     for_existing_users: bool
     user_id: str | None
     reads: int
+    auto_archive_at: str | None

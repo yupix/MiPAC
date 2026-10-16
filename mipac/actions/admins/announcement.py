@@ -60,6 +60,7 @@ class SharedAdminAnnouncementActions(AbstractAction):
         silence: bool = MISSING,
         need_confirmation_to_read: bool = MISSING,
         is_active: bool = MISSING,
+        auto_archive_at: int | None = MISSING,
         *,
         announce_id: str,
     ) -> bool:
@@ -85,6 +86,8 @@ class SharedAdminAnnouncementActions(AbstractAction):
             読んだか確認が必要か, by default MISSING
         is_active : bool, optional
             お知らせが有効かどうか, by default MISSING
+        auto_archive_at : int | None, optional
+            自動でアーカイブする日時(Unix ミリ秒), by default MISSING
         announce_id : str
             更新したいお知らせのID
 
@@ -108,6 +111,7 @@ class SharedAdminAnnouncementActions(AbstractAction):
                 "silence": silence,
                 "needConfirmationToRead": need_confirmation_to_read,
                 "isActive": is_active,
+                "autoArchiveAt": auto_archive_at,
             }
         )
 
@@ -147,6 +151,7 @@ class ClientAdminAnnouncementActions(AbstractAction):
         silence: bool = MISSING,
         need_confirmation_to_read: bool = MISSING,
         is_active: bool = MISSING,
+        auto_archive_at: int | None = MISSING,
         *,
         announce_id: str | None = None,
     ) -> bool:
@@ -160,6 +165,7 @@ class ClientAdminAnnouncementActions(AbstractAction):
             silence=silence,
             need_confirmation_to_read=need_confirmation_to_read,
             is_active=is_active,
+            auto_archive_at=auto_archive_at,
             announce_id=announce_id or self.__announce_id,
         )
 
@@ -184,6 +190,7 @@ class AdminAnnouncementActions(SharedAdminAnnouncementActions):
         silence: bool = MISSING,
         need_confirmation_to_read: bool = MISSING,
         user_id: str | None = MISSING,
+        auto_archive_at: int | None = MISSING,
     ) -> Announcement:
         body = remove_dict_missing(
             {
@@ -196,6 +203,7 @@ class AdminAnnouncementActions(SharedAdminAnnouncementActions):
                 "silence": silence,
                 "needConfirmationToRead": need_confirmation_to_read,
                 "userId": user_id,
+                "autoArchiveAt": auto_archive_at,
             }
         )
         created_announcement: IAnnouncement = await self._session.request(

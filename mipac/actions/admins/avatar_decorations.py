@@ -31,6 +31,7 @@ class SharedAvatarDecorationActions(AbstractAction):
         name: str = MISSING,
         description: str = MISSING,
         url: str = MISSING,
+        category: str | None = None,
         role_ids_that_can_be_used_this_decoration: list[str] = MISSING,
         *,
         avatar_decoration_id: str,
@@ -41,6 +42,7 @@ class SharedAvatarDecorationActions(AbstractAction):
                 "name": name,
                 "description": description,
                 "url": url,
+                "category": category,
                 "roleIdsThatCanBeUsedThisDecoration": role_ids_that_can_be_used_this_decoration,
             }
         )
@@ -61,6 +63,7 @@ class AdminAvatarDecorationActions(SharedAvatarDecorationActions):
         name: str,
         description: str,
         url: str,
+        category: str | None = None,
         role_ids_that_can_be_used_this_decoration: list[str] = MISSING,
     ) -> AvatarDecoration:
         body = remove_dict_empty(
@@ -68,6 +71,7 @@ class AdminAvatarDecorationActions(SharedAvatarDecorationActions):
                 "name": name,
                 "description": description,
                 "url": url,
+                "category": category,
                 "roleIdsThatCanBeUsedThisDecoration": role_ids_that_can_be_used_this_decoration,
             }
         )
@@ -137,6 +141,7 @@ class ClientAdminAvatarDecorationActions(AbstractAction):
         name: str = MISSING,
         description: str = MISSING,
         url: str = MISSING,
+        category: str | None = None,
         role_ids_that_can_be_used_this_decoration: list[str] = MISSING,
         *,
         avatar_decoration_id: str = MISSING,
@@ -147,6 +152,7 @@ class ClientAdminAvatarDecorationActions(AbstractAction):
             name=name,
             description=description,
             url=url,
+            category=category,
             role_ids_that_can_be_used_this_decoration=role_ids_that_can_be_used_this_decoration,
             avatar_decoration_id=avatar_decoration_id,
         )

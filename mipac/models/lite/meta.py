@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Any, Literal
 
 from mipac.models.roles import RolePolicies
 from mipac.types.ads import IAdPlaces
-from mipac.types.meta import IPartialMeta
+from mipac.types.meta import IPartialMeta, IMetaClientOptions
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager
@@ -269,6 +269,10 @@ class PartialMeta[T: IPartialMeta]:
     @property
     def max_file_size(self) -> int:
         return self._raw_meta["max_file_size"]
+
+    @property
+    def client_options(self) -> IMetaClientOptions:
+        return self._raw_meta["client_options"]
 
     def _get(self, key: str) -> Any | None:
         return self._raw_meta.get(key)

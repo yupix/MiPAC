@@ -137,6 +137,10 @@ class RolePolicies:
     def can_import_user_lists(self) -> bool:
         return self.__role_policies_data["can_import_user_lists"]
 
+    @property
+    def can_create_channel(self) -> bool:
+        return self.__role_policies_data["can_create_channel"]
+
     def _get(self, key: str) -> Any | None:
         return self.__role_policies_data.get(key)
 

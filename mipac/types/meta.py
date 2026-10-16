@@ -30,6 +30,12 @@ class IFeatures(TypedDict):
     miauth: bool
 
 
+class IMetaClientOptions(TypedDict):
+    entrance_page_style: Literal["classic", "simple"]
+    show_timeline_for_visitor: bool
+    show_activities_for_visitor: bool
+
+
 class IPartialMeta(TypedDict):
     maintainer_name: str | None
     maintainer_email: str | None
@@ -82,6 +88,7 @@ class IPartialMeta(TypedDict):
     policies: IRolePolicies
     note_searchable_scope: Literal["local", "global"]
     max_file_size: int
+    client_options: IMetaClientOptions
 
 
 class IMetaDetailedOnly(TypedDict):
@@ -214,9 +221,23 @@ class IAdminMeta(TypedDict):
     url_preview_summary_proxy_url: str | None
     federation: str
     federation_hosts: list[str]
+    sensitive_media_detection_api_url: str | None
+    sensitive_media_detection_api_key: str | None
+    sensitive_media_detection_timeout: int
+    sensitive_media_detection_max_images_per_request: int
+    url_preview_sensitive_list: list[str]
+    show_role_badges_of_remote_users: bool
+    client_options: IMetaClientOptions
 
 
 class IUpdateMetaBody(TypedDict, total=False):
+    sensitive_media_detection_api_url: str | None
+    sensitive_media_detection_api_key: str | None
+    sensitive_media_detection_timeout: int
+    sensitive_media_detection_max_images_per_request: int
+    url_preview_sensitive_list: list[str] | None
+    show_role_badges_of_remote_users: bool
+    client_options: IMetaClientOptions
     announcements: list
     disable_registration: bool
     disable_local_timeline: bool

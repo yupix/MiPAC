@@ -10,6 +10,7 @@ class IChannel(TypedDict):
     name: str
     description: str | None
     user_id: str | None
+    banner_id: str | None
     banner_url: str | None
     pinned_note_ids: list[str]
     color: str
@@ -20,4 +21,5 @@ class IChannel(TypedDict):
     allow_renote_to_external: bool
     is_following: NotRequired[bool]
     is_favorited: NotRequired[bool]
+    is_muting: NotRequired[bool]
     pinned_notes: NotRequired[list[INote]]

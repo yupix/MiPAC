@@ -89,6 +89,16 @@ class Channel:
         return self._raw_channel["banner_url"]
 
     @property
+    def banner_id(self) -> str | None:
+        """チャンネルのバナー画像のファイルID
+
+        Returns
+        -------
+        str | None
+        """
+        return self._raw_channel["banner_id"]
+
+    @property
     def pinned_note_ids(self) -> list[str]:
         """ピン留めされているノートのIDのリスト
 
@@ -177,6 +187,16 @@ class Channel:
         bool
         """
         return self._raw_channel.get("is_favorited")
+
+    @property
+    def is_muting(self) -> bool | None:
+        """自身がミュートしているかどうか
+
+        Returns
+        -------
+        bool
+        """
+        return self._raw_channel.get("is_muting")
 
     @property
     def pinned_notes(self) -> list[Note]:

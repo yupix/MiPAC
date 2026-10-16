@@ -53,8 +53,8 @@ class EmojiSimple:
         self.__client: ClientManager = client
 
     @property
-    def aliaces(self) -> list[str]:
-        return self.__raw_emoji_simple["aliaces"]
+    def aliases(self) -> list[str]:
+        return self.__raw_emoji_simple["aliases"]
 
     @property
     def name(self) -> str:
@@ -100,8 +100,8 @@ class EmojiDetailed:
         return self.__raw_emoji_detailed["id"]
 
     @property
-    def aliaces(self) -> list[str]:
-        return self.__raw_emoji_detailed["aliaces"]
+    def aliases(self) -> list[str]:
+        return self.__raw_emoji_detailed["aliases"]
 
     @property
     def name(self) -> str:

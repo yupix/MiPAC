@@ -1561,6 +1561,8 @@ class NoteActions(SharedNoteActions):
         host: str | None = None,
         user_id: str | None = None,
         channel_id: str | None = None,
+        range_start_at: int | None = None,
+        range_end_at: int | None = None,
     ):  # Implement methods for each ID in actions
         """Search for notes
 
@@ -1585,6 +1587,10 @@ class NoteActions(SharedNoteActions):
             Target user ID to search within
         channel_id : str | None, default=None
             Target channel ID to search within
+        range_start_at : int | None, default=None
+            Only notes created at or after this time (Unix ms)
+        range_end_at : int | None, default=None
+            Only notes created at or before this time (Unix ms)
 
         Returns
         -------
@@ -1600,6 +1606,8 @@ class NoteActions(SharedNoteActions):
             "host": host,
             "userId": user_id,
             "channelId": channel_id,
+            "rangeStartAt": range_start_at,
+            "rangeEndAt": range_end_at,
         }
 
         raw_notes: list[INote] = await self._session.request(
@@ -1618,6 +1626,8 @@ class NoteActions(SharedNoteActions):
         host: str | None = None,
         user_id: str | None = None,
         channel_id: str | None = None,
+        range_start_at: int | None = None,
+        range_end_at: int | None = None,
     ) -> AsyncGenerator[Note, None]:
         """Search for all notes using pagination
 
@@ -1642,6 +1652,10 @@ class NoteActions(SharedNoteActions):
             Target user ID to search within
         channel_id : str | None, default=None
             Target channel ID to search within
+        range_start_at : int | None, default=None
+            Only notes created at or after this time (Unix ms)
+        range_end_at : int | None, default=None
+            Only notes created at or before this time (Unix ms)
 
         Returns
         -------
@@ -1657,6 +1671,8 @@ class NoteActions(SharedNoteActions):
             "host": host,
             "userId": user_id,
             "channelId": channel_id,
+            "rangeStartAt": range_start_at,
+            "rangeEndAt": range_end_at,
         }
 
         pagination = Pagination[INote](

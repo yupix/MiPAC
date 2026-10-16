@@ -88,6 +88,16 @@ class NotificationRecieveConfig(TypedDict):
     achievement_earned: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
     app: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
     test: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    scheduled_note_posted: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    scheduled_note_post_failed: (
+        NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    )
+    chat_room_invitation_received: (
+        NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    )
+    login: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    create_token: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
+    export_completed: NotificationRecieveConfigType | NotificationRecieveConfigWithUserList
 
 
 class IUserSecurityKey(TypedDict):
@@ -205,6 +215,8 @@ class IMeDetailedOnlySchema(TypedDict):
     email_notification_types: list[EmailNotificationTypes]
     achievements: list[IAchievement]
     logged_in_days: int
+    follow_approval_local_seconds: int | None
+    follow_approval_remote_seconds: int | None
     policies: IRolePolicies
     two_factor_enabled: bool
     use_password_less_login: bool

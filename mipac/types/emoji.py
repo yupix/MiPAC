@@ -30,7 +30,7 @@ class EmojiPayload(TypedDict):
 
 
 class IEmojiSimple(TypedDict):
-    aliaces: list[str]
+    aliases: list[str]
     name: str
     category: str | None
     url: str
@@ -41,7 +41,7 @@ class IEmojiSimple(TypedDict):
 
 class IEmojiDetailed(TypedDict):
     id: str
-    aliaces: list[str]
+    aliases: list[str]
     name: str
     category: str | None
     host: str | None

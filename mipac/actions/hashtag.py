@@ -162,8 +162,9 @@ class HashtagActions(AbstractAction):
         ],
         state: Literal["all", "alive"] = "all",
         origin: Literal["combined", "local", "remote"] = "local",
+        offset: int = 0,
     ) -> list[UserDetailedNotMe | MeDetailed]:
-        body = {"tag": tag, "sort": sort, "state": state, "origin": origin}
+        body = {"tag": tag, "sort": sort, "state": state, "origin": origin, "offset": offset}
 
         raw_users: list[
             IUserDetailedNotMeSchema | IMeDetailedSchema

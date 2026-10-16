@@ -40,6 +40,10 @@ class AvatarDecoration:
         return self.__raw_avatar_decoration["url"]
 
     @property
+    def category(self) -> str | None:
+        return self.__raw_avatar_decoration["category"]
+
+    @property
     def role_ids_that_can_be_used_this_decoration(self) -> list[str]:
         return self.__raw_avatar_decoration["role_ids_that_can_be_used_this_decoration"]
 

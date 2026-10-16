@@ -512,6 +512,14 @@ class MeDetailedOnly:
         return self._raw_user["logged_in_days"]
 
     @property
+    def follow_approval_local_seconds(self) -> int | None:
+        return self._raw_user["follow_approval_local_seconds"]
+
+    @property
+    def follow_approval_remote_seconds(self) -> int | None:
+        return self._raw_user["follow_approval_remote_seconds"]
+
+    @property
     def policies(self) -> RolePolicies:
         return RolePolicies(self._raw_user["policies"])
 

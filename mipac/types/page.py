@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Optional, TypedDict
+from typing import TYPE_CHECKING, Any, Literal, Optional, TypedDict
 
 from mipac.types.drive import IFile
 from mipac.types.user import IPartialUser
@@ -31,7 +31,7 @@ class IPageRequired(TypedDict):
     name: str
     hideTitleWhenPinned: bool
     alignCenter: bool
-    font: str
+    font: Literal["serif", "sans-serif"]
     script: str
     attachedFiles: Any
     likedCount: int
@@ -116,7 +116,7 @@ class PagePayload(TypedDict):
     summary: str | None
     hide_title_when_pinned: bool
     align_center: bool
-    font: str
+    font: Literal["serif", "sans-serif"]
     script: str
     eye_catching_image_id: str | None
     eye_catching_image: EyeCatchingImagePayload

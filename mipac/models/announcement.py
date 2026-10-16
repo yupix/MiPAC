@@ -167,6 +167,14 @@ class AnnouncementDetailed:
         return self.__raw_announcement["display"]
 
     @property
+    def auto_archive_at(self) -> datetime | None:
+        return (
+            str_to_datetime(self.__raw_announcement["auto_archive_at"])
+            if self.__raw_announcement["auto_archive_at"]
+            else None
+        )
+
+    @property
     def is_active(self) -> bool:
         return self.__raw_announcement["is_active"]
 
