@@ -4,9 +4,7 @@ from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
-from mipac.models.emoji import CustomEmoji
 from mipac.models.note import NoteReaction
-from mipac.types.meta import IPartialMeta
 from mipac.types.note import INoteReaction
 from mipac.utils.cache import cache
 from mipac.utils.format import remove_dict_empty
@@ -166,14 +164,3 @@ class ClientReactionActions(AbstractAction):
 class ReactionActions(SharedReactionActions):
     def __init__(self, *, session: HTTPClient, client: ClientManager):
         super().__init__(session=session, client=client)
-
-    async def get_emoji_list(
-        self,
-    ) -> list[CustomEmoji]:  # TODO: metaからemojisは削除されてるので別の方法に切り替える
-        data: IPartialMeta = await self._session.request(
-            Route("GET", "/api/meta"),
-            json={"detail": False},
-            auth=True,
-            replace_list={"ToSUrl": "tos_url", "ToSTextUrl": "tos_text_url"},
-        )
-        return [CustomEmoji(i, client=self._client) for i in data.get("emojis", [])]
