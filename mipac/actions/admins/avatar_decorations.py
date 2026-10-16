@@ -6,7 +6,7 @@ from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
 from mipac.models.avatar_decoration import AvatarDecoration
 from mipac.types.avatar_decoration import IAvatarDecoration
-from mipac.utils.format import remove_dict_empty
+from mipac.utils.format import remove_dict_missing
 from mipac.utils.pagination import Pagination
 from mipac.utils.util import MISSING
 
@@ -31,12 +31,12 @@ class SharedAvatarDecorationActions(AbstractAction):
         name: str = MISSING,
         description: str = MISSING,
         url: str = MISSING,
-        category: str | None = None,
+        category: str | None = MISSING,
         role_ids_that_can_be_used_this_decoration: list[str] = MISSING,
         *,
         avatar_decoration_id: str,
     ) -> AvatarDecoration:
-        body = remove_dict_empty(
+        body = remove_dict_missing(
             {
                 "id": avatar_decoration_id,
                 "name": name,
@@ -66,7 +66,7 @@ class AdminAvatarDecorationActions(SharedAvatarDecorationActions):
         category: str | None = None,
         role_ids_that_can_be_used_this_decoration: list[str] = MISSING,
     ) -> AvatarDecoration:
-        body = remove_dict_empty(
+        body = remove_dict_missing(
             {
                 "name": name,
                 "description": description,
@@ -89,7 +89,7 @@ class AdminAvatarDecorationActions(SharedAvatarDecorationActions):
         until_id: str = MISSING,
         user_id: str | None = None,
     ) -> list[AvatarDecoration]:
-        body = remove_dict_empty(
+        body = remove_dict_missing(
             {"limit": limit, "sinceId": since_id, "untilId": until_id, "userId": user_id}
         )
 
@@ -109,7 +109,7 @@ class AdminAvatarDecorationActions(SharedAvatarDecorationActions):
         until_id: str = MISSING,
         user_id: str | None = None,
     ):
-        body = remove_dict_empty(
+        body = remove_dict_missing(
             {"limit": limit, "sinceId": since_id, "untilId": until_id, "userId": user_id}
         )
         pagination = Pagination[IAvatarDecoration](
@@ -141,7 +141,7 @@ class ClientAdminAvatarDecorationActions(AbstractAction):
         name: str = MISSING,
         description: str = MISSING,
         url: str = MISSING,
-        category: str | None = None,
+        category: str | None = MISSING,
         role_ids_that_can_be_used_this_decoration: list[str] = MISSING,
         *,
         avatar_decoration_id: str = MISSING,
