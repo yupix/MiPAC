@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, override
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -246,12 +246,11 @@ class SharedAntennaActions(AbstractAction):
         return Antenna(res_antenna, client=self._client)
 
 
-class ClientAntennaActions(SharedAntennaActions):
+class ClientAntennaActions(AbstractAction):
     def __init__(self, *, antenna_id: str, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedAntennaActions = SharedAntennaActions(session=session, client=client)
         self.__antenna_id: str = antenna_id
 
-    @override
     async def delete(self) -> bool:
         """Delete antenna from identifier
 
@@ -262,9 +261,8 @@ class ClientAntennaActions(SharedAntennaActions):
         bool
             success or failure
         """
-        return await super().delete(antenna_id=self.__antenna_id)
+        return await self.__actions.delete(antenna_id=self.__antenna_id)
 
-    @override
     async def show(self) -> Antenna:
         """Show antenna from identifier
 
@@ -276,9 +274,8 @@ class ClientAntennaActions(SharedAntennaActions):
             antenna object
         """
 
-        return await super().show(antenna_id=self.__antenna_id)
+        return await self.__actions.show(antenna_id=self.__antenna_id)
 
-    @override
     async def get_notes(
         self,
         limit: int = 10,
@@ -310,7 +307,7 @@ class ClientAntennaActions(SharedAntennaActions):
             取得したノートのリスト
         """
 
-        return await super().get_notes(
+        return await self.__actions.get_notes(
             limit=limit,
             since_id=since_id,
             until_id=until_id,
@@ -319,7 +316,6 @@ class ClientAntennaActions(SharedAntennaActions):
             antenna_id=self.__antenna_id,
         )
 
-    @override
     async def get_all_notes(
         self,
         limit: int = 10,
@@ -351,12 +347,11 @@ class ClientAntennaActions(SharedAntennaActions):
             取得したノートのリスト
         """
 
-        async for i in super().get_all_notes(
+        async for i in self.__actions.get_all_notes(
             limit, since_id, until_id, since_date, until_date, antenna_id=self.__antenna_id
         ):
             yield i
 
-    @override
     async def update(
         self,
         name: str,
@@ -402,7 +397,7 @@ class ClientAntennaActions(SharedAntennaActions):
         Antenna
             The created antenna.
         """
-        return await super().update(
+        return await self.__actions.update(
             name=name,
             src=src,
             keywords=keywords,

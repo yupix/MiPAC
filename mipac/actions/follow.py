@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -80,30 +80,25 @@ class SharedFollowActions(AbstractAction):
         return PartialUser(res, client=self._client)
 
 
-class ClientFollowActions(SharedFollowActions):
+class ClientFollowActions(AbstractAction):
     def __init__(self, user_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedFollowActions = SharedFollowActions(session=session, client=client)
         self.__user_id: str = user_id
 
-    @override
     async def create(self, with_replies: bool = MISSING) -> PartialUser:
-        return await super().create(with_replies, user_id=self.__user_id)
+        return await self.__actions.create(with_replies, user_id=self.__user_id)
 
-    @override
     async def add(self) -> PartialUser:
-        return await super().add(user_id=self.__user_id)
+        return await self.__actions.add(user_id=self.__user_id)
 
-    @override
     async def delete(self) -> PartialUser:
-        return await super().delete(user_id=self.__user_id)
+        return await self.__actions.delete(user_id=self.__user_id)
 
-    @override
     async def remove(self) -> PartialUser:
-        return await super().remove(user_id=self.__user_id)
+        return await self.__actions.remove(user_id=self.__user_id)
 
-    @override
     async def invalidate(self) -> PartialUser:
-        return await super().invalidate(user_id=self.__user_id)
+        return await self.__actions.invalidate(user_id=self.__user_id)
 
 
 class FollowActions(SharedFollowActions):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, Literal, override
+from typing import TYPE_CHECKING, AsyncGenerator, Literal
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -61,16 +61,14 @@ class SharedAdminAdActions(AbstractAction):
         return res
 
 
-class ClientAdminAdActions(SharedAdminAdActions):
+class ClientAdminAdActions(AbstractAction):
     def __init__(self, ad_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedAdminAdActions = SharedAdminAdActions(session=session, client=client)
         self.__ad_id: str = ad_id
 
-    @override
     async def delete(self, *, ad_id: str | None = None) -> bool:
-        return await super().delete(ad_id=ad_id or self.__ad_id)
+        return await self.__actions.delete(ad_id=ad_id or self.__ad_id)
 
-    @override
     async def update(
         self,
         memo: str = MISSING,
@@ -86,7 +84,7 @@ class ClientAdminAdActions(SharedAdminAdActions):
         *,
         ad_id: str | None = None,
     ) -> bool:
-        return await super().update(
+        return await self.__actions.update(
             memo=memo,
             url=url,
             image_url=image_url,

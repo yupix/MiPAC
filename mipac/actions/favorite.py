@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -44,28 +44,26 @@ class SharedFavoriteActions(AbstractAction):
         return await self.delete(note_id=note_id)
 
 
-class ClientFavoriteActions(SharedFavoriteActions):
+class ClientFavoriteActions(AbstractAction):
     def __init__(self, note_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedFavoriteActions = SharedFavoriteActions(
+            session=session, client=client
+        )
         self.__note_id: str = note_id
 
-    @override
     async def create(self) -> bool:
-        return await super().create(note_id=self.__note_id)
+        return await self.__actions.create(note_id=self.__note_id)
 
     @deprecated
-    @override
     async def add(self) -> bool:
-        return await super().create(note_id=self.__note_id)
+        return await self.__actions.create(note_id=self.__note_id)
 
-    @override
     async def delete(self) -> bool:
-        return await super().delete(note_id=self.__note_id)
+        return await self.__actions.delete(note_id=self.__note_id)
 
     @deprecated
-    @override
     async def remove(self) -> bool:
-        return await super().delete(note_id=self.__note_id)
+        return await self.__actions.delete(note_id=self.__note_id)
 
 
 class FavoriteActions(SharedFavoriteActions):

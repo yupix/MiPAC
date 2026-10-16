@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, override
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -166,23 +166,21 @@ class SharedClipActions(AbstractAction):
         return Clip(result, client=self._client)
 
 
-class ClientClipActions(SharedClipActions):
+class ClientClipActions(AbstractAction):
     def __init__(self, clip_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedClipActions = SharedClipActions(session=session, client=client)
         self._clip_id = clip_id
 
-    @override
     async def get_notes(
         self,
         limit: int = 10,
         since_id: str | None = None,
         until_id: str | None = None,
     ) -> list[Note]:
-        return await super().get_notes(
+        return await self.__actions.get_notes(
             limit=limit, since_id=since_id, until_id=until_id, clip_id=self._clip_id
         )
 
-    @override
     async def get_all_notes(
         self,
         limit: int = 10,
@@ -207,12 +205,11 @@ class ClientClipActions(SharedClipActions):
         AsyncGenerator[Note, None]
             The notes
         """
-        async for note in super().get_all_notes(
+        async for note in self.__actions.get_all_notes(
             limit=limit, since_id=since_id, until_id=until_id, clip_id=self._clip_id
         ):
             yield note
 
-    @override
     async def add_note(self, note_id: str) -> bool:
         """Add a note to a clip
 
@@ -226,9 +223,8 @@ class ClientClipActions(SharedClipActions):
         bool
             True if the note was added to the clip, False otherwise
         """
-        return await super().add_note(note_id=note_id, clip_id=self._clip_id)
+        return await self.__actions.add_note(note_id=note_id, clip_id=self._clip_id)
 
-    @override
     async def remove_note(self, note_id: str) -> bool:
         """Remove a note from a clip
 
@@ -242,9 +238,8 @@ class ClientClipActions(SharedClipActions):
         bool
             True if the note was removed from the clip, False otherwise
         """
-        return await super().remove_note(note_id=note_id, clip_id=self._clip_id)
+        return await self.__actions.remove_note(note_id=note_id, clip_id=self._clip_id)
 
-    @override
     async def delete(self) -> bool:
         """Delete a clip
 
@@ -253,9 +248,8 @@ class ClientClipActions(SharedClipActions):
         bool
             True if the clip was deleted, False otherwise
         """
-        return await super().delete(clip_id=self._clip_id)
+        return await self.__actions.delete(clip_id=self._clip_id)
 
-    @override
     async def update(
         self,
         name: str,
@@ -278,7 +272,7 @@ class ClientClipActions(SharedClipActions):
         bool
             True if the clip was updated, False otherwise
         """
-        return await super().update(
+        return await self.__actions.update(
             name=name, is_public=is_public, description=description, clip_id=self._clip_id
         )
 

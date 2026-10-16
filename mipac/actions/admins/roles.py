@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Literal, override
+from typing import TYPE_CHECKING, Any, Literal
 
+from mipac.abstract.action import AbstractAction
 from mipac.http import Route
 from mipac.models.roles import Role
 from mipac.models.user import RoleUser
@@ -175,16 +176,16 @@ class SharedAdminRoleActions:
                 yield RoleUser(raw_role_user, client=self._client)
 
 
-class ClientAdminRoleActions(SharedAdminRoleActions):
+class ClientAdminRoleActions(AbstractAction):
     def __init__(self, role_id: str, *, session: HTTPClient, client: ClientManager) -> None:
-        super().__init__(session=session, client=client)
+        self.__actions: SharedAdminRoleActions = SharedAdminRoleActions(
+            session=session, client=client
+        )
         self.__role_id: str = role_id
 
-    @override
     async def delete(self) -> bool:
-        return await super().delete(role_id=self.__role_id)
+        return await self.__actions.delete(role_id=self.__role_id)
 
-    @override
     async def update(
         self,
         name: str,
@@ -202,7 +203,7 @@ class ClientAdminRoleActions(SharedAdminRoleActions):
         display_order: int = 0,
         policies: dict[Any, Any] | None = None,
     ) -> bool:
-        return await super().update(
+        return await self.__actions.update(
             name=name,
             description=description,
             color=color,
@@ -220,33 +221,31 @@ class ClientAdminRoleActions(SharedAdminRoleActions):
             role_id=self.__role_id,
         )
 
-    @override
     async def assign(self, user_id: str, expires_at: int | None = None) -> bool:
-        return await super().assign(user_id=user_id, expires_at=expires_at, role_id=self.__role_id)
+        return await self.__actions.assign(
+            user_id=user_id, expires_at=expires_at, role_id=self.__role_id
+        )
 
-    @override
     async def unassign(self, user_id: str) -> bool:
-        return await super().unassign(user_id=user_id, role_id=self.__role_id)
+        return await self.__actions.unassign(user_id=user_id, role_id=self.__role_id)
 
-    @override
     async def get_users(
         self,
         since_id: str = MISSING,
         until_id: str = MISSING,
         limit: int = MISSING,
     ) -> RoleUser:
-        return await super().get_users(
+        return await self.__actions.get_users(
             since_id=since_id, until_id=until_id, limit=limit, role_id=self.__role_id
         )
 
-    @override
     async def get_all_users(
         self,
         since_id: str = MISSING,
         until_id: str = MISSING,
         limit: int = MISSING,
     ):
-        return super().get_all_users(
+        return self.__actions.get_all_users(
             since_id=since_id, until_id=until_id, limit=limit, role_id=self.__role_id
         )
 

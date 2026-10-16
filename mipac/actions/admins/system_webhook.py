@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal, override
+from typing import TYPE_CHECKING, Literal
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -40,17 +40,17 @@ class SharedSystemWebhookActions(AbstractAction):
         return SystemWebhook(system_webhook_payload, client=self._client)
 
 
-class ClientSystemWebhookActions(SharedSystemWebhookActions):
+class ClientSystemWebhookActions(AbstractAction):
     def __init__(self, webhook_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedSystemWebhookActions = SharedSystemWebhookActions(
+            session=session, client=client
+        )
         self.__webhook_id: str = webhook_id
 
-    @override
     async def delete(self, *, webhook_id: str | None = None) -> bool:
         webhook_id = webhook_id or self.__webhook_id
-        return await super().delete(webhook_id=webhook_id)
+        return await self.__actions.delete(webhook_id=webhook_id)
 
-    @override
     async def update(
         self,
         is_active: bool,
@@ -62,7 +62,7 @@ class ClientSystemWebhookActions(SharedSystemWebhookActions):
         webhook_id: str | None = None,
     ) -> SystemWebhook:
         webhook_id = webhook_id or self.__webhook_id
-        return await super().update(is_active, name, on, url, secret, webhook_id=webhook_id)
+        return await self.__actions.update(is_active, name, on, url, secret, webhook_id=webhook_id)
 
 
 class SystemWebhookActions(SharedSystemWebhookActions):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -279,13 +279,13 @@ class SharedFolderActions(AbstractAction):
         return Folder(raw_folder=raw_updated_folder, client=self._client)
 
 
-class ClientFolderActions(SharedFolderActions):
+class ClientFolderActions(AbstractAction):
     def __init__(self, folder_id: str, *, session: HTTPClient, client: ClientManager):
+        self.__actions: SharedFolderActions = SharedFolderActions(session=session, client=client)
         self.__folder_id: str = folder_id
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
-    @override
     async def gets(
         self,
         limit: int = 10,
@@ -310,14 +310,13 @@ class ClientFolderActions(SharedFolderActions):
         list[Folder]
             The found folders
         """
-        return await super().gets(
+        return await self.__actions.gets(
             limit=limit,
             since_id=since_id,
             until_id=until_id,
             folder_id=self.__folder_id,
         )
 
-    @override
     async def create(self, name: str | None = None) -> Folder:
         """現在のフォルダに新しいフォルダを作成します。
 
@@ -334,9 +333,8 @@ class ClientFolderActions(SharedFolderActions):
             The created folder
         """
 
-        return await super().create(name=name, parent_id=self.__folder_id)
+        return await self.__actions.create(name=name, parent_id=self.__folder_id)
 
-    @override
     async def delete(self) -> bool:
         """Delete a folder
 
@@ -352,9 +350,8 @@ class ClientFolderActions(SharedFolderActions):
         bool
             Whether the folder was deleted or not
         """
-        return await super().delete(folder_id=self.__folder_id)
+        return await self.__actions.delete(folder_id=self.__folder_id)
 
-    @override
     async def update(
         self,
         name: str | None = MISSING,
@@ -376,7 +373,9 @@ class ClientFolderActions(SharedFolderActions):
         Folder
             The updated folder
         """
-        return await super().update(name=name, parent_id=parent_id, folder_id=self.__folder_id)
+        return await self.__actions.update(
+            name=name, parent_id=parent_id, folder_id=self.__folder_id
+        )
 
 
 class FolderActions(SharedFolderActions):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, override
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -37,12 +37,11 @@ class SharedInviteActions(AbstractAction):
         return res
 
 
-class ClientInviteActions(SharedInviteActions):
+class ClientInviteActions(AbstractAction):
     def __init__(self, invite_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedInviteActions = SharedInviteActions(session=session, client=client)
         self._invite_id: str = invite_id
 
-    @override
     async def delete(self) -> bool:
         """Delete an invite code.
 
@@ -51,7 +50,7 @@ class ClientInviteActions(SharedInviteActions):
         bool
             Whether the invite code was deleted.
         """
-        return await super().delete(invite_id=self._invite_id)
+        return await self.__actions.delete(invite_id=self._invite_id)
 
 
 class InviteActions(SharedInviteActions):

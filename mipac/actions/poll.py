@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -30,14 +30,13 @@ class SharedPollActions(AbstractAction):
         return res
 
 
-class ClientPollActions(SharedPollActions):
+class ClientPollActions(AbstractAction):
     def __init__(self, note_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedPollActions = SharedPollActions(session=session, client=client)
         self._note_id: str = note_id
 
-    @override
     async def vote(self, choice: int) -> bool:
-        return await super().vote(choice=choice, note_id=self._note_id)
+        return await self.__actions.vote(choice=choice, note_id=self._note_id)
 
 
 class PollActions(SharedPollActions):

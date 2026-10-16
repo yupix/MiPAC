@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -58,12 +58,11 @@ class SharedMuteActions(AbstractAction):
         return res
 
 
-class ClientMuteActions(SharedMuteActions):
+class ClientMuteActions(AbstractAction):
     def __init__(self, user_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedMuteActions = SharedMuteActions(session=session, client=client)
         self.__user_id: str = user_id
 
-    @override
     async def create(self, expires_at: int | None = None) -> bool:
         """指定したユーザーをミュートします
 
@@ -77,9 +76,8 @@ class ClientMuteActions(SharedMuteActions):
         bool
             ミュートに成功したかどうか
         """
-        return await super().create(expires_at=expires_at, user_id=self.__user_id)
+        return await self.__actions.create(expires_at=expires_at, user_id=self.__user_id)
 
-    @override
     async def delete(self) -> bool:
         """指定したユーザーのミュートを解除します
 
@@ -88,7 +86,7 @@ class ClientMuteActions(SharedMuteActions):
         bool
             ミュート解除に成功したかどうか
         """
-        return await super().delete(user_id=self.__user_id)
+        return await self.__actions.delete(user_id=self.__user_id)
 
 
 class MuteActions(SharedMuteActions):

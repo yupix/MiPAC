@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -102,14 +102,15 @@ class SharedPartialUserListActions(AbstractAction):
         return res
 
 
-class ClientPartialUserListActions(SharedPartialUserListActions):
+class ClientPartialUserListActions(AbstractAction):
     """ユーザー向けのリストのアクションを提供します。"""
 
     def __init__(self, user_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedPartialUserListActions = SharedPartialUserListActions(
+            session=session, client=client
+        )
         self.__user_id: str = user_id
 
-    @override
     async def get_list(self) -> list[UserList]:
         """Get the user lists of a user
 
@@ -120,9 +121,8 @@ class ClientPartialUserListActions(SharedPartialUserListActions):
         list[UserList]
             The user lists the user has
         """
-        return await super().get_list(user_id=self.__user_id)
+        return await self.__actions.get_list(user_id=self.__user_id)
 
-    @override
     async def pull(self, *, list_id: str) -> bool:
         """Pull a user from a user list
 
@@ -139,9 +139,8 @@ class ClientPartialUserListActions(SharedPartialUserListActions):
             True if the user was pulled, False otherwise
         """
 
-        return await super().pull(list_id=list_id, user_id=self.__user_id)
+        return await self.__actions.pull(list_id=list_id, user_id=self.__user_id)
 
-    @override
     async def push(self, *, list_id: str) -> bool:
         """Push a user to a user list
 
@@ -157,11 +156,10 @@ class ClientPartialUserListActions(SharedPartialUserListActions):
         bool
             True if the user was pushed, False otherwise
         """
-        return await super().push(list_id=list_id, user_id=self.__user_id)
+        return await self.__actions.push(list_id=list_id, user_id=self.__user_id)
 
-    @override
     async def update_membership(self, with_replies: bool = MISSING, *, list_id: str):
-        return await super().update_membership(
+        return await self.__actions.update_membership(
             list_id=list_id, with_replies=with_replies, user_id=self.__user_id
         )
 
@@ -410,7 +408,7 @@ class SharedUserListActions(SharedPartialUserListActions):
             yield i
 
 
-class ClientUserListActions(SharedUserListActions):
+class ClientUserListActions(AbstractAction):
     def __init__(
         self,
         list_id: str,
@@ -418,10 +416,41 @@ class ClientUserListActions(SharedUserListActions):
         session: HTTPClient,
         client: ClientManager,
     ):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedUserListActions = SharedUserListActions(
+            session=session, client=client
+        )
         self.__list_id: str = list_id
 
-    @override
+    async def get_list(self, *, user_id: str) -> list[UserList]:
+        """指定したユーザーのリスト一覧を取得します
+
+        Endpoint `/api/users/lists/list`
+        """
+        return await self.__actions.get_list(user_id=user_id)
+
+    async def pull(self, *, user_id: str) -> bool:
+        """このリストからユーザーを削除します
+
+        Endpoint `/api/users/lists/pull`
+        """
+        return await self.__actions.pull(list_id=self.__list_id, user_id=user_id)
+
+    async def push(self, *, user_id: str) -> bool:
+        """このリストにユーザーを追加します
+
+        Endpoint `/api/users/lists/push`
+        """
+        return await self.__actions.push(list_id=self.__list_id, user_id=user_id)
+
+    async def update_membership(self, with_replies: bool = MISSING, *, user_id: str):
+        """このリスト内のユーザーのメンバーシップを更新します
+
+        Endpoint `/api/users/lists/update-membership`
+        """
+        return await self.__actions.update_membership(
+            list_id=self.__list_id, with_replies=with_replies, user_id=user_id
+        )
+
     async def delete(self) -> bool:
         """Delete a user list
 
@@ -432,9 +461,8 @@ class ClientUserListActions(SharedUserListActions):
         bool
             True if the user list was deleted, False otherwise
         """
-        return await super().delete(list_id=self.__list_id)
+        return await self.__actions.delete(list_id=self.__list_id)
 
-    @override
     async def show(self, for_public: bool = False) -> UserList:
         """Show a user list
 
@@ -450,9 +478,8 @@ class ClientUserListActions(SharedUserListActions):
         UserList
             The user list
         """
-        return await super().show(for_public=for_public, list_id=self.__list_id)
+        return await self.__actions.show(for_public=for_public, list_id=self.__list_id)
 
-    @override
     async def favorite(self) -> bool:
         """Favorite a user list
 
@@ -463,9 +490,8 @@ class ClientUserListActions(SharedUserListActions):
         bool
             True if the user list was favorited, False otherwise
         """
-        return await super().favorite(list_id=self.__list_id)
+        return await self.__actions.favorite(list_id=self.__list_id)
 
-    @override
     async def unfavorite(self) -> bool:
         """Unfavorite a user list
 
@@ -476,9 +502,8 @@ class ClientUserListActions(SharedUserListActions):
         bool
             True if the user list was unfavorited, False otherwise
         """
-        return await super().unfavorite(list_id=self.__list_id)
+        return await self.__actions.unfavorite(list_id=self.__list_id)
 
-    @override
     async def update(self, name: str = MISSING, is_public: bool = MISSING) -> UserList:
         """Update a user list
 
@@ -497,13 +522,11 @@ class ClientUserListActions(SharedUserListActions):
             The updated user list
         """
 
-        return await super().update(name=name, is_public=is_public, list_id=self.__list_id)
+        return await self.__actions.update(name=name, is_public=is_public, list_id=self.__list_id)
 
-    @override
     async def create_from_public(self, name: str):
-        return await super().create_from_public(name=name, list_id=self.__list_id)
+        return await self.__actions.create_from_public(name=name, list_id=self.__list_id)
 
-    @override
     async def get_memberships(
         self,
         for_public: bool = False,
@@ -511,7 +534,7 @@ class ClientUserListActions(SharedUserListActions):
         since_id: str | None = None,
         until_id: str | None = None,
     ) -> list[UserListMembership]:
-        return await super().get_memberships(
+        return await self.__actions.get_memberships(
             for_public=for_public,
             limit=limit,
             since_id=since_id,
@@ -519,7 +542,6 @@ class ClientUserListActions(SharedUserListActions):
             list_id=self.__list_id,
         )
 
-    @override
     async def get_all_memberships(
         self,
         for_public: bool = False,
@@ -527,7 +549,7 @@ class ClientUserListActions(SharedUserListActions):
         since_id: str | None = None,
         until_id: str | None = None,
     ):
-        async for i in super().get_all_memberships(
+        async for i in self.__actions.get_all_memberships(
             for_public=for_public,
             limit=limit,
             since_id=since_id,
@@ -537,7 +559,6 @@ class ClientUserListActions(SharedUserListActions):
             yield i
 
     # ここからはusers/lists系じゃないが、ここにあってほしい物
-    @override
     async def get_time_line(
         self,
         limit: int = 10,
@@ -550,7 +571,7 @@ class ClientUserListActions(SharedUserListActions):
         with_renotes: bool = True,
         with_files: bool = True,
     ) -> list[Note]:
-        return await super().get_time_line(
+        return await self.__actions.get_time_line(
             limit=limit,
             since_id=since_id,
             until_id=until_id,
@@ -563,7 +584,6 @@ class ClientUserListActions(SharedUserListActions):
             list_id=self.__list_id,
         )
 
-    @override
     async def get_all_time_line(
         self,
         limit: int = 10,
@@ -576,7 +596,7 @@ class ClientUserListActions(SharedUserListActions):
         with_renotes: bool = True,
         with_files: bool = True,
     ):
-        async for i in super().get_all_time_line(
+        async for i in self.__actions.get_all_time_line(
             limit=limit,
             since_id=since_id,
             until_id=until_id,

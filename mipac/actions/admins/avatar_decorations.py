@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -120,18 +120,18 @@ class AdminAvatarDecorationActions(SharedAvatarDecorationActions):
                 yield AvatarDecoration(raw_avatar_decoration, client=self._client)
 
 
-class ClientAdminAvatarDecorationActions(SharedAvatarDecorationActions):
+class ClientAdminAvatarDecorationActions(AbstractAction):
     def __init__(self, avatar_decoration_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedAvatarDecorationActions = SharedAvatarDecorationActions(
+            session=session, client=client
+        )
         self.__avatar_decoration_id: str = avatar_decoration_id
 
-    @override
     async def delete(self, *, avatar_decoration_id: str = MISSING) -> bool:
         avatar_decoration_id = avatar_decoration_id or self.__avatar_decoration_id
 
-        return await super().delete(avatar_decoration_id=avatar_decoration_id)
+        return await self.__actions.delete(avatar_decoration_id=avatar_decoration_id)
 
-    @override
     async def update(
         self,
         name: str = MISSING,
@@ -143,7 +143,7 @@ class ClientAdminAvatarDecorationActions(SharedAvatarDecorationActions):
     ) -> AvatarDecoration:
         avatar_decoration_id = avatar_decoration_id or self.__avatar_decoration_id
 
-        return await super().update(
+        return await self.__actions.update(
             name=name,
             description=description,
             url=url,

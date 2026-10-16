@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import io
 import os
-from typing import TYPE_CHECKING, Any, AsyncGenerator, override
+from typing import TYPE_CHECKING, Any, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -158,12 +158,11 @@ class SharedFileActions(AbstractAction):
         return File(res, client=self._client)
 
 
-class ClientFileActions(SharedFileActions):
+class ClientFileActions(AbstractAction):
     def __init__(self, file_ids: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedFileActions = SharedFileActions(session=session, client=client)
         self.__file_ids: str = file_ids  # TODO: 何故複数形なのか確認する
 
-    @override
     async def get_attached_notes(
         self,
         since_id: str | None = None,
@@ -188,23 +187,21 @@ class ClientFileActions(SharedFileActions):
         list[Note]
             The attached notes of the file
         """
-        return await super().get_attached_notes(
+        return await self.__actions.get_attached_notes(
             since_id=since_id, until_id=until_id, limit=limit, file_id=self.__file_ids
         )
 
-    @override
     async def get_all_attached_notes(
         self,
         since_id: str | None = None,
         until_id: str | None = None,
         limit: int = 10,
     ) -> AsyncGenerator[Note, None]:
-        async for note in super().get_all_attached_notes(
+        async for note in self.__actions.get_all_attached_notes(
             since_id=since_id, until_id=until_id, limit=limit, file_id=self.__file_ids
         ):
             yield note
 
-    @override
     async def delete(self) -> bool:
         """指定したファイルIDのファイルを削除します
 
@@ -215,9 +212,8 @@ class ClientFileActions(SharedFileActions):
         bool
             削除に成功したかどうか
         """
-        return await super().delete(file_id=self.__file_ids)
+        return await self.__actions.delete(file_id=self.__file_ids)
 
-    @override
     async def update(
         self,
         folder_id: str | None = MISSING,
@@ -245,7 +241,7 @@ class ClientFileActions(SharedFileActions):
         File
             更新後のファイル
         """
-        return await super().update(
+        return await self.__actions.update(
             folder_id=folder_id,
             name=name,
             is_sensitive=is_sensitive,

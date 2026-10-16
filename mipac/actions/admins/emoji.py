@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, override
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -114,20 +114,19 @@ class SharedAdminEmojiActions(AbstractAction):
         return res
 
 
-class ClientAdminEmojiActions(SharedAdminEmojiActions):
+class ClientAdminEmojiActions(AbstractAction):
     def __init__(self, *, emoji_id: str, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedAdminEmojiActions = SharedAdminEmojiActions(
+            session=session, client=client
+        )
         self.__emoji_id: str = emoji_id
 
-    @override
     async def copy(self) -> ID:
-        return await super().copy(emoji_id=self.__emoji_id)
+        return await self.__actions.copy(emoji_id=self.__emoji_id)
 
-    @override
     async def delete(self) -> bool:
-        return await super().delete(emoji_id=self.__emoji_id)
+        return await self.__actions.delete(emoji_id=self.__emoji_id)
 
-    @override
     async def update(
         self,
         name: str = MISSING,
@@ -138,7 +137,7 @@ class ClientAdminEmojiActions(SharedAdminEmojiActions):
         local_only: bool = MISSING,
         role_ids_that_can_be_used_this_emoji_as_reaction: list[str] = MISSING,
     ) -> bool:
-        return await super().update(
+        return await self.__actions.update(
             name=name,
             file_id=file_id,
             category=category,

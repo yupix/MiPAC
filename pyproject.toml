@@ -51,8 +51,7 @@ endpoints.py
 
 [tool.pyright]
 include = ["mipac"]
-# Shared*Actions を継承する Client*Actions が意図的にシグネチャを変えているため
-reportIncompatibleMethodOverride = false
+# TypedDict の継承で NotRequired に変えている箇所があるため
 reportIncompatibleVariableOverride = false
 venvPath = "."
 venv = ".venv"

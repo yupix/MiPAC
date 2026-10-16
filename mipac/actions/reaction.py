@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -104,12 +104,13 @@ class SharedReactionActions(AbstractAction):
         return [NoteReaction(i, client=self._client) for i in res]
 
 
-class ClientReactionActions(SharedReactionActions):
+class ClientReactionActions(AbstractAction):
     def __init__(self, note_id: str, *, session: HTTPClient, client: ClientManager) -> None:
-        super().__init__(session=session, client=client)
+        self.__actions: SharedReactionActions = SharedReactionActions(
+            session=session, client=client
+        )
         self.__note_id: str = note_id
 
-    @override
     async def add(self, reaction: str) -> bool:
         """Add reaction to note
 
@@ -125,9 +126,8 @@ class ClientReactionActions(SharedReactionActions):
         bool
             success or not
         """
-        return await super().add(reaction=reaction, note_id=self.__note_id)
+        return await self.__actions.add(reaction=reaction, note_id=self.__note_id)
 
-    @override
     async def remove(self) -> bool:
         """Remove reaction from note
 
@@ -138,9 +138,8 @@ class ClientReactionActions(SharedReactionActions):
         bool
             success or not
         """
-        return await super().remove(note_id=self.__note_id)
+        return await self.__actions.remove(note_id=self.__note_id)
 
-    @override
     async def get_reactions(
         self,
         type: str | None = None,
@@ -148,11 +147,10 @@ class ClientReactionActions(SharedReactionActions):
         since_id: str | None = None,
         until_id: str | None = None,
     ) -> list[NoteReaction]:
-        return await super().get_reactions(
+        return await self.__actions.get_reactions(
             type=type, note_id=self.__note_id, limit=limit, since_id=since_id, until_id=until_id
         )
 
-    @override
     async def fetch_reactions(
         self,
         type: str | None = None,
@@ -160,7 +158,7 @@ class ClientReactionActions(SharedReactionActions):
         since_id: str | None = None,
         until_id: str | None = None,
     ) -> list[NoteReaction]:
-        return await super().fetch_reactions(
+        return await self.__actions.fetch_reactions(
             type=type, note_id=self.__note_id, limit=limit, since_id=since_id, until_id=until_id
         )
 

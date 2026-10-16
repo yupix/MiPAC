@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -101,22 +101,21 @@ class SharedAdminUserActions(AbstractAction):
         return res
 
 
-class ClientAdminUserActions(SharedAdminUserActions):
+class ClientAdminUserActions(AbstractAction):
     def __init__(self, user_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedAdminUserActions = SharedAdminUserActions(
+            session=session, client=client
+        )
         self.__user_id = user_id
 
-    @override
     async def delete_account(self) -> bool:
-        return await super().delete_account(user_id=self.__user_id)
+        return await self.__actions.delete_account(user_id=self.__user_id)
 
-    @override
     async def show_user(self):
         """ユーザーの情報を取得します"""
 
-        return await super().show_user(user_id=self.__user_id)
+        return await self.__actions.show_user(user_id=self.__user_id)
 
-    @override
     async def suspend(self) -> bool:
         """対象のユーザーを凍結します
 
@@ -126,9 +125,8 @@ class ClientAdminUserActions(SharedAdminUserActions):
             成功ならTrue
         """
 
-        return await super().suspend(user_id=self.__user_id)
+        return await self.__actions.suspend(user_id=self.__user_id)
 
-    @override
     async def unsuspend(self) -> bool:
         """ユーザーの凍結を解除します
 
@@ -138,7 +136,7 @@ class ClientAdminUserActions(SharedAdminUserActions):
             成功ならTrue
         """
 
-        return await super().unsuspend(user_id=self.__user_id)
+        return await self.__actions.unsuspend(user_id=self.__user_id)
 
 
 class AdminUserActions(SharedAdminUserActions):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, override
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
@@ -60,17 +60,18 @@ class SharedBlockingActions(AbstractAction):
         return packed_user(res, client=self._client)
 
 
-class ClientBlockingActions(SharedBlockingActions):
+class ClientBlockingActions(AbstractAction):
     """クライアント用のブロックアクション
 
     基本的にoverride以外は行わない
     """
 
     def __init__(self, user_id: str, *, session: HTTPClient, client: ClientManager):
-        super().__init__(session=session, client=client)
+        self.__actions: SharedBlockingActions = SharedBlockingActions(
+            session=session, client=client
+        )
         self.__user_id: str = user_id
 
-    @override
     async def add(self) -> UserDetailedNotMe | MeDetailed:
         """ユーザーをブロックします
 
@@ -81,9 +82,8 @@ class ClientBlockingActions(SharedBlockingActions):
         UserDetailedNotMe | MeDetailed
             ブロック対象のユーザー情報
         """
-        return await super().add(user_id=self.__user_id)
+        return await self.__actions.add(user_id=self.__user_id)
 
-    @override
     async def remove(self) -> UserDetailedNotMe | MeDetailed:
         """ユーザーのブロックを解除します
 
@@ -94,7 +94,7 @@ class ClientBlockingActions(SharedBlockingActions):
         UserDetailedNotMe | MeDetailed
             ブロック解除対象のユーザー情報
         """
-        return await super().remove(user_id=self.__user_id)
+        return await self.__actions.remove(user_id=self.__user_id)
 
 
 class BlockingActions(SharedBlockingActions):

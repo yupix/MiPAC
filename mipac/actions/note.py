@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, override
+from typing import TYPE_CHECKING, AsyncGenerator
 
 from mipac.abstract.action import AbstractAction
 from mipac.errors.base import APIError
@@ -718,7 +718,7 @@ class SharedNoteActions(AbstractAction):
         return res
 
 
-class ClientNoteActions(SharedNoteActions):
+class ClientNoteActions(AbstractAction):
     def __init__(
         self,
         note_id: str,
@@ -726,21 +726,19 @@ class ClientNoteActions(SharedNoteActions):
         session: HTTPClient,
         client: ClientManager,
     ):
-        super().__init__(session, client)
+        self.__actions: SharedNoteActions = SharedNoteActions(session=session, client=client)
         self._note_id: str = note_id
 
-    @override
     async def get_children(
         self,
         limit: int = 100,
         since_id: str | None = None,
         untilId: str | None = None,
     ) -> list[Note]:
-        return await super().get_children(
+        return await self.__actions.get_children(
             limit=limit, since_id=since_id, untilId=untilId, note_id=self._note_id
         )
 
-    @override
     async def fetch_children(
         self,
         limit: int = 100,
@@ -766,11 +764,10 @@ class ClientNoteActions(SharedNoteActions):
         list[Note]
             Children of the note
         """
-        return await super().fetch_children(
+        return await self.__actions.fetch_children(
             limit=limit, since_id=since_id, untilId=untilId, note_id=self._note_id
         )
 
-    @override
     async def get_all_children(
         self,
         limit: int = 10,
@@ -793,12 +790,11 @@ class ClientNoteActions(SharedNoteActions):
         AsyncGenerator[Note, None]
             Children of the note
         """
-        async for i in super().get_all_children(
+        async for i in self.__actions.get_all_children(
             limit=limit, since_id=since_id, untilId=untilId, note_id=self._note_id
         ):
             yield i
 
-    @override
     async def get_clips(self) -> list[Clip]:
         """Get the clips of the note
 
@@ -809,9 +805,8 @@ class ClientNoteActions(SharedNoteActions):
         list[Clip]
             Clips of the note
         """
-        return await super().get_clips(note_id=self._note_id)
+        return await self.__actions.get_clips(note_id=self._note_id)
 
-    @override
     async def get_conversation(self, limit: int = 10, offset: int = 0) -> list[Note]:
         """Get the conversation of the note
 
@@ -829,9 +824,10 @@ class ClientNoteActions(SharedNoteActions):
         list[Note]
             Notes of the conversation
         """
-        return await super().get_conversation(limit=limit, offset=offset, note_id=self._note_id)
+        return await self.__actions.get_conversation(
+            limit=limit, offset=offset, note_id=self._note_id
+        )
 
-    @override
     async def delete(self) -> bool:
         """Delete a note
 
@@ -847,9 +843,8 @@ class ClientNoteActions(SharedNoteActions):
         bool
             success or not
         """
-        return await super().delete(note_id=self._note_id)
+        return await self.__actions.delete(note_id=self._note_id)
 
-    @override
     async def get_reactions(
         self,
         type: str | None = None,
@@ -857,7 +852,7 @@ class ClientNoteActions(SharedNoteActions):
         since_id: str | None = None,
         until_id: str | None = None,
     ) -> list[NoteReaction]:
-        return await super().get_reactions(
+        return await self.__actions.get_reactions(
             type=type,
             limit=limit,
             since_id=since_id,
@@ -865,7 +860,6 @@ class ClientNoteActions(SharedNoteActions):
             note_id=self._note_id,
         )
 
-    @override
     async def fetch_reactions(
         self,
         type: str | None = None,
@@ -873,7 +867,7 @@ class ClientNoteActions(SharedNoteActions):
         since_id: str | None = None,
         until_id: str | None = None,
     ) -> list[NoteReaction]:
-        return await super().fetch_reactions(
+        return await self.__actions.fetch_reactions(
             type=type,
             limit=limit,
             since_id=since_id,
@@ -881,7 +875,6 @@ class ClientNoteActions(SharedNoteActions):
             note_id=self._note_id,
         )
 
-    @override
     async def get_renotes(
         self,
         limit: int = 10,
@@ -907,11 +900,10 @@ class ClientNoteActions(SharedNoteActions):
             Renotes of the note
         """
 
-        return await super().get_renotes(
+        return await self.__actions.get_renotes(
             limit=limit, since_id=since_id, until_id=until_id, note_id=self._note_id
         )
 
-    @override
     async def get_replies(
         self,
         since_id: str | None = None,
@@ -936,11 +928,10 @@ class ClientNoteActions(SharedNoteActions):
         list[Note]
             replies
         """
-        return await super().get_replies(
+        return await self.__actions.get_replies(
             since_id=since_id, until_id=until_id, limit=limit, note_id=self._note_id
         )
 
-    @override
     async def get_all_replies(
         self,
         since_id: str | None = None,
@@ -964,12 +955,11 @@ class ClientNoteActions(SharedNoteActions):
             replies
         """
 
-        async for i in super().get_all_replies(
+        async for i in self.__actions.get_all_replies(
             since_id=since_id, until_id=until_id, limit=limit, note_id=self._note_id
         ):
             yield i
 
-    @override
     async def get_state(self) -> NoteState:
         """Get the state of the note
 
@@ -981,9 +971,8 @@ class ClientNoteActions(SharedNoteActions):
             Note state
         """
 
-        return await super().get_state(note_id=self._note_id)
+        return await self.__actions.get_state(note_id=self._note_id)
 
-    @override
     async def fetch_state(self) -> NoteState:
         """Get the state of the note.
 
@@ -996,7 +985,7 @@ class ClientNoteActions(SharedNoteActions):
         NoteState
             Note state
         """
-        return await super().fetch_state(note_id=self._note_id)
+        return await self.__actions.fetch_state(note_id=self._note_id)
 
     async def add_clips(self, clip_id: str) -> bool:
         """Add a note to the clip
@@ -1013,9 +1002,8 @@ class ClientNoteActions(SharedNoteActions):
         bool
             success or not
         """
-        return await super().add_clips(clip_id=clip_id, note_id=self._note_id)
+        return await self.__actions.add_clips(clip_id=clip_id, note_id=self._note_id)
 
-    @override
     async def create_renote(self) -> Note:
         """Renote a note
 
@@ -1027,9 +1015,8 @@ class ClientNoteActions(SharedNoteActions):
             Renoted note
         """
 
-        return await super().create_renote(note_id=self._note_id)
+        return await self.__actions.create_renote(note_id=self._note_id)
 
-    @override
     async def renote(
         self,
         text: str | None = None,
@@ -1076,7 +1063,7 @@ class ClientNoteActions(SharedNoteActions):
         poll : MiPoll | None, default=None
         """
 
-        return await super().renote(
+        return await self.__actions.renote(
             text=text,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
@@ -1092,7 +1079,6 @@ class ClientNoteActions(SharedNoteActions):
             renote_id=self._note_id,
         )
 
-    @override
     async def reply(
         self,
         text: str | None = None,
@@ -1107,7 +1093,7 @@ class ClientNoteActions(SharedNoteActions):
         files: list[MiFile | File | str] = MISSING,
         poll: MiPoll | None = None,
     ) -> Note:
-        return await super().reply(
+        return await self.__actions.reply(
             text=text,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
@@ -1122,7 +1108,6 @@ class ClientNoteActions(SharedNoteActions):
             reply_id=self._note_id,
         )
 
-    @override
     async def create_quote(
         self,
         content: str | None = None,
@@ -1165,7 +1150,7 @@ class ClientNoteActions(SharedNoteActions):
             Questionnaire to be created
         """
 
-        return await super().create_quote(
+        return await self.__actions.create_quote(
             content=content,
             visibility=visibility,
             visible_user_ids=visible_user_ids,
@@ -1180,7 +1165,6 @@ class ClientNoteActions(SharedNoteActions):
             note_id=self._note_id,
         )
 
-    @override
     async def translate(
         self,
         target_lang: str = "en-US",
@@ -1200,9 +1184,8 @@ class ClientNoteActions(SharedNoteActions):
             Translated result
         """
 
-        return await super().translate(target_lang=target_lang, note_id=self._note_id)
+        return await self.__actions.translate(target_lang=target_lang, note_id=self._note_id)
 
-    @override
     async def un_renote(self) -> bool:
         """Releases the note renote for the specified Id
 
@@ -1212,7 +1195,7 @@ class ClientNoteActions(SharedNoteActions):
             Whether the release was successful
         """
 
-        return await super().un_renote(note_id=self._note_id)
+        return await self.__actions.un_renote(note_id=self._note_id)
 
 
 class NoteActions(SharedNoteActions):

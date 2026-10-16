@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator, Literal, override
+from typing import TYPE_CHECKING, AsyncGenerator, Literal
 
 from mipac.abstract.action import AbstractAction
 from mipac.file import MiFile
@@ -350,13 +350,13 @@ class SharedChannelActions(AbstractAction):
         return res
 
 
-class ClientChannelActions(SharedChannelActions):
+class ClientChannelActions(AbstractAction):
     def __init__(self, channel_id: str, *, session: HTTPClient, client: ClientManager):
+        self.__actions: SharedChannelActions = SharedChannelActions(session=session, client=client)
         self._channel_id: str = channel_id
         self._session: HTTPClient = session
         self._client: ClientManager = client
 
-    @override
     async def send(
         self,
         text: str | None = None,
@@ -411,7 +411,7 @@ class ClientChannelActions(SharedChannelActions):
         Note
             Created note
         """
-        return await super().send(
+        return await self.__actions.send(
             text=text,
             cw=cw,
             files=files,
@@ -428,7 +428,6 @@ class ClientChannelActions(SharedChannelActions):
             local_only=local_only,
         )
 
-    @override
     async def follow(self) -> bool:
         """チャンネルをフォローします
 
@@ -439,9 +438,8 @@ class ClientChannelActions(SharedChannelActions):
         bool
             チャンネルをフォローしているかどうか
         """
-        return await super().follow(channel_id=self._channel_id)
+        return await self.__actions.follow(channel_id=self._channel_id)
 
-    @override
     async def unfollow(self) -> bool:
         """指定したIDのチャンネルのフォローを解除します
 
@@ -452,9 +450,8 @@ class ClientChannelActions(SharedChannelActions):
         bool
             フォロー解除に成功したかどうか
         """
-        return await super().unfollow(channel_id=self._channel_id)
+        return await self.__actions.unfollow(channel_id=self._channel_id)
 
-    @override
     async def update(
         self,
         name: str | None = MISSING,
@@ -495,7 +492,7 @@ class ClientChannelActions(SharedChannelActions):
             更新後のチャンネル
         """
 
-        return await super().update(
+        return await self.__actions.update(
             name=name,
             description=description,
             banner_id=banner_id,
@@ -507,7 +504,6 @@ class ClientChannelActions(SharedChannelActions):
             channel_id=self._channel_id,
         )
 
-    @override
     async def timeline(
         self,
         limit: int = 10,
@@ -539,7 +535,7 @@ class ClientChannelActions(SharedChannelActions):
             取得したノートのリスト
         """
 
-        return await super().timeline(
+        return await self.__actions.timeline(
             limit=limit,
             since_id=since_id,
             until_id=until_id,
@@ -548,7 +544,6 @@ class ClientChannelActions(SharedChannelActions):
             channel_id=self._channel_id,
         )
 
-    @override
     async def get_all_timeline(
         self,
         since_id: str | None = None,
@@ -578,7 +573,7 @@ class ClientChannelActions(SharedChannelActions):
         AsyncGenerator[Note, None]
             取得したノートのリスト
         """
-        async for i in super().get_all_timeline(
+        async for i in self.__actions.get_all_timeline(
             since_id=since_id,
             until_id=until_id,
             since_date=since_date,
@@ -587,7 +582,6 @@ class ClientChannelActions(SharedChannelActions):
         ):
             yield i
 
-    @override
     async def favorite(self) -> bool:
         """指定したIDのチャンネルをお気に入りにします
 
@@ -598,9 +592,8 @@ class ClientChannelActions(SharedChannelActions):
         bool
             お気に入りに追加できたかどうか
         """
-        return await super().favorite(channel_id=self._channel_id)
+        return await self.__actions.favorite(channel_id=self._channel_id)
 
-    @override
     async def unfavorite(self) -> bool:
         """指定したIDのチャンネルをお気に入りから外します
 
@@ -611,7 +604,7 @@ class ClientChannelActions(SharedChannelActions):
         bool
             お気に入りから外せたかどうか
         """
-        return await super().unfavorite(channel_id=self._channel_id)
+        return await self.__actions.unfavorite(channel_id=self._channel_id)
 
 
 class ChannelActions(SharedChannelActions):
