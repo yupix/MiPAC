@@ -72,7 +72,7 @@ class MetaDetailedOnly:
         return Features(self._raw_meta["features"])
 
     @property
-    def proxy_account_name(self) -> str:
+    def proxy_account_name(self) -> str | None:
         return self._raw_meta["proxy_account_name"]
 
     @property

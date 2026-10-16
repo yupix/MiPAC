@@ -235,19 +235,19 @@ class PartialMeta[T: IPartialMeta]:
         return self._raw_meta["background_image_url"]
 
     @property
-    def impressum_url(self) -> bool:
+    def impressum_url(self) -> str | None:
         return self._raw_meta["impressum_url"]
 
     @property
-    def logo_image_url(self) -> bool:
+    def logo_image_url(self) -> str | None:
         return self._raw_meta["logo_image_url"]
 
     @property
-    def privacy_policy_url(self) -> bool:
+    def privacy_policy_url(self) -> str | None:
         return self._raw_meta["privacy_policy_url"]
 
     @property
-    def inquiry_url(self) -> bool:
+    def inquiry_url(self) -> str | None:
         return self._raw_meta["inquiry_url"]
 
     @property
@@ -255,7 +255,7 @@ class PartialMeta[T: IPartialMeta]:
         return self._raw_meta["server_rules"]
 
     @property
-    def theme_color(self) -> str:
+    def theme_color(self) -> str | None:
         return self._raw_meta["theme_color"]
 
     @property

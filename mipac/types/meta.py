@@ -96,14 +96,6 @@ class IMetaDetailed(IPartialMeta, IMetaDetailedOnly):
     pass
 
 
-class IMetaDetailedOnly(TypedDict):
-    features: IFeatures
-    proxy_account_name: str
-    require_setup: bool
-    cache_remote_files: bool
-    cache_remote_sensitive_files: bool
-
-
 class IMeta(IPartialMeta, TypedDict): ...
 
 

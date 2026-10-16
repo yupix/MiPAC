@@ -8,7 +8,7 @@ from mipac.models.announcement import Announcement
 from mipac.models.lite.meta import PartialMeta
 from mipac.models.meta import Meta
 from mipac.types.announcement import IAnnouncement
-from mipac.types.meta import IMeta, IPartialMeta
+from mipac.types.meta import IMetaDetailed, IPartialMeta
 from mipac.utils.pagination import Pagination
 
 if TYPE_CHECKING:
@@ -34,7 +34,7 @@ class ClientActions(AbstractAction):
             "lower": True,
         }
         if detail is True:
-            meta: IMeta = await self.__session.request(**params)
+            meta: IMetaDetailed = await self.__session.request(**params)
             return Meta(meta, client=self.__client)
         lite_meta: IPartialMeta = await self.__session.request(**params)
         return PartialMeta(lite_meta, client=self.__client)

@@ -967,19 +967,7 @@ class UserActions(SharedUserActions):
         ]
 
     @overload
-    async def search(
-        self,
-        query: str,
-        limit: int = 100,
-        offset: int = 0,
-        origin: Literal["local", "remote", "combined"] = "combined",
-        detail: Literal[False] = ...,
-        *,
-        get_all: bool = False,
-    ) -> AsyncGenerator[PartialUser, None]: ...
-
-    @overload
-    async def search(
+    def search(
         self,
         query: str,
         limit: int = 100,
@@ -989,6 +977,18 @@ class UserActions(SharedUserActions):
         *,
         get_all: bool = False,
     ) -> AsyncGenerator[UserDetailedNotMe | MeDetailed, None]: ...
+
+    @overload
+    def search(
+        self,
+        query: str,
+        limit: int = 100,
+        offset: int = 0,
+        origin: Literal["local", "remote", "combined"] = "combined",
+        detail: Literal[False] = ...,
+        *,
+        get_all: bool = False,
+    ) -> AsyncGenerator[PartialUser, None]: ...
 
     async def search(
         self,
