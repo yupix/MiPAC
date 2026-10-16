@@ -2188,6 +2188,15 @@ IMetaAd
     :members:
 
 
+IMetaClientOptions
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.meta.IMetaClientOptions
+
+.. autoclass:: mipac.types.meta.IMetaClientOptions
+    :members:
+
+
 IMetaDetailed
 ~~~~~~~~~~~~~
 
@@ -3176,6 +3185,15 @@ AlreadyMovedError
     :members:
 
 
+AlreadyMutingChannelError
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.AlreadyMutingChannelError
+
+.. autoclass:: mipac.errors.errors.AlreadyMutingChannelError
+    :members:
+
+
 AlreadyMutingError
 ~~~~~~~~~~~~~~~~~~
 
@@ -3329,6 +3347,15 @@ CannotRenoteDueToVisibilityError
     :members:
 
 
+CannotRenoteError
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.CannotRenoteError
+
+.. autoclass:: mipac.errors.errors.CannotRenoteError
+    :members:
+
+
 CannotRenoteOutsideOfChannelError
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3347,6 +3374,15 @@ CannotRenoteToAPureRenoteError
     :members:
 
 
+CannotRenoteToExternalError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.CannotRenoteToExternalError
+
+.. autoclass:: mipac.errors.errors.CannotRenoteToExternalError
+    :members:
+
+
 CannotReplyToAPureRenoteError
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3362,6 +3398,15 @@ CannotReplyToAnInvisibleNoteError
 .. attributetable:: mipac.errors.errors.CannotReplyToAnInvisibleNoteError
 
 .. autoclass:: mipac.errors.errors.CannotReplyToAnInvisibleNoteError
+    :members:
+
+
+CannotReplyToSpecifiedNoteWithExtendedVisibilityError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.CannotReplyToSpecifiedNoteWithExtendedVisibilityError
+
+.. autoclass:: mipac.errors.errors.CannotReplyToSpecifiedNoteWithExtendedVisibilityError
     :members:
 
 
@@ -3416,6 +3461,33 @@ ContainsTooManyMentionsError
 .. attributetable:: mipac.errors.errors.ContainsTooManyMentionsError
 
 .. autoclass:: mipac.errors.errors.ContainsTooManyMentionsError
+    :members:
+
+
+ContentRequiredError
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ContentRequiredError
+
+.. autoclass:: mipac.errors.errors.ContentRequiredError
+    :members:
+
+
+ContentRestrictedByServerError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ContentRestrictedByServerError
+
+.. autoclass:: mipac.errors.errors.ContentRestrictedByServerError
+    :members:
+
+
+ContentRestrictedByUserError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ContentRestrictedByUserError
+
+.. autoclass:: mipac.errors.errors.ContentRestrictedByUserError
     :members:
 
 
@@ -3509,6 +3581,15 @@ ExceededLimitOfCreateInviteCodeError
     :members:
 
 
+ExpiresAtIsPastError
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ExpiresAtIsPastError
+
+.. autoclass:: mipac.errors.errors.ExpiresAtIsPastError
+    :members:
+
+
 ExtResourceHashDidntMatchError
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3533,6 +3614,33 @@ FailedToResolveRemoteUserError
 .. attributetable:: mipac.errors.errors.FailedToResolveRemoteUserError
 
 .. autoclass:: mipac.errors.errors.FailedToResolveRemoteUserError
+    :members:
+
+
+FederationNotAllowedError
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.FederationNotAllowedError
+
+.. autoclass:: mipac.errors.errors.FederationNotAllowedError
+    :members:
+
+
+FetchRssFailedError
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.FetchRssFailedError
+
+.. autoclass:: mipac.errors.errors.FetchRssFailedError
+    :members:
+
+
+FetchRssUnavailableError
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.FetchRssUnavailableError
+
+.. autoclass:: mipac.errors.errors.FetchRssUnavailableError
     :members:
 
 
@@ -3644,6 +3752,15 @@ InternalErrorError
     :members:
 
 
+InvalidAutoArchiveAtError
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.InvalidAutoArchiveAtError
+
+.. autoclass:: mipac.errors.errors.InvalidAutoArchiveAtError
+    :members:
+
+
 InvalidChoiceError
 ~~~~~~~~~~~~~~~~~~
 
@@ -3662,6 +3779,15 @@ InvalidDateTimeError
     :members:
 
 
+InvalidEndpointError
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.InvalidEndpointError
+
+.. autoclass:: mipac.errors.errors.InvalidEndpointError
+    :members:
+
+
 InvalidFileNameError
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -3677,6 +3803,24 @@ InvalidParamError
 .. attributetable:: mipac.errors.errors.InvalidParamError
 
 .. autoclass:: mipac.errors.errors.InvalidParamError
+    :members:
+
+
+InvalidParametersError
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.InvalidParametersError
+
+.. autoclass:: mipac.errors.errors.InvalidParametersError
+    :members:
+
+
+InvalidProviderError
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.InvalidProviderError
+
+.. autoclass:: mipac.errors.errors.InvalidProviderError
     :members:
 
 
@@ -3725,6 +3869,15 @@ LtlDisabledError
     :members:
 
 
+MaxFileSizeExceededError
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.MaxFileSizeExceededError
+
+.. autoclass:: mipac.errors.errors.MaxFileSizeExceededError
+    :members:
+
+
 MuteeIsYourselfError
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -3767,6 +3920,15 @@ NoPollError
 .. attributetable:: mipac.errors.errors.NoPollError
 
 .. autoclass:: mipac.errors.errors.NoPollError
+    :members:
+
+
+NoResponseProvidedError
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoResponseProvidedError
+
+.. autoclass:: mipac.errors.errors.NoResponseProvidedError
     :members:
 
 
@@ -3860,6 +4022,15 @@ NoSuchClipError
     :members:
 
 
+NoSuchCodeError
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSuchCodeError
+
+.. autoclass:: mipac.errors.errors.NoSuchCodeError
+    :members:
+
+
 NoSuchEmojiError
 ~~~~~~~~~~~~~~~~
 
@@ -3941,6 +4112,24 @@ NoSuchListError
     :members:
 
 
+NoSuchMessageError
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSuchMessageError
+
+.. autoclass:: mipac.errors.errors.NoSuchMessageError
+    :members:
+
+
+NoSuchNoteDraftError
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSuchNoteDraftError
+
+.. autoclass:: mipac.errors.errors.NoSuchNoteDraftError
+    :members:
+
+
 NoSuchNoteError
 ~~~~~~~~~~~~~~~
 
@@ -4004,12 +4193,30 @@ NoSuchRegistrationError
     :members:
 
 
+NoSuchRenoteError
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSuchRenoteError
+
+.. autoclass:: mipac.errors.errors.NoSuchRenoteError
+    :members:
+
+
 NoSuchRenoteTargetError
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.errors.errors.NoSuchRenoteTargetError
 
 .. autoclass:: mipac.errors.errors.NoSuchRenoteTargetError
+    :members:
+
+
+NoSuchReplyError
+~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSuchReplyError
+
+.. autoclass:: mipac.errors.errors.NoSuchReplyError
     :members:
 
 
@@ -4028,6 +4235,15 @@ NoSuchRoleError
 .. attributetable:: mipac.errors.errors.NoSuchRoleError
 
 .. autoclass:: mipac.errors.errors.NoSuchRoleError
+    :members:
+
+
+NoSuchRoomError
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NoSuchRoomError
+
+.. autoclass:: mipac.errors.errors.NoSuchRoomError
     :members:
 
 
@@ -4121,6 +4337,15 @@ NotLikedError
     :members:
 
 
+NotMutingChannelError
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.NotMutingChannelError
+
+.. autoclass:: mipac.errors.errors.NotMutingChannelError
+    :members:
+
+
 NotMutingError
 ~~~~~~~~~~~~~~
 
@@ -4157,6 +4382,15 @@ PendingSessionError
     :members:
 
 
+PermissionDeniedError
+~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.PermissionDeniedError
+
+.. autoclass:: mipac.errors.errors.PermissionDeniedError
+    :members:
+
+
 PinLimitExceededError
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -4184,6 +4418,15 @@ ReactionsNotPublicError
     :members:
 
 
+RecipientIsYourselfError
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.RecipientIsYourselfError
+
+.. autoclass:: mipac.errors.errors.RecipientIsYourselfError
+    :members:
+
+
 RecursiveNestingError
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -4202,6 +4445,24 @@ RemoteUserNotAllowedError
     :members:
 
 
+RequestFailedError
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.RequestFailedError
+
+.. autoclass:: mipac.errors.errors.RequestFailedError
+    :members:
+
+
+ResponseInvalidError
+~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ResponseInvalidError
+
+.. autoclass:: mipac.errors.errors.ResponseInvalidError
+    :members:
+
+
 RestrictedByRoleError
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -4217,6 +4478,33 @@ SameNameEmojiExistsError
 .. attributetable:: mipac.errors.errors.SameNameEmojiExistsError
 
 .. autoclass:: mipac.errors.errors.SameNameEmojiExistsError
+    :members:
+
+
+ScheduledAtMustBeInFutureError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ScheduledAtMustBeInFutureError
+
+.. autoclass:: mipac.errors.errors.ScheduledAtMustBeInFutureError
+    :members:
+
+
+ScheduledAtRequiredError
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.ScheduledAtRequiredError
+
+.. autoclass:: mipac.errors.errors.ScheduledAtRequiredError
+    :members:
+
+
+SigninRequiredError
+~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.SigninRequiredError
+
+.. autoclass:: mipac.errors.errors.SigninRequiredError
     :members:
 
 
@@ -4274,12 +4562,30 @@ TooManyClipsError
     :members:
 
 
+TooManyDraftsError
+~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TooManyDraftsError
+
+.. autoclass:: mipac.errors.errors.TooManyDraftsError
+    :members:
+
+
 TooManyMutedWordsError
 ~~~~~~~~~~~~~~~~~~~~~~
 
 .. attributetable:: mipac.errors.errors.TooManyMutedWordsError
 
 .. autoclass:: mipac.errors.errors.TooManyMutedWordsError
+    :members:
+
+
+TooManyScheduledNotesError
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.TooManyScheduledNotesError
+
+.. autoclass:: mipac.errors.errors.TooManyScheduledNotesError
     :members:
 
 
@@ -4319,6 +4625,15 @@ TwoFactorNotEnabledError
     :members:
 
 
+UnallowedFileTypeError
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.UnallowedFileTypeError
+
+.. autoclass:: mipac.errors.errors.UnallowedFileTypeError
+    :members:
+
+
 UnavailableError
 ~~~~~~~~~~~~~~~~
 
@@ -4334,6 +4649,33 @@ UnexpectedFileTypeError
 .. attributetable:: mipac.errors.errors.UnexpectedFileTypeError
 
 .. autoclass:: mipac.errors.errors.UnexpectedFileTypeError
+    :members:
+
+
+UnknownError
+~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.UnknownError
+
+.. autoclass:: mipac.errors.errors.UnknownError
+    :members:
+
+
+UnsupportedFileTypeError
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.UnsupportedFileTypeError
+
+.. autoclass:: mipac.errors.errors.UnsupportedFileTypeError
+    :members:
+
+
+UriInvalidError
+~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.UriInvalidError
+
+.. autoclass:: mipac.errors.errors.UriInvalidError
     :members:
 
 
@@ -4364,6 +4706,15 @@ UserNotFoundError
     :members:
 
 
+VerificationFailedError
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.VerificationFailedError
+
+.. autoclass:: mipac.errors.errors.VerificationFailedError
+    :members:
+
+
 YouHaveBeenBlockedError
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -4379,6 +4730,15 @@ YourFlashError
 .. attributetable:: mipac.errors.errors.YourFlashError
 
 .. autoclass:: mipac.errors.errors.YourFlashError
+    :members:
+
+
+YourNameContainsProhibitedWordsError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.errors.errors.YourNameContainsProhibitedWordsError
+
+.. autoclass:: mipac.errors.errors.YourNameContainsProhibitedWordsError
     :members:
 
 
