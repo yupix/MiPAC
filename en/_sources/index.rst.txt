@@ -4644,6 +4644,12 @@ cache
 .. autofunction:: mipac.utils.cache.cache
 
 
+cache_key_builder
+~~~~~~~~~~~~~~~~~
+
+.. autofunction:: mipac.utils.cache.cache_key_builder
+
+
 LRUCache
 ~~~~~~~~
 
