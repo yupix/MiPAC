@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from functools import lru_cache, wraps
+from functools import wraps
 from typing import Any
 
 DEFAULT_CACHE: dict[str, "LRUCache"] = {}
@@ -115,7 +115,6 @@ def cache(group: str = "default", override: bool = False):
     return decorator
 
 
-@lru_cache
 def cache_key_builder(func, cls, *args, **kwargs):
     """キャッシュのキーを作成します"""
     ordered_kwargs = sorted(kwargs.items())
