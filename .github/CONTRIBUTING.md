@@ -20,13 +20,9 @@ Check the going points before creating an assignment
 ## Building a Development Environment
 
 ```
-python -m venv .venv
+uv sync
 
-# after activate env
-
-pip install -r requirements.txt -r requirements-dev.txt
-
-pre-commit install
+uv run pre-commit install
 ```
 
 ## Creating a pull request

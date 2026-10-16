@@ -13,21 +13,18 @@ jobs:
         python-version: [3.12]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
+        fetch-depth: 0
 
-    - name: Setup Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
+    - uses: astral-sh/setup-uv@v6
 
     - name: Install Package
-      run: |
-        pip install -e .[doc]
+      run: uv sync --extra doc
 
     - name: Build Docs
-      run: python doc_gen.py
+      run: uv run python doc_gen.py
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3

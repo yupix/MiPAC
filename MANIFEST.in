@@ -1,6 +1,0 @@
-include README.md
-include LICENSE
-include requirements.txt
-include versioneer.py
-include mipac/_version.py
-graft mipac

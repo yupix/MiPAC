@@ -1,16 +1,48 @@
+[project]
+name = "mipac"
+dynamic = ["version"]
+description = "A Python wrapper for the Misskey API"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "yupix", email = "yupi0982@outlook.jp" }]
+requires-python = ">=3.12, <4.0"
+dependencies = ["aiohttp>=3.9,<4"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Programming Language :: Python :: 3.12",
+    "Natural Language :: Japanese",
+]
+
+[project.urls]
+Homepage = "https://github.com/yupix/mipac"
+
+[project.optional-dependencies]
+speed = ["orjson"]
+doc = ["sphinx", "furo", "sphinxcontrib_trio", "sphinx-intl", "numpydoc"]
+
+[dependency-groups]
+dev = ["ruff", "isort", "mypy", "pre-commit"]
+
+[build-system]
+requires = ["setuptools>=64", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["mipac*"]
+
+[tool.setuptools_scm]
+
 [tool.black]
 line-length = 99
 extend-exclude = '''
 (
-_version.py
-|endpoints.py
+endpoints.py
 )
 '''
 
-
 [tool.pyright]
 include = ["mipac"]
-exclude = ["mipac/_version.py"]
 venvPath = "."
 venv = ".venv"
 
@@ -18,16 +50,8 @@ venv = ".venv"
 profile = "black"
 line_length = 99
 
-[build-system]
-requires = ["setuptools", "versioneer[toml]"]
-build-backend = "setuptools.build_meta"
-
 [tool.ruff]
 line-length = 99
-
-[tool.ruff.format]
-exclude = ["mipac/_version.py"]
-
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["E402", "F403"]

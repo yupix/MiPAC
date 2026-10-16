@@ -1,5 +1,0 @@
-tqdm
-jinja2
-ruff
-isort
-pre-commit
