@@ -1,6 +1,10 @@
 from __future__ import annotations
 
-from typing import TypedDict
+from typing import TYPE_CHECKING, Literal, TypedDict
+
+if TYPE_CHECKING:
+    from mipac.types.note import INote
+    from mipac.types.user import IUserDetailedNotMeSchema
 
 
 class IFederationInstanceStat(TypedDict):
@@ -45,3 +49,16 @@ class IInstanceLite(TypedDict):
     icon_url: str | None
     favicon_url: str | None
     theme_color: str | None
+
+
+class IApShowUserResult(TypedDict):
+    type: Literal["User"]
+    object: IUserDetailedNotMeSchema
+
+
+class IApShowNoteResult(TypedDict):
+    type: Literal["Note"]
+    object: INote
+
+
+IApShowResult = IApShowUserResult | IApShowNoteResult

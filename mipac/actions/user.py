@@ -52,10 +52,7 @@ class SharedUserActions(AbstractAction):
         until_id: str | None = None,
         since_data: int | None = None,
         until_data: int | None = None,
-        include_my_renotes: bool = True,
         with_files: bool = False,
-        file_type: list[str] | None = None,
-        exclude_nsfw: bool = False,
         *,
         user_id: str,
     ) -> list[Note]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
@@ -68,10 +65,7 @@ class SharedUserActions(AbstractAction):
             "untilId": until_id,
             "sinceDate": since_data,
             "untilDate": until_data,
-            "includeMyRenotes": include_my_renotes,
             "withFiles": with_files,
-            "fileType": file_type,
-            "excludeNsfw": exclude_nsfw,
         }
 
         raw_note: list[INote] = await self._session.request(
@@ -89,10 +83,7 @@ class SharedUserActions(AbstractAction):
         until_id: str | None = None,
         since_data: int | None = None,
         until_data: int | None = None,
-        include_my_renotes: bool = True,
         with_files: bool = False,
-        file_type: list[str] | None = None,
-        exclude_nsfw: bool = False,
         *,
         user_id: str,
     ) -> AsyncGenerator[Note, None]:
@@ -105,10 +96,7 @@ class SharedUserActions(AbstractAction):
             "untilId": until_id,
             "sinceDate": since_data,
             "untilDate": until_data,
-            "includeMyRenotes": include_my_renotes,
             "withFiles": with_files,
-            "fileType": file_type,
-            "excludeNsfw": exclude_nsfw,
         }
         pagination = Pagination[INote](
             self._session, Route("POST", "/api/users/notes"), json=data, auth=True
@@ -510,10 +498,7 @@ class ClientUserActions(AbstractAction):
         until_id: str | None = None,
         since_data: int | None = None,
         until_data: int | None = None,
-        include_my_renotes: bool = True,
         with_files: bool = False,
-        file_type: list[str] | None = None,
-        exclude_nsfw: bool = False,
     ) -> list[Note]:  # TODO: since_dataなどを用いたページネーションを今後できるようにする
         return await self.__actions.get_notes(
             with_replies=with_replies,
@@ -523,10 +508,7 @@ class ClientUserActions(AbstractAction):
             until_id=until_id,
             since_data=since_data,
             until_data=until_data,
-            include_my_renotes=include_my_renotes,
             with_files=with_files,
-            file_type=file_type,
-            exclude_nsfw=exclude_nsfw,
             user_id=self.__user.id,
         )
 
@@ -539,10 +521,7 @@ class ClientUserActions(AbstractAction):
         until_id: str | None = None,
         since_data: int | None = None,
         until_data: int | None = None,
-        include_my_renotes: bool = True,
         with_files: bool = False,
-        file_type: list[str] | None = None,
-        exclude_nsfw: bool = False,
     ) -> AsyncGenerator[Note, None]:
         async for i in self.__actions.get_all_notes(
             with_replies=with_replies,
@@ -552,10 +531,7 @@ class ClientUserActions(AbstractAction):
             until_id=until_id,
             since_data=since_data,
             until_data=until_data,
-            include_my_renotes=include_my_renotes,
             with_files=with_files,
-            file_type=file_type,
-            exclude_nsfw=exclude_nsfw,
             user_id=self.__user.id,
         ):
             yield i

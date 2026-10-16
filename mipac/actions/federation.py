@@ -5,9 +5,10 @@ from typing import TYPE_CHECKING, Any, AsyncGenerator
 from mipac.abstract.action import AbstractAction
 from mipac.http import HTTPClient, Route
 from mipac.models.instance import FederationInstance
+from mipac.models.note import Note
 from mipac.models.user import MeDetailed, UserDetailedNotMe, packed_user
 from mipac.types.follow import IFederationFollower, IFederationFollowing
-from mipac.types.instance import IFederationInstance, IFederationInstanceStat
+from mipac.types.instance import IApShowResult, IFederationInstance, IFederationInstanceStat
 from mipac.types.user import IUserDetailed
 from mipac.utils.pagination import Pagination
 
@@ -27,15 +28,27 @@ class FederationActions(AbstractAction):
             )
         )
 
-    async def show_ap(
-        self, host: str, since_id: str | None = None, until_id: str | None = None, limit: int = 10
-    ) -> FederationInstance:  # TODO: 存在するのか確認する
-        body = {"host": host, "sinceId": since_id, "untilId": until_id, "limit": limit}
+    async def show_ap(self, uri: str) -> UserDetailedNotMe | MeDetailed | Note:
+        """ActivityPub の URI からユーザーまたはノートを取得します
 
-        res: FederationInstance = await self.__session.request(
-            Route("POST", "/api/ap/show"), auth=True, json=body
+        Endpoint: `/api/ap/show`
+
+        Parameters
+        ----------
+        uri : str
+            取得したいオブジェクトの URI
+
+        Returns
+        -------
+        UserDetailedNotMe | MeDetailed | Note
+            URI が指すユーザーまたはノート
+        """
+        res: IApShowResult = await self.__session.request(
+            Route("POST", "/api/ap/show"), auth=True, json={"uri": uri}
         )
-        return res
+        if res["type"] == "Note":
+            return Note(res["object"], client=self.__client)
+        return packed_user(res["object"], client=self.__client)
 
     async def get_followers(
         self,

@@ -87,16 +87,24 @@ class SystemWebhookActions(SharedSystemWebhookActions):
     async def get_list(
         self,
         is_active: bool | None = None,
-        abuse_report: bool | None = None,
-        abuse_report_resolved: bool | None = None,
-        user_created: bool | None = None,
-    ):
-        body = {
-            "isActive": is_active,
-            "abuseReport": abuse_report,
-            "abuseReportResolved": abuse_report_resolved,
-            "userCreated": user_created,
-        }
+        on: list[SystemWebhookEventTypes] | None = None,
+    ) -> list[SystemWebhook]:
+        """システムWebhookの一覧を取得します
+
+        Endpoint: `/api/admin/system-webhook/list`
+
+        Parameters
+        ----------
+        is_active : bool | None, default None
+            有効なWebhookのみに絞り込むかどうか
+        on : list[SystemWebhookEventTypes] | None, default None
+            指定したイベントを含むWebhookに絞り込む
+
+        Returns
+        -------
+        list[SystemWebhook]
+        """
+        body = {"isActive": is_active, "on": on}
         system_webhook_payload: list[ISystemWebhook] = await self._session.request(
             Route("POST", "/api/admin/system-webhook/list"), json=body
         )

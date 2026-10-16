@@ -22,8 +22,19 @@ class EmojiActions(AbstractAction):
         )
         return EmojiDetailed(raw_emoji_detailed=emoji, client=self.__client)
 
-    async def gets(self, name: str) -> EmojiSimple:
-        emoji: IEmojiSimple = await self.__session.request(
-            Route("POST", "/api/emojis"), auth=True, lower=True, json={"name": name}
+    async def gets(self) -> list[EmojiSimple]:
+        """サーバーのカスタム絵文字の一覧を取得します
+
+        Endpoint: `/api/emojis`
+
+        Returns
+        -------
+        list[EmojiSimple]
+            カスタム絵文字の一覧
+        """
+        res: dict[str, list[IEmojiSimple]] = await self.__session.request(
+            Route("POST", "/api/emojis"), auth=True, lower=True
         )
-        return EmojiSimple(raw_emoji_simple=emoji, client=self.__client)
+        return [
+            EmojiSimple(raw_emoji_simple=emoji, client=self.__client) for emoji in res["emojis"]
+        ]

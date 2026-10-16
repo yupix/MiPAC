@@ -177,7 +177,6 @@ class SharedAntennaActions(AbstractAction):
         case_sensitive: bool,
         with_replies: bool,
         with_file: bool,
-        notify: bool,
         user_list_id: str | None = None,
         *,
         antenna_id: str,
@@ -204,8 +203,6 @@ class SharedAntennaActions(AbstractAction):
             Whether to include replies.
         with_file : bool
             Whether to limit to notes with attached files.
-        notify : bool
-            Whether to notify for new notes.
         user_list_id : str | None, default None
             List of user IDs when selecting 'users' as the receive source for the antenna.
 
@@ -236,7 +233,6 @@ class SharedAntennaActions(AbstractAction):
             "caseSensitive": case_sensitive,
             "withReplies": with_replies,
             "withFile": with_file,
-            "notify": notify,
         }
 
         res_antenna: IAntenna = await self._session.request(
@@ -362,7 +358,6 @@ class ClientAntennaActions(AbstractAction):
         case_sensitive: bool,
         with_replies: bool,
         with_file: bool,
-        notify: bool,
         user_list_id: str | None = None,
     ) -> Antenna:
         """Update an antenna.
@@ -387,8 +382,6 @@ class ClientAntennaActions(AbstractAction):
             Whether to include replies.
         with_file : bool
             Whether to limit to notes with attached files.
-        notify : bool
-            Whether to notify for new notes.
         user_list_id : str | None, default None
             List of user IDs when selecting 'users' as the receive source for the antenna.
 
@@ -406,7 +399,6 @@ class ClientAntennaActions(AbstractAction):
             case_sensitive=case_sensitive,
             with_replies=with_replies,
             with_file=with_file,
-            notify=notify,
             user_list_id=user_list_id,
             antenna_id=self.__antenna_id,
         )
@@ -427,7 +419,6 @@ class AntennaActions(SharedAntennaActions):
         local_only: bool = MISSING,
         with_replies: bool = False,
         with_file: bool = False,
-        notify: bool = False,
         user_list_id: str | None = None,
     ) -> Antenna:
         """Create an antenna.
@@ -454,8 +445,6 @@ class AntennaActions(SharedAntennaActions):
             Whether to include replies.
         with_file : bool, default False
             Whether to limit to notes with attached files.
-        notify : bool, default False
-            Whether to notify for new notes.
         user_list_id : str | None, default None
             List of user IDs when selecting 'users' as the receive source for the antenna.
 
@@ -492,7 +481,6 @@ class AntennaActions(SharedAntennaActions):
                 "localOnly": local_only,
                 "withReplies": with_replies,
                 "withFile": with_file,
-                "notify": notify,
             }
         )
 

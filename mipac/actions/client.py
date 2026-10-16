@@ -42,7 +42,6 @@ class ClientActions(AbstractAction):
     async def get_announcements(
         self,
         limit: int = 10,
-        with_unreads: bool = False,
         since_id: str | None = None,
         until_id: str | None = None,
         *,
@@ -55,7 +54,6 @@ class ClientActions(AbstractAction):
 
         body = {
             "limit": limit,
-            "withUnreads": with_unreads,
             "sinceId": since_id,
             "untilId": until_id,
         }
