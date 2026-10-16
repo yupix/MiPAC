@@ -34,7 +34,7 @@ class AlreadyFollowingError(APIError):
 
 
 class AlreadyLikedError(APIError):
-    """The flash has already been liked."""
+    """The page has already been liked."""
 
 
 class AlreadyMovedError(APIError):
@@ -42,6 +42,10 @@ class AlreadyMovedError(APIError):
 
 
 class AlreadyMutingError(APIError):
+    """You are already muting that user."""
+
+
+class AlreadyMutingChannelError(APIError):
     """You are already muting that user."""
 
 
@@ -101,6 +105,10 @@ class CannotReactToRenoteError(APIError):
     """You cannot react to Renote."""
 
 
+class CannotRenoteError(APIError):
+    """Cannot renote."""
+
+
 class CannotRenoteDueToVisibilityError(APIError):
     """You can not Renote due to target visibility."""
 
@@ -113,12 +121,20 @@ class CannotRenoteToAPureRenoteError(APIError):
     """You can not Renote a pure Renote."""
 
 
+class CannotRenoteToExternalError(APIError):
+    """Cannot Renote to External."""
+
+
 class CannotReplyToAnInvisibleNoteError(APIError):
     """You cannot reply to an invisible Note."""
 
 
 class CannotReplyToAPureRenoteError(APIError):
     """You can not reply to a pure Renote."""
+
+
+class CannotReplyToSpecifiedNoteWithExtendedVisibilityError(APIError):
+    """You cannot reply to a specified visibility note with extended visibility."""
 
 
 class CannotReplyToSpecifiedVisibilityNoteWithExtendedVisibilityError(APIError):
@@ -147,6 +163,18 @@ class ContainsProhibitedWordsError(APIError):
 
 class ContainsTooManyMentionsError(APIError):
     """Cannot post because it exceeds the allowed number of mentions."""
+
+
+class ContentRequiredError(APIError):
+    """Content required. You need to set text or fileId."""
+
+
+class ContentRestrictedByServerError(APIError):
+    """Content restricted by server settings. Please sign in to view."""
+
+
+class ContentRestrictedByUserError(APIError):
+    """Content restricted by user. Please sign in to view."""
 
 
 class CorrelationCheckEmailError(APIError):
@@ -189,6 +217,10 @@ class ExceededLimitOfCreateInviteCodeError(APIError):
     """You have exceeded the limit for creating an invitation code."""
 
 
+class ExpiresAtIsPastError(APIError):
+    """Cannot set past date to "expiresAt"."""
+
+
 class ExtResourceHashDidntMatchError(APIError):
     """Hash did not match."""
 
@@ -199,6 +231,18 @@ class ExtResourceReturnedInvalidSchemaError(APIError):
 
 class FailedToResolveRemoteUserError(APIError):
     """Failed to resolve remote user."""
+
+
+class FederationNotAllowedError(APIError):
+    """Federation for this host is not allowed."""
+
+
+class FetchRssFailedError(APIError):
+    """Failed to fetch RSS."""
+
+
+class FetchRssUnavailableError(APIError):
+    """RSS fetching is temporarily unavailable."""
 
 
 class FolloweeIsYourselfError(APIError):
@@ -230,8 +274,7 @@ class HasChildFilesOrFoldersError(APIError):
 
 
 class InappropriateError(APIError):
-    """Cannot upload the file because it has been determined that it possibly contains
-    inappropriate content."""
+    """Cannot upload the file because it has been determined that it possibly contains inappropriate content."""
 
 
 class IncorrectInitialPasswordError(APIError):
@@ -246,6 +289,10 @@ class InternalErrorError(APIError):
     """Internal error occurred. Please contact us if the error persists."""
 
 
+class InvalidAutoArchiveAtError(APIError):
+    """Invalid auto archive date."""
+
+
 class InvalidChoiceError(APIError):
     """Choice ID is invalid."""
 
@@ -254,12 +301,24 @@ class InvalidDateTimeError(APIError):
     """Invalid date-time format"""
 
 
+class InvalidEndpointError(APIError):
+    """Invalid push endpoint."""
+
+
 class InvalidFileNameError(APIError):
     """Invalid file name."""
 
 
 class InvalidParamError(APIError):
     """Invalid param."""
+
+
+class InvalidParametersError(APIError):
+    """Invalid parameters."""
+
+
+class InvalidProviderError(APIError):
+    """Invalid provider."""
 
 
 class InvalidRegexpError(APIError):
@@ -271,7 +330,7 @@ class InvalidSeedError(APIError):
 
 
 class InvalidUrlError(APIError):
-    """Invalid URL"""
+    """Invalid URL."""
 
 
 class IsRemoteUserError(APIError):
@@ -284,6 +343,10 @@ class IAmAiError(APIError):
 
 class LtlDisabledError(APIError):
     """Local timeline has been disabled."""
+
+
+class MaxFileSizeExceededError(APIError):
+    """Cannot upload the file because it exceeds the maximum file size."""
 
 
 class MuteeIsYourselfError(APIError):
@@ -307,15 +370,19 @@ class NotFavoritedError(APIError):
 
 
 class NotFollowingError(APIError):
-    """The other use is not following you."""
+    """You are not following that user."""
 
 
 class NotLikedError(APIError):
-    """You have not liked that flash."""
+    """You have not liked that page."""
 
 
 class NotMutingError(APIError):
     """You are not muting that user."""
+
+
+class NotMutingChannelError(APIError):
+    """You are not muting that channel."""
 
 
 class NotReactedError(APIError):
@@ -336,6 +403,10 @@ class NoFreeSpaceError(APIError):
 
 class NoPollError(APIError):
     """The note does not attach a poll."""
+
+
+class NoResponseProvidedError(APIError):
+    """No response provided."""
 
 
 class NoSecurityKeyError(APIError):
@@ -378,6 +449,10 @@ class NoSuchClipError(APIError):
     """No such clip."""
 
 
+class NoSuchCodeError(APIError):
+    """No such code."""
+
+
 class NoSuchEmojiError(APIError):
     """No such emoji."""
 
@@ -414,8 +489,16 @@ class NoSuchListError(APIError):
     """No such list."""
 
 
+class NoSuchMessageError(APIError):
+    """No such message."""
+
+
 class NoSuchNoteError(APIError):
     """No such note."""
+
+
+class NoSuchNoteDraftError(APIError):
+    """No such note draft."""
 
 
 class NoSuchObjectError(APIError):
@@ -442,8 +525,16 @@ class NoSuchRegistrationError(APIError):
     """No such registration."""
 
 
+class NoSuchRenoteError(APIError):
+    """No such renote."""
+
+
 class NoSuchRenoteTargetError(APIError):
     """No such renote target."""
+
+
+class NoSuchReplyError(APIError):
+    """No such reply."""
 
 
 class NoSuchReplyTargetError(APIError):
@@ -452,6 +543,10 @@ class NoSuchReplyTargetError(APIError):
 
 class NoSuchRoleError(APIError):
     """No such role."""
+
+
+class NoSuchRoomError(APIError):
+    """No such room."""
 
 
 class NoSuchSessionError(APIError):
@@ -478,6 +573,10 @@ class PendingSessionError(APIError):
     """This session is not completed yet."""
 
 
+class PermissionDeniedError(APIError):
+    """Permission denied."""
+
+
 class PinLimitExceededError(APIError):
     """You can not pin notes any more."""
 
@@ -490,6 +589,10 @@ class ReactionsNotPublicError(APIError):
     """Reactions of the user is not public."""
 
 
+class RecipientIsYourselfError(APIError):
+    """You can not send a message to yourself."""
+
+
 class RecursiveNestingError(APIError):
     """It can not be structured like nesting folders recursively."""
 
@@ -498,12 +601,32 @@ class RemoteUserNotAllowedError(APIError):
     """Not allowed to load the remote user's list"""
 
 
+class RequestFailedError(APIError):
+    """Request failed."""
+
+
+class ResponseInvalidError(APIError):
+    """Response from remote server is invalid."""
+
+
 class RestrictedByRoleError(APIError):
     """This feature is restricted by your role."""
 
 
 class SameNameEmojiExistsError(APIError):
     """Emoji that have same name already exists."""
+
+
+class ScheduledAtMustBeInFutureError(APIError):
+    """scheduledAt must be in the future."""
+
+
+class ScheduledAtRequiredError(APIError):
+    """scheduledAt is required when isActuallyScheduled is true."""
+
+
+class SigninRequiredError(APIError):
+    """Signin required."""
 
 
 class StlDisabledError(APIError):
@@ -530,8 +653,16 @@ class TooManyClipNotesError(APIError):
     """You cannot add notes to the clip any more."""
 
 
+class TooManyDraftsError(APIError):
+    """You cannot create drafts any more."""
+
+
 class TooManyMutedWordsError(APIError):
     """Too many muted words."""
+
+
+class TooManyScheduledNotesError(APIError):
+    """You cannot create scheduled notes any more."""
 
 
 class TooManyUserlistsError(APIError):
@@ -550,6 +681,10 @@ class TwoFactorNotEnabledError(APIError):
     """2fa not enabled."""
 
 
+class UnallowedFileTypeError(APIError):
+    """Cannot upload the file because it is an unallowed file type."""
+
+
 class UnavailableError(APIError):
     """Translate of notes unavailable."""
 
@@ -558,8 +693,20 @@ class UnexpectedFileTypeError(APIError):
     """We need csv file."""
 
 
+class UnknownError(APIError):
+    """unknown"""
+
+
+class UnsupportedFileTypeError(APIError):
+    """Unsupported file type."""
+
+
+class UriInvalidError(APIError):
+    """URI is invalid."""
+
+
 class UriNullError(APIError):
-    """Local User ActivityPup URI is null."""
+    """User ActivityPup URI is null."""
 
 
 class UserIsDeletedError(APIError):
@@ -570,8 +717,16 @@ class UserNotFoundError(APIError):
     """User not found."""
 
 
+class VerificationFailedError(APIError):
+    """Verification failed."""
+
+
 class YourFlashError(APIError):
     """You cannot like your flash."""
+
+
+class YourNameContainsProhibitedWordsError(APIError):
+    """Your new name contains prohibited words."""
 
 
 class YourPageError(APIError):
