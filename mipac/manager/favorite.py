@@ -44,7 +44,7 @@ class FavoriteManager(AbstractManager):
 
         Returns
         -------
-        ReactionActions
+        FavoriteActions
             お気に入りに対するアクションを行うクラス
         """
         return FavoriteActions(
