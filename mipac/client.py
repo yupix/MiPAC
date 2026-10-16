@@ -22,6 +22,7 @@ class Client:
             setup_logging(level=log_level)
         self.config: Config = config
         self.http: HTTPClient = HTTPClient(url, token)
+        self.__client_manager: ClientManager = ClientManager(self.http, self.config)
 
     async def __aenter__(self) -> Self:
         return self
@@ -31,7 +32,7 @@ class Client:
 
     @property
     def api(self) -> ClientManager:
-        return ClientManager(self.http, self.config)
+        return self.__client_manager
 
     async def close_session(self) -> None:
         await self.http.close_session()
