@@ -29,6 +29,8 @@ async def json_or_text(response: aiohttp.ClientResponse):
     try:
         if "application/json" in response.headers["Content-Type"]:
             return _from_json(text)
+        else:
+            return text
     except KeyError:
         pass
 
