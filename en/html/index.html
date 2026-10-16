@@ -4452,68 +4452,10 @@ async</span><a class="reference internal" href="#mipac.actions.blocking.SharedBl
 </section>
 <section id="clientfollowactions">
 <h3>ClientFollowActions<a class="headerlink" href="#clientfollowactions" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.follow.ClientFollowActions"><div class="py-attribute-table-column">
-<span>
-Methods</span><ul>
-<li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.add">add</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.invalidate">invalidate</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.remove">remove</a></li></ul>
-</div></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.actions.follow.ClientFollowActions"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.follow.ClientFollowActions">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.actions.follow.</span></span><span class="sig-name descname"><span class="pre">ClientFollowActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.follow.ClientFollowActions" title="Link to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.follow.ClientFollowActions.add">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.ClientFollowActions.add" title="Link to this definition">¶</a></dt>
-<dd><p>対象のユーザーをフォローします</p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 0.6.1: </span>Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">mipac.actions.follow.SharedFollowActions.create()</span></code> instead.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The user that you followed</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>UserLite</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.follow.ClientFollowActions.invalidate">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">invalidate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.ClientFollowActions.invalidate" title="Link to this definition">¶</a></dt>
-<dd><p>Make the user unfollows you</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The user that followed you</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.follow.ClientFollowActions.remove">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser"><span class="pre">PartialUser</span></a></span></span><a class="headerlink" href="#mipac.actions.follow.ClientFollowActions.remove" title="Link to this definition">¶</a></dt>
-<dd><p>対象のユーザーのフォローを解除します</p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 0.6.1: </span>Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">mipac.actions.follow.SharedFollowActions.delete()</span></code> instead.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The user that you unfollowed</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.models.lite.user.PartialUser" title="mipac.models.lite.user.PartialUser">PartialUser</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
+<dd></dd></dl>
 
 </section>
 <section id="followactions">
@@ -7911,11 +7853,19 @@ async</span><a class="reference internal" href="#mipac.actions.users.list.Client
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.favorite">favorite</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.get_list">get_list</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.pull">pull</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.push">push</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.show">show</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.unfavorite">unfavorite</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.update">update</a></li></ul>
+async</span><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.update">update</a></li><li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.update_membership">update_membership</a></li></ul>
 </div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.users.list.ClientUserListActions">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.actions.users.list.</span></span><span class="sig-name descname"><span class="pre">ClientUserListActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.users.list.ClientUserListActions" title="Link to this definition">¶</a></dt>
@@ -7947,6 +7897,27 @@ async</span><a class="reference internal" href="#mipac.actions.users.list.Client
 <dd class="field-even"><p>bool</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.users.list.ClientUserListActions.get_list">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.user.UserList" title="mipac.models.user.UserList"><span class="pre">UserList</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.users.list.ClientUserListActions.get_list" title="Link to this definition">¶</a></dt>
+<dd><p>指定したユーザーのリスト一覧を取得します</p>
+<p>Endpoint <cite>/api/users/lists/list</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.users.list.ClientUserListActions.pull">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">pull</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.users.list.ClientUserListActions.pull" title="Link to this definition">¶</a></dt>
+<dd><p>このリストからユーザーを削除します</p>
+<p>Endpoint <cite>/api/users/lists/pull</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.users.list.ClientUserListActions.push">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.users.list.ClientUserListActions.push" title="Link to this definition">¶</a></dt>
+<dd><p>このリストにユーザーを追加します</p>
+<p>Endpoint <cite>/api/users/lists/push</cite></p>
 </dd></dl>
 
 <dl class="py method">
@@ -8001,6 +7972,13 @@ async</span><a class="reference internal" href="#mipac.actions.users.list.Client
 <dd class="field-odd"><p><a class="reference internal" href="#mipac.models.user.UserList" title="mipac.models.user.UserList">UserList</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.users.list.ClientUserListActions.update_membership">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">update_membership</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">with_replies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.users.list.ClientUserListActions.update_membership" title="Link to this definition">¶</a></dt>
+<dd><p>このリスト内のユーザーのメンバーシップを更新します</p>
+<p>Endpoint <cite>/api/users/lists/update-membership</cite></p>
 </dd></dl>
 
 </dd></dl>
@@ -9110,63 +9088,10 @@ Use <cite>AdminAnnouncementActions.get_list</cite> or <cite>AdminAnnouncementAct
 </section>
 <section id="clientadminannouncementactions">
 <h3>ClientAdminAnnouncementActions<a class="headerlink" href="#clientadminannouncementactions" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions"><div class="py-attribute-table-column">
-<span>
-Methods</span><ul>
-<li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete">delete</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update">update</a></li></ul>
-</div></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.announcement.</span></span><span class="sig-name descname"><span class="pre">ClientAdminAnnouncementActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions" title="Link to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete" title="Link to this definition">¶</a></dt>
-<dd><p>指定したお知らせを削除します</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>announce_id</strong> (<em>str</em>) – 削除したいお知らせのID</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>削除に成功した場合はTrue, それ以外はFalse</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'info'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'warning'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'error'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'success'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'normal'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'banner'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'dialog'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">for_existing_users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">need_confirmation_to_read</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">announce_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update" title="Link to this definition">¶</a></dt>
-<dd><p>指定したお知らせを更新します</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>title</strong> (<em>str</em>) – お知らせのタイトル</p></li>
-<li><p><strong>text</strong> (<em>str</em>) – お知らせの本文</p></li>
-<li><p><strong>image_url</strong> (<em>str</em><em>, </em><em>optional</em>) – お知らせの画像URL, by default None</p></li>
-<li><p><strong>icon</strong> (<em>AnnouncementIcon</em><em>, </em><em>optional</em>) – お知らせのアイコン, by default MISSING</p></li>
-<li><p><strong>display</strong> (<em>AnnouncementDisplay</em><em>, </em><em>optional</em>) – お知らせの表示方法, by default MISSING</p></li>
-<li><p><strong>for_existing_users</strong> (<em>bool</em><em>, </em><em>optional</em>) – 既存ユーザーに表示するか, by default MISSING</p></li>
-<li><p><strong>silence</strong> (<em>bool</em><em>, </em><em>optional</em>) – お知らせを静かにするか, by default MISSING</p></li>
-<li><p><strong>need_confirmation_to_read</strong> (<em>bool</em><em>, </em><em>optional</em>) – 読んだか確認が必要か, by default MISSING</p></li>
-<li><p><strong>is_active</strong> (<em>bool</em><em>, </em><em>optional</em>) – お知らせが有効かどうか, by default MISSING</p></li>
-<li><p><strong>announce_id</strong> (<em>str</em>) – 更新したいお知らせのID</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>更新に成功した場合はTrue, それ以外はFalse</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
+<dd></dd></dl>
 
 </section>
 <section id="sharedadminannouncementactions">
@@ -9240,83 +9165,10 @@ async</span><a class="reference internal" href="#mipac.actions.admins.announceme
 </section>
 <section id="clientadminroleactions">
 <h3>ClientAdminRoleActions<a class="headerlink" href="#clientadminroleactions" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.roles.ClientAdminRoleActions"><div class="py-attribute-table-column">
-<span>
-Methods</span><ul>
-<li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.roles.ClientAdminRoleActions.assign">assign</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users">get_all_users</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.roles.ClientAdminRoleActions.unassign">unassign</a></li></ul>
-</div></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.roles.ClientAdminRoleActions"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.admins.roles.ClientAdminRoleActions">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.roles.</span></span><span class="sig-name descname"><span class="pre">ClientAdminRoleActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.roles.ClientAdminRoleActions" title="Link to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.roles.ClientAdminRoleActions.assign">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">assign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_at</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.roles.ClientAdminRoleActions.assign" title="Link to this definition">¶</a></dt>
-<dd><p>指定したユーザーに指定したロールを付与します</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>user_id</strong> (<em>str</em>) – ロールを付与する対象のユーザーID</p></li>
-<li><p><strong>expires_at</strong> (<em>int</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – いつまでロールを付与するか, by default None</p></li>
-<li><p><strong>role_id</strong> (<em>str</em>) – ロールのID</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>成功したか否か</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get_all_users</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">since_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users" title="Link to this definition">¶</a></dt>
-<dd><p>指定したロールを持つユーザーを全て取得します</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>since_id</strong> (<em>str</em><em>, </em><em>optional</em>) – ページネーションの開始位置, by default MISSING</p></li>
-<li><p><strong>until_id</strong> (<em>str</em><em>, </em><em>optional</em>) – ページネーションの終了位置, by default MISSING</p></li>
-<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – 1ページあたりの取得数, by default MISSING</p></li>
-<li><p><strong>role_id</strong> (<em>str</em>) – ロールのID</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>ロールユーザー</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#mipac.models.user.RoleUser" title="mipac.models.user.RoleUser">RoleUser</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.roles.ClientAdminRoleActions.unassign">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">unassign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.roles.ClientAdminRoleActions.unassign" title="Link to this definition">¶</a></dt>
-<dd><p>指定したユーザーから指定したロールを解除します</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>user_id</strong> (<em>str</em>) – ロールを解除するユーザーID</p></li>
-<li><p><strong>role_id</strong> (<em>str</em>) – ロールのID</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>成功したか否か</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
+<dd></dd></dl>
 
 </section>
 <section id="sharedadminroleactions">
@@ -9686,74 +9538,10 @@ async</span><a class="reference internal" href="#mipac.actions.admins.emoji.Admi
 </section>
 <section id="clientadminemojiactions">
 <h3>ClientAdminEmojiActions<a class="headerlink" href="#clientadminemojiactions" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.emoji.ClientAdminEmojiActions"><div class="py-attribute-table-column">
-<span>
-Methods</span><ul>
-<li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions.copy">copy</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions.delete">delete</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions.update">update</a></li></ul>
-</div></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.emoji.ClientAdminEmojiActions"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.admins.emoji.ClientAdminEmojiActions">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.emoji.</span></span><span class="sig-name descname"><span class="pre">ClientAdminEmojiActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions" title="Link to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.emoji.ClientAdminEmojiActions.copy">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.common.ID" title="mipac.models.common.ID"><span class="pre">ID</span></a></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions.copy" title="Link to this definition">¶</a></dt>
-<dd><p>Copy an emoji</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>emoji_id</strong> (<em>str</em>) – The id of the emoji</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.emoji.ClientAdminEmojiActions.delete">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions.delete" title="Link to this definition">¶</a></dt>
-<dd><p>Delete an emoji</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – The id of the emoji</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether the operation was successful</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.emoji.ClientAdminEmojiActions.update">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role_ids_that_can_be_used_this_emoji_as_reaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions.update" title="Link to this definition">¶</a></dt>
-<dd><p>Update an emoji</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – The name of the emoji</p></li>
-<li><p><strong>file_id</strong> (<em>str</em>) – The id of the file</p></li>
-<li><p><strong>category</strong> (<em>str</em><em>, </em><em>optional</em>) – The category of the emoji, by default None</p></li>
-<li><p><strong>aliases</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – The aliases of the emoji, by default None</p></li>
-<li><p><strong>is_sensitive</strong> (<em>bool</em>) – Whether the emoji is sensitive</p></li>
-<li><p><strong>local_only</strong> (<em>bool</em>) – Whether the emoji is local only</p></li>
-<li><p><strong>role_ids_that_can_be_used_this_emoji_as_reaction</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The role ids that can be used this emoji as reaction</p></li>
-<li><p><strong>emoji_id</strong> (<em>str</em>) – The id of the emoji</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether the operation was successful</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
+<dd></dd></dl>
 
 </section>
 <section id="sharedadminemojiactions">
@@ -10057,8 +9845,6 @@ async</span><a class="reference internal" href="#mipac.actions.admins.drive.Admi
 Methods</span><ul>
 <li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
-async</span><a class="reference internal" href="#mipac.actions.admins.user.ClientAdminUserActions.delete_account">delete_account</a></li><li class="py-attribute-table-entry">
-<span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.admins.user.ClientAdminUserActions.show_user">show_user</a></li><li class="py-attribute-table-entry">
 <span class="py-attribute-table-badge" title="coroutine">
 async</span><a class="reference internal" href="#mipac.actions.admins.user.ClientAdminUserActions.suspend">suspend</a></li><li class="py-attribute-table-entry">
@@ -10068,27 +9854,6 @@ async</span><a class="reference internal" href="#mipac.actions.admins.user.Clien
 <dt class="sig sig-object py" id="mipac.actions.admins.user.ClientAdminUserActions">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.user.</span></span><span class="sig-name descname"><span class="pre">ClientAdminUserActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.user.ClientAdminUserActions" title="Link to this definition">¶</a></dt>
 <dd><dl class="py method">
-<dt class="sig sig-object py" id="mipac.actions.admins.user.ClientAdminUserActions.delete_account">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">delete_account</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mipac.actions.admins.user.ClientAdminUserActions.delete_account" title="Link to this definition">¶</a></dt>
-<dd><p>対象のユーザーを削除します</p>
-<p>Endpoint: <cite>/api/admin/accounts/delete</cite></p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 0.6.2: </span>Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">mipac.actions.admins.accounts.delete()</span></code> instead.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user_id</strong> (<em>str</em>) – 対象のユーザーID</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>成功ならTrue</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.admins.user.ClientAdminUserActions.show_user">
 <span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">show_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.user.ClientAdminUserActions.show_user" title="Link to this definition">¶</a></dt>
 <dd><p>ユーザーの情報を取得します</p>
@@ -14132,12 +13897,7 @@ Attributes</span><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#clientfollowactions">ClientFollowActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions"><code class="docutils literal notranslate"><span class="pre">ClientFollowActions</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.add"><code class="docutils literal notranslate"><span class="pre">ClientFollowActions.add()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.invalidate"><code class="docutils literal notranslate"><span class="pre">ClientFollowActions.invalidate()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions.remove"><code class="docutils literal notranslate"><span class="pre">ClientFollowActions.remove()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#mipac.actions.follow.ClientFollowActions"><code class="docutils literal notranslate"><span class="pre">ClientFollowActions</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#followactions">FollowActions</a><ul>
@@ -14479,9 +14239,13 @@ Attributes</span><ul>
 <li><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions"><code class="docutils literal notranslate"><span class="pre">ClientUserListActions</span></code></a><ul>
 <li><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.delete"><code class="docutils literal notranslate"><span class="pre">ClientUserListActions.delete()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.favorite"><code class="docutils literal notranslate"><span class="pre">ClientUserListActions.favorite()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.get_list"><code class="docutils literal notranslate"><span class="pre">ClientUserListActions.get_list()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.pull"><code class="docutils literal notranslate"><span class="pre">ClientUserListActions.pull()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.push"><code class="docutils literal notranslate"><span class="pre">ClientUserListActions.push()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.show"><code class="docutils literal notranslate"><span class="pre">ClientUserListActions.show()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.unfavorite"><code class="docutils literal notranslate"><span class="pre">ClientUserListActions.unfavorite()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.update"><code class="docutils literal notranslate"><span class="pre">ClientUserListActions.update()</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.users.list.ClientUserListActions.update_membership"><code class="docutils literal notranslate"><span class="pre">ClientUserListActions.update_membership()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -14622,11 +14386,7 @@ Attributes</span><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#clientadminannouncementactions">ClientAdminAnnouncementActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions"><code class="docutils literal notranslate"><span class="pre">ClientAdminAnnouncementActions</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.delete"><code class="docutils literal notranslate"><span class="pre">ClientAdminAnnouncementActions.delete()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions.update"><code class="docutils literal notranslate"><span class="pre">ClientAdminAnnouncementActions.update()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#mipac.actions.admins.announcement.ClientAdminAnnouncementActions"><code class="docutils literal notranslate"><span class="pre">ClientAdminAnnouncementActions</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#sharedadminannouncementactions">SharedAdminAnnouncementActions</a><ul>
@@ -14642,12 +14402,7 @@ Attributes</span><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#clientadminroleactions">ClientAdminRoleActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.roles.ClientAdminRoleActions"><code class="docutils literal notranslate"><span class="pre">ClientAdminRoleActions</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.roles.ClientAdminRoleActions.assign"><code class="docutils literal notranslate"><span class="pre">ClientAdminRoleActions.assign()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.admins.roles.ClientAdminRoleActions.get_all_users"><code class="docutils literal notranslate"><span class="pre">ClientAdminRoleActions.get_all_users()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.admins.roles.ClientAdminRoleActions.unassign"><code class="docutils literal notranslate"><span class="pre">ClientAdminRoleActions.unassign()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#mipac.actions.admins.roles.ClientAdminRoleActions"><code class="docutils literal notranslate"><span class="pre">ClientAdminRoleActions</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#sharedadminroleactions">SharedAdminRoleActions</a><ul>
@@ -14689,12 +14444,7 @@ Attributes</span><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#clientadminemojiactions">ClientAdminEmojiActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions"><code class="docutils literal notranslate"><span class="pre">ClientAdminEmojiActions</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions.copy"><code class="docutils literal notranslate"><span class="pre">ClientAdminEmojiActions.copy()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions.delete"><code class="docutils literal notranslate"><span class="pre">ClientAdminEmojiActions.delete()</span></code></a></li>
-<li><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions.update"><code class="docutils literal notranslate"><span class="pre">ClientAdminEmojiActions.update()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#mipac.actions.admins.emoji.ClientAdminEmojiActions"><code class="docutils literal notranslate"><span class="pre">ClientAdminEmojiActions</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#sharedadminemojiactions">SharedAdminEmojiActions</a><ul>
@@ -14745,7 +14495,6 @@ Attributes</span><ul>
 </li>
 <li><a class="reference internal" href="#clientadminuseractions">ClientAdminUserActions</a><ul>
 <li><a class="reference internal" href="#mipac.actions.admins.user.ClientAdminUserActions"><code class="docutils literal notranslate"><span class="pre">ClientAdminUserActions</span></code></a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.user.ClientAdminUserActions.delete_account"><code class="docutils literal notranslate"><span class="pre">ClientAdminUserActions.delete_account()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.admins.user.ClientAdminUserActions.show_user"><code class="docutils literal notranslate"><span class="pre">ClientAdminUserActions.show_user()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.admins.user.ClientAdminUserActions.suspend"><code class="docutils literal notranslate"><span class="pre">ClientAdminUserActions.suspend()</span></code></a></li>
 <li><a class="reference internal" href="#mipac.actions.admins.user.ClientAdminUserActions.unsuspend"><code class="docutils literal notranslate"><span class="pre">ClientAdminUserActions.unsuspend()</span></code></a></li>
