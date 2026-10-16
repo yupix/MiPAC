@@ -70,7 +70,7 @@ def create_note_body(
             }
         )
         body["poll"] = poll_data
-    if isinstance(files, MISSING) is False:
+    if files is not MISSING:
         file_ids = []
         for file in files:
             if isinstance(file, MiFile):
