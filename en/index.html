@@ -644,10 +644,23 @@ Attributes</span><ul>
 </section>
 <section id="rolepolicies">
 <h3>RolePolicies<a class="headerlink" href="#rolepolicies" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.models.roles.RolePolicies"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.models.roles.RolePolicies"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.roles.RolePolicies.always_mark_nfsw">always_mark_nfsw</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.roles.RolePolicies">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.models.roles.</span></span><span class="sig-name descname"><span class="pre">RolePolicies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_policies_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.roles.IRolePolicies" title="mipac.types.roles.IRolePolicies"><span class="pre">IRolePolicies</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.roles.RolePolicies" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.roles.RolePolicies.always_mark_nfsw">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">always_mark_nfsw</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#mipac.models.roles.RolePolicies.always_mark_nfsw" title="Link to this definition">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version typo: </span>のため <cite>always_mark_nsfw</cite> を使用してください</p>
+</div>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="activeuserschart">
@@ -1434,10 +1447,23 @@ Attributes</span><ul>
 </section>
 <section id="serverinfocpu">
 <h3>ServerInfoCpu<a class="headerlink" href="#serverinfocpu" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.models.admin.ServerInfoCpu"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.models.admin.ServerInfoCpu"><div class="py-attribute-table-column">
+<span>
+Attributes</span><ul>
+<li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.admin.ServerInfoCpu.models">models</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.admin.ServerInfoCpu">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.models.admin.</span></span><span class="sig-name descname"><span class="pre">ServerInfoCpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server_info_cpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.types.admin.IServerInfoCpu" title="mipac.types.admin.IServerInfoCpu"><span class="pre">IServerInfoCpu</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.models.admin.ServerInfoCpu" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.admin.ServerInfoCpu.models">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">models</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#mipac.models.admin.ServerInfoCpu.models" title="Link to this definition">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version `model`: </span>を使用してください</p>
+</div>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="serverinfofs">
@@ -3145,6 +3171,7 @@ Attributes</span><ul>
 <a class="reference internal" href="#mipac.models.lite.user.PartialUser.is_cat">is_cat</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.lite.user.PartialUser.name">name</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.lite.user.PartialUser.online_status">online_status</a></li><li class="py-attribute-table-entry">
+<a class="reference internal" href="#mipac.models.lite.user.PartialUser.requires_signin_to_view_contents">requires_signin_to_view_contents</a></li><li class="py-attribute-table-entry">
 <a class="reference internal" href="#mipac.models.lite.user.PartialUser.username">username</a></li></ul>
 </div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser">
@@ -3321,6 +3348,14 @@ Attributes</span><ul>
 <dd class="field-even"><p>IUserOnlineStatus</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mipac.models.lite.user.PartialUser.requires_signin_to_view_contents">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">requires_signin_to_view_contents</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#mipac.models.lite.user.PartialUser.requires_signin_to_view_contents" title="Link to this definition">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version `require_signin_to_view_contents`: </span>を使用してください</p>
+</div>
 </dd></dl>
 
 <dl class="py property">
@@ -3541,7 +3576,7 @@ Attributes</span><ul>
 <dd class="field-odd"><p>お気に入りに対するアクションを行うクラス</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#mipac.actions.reaction.ReactionActions" title="mipac.actions.reaction.ReactionActions">ReactionActions</a></p>
+<dd class="field-even"><p><a class="reference internal" href="#mipac.actions.favorite.FavoriteActions" title="mipac.actions.favorite.FavoriteActions">FavoriteActions</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -4683,10 +4718,34 @@ def</span><a class="reference internal" href="#mipac.actions.follow.SharedFollow
 </section>
 <section id="federationactions">
 <h3>FederationActions<a class="headerlink" href="#federationactions" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.federation.FederationActions"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.actions.federation.FederationActions"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.federation.FederationActions.show_ap">show_ap</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.federation.FederationActions">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.actions.federation.</span></span><span class="sig-name descname"><span class="pre">FederationActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.federation.FederationActions" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.federation.FederationActions.show_ap">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">show_ap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.user.UserDetailedNotMe" title="mipac.models.user.UserDetailedNotMe"><span class="pre">UserDetailedNotMe</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.user.MeDetailed" title="mipac.models.user.MeDetailed"><span class="pre">MeDetailed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note"><span class="pre">Note</span></a></span></span><a class="headerlink" href="#mipac.actions.federation.FederationActions.show_ap" title="Link to this definition">¶</a></dt>
+<dd><p>ActivityPub の URI からユーザーまたはノートを取得します</p>
+<p>Endpoint: <cite>/api/ap/show</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uri</strong> (<em>str</em>) – 取得したいオブジェクトの URI</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>URI が指すユーザーまたはノート</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mipac.models.user.UserDetailedNotMe" title="mipac.models.user.UserDetailedNotMe">UserDetailedNotMe</a> | <a class="reference internal" href="#mipac.models.user.MeDetailed" title="mipac.models.user.MeDetailed">MeDetailed</a> | <a class="reference internal" href="#mipac.models.note.Note" title="mipac.models.note.Note">Note</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="clientclipactions">
@@ -5020,7 +5079,7 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.AntennaAc
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.actions.antenna.</span></span><span class="sig-name descname"><span class="pre">AntennaActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.antenna.AntennaActions" title="Link to this definition">¶</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.antenna.AntennaActions.create">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'home'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'all'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'list'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users_blacklist'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_replies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_list_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.antenna.Antenna" title="mipac.models.antenna.Antenna"><span class="pre">Antenna</span></a></span></span><a class="headerlink" href="#mipac.actions.antenna.AntennaActions.create" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'home'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'all'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'list'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users_blacklist'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MISSING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_replies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_list_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.antenna.Antenna" title="mipac.models.antenna.Antenna"><span class="pre">Antenna</span></a></span></span><a class="headerlink" href="#mipac.actions.antenna.AntennaActions.create" title="Link to this definition">¶</a></dt>
 <dd><p>Create an antenna.</p>
 <p>Endpoint: <cite>/api/antennas/create</cite></p>
 <dl class="field-list simple">
@@ -5035,7 +5094,6 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.AntennaAc
 <li><p><strong>case_sensitive</strong> (<em>bool</em><em>, </em><em>default False</em>) – Whether to differentiate between uppercase and lowercase letters.</p></li>
 <li><p><strong>with_replies</strong> (<em>bool</em><em>, </em><em>default False</em>) – Whether to include replies.</p></li>
 <li><p><strong>with_file</strong> (<em>bool</em><em>, </em><em>default False</em>) – Whether to limit to notes with attached files.</p></li>
-<li><p><strong>notify</strong> (<em>bool</em><em>, </em><em>default False</em>) – Whether to notify for new notes.</p></li>
 <li><p><strong>user_list_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default None</em>) – List of user IDs when selecting ‘users’ as the receive source for the antenna.</p></li>
 </ul>
 </dd>
@@ -5162,7 +5220,7 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.ClientAnt
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.antenna.ClientAntennaActions.update">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'home'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'all'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'list'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users_blacklist'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_replies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_list_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.antenna.Antenna" title="mipac.models.antenna.Antenna"><span class="pre">Antenna</span></a></span></span><a class="headerlink" href="#mipac.actions.antenna.ClientAntennaActions.update" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'home'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'all'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'list'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users_blacklist'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_replies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_list_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.antenna.Antenna" title="mipac.models.antenna.Antenna"><span class="pre">Antenna</span></a></span></span><a class="headerlink" href="#mipac.actions.antenna.ClientAntennaActions.update" title="Link to this definition">¶</a></dt>
 <dd><p>Update an antenna.</p>
 <p>Endpoint: <cite>/api/antennas/update</cite></p>
 <dl class="field-list simple">
@@ -5176,7 +5234,6 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.ClientAnt
 <li><p><strong>case_sensitive</strong> (<em>bool</em>) – Whether to differentiate between uppercase and lowercase letters.</p></li>
 <li><p><strong>with_replies</strong> (<em>bool</em>) – Whether to include replies.</p></li>
 <li><p><strong>with_file</strong> (<em>bool</em>) – Whether to limit to notes with attached files.</p></li>
-<li><p><strong>notify</strong> (<em>bool</em>) – Whether to notify for new notes.</p></li>
 <li><p><strong>user_list_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default None</em>) – List of user IDs when selecting ‘users’ as the receive source for the antenna.</p></li>
 </ul>
 </dd>
@@ -5296,7 +5353,7 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.SharedAnt
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mipac.actions.antenna.SharedAntennaActions.update">
-<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'home'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'all'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'list'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users_blacklist'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_replies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_list_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">antenna_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.antenna.Antenna" title="mipac.models.antenna.Antenna"><span class="pre">Antenna</span></a></span></span><a class="headerlink" href="#mipac.actions.antenna.SharedAntennaActions.update" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'home'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'all'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'list'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'users_blacklist'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_replies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_list_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">antenna_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mipac.models.antenna.Antenna" title="mipac.models.antenna.Antenna"><span class="pre">Antenna</span></a></span></span><a class="headerlink" href="#mipac.actions.antenna.SharedAntennaActions.update" title="Link to this definition">¶</a></dt>
 <dd><p>Update an antenna.</p>
 <p>Endpoint: <cite>/api/antennas/update</cite></p>
 <dl class="field-list simple">
@@ -5310,7 +5367,6 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.SharedAnt
 <li><p><strong>case_sensitive</strong> (<em>bool</em>) – Whether to differentiate between uppercase and lowercase letters.</p></li>
 <li><p><strong>with_replies</strong> (<em>bool</em>) – Whether to include replies.</p></li>
 <li><p><strong>with_file</strong> (<em>bool</em>) – Whether to limit to notes with attached files.</p></li>
-<li><p><strong>notify</strong> (<em>bool</em>) – Whether to notify for new notes.</p></li>
 <li><p><strong>user_list_id</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>default None</em>) – List of user IDs when selecting ‘users’ as the receive source for the antenna.</p></li>
 </ul>
 </dd>
@@ -5352,10 +5408,31 @@ async</span><a class="reference internal" href="#mipac.actions.antenna.SharedAnt
 </section>
 <section id="emojiactions">
 <h3>EmojiActions<a class="headerlink" href="#emojiactions" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.emoji.EmojiActions"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.actions.emoji.EmojiActions"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.emoji.EmojiActions.gets">gets</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.emoji.EmojiActions">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.actions.emoji.</span></span><span class="sig-name descname"><span class="pre">EmojiActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.emoji.EmojiActions" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.emoji.EmojiActions.gets">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">gets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.emoji.EmojiSimple" title="mipac.models.emoji.EmojiSimple"><span class="pre">EmojiSimple</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.emoji.EmojiActions.gets" title="Link to this definition">¶</a></dt>
+<dd><p>サーバーのカスタム絵文字の一覧を取得します</p>
+<p>Endpoint: <cite>/api/emojis</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>カスタム絵文字の一覧</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#mipac.models.emoji.EmojiSimple" title="mipac.models.emoji.EmojiSimple">EmojiSimple</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="appactions">
@@ -9030,10 +9107,34 @@ async</span><a class="reference internal" href="#mipac.actions.drive.drive.Drive
 </section>
 <section id="systemwebhookactions">
 <h3>SystemWebhookActions<a class="headerlink" href="#systemwebhookactions" title="Link to this heading">¶</a></h3>
-<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.system_webhook.SystemWebhookActions"></div><dl class="py class">
+<div class="py-attribute-table" data-move-to-id="mipac.actions.admins.system_webhook.SystemWebhookActions"><div class="py-attribute-table-column">
+<span>
+Methods</span><ul>
+<li class="py-attribute-table-entry">
+<span class="py-attribute-table-badge" title="coroutine">
+async</span><a class="reference internal" href="#mipac.actions.admins.system_webhook.SystemWebhookActions.get_list">get_list</a></li></ul>
+</div></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.actions.admins.system_webhook.SystemWebhookActions">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.actions.admins.system_webhook.</span></span><span class="sig-name descname"><span class="pre">SystemWebhookActions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.http.HTTPClient" title="mipac.http.HTTPClient"><span class="pre">HTTPClient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mipac.manager.client.ClientManager" title="mipac.manager.client.ClientManager"><span class="pre">ClientManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mipac.actions.admins.system_webhook.SystemWebhookActions" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mipac.actions.admins.system_webhook.SystemWebhookActions.get_list">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'abuseReport'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'abuseReportResolved'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'userCreated'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'inactiveModeratorsWarning'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'inactiveModeratorsInvitationOnlyChanged'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mipac.models.system_webhook.SystemWebhook" title="mipac.models.system_webhook.SystemWebhook"><span class="pre">SystemWebhook</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mipac.actions.admins.system_webhook.SystemWebhookActions.get_list" title="Link to this definition">¶</a></dt>
+<dd><p>システムWebhookの一覧を取得します</p>
+<p>Endpoint: <cite>/api/admin/system-webhook/list</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>is_active</strong> (<em>bool</em><em> | </em><em>None</em><em>, </em><em>default None</em>) – 有効なWebhookのみに絞り込むかどうか</p></li>
+<li><p><strong>on</strong> (<em>list</em><em>[</em><em>SystemWebhookEventTypes</em><em>] </em><em>| </em><em>None</em><em>, </em><em>default None</em>) – 指定したイベントを含むWebhookに絞り込む</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#mipac.models.system_webhook.SystemWebhook" title="mipac.models.system_webhook.SystemWebhook">SystemWebhook</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 <section id="adminaccountactions">
@@ -10355,6 +10456,22 @@ async</span><a class="reference internal" href="#mipac.actions.admins.user.Share
 <dd></dd></dl>
 
 </section>
+<section id="iapshownoteresult">
+<h3>IApShowNoteResult<a class="headerlink" href="#iapshownoteresult" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.instance.IApShowNoteResult"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.instance.IApShowNoteResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.types.instance.</span></span><span class="sig-name descname"><span class="pre">IApShowNoteResult</span></span><a class="headerlink" href="#mipac.types.instance.IApShowNoteResult" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="iapshowuserresult">
+<h3>IApShowUserResult<a class="headerlink" href="#iapshowuserresult" title="Link to this heading">¶</a></h3>
+<div class="py-attribute-table" data-move-to-id="mipac.types.instance.IApShowUserResult"></div><dl class="py class">
+<dt class="sig sig-object py" id="mipac.types.instance.IApShowUserResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.types.instance.</span></span><span class="sig-name descname"><span class="pre">IApShowUserResult</span></span><a class="headerlink" href="#mipac.types.instance.IApShowUserResult" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="ifederationinstance">
 <h3>IFederationInstance<a class="headerlink" href="#ifederationinstance" title="Link to this heading">¶</a></h3>
 <div class="py-attribute-table" data-move-to-id="mipac.types.instance.IFederationInstance"></div><dl class="py class">
@@ -10916,7 +11033,8 @@ IMeDetailedOnlySchema が持つ avatar_id が無いことを確認する
 <div class="py-attribute-table" data-move-to-id="mipac.types.page.PageContentPayload"></div><dl class="py class">
 <dt class="sig sig-object py" id="mipac.types.page.PageContentPayload">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mipac.types.page.</span></span><span class="sig-name descname"><span class="pre">PageContentPayload</span></span><a class="headerlink" href="#mipac.types.page.PageContentPayload" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Misskey Schema: <cite>PageBlock</cite></p>
+</dd></dl>
 
 </section>
 <section id="pagefilepayload">
@@ -13501,7 +13619,10 @@ Attributes</span><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#rolepolicies">RolePolicies</a><ul>
-<li><a class="reference internal" href="#mipac.models.roles.RolePolicies"><code class="docutils literal notranslate"><span class="pre">RolePolicies</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.roles.RolePolicies"><code class="docutils literal notranslate"><span class="pre">RolePolicies</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.models.roles.RolePolicies.always_mark_nfsw"><code class="docutils literal notranslate"><span class="pre">RolePolicies.always_mark_nfsw</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#activeuserschart">ActiveUsersChart</a><ul>
@@ -13658,7 +13779,10 @@ Attributes</span><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#serverinfocpu">ServerInfoCpu</a><ul>
-<li><a class="reference internal" href="#mipac.models.admin.ServerInfoCpu"><code class="docutils literal notranslate"><span class="pre">ServerInfoCpu</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.admin.ServerInfoCpu"><code class="docutils literal notranslate"><span class="pre">ServerInfoCpu</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.models.admin.ServerInfoCpu.models"><code class="docutils literal notranslate"><span class="pre">ServerInfoCpu.models</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#serverinfofs">ServerInfoFs</a><ul>
@@ -13940,6 +14064,7 @@ Attributes</span><ul>
 <li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.is_cat"><code class="docutils literal notranslate"><span class="pre">PartialUser.is_cat</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.name"><code class="docutils literal notranslate"><span class="pre">PartialUser.name</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.online_status"><code class="docutils literal notranslate"><span class="pre">PartialUser.online_status</span></code></a></li>
+<li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.requires_signin_to_view_contents"><code class="docutils literal notranslate"><span class="pre">PartialUser.requires_signin_to_view_contents</span></code></a></li>
 <li><a class="reference internal" href="#mipac.models.lite.user.PartialUser.username"><code class="docutils literal notranslate"><span class="pre">PartialUser.username</span></code></a></li>
 </ul>
 </li>
@@ -14333,7 +14458,10 @@ Attributes</span><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#federationactions">FederationActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.federation.FederationActions"><code class="docutils literal notranslate"><span class="pre">FederationActions</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.federation.FederationActions"><code class="docutils literal notranslate"><span class="pre">FederationActions</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.federation.FederationActions.show_ap"><code class="docutils literal notranslate"><span class="pre">FederationActions.show_ap()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#clientclipactions">ClientClipActions</a><ul>
@@ -14411,7 +14539,10 @@ Attributes</span><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#emojiactions">EmojiActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.emoji.EmojiActions"><code class="docutils literal notranslate"><span class="pre">EmojiActions</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.emoji.EmojiActions"><code class="docutils literal notranslate"><span class="pre">EmojiActions</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.emoji.EmojiActions.gets"><code class="docutils literal notranslate"><span class="pre">EmojiActions.gets()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#appactions">AppActions</a><ul>
@@ -14756,7 +14887,10 @@ Attributes</span><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#systemwebhookactions">SystemWebhookActions</a><ul>
-<li><a class="reference internal" href="#mipac.actions.admins.system_webhook.SystemWebhookActions"><code class="docutils literal notranslate"><span class="pre">SystemWebhookActions</span></code></a></li>
+<li><a class="reference internal" href="#mipac.actions.admins.system_webhook.SystemWebhookActions"><code class="docutils literal notranslate"><span class="pre">SystemWebhookActions</span></code></a><ul>
+<li><a class="reference internal" href="#mipac.actions.admins.system_webhook.SystemWebhookActions.get_list"><code class="docutils literal notranslate"><span class="pre">SystemWebhookActions.get_list()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#adminaccountactions">AdminAccountActions</a><ul>
@@ -15074,6 +15208,14 @@ Attributes</span><ul>
 </li>
 <li><a class="reference internal" href="#iantenna">IAntenna</a><ul>
 <li><a class="reference internal" href="#mipac.types.antenna.IAntenna"><code class="docutils literal notranslate"><span class="pre">IAntenna</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#iapshownoteresult">IApShowNoteResult</a><ul>
+<li><a class="reference internal" href="#mipac.types.instance.IApShowNoteResult"><code class="docutils literal notranslate"><span class="pre">IApShowNoteResult</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#iapshowuserresult">IApShowUserResult</a><ul>
+<li><a class="reference internal" href="#mipac.types.instance.IApShowUserResult"><code class="docutils literal notranslate"><span class="pre">IApShowUserResult</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ifederationinstance">IFederationInstance</a><ul>

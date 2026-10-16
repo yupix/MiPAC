@@ -2467,6 +2467,24 @@ IAntenna
     :members:
 
 
+IApShowNoteResult
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.instance.IApShowNoteResult
+
+.. autoclass:: mipac.types.instance.IApShowNoteResult
+    :members:
+
+
+IApShowUserResult
+~~~~~~~~~~~~~~~~~
+
+.. attributetable:: mipac.types.instance.IApShowUserResult
+
+.. autoclass:: mipac.types.instance.IApShowUserResult
+    :members:
+
+
 IFederationInstance
 ~~~~~~~~~~~~~~~~~~~
 
