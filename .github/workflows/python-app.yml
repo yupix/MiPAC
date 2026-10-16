@@ -23,3 +23,7 @@ jobs:
         run: uv sync
       - name: Lint with ruff
         run: uv run ruff check mipac
+      - name: Type check with pyright
+        run: uv run pyright mipac
+      - name: Test with pytest
+        run: uv run pytest
