@@ -138,7 +138,8 @@ class HTTPClient:
             if kwargs.get(i) and remove_none:
                 kwargs[i] = remove_dict_empty(kwargs[i])
 
-        # プロパティ側のSessionを使用することで、セッションが閉じている場合は新しいセッションを作成する
+        # プロパティ側のSessionを使用することで、
+        # セッションが閉じている場合は新しいセッションを作成する
         async with self.session.request(route.method, self._url + route.path, **kwargs) as res:
             data = await json_or_text(res)
             if lower:
@@ -173,7 +174,9 @@ REQUEST:{COLORS.reset}
         """現在指定されているTokenのユーザー情報を返します
 
         ..deprecated:: 0.6.4
-            :class:`mipac.http.HTTPClient` をインスタンス化した際に自動的にセッションが作成されるようになったため非推奨になりました。現在のTokenのユーザー情報を取得する場合は :meth:`mipac.actions.user.get_me` を使用してください。
+            :class:`mipac.http.HTTPClient` をインスタンス化した際に自動的にセッションが作成される
+            ようになったため非推奨になりました。現在のTokenのユーザー情報を取得する場合は
+            :meth:`mipac.actions.user.get_me` を使用してください。
 
         Returns
         -------

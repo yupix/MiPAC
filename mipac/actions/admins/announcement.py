@@ -273,7 +273,10 @@ class AdminAnnouncementActions(SharedAdminAnnouncementActions):
         res_annonuncement_systems: list[IAnnouncementDetailed] = await self._session.request(
             Route("POST", "/api/admin/announcements/list"), json=body, auth=True
         )
-        return [AnnouncementDetailed(res_announcement_system, client=self._client) for res_announcement_system in res_annonuncement_systems]
+        return [
+            AnnouncementDetailed(res_announcement_system, client=self._client)
+            for res_announcement_system in res_annonuncement_systems
+        ]
 
     async def get_all_list(
         self,

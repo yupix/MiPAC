@@ -93,7 +93,8 @@ class INote(TypedDict):
     replies_count: int
     uri: NotRequired[str]
     url: NotRequired[str]
-    reaction_and_user_pair_cache: NotRequired[list[str]]  # いつ出てくるのか不明だけどスキーマには存在する
+    # いつ出てくるのか不明だけどスキーマには存在する
+    reaction_and_user_pair_cache: NotRequired[list[str]]
     clipped_count: NotRequired[int]  # Misskeyの内部的にたまに存在しないだけで普通は存在しそう...?
     has_poll: NotRequired[bool]  # pollが存在するかどうか
     my_reaction: NotRequired[str | None]  # ログイン時のみ存在

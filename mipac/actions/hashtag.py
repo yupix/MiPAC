@@ -63,9 +63,9 @@ class HashtagActions(AbstractAction):
         attached_to_user_only: bool, optional
             ユーザーに添付されたハッシュタグのみを取得するかどうかを指定します, default=False
         attached_to_local_user_only: bool, optional
-            ローカルユーザーに添付されたハッシュタグのみを取得するかどうかを指定します, default=False
+            ローカルユーザーに添付されたハッシュタグのみを取得するか, default=False
         attached_to_remote_user_only: bool, optional
-            リモートユーザーに添付されたハッシュタグのみを取得するかどうかを指定します, default=False
+            リモートユーザーに添付されたハッシュタグのみを取得するか, default=False
 
         Returns
         -------

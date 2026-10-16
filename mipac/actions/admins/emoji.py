@@ -102,7 +102,9 @@ class SharedAdminEmojiActions(AbstractAction):
                 "aliases": aliases,
                 "isSensitive": is_sensitive,
                 "localOnly": local_only,
-                "roleIdsThatCanBeUsedThisEmojiAsReaction": role_ids_that_can_be_used_this_emoji_as_reaction,
+                "roleIdsThatCanBeUsedThisEmojiAsReaction": (
+                    role_ids_that_can_be_used_this_emoji_as_reaction
+                ),
             }
         )
 

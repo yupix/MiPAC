@@ -117,7 +117,8 @@ class AdminDriveActions(AbstractAction):
             "fileId": file_id,
             "url": url,
         }
-        # TODO: IFileではなく、ほぼほぼデータベースの中身が返ってくるのでそれに合わせた型とモデルを作る
+        # TODO: IFileではなく、ほぼほぼデータベースの中身が返ってくるので
+        # それに合わせた型とモデルを作る
         raw_file: dict[str, Any] = await self.__session.request(
             Route("POST", "/api/admin/drive/show-file"), auth=True, json=data
         )

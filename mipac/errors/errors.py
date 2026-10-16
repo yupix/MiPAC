@@ -230,7 +230,8 @@ class HasChildFilesOrFoldersError(APIError):
 
 
 class InappropriateError(APIError):
-    """Cannot upload the file because it has been determined that it possibly contains inappropriate content."""
+    """Cannot upload the file because it has been determined that it possibly contains
+    inappropriate content."""
 
 
 class IncorrectInitialPasswordError(APIError):

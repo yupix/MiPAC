@@ -4,7 +4,6 @@ from typing import TYPE_CHECKING, Any
 
 from mipac.models.lite.instance import LiteInstance
 from mipac.types.user import IAvatarDecoration, IBadgeRole, IPartialUser, IUserOnlineStatus
-from mipac.utils.util import deprecated
 
 if TYPE_CHECKING:
     from mipac.manager.client import ClientManager

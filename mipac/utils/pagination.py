@@ -18,7 +18,10 @@ def _parse_date_to_timestamp_ms(value: str | int) -> int:
     return int(dt.timestamp() * 1000)
 
 
-def _infer_pagination_type(json: dict[str, Any]) -> Literal["until", "until_date", "since_date", "since", "count"]:
+PaginationType = Literal["until", "until_date", "since_date", "since", "count"]
+
+
+def _infer_pagination_type(json: dict[str, Any]) -> PaginationType:
     """jsonのパラメータからページネーションタイプを自動判定します
 
     優先順位: untilDate > untilId > sinceDate > sinceId > until（デフォルト）
@@ -45,7 +48,7 @@ class Pagination[T]:
         auth: bool = True,
         remove_none: bool = True,
         lower: bool = True,
-        pagination_type: Literal["until", "until_date", "since_date", "since", "count", "auto"] = "auto",
+        pagination_type: PaginationType | Literal["auto"] = "auto",
         limit: int = 100,
         date_key: str = "created_at",
     ) -> None:
@@ -58,7 +61,7 @@ class Pagination[T]:
         _pagination_type = pagination_type
         if _pagination_type == "auto":
             _pagination_type = _infer_pagination_type(json)
-        self.pagination_type: Literal["until", "until_date", "since_date", "since", "count"] = _pagination_type
+        self.pagination_type: PaginationType = _pagination_type
         self.limit: int = limit
         self.date_key: str = date_key
         self.count = 0
