@@ -649,9 +649,9 @@ class ChannelActions(SharedChannelActions):
                 "name": name,
                 "color": color,
                 "description": description,
-                "banner_id": banner_id,
-                "is_sensitive": is_sensitive,
-                "allow_renote_to_external": allow_renote_to_external,
+                "bannerId": banner_id,
+                "isSensitive": is_sensitive,
+                "allowRenoteToExternal": allow_renote_to_external,
             }
         )
         raw_channel: IChannel = await self._session.request(

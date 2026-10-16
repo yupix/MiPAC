@@ -278,7 +278,7 @@ class SharedUserListActions(SharedPartialUserListActions):
         UserList
             The updated user list
         """
-        data = remove_dict_missing({"listId": list_id, "name": name, "public": is_public})
+        data = remove_dict_missing({"listId": list_id, "name": name, "isPublic": is_public})
 
         res: IUserList = await self._session.request(
             Route("POST", "/api/users/lists/update"),

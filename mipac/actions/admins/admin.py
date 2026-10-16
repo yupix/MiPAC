@@ -52,9 +52,7 @@ class AdminActions(SharedAdminUserActions):
         )
 
     async def update_meta(self, meta: IUpdateMetaBody) -> bool:  # TODO: 引数を見直すべき
-        body = convert_dict_keys_to_camel(
-            meta, replace_list={"tos_text_url": "ToSTextUrl", "tos_url": "ToSUrl"}
-        )
+        body = convert_dict_keys_to_camel(meta)
 
         return bool(
             await self._session.request(

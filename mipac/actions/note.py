@@ -1914,7 +1914,7 @@ class NoteActions(SharedNoteActions):
         data = {
             "limit": limit,
             "listId": list_id,
-            "includeRenoteMyNotes": include_renote_my_notes,
+            "includeRenotedMyNotes": include_renote_my_notes,
             "includeLocalRenotes": include_local_renotes,
             "withRenotes": with_renotes,
             "withFiles": with_files,
@@ -1946,7 +1946,7 @@ class NoteActions(SharedNoteActions):
         data = {
             "limit": limit,
             "listId": list_id,
-            "includeRenoteMyNotes": include_renote_my_notes,
+            "includeRenotedMyNotes": include_renote_my_notes,
             "includeLocalRenotes": include_local_renotes,
             "withRenotes": with_renotes,
             "withFiles": with_files,

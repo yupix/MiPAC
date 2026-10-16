@@ -154,8 +154,8 @@ class RoleActions(AbstractAction):
             "limit": limit,
             "sinceId": since_id,
             "untilId": until_id,
-            "sinceData": since_data,
-            "untilData": until_data,
+            "sinceDate": since_data,
+            "untilDate": until_data,
         }
 
         pagination = Pagination[INote](

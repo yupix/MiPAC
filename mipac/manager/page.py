@@ -17,9 +17,9 @@ class PagesManager(AbstractManager):
     async def get_pages(
         self,
         limit: int = 100,
-        since_id: int | None = None,
-        until_id: int | None = None,
+        since_id: str | None = None,
+        until_id: str | None = None,
     ):
-        data = {"limit": limit, "since_id": since_id, "until_id": until_id}
+        data = {"limit": limit, "sinceId": since_id, "untilId": until_id}
         res = await self.__session.request(Route("POST", "/api/i/pages"), json=data, auth=True)
         return res
